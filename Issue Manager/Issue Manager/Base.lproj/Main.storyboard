@@ -134,4 +134,5 @@
     <inferredMetricsTieBreakers>
         <segue reference="6S0-TO-JiA"/>
     </inferredMetricsTieBreakers>
+    <color key="tintColor" red="0.20392156862745098" green="0.20392156862745098" blue="0.46666666666666667" alpha="1" colorSpace="calibratedRGB"/>
 </document>
