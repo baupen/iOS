@@ -8,6 +8,18 @@ extension Client {
 	}
 }
 
+fileprivate func logOutcome<T>(of future: Future<T>, as method: String) {
+	future.then { _ in
+		print("\(method) completed successfully")
+	}
+	
+	future.catch { error in
+		print("\(method) encountered error:")
+		print(error.localizedDescription)
+		dump(error)
+	}
+}
+
 // MARK: -
 // MARK: Log In
 
@@ -165,7 +177,9 @@ struct IssueCreationRequest: MultipartJSONRequest, ApplyingRequest, BacklogStora
 	let fileURL: URL?
 	
 	func applyToClient(_ response: ExpectedResponse) {
+		let previous = Client.shared.storage.issues[issue.id]
 		Client.shared.storage.issues[issue.id] = response.issue
+		response.issue.downloadFile(previous: previous)
 	}
 	
 	struct ExpectedResponse: Response {
@@ -183,14 +197,7 @@ extension Client {
 				).send()
 		}
 		
-		result.then { response in
-			print("issue created successfully")
-		}
-		
-		result.catch { error in
-			print("error whilst creating issue:")
-			dump(error)
-		}
+		logOutcome(of: result, as: "issue creation")
 	}
 }
 
@@ -205,7 +212,9 @@ struct IssueUpdateRequest: MultipartJSONRequest, ApplyingRequest, BacklogStorabl
 	let fileURL: URL?
 	
 	func applyToClient(_ response: ExpectedResponse) {
+		let previous = Client.shared.storage.issues[issue.id]
 		Client.shared.storage.issues[issue.id] = response.issue
+		response.issue.downloadFile(previous: previous)
 	}
 	
 	struct ExpectedResponse: Response {
@@ -223,14 +232,7 @@ extension Client {
 				).send()
 		}
 		
-		result.then { response in
-			print("issue updated successfully")
-		}
-		
-		result.catch { error in
-			print("error whilst updating issue:")
-			dump(error)
-		}
+		logOutcome(of: result, as: "issue update")
 	}
 }
 
@@ -244,6 +246,7 @@ struct IssueDeletionRequest: JSONJSONRequest, ApplyingRequest, BacklogStorable {
 	let issueID: UUID
 	
 	func applyToClient(_ response: ExpectedResponse) {
+		Client.shared.storage.issues[issueID]?.deleteFile()
 		Client.shared.storage.issues[issueID] = nil
 	}
 	
@@ -265,14 +268,7 @@ extension Client {
 				).send()
 		}
 		
-		result.then { response in
-			print("issue deleted successfully")
-		}
-		
-		result.catch { error in
-			print("error whilst deleting issue:")
-			dump(error)
-		}
+		logOutcome(of: result, as: "issue deletion")
 	}
 }
 
@@ -312,13 +308,6 @@ extension Client {
 				).send()
 		}
 		
-		result.then { response in
-			print("issue action performed successfully")
-		}
-		
-		result.catch { error in
-			print("error whilst performing issue action:")
-			dump(error)
-		}
+		logOutcome(of: result, as: "issue \(action.rawValue)")
 	}
 }
