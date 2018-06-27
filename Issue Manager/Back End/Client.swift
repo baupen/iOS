@@ -7,7 +7,7 @@ typealias TaskResult = (data: Data, response: HTTPURLResponse)
 class Client {
 	static let shared = Client()
 	
-	private static let baseURL = URL(string: "https://dev.app.mangel.io/api")!
+	private static let baseURL = URL(string: "https://dev.app.mangel.io/api/external")!
 	
 	private let urlSession = URLSession.shared
 	
@@ -24,23 +24,24 @@ class Client {
 	private var backlog: [BacklogStorable] = []
 	private var isClearingBacklog = false // oh no
 	
-	private let backlogQueue = DispatchQueue(label: "backlog clearing")
+	/// any dependent requests are executed on this queue, so as to avoid bad interleavings and races and such
+	private let linearQueue = DispatchQueue(label: "dependent request execution")
 	
 	private init() {
 		loadShared()
 	}
 	
-	func addToBacklog(_ request: BacklogStorable) {
+	private func addToBacklog(_ request: BacklogStorable) {
 		guard !isClearingBacklog else { return }
-		backlogQueue.async {
+		linearQueue.async {
 			self.backlog.append(request)
 		}
 	}
 	
-	func clearBacklog() -> Future<Void> {
+	private func clearBacklog() -> Future<Void> {
 		isClearingBacklog = true
 		return Future { promise in
-			backlogQueue.async {
+			linearQueue.async {
 				let group = DispatchGroup()
 				
 				for (index, request) in self.backlog.enumerated() {
@@ -79,33 +80,12 @@ class Client {
 			.always { self.isClearingBacklog = false }
 	}
 	
-	func send<R: MultipartJSONRequest>(_ request: R) -> Future<R.ExpectedResponse> {
-		return Future.fulfilled(with: request)
-			.map { request in
-				let encoded = try self.requestEncoder.encode(request)
-				let parts = [MultipartPart(name: "message", content: .json(encoded))]
-					+ (request.fileURL.map { [MultipartPart(name: "image", content: .jpeg(at: $0))] } ?? [])
-				return try multipartRequest(to: self.apiURL(for: request), parts: parts)
-			}
-			.flatMap(send)
-			.map(extractData)
-			.map(decodeResponse)
-	}
-	
-	func send<R: JSONJSONRequest>(_ request: R) -> Future<R.ExpectedResponse> {
-		return sendBasic(request)
-			.map(decodeResponse)
-	}
-	
-	func send<R: JSONDataRequest>(_ request: R) -> Future<Data> {
-		return sendBasic(request)
-	}
-	
-	private func sendBasic<R: DataRequest>(_ request: R) -> Future<Data> {
+	func send<R: Request>(_ request: R) -> Future<R.ExpectedResponse> {
 		return Future.fulfilled(with: request)
 			.map(urlRequest)
 			.flatMap(send)
-			.map(extractData)
+			.map { taskResult in try self.extractData(from: taskResult, for: request) }
+			.then(request.applyToClient)
 	}
 	
 	private func decodeResponse<R: Response>(from data: Data) throws -> R {
@@ -114,31 +94,31 @@ class Client {
 		return success.data
 	}
 	
-	private func extractData(from taskResult: TaskResult) throws -> Data {
+	private func extractData<R: Request>(from taskResult: TaskResult, for request: R) throws -> R.ExpectedResponse {
 		let (data, response) = taskResult
 		print("Status code: \(response.statusCode), body: \(debugRepresentation(of: data))")
 		switch response.statusCode {
 		case 200:
-			return data
+			return try request.decode(from: data, using: responseDecoder)
 		case 400:
-			let failure = try self.responseDecoder.decode(JSendFailure.self, from: data)
+			let failure = try responseDecoder.decode(JSendFailure.self, from: data)
 			throw RequestError.apiError(failure)
 		case 500:
-			let error = try self.responseDecoder.decode(JSendError.self, from: data)
+			let error = try responseDecoder.decode(JSendError.self, from: data)
 			throw RequestError.serverError(error)
 		case let code:
 			fatalError("Invalid status code \(code)")
 		}
 	} 
 	
-	private func urlRequest<R: DataRequest>(body: R) throws -> URLRequest {
-		return try URLRequest(url: apiURL(for: body)) <- {
-			$0.httpMethod = "POST"
-			$0.httpBody = try requestEncoder.encode(body)
+	private func urlRequest<R: Request>(body: R) throws -> URLRequest {
+		return try URLRequest(url: apiURL(for: body)) <- { request in
+			request.httpMethod = "POST"
+			try body.encode(using: requestEncoder, into: &request)
 		}
 	}
 	
-	private func apiURL<R: DataRequest>(for request: R) -> URL {
+	private func apiURL<R: Request>(for request: R) -> URL {
 		return Client.baseURL.appendingPathComponent(request.method)
 	}
 	

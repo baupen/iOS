@@ -8,6 +8,8 @@ extension Client {
 	}
 }
 
+fileprivate func ignore(_ value: Any) {}
+
 fileprivate func logOutcome<T>(of future: Future<T>, as method: String) {
 	future.then { _ in
 		print("\(method) completed successfully")
@@ -23,16 +25,14 @@ fileprivate func logOutcome<T>(of future: Future<T>, as method: String) {
 // MARK: -
 // MARK: Log In
 
-struct LoginRequest: JSONJSONRequest, ApplyingRequest {
+struct LoginRequest: JSONJSONRequest {
+	static let isIndependent = true
+	
 	var method: String { return "login" }
 	
 	let username: String
 	let passwordHash: String
 	let clientVersion = 1
-	
-	func send() -> Future<Void> {
-		return Client.shared.send(self).map(applyToClient)
-	}
 	
 	func applyToClient(_ response: ExpectedResponse) {
 		Client.shared.user = response.user
@@ -45,17 +45,20 @@ struct LoginRequest: JSONJSONRequest, ApplyingRequest {
 
 extension Client {
 	func logIn(as username: String, password: String) -> Future<Void> {
-		return LoginRequest(
+		let request = LoginRequest(
 			username: username,
 			passwordHash: password.sha256()
-			).send()
+		)
+		return Client.shared.send(request).map(ignore)
 	}
 }
 
 // MARK: -
 // MARK: Read
 
-struct ReadRequest: JSONJSONRequest, ApplyingRequest {
+struct ReadRequest: JSONJSONRequest, BacklogStorable {
+	static let isIndependent = false
+	
 	var method: String { return "read" }
 	
 	let authenticationToken: String
@@ -88,8 +91,8 @@ struct ReadRequest: JSONJSONRequest, ApplyingRequest {
 
 extension Client {
 	func read() -> Future<Void> {
-		return clearBacklog().flatMap {
-			self.getUser().flatMap { user in
+		return getUser()
+			.map { user in
 				ReadRequest(
 					authenticationToken: user.authenticationToken,
 					user: user.meta,
@@ -97,12 +100,13 @@ extension Client {
 					buildings: self.storage.buildings.values.map { $0.meta },
 					maps:      self.storage.maps     .values.map { $0.meta },
 					issues:    self.storage.issues   .values.map { $0.meta }
-					).send()
+				)
 			}
-		}
+			.flatMap(Client.shared.send)
+			.map(ignore)
 	}
 	
-	func update(from response: ReadRequest.ExpectedResponse) {
+	fileprivate func update(from response: ReadRequest.ExpectedResponse) {
 		func updateEntries<T: APIObject>(in path: WritableKeyPath<Storage, [UUID: T]>,
 										 changing changedEntries: [T],
 										 removing removedIDs: [UUID]) {
@@ -140,6 +144,8 @@ extension Client {
 typealias DownloadRequestPath = WritableKeyPath<FileDownloadRequest, ObjectMeta?>
 
 struct FileDownloadRequest: JSONDataRequest {
+	static let isIndependent = true
+	
 	var method: String { return "file/download" }
 	
 	// mutable for keypath stuff
@@ -156,20 +162,23 @@ struct FileDownloadRequest: JSONDataRequest {
 
 extension Client {
 	func downloadFile(for path: DownloadRequestPath, meta: ObjectMeta) -> Future<Data> {
-		return getUser().flatMap { user in
-			FileDownloadRequest(
-				authenticationToken: user.authenticationToken,
-				requestingFileFor: path,
-				meta: meta
-				).send()
-		}
+		return getUser()
+			.map { user in
+				FileDownloadRequest(
+					authenticationToken: user.authenticationToken,
+					requestingFileFor: path,
+					meta: meta
+				)
+			}.flatMap(Client.shared.send)
 	}
 }
 
 // MARK: -
 // MARK: Issue Creation
 
-struct IssueCreationRequest: MultipartJSONRequest, ApplyingRequest, BacklogStorable {
+struct IssueCreationRequest: MultipartJSONRequest, BacklogStorable {
+	static let isIndependent = false
+	
 	var method: String { return "issue/create" }
 	
 	let authenticationToken: String
@@ -189,13 +198,14 @@ struct IssueCreationRequest: MultipartJSONRequest, ApplyingRequest, BacklogStora
 
 extension Client {
 	func issueCreated(_ issue: Issue) {
-		let result = getUser().flatMap { user in
-			IssueCreationRequest(
-				authenticationToken: user.authenticationToken,
-				issue: issue,
-				fileURL: issue.filename.map(Issue.localURL)
-				).send()
-		}
+		let result = getUser()
+			.map { user in
+				IssueCreationRequest(
+					authenticationToken: user.authenticationToken,
+					issue: issue,
+					fileURL: issue.filename.map(Issue.localURL)
+				)
+			}.flatMap(Client.shared.send)
 		
 		logOutcome(of: result, as: "issue creation")
 	}
@@ -204,7 +214,9 @@ extension Client {
 // MARK: -
 // MARK: Issue Update
 
-struct IssueUpdateRequest: MultipartJSONRequest, ApplyingRequest, BacklogStorable {
+struct IssueUpdateRequest: MultipartJSONRequest, BacklogStorable {
+	static let isIndependent = false
+	
 	var method: String { return "issue/update" }
 	
 	let authenticationToken: String
@@ -224,13 +236,14 @@ struct IssueUpdateRequest: MultipartJSONRequest, ApplyingRequest, BacklogStorabl
 
 extension Client {
 	func issueChanged(_ issue: Issue) {
-		let result = getUser().flatMap { user in
-			IssueUpdateRequest(
-				authenticationToken: user.authenticationToken,
-				issue: issue,
-				fileURL: issue.filename.map(Issue.localURL)
-				).send()
-		}
+		let result = getUser()
+			.map { user in
+				IssueUpdateRequest(
+					authenticationToken: user.authenticationToken,
+					issue: issue,
+					fileURL: issue.filename.map(Issue.localURL)
+				)
+			}.flatMap(Client.shared.send)
 		
 		logOutcome(of: result, as: "issue update")
 	}
@@ -239,7 +252,9 @@ extension Client {
 // MARK: -
 // MARK: Issue Deletion
 
-struct IssueDeletionRequest: JSONJSONRequest, ApplyingRequest, BacklogStorable {
+struct IssueDeletionRequest: JSONJSONRequest, BacklogStorable {
+	static let isIndependent = false
+	
 	var method: String { return "issue/delete" }
 	
 	let authenticationToken: String
@@ -261,12 +276,13 @@ extension EmptyCollection: Response {
 
 extension Client {
 	func issueRemoved(_ issue: Issue) {
-		let result = getUser().flatMap { user in
-			IssueDeletionRequest(
-				authenticationToken: user.authenticationToken,
-				issueID: issue.id
-				).send()
-		}
+		let result = getUser()
+			.map { user in
+				IssueDeletionRequest(
+					authenticationToken: user.authenticationToken,
+					issueID: issue.id
+				)
+			}.flatMap(Client.shared.send)
 		
 		logOutcome(of: result, as: "issue deletion")
 	}
@@ -281,7 +297,9 @@ enum IssueAction: String, Codable {
 	case revert
 }
 
-struct IssueActionRequest: JSONJSONRequest, ApplyingRequest, BacklogStorable {
+struct IssueActionRequest: JSONJSONRequest, BacklogStorable {
+	static let isIndependent = false
+	
 	var method: String { return "issue/\(action.rawValue)" }
 	
 	let authenticationToken: String
@@ -300,13 +318,14 @@ struct IssueActionRequest: JSONJSONRequest, ApplyingRequest, BacklogStorable {
 
 extension Client {
 	func performed(_ action: IssueAction, on issue: Issue) {
-		let result = getUser().flatMap { user in
-			IssueActionRequest(
-				authenticationToken: user.authenticationToken,
-				issueID: issue.id,
-				action: action
-				).send()
-		}
+		let result = getUser()
+			.map { user in
+				IssueActionRequest(
+					authenticationToken: user.authenticationToken,
+					issueID: issue.id,
+					action: action
+				)
+			}.flatMap(Client.shared.send)
 		
 		logOutcome(of: result, as: "issue \(action.rawValue)")
 	}

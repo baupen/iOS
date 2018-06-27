@@ -2,21 +2,16 @@
 
 import Foundation
 
-func multipartRequest(to url: URL, parts: [MultipartPart]) throws -> URLRequest {
+func encodeMultipartRequest(containing parts: [MultipartPart], into request: inout URLRequest) throws {
 	let boundary = "boundary-\(UUID())-boundary"
 	let rawBoundary = "--\(boundary)\r\n".data(using: .utf8)!
 	
-	let body = try parts
+	request.setValue("multipart/form-data; charset=utf-8; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+	request.httpBody = try parts
 		.lazy
 		.map { try rawBoundary + $0.makeFormData() }
 		.reduce(into: Data(), +=)
 		+ "--\(boundary)--\r\n".data(using: .utf8)!
-	
-	return URLRequest(url: url) <- {
-		$0.httpMethod = "POST"
-		$0.setValue("multipart/form-data; charset=utf-8; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-		$0.httpBody = body
-	}
 }
 
 struct MultipartPart {

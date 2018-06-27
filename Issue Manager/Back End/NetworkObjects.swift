@@ -23,69 +23,74 @@ A basic request doesn't say anything about its response, which makes it handy fo
 
 Conform to one of the more specific protocols rather than this.
 */
-protocol DataRequest: Encodable {
-	associatedtype SendingResult
+protocol Request {
+	associatedtype ExpectedResponse
+	
+	/// Independent requests don't depend on results of other requests and, as such, can be executed at any time.
+	static var isIndependent: Bool { get }
 	
 	var method: String { get }
 	
-	func send() -> Future<SendingResult>
+	func applyToClient(_ response: ExpectedResponse)
+	
+	func encode(using encoder: JSONEncoder, into request: inout URLRequest) throws
+	func decode(from data: Data, using decoder: JSONDecoder) throws -> ExpectedResponse
 }
 
-/**
-A request that expects a JSON-decodable response.
-
-Conform to one of the more specific protocols rather than this.
-*/
-protocol Request: DataRequest {
-	associatedtype ExpectedResponse: Response
+extension Request {
+	func applyToClient(_ response: ExpectedResponse) {}
 }
 
-/// A request that is encoded to JSON and expects a binary data response.
-protocol JSONDataRequest: DataRequest {}
+extension Request where Self: BacklogStorable {
+	static var isIndependent: Bool { return false }
+}
 
-/// A request that is sent as simple JSON data and expects a JSON response.
-protocol JSONJSONRequest: Request {}
+/// a request that is encoded as simple JSON
+protocol JSONEncodingRequest: Request, Encodable {}
 
-/// A request that is encoded as multipart form data and expects a JSON response.
-protocol MultipartJSONRequest: Request {
+extension JSONEncodingRequest {
+	func encode(using encoder: JSONEncoder, into request: inout URLRequest) throws {
+		request.httpBody = try encoder.encode(self)
+	}
+}
+
+/// a request that is encoded as a multipart form
+protocol MultipartEncodingRequest: Request, Encodable {
 	var fileURL: URL? { get }
 }
 
-extension JSONDataRequest where SendingResult == Data {
-	func send() -> Future<Data> {
-		return Client.shared.send(self)
+extension MultipartEncodingRequest {
+	func encode(using encoder: JSONEncoder, into request: inout URLRequest) throws {
+		let encoded = try encoder.encode(self)
+		let parts = [MultipartPart(name: "message", content: .json(encoded))]
+			+ (fileURL.map { [MultipartPart(name: "image", content: .jpeg(at: $0))] } ?? [])
+		try encodeMultipartRequest(containing: parts, into: &request)
 	}
 }
 
-/// A request that can apply its result to the client
-protocol ApplyingRequest: Request {
-	func applyToClient(_ response: ExpectedResponse)
+/// a request that expects a JSON-decodable response
+protocol JSONDecodingRequest: Request where ExpectedResponse: Response {}
+
+extension JSONDecodingRequest {
+	func decode(from data: Data, using decoder: JSONDecoder) throws -> ExpectedResponse {
+		return try decoder.decode(JSendSuccess<ExpectedResponse>.self, from: data).data
+	}
 }
 
+/// a request that expects a binary data response
+protocol DataDecodingRequest: Request where ExpectedResponse == Data {}
+
+extension DataDecodingRequest {
+	func decode(from data: Data, using decoder: JSONDecoder) throws -> Data {
+		return data
+	}
+}
+
+typealias JSONJSONRequest = JSONEncodingRequest & JSONDecodingRequest
+typealias JSONDataRequest = JSONEncodingRequest & DataDecodingRequest
+typealias MultipartJSONRequest = MultipartEncodingRequest & JSONDecodingRequest
+
+/// a request that can be stored for later execution and released whenever the connection comes back later
 protocol BacklogStorable: Codable {
 	var method: String { get }
-	
-	func send() -> Future<Void>
-}
-
-extension BacklogStorable where Self: ApplyingRequest {
-	fileprivate func handle(_ result: Future<ExpectedResponse>) -> Future<Void> {
-		return result.map(applyToClient).catch { error in
-			if case RequestError.communicationError = error {
-				Client.shared.addToBacklog(self)
-			}
-		}
-	}
-}
-
-extension JSONJSONRequest where Self: ApplyingRequest & BacklogStorable, SendingResult == Void {
-	func send() -> Future<Void> {
-		return handle(Client.shared.send(self))
-	}
-}
-
-extension MultipartJSONRequest where Self: ApplyingRequest & BacklogStorable, SendingResult == Void {
-	func send() -> Future<Void> {
-		return handle(Client.shared.send(self))
-	}
 }
