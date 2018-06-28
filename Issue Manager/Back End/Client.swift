@@ -18,17 +18,30 @@ class Client {
 		$0.dateDecodingStrategy = .iso8601
 	}
 	
+	/// the user we're currently logged in as
 	var user: User?
+	/// current local representation of all the data
 	var storage = Storage()
 	
+	/// the backlog of requests that couldn't be sent due to connection issues
 	private var backlog = Backlog()
-	private var isClearingBacklog = false // oh no
-	
+	/// used to automatically attempt to clear the backlog at regular intervals
+	private var backlogClearingTimer: Timer!
 	/// any dependent requests are executed on this queue, so as to avoid bad interleavings and races and such
 	private let linearQueue = DispatchQueue(label: "dependent request execution")
 	
 	private init() {
 		loadShared()
+		backlogClearingTimer = .scheduledTimer(withTimeInterval: 60, repeats: true) { _ in
+			self.tryToClearBacklog()
+		}
+	}
+	
+	/// call this e.g. when the device regains its internet connection
+	func tryToClearBacklog() {
+		linearQueue.async {
+			try? self.clearBacklog()
+		}
 	}
 	
 	func send<R: Request>(_ request: R) -> Future<R.ExpectedResponse> {
@@ -50,10 +63,6 @@ class Client {
 				linearQueue.async {
 					do {
 						try self.clearBacklog()
-					} catch {
-						self.backlog.appendIfPossible(request)
-					}
-					do {
 						let taskResult = try self.startTask(for: request).await()
 						resolver.fulfill(with: taskResult)
 					} catch RequestError.communicationError(let error) {
