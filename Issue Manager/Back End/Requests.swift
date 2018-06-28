@@ -8,7 +8,11 @@ extension Client {
 	}
 }
 
-func ignore(_ value: Any) {}
+extension Future {
+	func ignoringResult() -> Future<Void> {
+		return self.map { _ in }
+	}
+}
 
 fileprivate func logOutcome<T>(of future: Future<T>, as method: String) {
 	future.then { _ in
@@ -49,7 +53,7 @@ extension Client {
 			username: username,
 			passwordHash: password.sha256()
 		)
-		return Client.shared.send(request).map(ignore)
+		return Client.shared.send(request).ignoringResult()
 	}
 }
 
@@ -99,7 +103,7 @@ extension Client {
 				)
 			}
 			.flatMap(Client.shared.send)
-			.map(ignore)
+			.ignoringResult()
 	}
 	
 	fileprivate func update(from response: ReadRequest.ExpectedResponse) {
