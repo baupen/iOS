@@ -7,4 +7,8 @@ struct User: APIObject {
 	var authenticationToken: String
 	var givenName: String
 	var familyName: String
+	
+	var fullName: String {
+		return "\(givenName) \(familyName)"
+	}
 }

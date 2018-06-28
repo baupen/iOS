@@ -42,6 +42,25 @@ struct Issue: FileContainer {
 			var time: Date
 			/// the name whoever caused the event chose
 			var author: String
+			
+			init(at time: Date, by author: String) {
+				self.time = time
+				self.author = author
+			}
 		}
+	}
+}
+
+extension Issue {
+	var isRegistered: Bool {
+		return status.registration != nil
+	}
+	
+	var hasResponse: Bool {
+		return status.response != nil
+	}
+	
+	var isReviewed: Bool {
+		return status.review != nil
 	}
 }
