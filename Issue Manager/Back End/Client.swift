@@ -20,8 +20,8 @@ class Client {
 	
 	var user: User?
 	var storage = Storage()
-	// TODO build up backlog rather than attempting requests once reachability is implemented
-	private var backlog: [BacklogStorable] = []
+	
+	private var backlog = Backlog()
 	private var isClearingBacklog = false // oh no
 	
 	/// any dependent requests are executed on this queue, so as to avoid bad interleavings and races and such
@@ -31,72 +31,64 @@ class Client {
 		loadShared()
 	}
 	
-	private func addToBacklog(_ request: BacklogStorable) {
-		guard !isClearingBacklog else { return }
-		linearQueue.async {
-			self.backlog.append(request)
-		}
-	}
-	
-	private func clearBacklog() -> Future<Void> {
-		isClearingBacklog = true
-		return Future { promise in
-			linearQueue.async {
-				let group = DispatchGroup()
-				
-				for (index, request) in self.backlog.enumerated() {
-					group.enter()
-					let result = request.send()
-					result.always(group.leave)
-					
-					var cancelCause: RequestError?
-					
-					result.then { _ in 
-						print("backlog request \(request.method) cleared successfully")
-					}
-					
-					result.catch { error in
-						if case RequestError.communicationError(let error) = error {
-							print("backlog request \(request.method) failed with a communication error! cancelling...")
-							cancelCause = .communicationError(error)
-						} else {
-							print("backlog request \(request.method) failed! clearing anyway.")
-						}
-					}
-					
-					group.wait()
-					
-					if let error = cancelCause {
-						self.backlog.removeFirst(index) // remove all previously completed tasks
-						promise.reject(with: error)
-						return
-					}
-				}
-				
-				self.backlog = []
-				promise.fulfill()
-			}
-			}
-			.always { self.isClearingBacklog = false }
-	}
-	
 	func send<R: Request>(_ request: R) -> Future<R.ExpectedResponse> {
-		return Future.fulfilled(with: request)
-			.map(urlRequest)
-			.flatMap(send)
+		return dispatch(request)
 			.map { taskResult in try self.extractData(from: taskResult, for: request) }
 			.then(request.applyToClient)
 	}
 	
-	private func decodeResponse<R: Response>(from data: Data) throws -> R {
-		let success = try responseDecoder.decode(JSendSuccess<R>.self, from: data)
-		print("Decoded response!")
-		return success.data
+	private func startTask<R: Request>(for request: R) -> Future<TaskResult> {
+		return Future { try urlRequest(body: request) }
+			.flatMap(send)
+	}
+	
+	private func dispatch<R: Request>(_ request: R) -> Future<TaskResult> {
+		if R.isIndependent {
+			return startTask(for: request)
+		} else {
+			return Future { resolver in
+				linearQueue.async {
+					do {
+						try self.clearBacklog()
+					} catch {
+						self.backlog.appendIfPossible(request)
+					}
+					do {
+						let taskResult = try self.startTask(for: request).await()
+						resolver.fulfill(with: taskResult)
+					} catch RequestError.communicationError(let error) {
+						print("Communication error during request \(request.method): \(error.localizedDescription)")
+						dump(error)
+						self.backlog.appendIfPossible(request)
+						resolver.reject(with: RequestError.communicationError(error))
+					} catch {
+						resolver.reject(with: error)
+					}
+				}
+			}
+		}
+	}
+	
+	/// only ever run this on linearQueue
+	private func clearBacklog() throws {
+		while let request = backlog.first {
+			do {
+				try request.send().await()
+			} catch RequestError.communicationError(let error) {
+				print("Communication error whilst clearing request \(request.method) from backlog: \(error.localizedDescription)")
+				dump(error)
+				throw RequestError.communicationError(error)
+			} catch {
+				print("Error occurred whilst clearing request \(request.method) from backlog; ignoring: \(error.localizedDescription)")
+				dump(error)
+			}
+			backlog.removeFirst()
+		}
 	}
 	
 	private func extractData<R: Request>(from taskResult: TaskResult, for request: R) throws -> R.ExpectedResponse {
 		let (data, response) = taskResult
-		print("Status code: \(response.statusCode), body: \(debugRepresentation(of: data))")
+		print("\(request.method): status code: \(response.statusCode), body: \(debugRepresentation(of: data))")
 		switch response.statusCode {
 		case 200:
 			return try request.decode(from: data, using: responseDecoder)
@@ -124,10 +116,30 @@ class Client {
 	
 	private func send(_ request: URLRequest) -> Future<TaskResult> {
 		let path = request.url!.relativePath
-		print("\(path): Sending \(debugRepresentation(of: request.httpBody!))")
+		print("\(path): sending \(debugRepresentation(of: request.httpBody!))")
 		return urlSession.dataTask(with: request)
 			.mapError(RequestError.communicationError)
-			.always { print("\(path): Received response") }
+			.always { print("\(path): finished") }
+	}
+}
+
+extension Future {
+	func await() throws -> Value {
+		let group = DispatchGroup()
+		group.enter()
+		always(group.leave)
+		group.wait()
+		
+		var result: Result<Value>?
+		self.then { result = .success($0) }
+		self.catch { result = .failure($0) }
+		
+		switch result! {
+		case .success(let value):
+			return value
+		case .failure(let error):
+			throw error
+		}
 	}
 }
 
@@ -161,6 +173,7 @@ extension Client {
 		do {
 			user = try defaults.decode(forKey: "Client.shared.user")
 			storage = try defaults.decode(forKey: "Client.shared.storage") ?? storage
+			backlog = try defaults.decode(forKey: "Client.shared.backlog") ?? backlog
 			print("Client loaded!")
 		} catch {
 			print("Client could not be loaded!")
@@ -174,6 +187,7 @@ extension Client {
 		do {
 			try defaults.encode(user, forKey: "Client.shared.user")
 			try defaults.encode(storage, forKey: "Client.shared.storage")
+			try defaults.encode(backlog, forKey: "Client.shared.backlog")
 			print("Client saved!")
 		} catch {
 			print("Client could not be saved!")

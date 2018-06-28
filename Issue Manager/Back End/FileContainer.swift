@@ -66,7 +66,7 @@ extension FileContainer {
 		let result = Client.shared.downloadFile(for: Self.downloadRequestPath, meta: meta)
 		result.then { data in
 			let success = manager.createFile(atPath: url.path, contents: data)
-			print(success ? "Saved file to" : "Could not save file to", filename)
+			print(success ? "Saved file to" : "Could not save file to", url)
 		}
 		
 		result.catch { error in

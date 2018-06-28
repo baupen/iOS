@@ -8,7 +8,7 @@ extension Client {
 	}
 }
 
-fileprivate func ignore(_ value: Any) {}
+func ignore(_ value: Any) {}
 
 fileprivate func logOutcome<T>(of future: Future<T>, as method: String) {
 	future.then { _ in
@@ -56,7 +56,7 @@ extension Client {
 // MARK: -
 // MARK: Read
 
-struct ReadRequest: JSONJSONRequest, BacklogStorable {
+struct ReadRequest: JSONJSONRequest {
 	static let isIndependent = false
 	
 	var method: String { return "read" }
@@ -67,10 +67,6 @@ struct ReadRequest: JSONJSONRequest, BacklogStorable {
 	let buildings: [ObjectMeta]
 	let maps: [ObjectMeta]
 	let issues: [ObjectMeta]
-	
-	func send() -> Future<Void> {
-		return Client.shared.send(self).map(applyToClient)
-	}
 	
 	func applyToClient(_ response: ExpectedResponse) {
 		Client.shared.update(from: response)
@@ -177,6 +173,8 @@ extension Client {
 // MARK: Issue Creation
 
 struct IssueCreationRequest: MultipartJSONRequest, BacklogStorable {
+	static let storageID = "issue creation"
+	
 	static let isIndependent = false
 	
 	var method: String { return "issue/create" }
@@ -215,6 +213,8 @@ extension Client {
 // MARK: Issue Update
 
 struct IssueUpdateRequest: MultipartJSONRequest, BacklogStorable {
+	static let storageID = "issue update"
+	
 	static let isIndependent = false
 	
 	var method: String { return "issue/update" }
@@ -253,6 +253,8 @@ extension Client {
 // MARK: Issue Deletion
 
 struct IssueDeletionRequest: JSONJSONRequest, BacklogStorable {
+	static let storageID = "issue deletion"
+	
 	static let isIndependent = false
 	
 	var method: String { return "issue/delete" }
@@ -298,6 +300,7 @@ enum IssueAction: String, Codable {
 }
 
 struct IssueActionRequest: JSONJSONRequest, BacklogStorable {
+	static let storageID = "issue action"
 	static let isIndependent = false
 	
 	var method: String { return "issue/\(action.rawValue)" }

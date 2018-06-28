@@ -89,8 +89,3 @@ extension DataDecodingRequest {
 typealias JSONJSONRequest = JSONEncodingRequest & JSONDecodingRequest
 typealias JSONDataRequest = JSONEncodingRequest & DataDecodingRequest
 typealias MultipartJSONRequest = MultipartEncodingRequest & JSONDecodingRequest
-
-/// a request that can be stored for later execution and released whenever the connection comes back later
-protocol BacklogStorable: Codable {
-	var method: String { get }
-}
