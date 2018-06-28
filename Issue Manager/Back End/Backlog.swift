@@ -18,7 +18,7 @@ protocol BacklogStorable: Codable {
 
 extension BacklogStorable where Self: Request {
 	func send() -> Future<Void> {
-		return Client.shared.send(self).map(ignore)
+		return Client.shared.send(self).ignoringResult()
 	}
 }
 

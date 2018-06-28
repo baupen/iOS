@@ -37,7 +37,7 @@ extension FileContainer {
 		return url
 	}
 	
-	func downloadFile(previous: FileContainer?) {
+	func downloadFile(previous: FileContainer? = nil) {
 		if let previous = previous {
 			switch (previous.filename, filename) {
 			case (nil, nil): // never had file

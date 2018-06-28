@@ -9,7 +9,7 @@ final class Storage: Codable {
 	// try not to mutate these directly
 	internal(set) var issues: [UUID: Issue] = [:]
 	
-	var fileContainers: [FileContainer] {
+	private var fileContainers: [FileContainer] {
 		return Array(buildings.values) as [FileContainer]
 			+ Array(maps.values)
 			+ Array(issues.values)
@@ -24,14 +24,22 @@ final class Storage: Codable {
 		buildings = try container.decodeValue(forKey: .buildings)
 		maps      = try container.decodeValue(forKey: .maps)
 		issues    = try container.decodeValue(forKey: .issues)
+		
+		downloadMissingFiles()
 	}
 	
-	func add(_ issue: Issue) {
-		issues[issue.id] = issue
-		Client.shared.issueCreated(issue)
+	func downloadMissingFiles() {
+		fileContainers.forEach { $0.downloadFile() }
 	}
 	
 	// somewhat defensive coding to avoid crashes when new data is read at unfortunate times
+	
+	func add(_ issue: Issue) {
+		assert(issues[issue.id] == nil)
+		
+		issues[issue.id] = issue
+		Client.shared.issueCreated(issue)
+	}
 	
 	func changeIssue(withID id: UUID, transform: (inout Issue) throws -> Void) rethrows {
 		guard var issue = issues[id] else {
@@ -39,9 +47,11 @@ final class Storage: Codable {
 			return
 		}
 		assert(!issue.isRegistered)
+		
+		let oldFilename = issue.filename
 		try transform(&issue)
 		issues[id] = issue
-		Client.shared.issueChanged(issue)
+		Client.shared.issueChanged(issue, hasChangedFilename: issue.filename != oldFilename)
 	}
 	
 	func removeIssue(withID id: UUID) {
@@ -50,6 +60,7 @@ final class Storage: Codable {
 			return
 		}
 		assert(!issue.isRegistered)
+		
 		issues[issue.id] = nil
 		issue.deleteFile()
 		Client.shared.issueRemoved(issue)
@@ -60,6 +71,7 @@ final class Storage: Codable {
 			assertionFailure("issue must exist")
 			return
 		}
+		
 		issues[issue.id]!.isMarked.toggle()
 		Client.shared.performed(.mark, on: issue)
 	}
@@ -71,6 +83,7 @@ final class Storage: Codable {
 		}
 		assert(issue.isRegistered)
 		assert(!issue.isReviewed)
+		
 		issues[id]!.status.review = .init(at: Date(), by: Client.shared.user!.fullName)
 		Client.shared.performed(.review, on: issue)
 	}
@@ -81,6 +94,7 @@ final class Storage: Codable {
 			return
 		}
 		assert(issue.isReviewed)
+		
 		issues[id]!.status.review = nil
 		Client.shared.performed(.revert, on: issue)
 	}
@@ -92,6 +106,7 @@ final class Storage: Codable {
 		}
 		assert(issue.hasResponse)
 		assert(!issue.isReviewed)
+		
 		issues[id]!.status.review = nil
 		Client.shared.performed(.revert, on: issue)
 	}

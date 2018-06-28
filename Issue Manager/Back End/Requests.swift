@@ -239,7 +239,7 @@ struct IssueUpdateRequest: MultipartJSONRequest, BacklogStorable {
 }
 
 extension Client {
-	func issueChanged(_ issue: Issue) {
+	func issueChanged(_ issue: Issue, hasChangedFilename: Bool) {
 		let result = getUser()
 			.map { user in
 				IssueUpdateRequest(
