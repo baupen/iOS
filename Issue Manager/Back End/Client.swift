@@ -59,20 +59,15 @@ class Client {
 		if R.isIndependent {
 			return startTask(for: request)
 		} else {
-			return Future { resolver in
-				linearQueue.async {
-					do {
-						try self.clearBacklog()
-						let taskResult = try self.startTask(for: request).await()
-						resolver.fulfill(with: taskResult)
-					} catch RequestError.communicationError(let error) {
-						print("Communication error during request \(request.method): \(error.localizedDescription)")
-						dump(error)
-						self.backlog.appendIfPossible(request)
-						resolver.reject(with: RequestError.communicationError(error))
-					} catch {
-						resolver.reject(with: error)
-					}
+			return Future(asyncOn: linearQueue) {
+				do {
+					try self.clearBacklog()
+					return try self.startTask(for: request).await()
+				} catch RequestError.communicationError(let error) {
+					print("Communication error during request \(request.method): \(error.localizedDescription)")
+					dump(error)
+					self.backlog.appendIfPossible(request)
+					throw RequestError.communicationError(error)
 				}
 			}
 		}
