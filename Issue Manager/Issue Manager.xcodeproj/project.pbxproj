@@ -290,7 +290,6 @@
 		9583C2D620DC76CE00452695 /* Back End */ = {
 			isa = PBXGroup;
 			children = (
-				95A7B24C20E3FFE200A928D6 /* Backlog.swift */,
 				9511A0FD20DD378A00101ADE /* Helpers */,
 				9511A12020DD4F6100101ADE /* API Objects */,
 				9554234E20DC781E009CCCE0 /* NetworkObjects.swift */,
@@ -300,6 +299,7 @@
 				9511A11E20DD4F5600101ADE /* Client.swift */,
 				95B9BA6720DEDF0400261954 /* Storage.swift */,
 				95B9BA6520DEC7FA00261954 /* Requests.swift */,
+				95A7B24C20E3FFE200A928D6 /* Backlog.swift */,
 			);
 			path = "Back End";
 			sourceTree = "<group>";
