@@ -19,7 +19,14 @@ class Client {
 	}
 	
 	/// the user we're currently logged in as
-	var user: User?
+	var user: User? {
+		didSet {
+			guard let user = user else { return }
+			if let old = oldValue, user.id != old.id {
+				storage = Storage() // invalidate after switching user
+			}
+		}
+	}
 	/// current local representation of all the data
 	var storage = Storage()
 	

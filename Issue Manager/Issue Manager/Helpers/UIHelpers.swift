@@ -14,7 +14,7 @@ extension UIViewController {
 	func showAlert(titled title: String?,
 				   message: String?,
 				   canCancel: Bool = false,
-				   okMessage: String = "Okay",
+				   okMessage: String = "Okay", // TODO localize
 				   okStyle: UIAlertActionStyle = .default,
 				   okHandler: (() -> Void)? = nil) {
 		let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)

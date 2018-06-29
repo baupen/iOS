@@ -39,7 +39,11 @@ struct LoginRequest: JSONJSONRequest {
 	let clientVersion = 1
 	
 	func applyToClient(_ response: ExpectedResponse) {
-		Client.shared.user = response.user
+		Client.shared.user = response.user <- {
+			$0.username = username // TODO remove once API updated
+			$0.passwordHash = passwordHash
+		}
+		Client.shared.saveShared()
 	}
 	
 	struct ExpectedResponse: Response {
@@ -191,6 +195,7 @@ struct IssueCreationRequest: MultipartJSONRequest, BacklogStorable {
 		let previous = Client.shared.storage.issues[issue.id]
 		Client.shared.storage.issues[issue.id] = response.issue
 		response.issue.downloadFile(previous: previous)
+		Client.shared.saveShared()
 	}
 	
 	struct ExpectedResponse: Response {
@@ -231,6 +236,7 @@ struct IssueUpdateRequest: MultipartJSONRequest, BacklogStorable {
 		let previous = Client.shared.storage.issues[issue.id]
 		Client.shared.storage.issues[issue.id] = response.issue
 		response.issue.downloadFile(previous: previous)
+		Client.shared.saveShared()
 	}
 	
 	struct ExpectedResponse: Response {
@@ -269,6 +275,7 @@ struct IssueDeletionRequest: JSONJSONRequest, BacklogStorable {
 	func applyToClient(_ response: ExpectedResponse) {
 		Client.shared.storage.issues[issueID]?.deleteFile()
 		Client.shared.storage.issues[issueID] = nil
+		Client.shared.saveShared()
 	}
 	
 	typealias ExpectedResponse = EmptyCollection<Void>
@@ -316,6 +323,7 @@ struct IssueActionRequest: JSONJSONRequest, BacklogStorable {
 	func applyToClient(_ response: ExpectedResponse) {
 		assert(issueID == response.issue.id)
 		Client.shared.storage.issues[response.issue.id] = response.issue
+		Client.shared.saveShared()
 	}
 	
 	struct ExpectedResponse: Response {

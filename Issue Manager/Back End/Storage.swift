@@ -39,6 +39,8 @@ final class Storage: Codable {
 		
 		issues[issue.id] = issue
 		Client.shared.issueCreated(issue)
+		
+		Client.shared.saveShared()
 	}
 	
 	func changeIssue(withID id: UUID, transform: (inout Issue) throws -> Void) rethrows {
@@ -52,6 +54,8 @@ final class Storage: Codable {
 		try transform(&issue)
 		issues[id] = issue
 		Client.shared.issueChanged(issue, hasChangedFilename: issue.filename != oldFilename)
+		
+		Client.shared.saveShared()
 	}
 	
 	func removeIssue(withID id: UUID) {
@@ -64,6 +68,8 @@ final class Storage: Codable {
 		issues[issue.id] = nil
 		issue.deleteFile()
 		Client.shared.issueRemoved(issue)
+		
+		Client.shared.saveShared()
 	}
 	
 	func markIssue(withID id: UUID) {
@@ -74,6 +80,8 @@ final class Storage: Codable {
 		
 		issues[issue.id]!.isMarked.toggle()
 		Client.shared.performed(.mark, on: issue)
+		
+		Client.shared.saveShared()
 	}
 	
 	func reviewIssue(withID id: UUID) {
@@ -86,6 +94,8 @@ final class Storage: Codable {
 		
 		issues[id]!.status.review = .init(at: Date(), by: Client.shared.user!.fullName)
 		Client.shared.performed(.review, on: issue)
+		
+		Client.shared.saveShared()
 	}
 	
 	func revertReviewForIssue(withID id: UUID) {
@@ -97,6 +107,8 @@ final class Storage: Codable {
 		
 		issues[id]!.status.review = nil
 		Client.shared.performed(.revert, on: issue)
+		
+		Client.shared.saveShared()
 	}
 	
 	func revertResponseForIssue(withID id: UUID) {
@@ -109,5 +121,13 @@ final class Storage: Codable {
 		
 		issues[id]!.status.review = nil
 		Client.shared.performed(.revert, on: issue)
+		
+		Client.shared.saveShared()
+	}
+}
+
+extension Bool {
+	mutating func toggle() { // TODO remove in Swift 4.2
+		self = !self
 	}
 }
