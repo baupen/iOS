@@ -1,0 +1,5 @@
+language: swift
+osx_image: xcode9.4
+xcode_project: Issue Manager.xcodeproj
+xcode_scheme: Issue Manager
+install: carthage bootstrap
