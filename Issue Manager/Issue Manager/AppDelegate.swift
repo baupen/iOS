@@ -1,13 +1,18 @@
 // Created by Julian Dunskus
 
 import UIKit
+import Reachability
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
 	var window: UIWindow?
+	let reachability = Reachability()
 	
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 		// Override point for customization after application launch.
+		reachability?.whenReachable = { _ in
+			Client.shared.tryToClearBacklog()
+		}
 		return true
 	}
 	
