@@ -2,6 +2,8 @@
 
 import UIKit
 
+fileprivate let refreshingCellAlpha: CGFloat = 0.25
+
 class BuildingListViewController: UITableViewController, LoadedViewController {
 	fileprivate typealias Localization = L10n.BuildingList
 	
@@ -20,30 +22,27 @@ class BuildingListViewController: UITableViewController, LoadedViewController {
 	
 	@objc func refresh(_ refresher: UIRefreshControl) {
 		isRefreshing = true
-		buildingListView.reloadData()
+		buildingListView.visibleCells.forEach { ($0 as! BuildingCell).isRefreshing = true }
 		
-		let result = Client.shared.read()
+		let result = Client.shared.read().on(.main)
+			.delayed(by: 1)
 		
 		result.then {
 			self.buildings = Array(Client.shared.storage.buildings.values)
 		}
 		result.always {
-			DispatchQueue.main.async {
-				refresher.endRefreshing()
-				self.isRefreshing = false
-				self.buildingListView.reloadData()
-			}
+			refresher.endRefreshing()
+			self.isRefreshing = false
+			self.buildingListView.reloadData()
 		}
 		result.catch { error in
-			DispatchQueue.main.async {
-				switch error {
-				case RequestError.communicationError:
-					self.showAlert(titled: L10n.Alert.ConnectionIssues.title,
-								   message: L10n.Alert.ConnectionIssues.message)
-				default:
-					self.showAlert(titled: L10n.Alert.UnknownSyncError.title,
-								   message: L10n.Alert.UnknownSyncError.message)
-				}
+			switch error {
+			case RequestError.communicationError:
+				self.showAlert(titled: L10n.Alert.ConnectionIssues.title,
+							   message: L10n.Alert.ConnectionIssues.message)
+			default:
+				self.showAlert(titled: L10n.Alert.UnknownSyncError.title,
+							   message: L10n.Alert.UnknownSyncError.message)
 			}
 		}
 	}
@@ -89,7 +88,7 @@ class BuildingListViewController: UITableViewController, LoadedViewController {
 
 extension BuildingListViewController: UICollectionViewDataSource {
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return isRefreshing ? 0 : buildings.count
+		return buildings.count
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -97,6 +96,7 @@ extension BuildingListViewController: UICollectionViewDataSource {
 		
 		let building = buildings[indexPath.item]
 		cell.building = building
+		cell.isRefreshing = isRefreshing
 		
 		return cell
 	}

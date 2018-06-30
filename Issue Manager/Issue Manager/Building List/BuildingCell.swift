@@ -2,6 +2,8 @@
 
 import UIKit
 
+fileprivate let shadowOpacity: Float = 0.2
+
 class BuildingCell: UICollectionViewCell, LoadedCollectionCell {
 	fileprivate typealias Localization = L10n.BuildingList.BuildingSummary
 	
@@ -14,12 +16,22 @@ class BuildingCell: UICollectionViewCell, LoadedCollectionCell {
 	
 	var building: Building! {
 		didSet {
-			nameLabel.text = building.name
-			let issues = building.allIssues()
-			totalIssuesLabel.text = Localization.totalIssues(String(issues.count))
-			let openIssues = issues.filter { !$0.isReviewed }
-			openIssuesLabel.text = Localization.openIssues(String(openIssues.count))
 			updateImage()
+			nameLabel.text = building.name
+			DispatchQueue.global().async {
+				let issues = self.building.allIssues()
+				let openIssues = issues.filter { !$0.isReviewed }
+				DispatchQueue.main.async {
+					self.totalIssuesLabel.text = Localization.totalIssues(String(issues.count))
+					self.openIssuesLabel.text = Localization.openIssues(String(openIssues.count))
+				}
+			}
+		}
+	}
+	var isRefreshing = false {
+		didSet {
+			contentView.alpha = isRefreshing ? 0.25 : 1
+			layer.shadowOpacity = isRefreshing ? 0.05 : shadowOpacity
 		}
 	}
 	
@@ -30,7 +42,7 @@ class BuildingCell: UICollectionViewCell, LoadedCollectionCell {
 		contentView.clipsToBounds = true
 		layer.cornerRadius = 8
 		
-		layer.shadowOpacity = 0.2
+		layer.shadowOpacity = shadowOpacity
 		layer.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
 		layer.shadowOffset = CGSize(width: 0, height: 6)
 		layer.shadowRadius = 12
