@@ -330,7 +330,7 @@ Im Abnahmemodus erfasste Pendenzen werden hingegen auch sonst angezeigt.</string
                                                         <constraint firstAttribute="height" constant="320" id="uvM-uk-rSL"/>
                                                     </constraints>
                                                     <inset key="scrollIndicatorInsets" minX="20" minY="0.0" maxX="20" maxY="24"/>
-                                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="oGQ-sp-LyL" customClass="BuildingLayout" customModule="Issue_Manager" customModuleProvider="target">
+                                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="oGQ-sp-LyL" customClass="BuildingListLayout" customModule="Issue_Manager" customModuleProvider="target">
                                                         <size key="itemSize" width="50" height="50"/>
                                                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
