@@ -344,6 +344,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9583C2CF20DC748B00452695 /* Build configuration list for PBXNativeTarget "Issue Manager" */;
 			buildPhases = (
+				950283AA20E71001001A5083 /* Run Poesie */,
 				950283A920E70DA4001A5083 /* Run SwiftGen */,
 				9583C2B720DC748800452695 /* Sources */,
 				9583C2B820DC748800452695 /* Frameworks */,
@@ -437,13 +438,30 @@
 			files = (
 			);
 			inputPaths = (
+				"Issue Manager/Base.lproj/Localizable.strings",
 			);
 			name = "Run SwiftGen";
 			outputPaths = (
+				"Issue Manager/Generated/LocalizedStrings.swift",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftgen >/dev/null; then\n    cd \"Issue Manager\"\n    swiftgen\nelse\n    echo \"warning: SwiftGen not installed, download it from https://github.com/SwiftGen/SwiftGen\"\nfi";
+		};
+		950283AA20E71001001A5083 /* Run Poesie */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Poesie";
+			outputPaths = (
+				"Issue Manager/Base.lproj/Localizable.strings",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which poesie >/dev/null; then\n    cd \"Issue Manager\"\n    poesie --lang de --token 8921aa79c88bf258f7e28b3a25c1ee11 --project 194177 --ios Base.lproj/Localizable.strings \nelse\n    echo \"warning: Poesie not installed\"\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
