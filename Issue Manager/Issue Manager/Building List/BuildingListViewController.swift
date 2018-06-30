@@ -25,7 +25,6 @@ class BuildingListViewController: UITableViewController, LoadedViewController {
 		buildingListView.visibleCells.forEach { ($0 as! BuildingCell).isRefreshing = true }
 		
 		let result = Client.shared.read().on(.main)
-			.delayed(by: 1)
 		
 		result.then {
 			self.buildings = Array(Client.shared.storage.buildings.values)
