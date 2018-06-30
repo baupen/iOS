@@ -15,14 +15,29 @@
 "alert.okay" = "Okay";
 
 ////////////////////////////////////////////////////////////////////////////////
+// MARK: Alert.unknown
+// CONTEXT: Nachricht für den Alert, dass beim aktualisieren ein unbekannter Fehler aufgetreten ist.
+"alert.unknown_sync_error.message" = "Beim aktualisieren ist ein unbekannter Fehler aufgetreten. Bitte versuch es später nochmal.";
+// CONTEXT: Titel für den Alert, dass beim aktualisieren ein unbekannter Fehler aufgetreten ist.
+"alert.unknown_sync_error.title" = "Unbekannter Fehler!";
+
+////////////////////////////////////////////////////////////////////////////////
 // MARK: Building
+// CONTEXT: Beschreibung für den Abnahmemodus
+"building_list.client_mode.description" = "Im Abnahmemodus werden nur die Pendenzen angezeigt, die auch im Abnahmemodus erfasst wurden.\nIm Abnahmemodus erfasste Pendenzen werden hingegen auch sonst angezeigt.";
+// CONTEXT: Titel für den Schalter um Abnahmemodus an- und auszuschalten. (Abnahmemodus ist für wenn man mit dem Käufer herumläuft und inspiziert; dabei werden die "normalen" Mängel nicht angezeigt.)
+"building_list.client_mode.title" = "Abnahmemodus";
 // CONTEXT: Knopf oben links zum ausloggen
 "building_list.log_out" = "Ausloggen";
+// CONTEXT: Titel für die Gebäudeliste-Ansicht
+"building_list.title" = "Gebäude";
+// CONTEXT: Der Willkommenstext oben. %s wird mit dem Vornamen ersetzt.
+"building_list.welcome" = "Willkommen, %@";
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Login.alert.login
 // CONTEXT: Nachricht des Alerts für wenn man sich aus einem unbekannten Grund nicht einloggen kann.
-"login.alert.login_error.message" = "Beim einloggen ist ein Fehler aufgetreten! Sie werden falls möglich lokal eingeloggt.";
+"login.alert.login_error.message" = "Beim einloggen ist ein Fehler aufgetreten! Du wirst falls möglich lokal eingeloggt.";
 // CONTEXT: Titel des Alerts für wenn man sich aus einem unbekannten Grund nicht einloggen kann.
 "login.alert.login_error.title" = "Unbekannter Fehler!";
 

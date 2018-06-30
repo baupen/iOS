@@ -3,6 +3,8 @@
 import UIKit
 
 class LoginViewController: UIViewController {
+	fileprivate typealias Localization = L10n.Login
+	
 	@IBOutlet var textFieldView: UIStackView!
 	@IBOutlet var usernameField: UITextField!
 	@IBOutlet var passwordField: UITextField!
@@ -61,7 +63,7 @@ class LoginViewController: UIViewController {
 		result.then {
 			print("Logged in!")
 			print(Client.shared.user!.authenticationToken)
-			DispatchQueue.main.async(execute: self.showMainController)
+			DispatchQueue.main.async(execute: self.showBuildingList)
 		}
 		
 		result.catch { error in
@@ -82,8 +84,8 @@ class LoginViewController: UIViewController {
 					
 					self.attemptLocalLogin()
 				default:
-					self.showAlert(titled: L10n.Login.Alert.LoginError.title,
-								   message: L10n.Login.Alert.LoginError.message) {
+					self.showAlert(titled: Localization.Alert.LoginError.title,
+								   message: Localization.Alert.LoginError.message) {
 						self.attemptLocalLogin(showingAlerts: false)
 					}
 				}
@@ -117,23 +119,23 @@ class LoginViewController: UIViewController {
 		}
 		
 		print("Logged in locally!")
-		showMainController()
+		showBuildingList()
 	}
 	
 	func showUnknownUsernameAlert(username: String) {
-		showAlert(titled: L10n.Login.Alert.WrongUsername.title,
-				  message: L10n.Login.Alert.WrongUsername.message(username))
+		showAlert(titled: Localization.Alert.WrongUsername.title,
+				  message: Localization.Alert.WrongUsername.message(username))
 	}
 	
 	func showWrongPasswordAlert(username: String) {
-		showAlert(titled: L10n.Login.Alert.WrongPassword.title,
-				  message: L10n.Login.Alert.WrongPassword.message(username))
+		showAlert(titled: Localization.Alert.WrongPassword.title,
+				  message: Localization.Alert.WrongPassword.message(username))
 	}
 	
-	func showMainController() {
-		let mainController = storyboard!.instantiate(MainViewController.self)!
-		mainController.modalTransitionStyle = .flipHorizontal
-		present(mainController, animated: true)
+	func showBuildingList() {
+		let controller = storyboard!.instantiate(BuildingListViewController.self)!
+		controller.modalTransitionStyle = .flipHorizontal
+		present(controller, animated: true)
 	}
 }
 

@@ -7,17 +7,6 @@ typealias TaskResult = (data: Data, response: HTTPURLResponse)
 class Client {
 	static let shared = Client()
 	
-	private static let baseURL = URL(string: "https://dev.app.mangel.io/api/external")!
-	
-	private let urlSession = URLSession.shared
-	
-	private let requestEncoder = JSONEncoder() <- {
-		$0.dateEncodingStrategy = .iso8601
-	}
-	private let responseDecoder = JSONDecoder() <- {
-		$0.dateDecodingStrategy = .iso8601
-	}
-	
 	/// the user we're currently logged in as
 	var user: User? {
 		didSet {
@@ -27,8 +16,23 @@ class Client {
 			}
 		}
 	}
+	
 	/// current local representation of all the data
 	var storage = Storage()
+	
+	/// issues recorded in client mode are marked as such; other issues should not be displayed whilst in client mode
+	var isInClientMode = false
+	
+	private let baseURL = URL(string: "https://dev.app.mangel.io/api/external")!
+	
+	private let urlSession = URLSession.shared
+	
+	private let requestEncoder = JSONEncoder() <- {
+		$0.dateEncodingStrategy = .iso8601
+	}
+	private let responseDecoder = JSONDecoder() <- {
+		$0.dateDecodingStrategy = .iso8601
+	}
 	
 	/// the backlog of requests that couldn't be sent due to connection issues
 	private var backlog = Backlog()
@@ -122,7 +126,7 @@ class Client {
 	}
 	
 	private func apiURL<R: Request>(for request: R) -> URL {
-		return Client.baseURL.appendingPathComponent(request.method)
+		return baseURL.appendingPathComponent(request.method)
 	}
 	
 	private func send(_ request: URLRequest) -> Future<TaskResult> {
@@ -185,6 +189,7 @@ extension Client {
 			user = try defaults.decode(forKey: "Client.shared.user")
 			storage = try defaults.decode(forKey: "Client.shared.storage") ?? storage
 			backlog = try defaults.decode(forKey: "Client.shared.backlog") ?? backlog
+			isInClientMode = defaults.bool(forKey: "Client.shared.isInClientMode")
 			print("Client loaded!")
 		} catch {
 			print("Client could not be loaded!")
@@ -199,6 +204,7 @@ extension Client {
 			try defaults.encode(user, forKey: "Client.shared.user")
 			try defaults.encode(storage, forKey: "Client.shared.storage")
 			try defaults.encode(backlog, forKey: "Client.shared.backlog")
+			defaults.set(isInClientMode, forKey: "Client.shared.isInClientMode")
 			print("Client saved!")
 		} catch {
 			print("Client could not be saved!")

@@ -20,11 +20,31 @@ internal enum L10n {
       /// Verbindungsproblem
       internal static let title = L10n.tr("Localizable", "alert.connection_issues.title")
     }
+
+    internal enum UnknownSyncError {
+      /// Beim aktualisieren ist ein unbekannter Fehler aufgetreten. Bitte versuch es später nochmal.
+      internal static let message = L10n.tr("Localizable", "alert.unknown_sync_error.message")
+      /// Unbekannter Fehler!
+      internal static let title = L10n.tr("Localizable", "alert.unknown_sync_error.title")
+    }
   }
 
   internal enum BuildingList {
     /// Ausloggen
     internal static let logOut = L10n.tr("Localizable", "building_list.log_out")
+    /// Gebäude
+    internal static let title = L10n.tr("Localizable", "building_list.title")
+    /// Willkommen, %@
+    internal static func welcome(_ p1: String) -> String {
+      return L10n.tr("Localizable", "building_list.welcome", p1)
+    }
+
+    internal enum ClientMode {
+      /// Im Abnahmemodus werden nur die Pendenzen angezeigt, die auch im Abnahmemodus erfasst wurden.\nIm Abnahmemodus erfasste Pendenzen werden hingegen auch sonst angezeigt.
+      internal static let description = L10n.tr("Localizable", "building_list.client_mode.description")
+      /// Abnahmemodus
+      internal static let title = L10n.tr("Localizable", "building_list.client_mode.title")
+    }
   }
 
   internal enum Login {
@@ -32,7 +52,7 @@ internal enum L10n {
     internal enum Alert {
 
       internal enum LoginError {
-        /// Beim einloggen ist ein Fehler aufgetreten! Sie werden falls möglich lokal eingeloggt.
+        /// Beim einloggen ist ein Fehler aufgetreten! Du wirst falls möglich lokal eingeloggt.
         internal static let message = L10n.tr("Localizable", "login.alert.login_error.message")
         /// Unbekannter Fehler!
         internal static let title = L10n.tr("Localizable", "login.alert.login_error.title")
