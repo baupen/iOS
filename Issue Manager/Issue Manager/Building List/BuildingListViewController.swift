@@ -49,7 +49,14 @@ class BuildingListViewController: UITableViewController, LoadedViewController {
 	}
 	
 	var isRefreshing = false
-	var buildings: [Building] = []
+	var buildings: [Building] = [] {
+		didSet {
+			buildings += buildings // TODO remove after testing
+			buildings.sort {
+				$0.name < $1.name // TODO use last opened date instead
+			}
+		}
+	}
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -108,51 +115,21 @@ class BuildingLayout: UICollectionViewFlowLayout {
 		itemSize = size - CGSize(width: inset.left + inset.right, height: inset.top + inset.bottom)
 	}
 	
+	// snaps cells to bounds; relies on the layout being a single horizontally scrolling list
+	override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
+		guard proposedContentOffset.x > 0 else { return proposedContentOffset }
+		
+		let offset = minimumLineSpacing / 2
+		let lineDistance = itemSize.width + minimumLineSpacing
+		let offsetWithinCell = proposedContentOffset.x.truncatingRemainder(dividingBy: lineDistance) - offset
+		let rounded = (offsetWithinCell / lineDistance).rounded() * lineDistance
+		let offsetWithinView = (proposedContentOffset.x / lineDistance).rounded(.down) * lineDistance
+		let targetOffset = offsetWithinView + rounded
+		return CGPoint(x: targetOffset, y: proposedContentOffset.y)
+	}
+	
 	override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
 		return true
-	}
-}
-
-class BuildingCell: UICollectionViewCell, LoadedCollectionCell {
-	static let reuseID = "Building Cell"
-	
-	@IBOutlet var imageView: UIImageView!
-	@IBOutlet var nameLabel: UILabel!
-	
-	var building: Building! {
-		didSet {
-			nameLabel.text = building.name
-			updateImage()
-		}
-	}
-	
-	override func awakeFromNib() {
-		super.awakeFromNib()
-		
-		contentView.layer.cornerRadius = 8
-		contentView.clipsToBounds = true
-		layer.cornerRadius = 8
-		
-		layer.shadowOpacity = 0.2
-		layer.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-		layer.shadowOffset = CGSize(width: 0, height: 6)
-		layer.shadowRadius = 12
-	}
-	
-	private var imageTimer: Timer?
-	func updateImage() {
-		if let imageFilename = building.imageFilename {
-			let imageURL = Building.cacheURL(filename: imageFilename)
-			if let image = UIImage(contentsOfFile: imageURL.path) {
-				imageView.image = image
-				imageTimer?.invalidate()
-			} else {
-				// because images may not be downloaded right away and we don't have a callback for that
-				imageTimer = .scheduledTimer(withTimeInterval: 5, repeats: true) { _ in
-					self.updateImage()
-				}
-			}
-		}
 	}
 }
 
