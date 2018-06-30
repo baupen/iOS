@@ -1,0 +1,6 @@
+input_dir: .
+output_dir: Generated/
+strings:
+  paths: Base.lproj/Localizable.strings
+  templateName: structured-swift4
+  output: LocalizedStrings.swift

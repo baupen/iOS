@@ -82,14 +82,8 @@ class LoginViewController: UIViewController {
 					
 					self.attemptLocalLogin()
 				default:
-					let message = """
-					Beim einloggen ist ein Fehler aufgetreten!
-					
-					\(error.localizedDescription)
-					
-					Sie werden falls möglich lokal eingeloggt.
-					"""
-					self.showAlert(titled: "Fehler!", message: message) {
+					self.showAlert(titled: L10n.Login.Alert.LoginError.title,
+								   message: L10n.Login.Alert.LoginError.message) {
 						self.attemptLocalLogin(showingAlerts: false)
 					}
 				}
@@ -103,7 +97,8 @@ class LoginViewController: UIViewController {
 		let password = passwordField.text!
 		guard let user = Client.shared.user else {
 			if showingAlerts {
-				showAlert(titled: "Verbindungsproblem", message: "Es konnte keine Verbindung zum Dienst aufgebaut werden.")
+				showAlert(titled: L10n.Alert.ConnectionIssues.title,
+						  message: L10n.Alert.ConnectionIssues.message)
 			}
 			return
 		}
@@ -126,11 +121,13 @@ class LoginViewController: UIViewController {
 	}
 	
 	func showUnknownUsernameAlert(username: String) {
-		showAlert(titled: "Falscher Benutzername!", message: "Es gibt keinen Benutzer namens \"\(username)\".")
+		showAlert(titled: L10n.Login.Alert.WrongUsername.title,
+				  message: L10n.Login.Alert.WrongUsername.message(username))
 	}
 	
 	func showWrongPasswordAlert(username: String) {
-		showAlert(titled: "Falsches Passwort!", message: "Das ist nicht das richtige Passwort für den Benutzer \"\(username)\".")
+		showAlert(titled: L10n.Login.Alert.WrongPassword.title,
+				  message: L10n.Login.Alert.WrongPassword.message(username))
 	}
 	
 	func showMainController() {

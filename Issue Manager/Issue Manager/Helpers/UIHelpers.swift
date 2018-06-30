@@ -14,12 +14,12 @@ extension UIViewController {
 	func showAlert(titled title: String?,
 				   message: String?,
 				   canCancel: Bool = false,
-				   okMessage: String = "Okay", // TODO localize
+				   okMessage: String = L10n.Alert.okay,
 				   okStyle: UIAlertActionStyle = .default,
 				   okHandler: (() -> Void)? = nil) {
 		let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
 		if canCancel {
-			alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+			alert.addAction(UIAlertAction(title: L10n.Alert.cancel, style: .cancel, handler: nil))
 		}
 		alert.addAction(UIAlertAction(title: okMessage, style: okStyle) { _ in
 			okHandler?()

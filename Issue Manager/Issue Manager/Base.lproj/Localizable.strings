@@ -1,0 +1,36 @@
+
+/*"Abbrechen" Knopf in einem Alert*/
+"alert.cancel" = "Abbrechen";
+
+/*"Okay" Knopf in einem Alert*/
+"alert.okay" = "Okay";
+
+/*Nachricht des Alerts für wenn man Verbindungsprobleme hat.*/
+"alert.connection_issues.message" = "Es konnte keine Verbindung zum Dienst aufgebaut werden.";
+
+/*Titel des Alerts für wenn man Verbindungsprobleme hat.*/
+"alert.connection_issues.title" = "Verbindungsproblem";
+
+/*Nachricht des Alerts für wenn man sich aus einem unbekannten Grund nicht einloggen kann.*/
+"login.alert.login_error.message" = "Beim einloggen ist ein Fehler aufgetreten! Sie werden falls möglich lokal eingeloggt.";
+
+/*Titel des Alerts für wenn man sich aus einem unbekannten Grund nicht einloggen kann.*/
+"login.alert.login_error.title" = "Unbekannter Fehler!";
+
+/*Nachricht des Alerts für wenn man das falsche Passwort eingegeben hat. %@ wird durch den Benutzernamen ersetzt.*/
+"login.alert.wrong_password.message" = "Das ist nicht das richtige Passwort für den Benutzer %@.";
+
+/*Titel des Alerts für wenn man das falsche Passwort eingegeben hat.*/
+"login.alert.wrong_password.title" = "Falsches Passwort!";
+
+/*Nachricht des Alerts für wenn man einen falschen Benutzernamen eingegeben hat. %@ wird durch den Benutzernamen ersetzt.*/
+"login.alert.wrong_username.message" = "Es gibt keinen Benutzer namens %@.";
+
+/*Titel des Alerts für wenn man einen falschen Benutzernamen eingegeben hat.*/
+"login.alert.wrong_username.title" = "Falscher Benutzername!";
+
+/*Platzhalter für den Benutzernamen im Login-Screen*/
+"login.placeholder.username" = "Benutzername";
+
+/*Platzhalter für das Passwort im Login-Screen*/
+"login.placeholder.password" = "Passwort";
