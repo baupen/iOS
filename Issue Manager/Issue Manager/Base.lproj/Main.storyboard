@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14269.14" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kjR-zx-obn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14269.14" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Bne-PF-7lo">
     <device id="ipad9_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
@@ -186,7 +186,7 @@
         <scene sceneID="cN8-uD-Xw3">
             <objects>
                 <tableViewController storyboardIdentifier="Building List" id="Bne-PF-7lo" customClass="BuildingListViewController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="IMy-is-gSU">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="IMy-is-gSU">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -202,14 +202,14 @@
                                         <rect key="frame" x="0.0" y="0.0" width="1024" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Hbe-OZ-mUc" id="eib-mP-Vvz">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="79.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" alignment="firstBaseline" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="p2L-fg-B9b">
+                                                <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" alignment="lastBaseline" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="p2L-fg-B9b">
                                                     <rect key="frame" x="20" y="19" width="984" height="42"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="200" verticalHuggingPriority="790" text="Willkommen, Julian" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RLH-2h-ViC">
-                                                            <rect key="frame" x="0.0" y="6" width="903" height="33.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="200" verticalHuggingPriority="790" text="Willkommen, Julian" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RLH-2h-ViC">
+                                                            <rect key="frame" x="0.0" y="0.0" width="903" height="33.5"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -218,7 +218,7 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pie-53-hts">
-                                                            <rect key="frame" x="911" y="12" width="73" height="30"/>
+                                                            <rect key="frame" x="911" y="6" width="73" height="30"/>
                                                             <state key="normal" title="Ausloggen"/>
                                                             <connections>
                                                                 <segue destination="Gox-Jy-bEL" kind="unwind" unwindAction="logOut:" id="pbP-VW-To5"/>
@@ -226,9 +226,19 @@
                                                         </button>
                                                     </subviews>
                                                 </stackView>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aSI-Ck-wm9" userLabel="Separator">
+                                                    <rect key="frame" x="20" y="79" width="1004" height="1"/>
+                                                    <color key="backgroundColor" white="0.90000000000000002" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="ZHV-Lw-G8e"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="aSI-Ck-wm9" firstAttribute="leading" secondItem="eib-mP-Vvz" secondAttribute="leadingMargin" id="A4d-gf-j4g"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="p2L-fg-B9b" secondAttribute="bottom" constant="8" id="B68-vK-96S"/>
+                                                <constraint firstAttribute="bottom" secondItem="aSI-Ck-wm9" secondAttribute="bottom" id="G2v-QC-6Lf"/>
+                                                <constraint firstAttribute="trailing" secondItem="aSI-Ck-wm9" secondAttribute="trailing" id="Xrw-ph-h3i"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="p2L-fg-B9b" secondAttribute="trailing" id="dMH-OI-fec"/>
                                                 <constraint firstItem="p2L-fg-B9b" firstAttribute="top" secondItem="eib-mP-Vvz" secondAttribute="topMargin" constant="8" id="mYh-wZ-RbG"/>
                                                 <constraint firstItem="p2L-fg-B9b" firstAttribute="leading" secondItem="eib-mP-Vvz" secondAttribute="leadingMargin" id="uOL-Xs-NqW"/>
@@ -239,7 +249,7 @@
                                         <rect key="frame" x="0.0" y="80" width="1024" height="140"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ekp-oq-wh0" id="E4V-Ya-no3">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="139.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="140"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="ahp-Jy-3OO">
@@ -278,11 +288,21 @@ Im Abnahmemodus erfasste Pendenzen werden hingegen auch sonst angezeigt.</string
                                                         </label>
                                                     </subviews>
                                                 </stackView>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Mz-23-4oT" userLabel="Separator">
+                                                    <rect key="frame" x="20" y="139" width="1004" height="1"/>
+                                                    <color key="backgroundColor" white="0.90000000000000002" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="3br-4T-ofq"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottomMargin" secondItem="ahp-Jy-3OO" secondAttribute="bottom" constant="8" id="2gi-Sh-NkL"/>
+                                                <constraint firstAttribute="bottom" secondItem="1Mz-23-4oT" secondAttribute="bottom" id="3eq-9V-bL5"/>
                                                 <constraint firstItem="ahp-Jy-3OO" firstAttribute="top" secondItem="E4V-Ya-no3" secondAttribute="topMargin" constant="8" id="8o9-9H-KBn"/>
+                                                <constraint firstAttribute="trailing" secondItem="1Mz-23-4oT" secondAttribute="trailing" id="KC0-MJ-XSh"/>
                                                 <constraint firstItem="ahp-Jy-3OO" firstAttribute="leading" secondItem="E4V-Ya-no3" secondAttribute="leadingMargin" id="QW4-dF-tJe"/>
+                                                <constraint firstItem="1Mz-23-4oT" firstAttribute="leading" secondItem="E4V-Ya-no3" secondAttribute="leadingMargin" id="bb1-Wr-0ET"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="ahp-Jy-3OO" secondAttribute="trailing" id="qfx-8h-IWc"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -291,11 +311,11 @@ Im Abnahmemodus erfasste Pendenzen werden hingegen auch sonst angezeigt.</string
                                         <rect key="frame" x="0.0" y="220" width="1024" height="320"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xxT-rY-px6" id="mi9-4L-9Qt">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="319.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="320"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="200" verticalHuggingPriority="200" verticalCompressionResistancePriority="800" text="Gebäude" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Njl-Dw-vOS">
-                                                    <rect key="frame" x="20" y="11" width="984" height="68.5"/>
+                                                    <rect key="frame" x="20" y="11" width="984" height="69"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -303,12 +323,13 @@ Im Abnahmemodus erfasste Pendenzen werden hingegen auch sonst angezeigt.</string
                                                         <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="building_list.title"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
-                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Zp8-gD-E9i">
-                                                    <rect key="frame" x="0.0" y="79.5" width="1024" height="240"/>
+                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Zp8-gD-E9i">
+                                                    <rect key="frame" x="0.0" y="80" width="1024" height="240"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="240" id="uvM-uk-rSL"/>
                                                     </constraints>
+                                                    <inset key="scrollIndicatorInsets" minX="20" minY="0.0" maxX="20" maxY="24"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="oGQ-sp-LyL" customClass="BuildingLayout" customModule="Issue_Manager" customModuleProvider="target">
                                                         <size key="itemSize" width="50" height="50"/>
                                                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
