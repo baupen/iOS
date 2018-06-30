@@ -236,6 +236,9 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Master" id="Zdf-7t-Un8">
                         <barButtonItem key="leftBarButtonItem" title="Log Out" id="hYA-WQ-Bwf">
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="building_list.log_out"/>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <segue destination="856-u4-AOv" kind="unwind" unwindAction="logOut:" id="fdk-vC-09Z"/>
                             </connections>

@@ -15,6 +15,11 @@
 "alert.okay" = "Okay";
 
 ////////////////////////////////////////////////////////////////////////////////
+// MARK: Building
+// CONTEXT: Knopf oben links zum ausloggen
+"building_list.log_out" = "Ausloggen";
+
+////////////////////////////////////////////////////////////////////////////////
 // MARK: Login.alert.login
 // CONTEXT: Nachricht des Alerts für wenn man sich aus einem unbekannten Grund nicht einloggen kann.
 "login.alert.login_error.message" = "Beim einloggen ist ein Fehler aufgetreten! Sie werden falls möglich lokal eingeloggt.";

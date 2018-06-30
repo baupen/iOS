@@ -22,6 +22,11 @@ internal enum L10n {
     }
   }
 
+  internal enum BuildingList {
+    /// Ausloggen
+    internal static let logOut = L10n.tr("Localizable", "building_list.log_out")
+  }
+
   internal enum Login {
 
     internal enum Alert {
