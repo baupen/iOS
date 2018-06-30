@@ -39,6 +39,17 @@ internal enum L10n {
       return L10n.tr("Localizable", "building_list.welcome", p1)
     }
 
+    internal enum BuildingSummary {
+      /// %@ offene Pendenzen
+      internal static func openIssues(_ p1: String) -> String {
+        return L10n.tr("Localizable", "building_list.building_summary.open_issues", p1)
+      }
+      /// %@ insgesamt
+      internal static func totalIssues(_ p1: String) -> String {
+        return L10n.tr("Localizable", "building_list.building_summary.total_issues", p1)
+      }
+    }
+
     internal enum ClientMode {
       /// Im Abnahmemodus werden nur die Pendenzen angezeigt, die auch im Abnahmemodus erfasst wurden.\nIm Abnahmemodus erfasste Pendenzen werden hingegen auch sonst angezeigt.
       internal static let description = L10n.tr("Localizable", "building_list.client_mode.description")

@@ -191,7 +191,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="GNc-EF-3o7" userLabel="Empty footer to hide empty cells">
-                            <rect key="frame" x="0.0" y="540" width="1024" height="0.0"/>
+                            <rect key="frame" x="0.0" y="620" width="1024" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
@@ -307,11 +307,11 @@ Im Abnahmemodus erfasste Pendenzen werden hingegen auch sonst angezeigt.</string
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="320" id="xxT-rY-px6">
-                                        <rect key="frame" x="0.0" y="220" width="1024" height="320"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="400" id="xxT-rY-px6">
+                                        <rect key="frame" x="0.0" y="220" width="1024" height="400"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xxT-rY-px6" id="mi9-4L-9Qt">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="320"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="400"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="200" verticalHuggingPriority="200" verticalCompressionResistancePriority="800" text="Gebäude" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Njl-Dw-vOS">
@@ -324,10 +324,10 @@ Im Abnahmemodus erfasste Pendenzen werden hingegen auch sonst angezeigt.</string
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Zp8-gD-E9i">
-                                                    <rect key="frame" x="0.0" y="80" width="1024" height="240"/>
+                                                    <rect key="frame" x="0.0" y="80" width="1024" height="320"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="240" id="uvM-uk-rSL"/>
+                                                        <constraint firstAttribute="height" constant="320" id="uvM-uk-rSL"/>
                                                     </constraints>
                                                     <inset key="scrollIndicatorInsets" minX="20" minY="0.0" maxX="20" maxY="24"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="oGQ-sp-LyL" customClass="BuildingLayout" customModule="Issue_Manager" customModuleProvider="target">
@@ -338,36 +338,53 @@ Im Abnahmemodus erfasste Pendenzen werden hingegen auch sonst angezeigt.</string
                                                     </collectionViewFlowLayout>
                                                     <cells>
                                                         <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Building Cell" id="p1v-wS-Ay0" customClass="BuildingCell" customModule="Issue_Manager" customModuleProvider="target">
-                                                            <rect key="frame" x="20" y="22" width="320" height="180"/>
+                                                            <rect key="frame" x="20" y="62" width="320" height="180"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eoD-Lf-DZl" userLabel="Container View">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="240" height="180"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
                                                                         <subviews>
                                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="JGn-F7-Qxe">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="240" height="180"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
                                                                                 <subviews>
-                                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dOZ-qu-KIz">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="240" height="130"/>
+                                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="200" verticalHuggingPriority="200" horizontalCompressionResistancePriority="200" verticalCompressionResistancePriority="200" translatesAutoresizingMaskIntoConstraints="NO" id="dOZ-qu-KIz">
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
                                                                                     </imageView>
-                                                                                    <view opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="200" verticalHuggingPriority="800" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="800" translatesAutoresizingMaskIntoConstraints="NO" id="fPz-3b-gSZ">
-                                                                                        <rect key="frame" x="0.0" y="130" width="240" height="50"/>
+                                                                                    <view opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="200" verticalHuggingPriority="800" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="800" translatesAutoresizingMaskIntoConstraints="NO" id="fPz-3b-gSZ" userLabel="Text Container">
+                                                                                        <rect key="frame" x="0.0" y="90" width="320" height="90"/>
                                                                                         <subviews>
-                                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="200" verticalHuggingPriority="800" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="800" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gZ3-qb-zZY">
-                                                                                                <rect key="frame" x="8" y="8" width="224" height="34"/>
-                                                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                                                <nil key="textColor"/>
-                                                                                                <nil key="highlightedColor"/>
-                                                                                            </label>
+                                                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="fIL-lV-iBl">
+                                                                                                <rect key="frame" x="8" y="8" width="304" height="74"/>
+                                                                                                <subviews>
+                                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="200" verticalHuggingPriority="800" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="800" text="Gebäudename" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gZ3-qb-zZY">
+                                                                                                        <rect key="frame" x="0.0" y="0.0" width="304" height="20.5"/>
+                                                                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                                                                        <nil key="textColor"/>
+                                                                                                        <nil key="highlightedColor"/>
+                                                                                                    </label>
+                                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="x offene Pendenzen" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZFB-QJ-OK9">
+                                                                                                        <rect key="frame" x="0.0" y="24.5" width="304" height="25"/>
+                                                                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                                                        <nil key="textColor"/>
+                                                                                                        <nil key="highlightedColor"/>
+                                                                                                    </label>
+                                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="y insgesamt" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HFC-H3-lQ9">
+                                                                                                        <rect key="frame" x="0.0" y="53.5" width="304" height="20.5"/>
+                                                                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                                                        <nil key="textColor"/>
+                                                                                                        <nil key="highlightedColor"/>
+                                                                                                    </label>
+                                                                                                </subviews>
+                                                                                            </stackView>
                                                                                         </subviews>
                                                                                         <constraints>
-                                                                                            <constraint firstItem="gZ3-qb-zZY" firstAttribute="leading" secondItem="fPz-3b-gSZ" secondAttribute="leadingMargin" id="Lix-vu-f15"/>
-                                                                                            <constraint firstAttribute="trailingMargin" secondItem="gZ3-qb-zZY" secondAttribute="trailing" id="R0d-lQ-rm0"/>
-                                                                                            <constraint firstItem="gZ3-qb-zZY" firstAttribute="top" secondItem="fPz-3b-gSZ" secondAttribute="topMargin" id="Xfb-5k-Ari"/>
-                                                                                            <constraint firstAttribute="bottomMargin" secondItem="gZ3-qb-zZY" secondAttribute="bottom" id="x4j-fe-J5H"/>
+                                                                                            <constraint firstAttribute="bottomMargin" secondItem="fIL-lV-iBl" secondAttribute="bottom" id="Can-Pe-GZC"/>
+                                                                                            <constraint firstAttribute="trailingMargin" secondItem="fIL-lV-iBl" secondAttribute="trailing" id="FOk-KA-Mo1"/>
+                                                                                            <constraint firstItem="fIL-lV-iBl" firstAttribute="leading" secondItem="fPz-3b-gSZ" secondAttribute="leadingMargin" id="ab9-tl-MJ6"/>
+                                                                                            <constraint firstItem="fIL-lV-iBl" firstAttribute="top" secondItem="fPz-3b-gSZ" secondAttribute="topMargin" id="gVi-Io-RDx"/>
                                                                                         </constraints>
                                                                                     </view>
                                                                                 </subviews>
@@ -393,6 +410,8 @@ Im Abnahmemodus erfasste Pendenzen werden hingegen auch sonst angezeigt.</string
                                                             <connections>
                                                                 <outlet property="imageView" destination="dOZ-qu-KIz" id="pvD-CX-zwg"/>
                                                                 <outlet property="nameLabel" destination="gZ3-qb-zZY" id="7SB-FB-hlK"/>
+                                                                <outlet property="openIssuesLabel" destination="ZFB-QJ-OK9" id="FRm-FE-SjX"/>
+                                                                <outlet property="totalIssuesLabel" destination="HFC-H3-lQ9" id="Rl2-yb-9g1"/>
                                                             </connections>
                                                         </collectionViewCell>
                                                     </cells>

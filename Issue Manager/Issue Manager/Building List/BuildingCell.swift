@@ -3,14 +3,22 @@
 import UIKit
 
 class BuildingCell: UICollectionViewCell, LoadedCollectionCell {
+	fileprivate typealias Localization = L10n.BuildingList.BuildingSummary
+	
 	static let reuseID = "Building Cell"
 	
 	@IBOutlet var imageView: UIImageView!
 	@IBOutlet var nameLabel: UILabel!
+	@IBOutlet var openIssuesLabel: UILabel!
+	@IBOutlet var totalIssuesLabel: UILabel!
 	
 	var building: Building! {
 		didSet {
 			nameLabel.text = building.name
+			let issues = building.allIssues()
+			totalIssuesLabel.text = Localization.totalIssues(String(issues.count))
+			let openIssues = issues.filter { !$0.isReviewed }
+			openIssuesLabel.text = Localization.openIssues(String(openIssues.count))
 			updateImage()
 		}
 	}

@@ -14,6 +14,14 @@ struct Building: FileContainer {
 	static let downloadRequestPath = \FileDownloadRequest.building
 	var filename: String? { return imageFilename }
 	
+	func childMaps() -> [Map] {
+		return maps.compactMap { Client.shared.storage.maps[$0] }
+	}
+	
+	func allIssues() -> [Issue] {
+		return childMaps().flatMap { $0.allIssues() }
+	}
+	
 	struct Address: Codable {
 		/// first two address lines (multiline)
 		var streetAddress: String?
