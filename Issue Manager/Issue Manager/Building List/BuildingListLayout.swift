@@ -10,7 +10,12 @@ class BuildingListLayout: UICollectionViewFlowLayout {
 		
 		let size = collectionView.bounds.size
 		let inset = sectionInset
-		itemSize = size - CGSize(width: inset.left + inset.right, height: inset.top + inset.bottom)
+		let available = size - CGSize(width: inset.left + inset.right, height: inset.top + inset.bottom)
+		let minimumWidth: CGFloat = 300
+		let spacing = minimumLineSpacing
+		let amount = ((available.width + spacing) / (minimumWidth + spacing)).rounded(.down)
+		let cellWidth = (available.width - (amount - 1) * spacing) / amount
+		itemSize = CGSize(width: cellWidth, height: available.height)
 	}
 	
 	// snaps cells to bounds; relies on the layout being a single horizontally scrolling list
