@@ -112,7 +112,11 @@ extension BuildingListViewController: UICollectionViewDataSource {
 	}
 }
 
-extension BuildingListViewController: UICollectionViewDelegateFlowLayout {}
+extension BuildingListViewController: UICollectionViewDelegate {
+	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		// TODO show building
+	}
+}
 
 extension Client {
 	var backgroundColor: UIColor {

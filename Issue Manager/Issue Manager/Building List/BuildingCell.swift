@@ -3,6 +3,8 @@
 import UIKit
 
 fileprivate let shadowOpacity: Float = 0.2
+fileprivate let shadowOffset = CGSize(width: 0, height: 6)
+fileprivate let shadowRadius: CGFloat = 12
 
 class BuildingCell: UICollectionViewCell, LoadedCollectionCell {
 	fileprivate typealias Localization = L10n.BuildingList.BuildingSummary
@@ -13,6 +15,19 @@ class BuildingCell: UICollectionViewCell, LoadedCollectionCell {
 	@IBOutlet var nameLabel: UILabel!
 	@IBOutlet var openIssuesLabel: UILabel!
 	@IBOutlet var totalIssuesLabel: UILabel!
+	
+	override var isHighlighted: Bool {
+		didSet {
+			print(isHighlighted)
+			updateAppearance()
+		}
+	}
+	
+	var isRefreshing = false {
+		didSet {
+			updateAppearance()
+		}
+	}
 	
 	var building: Building! {
 		didSet {
@@ -28,12 +43,6 @@ class BuildingCell: UICollectionViewCell, LoadedCollectionCell {
 			}
 		}
 	}
-	var isRefreshing = false {
-		didSet {
-			contentView.alpha = isRefreshing ? 0.25 : 1
-			layer.shadowOpacity = isRefreshing ? 0.05 : shadowOpacity
-		}
-	}
 	
 	override func awakeFromNib() {
 		super.awakeFromNib()
@@ -42,10 +51,20 @@ class BuildingCell: UICollectionViewCell, LoadedCollectionCell {
 		contentView.clipsToBounds = true
 		layer.cornerRadius = 8
 		
-		layer.shadowOpacity = shadowOpacity
-		layer.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-		layer.shadowOffset = CGSize(width: 0, height: 6)
-		layer.shadowRadius = 12
+		updateAppearance()
+	}
+	
+	func updateAppearance() {
+		UIView.animate(withDuration: 0.1) {
+			self.contentView.alpha = self.isRefreshing ? 1 / 4 : 1
+			self.layer.shadowOpacity = self.isRefreshing ? shadowOpacity / 4 : shadowOpacity
+			
+			let isHighlighted = self.isHighlighted
+			self.contentView.backgroundColor = isHighlighted ? #colorLiteral(red: 0.2652326185, green: 0.2791550029, blue: 0.5412910581, alpha: 0.1) : #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
+			self.layer.shadowOffset = isHighlighted ? shadowOffset / 4 : shadowOffset
+			self.layer.shadowRadius = isHighlighted ? shadowRadius / 4 : shadowRadius
+			self.transform = isHighlighted ? .init(scaleX: 0.95, y: 0.95) : .identity
+		}
 	}
 	
 	private var imageTimer: Timer?

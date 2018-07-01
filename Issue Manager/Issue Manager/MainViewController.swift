@@ -5,6 +5,12 @@ import UIKit
 class MainViewController: UISplitViewController, LoadedViewController {
 	static let storyboardID = "Main"
 	
+	var building: Building! {
+		didSet {
+			// TODO
+		}
+	}
+	
 	var masterNav: MasterNavigationController? {
 		return viewControllers.first! as? MasterNavigationController
 	}
