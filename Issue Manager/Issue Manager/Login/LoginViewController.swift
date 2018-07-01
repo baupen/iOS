@@ -9,10 +9,15 @@ class LoginViewController: UIViewController {
 	@IBOutlet var usernameField: UITextField!
 	@IBOutlet var passwordField: UITextField!
 	@IBOutlet var activityIndicator: UIActivityIndicatorView!
+	@IBOutlet var stayLoggedInSwitch: UISwitch!
 	
 	@IBAction func backgroundTapped(_ sender: UITapGestureRecognizer) {
 		usernameField.resignFirstResponder()
 		passwordField.resignFirstResponder()
+	}
+	
+	@IBAction func stayLoggedInSwitched() {
+		defaults.stayLoggedIn = stayLoggedInSwitch.isOn
 	}
 	
 	// unwind segue
@@ -42,11 +47,24 @@ class LoginViewController: UIViewController {
 		
 		usernameField.delegate = self
 		passwordField.delegate = self
+		
 		if let username = Client.shared.user?.username, !username.isEmpty {
 			usernameField.text = Client.shared.user?.username
-			passwordField.becomeFirstResponder()
+			
+			if !defaults.stayLoggedIn {
+				passwordField.becomeFirstResponder()
+			}
 		} else {
 			usernameField.becomeFirstResponder()
+		}
+		
+		stayLoggedInSwitch.isOn = defaults.stayLoggedIn
+		
+		if defaults.stayLoggedIn, Client.shared.user != nil {
+			// not right now but asap
+			DispatchQueue.main.async {
+				self.showBuildingList(animated: false)
+			}
 		}
 	}
 	
@@ -65,9 +83,10 @@ class LoginViewController: UIViewController {
 		}
 		
 		result.then {
-			print("Logged in!")
-			print(Client.shared.user!.authenticationToken)
-			DispatchQueue.main.async(execute: self.showBuildingList)
+			print("Logged in as", Client.shared.user!.authenticationToken)
+			DispatchQueue.main.async {
+				self.showBuildingList()
+			}
 		}
 		
 		result.catch { error in
@@ -136,10 +155,10 @@ class LoginViewController: UIViewController {
 				  message: Localization.Alert.WrongPassword.message(username))
 	}
 	
-	func showBuildingList() {
+	func showBuildingList(animated: Bool = true) {
 		let controller = storyboard!.instantiate(BuildingListViewController.self)!
 		controller.modalTransitionStyle = .flipHorizontal
-		present(controller, animated: true)
+		present(controller, animated: animated)
 	}
 }
 
@@ -155,17 +174,5 @@ extension LoginViewController: UITextFieldDelegate {
 			return true // default handling
 		}
 		return false // custom handling
-	}
-}
-
-class LoginWindowView: UIView {
-	required init?(coder decoder: NSCoder) {
-		super.init(coder: decoder)
-		layer.cornerRadius = 16
-		
-		layer.shadowOpacity = 0.25
-		layer.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-		layer.shadowOffset = CGSize(width: 0, height: 16)
-		layer.shadowRadius = 32
 	}
 }

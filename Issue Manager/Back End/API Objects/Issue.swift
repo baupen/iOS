@@ -18,8 +18,8 @@ struct Issue: FileContainer {
 	static let downloadRequestPath = \FileDownloadRequest.issue
 	var filename: String? { return imageFilename }
 	
-	init(at position: Position? = nil, in map: Map, wasAddedWithClient: Bool) {
-		self.wasAddedWithClient = wasAddedWithClient
+	init(at position: Position? = nil, in map: Map) {
+		self.wasAddedWithClient = Client.shared.isInClientMode
 		self.map = map.id
 		self.position = position
 	}
