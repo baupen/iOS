@@ -70,6 +70,8 @@ internal enum L10n {
   }
 
   internal enum Login {
+    /// Eingeloggt Bleiben
+    internal static let stayLoggedIn = L10n.tr("Localizable", "login.stay_logged_in")
 
     internal enum Alert {
 

@@ -10,6 +10,11 @@ class LoginViewController: UIViewController {
 	@IBOutlet var passwordField: UITextField!
 	@IBOutlet var activityIndicator: UIActivityIndicatorView!
 	
+	@IBAction func backgroundTapped(_ sender: UITapGestureRecognizer) {
+		usernameField.resignFirstResponder()
+		passwordField.resignFirstResponder()
+	}
+	
 	// unwind segue
 	@IBAction func logOut(_ segue: UIStoryboardSegue) {
 		passwordField.text = ""
@@ -153,22 +158,9 @@ extension LoginViewController: UITextFieldDelegate {
 	}
 }
 
-//@IBDesignable
 class LoginWindowView: UIView {
-	// required for live preview
-	override init(frame: CGRect) {
-		super.init(frame: frame)
-		
-		setUp()
-	}
-	
 	required init?(coder decoder: NSCoder) {
 		super.init(coder: decoder)
-		
-		setUp()
-	}
-	
-	func setUp() {
 		layer.cornerRadius = 16
 		
 		layer.shadowOpacity = 0.25

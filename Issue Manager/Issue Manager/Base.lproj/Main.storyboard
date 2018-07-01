@@ -69,10 +69,10 @@
                                 <rect key="frame" x="0.0" y="20" width="1024" height="748"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3ny-ZM-srI" userLabel="Login Window" customClass="LoginWindowView" customModule="Issue_Manager" customModuleProvider="target">
-                                        <rect key="frame" x="372" y="276" width="280" height="196.5"/>
+                                        <rect key="frame" x="372" y="252.5" width="280" height="243.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="rtk-6B-eBm" userLabel="Main Stack">
-                                                <rect key="frame" x="0.0" y="16" width="280" height="164.5"/>
+                                                <rect key="frame" x="0.0" y="16" width="280" height="211.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="mangel.io" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FET-Dd-yGp">
                                                         <rect key="frame" x="0.0" y="0.0" width="280" height="57.5"/>
@@ -83,10 +83,10 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="SmK-w0-gYf" userLabel="Fields">
                                                         <rect key="frame" x="0.0" y="73.5" width="280" height="91"/>
                                                         <subviews>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yEK-82-OKj" userLabel="Username Wrapper">
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yEK-82-OKj" userLabel="Username Wrapper" customClass="TextFieldContainer" customModule="Issue_Manager" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="280" height="45"/>
                                                                 <subviews>
-                                                                    <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Benutzername" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="oEF-bZ-0Bt" userLabel="test">
+                                                                    <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Benutzername" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="oEF-bZ-0Bt" userLabel="Username Field">
                                                                         <rect key="frame" x="16" y="12" width="248" height="21"/>
                                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="textColor"/>
@@ -107,13 +107,13 @@
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
-                                                                    <constraint firstItem="oEF-bZ-0Bt" firstAttribute="top" secondItem="yEK-82-OKj" secondAttribute="top" constant="12" id="Mg8-LC-nwV"/>
-                                                                    <constraint firstItem="oEF-bZ-0Bt" firstAttribute="leading" secondItem="yEK-82-OKj" secondAttribute="leading" constant="16" id="RGD-Zq-JTk"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="oEF-bZ-0Bt" secondAttribute="trailing" constant="16" id="dZX-wg-gPz"/>
-                                                                    <constraint firstAttribute="bottom" secondItem="oEF-bZ-0Bt" secondAttribute="bottom" constant="12" id="fIH-XS-o3c"/>
+                                                                    <constraint firstItem="oEF-bZ-0Bt" firstAttribute="top" secondItem="yEK-82-OKj" secondAttribute="topMargin" constant="4" id="Mg8-LC-nwV"/>
+                                                                    <constraint firstItem="oEF-bZ-0Bt" firstAttribute="leading" secondItem="yEK-82-OKj" secondAttribute="leadingMargin" constant="8" id="RGD-Zq-JTk"/>
+                                                                    <constraint firstAttribute="trailingMargin" secondItem="oEF-bZ-0Bt" secondAttribute="trailing" constant="8" id="dZX-wg-gPz"/>
+                                                                    <constraint firstAttribute="bottomMargin" secondItem="oEF-bZ-0Bt" secondAttribute="bottom" constant="4" id="fIH-XS-o3c"/>
                                                                 </constraints>
                                                             </view>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H1d-R8-95a" userLabel="Password Wrapper">
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H1d-R8-95a" userLabel="Password Wrapper" customClass="TextFieldContainer" customModule="Issue_Manager" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="46" width="280" height="45"/>
                                                                 <subviews>
                                                                     <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Passwort" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fct-Hu-ZLU">
@@ -129,14 +129,43 @@
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
-                                                                    <constraint firstItem="fct-Hu-ZLU" firstAttribute="top" secondItem="H1d-R8-95a" secondAttribute="top" constant="12" id="34q-6Y-R3M"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="fct-Hu-ZLU" secondAttribute="trailing" constant="16" id="86b-nx-xgG"/>
-                                                                    <constraint firstAttribute="bottom" secondItem="fct-Hu-ZLU" secondAttribute="bottom" constant="12" id="TL8-SG-Var"/>
-                                                                    <constraint firstItem="fct-Hu-ZLU" firstAttribute="leading" secondItem="H1d-R8-95a" secondAttribute="leading" constant="16" id="UAg-FR-pxh"/>
+                                                                    <constraint firstItem="fct-Hu-ZLU" firstAttribute="top" secondItem="H1d-R8-95a" secondAttribute="topMargin" constant="4" id="34q-6Y-R3M"/>
+                                                                    <constraint firstAttribute="trailingMargin" secondItem="fct-Hu-ZLU" secondAttribute="trailing" constant="8" id="86b-nx-xgG"/>
+                                                                    <constraint firstAttribute="bottomMargin" secondItem="fct-Hu-ZLU" secondAttribute="bottom" constant="4" id="TL8-SG-Var"/>
+                                                                    <constraint firstItem="fct-Hu-ZLU" firstAttribute="leading" secondItem="H1d-R8-95a" secondAttribute="leadingMargin" constant="8" id="UAg-FR-pxh"/>
                                                                 </constraints>
                                                             </view>
                                                         </subviews>
                                                     </stackView>
+                                                    <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v4r-nw-c5Z">
+                                                        <rect key="frame" x="0.0" y="180.5" width="280" height="31"/>
+                                                        <subviews>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="LYz-K0-Gsn">
+                                                                <rect key="frame" x="16" y="0.0" width="248" height="31"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Eingeloggt Bleiben" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DPc-Hy-k7f">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="191" height="31"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                        <userDefinedRuntimeAttributes>
+                                                                            <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="login.stay_logged_in"/>
+                                                                        </userDefinedRuntimeAttributes>
+                                                                    </label>
+                                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oqn-OT-rbM">
+                                                                        <rect key="frame" x="199" y="0.0" width="51" height="31"/>
+                                                                        <color key="onTintColor" red="0.20392156859999999" green="0.20392156859999999" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    </switch>
+                                                                </subviews>
+                                                            </stackView>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstAttribute="trailingMargin" secondItem="LYz-K0-Gsn" secondAttribute="trailing" constant="8" id="S8G-dN-W7I"/>
+                                                            <constraint firstAttribute="bottom" secondItem="LYz-K0-Gsn" secondAttribute="bottom" id="g7G-oE-uBg"/>
+                                                            <constraint firstItem="LYz-K0-Gsn" firstAttribute="top" secondItem="v4r-nw-c5Z" secondAttribute="top" id="hIg-Wr-ySJ"/>
+                                                            <constraint firstItem="LYz-K0-Gsn" firstAttribute="leading" secondItem="v4r-nw-c5Z" secondAttribute="leadingMargin" constant="8" id="jVq-mj-9re"/>
+                                                        </constraints>
+                                                    </view>
                                                 </subviews>
                                             </stackView>
                                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="EO6-UH-biG">
@@ -163,6 +192,7 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.20392156862745098" green="0.20392156862745098" blue="0.46666666666666667" alpha="1" colorSpace="calibratedRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="HQ9-Wv-7q4" firstAttribute="top" secondItem="Heg-xX-62H" secondAttribute="top" priority="500" id="S7l-TD-YcK"/>
                             <constraint firstItem="HQ9-Wv-7q4" firstAttribute="leading" secondItem="Heg-xX-62H" secondAttribute="leading" id="TWA-Ff-9aC"/>
@@ -170,6 +200,9 @@
                             <constraint firstItem="Heg-xX-62H" firstAttribute="bottom" secondItem="HQ9-Wv-7q4" secondAttribute="bottom" id="uie-FA-HXc" customClass="KeyboardLayoutConstraint" customModule="Issue_Manager" customModuleProvider="target"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Heg-xX-62H"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="OV6-mX-uvd" appends="YES" id="VW3-vV-oht"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="EO6-UH-biG" id="hnF-E1-h92"/>
@@ -179,6 +212,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B2Y-gE-lKO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="OV6-mX-uvd">
+                    <connections>
+                        <action selector="backgroundTapped:" destination="kjR-zx-obn" id="ZfE-Xl-ey0"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-2430" y="-330"/>
         </scene>

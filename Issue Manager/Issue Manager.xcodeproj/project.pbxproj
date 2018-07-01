@@ -46,6 +46,7 @@
 		9583C2D320DC74BA00452695 /* UIHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9583C2D220DC74BA00452695 /* UIHelpers.swift */; };
 		9583C2D520DC757800452695 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9583C2D420DC757800452695 /* MapViewController.swift */; };
 		9583C2D820DC76F200452695 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9583C2D720DC76F200452695 /* User.swift */; };
+		9584F24820E92DB800A8C884 /* TextFieldContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9584F24720E92DB800A8C884 /* TextFieldContainer.swift */; };
 		95953B2120DFCD90001ED1B7 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95953B2020DFCD90001ED1B7 /* main.swift */; };
 		95953B2E20DFD99A001ED1B7 /* BasicFuture+extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9511A12620DD559500101ADE /* BasicFuture+extras.swift */; };
 		95953B2F20DFD99A001ED1B7 /* BasicFuture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9511A12720DD559500101ADE /* BasicFuture.swift */; };
@@ -157,6 +158,7 @@
 		9583C2D220DC74BA00452695 /* UIHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelpers.swift; sourceTree = "<group>"; };
 		9583C2D420DC757800452695 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		9583C2D720DC76F200452695 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		9584F24720E92DB800A8C884 /* TextFieldContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldContainer.swift; sourceTree = "<group>"; };
 		95953B1E20DFCD90001ED1B7 /* Testing */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Testing; sourceTree = BUILT_PRODUCTS_DIR; };
 		95953B2020DFCD90001ED1B7 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		95953B4B20DFFAED001ED1B7 /* JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 		9511A0FD20DD378A00101ADE /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				9584F24720E92DB800A8C884 /* TextFieldContainer.swift */,
 				9554235020DC7921009CCCE0 /* Hashing.swift */,
 				9511A0FE20DD379800101ADE /* Codable.swift */,
 				9511A14320DD56D700101ADE /* MiscHelpers.swift */,
@@ -513,6 +516,7 @@
 				9511A13F20DD559500101ADE /* Future+Foundation.swift in Sources */,
 				9511A14220DD559500101ADE /* Future+extras.swift in Sources */,
 				9511A10620DD3B8E00101ADE /* Building.swift in Sources */,
+				9584F24820E92DB800A8C884 /* TextFieldContainer.swift in Sources */,
 				95B2735320DE7AD600D2BD44 /* Multipart.swift in Sources */,
 				9511A0FF20DD379800101ADE /* Codable.swift in Sources */,
 				9583C2BF20DC748800452695 /* AppDelegate.swift in Sources */,

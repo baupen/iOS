@@ -68,3 +68,8 @@
 "login.placeholder.password" = "Passwort";
 // CONTEXT: Platzhalter für den Benutzernamen im Login-Screen
 "login.placeholder.username" = "Benutzername";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Login.stay
+// CONTEXT: Steht beim Schalter, durch den man eingeloggt bleibt, auch wenn die App neugestartet wird.
+"login.stay_logged_in" = "Eingeloggt Bleiben";
