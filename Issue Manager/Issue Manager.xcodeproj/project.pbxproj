@@ -88,11 +88,63 @@
 		95B9BA6620DEC7FA00261954 /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B9BA6520DEC7FA00261954 /* Requests.swift */; };
 		95B9BA6820DEDF0400261954 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B9BA6720DEDF0400261954 /* Storage.swift */; };
 		95B9BA6A20DEEE8500261954 /* FileContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B9BA6920DEEE8400261954 /* FileContainer.swift */; };
+		95BD516020E985FC00FCB7EB /* Reachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95BD515520E985C600FCB7EB /* Reachability.framework */; };
+		95BD516120E985FC00FCB7EB /* Reachability.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 95BD515520E985C600FCB7EB /* Reachability.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		95D2C2AE20E5C3E700D887C8 /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D2C2AD20E5C3E700D887C8 /* Localization.swift */; };
 		95D2C2B120E5C50200D887C8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 95D2C2B320E5C50200D887C8 /* Localizable.strings */; };
-		95DBA7D820E10D6C003A97FF /* Reachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95DBA7D720E10D6C003A97FF /* Reachability.framework */; };
-		95DBA7D920E10D6C003A97FF /* Reachability.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 95DBA7D720E10D6C003A97FF /* Reachability.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		95BD515420E985C600FCB7EB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 95BD514B20E985C600FCB7EB /* Reachability.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = AA7344721BE7678B008AFE69;
+			remoteInfo = Reachability;
+		};
+		95BD515620E985C600FCB7EB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 95BD514B20E985C600FCB7EB /* Reachability.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 00C54B111C09CD9C001C3F12;
+			remoteInfo = ReachabilityMac;
+		};
+		95BD515820E985C600FCB7EB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 95BD514B20E985C600FCB7EB /* Reachability.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 57A45A2A1C197F4800384AE4;
+			remoteInfo = ReachabilityTV;
+		};
+		95BD515A20E985C600FCB7EB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 95BD514B20E985C600FCB7EB /* Reachability.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = AA7344901BE76820008AFE69;
+			remoteInfo = ReachabilitySample;
+		};
+		95BD515C20E985C600FCB7EB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 95BD514B20E985C600FCB7EB /* Reachability.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 00C54B1F1C09CF67001C3F12;
+			remoteInfo = ReachabilityMacSample;
+		};
+		95BD515E20E985C600FCB7EB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 95BD514B20E985C600FCB7EB /* Reachability.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 57A45A011C197BE800384AE4;
+			remoteInfo = ReachabilityAppleTVSample;
+		};
+		95BD516220E985FC00FCB7EB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 95BD514B20E985C600FCB7EB /* Reachability.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = AA7344711BE7678B008AFE69;
+			remoteInfo = Reachability;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		9511A11D20DD407E00101ADE /* Embed Frameworks */ = {
@@ -101,7 +153,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				95DBA7D920E10D6C003A97FF /* Reachability.framework in Embed Frameworks */,
+				95BD516120E985FC00FCB7EB /* Reachability.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -174,9 +226,9 @@
 		95B9BA6520DEC7FA00261954 /* Requests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requests.swift; sourceTree = "<group>"; };
 		95B9BA6720DEDF0400261954 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		95B9BA6920DEEE8400261954 /* FileContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileContainer.swift; sourceTree = "<group>"; };
+		95BD514B20E985C600FCB7EB /* Reachability.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Reachability.xcodeproj; path = Carthage/Checkouts/Reachability.swift/Reachability.xcodeproj; sourceTree = "<group>"; };
 		95D2C2AD20E5C3E700D887C8 /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
 		95D2C2B520E5C52700D887C8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
-		95DBA7D720E10D6C003A97FF /* Reachability.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reachability.framework; path = Carthage/Build/iOS/Reachability.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,7 +236,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				95DBA7D820E10D6C003A97FF /* Reachability.framework in Frameworks */,
+				95BD516020E985FC00FCB7EB /* Reachability.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,7 +362,7 @@
 		9583C2B220DC748800452695 = {
 			isa = PBXGroup;
 			children = (
-				95DBA7D720E10D6C003A97FF /* Reachability.framework */,
+				95BD514B20E985C600FCB7EB /* Reachability.xcodeproj */,
 				9554235220DC796A009CCCE0 /* BridgingHeader.h */,
 				9511A12320DD558700101ADE /* Libraries */,
 				9583C2D620DC76CE00452695 /* Back End */,
@@ -374,6 +426,19 @@
 			path = Testing;
 			sourceTree = "<group>";
 		};
+		95BD514C20E985C600FCB7EB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				95BD515520E985C600FCB7EB /* Reachability.framework */,
+				95BD515720E985C600FCB7EB /* Reachability.framework */,
+				95BD515920E985C600FCB7EB /* Reachability.framework */,
+				95BD515B20E985C600FCB7EB /* ReachabilitySample.app */,
+				95BD515D20E985C600FCB7EB /* ReachabilityMacSample.app */,
+				95BD515F20E985C600FCB7EB /* ReachabilityAppleTVSample.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -391,6 +456,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				95BD516320E985FC00FCB7EB /* PBXTargetDependency */,
 			);
 			name = "Issue Manager";
 			productName = "Issue Manager";
@@ -446,6 +512,12 @@
 			mainGroup = 9583C2B220DC748800452695;
 			productRefGroup = 9583C2BC20DC748800452695 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 95BD514C20E985C600FCB7EB /* Products */;
+					ProjectRef = 95BD514B20E985C600FCB7EB /* Reachability.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				9583C2BA20DC748800452695 /* Issue Manager */,
@@ -453,6 +525,51 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		95BD515520E985C600FCB7EB /* Reachability.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Reachability.framework;
+			remoteRef = 95BD515420E985C600FCB7EB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		95BD515720E985C600FCB7EB /* Reachability.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Reachability.framework;
+			remoteRef = 95BD515620E985C600FCB7EB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		95BD515920E985C600FCB7EB /* Reachability.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Reachability.framework;
+			remoteRef = 95BD515820E985C600FCB7EB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		95BD515B20E985C600FCB7EB /* ReachabilitySample.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = ReachabilitySample.app;
+			remoteRef = 95BD515A20E985C600FCB7EB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		95BD515D20E985C600FCB7EB /* ReachabilityMacSample.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = ReachabilityMacSample.app;
+			remoteRef = 95BD515C20E985C600FCB7EB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		95BD515F20E985C600FCB7EB /* ReachabilityAppleTVSample.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = ReachabilityAppleTVSample.app;
+			remoteRef = 95BD515E20E985C600FCB7EB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		9583C2B920DC748800452695 /* Resources */ = {
@@ -600,6 +717,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		95BD516320E985FC00FCB7EB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Reachability;
+			targetProxy = 95BD516220E985FC00FCB7EB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		9583C2C420DC748800452695 /* Main.storyboard */ = {
@@ -749,9 +874,11 @@
 		9583C2D020DC748B00452695 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V2EPDFA9PV;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -772,9 +899,11 @@
 		9583C2D120DC748B00452695 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V2EPDFA9PV;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",

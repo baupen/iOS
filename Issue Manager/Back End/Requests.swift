@@ -111,24 +111,6 @@ extension Client {
 	}
 	
 	fileprivate func update(from response: ReadRequest.ExpectedResponse) {
-		func updateEntries<T: APIObject>(in path: WritableKeyPath<Storage, [UUID: T]>,
-										 changing changedEntries: [T],
-										 removing removedIDs: [UUID]) {
-			for changed in changedEntries {
-				let previous = storage[keyPath: path][changed.id]
-				storage[keyPath: path][changed.id] = changed
-				if let container = changed as? FileContainer {
-					container.downloadFile(previous: previous as? FileContainer)
-				}
-			}
-			for removed in removedIDs {
-				if let container = storage[keyPath: path][removed] as? FileContainer {
-					container.deleteFile()
-				}
-				storage[keyPath: path][removed] = nil
-			}
-		}
-		
 		updateEntries(in: \.craftsmen, changing: response.changedCraftsmen, removing: response.removedCraftsmanIDs)
 		updateEntries(in: \.buildings, changing: response.changedBuildings, removing: response.removedBuildingIDs)
 		updateEntries(in: \.maps,      changing: response.changedMaps,      removing: response.removedMapIDs)
@@ -139,6 +121,24 @@ extension Client {
 		}
 		
 		saveShared()
+	}
+	
+	private func updateEntries<T: APIObject>(in path: WritableKeyPath<Storage, [UUID: T]>,
+									 changing changedEntries: [T],
+									 removing removedIDs: [UUID]) {
+		for changed in changedEntries {
+			let previous = storage[keyPath: path][changed.id]
+			storage[keyPath: path][changed.id] = changed
+			if let container = changed as? FileContainer {
+				container.downloadFile(previous: previous as? FileContainer)
+			}
+		}
+		for removed in removedIDs {
+			if let container = storage[keyPath: path][removed] as? FileContainer {
+				container.deleteFile()
+			}
+			storage[keyPath: path][removed] = nil
+		}
 	}
 }
 
