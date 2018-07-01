@@ -50,7 +50,6 @@ class LoginViewController: UIViewController {
 	}
 	
 	func logIn() {
-		// TODO indicator?
 		let username = usernameField.text!
 		let password = passwordField.text!
 		

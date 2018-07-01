@@ -11,13 +11,20 @@
 "alert.connection_issues.message" = "Es konnte keine Verbindung zum Dienst aufgebaut werden.";
 // CONTEXT: Titel des Alerts für wenn man Verbindungsprobleme hat.
 "alert.connection_issues.title" = "Verbindungsproblem";
-// CONTEXT: "Okay" Knopf in einem Alert
-"alert.okay" = "Okay";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Alert.invalid
+// CONTEXT: Nachricht des Alerts für wenn der Token, der bei der Anmeldung erhalten wurde, nicht mehr gültig ist, z.B. wenn auf der Website das Passwort geändert wurde.
+"alert.invalid_session.message" = "Bitte loggen sie sich wieder neu ein.";
+// CONTEXT: Titel des Alerts für wenn der Token, der bei der Anmeldung erhalten wurde, nicht mehr gültig ist, z.B. wenn auf der Website das Passwort geändert wurde.
+"alert.invalid_session.title" = "Ungültige Sitzung!";
+// CONTEXT: "OK" Knopf in einem Alert
+"alert.okay" = "OK";
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Alert.unknown
-// CONTEXT: Nachricht für den Alert, dass beim aktualisieren ein unbekannter Fehler aufgetreten ist.
-"alert.unknown_sync_error.message" = "Beim aktualisieren ist ein unbekannter Fehler aufgetreten. Bitte versuch es später nochmal.";
+// CONTEXT: Nachricht für den Alert, dass beim aktualisieren ein unbekannter Fehler aufgetreten ist. %s wird durch eine (nicht benutzerfreundliche) Beschreibung des Fehlers ersetzt.
+"alert.unknown_sync_error.message" = "Beim aktualisieren ist ein unbekannter Fehler aufgetreten. Bitte versuch es später nochmal.\n\nFalls der Fehler bestehen bleibt, könnte der folgende Text dem Support behilflich sein:\n%@";
 // CONTEXT: Titel für den Alert, dass beim aktualisieren ein unbekannter Fehler aufgetreten ist.
 "alert.unknown_sync_error.title" = "Unbekannter Fehler!";
 
@@ -33,6 +40,8 @@
 "building_list.client_mode.title" = "Abnahmemodus";
 // CONTEXT: Knopf oben links zum ausloggen
 "building_list.log_out" = "Ausloggen";
+// CONTEXT: Wird anstelle der Gebäude angezeigt, wenn man noch nie synchronisiert hat. Sollte den Benutzer darauf hinweisen, dass er durch runterziehen synchronisieren kann.
+"building_list.refresh_hint" = "Noch keine Daten geladen!\nZieh runter, um die lokalen Daten mit dem Server zu synchronisieren.";
 // CONTEXT: Titel für die Gebäudeliste-Ansicht
 "building_list.title" = "Gebäude";
 // CONTEXT: Der Willkommenstext oben. %s wird mit dem Vornamen ersetzt.

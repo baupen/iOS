@@ -11,7 +11,7 @@ internal enum L10n {
   internal enum Alert {
     /// Abbrechen
     internal static let cancel = L10n.tr("Localizable", "alert.cancel")
-    /// Okay
+    /// OK
     internal static let okay = L10n.tr("Localizable", "alert.okay")
 
     internal enum ConnectionIssues {
@@ -21,9 +21,18 @@ internal enum L10n {
       internal static let title = L10n.tr("Localizable", "alert.connection_issues.title")
     }
 
+    internal enum InvalidSession {
+      /// Bitte loggen sie sich wieder neu ein.
+      internal static let message = L10n.tr("Localizable", "alert.invalid_session.message")
+      /// Ungültige Sitzung!
+      internal static let title = L10n.tr("Localizable", "alert.invalid_session.title")
+    }
+
     internal enum UnknownSyncError {
-      /// Beim aktualisieren ist ein unbekannter Fehler aufgetreten. Bitte versuch es später nochmal.
-      internal static let message = L10n.tr("Localizable", "alert.unknown_sync_error.message")
+      /// Beim aktualisieren ist ein unbekannter Fehler aufgetreten. Bitte versuch es später nochmal.\n\nFalls der Fehler bestehen bleibt, könnte der folgende Text dem Support behilflich sein:\n%@
+      internal static func message(_ p1: String) -> String {
+        return L10n.tr("Localizable", "alert.unknown_sync_error.message", p1)
+      }
       /// Unbekannter Fehler!
       internal static let title = L10n.tr("Localizable", "alert.unknown_sync_error.title")
     }
@@ -32,6 +41,8 @@ internal enum L10n {
   internal enum BuildingList {
     /// Ausloggen
     internal static let logOut = L10n.tr("Localizable", "building_list.log_out")
+    /// Noch keine Daten geladen!\nZieh runter, um die lokalen Daten mit dem Server zu synchronisieren.
+    internal static let refreshHint = L10n.tr("Localizable", "building_list.refresh_hint")
     /// Gebäude
     internal static let title = L10n.tr("Localizable", "building_list.title")
     /// Willkommen, %@

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14269.14" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Bne-PF-7lo">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14269.14" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kjR-zx-obn">
     <device id="ipad9_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
@@ -310,12 +310,15 @@ Im Abnahmemodus erfasste Pendenzen werden hingegen auch sonst angezeigt.</string
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="400" id="xxT-rY-px6">
                                         <rect key="frame" x="0.0" y="220" width="1024" height="400"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xxT-rY-px6" id="mi9-4L-9Qt">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xxT-rY-px6" id="mi9-4L-9Qt">
                                             <rect key="frame" x="0.0" y="0.0" width="1024" height="400"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="200" verticalHuggingPriority="200" verticalCompressionResistancePriority="800" text="Gebäude" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Njl-Dw-vOS">
-                                                    <rect key="frame" x="20" y="11" width="984" height="69"/>
+                                                    <rect key="frame" x="20" y="19" width="984" height="31"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="31" id="aEC-aZ-yWk"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -324,7 +327,7 @@ Im Abnahmemodus erfasste Pendenzen werden hingegen auch sonst angezeigt.</string
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Zp8-gD-E9i">
-                                                    <rect key="frame" x="0.0" y="80" width="1024" height="320"/>
+                                                    <rect key="frame" x="0.0" y="50" width="1024" height="320"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="320" id="uvM-uk-rSL"/>
@@ -420,14 +423,28 @@ Im Abnahmemodus erfasste Pendenzen werden hingegen auch sonst angezeigt.</string
                                                         <outlet property="delegate" destination="Bne-PF-7lo" id="qLJ-6W-Ib0"/>
                                                     </connections>
                                                 </collectionView>
+                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6qc-QJ-bLk">
+                                                    <rect key="frame" x="20" y="58" width="984" height="41"/>
+                                                    <string key="text">Noch keine Daten geladen!
+Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="building_list.refresh_hint"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="Njl-Dw-vOS" firstAttribute="trailing" secondItem="mi9-4L-9Qt" secondAttribute="trailingMargin" id="7ql-QI-H0o"/>
-                                                <constraint firstItem="Njl-Dw-vOS" firstAttribute="top" secondItem="mi9-4L-9Qt" secondAttribute="topMargin" id="9NZ-gE-B2f"/>
+                                                <constraint firstItem="Njl-Dw-vOS" firstAttribute="top" secondItem="mi9-4L-9Qt" secondAttribute="topMargin" constant="8" id="9NZ-gE-B2f"/>
+                                                <constraint firstItem="6qc-QJ-bLk" firstAttribute="top" secondItem="Zp8-gD-E9i" secondAttribute="top" constant="8" id="CYM-XE-Keq"/>
+                                                <constraint firstItem="6qc-QJ-bLk" firstAttribute="leading" secondItem="mi9-4L-9Qt" secondAttribute="leadingMargin" id="DSg-Zp-Z1M"/>
                                                 <constraint firstItem="Njl-Dw-vOS" firstAttribute="leading" secondItem="mi9-4L-9Qt" secondAttribute="leadingMargin" id="Fxy-SE-361"/>
                                                 <constraint firstItem="Zp8-gD-E9i" firstAttribute="top" secondItem="Njl-Dw-vOS" secondAttribute="bottom" id="R7e-WR-wTF"/>
                                                 <constraint firstItem="Zp8-gD-E9i" firstAttribute="leading" secondItem="mi9-4L-9Qt" secondAttribute="leading" id="vFH-jc-ptM"/>
                                                 <constraint firstAttribute="trailing" secondItem="Zp8-gD-E9i" secondAttribute="trailing" id="vn9-2r-GFt"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="6qc-QJ-bLk" secondAttribute="trailing" id="wTH-eS-oQt"/>
                                                 <constraint firstAttribute="bottom" secondItem="Zp8-gD-E9i" secondAttribute="bottom" id="yEz-tL-8DJ"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -444,6 +461,7 @@ Im Abnahmemodus erfasste Pendenzen werden hingegen auch sonst angezeigt.</string
                         <outlet property="buildingListView" destination="Zp8-gD-E9i" id="tdM-Zf-QAY"/>
                         <outlet property="clientModeCell" destination="ekp-oq-wh0" id="CIH-0V-nXl"/>
                         <outlet property="clientModeSwitch" destination="NEh-JP-6pw" id="SaP-4w-Afj"/>
+                        <outlet property="refreshHintLabel" destination="6qc-QJ-bLk" id="1bA-kw-03d"/>
                         <outlet property="welcomeLabel" destination="RLH-2h-ViC" id="eZ0-1q-ylv"/>
                     </connections>
                 </tableViewController>

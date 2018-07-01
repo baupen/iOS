@@ -13,6 +13,7 @@ class BuildingListViewController: UITableViewController, LoadedViewController {
 	@IBOutlet var clientModeSwitch: UISwitch!
 	@IBOutlet var clientModeCell: UITableViewCell!
 	@IBOutlet var buildingListView: UICollectionView!
+	@IBOutlet var refreshHintLabel: UILabel!
 	
 	@IBAction func clientModeSwitched() {
 		Client.shared.isInClientMode = clientModeSwitch.isOn
@@ -35,13 +36,23 @@ class BuildingListViewController: UITableViewController, LoadedViewController {
 			self.buildingListView.reloadData()
 		}
 		result.catch { error in
+			typealias Alert = L10n.Alert
 			switch error {
 			case RequestError.communicationError:
-				self.showAlert(titled: L10n.Alert.ConnectionIssues.title,
-							   message: L10n.Alert.ConnectionIssues.message)
+				self.showAlert(titled: Alert.ConnectionIssues.title,
+							   message: Alert.ConnectionIssues.message)
+			case RequestError.apiError(let failure) where failure.error == .invalidToken:
+				self.showAlert(
+					titled: Alert.InvalidSession.title,
+					message: Alert.InvalidSession.message
+				) {
+					self.dismiss(animated: true)
+				}
 			default:
-				self.showAlert(titled: L10n.Alert.UnknownSyncError.title,
-							   message: L10n.Alert.UnknownSyncError.message)
+				var errorDesc = ""
+				dump(error, to: &errorDesc)
+				self.showAlert(titled: Alert.UnknownSyncError.title,
+							   message: Alert.UnknownSyncError.message(errorDesc))
 			}
 		}
 	}
@@ -49,10 +60,10 @@ class BuildingListViewController: UITableViewController, LoadedViewController {
 	var isRefreshing = false
 	var buildings: [Building] = [] {
 		didSet {
-			buildings += buildings // TODO remove after testing
 			buildings.sort {
 				$0.name < $1.name // TODO use last opened date instead
 			}
+			refreshHintLabel.isHidden = !buildings.isEmpty
 		}
 	}
 	
