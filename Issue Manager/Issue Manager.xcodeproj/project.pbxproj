@@ -50,6 +50,8 @@
 		9584F24A20E92F8E00A8C884 /* CenteringScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9584F24920E92F8E00A8C884 /* CenteringScrollViewDelegate.swift */; };
 		9584F24C20E936BD00A8C884 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9584F24B20E936BD00A8C884 /* UserDefaults.swift */; };
 		9584F24E20E936ED00A8C884 /* LoginWindowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9584F24D20E936ED00A8C884 /* LoginWindowView.swift */; };
+		95870B2720E9B7D300BB1B39 /* SimplePDFKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95870B2620E9B7A900BB1B39 /* SimplePDFKit.framework */; };
+		95870B2820E9B7D300BB1B39 /* SimplePDFKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 95870B2620E9B7A900BB1B39 /* SimplePDFKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		95953B2120DFCD90001ED1B7 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95953B2020DFCD90001ED1B7 /* main.swift */; };
 		95953B2E20DFD99A001ED1B7 /* BasicFuture+extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9511A12620DD559500101ADE /* BasicFuture+extras.swift */; };
 		95953B2F20DFD99A001ED1B7 /* BasicFuture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9511A12720DD559500101ADE /* BasicFuture.swift */; };
@@ -95,6 +97,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		95870B2520E9B7A900BB1B39 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 95870B1C20E9B7A900BB1B39 /* SimplePDFKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 954CFBEC20E9AEC20014E02F;
+			remoteInfo = SimplePDFKit;
+		};
+		95870B2920E9B7D300BB1B39 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 95870B1C20E9B7A900BB1B39 /* SimplePDFKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 954CFBEB20E9AEC20014E02F;
+			remoteInfo = SimplePDFKit;
+		};
 		95BD515420E985C600FCB7EB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 95BD514B20E985C600FCB7EB /* Reachability.xcodeproj */;
@@ -153,6 +169,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				95870B2820E9B7D300BB1B39 /* SimplePDFKit.framework in Embed Frameworks */,
 				95BD516120E985FC00FCB7EB /* Reachability.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -217,6 +234,7 @@
 		9584F24920E92F8E00A8C884 /* CenteringScrollViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenteringScrollViewDelegate.swift; sourceTree = "<group>"; };
 		9584F24B20E936BD00A8C884 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		9584F24D20E936ED00A8C884 /* LoginWindowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWindowView.swift; sourceTree = "<group>"; };
+		95870B1C20E9B7A900BB1B39 /* SimplePDFKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SimplePDFKit.xcodeproj; path = ../../SimplePDFKit/SimplePDFKit/SimplePDFKit.xcodeproj; sourceTree = "<group>"; };
 		95953B1E20DFCD90001ED1B7 /* Testing */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Testing; sourceTree = BUILT_PRODUCTS_DIR; };
 		95953B2020DFCD90001ED1B7 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		95953B4B20DFFAED001ED1B7 /* JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
@@ -236,6 +254,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95870B2720E9B7D300BB1B39 /* SimplePDFKit.framework in Frameworks */,
 				95BD516020E985FC00FCB7EB /* Reachability.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -369,6 +388,7 @@
 		9583C2B220DC748800452695 = {
 			isa = PBXGroup;
 			children = (
+				95870B1C20E9B7A900BB1B39 /* SimplePDFKit.xcodeproj */,
 				95BD514B20E985C600FCB7EB /* Reachability.xcodeproj */,
 				9554235220DC796A009CCCE0 /* BridgingHeader.h */,
 				9511A12320DD558700101ADE /* Libraries */,
@@ -425,6 +445,14 @@
 			path = "Back End";
 			sourceTree = "<group>";
 		};
+		95870B1D20E9B7A900BB1B39 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				95870B2620E9B7A900BB1B39 /* SimplePDFKit.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		95953B1F20DFCD90001ED1B7 /* Testing */ = {
 			isa = PBXGroup;
 			children = (
@@ -465,6 +493,7 @@
 			);
 			dependencies = (
 				95BD516320E985FC00FCB7EB /* PBXTargetDependency */,
+				95870B2A20E9B7D300BB1B39 /* PBXTargetDependency */,
 			);
 			name = "Issue Manager";
 			productName = "Issue Manager";
@@ -525,6 +554,10 @@
 					ProductGroup = 95BD514C20E985C600FCB7EB /* Products */;
 					ProjectRef = 95BD514B20E985C600FCB7EB /* Reachability.xcodeproj */;
 				},
+				{
+					ProductGroup = 95870B1D20E9B7A900BB1B39 /* Products */;
+					ProjectRef = 95870B1C20E9B7A900BB1B39 /* SimplePDFKit.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -535,6 +568,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		95870B2620E9B7A900BB1B39 /* SimplePDFKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SimplePDFKit.framework;
+			remoteRef = 95870B2520E9B7A900BB1B39 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		95BD515520E985C600FCB7EB /* Reachability.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -727,6 +767,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		95870B2A20E9B7D300BB1B39 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SimplePDFKit;
+			targetProxy = 95870B2920E9B7D300BB1B39 /* PBXContainerItemProxy */;
+		};
 		95BD516320E985FC00FCB7EB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Reachability;
