@@ -273,11 +273,9 @@
 			children = (
 				9511A10120DD3A2700101ADE /* Geometry.swift */,
 				95D2C2AD20E5C3E700D887C8 /* Localization.swift */,
-				9511A10320DD3A7100101ADE /* Loading.swift */,
-				9584F24720E92DB800A8C884 /* TextFieldContainer.swift */,
-				9584F24920E92F8E00A8C884 /* CenteringScrollViewDelegate.swift */,
-				9583C2D220DC74BA00452695 /* UIHelpers.swift */,
 				9584F24B20E936BD00A8C884 /* UserDefaults.swift */,
+				9511A10320DD3A7100101ADE /* Loading.swift */,
+				9583C2D220DC74BA00452695 /* UIHelpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -340,6 +338,15 @@
 			path = Future;
 			sourceTree = "<group>";
 		};
+		95283A0F20E9A5760095D4C5 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				9584F24720E92DB800A8C884 /* TextFieldContainer.swift */,
+				9584F24920E92F8E00A8C884 /* CenteringScrollViewDelegate.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		952CB48920E830BF00E6B664 /* Building List */ = {
 			isa = PBXGroup;
 			children = (
@@ -387,6 +394,7 @@
 				950283A620E70C46001A5083 /* Generated */,
 				9511A10020DD3A0F00101ADE /* Helpers */,
 				9583C2BE20DC748800452695 /* AppDelegate.swift */,
+				95283A0F20E9A5760095D4C5 /* Common */,
 				952CB48A20E830CD00E6B664 /* Login */,
 				952CB48920E830BF00E6B664 /* Building List */,
 				9583C2C020DC748800452695 /* MainViewController.swift */,

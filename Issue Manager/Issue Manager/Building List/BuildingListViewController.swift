@@ -21,18 +21,21 @@ class BuildingListViewController: UITableViewController, LoadedViewController {
 		updateClientModeAppearance()
 	}
 	
+	// unwind segue
+	@IBAction func backToBuildingList(_ segue: UIStoryboardSegue) {}
+	
 	@objc func refresh(_ refresher: UIRefreshControl) {
 		isRefreshing = true
 		buildingListView.visibleCells.forEach { ($0 as! BuildingCell).isRefreshing = true }
 		
 		let result = Client.shared.read().on(.main)
 		
-		result.then {
-			self.buildings = Array(Client.shared.storage.buildings.values)
-		}
 		result.always {
 			refresher.endRefreshing()
 			self.isRefreshing = false
+		}
+		result.then {
+			self.buildings = Array(Client.shared.storage.buildings.values)
 			self.buildingListView.reloadData()
 		}
 		result.catch { error in
@@ -81,10 +84,25 @@ class BuildingListViewController: UITableViewController, LoadedViewController {
 		let refreshControl = UIRefreshControl()
 		refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
 		tableView.refreshControl = refreshControl
+		
+		if let id = defaults.lastBuildingID, let lastBuilding = Client.shared.storage.buildings[id] {
+			DispatchQueue.main.async {
+				self.showMapList(for: lastBuilding, animated: false)
+			}
+		}
 	}
 	
 	func updateClientModeAppearance() {
 		clientModeCell.backgroundColor = Client.shared.backgroundColor
+	}
+	
+	func showMapList(for building: Building, animated: Bool = true) {
+		defaults.lastBuildingID = building.id
+		
+		let main = storyboard!.instantiate(MainViewController.self)!
+		main.building = building
+		
+		present(main, animated: animated)
 	}
 	
 	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -114,7 +132,8 @@ extension BuildingListViewController: UICollectionViewDataSource {
 
 extension BuildingListViewController: UICollectionViewDelegate {
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		// TODO show building
+		let building = buildings[indexPath.item]
+		showMapList(for: building)
 	}
 }
 

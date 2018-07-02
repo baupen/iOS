@@ -18,7 +18,6 @@ class BuildingCell: UICollectionViewCell, LoadedCollectionCell {
 	
 	override var isHighlighted: Bool {
 		didSet {
-			print(isHighlighted)
 			updateAppearance()
 		}
 	}

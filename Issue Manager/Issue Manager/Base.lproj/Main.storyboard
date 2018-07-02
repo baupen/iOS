@@ -397,12 +397,12 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Master" id="Zdf-7t-Un8">
-                        <barButtonItem key="leftBarButtonItem" title="Log Out" id="hYA-WQ-Bwf">
+                        <barButtonItem key="leftBarButtonItem" title="Gebäude" id="hYA-WQ-Bwf">
                             <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="building_list.log_out"/>
+                                <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="building_list.title"/>
                             </userDefinedRuntimeAttributes>
                             <connections>
-                                <segue destination="856-u4-AOv" kind="unwind" unwindAction="logOut:" id="fdk-vC-09Z"/>
+                                <segue destination="856-u4-AOv" kind="unwind" unwindAction="backToBuildingList:" id="C7o-oG-doc"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -613,7 +613,7 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="6S0-TO-JiA"/>
+        <segue reference="Tll-UG-LXB"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.20392156862745098" green="0.20392156862745098" blue="0.46666666666666667" alpha="1" colorSpace="calibratedRGB"/>
 </document>

@@ -3,7 +3,7 @@
 import Foundation
 
 extension NSError {
-	/// Creates an `NSError` object with the specified parameters. (Because the default initializer is terrible.)
+	/// Creates an `NSError` object with the specified parameters (because the default initializer is terrible).
 	convenience init(code: Int = 0, localizedDescription: String? = nil, localizedRecoverySuggestion: String? = nil) {
 		var userInfo: [String: Any] = [:]
 		userInfo[NSLocalizedDescriptionKey] = localizedDescription

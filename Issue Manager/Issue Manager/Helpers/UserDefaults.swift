@@ -4,6 +4,9 @@ import Foundation
 
 let defaults = UserDefaults.standard
 
+fileprivate let stayLoggedInKey = "stayLoggedIn"
+fileprivate let lastBuildingIDKey = "lastBuildingID"
+
 func registerDefaults() {
 	defaults.register(
 		defaults: [
@@ -12,7 +15,6 @@ func registerDefaults() {
 	)
 }
 
-fileprivate let stayLoggedInKey = "stayLoggedIn"
 extension UserDefaults {
 	var stayLoggedIn: Bool {
 		get {
@@ -20,6 +22,15 @@ extension UserDefaults {
 		}
 		set {
 			set(newValue, forKey: stayLoggedInKey)
+		}
+	}
+	
+	var lastBuildingID: UUID? {
+		get {
+			return string(forKey: lastBuildingIDKey).flatMap(UUID.init)
+		}
+		set {
+			set(lastBuildingID?.uuidString, forKey: lastBuildingIDKey)
 		}
 	}
 }
