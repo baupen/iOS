@@ -7,7 +7,8 @@ class MainViewController: UISplitViewController, LoadedViewController {
 	
 	var building: Building! {
 		didSet {
-			// TODO
+			let mapList = masterNav!.topViewController as! MapListViewController
+			mapList.building = building
 		}
 	}
 	

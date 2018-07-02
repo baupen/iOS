@@ -52,6 +52,8 @@
 		9584F24E20E936ED00A8C884 /* LoginWindowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9584F24D20E936ED00A8C884 /* LoginWindowView.swift */; };
 		95870B2720E9B7D300BB1B39 /* SimplePDFKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95870B2620E9B7A900BB1B39 /* SimplePDFKit.framework */; };
 		95870B2820E9B7D300BB1B39 /* SimplePDFKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 95870B2620E9B7A900BB1B39 /* SimplePDFKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		95870B2E20E9C05300BB1B39 /* MapListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95870B2D20E9C05300BB1B39 /* MapListViewController.swift */; };
+		95870B3020E9C06B00BB1B39 /* MapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95870B2F20E9C06B00BB1B39 /* MapCell.swift */; };
 		95953B2120DFCD90001ED1B7 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95953B2020DFCD90001ED1B7 /* main.swift */; };
 		95953B2E20DFD99A001ED1B7 /* BasicFuture+extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9511A12620DD559500101ADE /* BasicFuture+extras.swift */; };
 		95953B2F20DFD99A001ED1B7 /* BasicFuture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9511A12720DD559500101ADE /* BasicFuture.swift */; };
@@ -235,6 +237,8 @@
 		9584F24B20E936BD00A8C884 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		9584F24D20E936ED00A8C884 /* LoginWindowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWindowView.swift; sourceTree = "<group>"; };
 		95870B1C20E9B7A900BB1B39 /* SimplePDFKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SimplePDFKit.xcodeproj; path = ../../SimplePDFKit/SimplePDFKit/SimplePDFKit.xcodeproj; sourceTree = "<group>"; };
+		95870B2D20E9C05300BB1B39 /* MapListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapListViewController.swift; sourceTree = "<group>"; };
+		95870B2F20E9C06B00BB1B39 /* MapCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCell.swift; sourceTree = "<group>"; };
 		95953B1E20DFCD90001ED1B7 /* Testing */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Testing; sourceTree = BUILT_PRODUCTS_DIR; };
 		95953B2020DFCD90001ED1B7 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		95953B4B20DFFAED001ED1B7 /* JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
@@ -417,8 +421,9 @@
 				95283A0F20E9A5760095D4C5 /* Common */,
 				952CB48A20E830CD00E6B664 /* Login */,
 				952CB48920E830BF00E6B664 /* Building List */,
-				9583C2C020DC748800452695 /* MainViewController.swift */,
-				9583C2D420DC757800452695 /* MapViewController.swift */,
+				95870B3120E9C20000BB1B39 /* Main */,
+				95870B2B20E9C03200BB1B39 /* Map List */,
+				95870B2C20E9C03900BB1B39 /* Map */,
 				9583C2C420DC748800452695 /* Main.storyboard */,
 				9583C2C920DC748B00452695 /* LaunchScreen.storyboard */,
 				9583C2C720DC748B00452695 /* Assets.xcassets */,
@@ -451,6 +456,31 @@
 				95870B2620E9B7A900BB1B39 /* SimplePDFKit.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		95870B2B20E9C03200BB1B39 /* Map List */ = {
+			isa = PBXGroup;
+			children = (
+				95870B2D20E9C05300BB1B39 /* MapListViewController.swift */,
+				95870B2F20E9C06B00BB1B39 /* MapCell.swift */,
+			);
+			path = "Map List";
+			sourceTree = "<group>";
+		};
+		95870B2C20E9C03900BB1B39 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				9583C2D420DC757800452695 /* MapViewController.swift */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		95870B3120E9C20000BB1B39 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				9583C2C020DC748800452695 /* MainViewController.swift */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 		95953B1F20DFCD90001ED1B7 /* Testing */ = {
@@ -529,7 +559,7 @@
 				TargetAttributes = {
 					9583C2BA20DC748800452695 = {
 						CreatedOnToolsVersion = 9.4.1;
-						LastSwiftMigration = 0940;
+						LastSwiftMigration = 1000;
 					};
 					95953B1D20DFCD90001ED1B7 = {
 						CreatedOnToolsVersion = 9.4.1;
@@ -690,6 +720,7 @@
 				952CB48C20E8429D00E6B664 /* BuildingListLayout.swift in Sources */,
 				9511A13F20DD559500101ADE /* Future+Foundation.swift in Sources */,
 				9584F24C20E936BD00A8C884 /* UserDefaults.swift in Sources */,
+				95870B2E20E9C05300BB1B39 /* MapListViewController.swift in Sources */,
 				9511A14220DD559500101ADE /* Future+extras.swift in Sources */,
 				9511A10620DD3B8E00101ADE /* Building.swift in Sources */,
 				9584F24820E92DB800A8C884 /* TextFieldContainer.swift in Sources */,
@@ -700,6 +731,7 @@
 				9511A13C20DD559500101ADE /* ExecutionContext.swift in Sources */,
 				9583C2D520DC757800452695 /* MapViewController.swift in Sources */,
 				95B9BA6820DEDF0400261954 /* Storage.swift in Sources */,
+				95870B3020E9C06B00BB1B39 /* MapCell.swift in Sources */,
 				9511A14420DD56D700101ADE /* MiscHelpers.swift in Sources */,
 				9511A13A20DD559500101ADE /* Traversable.swift in Sources */,
 				9511A13820DD559500101ADE /* BasicPromise.swift in Sources */,
