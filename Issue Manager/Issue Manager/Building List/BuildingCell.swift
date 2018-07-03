@@ -59,7 +59,6 @@ class BuildingCell: UICollectionViewCell, LoadedCollectionCell {
 			self.layer.shadowOpacity = self.isRefreshing ? shadowOpacity / 4 : shadowOpacity
 			
 			let isHighlighted = self.isHighlighted
-			self.contentView.backgroundColor = isHighlighted ? #colorLiteral(red: 0.2652326185, green: 0.2791550029, blue: 0.5412910581, alpha: 0.1) : #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
 			self.layer.shadowOffset = isHighlighted ? shadowOffset / 4 : shadowOffset
 			self.layer.shadowRadius = isHighlighted ? shadowRadius / 4 : shadowRadius
 			self.transform = isHighlighted ? .init(scaleX: 0.95, y: 0.95) : .identity
