@@ -3,17 +3,14 @@
 import UIKit
 
 class MapListViewController: UITableViewController {
-	var building: Building! {
+	var source: MapSource! {
 		didSet {
-			navigationItem.title = building?.name
+			navigationItem.title = source.name
 			reload()
 		}
 	}
-	var maps: [Map] = []
 	
-	override func viewDidLoad() {
-		super.viewDidLoad()
-	}
+	var maps: [Map] = []
 	
 	override func viewWillAppear(_ animated: Bool) {
 		clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
@@ -21,23 +18,8 @@ class MapListViewController: UITableViewController {
 	}
 	
 	func reload() {
-		maps = building.childMaps().sorted { $0.name < $1.name }
+		maps = source.childMaps().sorted { $0.name < $1.name }
 		tableView.reloadData()
-	}
-	
-	// MARK: - Segues
-	
-	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		if segue.identifier == "showDetail", let indexPath = tableView.indexPathForSelectedRow {
-			let map = maps[indexPath.row]
-			let destinationNav = segue.destination as! UINavigationController
-			let controller = destinationNav.topViewController as! MapViewController
-			controller.map = map
-			controller.loadViewIfNeeded()
-			// `controller` isn't in `splitViewController` yet, so we have to do it from here
-			controller.navigationItem.leftBarButtonItem = splitViewController!.displayModeButtonItem
-			splitViewController?.toggleMasterView()
-		}
 	}
 	
 	// MARK: - Table View
@@ -55,4 +37,34 @@ class MapListViewController: UITableViewController {
 		cell.map = maps[indexPath.row]
 		return cell
 	}
+	
+	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		let map = maps[indexPath.row]
+		
+		let mainController = splitViewController as! MainViewController
+		
+		let mapController: MapViewController
+		if traitCollection.horizontalSizeClass == .regular {
+			mapController = mainController.detailNav!.topViewController as! MapViewController
+			// TODO reevaluate
+			// mapController isn't in splitViewController yet, so we have to do it from here
+			mapController.navigationItem.leftBarButtonItem = splitViewController!.displayModeButtonItem
+		} else {
+			mapController = storyboard!.instantiate(MapViewController.self)!
+			mapController.loadViewIfNeeded()
+		}
+		mapController.map = map
+		
+		showDetailViewController(mapController, sender: self)
+	}
 }
+
+protocol MapSource {
+	var name: String { get }
+	var filename: String? { get }
+	
+	func childMaps() -> [Map]
+}
+
+extension Building: MapSource {}
+extension Map: MapSource {}

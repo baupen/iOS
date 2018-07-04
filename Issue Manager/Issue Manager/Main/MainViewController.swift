@@ -8,7 +8,7 @@ class MainViewController: UISplitViewController, LoadedViewController {
 	var building: Building! {
 		didSet {
 			let mapList = masterNav!.topViewController as! MapListViewController
-			mapList.building = building
+			mapList.source = building
 		}
 	}
 	
@@ -42,7 +42,7 @@ class MasterNavigationController: UINavigationController {
 	override func collapseSecondaryViewController(_ secondaryViewController: UIViewController, for splitViewController: UISplitViewController) {
 		let detailNav = secondaryViewController as! DetailNavigationController
 		let mapController = detailNav.topViewController as! MapViewController
-		if mapController.map != nil {
+		if mapController.map?.filename != nil {
 			pushViewController(mapController, animated: false)
 		}
 	}
