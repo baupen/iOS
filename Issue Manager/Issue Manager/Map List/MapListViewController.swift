@@ -75,6 +75,7 @@ protocol MapSource {
 	var filename: String? { get }
 	
 	func childMaps() -> [Map]
+	func allIssues() -> [Issue]
 }
 
 extension Building: MapSource {}

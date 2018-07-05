@@ -15,6 +15,7 @@ class BuildingCell: UICollectionViewCell, LoadedCollectionCell {
 	@IBOutlet var nameLabel: UILabel!
 	@IBOutlet var openIssuesLabel: UILabel!
 	@IBOutlet var totalIssuesLabel: UILabel!
+	@IBOutlet var issueBadge: IssueBadge!
 	
 	override var isHighlighted: Bool {
 		didSet {
@@ -30,16 +31,7 @@ class BuildingCell: UICollectionViewCell, LoadedCollectionCell {
 	
 	var building: Building! {
 		didSet {
-			updateImage()
-			nameLabel.text = building.name
-			DispatchQueue.global().async {
-				let issues = self.building.allIssues()
-				let openIssues = issues.filter { !$0.isReviewed }
-				DispatchQueue.main.async {
-					self.totalIssuesLabel.text = Localization.totalIssues(String(issues.count))
-					self.openIssuesLabel.text = Localization.openIssues(String(openIssues.count))
-				}
-			}
+			update()
 		}
 	}
 	
@@ -62,6 +54,21 @@ class BuildingCell: UICollectionViewCell, LoadedCollectionCell {
 			self.layer.shadowOffset = isHighlighted ? shadowOffset / 4 : shadowOffset
 			self.layer.shadowRadius = isHighlighted ? shadowRadius / 4 : shadowRadius
 			self.transform = isHighlighted ? .init(scaleX: 0.95, y: 0.95) : .identity
+		}
+	}
+	
+	func update() {
+		updateImage()
+		nameLabel.text = building.name
+		issueBadge.source = building
+		
+		DispatchQueue.global().async {
+			let issues = self.building.allIssues()
+			let openIssues = issues.filter { !$0.isReviewed }
+			DispatchQueue.main.async {
+				self.totalIssuesLabel.text = Localization.totalIssues(String(issues.count))
+				self.openIssuesLabel.text = Localization.openIssues(String(openIssues.count))
+			}
 		}
 	}
 	

@@ -9,6 +9,7 @@ class MapCell: UITableViewCell, LoadedTableCell {
 	
 	@IBOutlet weak var nameLabel: UILabel?
 	@IBOutlet var openIssuesLabel: UILabel?
+	@IBOutlet var issueBadge: IssueBadge!
 	
 	var map: Map? {
 		didSet {
@@ -27,5 +28,6 @@ class MapCell: UITableViewCell, LoadedTableCell {
 		nameLabel?.text = map.name
 		let openIssues = map.allIssues().lazy.filter { !$0.isReviewed }
 		openIssuesLabel?.text = Localization.openIssues(String(openIssues.count))
+		issueBadge.source = map
 	}
 }

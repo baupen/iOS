@@ -36,3 +36,9 @@ extension UIImage {
 		return UIGraphicsGetImageFromCurrentImageContext()!
 	}
 }
+
+extension UILayoutPriority: ExpressibleByFloatLiteral {
+	public init(floatLiteral value: Float) {
+		self.init(value)
+	}
+}

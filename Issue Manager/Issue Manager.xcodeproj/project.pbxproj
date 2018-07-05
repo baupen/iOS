@@ -34,6 +34,7 @@
 		9511A14220DD559500101ADE /* Future+extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9511A13420DD559500101ADE /* Future+extras.swift */; };
 		9511A14420DD56D700101ADE /* MiscHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9511A14320DD56D700101ADE /* MiscHelpers.swift */; };
 		951FDD4B20E59AA200268BEB /* KeyboardLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951FDD4A20E59AA100268BEB /* KeyboardLayoutConstraint.swift */; };
+		9529A63D20EECF8600C7E0A0 /* IssueBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9529A63C20EECF8600C7E0A0 /* IssueBadge.swift */; };
 		952CB48820E830A300E6B664 /* BuildingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952CB48720E830A300E6B664 /* BuildingCell.swift */; };
 		952CB48C20E8429D00E6B664 /* BuildingListLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952CB48B20E8429D00E6B664 /* BuildingListLayout.swift */; };
 		9554234F20DC781E009CCCE0 /* NetworkObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9554234E20DC781E009CCCE0 /* NetworkObjects.swift */; };
@@ -218,6 +219,7 @@
 		9511A13420DD559500101ADE /* Future+extras.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Future+extras.swift"; sourceTree = "<group>"; };
 		9511A14320DD56D700101ADE /* MiscHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiscHelpers.swift; sourceTree = "<group>"; };
 		951FDD4A20E59AA100268BEB /* KeyboardLayoutConstraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardLayoutConstraint.swift; sourceTree = "<group>"; };
+		9529A63C20EECF8600C7E0A0 /* IssueBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueBadge.swift; sourceTree = "<group>"; };
 		952CB48720E830A300E6B664 /* BuildingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingCell.swift; sourceTree = "<group>"; };
 		952CB48B20E8429D00E6B664 /* BuildingListLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingListLayout.swift; sourceTree = "<group>"; };
 		9554234E20DC781E009CCCE0 /* NetworkObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkObjects.swift; sourceTree = "<group>"; };
@@ -367,6 +369,7 @@
 		95283A0F20E9A5760095D4C5 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				9529A63C20EECF8600C7E0A0 /* IssueBadge.swift */,
 				9584F24720E92DB800A8C884 /* TextFieldContainer.swift */,
 				9584F24920E92F8E00A8C884 /* CenteringScrollViewDelegate.swift */,
 			);
@@ -736,6 +739,7 @@
 				95B9BA6820DEDF0400261954 /* Storage.swift in Sources */,
 				95870B3020E9C06B00BB1B39 /* MapCell.swift in Sources */,
 				9511A14420DD56D700101ADE /* MiscHelpers.swift in Sources */,
+				9529A63D20EECF8600C7E0A0 /* IssueBadge.swift in Sources */,
 				9511A13A20DD559500101ADE /* Traversable.swift in Sources */,
 				9511A13820DD559500101ADE /* BasicPromise.swift in Sources */,
 				9511A13E20DD559500101ADE /* Future.swift in Sources */,
