@@ -108,6 +108,18 @@ internal enum L10n {
       internal static let username = L10n.tr("Localizable", "login.placeholder.username")
     }
   }
+
+  internal enum MapList {
+    /// Grundriss
+    internal static let showMap = L10n.tr("Localizable", "map_list.show_map")
+
+    internal enum MapSummary {
+      /// %@ offene Pendenzen
+      internal static func openIssues(_ p1: String) -> String {
+        return L10n.tr("Localizable", "map_list.map_summary.open_issues", p1)
+      }
+    }
+  }
 }
 // swiftlint:enable explicit_type_interface identifier_name line_length nesting type_body_length type_name
 

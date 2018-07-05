@@ -8,6 +8,8 @@ class MainViewController: UISplitViewController, LoadedViewController {
 	override var viewControllers: [UIViewController] {
 		didSet {
 			detailNav?.delegate = self
+			let mapList = masterNav!.topViewController as! MapListViewController
+			mapList.updateShowMapButton()
 		}
 	}
 	

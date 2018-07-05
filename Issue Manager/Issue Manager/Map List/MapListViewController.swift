@@ -3,6 +3,8 @@
 import UIKit
 
 class MapListViewController: UITableViewController {
+	@IBOutlet var showMapButton: UIBarButtonItem!
+	
 	var source: MapSource! {
 		didSet {
 			navigationItem.title = source.name
@@ -10,16 +12,29 @@ class MapListViewController: UITableViewController {
 		}
 	}
 	
-	var maps: [Map] = []
+	var maps: [Map] = [] {
+		didSet {
+			tableView.reloadData()
+		}
+	}
 	
 	override func viewWillAppear(_ animated: Bool) {
 		clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
+		updateShowMapButton()
+		
 		super.viewWillAppear(animated)
 	}
 	
 	func reload() {
+		updateShowMapButton()
+		
 		maps = source.childMaps().sorted { $0.name < $1.name }
-		tableView.reloadData()
+	}
+	
+	func updateShowMapButton() {
+		showMapButton.isEnabled = source.filename != nil
+		let isMapShown = splitViewController!.viewControllers.count == 2
+		navigationItem.rightBarButtonItem = isMapShown ? nil : showMapButton
 	}
 	
 	// MARK: - Table View
@@ -46,9 +61,6 @@ class MapListViewController: UITableViewController {
 		let mapController: MapViewController
 		if mainController.traitCollection.horizontalSizeClass == .regular {
 			mapController = mainController.detailNav!.topViewController as! MapViewController
-			// TODO reevaluate
-			// mapController isn't in splitViewController yet, so we have to do it from here
-			//mapController.navigationItem.leftBarButtonItem = splitViewController!.displayModeButtonItem
 		} else {
 			mapController = storyboard!.instantiate(MapViewController.self)!
 			mapController.loadViewIfNeeded()

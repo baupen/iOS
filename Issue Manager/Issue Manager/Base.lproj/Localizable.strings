@@ -42,7 +42,7 @@
 "building_list.log_out" = "Ausloggen";
 // CONTEXT: Wird anstelle der Gebäude angezeigt, wenn man noch nie synchronisiert hat. Sollte den Benutzer darauf hinweisen, dass er durch runterziehen synchronisieren kann.
 "building_list.refresh_hint" = "Noch keine Daten geladen!\nZieh runter, um die lokalen Daten mit dem Server zu synchronisieren.";
-// CONTEXT: Titel für die Gebäudeliste-Ansicht
+// CONTEXT: Titel für die Gebäudeliste-Ansicht; wird auch für den Back-Button aus der Grundrissliste verwendet.
 "building_list.title" = "Gebäude";
 // CONTEXT: Der Willkommenstext oben. %s wird mit dem Vornamen ersetzt.
 "building_list.welcome" = "Willkommen, %@";
@@ -73,3 +73,10 @@
 // MARK: Login.stay
 // CONTEXT: Steht beim Schalter, durch den man eingeloggt bleibt, auch wenn die App neugestartet wird.
 "login.stay_logged_in" = "Eingeloggt Bleiben";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Map
+// CONTEXT: Beschreibt für einen Grundriss, wieviele offene Pendenzen er (rekursiv) enthält; %s wird durch die Anzahl ersetzt.
+"map_list.map_summary.open_issues" = "%@ offene Pendenzen";
+// CONTEXT: Button um die Kartenansicht anzuzeigen (wenn sie gerade nicht sichtbar ist, aber angezeigt werden kann); sollte möglichst kurz sein.
+"map_list.show_map" = "Grundriss";

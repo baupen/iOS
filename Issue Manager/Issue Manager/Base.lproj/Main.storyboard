@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14269.14" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Unm-RN-TtL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14295.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Unm-RN-TtL">
     <device id="ipad9_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14252.5"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14270.1"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Master-->
+        <!--Master Navigation-->
         <scene sceneID="pY4-Hu-kfo">
             <objects>
-                <navigationController title="Master" id="RMx-3f-FxP" customClass="MasterNavigationController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController title="Master" id="RMx-3f-FxP" userLabel="Master Navigation" customClass="MasterNavigationController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Pmd-2v-anx">
                         <rect key="frame" x="0.0" y="20" width="320" height="50"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -26,10 +28,10 @@
             </objects>
             <point key="canvasLocation" x="-38" y="-630"/>
         </scene>
-        <!--Detail-->
+        <!--Map-->
         <scene sceneID="yUG-lL-AsK">
             <objects>
-                <viewController storyboardIdentifier="Map" title="Detail" id="JEX-9P-axG" customClass="MapViewController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Map" title="Detail" id="JEX-9P-axG" userLabel="Map" customClass="MapViewController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="svH-Pt-448">
                         <rect key="frame" x="0.0" y="0.0" width="703.5" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -60,10 +62,10 @@
             </objects>
             <point key="canvasLocation" x="709" y="129"/>
         </scene>
-        <!--Building List View Controller-->
+        <!--Building List-->
         <scene sceneID="cN8-uD-Xw3">
             <objects>
-                <tableViewController storyboardIdentifier="Building List" id="Bne-PF-7lo" customClass="BuildingListViewController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="Building List" id="Bne-PF-7lo" userLabel="Building List" customClass="BuildingListViewController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" delaysContentTouches="NO" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="IMy-is-gSU">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -147,6 +149,7 @@
                                                                 </label>
                                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NEh-JP-6pw">
                                                                     <rect key="frame" x="935" y="0.0" width="51" height="31"/>
+                                                                    <color key="onTintColor" name="Main"/>
                                                                     <connections>
                                                                         <action selector="clientModeSwitched" destination="Bne-PF-7lo" eventType="valueChanged" id="7Yu-Qq-NDp"/>
                                                                     </connections>
@@ -348,10 +351,10 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
             </objects>
             <point key="canvasLocation" x="-1649.4140625" y="-330.46875"/>
         </scene>
-        <!--Main View Controller-->
+        <!--Main-->
         <scene sceneID="Nki-YV-4Qg">
             <objects>
-                <splitViewController storyboardIdentifier="Main" id="H1p-Uh-vWS" customClass="MainViewController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
+                <splitViewController storyboardIdentifier="Main" id="H1p-Uh-vWS" userLabel="Main" customClass="MainViewController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <connections>
                         <segue destination="RMx-3f-FxP" kind="relationship" relationship="masterViewController" id="BlO-5A-QYV"/>
@@ -362,34 +365,51 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
             </objects>
             <point key="canvasLocation" x="-856" y="-330"/>
         </scene>
-        <!--Master-->
+        <!--Map List-->
         <scene sceneID="smW-Zh-WAh">
             <objects>
-                <tableViewController title="Master" clearsSelectionOnViewWillAppear="NO" id="7bK-jq-Zjz" customClass="MapListViewController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Master" clearsSelectionOnViewWillAppear="NO" id="7bK-jq-Zjz" userLabel="Map List" customClass="MapListViewController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="r7i-6Z-zg0">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Map Cell" textLabel="Arm-wq-HPj" style="IBUITableViewCellStyleDefault" id="WCw-Qf-5nD" customClass="MapCell" customModule="Issue_Manager" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="55.5" width="320" height="44"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Map Cell" rowHeight="80" id="WCw-Qf-5nD" customClass="MapCell" customModule="Issue_Manager" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="55.5" width="320" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WCw-Qf-5nD" id="37f-cq-3Eg">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="79.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" text="Grundrissname" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Arm-wq-HPj">
-                                            <rect key="frame" x="16" y="0.0" width="288" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </label>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="LgH-jF-dMP">
+                                            <rect key="frame" x="16" y="11" width="288" height="58"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" text="Grundrissname" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1BU-29-Vu6">
+                                                    <rect key="frame" x="0.0" y="0.0" width="120" height="29.5"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="x offene Pendenzen" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3fO-u1-NhG">
+                                                    <rect key="frame" x="0.0" y="37.5" width="152" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
+                                                    <color key="highlightedColor" white="1" alpha="0.5" colorSpace="calibratedWhite"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottomMargin" secondItem="LgH-jF-dMP" secondAttribute="bottom" id="Utp-rL-BqZ"/>
+                                        <constraint firstItem="LgH-jF-dMP" firstAttribute="top" secondItem="37f-cq-3Eg" secondAttribute="topMargin" id="dwx-ed-nVh"/>
+                                        <constraint firstItem="LgH-jF-dMP" firstAttribute="leading" secondItem="37f-cq-3Eg" secondAttribute="leadingMargin" id="wBu-OX-v51"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="LgH-jF-dMP" secondAttribute="trailing" id="xDd-OG-EWE"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
-                                    <outlet property="nameLabel" destination="Arm-wq-HPj" id="uU9-TI-98l"/>
+                                    <outlet property="nameLabel" destination="1BU-29-Vu6" id="FJL-2T-Sz3"/>
+                                    <outlet property="openIssuesLabel" destination="3fO-u1-NhG" id="wTr-7j-TCL"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -399,7 +419,7 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                             <outlet property="delegate" destination="7bK-jq-Zjz" id="RA6-mI-bju"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Master" largeTitleDisplayMode="always" id="Zdf-7t-Un8">
+                    <navigationItem key="navigationItem" title="Gebäudename" largeTitleDisplayMode="always" id="Zdf-7t-Un8">
                         <barButtonItem key="leftBarButtonItem" title="Gebäude" id="hYA-WQ-Bwf">
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="building_list.title"/>
@@ -408,17 +428,25 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                 <segue destination="856-u4-AOv" kind="unwind" unwindAction="backToBuildingList:" id="C7o-oG-doc"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Grundriss" style="done" id="p3h-tP-TLE">
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="map_list.show_map"/>
+                            </userDefinedRuntimeAttributes>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="showMapButton" destination="p3h-tP-TLE" id="tUb-RV-34U"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rux-fX-hf1" sceneMemberID="firstResponder"/>
                 <exit id="856-u4-AOv" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="709" y="-630"/>
         </scene>
-        <!--Detail Navigation Controller-->
+        <!--Detail Navigation-->
         <scene sceneID="r7l-gg-dq7">
             <objects>
-                <navigationController id="vC3-pB-5Vb" customClass="DetailNavigationController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="vC3-pB-5Vb" userLabel="Detail Navigation" customClass="DetailNavigationController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="DjV-YW-jjY">
                         <rect key="frame" x="0.0" y="20" width="703.5" height="50"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -431,10 +459,10 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
             </objects>
             <point key="canvasLocation" x="-45" y="129"/>
         </scene>
-        <!--Login View Controller-->
+        <!--Login-->
         <scene sceneID="TjX-Lc-tIw">
             <objects>
-                <viewController id="Unm-RN-TtL" customClass="LoginViewController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Unm-RN-TtL" userLabel="Login" customClass="LoginViewController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WiD-sL-iKS">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -454,7 +482,7 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="mangel.io" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rKk-Qt-Y0J">
                                                                 <rect key="frame" x="0.0" y="0.0" width="280" height="57.5"/>
                                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="48"/>
-                                                                <color key="textColor" red="0.20392156859999999" green="0.20392156859999999" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <color key="textColor" name="Main"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="GUV-MR-X1N" userLabel="Fields">
@@ -531,7 +559,7 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                                                             </label>
                                                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c1n-9j-SyJ">
                                                                                 <rect key="frame" x="199" y="0.0" width="51" height="31"/>
-                                                                                <color key="onTintColor" red="0.20392156859999999" green="0.20392156859999999" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                <color key="onTintColor" name="Main"/>
                                                                                 <connections>
                                                                                     <action selector="stayLoggedInSwitched" destination="Unm-RN-TtL" eventType="valueChanged" id="uFD-Sr-ktY"/>
                                                                                 </connections>
@@ -583,7 +611,7 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                 </connections>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" red="0.20392156859999999" green="0.20392156859999999" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" name="Main"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="bDK-pb-GOQ" firstAttribute="top" secondItem="zsI-rA-z83" secondAttribute="top" id="33m-xb-E1T"/>
@@ -615,5 +643,10 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
             <point key="canvasLocation" x="-2440" y="-330"/>
         </scene>
     </scenes>
-    <color key="tintColor" red="0.20392156862745098" green="0.20392156862745098" blue="0.46666666666666667" alpha="1" colorSpace="calibratedRGB"/>
+    <resources>
+        <namedColor name="Main">
+            <color red="0.20399999618530273" green="0.20399999618530273" blue="0.46700000762939453" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+    <color key="tintColor" name="Main"/>
 </document>
