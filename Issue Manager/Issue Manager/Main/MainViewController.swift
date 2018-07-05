@@ -5,6 +5,12 @@ import UIKit
 class MainViewController: UISplitViewController, LoadedViewController {
 	static let storyboardID = "Main"
 	
+	override var viewControllers: [UIViewController] {
+		didSet {
+			detailNav?.delegate = self
+		}
+	}
+	
 	var building: Building! {
 		didSet {
 			let mapList = masterNav!.topViewController as! MapListViewController
@@ -22,7 +28,17 @@ class MainViewController: UISplitViewController, LoadedViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		
+		assert(viewControllers.count == 2)
 		preferredDisplayMode = .allVisible
+		detailNav?.delegate = self
+	}
+}
+
+// only for detail navigation controller, to automatically set the display mode button item
+extension MainViewController: UINavigationControllerDelegate {
+	func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+		viewController.navigationItem.leftBarButtonItem = displayModeButtonItem
 	}
 }
 

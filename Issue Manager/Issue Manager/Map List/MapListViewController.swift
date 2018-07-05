@@ -33,9 +33,9 @@ class MapListViewController: UITableViewController {
 	}
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeue(MapCell.self, for: indexPath)!
-		cell.map = maps[indexPath.row]
-		return cell
+		return tableView.dequeue(MapCell.self, for: indexPath)! <- {
+			$0.map = maps[indexPath.row]
+		}
 	}
 	
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -44,18 +44,17 @@ class MapListViewController: UITableViewController {
 		let mainController = splitViewController as! MainViewController
 		
 		let mapController: MapViewController
-		if traitCollection.horizontalSizeClass == .regular {
+		if mainController.traitCollection.horizontalSizeClass == .regular {
 			mapController = mainController.detailNav!.topViewController as! MapViewController
 			// TODO reevaluate
 			// mapController isn't in splitViewController yet, so we have to do it from here
-			mapController.navigationItem.leftBarButtonItem = splitViewController!.displayModeButtonItem
+			//mapController.navigationItem.leftBarButtonItem = splitViewController!.displayModeButtonItem
 		} else {
 			mapController = storyboard!.instantiate(MapViewController.self)!
 			mapController.loadViewIfNeeded()
+			show(mapController, sender: self)
 		}
 		mapController.map = map
-		
-		showDetailViewController(mapController, sender: self)
 	}
 }
 

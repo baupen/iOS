@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		950283A820E70C46001A5083 /* LocalizedStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950283A720E70C46001A5083 /* LocalizedStrings.swift */; };
+		9506A96320EDAAAD00AF6AB7 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9506A96220EDAAAD00AF6AB7 /* Colors.swift */; };
 		9511A0FF20DD379800101ADE /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9511A0FE20DD379800101ADE /* Codable.swift */; };
 		9511A10220DD3A2700101ADE /* Geometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9511A10120DD3A2700101ADE /* Geometry.swift */; };
 		9511A10420DD3A7100101ADE /* Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9511A10320DD3A7100101ADE /* Loading.swift */; };
@@ -191,6 +192,7 @@
 /* Begin PBXFileReference section */
 		950283A520E70383001A5083 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		950283A720E70C46001A5083 /* LocalizedStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizedStrings.swift; sourceTree = "<group>"; };
+		9506A96220EDAAAD00AF6AB7 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		9511A0FE20DD379800101ADE /* Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Codable.swift; sourceTree = "<group>"; };
 		9511A10120DD3A2700101ADE /* Geometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geometry.swift; sourceTree = "<group>"; };
 		9511A10320DD3A7100101ADE /* Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loading.swift; sourceTree = "<group>"; };
@@ -296,6 +298,7 @@
 			children = (
 				9511A10120DD3A2700101ADE /* Geometry.swift */,
 				95D2C2AD20E5C3E700D887C8 /* Localization.swift */,
+				9506A96220EDAAAD00AF6AB7 /* Colors.swift */,
 				9584F24B20E936BD00A8C884 /* UserDefaults.swift */,
 				9511A10320DD3A7100101ADE /* Loading.swift */,
 				9583C2D220DC74BA00452695 /* UIHelpers.swift */,
@@ -736,6 +739,7 @@
 				9511A13A20DD559500101ADE /* Traversable.swift in Sources */,
 				9511A13820DD559500101ADE /* BasicPromise.swift in Sources */,
 				9511A13E20DD559500101ADE /* Future.swift in Sources */,
+				9506A96320EDAAAD00AF6AB7 /* Colors.swift in Sources */,
 				9511A13B20DD559500101ADE /* Result.swift in Sources */,
 				9511A12220DD509600101ADE /* JSend.swift in Sources */,
 				95AB959320E572C900A0AE8D /* LoginViewController.swift in Sources */,

@@ -15,6 +15,8 @@ class MapCell: UITableViewCell, LoadedTableCell {
 	
 	override func awakeFromNib() {
 		super.awakeFromNib()
+		
+		selectedBackgroundView = UIView() <- { $0.backgroundColor = .mainColor }
 		reload()
 	}
 	
