@@ -25,19 +25,19 @@ class LoginViewController: UIViewController {
 		passwordField.text = ""
 	}
 	
+	/// - note: only ever change this from the main queue
 	var isLoggingIn = false {
 		didSet {
 			let isLoggingIn = self.isLoggingIn // capture
-			DispatchQueue.main.async {
-				self.usernameField.isEnabled = !isLoggingIn
-				self.passwordField.isEnabled = !isLoggingIn
-				self.textFieldView.alpha = isLoggingIn ? 0.5 : 1
-				
-				if isLoggingIn {
-					self.activityIndicator.startAnimating()
-				} else {
-					self.activityIndicator.stopAnimating()
-				}
+			
+			self.usernameField.isEnabled = !isLoggingIn
+			self.passwordField.isEnabled = !isLoggingIn
+			self.textFieldView.alpha = isLoggingIn ? 0.5 : 1
+			
+			if isLoggingIn {
+				self.activityIndicator.startAnimating()
+			} else {
+				self.activityIndicator.stopAnimating()
 			}
 		}
 	}
@@ -77,46 +77,43 @@ class LoginViewController: UIViewController {
 		let password = passwordField.text!
 		
 		isLoggingIn = true
-		let result = Client.shared.logIn(as: username, password: password)
+		let result = Client.shared.logIn(as: username, password: password).on(.main)
 		result.always {
 			self.isLoggingIn = false
 		}
 		
 		result.then {
 			print("Logged in as", Client.shared.user!.authenticationToken)
-			DispatchQueue.main.async {
-				self.showBuildingList()
-			}
+			self.showBuildingList()
 		}
 		
 		result.catch { error in
-			DispatchQueue.main.async {
-				print("Login Failed!")
+			print("Login Failed!")
+			print(error.localizedDescription)
+			print(error)
+			
+			switch error as! RequestError {
+			case RequestError.apiError(let meta) where meta.error == .unknownUsername:
+				self.showUnknownUsernameAlert(username: username)
+			case RequestError.apiError(let meta) where meta.error == .wrongPassword:
+				self.showWrongPasswordAlert(username: username)
+			case RequestError.communicationError(let error): // likely connection failure
+				print("Request Error!", error)
 				print(error.localizedDescription)
 				print(error)
 				
-				switch error as! RequestError {
-				case RequestError.apiError(let meta) where meta.error == .unknownUsername:
-					self.showUnknownUsernameAlert(username: username)
-				case RequestError.apiError(let meta) where meta.error == .wrongPassword:
-					self.showWrongPasswordAlert(username: username)
-				case RequestError.communicationError(let error): // likely connection failure
-					print("Request Error!", error)
-					print(error.localizedDescription)
-					print(error)
-					
-					self.attemptLocalLogin()
-				default:
-					self.showAlert(titled: Localization.Alert.LoginError.title,
-								   message: Localization.Alert.LoginError.message) {
-						self.attemptLocalLogin(showingAlerts: false)
-					}
+				self.attemptLocalLogin()
+			default:
+				self.showAlert(
+					titled: Localization.Alert.LoginError.title,
+					message: Localization.Alert.LoginError.message
+				) {
+					self.attemptLocalLogin(showingAlerts: false)
 				}
 			}
 		}
 	}
 	
-	/// - returns: whether or not 
 	func attemptLocalLogin(showingAlerts: Bool = true) {
 		let username = usernameField.text!
 		let password = passwordField.text!
