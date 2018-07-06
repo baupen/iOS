@@ -7,7 +7,6 @@ class MainViewController: UISplitViewController, LoadedViewController {
 	
 	override var viewControllers: [UIViewController] {
 		didSet {
-			detailNav?.delegate = self
 			let mapList = masterNav!.topViewController as! MapListViewController
 			mapList.updateShowMapButton()
 		}
@@ -16,7 +15,7 @@ class MainViewController: UISplitViewController, LoadedViewController {
 	var building: Building! {
 		didSet {
 			let mapList = masterNav!.topViewController as! MapListViewController
-			mapList.source = building
+			mapList.holder = building
 		}
 	}
 	
@@ -31,39 +30,32 @@ class MainViewController: UISplitViewController, LoadedViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		assert(viewControllers.count == 2)
 		preferredDisplayMode = .allVisible
-		detailNav?.delegate = self
-	}
-}
-
-// only for detail navigation controller, to automatically set the display mode button item
-extension MainViewController: UINavigationControllerDelegate {
-	func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-		viewController.navigationItem.leftBarButtonItem = displayModeButtonItem
 	}
 }
 
 class MasterNavigationController: UINavigationController {
 	override func separateSecondaryViewController(for splitViewController: UISplitViewController) -> UIViewController? {
-		if let detailNav = topViewController as? DetailNavigationController {
-			popViewController(animated: false)
-			return detailNav
-		} else if let mapController = topViewController as? MapViewController {
+		assert(!(topViewController is DetailNavigationController))
+		if let mapController = topViewController as? MapViewController {
 			popViewController(animated: false)
 			return DetailNavigationController(rootViewController: mapController)
 		} else {
-			return nil
+			return storyboard!.instantiate(DetailNavigationController.self)!
 		}
 	}
 	
 	override func collapseSecondaryViewController(_ secondaryViewController: UIViewController, for splitViewController: UISplitViewController) {
 		let detailNav = secondaryViewController as! DetailNavigationController
 		let mapController = detailNav.topViewController as! MapViewController
-		if mapController.map?.filename != nil {
-			pushViewController(mapController, animated: false)
+		if mapController.holder?.filename != nil {
+			// worth keeping around
+			pushViewController(mapController, animated: true)
+			mapController.didMove(toParentViewController: self) // apparently not called by pushViewController (i.e. only called once, with nil)
 		}
 	}
 }
 
-class DetailNavigationController: UINavigationController {}
+class DetailNavigationController: UINavigationController, LoadedViewController {
+	static let storyboardID = "Detail"
+}

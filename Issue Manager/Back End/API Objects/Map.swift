@@ -22,7 +22,7 @@ struct Map: FileContainer {
 	}
 	
 	func allIssues() -> [Issue] {
-		return recursiveChildren()
+		return (recursiveChildren() + [self])
 			.lazy
 			.flatMap { $0.issues }
 			.compactMap { Client.shared.storage.issues[$0] }

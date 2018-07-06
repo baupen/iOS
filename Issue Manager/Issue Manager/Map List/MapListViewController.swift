@@ -2,13 +2,22 @@
 
 import UIKit
 
-class MapListViewController: UITableViewController {
+class MapListViewController: UITableViewController, LoadedViewController {
+	static let storyboardID = "Map List"
+	
+	@IBOutlet var backToBuildingsButton: UIBarButtonItem!
 	@IBOutlet var showMapButton: UIBarButtonItem!
 	
-	var source: MapSource! {
+	@IBAction func showMap(_ sender: Any) {
+		showMapController(for: holder)
+	}
+	
+	var holder: MapHolder! {
 		didSet {
-			navigationItem.title = source.name
-			reload()
+			navigationItem.title = holder.name
+			updateShowMapButton()
+			
+			maps = holder.childMaps().sorted { $0.name < $1.name }
 		}
 	}
 	
@@ -19,22 +28,34 @@ class MapListViewController: UITableViewController {
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
-		clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
+		clearsSelectionOnViewWillAppear = clearsSelectionOnViewWillAppear || splitViewController!.isCollapsed
 		updateShowMapButton()
+		
+		let isRoot = holder is Building
+		navigationItem.leftBarButtonItem = isRoot ? backToBuildingsButton : nil
 		
 		super.viewWillAppear(animated)
 	}
 	
-	func reload() {
-		updateShowMapButton()
+	func updateShowMapButton() {
+		showMapButton.isEnabled = holder.filename != nil
 		
-		maps = source.childMaps().sorted { $0.name < $1.name }
+		if let splitViewController = splitViewController {
+			let isMapShown = splitViewController.viewControllers.count == 2
+			navigationItem.rightBarButtonItem = isMapShown ? nil : showMapButton
+		}
 	}
 	
-	func updateShowMapButton() {
-		showMapButton.isEnabled = source.filename != nil
-		let isMapShown = splitViewController!.viewControllers.count == 2
-		navigationItem.rightBarButtonItem = isMapShown ? nil : showMapButton
+	func showMapController(for holder: MapHolder) {
+		let mapController = storyboard!.instantiate(MapViewController.self)!
+		mapController.holder = holder
+		show(mapController, sender: self)
+	}
+	
+	func showListController(for holder: MapHolder) {
+		let listController = storyboard!.instantiate(MapListViewController.self)!
+		listController.holder = holder
+		show(listController, sender: self)
 	}
 	
 	// MARK: - Table View
@@ -58,25 +79,21 @@ class MapListViewController: UITableViewController {
 		
 		let mainController = splitViewController as! MainViewController
 		
-		let mapController: MapViewController
-		if mainController.traitCollection.horizontalSizeClass == .regular {
-			mapController = mainController.detailNav!.topViewController as! MapViewController
+		clearsSelectionOnViewWillAppear = !map.children.isEmpty
+		
+		if mainController.isCollapsed {
+			if map.children.isEmpty {
+				showMapController(for: map)
+			} else {
+				showListController(for: map)
+			}
 		} else {
-			mapController = storyboard!.instantiate(MapViewController.self)!
-			mapController.loadViewIfNeeded()
-			show(mapController, sender: self)
+			let mapController = mainController.detailNav!.topViewController as! MapViewController
+			mapController.holder = map
+			
+			if !map.children.isEmpty {
+				showListController(for: map)
+			}
 		}
-		mapController.map = map
 	}
 }
-
-protocol MapSource {
-	var name: String { get }
-	var filename: String? { get }
-	
-	func childMaps() -> [Map]
-	func allIssues() -> [Issue]
-}
-
-extension Building: MapSource {}
-extension Map: MapSource {}

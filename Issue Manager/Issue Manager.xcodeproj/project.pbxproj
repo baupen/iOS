@@ -89,6 +89,7 @@
 		95953B4C20DFFAED001ED1B7 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95953B4B20DFFAED001ED1B7 /* JSON.swift */; };
 		95A7B24D20E3FFE200A928D6 /* Backlog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A7B24C20E3FFE200A928D6 /* Backlog.swift */; };
 		95A7B24E20E3FFE200A928D6 /* Backlog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A7B24C20E3FFE200A928D6 /* Backlog.swift */; };
+		95AA606920EEFA700067A656 /* MapHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AA606820EEFA700067A656 /* MapHolder.swift */; };
 		95AB959320E572C900A0AE8D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AB959220E572C900A0AE8D /* LoginViewController.swift */; };
 		95B2735320DE7AD600D2BD44 /* Multipart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B2735220DE7AD600D2BD44 /* Multipart.swift */; };
 		95B9BA6620DEC7FA00261954 /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B9BA6520DEC7FA00261954 /* Requests.swift */; };
@@ -247,6 +248,7 @@
 		95953B2020DFCD90001ED1B7 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		95953B4B20DFFAED001ED1B7 /* JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
 		95A7B24C20E3FFE200A928D6 /* Backlog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Backlog.swift; sourceTree = "<group>"; };
+		95AA606820EEFA700067A656 /* MapHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapHolder.swift; sourceTree = "<group>"; };
 		95AB959220E572C900A0AE8D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		95B2735220DE7AD600D2BD44 /* Multipart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Multipart.swift; sourceTree = "<group>"; };
 		95B9BA6520DEC7FA00261954 /* Requests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requests.swift; sourceTree = "<group>"; };
@@ -316,6 +318,7 @@
 				9511A10720DD3BD100101ADE /* Craftsman.swift */,
 				9511A10920DD3BED00101ADE /* Map.swift */,
 				9511A10B20DD3C0500101ADE /* Issue.swift */,
+				95AA606820EEFA700067A656 /* MapHolder.swift */,
 			);
 			path = "API Objects";
 			sourceTree = "<group>";
@@ -745,6 +748,7 @@
 				9511A13E20DD559500101ADE /* Future.swift in Sources */,
 				9506A96320EDAAAD00AF6AB7 /* Colors.swift in Sources */,
 				9511A13B20DD559500101ADE /* Result.swift in Sources */,
+				95AA606920EEFA700067A656 /* MapHolder.swift in Sources */,
 				9511A12220DD509600101ADE /* JSend.swift in Sources */,
 				95AB959320E572C900A0AE8D /* LoginViewController.swift in Sources */,
 				957E16AA20E7D81B00F3DEA1 /* BuildingListViewController.swift in Sources */,

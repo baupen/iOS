@@ -20,7 +20,24 @@ class MapCell: UITableViewCell, LoadedTableCell {
 	override func awakeFromNib() {
 		super.awakeFromNib()
 		
+		// if i do this via `appearance()` the background disappears when going from highlighted to selected
+		selectedBackgroundView = UIView() <- {
+			$0.backgroundColor = .main
+		}
+		
 		reload()
+	}
+	
+	override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+		issueBadge.keepBackgroundColor {
+			super.setHighlighted(highlighted, animated: animated)
+		}
+	}
+	
+	override func setSelected(_ selected: Bool, animated: Bool) {
+		issueBadge.keepBackgroundColor {
+			super.setSelected(selected, animated: animated)
+		}
 	}
 	
 	func reload() {

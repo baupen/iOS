@@ -14,7 +14,7 @@ class IssueBadge: UIView {
 		$0.setContentCompressionResistancePriority(.required, for: .vertical)
 	}
 	
-	var source: MapSource! {
+	var source: MapHolder! {
 		didSet {
 			update()
 		}

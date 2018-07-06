@@ -109,6 +109,11 @@ internal enum L10n {
     }
   }
 
+  internal enum Map {
+    /// Grundriss
+    internal static let title = L10n.tr("Localizable", "map.title")
+  }
+
   internal enum MapList {
     /// Grundriss
     internal static let showMap = L10n.tr("Localizable", "map_list.show_map")

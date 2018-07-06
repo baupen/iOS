@@ -73,6 +73,8 @@
 // MARK: Login.stay
 // CONTEXT: Steht beim Schalter, durch den man eingeloggt bleibt, auch wenn die App neugestartet wird.
 "login.stay_logged_in" = "Eingeloggt Bleiben";
+// CONTEXT: Titel für die Grundrissansicht. (Wird angezeigt, wenn kein Grundriss ausgewählt ist.)
+"map.title" = "Grundriss";
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Map

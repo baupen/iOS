@@ -18,9 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 		// Override point for customization after application launch.
 		registerDefaults()
 		
-		UITableViewCell.appearance().selectedBackgroundView = UIView() <- {
-			$0.backgroundColor = .main
-		}
+		UIView.appearance().tintColor = .main
 		
 		return true
 	}
