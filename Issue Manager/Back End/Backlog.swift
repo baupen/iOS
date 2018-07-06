@@ -23,7 +23,6 @@ extension BacklogStorable where Self: Request {
 }
 
 let storableTypes: [BacklogStorable.Type] = [
-	IssueCreationRequest.self,
 	IssueUpdateRequest.self,
 	IssueDeletionRequest.self,
 	IssueActionRequest.self,

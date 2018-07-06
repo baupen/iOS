@@ -124,8 +124,8 @@ extension Client {
 	}
 	
 	private func updateEntries<T: APIObject>(in path: WritableKeyPath<Storage, [UUID: T]>,
-									 changing changedEntries: [T],
-									 removing removedIDs: [UUID]) {
+											 changing changedEntries: [T],
+											 removing removedIDs: [UUID]) {
 		for changed in changedEntries {
 			let previous = storage[keyPath: path][changed.id]
 			storage[keyPath: path][changed.id] = changed
@@ -178,14 +178,14 @@ extension Client {
 }
 
 // MARK: -
-// MARK: Issue Creation
+// MARK: Issue Creation/Update
 
-struct IssueCreationRequest: MultipartJSONRequest, BacklogStorable {
-	static let storageID = "issue creation"
+struct IssueUpdateRequest: MultipartJSONRequest, BacklogStorable {
+	static let storageID = "issue update"
 	
 	static let isIndependent = false
 	
-	var method: String { return "issue/create" }
+	let method: String
 	
 	let authenticationToken: String
 	let issue: Issue
@@ -207,7 +207,8 @@ extension Client {
 	func issueCreated(_ issue: Issue) {
 		let result = getUser()
 			.map { user in
-				IssueCreationRequest(
+				IssueUpdateRequest(
+					method: "issue/create",
 					authenticationToken: user.authenticationToken,
 					issue: issue,
 					fileURL: issue.filename.map(Issue.localURL)
@@ -218,40 +219,15 @@ extension Client {
 	}
 }
 
-// MARK: -
-// MARK: Issue Update
-
-struct IssueUpdateRequest: MultipartJSONRequest, BacklogStorable {
-	static let storageID = "issue update"
-	
-	static let isIndependent = false
-	
-	var method: String { return "issue/update" }
-	
-	let authenticationToken: String
-	let issue: Issue
-	let fileURL: URL?
-	
-	func applyToClient(_ response: ExpectedResponse) {
-		let previous = Client.shared.storage.issues[issue.id]
-		Client.shared.storage.issues[issue.id] = response.issue
-		response.issue.downloadFile(previous: previous)
-		Client.shared.saveShared()
-	}
-	
-	struct ExpectedResponse: Response {
-		let issue: Issue
-	}
-}
-
 extension Client {
 	func issueChanged(_ issue: Issue, hasChangedFilename: Bool) {
 		let result = getUser()
 			.map { user in
 				IssueUpdateRequest(
+					method: "issue/update",
 					authenticationToken: user.authenticationToken,
 					issue: issue,
-					fileURL: issue.filename.map(Issue.localURL)
+					fileURL: hasChangedFilename ? issue.filename.map(Issue.localURL) : nil
 				)
 			}.flatMap(Client.shared.send)
 		
