@@ -110,6 +110,12 @@ internal enum L10n {
   }
 
   internal enum Map {
+    /// Der Grundriss konnte nicht geladen werden!
+    internal static let couldNotLoad = L10n.tr("Localizable", "map.could_not_load")
+    /// Wähle links einen Bereich aus, um hier den zugehörigen Grundriss zu sehen.
+    internal static let noMapSelected = L10n.tr("Localizable", "map.no_map_selected")
+    /// Dieser Bereich hat keinen zugehörigen Grundriss.
+    internal static let noPdf = L10n.tr("Localizable", "map.no_pdf")
     /// Grundriss
     internal static let title = L10n.tr("Localizable", "map.title")
   }

@@ -31,31 +31,38 @@
         <!--Map-->
         <scene sceneID="yUG-lL-AsK">
             <objects>
-                <viewController storyboardIdentifier="Map" title="Detail" id="JEX-9P-axG" userLabel="Map" customClass="MapViewController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Map" title="Detail" automaticallyAdjustsScrollViewInsets="NO" id="JEX-9P-axG" userLabel="Map" customClass="MapViewController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="svH-Pt-448">
                         <rect key="frame" x="0.0" y="0.0" width="703.5" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Detail view content goes here" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="0XM-y9-sOw">
-                                <rect key="frame" x="20" y="374" width="663.5" height="20.5"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wähle links einen Bereich aus, um hier den zugehörigen Grundriss zu sehen." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Cf-dE-GqE" userLabel="Fallback Label">
+                                <rect key="frame" x="70.5" y="398.5" width="562.5" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g4F-zU-ri6" userLabel="PDF Container View">
+                                <rect key="frame" x="0.0" y="70" width="703.5" height="698"/>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="0XM-y9-sOw" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leading" constant="20" symbolic="YES" id="Tsc-yG-G1q"/>
-                            <constraint firstItem="0XM-y9-sOw" firstAttribute="centerY" secondItem="svH-Pt-448" secondAttribute="centerY" id="jWN-iV-94e"/>
-                            <constraint firstAttribute="trailing" secondItem="0XM-y9-sOw" secondAttribute="trailing" constant="20" symbolic="YES" id="tHV-ZD-HQj"/>
+                            <constraint firstItem="g4F-zU-ri6" firstAttribute="top" secondItem="VUw-jc-0yf" secondAttribute="top" id="bKe-LR-qsS"/>
+                            <constraint firstItem="9Cf-dE-GqE" firstAttribute="centerY" secondItem="VUw-jc-0yf" secondAttribute="centerY" id="dLi-md-ijV"/>
+                            <constraint firstItem="VUw-jc-0yf" firstAttribute="bottom" secondItem="g4F-zU-ri6" secondAttribute="bottom" id="h1b-2h-6Kx"/>
+                            <constraint firstItem="g4F-zU-ri6" firstAttribute="leading" secondItem="VUw-jc-0yf" secondAttribute="leading" id="k14-DP-nee"/>
+                            <constraint firstItem="9Cf-dE-GqE" firstAttribute="width" secondItem="VUw-jc-0yf" secondAttribute="width" multiplier="0.8" id="rfh-Rd-rb7"/>
+                            <constraint firstItem="VUw-jc-0yf" firstAttribute="trailing" secondItem="g4F-zU-ri6" secondAttribute="trailing" id="wQv-77-KwU"/>
+                            <constraint firstItem="9Cf-dE-GqE" firstAttribute="centerX" secondItem="VUw-jc-0yf" secondAttribute="centerX" id="zEK-Nr-tUp"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VUw-jc-0yf"/>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Detail" id="mOI-FS-AaM"/>
                     <connections>
-                        <outlet property="testLabel" destination="0XM-y9-sOw" id="hnM-D7-OjO"/>
+                        <outlet property="fallbackLabel" destination="9Cf-dE-GqE" id="uj7-dO-mcT"/>
+                        <outlet property="pdfContainerView" destination="g4F-zU-ri6" id="pRf-qb-AVn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FJe-Yq-33r" sceneMemberID="firstResponder"/>
