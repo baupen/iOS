@@ -91,7 +91,7 @@ class LoginViewController: UIViewController {
 			print("Login Failed!", error.localizedDescription)
 			dump(error)
 			
-			switch error as! RequestError {
+			switch error {
 			case RequestError.apiError(let meta) where meta.error == .unknownUsername:
 				self.showUnknownUsernameAlert(username: username)
 			case RequestError.apiError(let meta) where meta.error == .wrongPassword:
