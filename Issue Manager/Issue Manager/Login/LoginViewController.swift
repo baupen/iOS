@@ -88,20 +88,15 @@ class LoginViewController: UIViewController {
 		}
 		
 		result.catch { error in
-			print("Login Failed!")
-			print(error.localizedDescription)
-			print(error)
+			print("Login Failed!", error.localizedDescription)
+			dump(error)
 			
 			switch error as! RequestError {
 			case RequestError.apiError(let meta) where meta.error == .unknownUsername:
 				self.showUnknownUsernameAlert(username: username)
 			case RequestError.apiError(let meta) where meta.error == .wrongPassword:
 				self.showWrongPasswordAlert(username: username)
-			case RequestError.communicationError(let error): // likely connection failure
-				print("Request Error!", error)
-				print(error.localizedDescription)
-				print(error)
-				
+			case RequestError.communicationError: // likely connection failure
 				self.attemptLocalLogin()
 			default:
 				self.showAlert(
