@@ -7,7 +7,7 @@ protocol LoadedViewController where Self: UIViewController {
 }
 
 extension UIStoryboard {
-	func instantiate<Controller>(_ type: Controller.Type) -> Controller? where Controller: LoadedViewController {
+	func instantiate<Controller>(_ type: Controller.Type = Controller.self) -> Controller? where Controller: LoadedViewController {
 		return instantiateViewController(withIdentifier: Controller.storyboardID) as? Controller
 	}
 }

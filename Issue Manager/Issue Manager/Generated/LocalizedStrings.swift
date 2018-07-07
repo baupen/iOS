@@ -114,8 +114,10 @@ internal enum L10n {
     internal static let couldNotLoad = L10n.tr("Localizable", "map.could_not_load")
     /// Wähle links einen Bereich aus, um hier den zugehörigen Grundriss zu sehen.
     internal static let noMapSelected = L10n.tr("Localizable", "map.no_map_selected")
-    /// Dieser Bereich hat keinen zugehörigen Grundriss.
-    internal static let noPdf = L10n.tr("Localizable", "map.no_pdf")
+    /// Der Bereich "%@" hat keinen zugehörigen Grundriss.
+    internal static func noPdf(_ p1: String) -> String {
+      return L10n.tr("Localizable", "map.no_pdf", p1)
+    }
     /// Grundriss lädt…
     internal static let pdfLoading = L10n.tr("Localizable", "map.pdf_loading")
     /// Grundriss
@@ -131,6 +133,13 @@ internal enum L10n {
       internal static func openIssues(_ p1: String) -> String {
         return L10n.tr("Localizable", "map_list.map_summary.open_issues", p1)
       }
+    }
+
+    internal enum Section {
+      /// Untergeordnete Bereiche
+      internal static let childMaps = L10n.tr("Localizable", "map_list.section.child_maps")
+      /// Dieser Bereich
+      internal static let thisMap = L10n.tr("Localizable", "map_list.section.this_map")
     }
   }
 }

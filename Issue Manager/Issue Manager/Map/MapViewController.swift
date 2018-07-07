@@ -67,8 +67,8 @@ class MapViewController: UIViewController, LoadedViewController {
 			asyncLoadPDF(at: url)
 		} else {
 			pdfController = nil
-			if holder != nil {
-				fallbackLabel.text = Localization.noPdf
+			if let holder = holder {
+				fallbackLabel.text = Localization.noPdf(holder.name)
 			} else {
 				fallbackLabel.text = Localization.noMapSelected
 			}

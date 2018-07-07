@@ -93,7 +93,11 @@ class BuildingListViewController: UITableViewController, LoadedViewController {
 	}
 	
 	func updateClientModeAppearance() {
-		clientModeCell.backgroundColor = Client.shared.backgroundColor
+		let isInClientMode = Client.shared.isInClientMode
+		UIView.animate(withDuration: 0.1) {
+			self.clientModeCell.backgroundColor = isInClientMode ? .clientMode : nil
+		}
+		UINavigationBar.appearance().barTintColor = isInClientMode ? .clientMode : nil
 	}
 	
 	func showMapList(for building: Building, animated: Bool = true) {

@@ -5,52 +5,46 @@ import UIKit
 class MainViewController: UISplitViewController, LoadedViewController {
 	static let storyboardID = "Main"
 	
-	override var viewControllers: [UIViewController] {
-		didSet {
-			let mapList = masterNav!.topViewController as! MapListViewController
-			mapList.updateShowMapButton()
-		}
-	}
-	
 	var building: Building! {
 		didSet {
-			let mapList = masterNav!.topViewController as! MapListViewController
+			let mapList = masterNav.topViewController as! MapListViewController
 			mapList.holder = building
 		}
 	}
 	
-	var masterNav: MasterNavigationController? {
-		return viewControllers.first! as? MasterNavigationController
-	}
+	var masterNav: MasterNavigationController!
+	var detailNav: DetailNavigationController!
 	
-	var detailNav: DetailNavigationController? {
-		return viewControllers.last! as? DetailNavigationController
-	}
-	
-	override func viewDidLoad() {
-		super.viewDidLoad()
+	override func awakeFromNib() {
+		super.awakeFromNib()
 		
 		preferredDisplayMode = .allVisible
+		
+		masterNav = (viewControllers.first as! MasterNavigationController)
+		detailNav = (viewControllers.last as! DetailNavigationController)
 	}
 }
 
 class MasterNavigationController: UINavigationController {
 	override func separateSecondaryViewController(for splitViewController: UISplitViewController) -> UIViewController? {
 		assert(!(topViewController is DetailNavigationController))
-		if let mapController = topViewController as? MapViewController {
-			popViewController(animated: false)
-			return DetailNavigationController(rootViewController: mapController)
-		} else {
-			return storyboard!.instantiate(DetailNavigationController.self)!
-		}
+		let mainController = splitViewController as! MainViewController
+		let detailNav = mainController.detailNav!
+		
+		let mapController = topViewController as? MapViewController ?? storyboard!.instantiate()!
+		detailNav.pushViewController(mapController, animated: false) // auto-pops from previous
+		viewControllers = viewControllers // update
+		mapController.didMove(toParentViewController: detailNav)
+		return detailNav
 	}
 	
 	override func collapseSecondaryViewController(_ secondaryViewController: UIViewController, for splitViewController: UISplitViewController) {
 		let detailNav = secondaryViewController as! DetailNavigationController
-		let mapController = detailNav.topViewController as! MapViewController
+		let mapController = detailNav.mapController
+		
 		if mapController.holder?.filename != nil {
 			// worth keeping around
-			pushViewController(mapController, animated: true)
+			pushViewController(mapController, animated: true) // auto-pops from previous
 			mapController.didMove(toParentViewController: self) // apparently not called by pushViewController (i.e. only called once, with nil)
 		}
 	}
@@ -58,4 +52,8 @@ class MasterNavigationController: UINavigationController {
 
 class DetailNavigationController: UINavigationController, LoadedViewController {
 	static let storyboardID = "Detail"
+	
+	var mapController: MapViewController {
+		return topViewController as! MapViewController
+	}
 }

@@ -3,19 +3,15 @@
 import UIKit
 
 class MapListViewController: UITableViewController, LoadedViewController {
+	typealias Localization = L10n.MapList
+	
 	static let storyboardID = "Map List"
 	
 	@IBOutlet var backToBuildingsButton: UIBarButtonItem!
-	@IBOutlet var showMapButton: UIBarButtonItem!
-	
-	@IBAction func showMap(_ sender: Any) {
-		showMapController(for: holder)
-	}
 	
 	var holder: MapHolder! {
 		didSet {
 			navigationItem.title = holder.name
-			updateShowMapButton()
 			
 			maps = holder.childMaps().sorted { $0.name < $1.name }
 		}
@@ -27,33 +23,53 @@ class MapListViewController: UITableViewController, LoadedViewController {
 		}
 	}
 	
+	var mainController: MainViewController {
+		return splitViewController as! MainViewController
+	}
+	
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		
+		clearsSelectionOnViewWillAppear = false
+	}
+	
 	override func viewWillAppear(_ animated: Bool) {
-		clearsSelectionOnViewWillAppear = clearsSelectionOnViewWillAppear || splitViewController!.isCollapsed
-		updateShowMapButton()
+		if let selected = tableView.indexPathForSelectedRow {
+			if !mainController.isCollapsed {
+				// deselect map unless currently shown
+				let mapController = mainController.detailNav.mapController
+				let currentMap = mapController.holder
+				if currentMap?.id != map(for: selected).id {
+					tableView.deselectRow(at: selected, animated: true)
+				}
+			} else {
+				// compact; always deselect
+				tableView.deselectRow(at: selected, animated: true)
+			}
+		} else if !mainController.isCollapsed {
+			showOwnMap()
+		}
 		
-		let isRoot = holder is Building
-		navigationItem.leftBarButtonItem = isRoot ? backToBuildingsButton : nil
-		
-		showOwnMap()
+		navigationItem.leftBarButtonItem = holder is Building ? backToBuildingsButton : nil
 		
 		super.viewWillAppear(animated)
 	}
 	
 	func showOwnMap() {
 		// update shown map
-		let mainController = splitViewController as! MainViewController
-		if let detailNav = mainController.detailNav {
-			let mapController = detailNav.topViewController as! MapViewController
-			mapController.holder = holder
-		}
-	}
-	
-	func updateShowMapButton() {
-		showMapButton.isEnabled = holder.filename != nil
-		
-		if let splitViewController = splitViewController {
-			let isMapShown = splitViewController.viewControllers.count == 2
-			navigationItem.rightBarButtonItem = isMapShown ? nil : showMapButton
+		if !mainController.isCollapsed {
+			let mapController = mainController.detailNav.mapController
+			if holder is Map {
+				tableView.selectRow(at: [0, 0], animated: false, scrollPosition: .none)
+			} else if let selected = tableView.indexPathForSelectedRow {
+				tableView.deselectRow(at: selected, animated: true)
+			}
+			
+			if holder.id != mapController.holder?.id {
+				mapController.holder = holder
+			}
+		} else {
+			showMapController(for: holder)
 		}
 	}
 	
@@ -69,19 +85,39 @@ class MapListViewController: UITableViewController, LoadedViewController {
 		show(listController, sender: self)
 	}
 	
+	func map(for indexPath: IndexPath) -> Map {
+		if indexPath.section == 0, let map = holder as? Map {
+			return map
+		} else {
+			return maps[indexPath.row]
+		}
+	}
+	
 	// MARK: - Table View
 	
 	override func numberOfSections(in tableView: UITableView) -> Int {
-		return 1
+		return holder is Map ? 2 : 1
+	}
+	
+	override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+		if holder is Map {
+			return [Localization.Section.thisMap, Localization.Section.childMaps][section]
+		} else {
+			return Localization.Section.childMaps
+		}
 	}
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return maps.count
+		if holder is Map {
+			return [1, maps.count][section]
+		} else {
+			return maps.count
+		}
 	}
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		return tableView.dequeue(MapCell.self, for: indexPath)! <- {
-			$0.map = maps[indexPath.row]
+			$0.map = map(for: indexPath)
 		}
 	}
 	
@@ -95,28 +131,25 @@ class MapListViewController: UITableViewController, LoadedViewController {
 	}
 	
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		let map = maps[indexPath.row]
-		
-		clearsSelectionOnViewWillAppear = !map.children.isEmpty
-		
-		let mainController = splitViewController as! MainViewController
-		if mainController.isCollapsed {
-			if map.children.isEmpty {
-				showMapController(for: map)
-			} else {
-				showListController(for: map)
-			}
+		if indexPath.section == 0, holder is Map {
+			showOwnMap()
 		} else {
-			let mapController = mainController.detailNav!.topViewController as! MapViewController
-			mapController.holder = map
+			let map = maps[indexPath.row]
 			
-			if !map.children.isEmpty {
-				showListController(for: map)
+			if !mainController.isCollapsed {
+				let mapController = mainController.detailNav.mapController
+				mapController.holder = map
+				
+				if !map.children.isEmpty {
+					showListController(for: map)
+				}
+			} else {
+				if map.children.isEmpty {
+					showMapController(for: map)
+				} else {
+					showListController(for: map)
+				}
 			}
 		}
-	}
-	
-	override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-		print("deselected!")
 	}
 }

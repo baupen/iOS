@@ -461,18 +461,9 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                 <segue destination="856-u4-AOv" kind="unwind" unwindAction="backToBuildingList:" id="C7o-oG-doc"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Grundriss" style="done" id="p3h-tP-TLE">
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="map_list.show_map"/>
-                            </userDefinedRuntimeAttributes>
-                            <connections>
-                                <action selector="showMap:" destination="7bK-jq-Zjz" id="Tq8-TP-JoJ"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="backToBuildingsButton" destination="hYA-WQ-Bwf" id="XBL-MZ-bEA"/>
-                        <outlet property="showMapButton" destination="p3h-tP-TLE" id="tUb-RV-34U"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rux-fX-hf1" sceneMemberID="firstResponder"/>

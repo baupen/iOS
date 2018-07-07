@@ -83,8 +83,8 @@
 // MARK: Map.no
 // CONTEXT: Wird angezeigt, wenn kein Bereich ausgewählt ist.
 "map.no_map_selected" = "Wähle links einen Bereich aus, um hier den zugehörigen Grundriss zu sehen.";
-// CONTEXT: Wird angezeigt, wenn ein Bereich ausgewählt wurde, für den es keinen Grundriss/kein PDF gibt.
-"map.no_pdf" = "Dieser Bereich hat keinen zugehörigen Grundriss.";
+// CONTEXT: Wird angezeigt, wenn ein Bereich ausgewählt wurde, für den es keinen Grundriss/kein PDF gibt. %s wird durch den Namen des Bereichs ersetzt.
+"map.no_pdf" = "Der Bereich \"%@\" hat keinen zugehörigen Grundriss.";
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Map.pdf
@@ -97,5 +97,9 @@
 // MARK: Map
 // CONTEXT: Beschreibt für einen Grundriss, wieviele offene Pendenzen er (rekursiv) enthält; %s wird durch die Anzahl ersetzt.
 "map_list.map_summary.open_issues" = "%@ offene Pendenzen";
+// CONTEXT: Überschrift des Abschnitts in der Liste für die untergeordneten Bereiche
+"map_list.section.child_maps" = "Untergeordnete Bereiche";
+// CONTEXT: Überschrift des Abschnitts in der Liste für den entsprechenden Bereich
+"map_list.section.this_map" = "Dieser Bereich";
 // CONTEXT: Button um die Kartenansicht anzuzeigen (wenn sie gerade nicht sichtbar ist, aber angezeigt werden kann); sollte möglichst kurz sein.
 "map_list.show_map" = "Grundriss";

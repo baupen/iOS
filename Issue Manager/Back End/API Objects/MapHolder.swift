@@ -2,7 +2,7 @@
 
 import Foundation
 
-protocol MapHolder {
+protocol MapHolder: APIObject {
 	var name: String { get }
 	var filename: String? { get }
 	
