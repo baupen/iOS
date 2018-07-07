@@ -1,6 +1,6 @@
 
 <p align="center">
-	<img width=256px src="Images/icon/icon.png" /><br><br>
+	<img width=192px src="Images/icon/unspaced.png" /><br><br>
 	<a href="https://swift.org">
 		<img alt="Swift Version" src="https://img.shields.io/badge/swift-4.1-orange.svg" />
 	</a>
