@@ -4,7 +4,6 @@ import Foundation
 
 protocol MapHolder: APIObject {
 	var name: String { get }
-	var filename: String? { get }
 	
 	func childMaps() -> [Map]
 	func allIssues() -> [Issue]

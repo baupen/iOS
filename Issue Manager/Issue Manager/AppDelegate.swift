@@ -14,13 +14,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 		}
 	}
 	
-	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-		// Override point for customization after application launch.
+	func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]? = nil) -> Bool {
 		registerDefaults()
-		
 		UIView.appearance().tintColor = .main
 		
+		// disables state restoration animations
+		window!.isHidden = false
+		
 		return true
+	}
+	
+	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+		// Override point for customization after application launch.
+		return true
+	}
+	
+	func application(_ application: UIApplication, shouldSaveApplicationState coder: NSCoder) -> Bool {
+		return true
+	}
+	
+	func application(_ application: UIApplication, shouldRestoreApplicationState coder: NSCoder) -> Bool {
+		return defaults.stayLoggedIn && Client.shared.user != nil
 	}
 	
 	func applicationWillResignActive(_ application: UIApplication) {

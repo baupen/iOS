@@ -23,29 +23,60 @@ class MainViewController: UISplitViewController, LoadedViewController {
 		masterNav = (viewControllers.first as! MasterNavigationController)
 		detailNav = (viewControllers.last as! DetailNavigationController)
 	}
+	
+	override func encodeRestorableState(with coder: NSCoder) {
+		super.encodeRestorableState(with: coder)
+		
+		coder.encode(building.id, forKey: "buildingID")
+	}
+	
+	override func decodeRestorableState(with coder: NSCoder) {
+		super.decodeRestorableState(with: coder)
+		
+		// no way to gracefully fail from here; may as well crash if something goes wrong
+		let buildingID = coder.decodeObject(forKey: "buildingID") as! UUID
+		building = Client.shared.storage.buildings[buildingID]!
+	}
 }
 
 class MasterNavigationController: UINavigationController {
+	override var title: String? {
+		get { return topViewController!.navigationItem.title }
+		set {} // dummy
+	}
+	
 	override func separateSecondaryViewController(for splitViewController: UISplitViewController) -> UIViewController? {
 		assert(!(topViewController is DetailNavigationController))
 		let mainController = splitViewController as! MainViewController
 		let detailNav = mainController.detailNav!
 		
-		let mapController = topViewController as? MapViewController ?? storyboard!.instantiate()!
-		detailNav.pushViewController(mapController, animated: false) // auto-pops from previous
-		viewControllers = viewControllers // update
+		let mapController: MapViewController
+		if let topMap = topViewController as? MapViewController {
+			mapController = topMap
+			popViewController(animated: false)
+			mapController.didMove(toParentViewController: nil)
+		} else {
+			mapController = storyboard!.instantiate()!
+		}
+		
+		detailNav.pushViewController(mapController, animated: false)
 		mapController.didMove(toParentViewController: detailNav)
+		
 		return detailNav
 	}
 	
 	override func collapseSecondaryViewController(_ secondaryViewController: UIViewController, for splitViewController: UISplitViewController) {
 		let detailNav = secondaryViewController as! DetailNavigationController
-		let mapController = detailNav.mapController
 		
-		if mapController.holder?.filename != nil {
+		let mapController = detailNav.mapController
+		detailNav.viewControllers = []
+		mapController.didMove(toParentViewController: nil)
+		
+		if let map = mapController.holder as? Map, map.filename != nil {
 			// worth keeping around
-			pushViewController(mapController, animated: true) // auto-pops from previous
-			mapController.didMove(toParentViewController: self) // apparently not called by pushViewController (i.e. only called once, with nil)
+			
+			pushViewController(mapController, animated: true)
+			mapController.didMove(toParentViewController: self)
 		}
 	}
 }

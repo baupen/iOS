@@ -40,12 +40,25 @@ class MapViewController: UIViewController, LoadedViewController {
 		update()
 	}
 	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		updateBarButtonItem()
+	}
+	
+	// not called at all in initial instantiation for some reason (hence the additional call in viewWillAppear)
+	override func didMove(toParentViewController parent: UIViewController?) {
+		super.didMove(toParentViewController: parent)
+		
+		updateBarButtonItem()
+	}
+	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		// called in the beginning when the controller is embedded
 		pdfController = (segue.destination as! SimplePDFViewController)
 	}
 	
-	override func didMove(toParentViewController parent: UIViewController?) {
+	private func updateBarButtonItem() {
 		guard parent != nil else { return }
 		
 		if parent is MasterNavigationController {

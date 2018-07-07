@@ -59,13 +59,6 @@ class LoginViewController: UIViewController {
 		}
 		
 		stayLoggedInSwitch.isOn = defaults.stayLoggedIn
-		
-		if defaults.stayLoggedIn, Client.shared.user != nil {
-			// not right now but asap
-			DispatchQueue.main.async {
-				self.showBuildingList(animated: false)
-			}
-		}
 	}
 	
 	override var preferredStatusBarStyle: UIStatusBarStyle {
