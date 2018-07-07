@@ -101,5 +101,3 @@
 "map_list.section.child_maps" = "Untergeordnete Bereiche";
 // CONTEXT: Überschrift des Abschnitts in der Liste für den entsprechenden Bereich
 "map_list.section.this_map" = "Dieser Bereich";
-// CONTEXT: Button um die Kartenansicht anzuzeigen (wenn sie gerade nicht sichtbar ist, aber angezeigt werden kann); sollte möglichst kurz sein.
-"map_list.show_map" = "Grundriss";

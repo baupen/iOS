@@ -125,8 +125,6 @@ internal enum L10n {
   }
 
   internal enum MapList {
-    /// Grundriss
-    internal static let showMap = L10n.tr("Localizable", "map_list.show_map")
 
     internal enum MapSummary {
       /// %@ offene Pendenzen

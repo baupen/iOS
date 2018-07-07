@@ -60,10 +60,11 @@ class BuildingCell: UICollectionViewCell, LoadedCollectionCell {
 	func update() {
 		updateImage()
 		nameLabel.text = building.name
-		issueBadge.source = building
+		
+		issueBadge.holder = building
 		
 		DispatchQueue.global().async {
-			let issues = self.building.allIssues()
+			let issues = self.building.recursiveIssues()
 			let openIssues = issues.filter { !$0.isReviewed }
 			DispatchQueue.main.async {
 				self.totalIssuesLabel.text = Localization.totalIssues(String(issues.count))

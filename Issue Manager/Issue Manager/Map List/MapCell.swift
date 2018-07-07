@@ -7,13 +7,14 @@ class MapCell: UITableViewCell, LoadedTableCell {
 	
 	static let reuseID = "Map Cell"
 	
-	@IBOutlet weak var nameLabel: UILabel?
-	@IBOutlet var openIssuesLabel: UILabel?
+	@IBOutlet weak var nameLabel: UILabel!
+	@IBOutlet var openIssuesLabel: UILabel!
 	@IBOutlet var issueBadge: IssueBadge!
 	
-	var map: Map? {
+	var shouldUseRecursiveIssues = true
+	var map: Map! {
 		didSet {
-			reload()
+			update()
 		}
 	}
 	
@@ -24,8 +25,6 @@ class MapCell: UITableViewCell, LoadedTableCell {
 		selectedBackgroundView = UIView() <- {
 			$0.backgroundColor = .main
 		}
-		
-		reload()
 	}
 	
 	override func setHighlighted(_ highlighted: Bool, animated: Bool) {
@@ -40,11 +39,21 @@ class MapCell: UITableViewCell, LoadedTableCell {
 		}
 	}
 	
-	func reload() {
-		guard let map = map else { return }
-		nameLabel?.text = map.name
-		let openIssues = map.allIssues().lazy.filter { !$0.isReviewed }
-		openIssuesLabel?.text = Localization.openIssues(String(openIssues.count))
-		issueBadge.source = map
+	func update() {
+		nameLabel!.text = map.name
+		
+		let issues = shouldUseRecursiveIssues ? map.recursiveIssues() : map.allIssues()
+		let openIssueCount = BasicFuture(asyncOn: .global()) {
+			issues
+				.lazy
+				.filter { !$0.isReviewed }
+				.count
+		}
+		openIssueCount.on(.main).then { count in
+			self.openIssuesLabel?.text = Localization.openIssues(String(count))
+		}
+		
+		issueBadge.shouldUseRecursiveIssues = shouldUseRecursiveIssues
+		issueBadge.holder = map
 	}
 }

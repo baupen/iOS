@@ -117,6 +117,9 @@ class MapListViewController: UITableViewController, LoadedViewController {
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		return tableView.dequeue(MapCell.self, for: indexPath)! <- {
+			if indexPath.section == 0, holder is Map {
+				$0.shouldUseRecursiveIssues = false
+			}
 			$0.map = map(for: indexPath)
 		}
 	}

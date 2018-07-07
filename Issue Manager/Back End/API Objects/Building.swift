@@ -2,7 +2,7 @@
 
 import Foundation
 
-struct Building: FileContainer {
+struct Building: MapHolder, FileContainer {
 	var meta: ObjectMeta
 	var name: String
 	var address: Address
@@ -14,12 +14,10 @@ struct Building: FileContainer {
 	static let downloadRequestPath = \FileDownloadRequest.building
 	var filename: String? { return imageFilename }
 	
-	func childMaps() -> [Map] {
-		return maps.compactMap { Client.shared.storage.maps[$0] }
-	}
+	var children: [UUID] { return maps }
 	
-	func allIssues() -> [Issue] {
-		return childMaps().flatMap { $0.allIssues() }
+	func recursiveChildren() -> [Map] {
+		return childMaps().flatMap { $0.recursiveChildren() }
 	}
 	
 	struct Address: Codable {

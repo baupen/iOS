@@ -2,7 +2,7 @@
 
 import Foundation
 
-struct Map: FileContainer {
+struct Map: MapHolder, FileContainer {
 	var meta: ObjectMeta
 	var children: [UUID]
 	var issues: [UUID]
@@ -12,19 +12,11 @@ struct Map: FileContainer {
 	static let pathPrefix = "map"
 	static let downloadRequestPath = \FileDownloadRequest.map
 	
-	func childMaps() -> [Map] {
-		return children.compactMap { Client.shared.storage.maps[$0] }
-	}
-	
 	func recursiveChildren() -> [Map] {
-		let children = childMaps()
-		return children + children.flatMap { $0.childMaps() }
+		return [self] + childMaps().flatMap { $0.recursiveChildren() }
 	}
 	
-	func allIssues() -> [Issue] {
-		return (recursiveChildren() + [self])
-			.lazy
-			.flatMap { $0.issues }
-			.compactMap { Client.shared.storage.issues[$0] }
+	func allIssues() -> AnyCollection<Issue> {
+		return AnyCollection(issues.lazy.compactMap { Client.shared.storage.issues[$0] })
 	}
 }

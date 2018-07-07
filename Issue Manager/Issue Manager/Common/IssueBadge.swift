@@ -14,7 +14,8 @@ class IssueBadge: UIView {
 		$0.setContentCompressionResistancePriority(.required, for: .vertical)
 	}
 	
-	var source: MapHolder! {
+	var shouldUseRecursiveIssues = true
+	var holder: MapHolder! {
 		didSet {
 			update()
 		}
@@ -45,20 +46,21 @@ class IssueBadge: UIView {
 	}
 	
 	func update() {
-		DispatchQueue.global().async {
-			let issues = self.source.allIssues()
-			let count = issues
+		let issues = shouldUseRecursiveIssues ? holder.recursiveIssues() : (holder as! Map).allIssues()
+		let issueCount = BasicFuture(asyncOn: .global()) {
+			issues
 				.lazy
 				.filter { $0.hasResponse && !$0.isReviewed }
 				.count
-			DispatchQueue.main.async {
-				if count == 0 {
-					self.isHidden = true
-				} else {
-					self.isHidden = false
-					self.label.text = String(count)
-					self.setNeedsLayout()
-				}
+		}
+		
+		issueCount.on(.main).then { count in
+			if count == 0 {
+				self.isHidden = true
+			} else {
+				self.isHidden = false
+				self.label.text = String(count)
+				self.setNeedsLayout()
 			}
 		}
 	}
