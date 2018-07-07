@@ -116,6 +116,8 @@ internal enum L10n {
     internal static let noMapSelected = L10n.tr("Localizable", "map.no_map_selected")
     /// Dieser Bereich hat keinen zugehörigen Grundriss.
     internal static let noPdf = L10n.tr("Localizable", "map.no_pdf")
+    /// Grundriss lädt…
+    internal static let pdfLoading = L10n.tr("Localizable", "map.pdf_loading")
     /// Grundriss
     internal static let title = L10n.tr("Localizable", "map.title")
   }

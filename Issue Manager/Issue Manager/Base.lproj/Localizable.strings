@@ -85,6 +85,11 @@
 "map.no_map_selected" = "Wähle links einen Bereich aus, um hier den zugehörigen Grundriss zu sehen.";
 // CONTEXT: Wird angezeigt, wenn ein Bereich ausgewählt wurde, für den es keinen Grundriss/kein PDF gibt.
 "map.no_pdf" = "Dieser Bereich hat keinen zugehörigen Grundriss.";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Map.pdf
+// CONTEXT: Wird angezeigt, während der Grundriss geladen wird.
+"map.pdf_loading" = "Grundriss lädt…";
 // CONTEXT: Titel für die Grundrissansicht. (Wird angezeigt, wenn kein Grundriss ausgewählt ist.)
 "map.title" = "Grundriss";
 

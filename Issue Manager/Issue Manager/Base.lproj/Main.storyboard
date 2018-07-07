@@ -36,6 +36,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="703.5" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="elz-u4-mxA">
+                                <rect key="frame" x="342" y="370.5" width="20" height="20"/>
+                            </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wähle links einen Bereich aus, um hier den zugehörigen Grundriss zu sehen." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Cf-dE-GqE" userLabel="Fallback Label">
                                 <rect key="frame" x="70.5" y="398.5" width="562.5" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -46,8 +49,10 @@
                                 <rect key="frame" x="0.0" y="70" width="703.5" height="698"/>
                             </containerView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="9Cf-dE-GqE" firstAttribute="top" secondItem="elz-u4-mxA" secondAttribute="bottom" constant="8" id="4b1-zA-RHd"/>
+                            <constraint firstItem="elz-u4-mxA" firstAttribute="centerX" secondItem="VUw-jc-0yf" secondAttribute="centerX" id="9Hx-o9-olH"/>
                             <constraint firstItem="g4F-zU-ri6" firstAttribute="top" secondItem="VUw-jc-0yf" secondAttribute="top" id="bKe-LR-qsS"/>
                             <constraint firstItem="9Cf-dE-GqE" firstAttribute="centerY" secondItem="VUw-jc-0yf" secondAttribute="centerY" id="dLi-md-ijV"/>
                             <constraint firstItem="VUw-jc-0yf" firstAttribute="bottom" secondItem="g4F-zU-ri6" secondAttribute="bottom" id="h1b-2h-6Kx"/>
@@ -61,6 +66,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Detail" id="mOI-FS-AaM"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="elz-u4-mxA" id="Paa-GH-0Rl"/>
                         <outlet property="fallbackLabel" destination="9Cf-dE-GqE" id="uj7-dO-mcT"/>
                         <outlet property="pdfContainerView" destination="g4F-zU-ri6" id="pRf-qb-AVn"/>
                     </connections>

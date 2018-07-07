@@ -34,7 +34,18 @@ class MapListViewController: UITableViewController, LoadedViewController {
 		let isRoot = holder is Building
 		navigationItem.leftBarButtonItem = isRoot ? backToBuildingsButton : nil
 		
+		showOwnMap()
+		
 		super.viewWillAppear(animated)
+	}
+	
+	func showOwnMap() {
+		// update shown map
+		let mainController = splitViewController as! MainViewController
+		if let detailNav = mainController.detailNav {
+			let mapController = detailNav.topViewController as! MapViewController
+			mapController.holder = holder
+		}
 	}
 	
 	func updateShowMapButton() {
@@ -74,13 +85,21 @@ class MapListViewController: UITableViewController, LoadedViewController {
 		}
 	}
 	
+	override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+		if indexPath == tableView.indexPathForSelectedRow {
+			// already selected
+			return nil
+		} else {
+			return indexPath
+		}
+	}
+	
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		let map = maps[indexPath.row]
 		
-		let mainController = splitViewController as! MainViewController
-		
 		clearsSelectionOnViewWillAppear = !map.children.isEmpty
 		
+		let mainController = splitViewController as! MainViewController
 		if mainController.isCollapsed {
 			if map.children.isEmpty {
 				showMapController(for: map)
@@ -95,5 +114,9 @@ class MapListViewController: UITableViewController, LoadedViewController {
 				showListController(for: map)
 			}
 		}
+	}
+	
+	override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+		print("deselected!")
 	}
 }

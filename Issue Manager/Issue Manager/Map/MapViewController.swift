@@ -10,6 +10,7 @@ class MapViewController: UIViewController, LoadedViewController {
 	
 	@IBOutlet var fallbackLabel: UILabel!
 	@IBOutlet var pdfContainerView: UIView!
+	@IBOutlet var activityIndicator: UIActivityIndicatorView!
 	
 	var pdfController: SimplePDFViewController? {
 		didSet {
@@ -62,19 +63,8 @@ class MapViewController: UIViewController, LoadedViewController {
 		navigationItem.title = holder?.name ?? Localization.title
 		
 		if let map = holder as? Map, let filename = map.filename {
-			do {
-				let url = Map.cacheURL(filename: filename)
-				let document = try PDFDocument(at: url)
-				let page = try document.page(0)
-				pdfController = SimplePDFViewController() <- {
-					$0.page = page
-				}
-				print("PDF loaded!")
-			} catch {
-				print("Error while loading PDF!", error.localizedDescription)
-				dump(error)
-				fallbackLabel.text = Localization.couldNotLoad
-			}
+			let url = Map.cacheURL(filename: filename)
+			asyncLoadPDF(at: url)
 		} else {
 			pdfController = nil
 			if holder != nil {
@@ -82,6 +72,29 @@ class MapViewController: UIViewController, LoadedViewController {
 			} else {
 				fallbackLabel.text = Localization.noMapSelected
 			}
+		}
+	}
+	
+	func asyncLoadPDF(at url: URL) {
+		let page = Future
+			.init(asyncOn: .global()) { try PDFDocument(at: url).page(0) }
+			.on(.main)
+		
+		pdfController = nil
+		fallbackLabel.text = Localization.pdfLoading
+		activityIndicator.startAnimating()
+		page.always(activityIndicator.stopAnimating)
+		
+		page.then { page in
+			self.pdfController = SimplePDFViewController() <- {
+				$0.page = page
+			}
+		}
+		
+		page.catch { error in
+			print("Error while loading PDF!", error.localizedDescription)
+			dump(error)
+			self.fallbackLabel.text = Localization.couldNotLoad
 		}
 	}
 }
