@@ -58,7 +58,7 @@
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rHo-jf-rQe">
-                                                    <rect key="frame" x="0.0" y="0.0" width="703.5" height="256"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="703" height="256"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="256" id="tbp-3z-9r2"/>
                                                     </constraints>
@@ -745,17 +745,17 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
             <objects>
                 <viewController id="XdX-XP-UgZ" customClass="IssueListViewController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" opaque="NO" contentMode="scaleToFill" id="eaQ-Dp-CWK">
-                        <rect key="frame" x="0.0" y="0.0" width="703.5" height="256"/>
+                        <rect key="frame" x="0.0" y="0.0" width="703" height="256"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7Ad-BC-5Kd">
-                                <rect key="frame" x="0.0" y="0.0" width="703.5" height="256"/>
+                                <rect key="frame" x="0.0" y="0.0" width="703" height="256"/>
                                 <subviews>
                                     <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8RX-4M-Ilf">
-                                        <rect key="frame" x="0.0" y="0.0" width="703.5" height="64"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="703" height="64"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZbN-Ox-zZ9" userLabel="Indicator">
-                                                <rect key="frame" x="334" y="4" width="36" height="5"/>
+                                                <rect key="frame" x="333.5" y="4" width="36" height="5"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.25" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="5" id="9X6-ow-dzM"/>
@@ -779,14 +779,18 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                             <constraint firstItem="5mB-PJ-gr9" firstAttribute="leading" secondItem="8RX-4M-Ilf" secondAttribute="leadingMargin" constant="8" id="QAy-ti-Chr"/>
                                             <constraint firstItem="5mB-PJ-gr9" firstAttribute="top" secondItem="8RX-4M-Ilf" secondAttribute="topMargin" id="SOX-3L-Yzk"/>
                                             <constraint firstAttribute="height" constant="64" id="gMh-yw-Rp2"/>
+                                            <constraint firstItem="apj-CG-thG" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="5mB-PJ-gr9" secondAttribute="trailing" constant="8" id="j1o-W4-ChV"/>
                                             <constraint firstAttribute="bottomMargin" secondItem="5mB-PJ-gr9" secondAttribute="bottom" id="kEJ-tC-MyF"/>
                                             <constraint firstItem="ZbN-Ox-zZ9" firstAttribute="centerX" secondItem="8RX-4M-Ilf" secondAttribute="centerX" id="nnP-LX-ioa"/>
                                         </constraints>
                                         <viewLayoutGuide key="safeArea" id="apj-CG-thG"/>
                                     </view>
                                     <tableView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eSQ-Ii-ycc">
-                                        <rect key="frame" x="0.0" y="64" width="703.5" height="192"/>
+                                        <rect key="frame" x="0.0" y="64" width="703" height="192"/>
                                         <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="XdX-XP-UgZ" id="XRv-j3-QBy"/>
+                                        </connections>
                                     </tableView>
                                 </subviews>
                             </stackView>
@@ -797,8 +801,10 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                             <constraint firstItem="7Ad-BC-5Kd" firstAttribute="leading" secondItem="eaQ-Dp-CWK" secondAttribute="leading" id="kS3-Sf-uut"/>
                             <constraint firstItem="7Ad-BC-5Kd" firstAttribute="top" secondItem="eaQ-Dp-CWK" secondAttribute="top" id="kVz-vr-GUm"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="6P1-UZ-1aU"/>
                     </view>
                     <connections>
+                        <outlet property="issueTableView" destination="eSQ-Ii-ycc" id="BBf-ez-6TU"/>
                         <outlet property="summaryLabel" destination="5mB-PJ-gr9" id="l74-fz-SFv"/>
                     </connections>
                 </viewController>

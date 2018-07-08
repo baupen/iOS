@@ -72,6 +72,7 @@ class MapViewController: UIViewController, LoadedViewController {
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		// called in the beginning when the list controller is embedded
 		issueListController = (segue.destination as! IssueListViewController)
+		issueListController.pullableView = pullableView
 	}
 	
 	private func updateBarButtonItem() {
