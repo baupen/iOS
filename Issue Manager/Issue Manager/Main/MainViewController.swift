@@ -50,16 +50,11 @@ class MasterNavigationController: UINavigationController {
 		let mainController = splitViewController as! MainViewController
 		let detailNav = mainController.detailNav!
 		
-		let mapController: MapViewController
-		if let topMap = topViewController as? MapViewController {
-			mapController = topMap
-			popViewController(animated: false)
-			mapController.didMove(toParentViewController: nil)
-		} else {
-			mapController = storyboard!.instantiate()!
-		}
+		let mapController = topViewController as? MapViewController
+			?? storyboard!.instantiate()!
 		
-		detailNav.pushViewController(mapController, animated: false)
+		detailNav.pushViewController(mapController, animated: false) // auto-pops from self
+		viewControllers = viewControllers // update own controllers in case top was popped off
 		mapController.didMove(toParentViewController: detailNav)
 		
 		return detailNav
@@ -69,7 +64,7 @@ class MasterNavigationController: UINavigationController {
 		let detailNav = secondaryViewController as! DetailNavigationController
 		
 		let mapController = detailNav.mapController
-		detailNav.viewControllers = []
+		detailNav.viewControllers = [] // can't pop root view controller explicitly
 		mapController.didMove(toParentViewController: nil)
 		
 		if let map = mapController.holder as? Map, map.filename != nil {

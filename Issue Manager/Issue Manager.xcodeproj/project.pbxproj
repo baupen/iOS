@@ -37,6 +37,8 @@
 		9529A63D20EECF8600C7E0A0 /* IssueBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9529A63C20EECF8600C7E0A0 /* IssueBadge.swift */; };
 		952CB48820E830A300E6B664 /* BuildingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952CB48720E830A300E6B664 /* BuildingCell.swift */; };
 		952CB48C20E8429D00E6B664 /* BuildingListLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952CB48B20E8429D00E6B664 /* BuildingListLayout.swift */; };
+		9553707020F18C10005D81C8 /* PullToExpand.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9553706720F18BE1005D81C8 /* PullToExpand.framework */; };
+		9553707120F18C10005D81C8 /* PullToExpand.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9553706720F18BE1005D81C8 /* PullToExpand.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9554234F20DC781E009CCCE0 /* NetworkObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9554234E20DC781E009CCCE0 /* NetworkObjects.swift */; };
 		9554235120DC7921009CCCE0 /* Hashing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9554235020DC7921009CCCE0 /* Hashing.swift */; };
 		957E16AA20E7D81B00F3DEA1 /* BuildingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957E16A920E7D81B00F3DEA1 /* BuildingListViewController.swift */; };
@@ -102,6 +104,27 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		9553706620F18BE1005D81C8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9553706220F18BE1005D81C8 /* PullToExpand.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 95645ABC1F69CF4B00E3CBF2;
+			remoteInfo = PullToExpand;
+		};
+		9553706E20F18BE1005D81C8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 95870B1C20E9B7A900BB1B39 /* SimplePDFKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 953C237720F0132500BE51F7;
+			remoteInfo = SimplePDFExample;
+		};
+		9553707220F18C10005D81C8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9553706220F18BE1005D81C8 /* PullToExpand.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 95645ABB1F69CF4B00E3CBF2;
+			remoteInfo = PullToExpand;
+		};
 		95870B2520E9B7A900BB1B39 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 95870B1C20E9B7A900BB1B39 /* SimplePDFKit.xcodeproj */;
@@ -174,6 +197,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				9553707120F18C10005D81C8 /* PullToExpand.framework in Embed Frameworks */,
 				95870B2820E9B7D300BB1B39 /* SimplePDFKit.framework in Embed Frameworks */,
 				95BD516120E985FC00FCB7EB /* Reachability.framework in Embed Frameworks */,
 			);
@@ -223,6 +247,7 @@
 		9529A63C20EECF8600C7E0A0 /* IssueBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueBadge.swift; sourceTree = "<group>"; };
 		952CB48720E830A300E6B664 /* BuildingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingCell.swift; sourceTree = "<group>"; };
 		952CB48B20E8429D00E6B664 /* BuildingListLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingListLayout.swift; sourceTree = "<group>"; };
+		9553706220F18BE1005D81C8 /* PullToExpand.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PullToExpand.xcodeproj; path = ../../PullToExpand/PullToExpand/PullToExpand.xcodeproj; sourceTree = "<group>"; };
 		9554234E20DC781E009CCCE0 /* NetworkObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkObjects.swift; sourceTree = "<group>"; };
 		9554235020DC7921009CCCE0 /* Hashing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hashing.swift; sourceTree = "<group>"; };
 		9554235220DC796A009CCCE0 /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
@@ -264,6 +289,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9553707020F18C10005D81C8 /* PullToExpand.framework in Frameworks */,
 				95870B2720E9B7D300BB1B39 /* SimplePDFKit.framework in Frameworks */,
 				95BD516020E985FC00FCB7EB /* Reachability.framework in Frameworks */,
 			);
@@ -398,9 +424,18 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		9553706320F18BE1005D81C8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9553706720F18BE1005D81C8 /* PullToExpand.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		9583C2B220DC748800452695 = {
 			isa = PBXGroup;
 			children = (
+				9553706220F18BE1005D81C8 /* PullToExpand.xcodeproj */,
 				95870B1C20E9B7A900BB1B39 /* SimplePDFKit.xcodeproj */,
 				95BD514B20E985C600FCB7EB /* Reachability.xcodeproj */,
 				9554235220DC796A009CCCE0 /* BridgingHeader.h */,
@@ -463,6 +498,7 @@
 			isa = PBXGroup;
 			children = (
 				95870B2620E9B7A900BB1B39 /* SimplePDFKit.framework */,
+				9553706F20F18BE1005D81C8 /* SimplePDFExample.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -533,6 +569,7 @@
 			dependencies = (
 				95BD516320E985FC00FCB7EB /* PBXTargetDependency */,
 				95870B2A20E9B7D300BB1B39 /* PBXTargetDependency */,
+				9553707320F18C10005D81C8 /* PBXTargetDependency */,
 			);
 			name = "Issue Manager";
 			productName = "Issue Manager";
@@ -590,6 +627,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 9553706320F18BE1005D81C8 /* Products */;
+					ProjectRef = 9553706220F18BE1005D81C8 /* PullToExpand.xcodeproj */;
+				},
+				{
 					ProductGroup = 95BD514C20E985C600FCB7EB /* Products */;
 					ProjectRef = 95BD514B20E985C600FCB7EB /* Reachability.xcodeproj */;
 				},
@@ -607,6 +648,20 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		9553706720F18BE1005D81C8 /* PullToExpand.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = PullToExpand.framework;
+			remoteRef = 9553706620F18BE1005D81C8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9553706F20F18BE1005D81C8 /* SimplePDFExample.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = SimplePDFExample.app;
+			remoteRef = 9553706E20F18BE1005D81C8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		95870B2620E9B7A900BB1B39 /* SimplePDFKit.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -811,6 +866,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		9553707320F18C10005D81C8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = PullToExpand;
+			targetProxy = 9553707220F18C10005D81C8 /* PBXContainerItemProxy */;
+		};
 		95870B2A20E9B7D300BB1B39 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SimplePDFKit;

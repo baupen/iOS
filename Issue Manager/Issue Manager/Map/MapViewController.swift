@@ -2,6 +2,7 @@
 
 import UIKit
 import SimplePDFKit
+import PullToExpand
 
 class MapViewController: UIViewController, LoadedViewController {
 	typealias Localization = L10n.Map
@@ -11,6 +12,9 @@ class MapViewController: UIViewController, LoadedViewController {
 	@IBOutlet var fallbackLabel: UILabel!
 	@IBOutlet var pdfContainerView: UIView!
 	@IBOutlet var activityIndicator: UIActivityIndicatorView!
+	@IBOutlet var pullableView: PullableView!
+	@IBOutlet var blurHeightConstraint: NSLayoutConstraint!
+	@IBOutlet var listHeightConstraint: NSLayoutConstraint!
 	
 	var pdfController: SimplePDFViewController? {
 		didSet {
@@ -46,6 +50,16 @@ class MapViewController: UIViewController, LoadedViewController {
 		updateBarButtonItem()
 	}
 	
+	override func viewWillLayoutSubviews() {
+		super.viewWillLayoutSubviews()
+		
+		let safeArea = UIEdgeInsetsInsetRect(view.bounds, view.safeAreaInsets)
+		let allowedHeight = safeArea.height * 2/3
+		blurHeightConstraint.constant = allowedHeight + safeArea.height
+		listHeightConstraint.constant = allowedHeight
+		pullableView.maxHeight = allowedHeight
+	}
+	
 	// not called at all in initial instantiation for some reason (hence the additional call in viewWillAppear)
 	override func didMove(toParentViewController parent: UIViewController?) {
 		super.didMove(toParentViewController: parent)
@@ -54,8 +68,8 @@ class MapViewController: UIViewController, LoadedViewController {
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		// called in the beginning when the controller is embedded
-		pdfController = (segue.destination as! SimplePDFViewController)
+		// called in the beginning when the list controller is embedded
+		// TODO
 	}
 	
 	private func updateBarButtonItem() {

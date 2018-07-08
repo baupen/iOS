@@ -48,15 +48,98 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g4F-zU-ri6" userLabel="PDF Container View">
                                 <rect key="frame" x="0.0" y="70" width="703.5" height="698"/>
                             </containerView>
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Axp-84-gLn" customClass="PullableView" customModule="PullToExpand">
+                                <rect key="frame" x="0.0" y="512" width="703.5" height="256"/>
+                                <subviews>
+                                    <visualEffectView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0fQ-ZQ-GOx">
+                                        <rect key="frame" x="0.0" y="0.0" width="703.5" height="512"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="0Gy-ZS-TQM">
+                                            <rect key="frame" x="0.0" y="0.0" width="703" height="512"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cCt-89-qhr">
+                                                    <rect key="frame" x="0.0" y="0.0" width="703" height="512"/>
+                                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="TBY-9f-gYZ">
+                                                        <rect key="frame" x="0.0" y="0.0" width="703" height="512"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <subviews>
+                                                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rHo-jf-rQe">
+                                                                <rect key="frame" x="0.0" y="0.0" width="704" height="256"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="256" id="tbp-3z-9r2"/>
+                                                                </constraints>
+                                                                <connections>
+                                                                    <segue destination="XdX-XP-UgZ" kind="embed" id="oIu-NA-CAA"/>
+                                                                </connections>
+                                                            </containerView>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstItem="rHo-jf-rQe" firstAttribute="top" secondItem="TBY-9f-gYZ" secondAttribute="top" id="5ux-x1-Qrb"/>
+                                                            <constraint firstItem="rHo-jf-rQe" firstAttribute="leading" secondItem="TBY-9f-gYZ" secondAttribute="leading" id="9p0-14-7p5"/>
+                                                            <constraint firstAttribute="trailing" secondItem="rHo-jf-rQe" secondAttribute="trailing" id="vXF-aU-JiG"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <vibrancyEffect>
+                                                        <blurEffect style="prominent"/>
+                                                    </vibrancyEffect>
+                                                </visualEffectView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="cCt-89-qhr" firstAttribute="leading" secondItem="0Gy-ZS-TQM" secondAttribute="leading" id="Xbl-fU-X8r"/>
+                                                <constraint firstAttribute="trailing" secondItem="cCt-89-qhr" secondAttribute="trailing" id="ZAV-Af-vVz"/>
+                                                <constraint firstItem="cCt-89-qhr" firstAttribute="top" secondItem="0Gy-ZS-TQM" secondAttribute="top" id="y64-Xm-TTx"/>
+                                                <constraint firstAttribute="bottom" secondItem="cCt-89-qhr" secondAttribute="bottom" id="zvL-h9-UzJ"/>
+                                            </constraints>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="512" id="f9P-g7-BFL"/>
+                                        </constraints>
+                                        <blurEffect style="prominent"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </visualEffectView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="0fQ-ZQ-GOx" secondAttribute="trailing" id="DQb-uP-RRc"/>
+                                    <constraint firstItem="0fQ-ZQ-GOx" firstAttribute="top" secondItem="Axp-84-gLn" secondAttribute="top" id="NlX-ya-XNn"/>
+                                    <constraint firstItem="0fQ-ZQ-GOx" firstAttribute="leading" secondItem="Axp-84-gLn" secondAttribute="leading" id="XKx-jA-lwa"/>
+                                    <constraint firstItem="rHo-jf-rQe" firstAttribute="width" secondItem="Axp-84-gLn" secondAttribute="width" id="dQH-Gx-I48"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="previewExpanded" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="minHeight">
+                                        <real key="value" value="64"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="maxHeight">
+                                        <real key="value" value="256"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="expandsDownward" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowOpacity">
+                                        <real key="value" value="0.10000000000000001"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="size" keyPath="layer.shadowOffset">
+                                        <size key="value" width="0.0" height="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="9Cf-dE-GqE" firstAttribute="top" secondItem="elz-u4-mxA" secondAttribute="bottom" constant="8" id="4b1-zA-RHd"/>
                             <constraint firstItem="elz-u4-mxA" firstAttribute="centerX" secondItem="VUw-jc-0yf" secondAttribute="centerX" id="9Hx-o9-olH"/>
+                            <constraint firstItem="VUw-jc-0yf" firstAttribute="trailing" secondItem="Axp-84-gLn" secondAttribute="trailing" id="JYh-B1-nwg"/>
+                            <constraint firstItem="Axp-84-gLn" firstAttribute="leading" secondItem="VUw-jc-0yf" secondAttribute="leading" id="Wac-kP-f7Y"/>
                             <constraint firstItem="g4F-zU-ri6" firstAttribute="top" secondItem="VUw-jc-0yf" secondAttribute="top" id="bKe-LR-qsS"/>
                             <constraint firstItem="9Cf-dE-GqE" firstAttribute="centerY" secondItem="VUw-jc-0yf" secondAttribute="centerY" id="dLi-md-ijV"/>
                             <constraint firstItem="VUw-jc-0yf" firstAttribute="bottom" secondItem="g4F-zU-ri6" secondAttribute="bottom" id="h1b-2h-6Kx"/>
                             <constraint firstItem="g4F-zU-ri6" firstAttribute="leading" secondItem="VUw-jc-0yf" secondAttribute="leading" id="k14-DP-nee"/>
+                            <constraint firstItem="VUw-jc-0yf" firstAttribute="bottom" secondItem="Axp-84-gLn" secondAttribute="bottom" id="lW3-Nd-DUG"/>
                             <constraint firstItem="9Cf-dE-GqE" firstAttribute="width" secondItem="VUw-jc-0yf" secondAttribute="width" multiplier="0.8" id="rfh-Rd-rb7"/>
                             <constraint firstItem="VUw-jc-0yf" firstAttribute="trailing" secondItem="g4F-zU-ri6" secondAttribute="trailing" id="wQv-77-KwU"/>
                             <constraint firstItem="9Cf-dE-GqE" firstAttribute="centerX" secondItem="VUw-jc-0yf" secondAttribute="centerX" id="zEK-Nr-tUp"/>
@@ -67,8 +150,11 @@
                     <navigationItem key="navigationItem" title="Detail" id="mOI-FS-AaM"/>
                     <connections>
                         <outlet property="activityIndicator" destination="elz-u4-mxA" id="Paa-GH-0Rl"/>
+                        <outlet property="blurHeightConstraint" destination="f9P-g7-BFL" id="3CA-1n-t1H"/>
                         <outlet property="fallbackLabel" destination="9Cf-dE-GqE" id="uj7-dO-mcT"/>
+                        <outlet property="listHeightConstraint" destination="tbp-3z-9r2" id="HrW-Nu-aF6"/>
                         <outlet property="pdfContainerView" destination="g4F-zU-ri6" id="pRf-qb-AVn"/>
+                        <outlet property="pullableView" destination="Axp-84-gLn" id="c3V-tK-ZCC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FJe-Yq-33r" sceneMemberID="firstResponder"/>
@@ -669,6 +755,19 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-2440" y="-330"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="LWW-h8-uPK">
+            <objects>
+                <viewController id="XdX-XP-UgZ" sceneMemberID="viewController">
+                    <view key="view" opaque="NO" contentMode="scaleToFill" id="eaQ-Dp-CWK">
+                        <rect key="frame" x="0.0" y="0.0" width="704" height="256"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="61v-Hv-iZJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="709" y="820"/>
         </scene>
     </scenes>
     <resources>
