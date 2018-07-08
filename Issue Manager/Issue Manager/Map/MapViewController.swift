@@ -16,6 +16,8 @@ class MapViewController: UIViewController, LoadedViewController {
 	@IBOutlet var blurHeightConstraint: NSLayoutConstraint!
 	@IBOutlet var listHeightConstraint: NSLayoutConstraint!
 	
+	var issueListController: IssueListViewController!
+	
 	var pdfController: SimplePDFViewController? {
 		didSet {
 			guard pdfController != oldValue else { return }
@@ -69,7 +71,7 @@ class MapViewController: UIViewController, LoadedViewController {
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		// called in the beginning when the list controller is embedded
-		// TODO
+		issueListController = (segue.destination as! IssueListViewController)
 	}
 	
 	private func updateBarButtonItem() {
@@ -92,6 +94,9 @@ class MapViewController: UIViewController, LoadedViewController {
 		if let map = holder as? Map, let filename = map.filename {
 			let url = Map.cacheURL(filename: filename)
 			asyncLoadPDF(at: url)
+			
+			pullableView.isHidden = false
+			issueListController.map = map
 		} else {
 			pdfController = nil
 			if let holder = holder {
@@ -99,6 +104,7 @@ class MapViewController: UIViewController, LoadedViewController {
 			} else {
 				fallbackLabel.text = Localization.noMapSelected
 			}
+			pullableView.isHidden = true
 		}
 	}
 	

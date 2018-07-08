@@ -39,6 +39,7 @@
 		952CB48C20E8429D00E6B664 /* BuildingListLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952CB48B20E8429D00E6B664 /* BuildingListLayout.swift */; };
 		9553707020F18C10005D81C8 /* PullToExpand.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9553706720F18BE1005D81C8 /* PullToExpand.framework */; };
 		9553707120F18C10005D81C8 /* PullToExpand.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9553706720F18BE1005D81C8 /* PullToExpand.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9553707520F1A5E2005D81C8 /* IssueListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9553707420F1A5E2005D81C8 /* IssueListViewController.swift */; };
 		9554234F20DC781E009CCCE0 /* NetworkObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9554234E20DC781E009CCCE0 /* NetworkObjects.swift */; };
 		9554235120DC7921009CCCE0 /* Hashing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9554235020DC7921009CCCE0 /* Hashing.swift */; };
 		957E16AA20E7D81B00F3DEA1 /* BuildingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957E16A920E7D81B00F3DEA1 /* BuildingListViewController.swift */; };
@@ -248,6 +249,7 @@
 		952CB48720E830A300E6B664 /* BuildingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingCell.swift; sourceTree = "<group>"; };
 		952CB48B20E8429D00E6B664 /* BuildingListLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingListLayout.swift; sourceTree = "<group>"; };
 		9553706220F18BE1005D81C8 /* PullToExpand.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PullToExpand.xcodeproj; path = ../../PullToExpand/PullToExpand/PullToExpand.xcodeproj; sourceTree = "<group>"; };
+		9553707420F1A5E2005D81C8 /* IssueListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListViewController.swift; sourceTree = "<group>"; };
 		9554234E20DC781E009CCCE0 /* NetworkObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkObjects.swift; sourceTree = "<group>"; };
 		9554235020DC7921009CCCE0 /* Hashing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hashing.swift; sourceTree = "<group>"; };
 		9554235220DC796A009CCCE0 /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
@@ -515,6 +517,7 @@
 		95870B2C20E9C03900BB1B39 /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				9553707420F1A5E2005D81C8 /* IssueListViewController.swift */,
 				9583C2D420DC757800452695 /* MapViewController.swift */,
 			);
 			path = Map;
@@ -816,6 +819,7 @@
 				9511A13D20DD559500101ADE /* Atomic.swift in Sources */,
 				950283A820E70C46001A5083 /* LocalizedStrings.swift in Sources */,
 				9584F24E20E936ED00A8C884 /* LoginWindowView.swift in Sources */,
+				9553707520F1A5E2005D81C8 /* IssueListViewController.swift in Sources */,
 				9511A10820DD3BD100101ADE /* Craftsman.swift in Sources */,
 				9511A13620DD559500101ADE /* BasicFuture.swift in Sources */,
 				9511A13720DD559500101ADE /* BasicResolver.swift in Sources */,

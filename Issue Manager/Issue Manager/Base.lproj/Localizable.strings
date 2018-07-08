@@ -80,6 +80,11 @@
 "map.could_not_load" = "Der Grundriss konnte nicht geladen werden!";
 
 ////////////////////////////////////////////////////////////////////////////////
+// MARK: Map.issue
+// CONTEXT: Fasst kurz zusammen, was für Pendenzen in einem Bereich sind. Das erste %s wird durch die Anzahl offener Pendenzen ersetzt, das zweite durch die Anzahl insgesamt (innerhalb des Bereichs)
+"map.issue_list.summary" = "%@ Pendenzen offen; %@ insgesamt";
+
+////////////////////////////////////////////////////////////////////////////////
 // MARK: Map.no
 // CONTEXT: Wird angezeigt, wenn kein Bereich ausgewählt ist.
 "map.no_map_selected" = "Wähle links einen Bereich aus, um hier den zugehörigen Grundriss zu sehen.";

@@ -122,6 +122,13 @@ internal enum L10n {
     internal static let pdfLoading = L10n.tr("Localizable", "map.pdf_loading")
     /// Grundriss
     internal static let title = L10n.tr("Localizable", "map.title")
+
+    internal enum IssueList {
+      /// %@ Pendenzen offen; %@ insgesamt
+      internal static func summary(_ p1: String, _ p2: String) -> String {
+        return L10n.tr("Localizable", "map.issue_list.summary", p1, p2)
+      }
+    }
   }
 
   internal enum MapList {
