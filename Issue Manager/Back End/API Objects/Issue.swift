@@ -2,7 +2,8 @@
 
 import Foundation
 
-struct Issue: FileContainer {
+final class Issue: FileContainer {
+	// NB: update `update(from:)` when adding/removing stored properties!
 	var meta = ObjectMeta()
 	var number: Int?
 	var isMarked = false
@@ -19,9 +20,31 @@ struct Issue: FileContainer {
 	var filename: String? { return imageFilename }
 	
 	init(at position: Position? = nil, in map: Map) {
-		self.wasAddedWithClient = Client.shared.isInClientMode
+		self.wasAddedWithClient = defaults.isInClientMode
 		self.map = map.id
 		self.position = position
+	}
+	
+	func update(from other: Issue) {
+		assert(id == other.id)
+		
+		other.downloadFile(previous: self)
+		
+		func update<T>(_ keyPath: ReferenceWritableKeyPath<Issue, T>) {
+			self[keyPath: keyPath] = other[keyPath: keyPath]
+		}
+		
+		// this is bad to maintain but super handy in every other way
+		update(\.meta)
+		update(\.number)
+		update(\.isMarked)
+		update(\.wasAddedWithClient)
+		update(\.imageFilename)
+		update(\.description)
+		update(\.craftsman)
+		update(\.map)
+		update(\.status)
+		update(\.position)
 	}
 	
 	struct Position: Codable {
@@ -62,5 +85,57 @@ extension Issue {
 	
 	var isReviewed: Bool {
 		return status.review != nil
+	}
+	
+	var isOpen: Bool {
+		return status.review == nil
+	}
+}
+
+extension Issue {
+	func change(transform: (Issue) throws -> Void) rethrows {
+		assert(!isRegistered)
+		
+		let oldFilename = filename
+		try transform(self)
+		Client.shared.issueChanged(self, hasChangedFilename: filename != oldFilename)
+		
+		Client.shared.saveShared()
+	}
+	
+	func mark() {
+		isMarked.toggle()
+		Client.shared.performed(.mark, on: self)
+		
+		Client.shared.saveShared()
+	}
+	
+	func review() {
+		assert(isRegistered)
+		assert(!isReviewed)
+		
+		status.review = .init(at: Date(), by: Client.shared.user!.fullName)
+		Client.shared.performed(.review, on: self)
+		
+		Client.shared.saveShared()
+	}
+	
+	func revertReview() {
+		assert(isReviewed)
+		
+		status.review = nil
+		Client.shared.performed(.revert, on: self)
+		
+		Client.shared.saveShared()
+	}
+	
+	func revertResponse() {
+		assert(hasResponse)
+		assert(!isReviewed)
+		
+		status.review = nil
+		Client.shared.performed(.revert, on: self)
+		
+		Client.shared.saveShared()
 	}
 }

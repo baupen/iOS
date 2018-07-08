@@ -37,6 +37,7 @@
 		9529A63D20EECF8600C7E0A0 /* IssueBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9529A63C20EECF8600C7E0A0 /* IssueBadge.swift */; };
 		952CB48820E830A300E6B664 /* BuildingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952CB48720E830A300E6B664 /* BuildingCell.swift */; };
 		952CB48C20E8429D00E6B664 /* BuildingListLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952CB48B20E8429D00E6B664 /* BuildingListLayout.swift */; };
+		9550E0E220F2C7FF00921387 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9584F24B20E936BD00A8C884 /* UserDefaults.swift */; };
 		9553707020F18C10005D81C8 /* PullToExpand.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9553706720F18BE1005D81C8 /* PullToExpand.framework */; };
 		9553707120F18C10005D81C8 /* PullToExpand.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9553706720F18BE1005D81C8 /* PullToExpand.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9553707520F1A5E2005D81C8 /* IssueListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9553707420F1A5E2005D81C8 /* IssueListViewController.swift */; };
@@ -324,6 +325,7 @@
 			children = (
 				9554235020DC7921009CCCE0 /* Hashing.swift */,
 				9511A0FE20DD379800101ADE /* Codable.swift */,
+				9584F24B20E936BD00A8C884 /* UserDefaults.swift */,
 				9511A14320DD56D700101ADE /* MiscHelpers.swift */,
 			);
 			path = Helpers;
@@ -335,7 +337,6 @@
 				9511A10120DD3A2700101ADE /* Geometry.swift */,
 				95D2C2AD20E5C3E700D887C8 /* Localization.swift */,
 				9506A96220EDAAAD00AF6AB7 /* Colors.swift */,
-				9584F24B20E936BD00A8C884 /* UserDefaults.swift */,
 				9511A10320DD3A7100101ADE /* Loading.swift */,
 				9583C2D220DC74BA00452695 /* UIHelpers.swift */,
 			);
@@ -854,6 +855,7 @@
 				95953B3820DFD99A001ED1B7 /* Result.swift in Sources */,
 				95953B3920DFD99A001ED1B7 /* Traversable.swift in Sources */,
 				95953B3A20DFD99A001ED1B7 /* ExecutionContext.swift in Sources */,
+				9550E0E220F2C7FF00921387 /* UserDefaults.swift in Sources */,
 				95953B3B20DFD99A001ED1B7 /* Atomic.swift in Sources */,
 				95953B3C20DFD99A001ED1B7 /* Hashing.swift in Sources */,
 				95953B3D20DFD99A001ED1B7 /* Codable.swift in Sources */,

@@ -32,8 +32,6 @@ final class Storage: Codable {
 		fileContainers.forEach { $0.downloadFile() }
 	}
 	
-	// somewhat defensive coding to avoid crashes when new data is read at unfortunate times
-	
 	func add(_ issue: Issue) {
 		assert(issues[issue.id] == nil)
 		
@@ -43,84 +41,12 @@ final class Storage: Codable {
 		Client.shared.saveShared()
 	}
 	
-	func changeIssue(withID id: UUID, transform: (inout Issue) throws -> Void) rethrows {
-		guard var issue = issues[id] else {
-			assertionFailure("issue must exist")
-			return
-		}
-		assert(!issue.isRegistered)
-		
-		let oldFilename = issue.filename
-		try transform(&issue)
-		issues[id] = issue
-		Client.shared.issueChanged(issue, hasChangedFilename: issue.filename != oldFilename)
-		
-		Client.shared.saveShared()
-	}
-	
-	func removeIssue(withID id: UUID) {
-		guard let issue = issues[id] else {
-			assertionFailure("issue must exist")
-			return
-		}
+	func remove(_ issue: Issue) {
 		assert(!issue.isRegistered)
 		
 		issues[issue.id] = nil
 		issue.deleteFile()
 		Client.shared.issueRemoved(issue)
-		
-		Client.shared.saveShared()
-	}
-	
-	func markIssue(withID id: UUID) {
-		guard let issue = issues[id] else {
-			assertionFailure("issue must exist")
-			return
-		}
-		
-		issues[issue.id]!.isMarked.toggle()
-		Client.shared.performed(.mark, on: issue)
-		
-		Client.shared.saveShared()
-	}
-	
-	func reviewIssue(withID id: UUID) {
-		guard let issue = issues[id] else {
-			assertionFailure("issue must exist")
-			return
-		}
-		assert(issue.isRegistered)
-		assert(!issue.isReviewed)
-		
-		issues[id]!.status.review = .init(at: Date(), by: Client.shared.user!.fullName)
-		Client.shared.performed(.review, on: issue)
-		
-		Client.shared.saveShared()
-	}
-	
-	func revertReviewForIssue(withID id: UUID) {
-		guard let issue = issues[id] else {
-			assertionFailure("issue must exist")
-			return
-		}
-		assert(issue.isReviewed)
-		
-		issues[id]!.status.review = nil
-		Client.shared.performed(.revert, on: issue)
-		
-		Client.shared.saveShared()
-	}
-	
-	func revertResponseForIssue(withID id: UUID) {
-		guard let issue = issues[id] else {
-			assertionFailure("issue must exist")
-			return
-		}
-		assert(issue.hasResponse)
-		assert(!issue.isReviewed)
-		
-		issues[id]!.status.review = nil
-		Client.shared.performed(.revert, on: issue)
 		
 		Client.shared.saveShared()
 	}

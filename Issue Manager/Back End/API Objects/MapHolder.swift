@@ -23,7 +23,7 @@ extension MapHolder {
 			.flatMap { $0.issues }
 			.compactMap { Client.shared.storage.issues[$0] }
 		
-		if Client.shared.isInClientMode {
+		if defaults.isInClientMode {
 			return AnyCollection(recursiveIssues.filter { $0.wasAddedWithClient })
 		} else {
 			return AnyCollection(recursiveIssues)

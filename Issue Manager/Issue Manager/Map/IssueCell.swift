@@ -13,10 +13,8 @@ class IssueCell: UITableViewCell, LoadedTableCell {
 	@IBOutlet var tradeLabel: UILabel!
 	
 	@IBAction func markButtonPressed() {
-		issue.isMarked.toggle()
-		// TODO propagate to holder
-		Client.shared.storage.issues[issue.id] = issue
-		Client.shared.performed(.mark, on: issue)
+		issue.mark()
+		update()
 	}
 	
 	var issue: Issue! {

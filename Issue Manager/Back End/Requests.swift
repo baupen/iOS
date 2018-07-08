@@ -40,7 +40,7 @@ struct LoginRequest: JSONJSONRequest {
 	
 	func applyToClient(_ response: ExpectedResponse) {
 		Client.shared.user = response.user <- {
-			$0.username = username // TODO remove once API updated
+			$0.username = username
 			$0.passwordHash = passwordHash
 		}
 		Client.shared.saveShared()
@@ -192,9 +192,7 @@ struct IssueUpdateRequest: MultipartJSONRequest, BacklogStorable {
 	let fileURL: URL?
 	
 	func applyToClient(_ response: ExpectedResponse) {
-		let previous = Client.shared.storage.issues[issue.id]
-		Client.shared.storage.issues[issue.id] = response.issue
-		response.issue.downloadFile(previous: previous)
+		issue.update(from: response.issue)
 		Client.shared.saveShared()
 	}
 	
@@ -254,13 +252,7 @@ struct IssueDeletionRequest: JSONJSONRequest, BacklogStorable {
 		Client.shared.saveShared()
 	}
 	
-	typealias ExpectedResponse = EmptyCollection<Void>
-}
-
-extension EmptyCollection: Response {
-	public init(from decoder: Decoder) throws {
-		self.init()
-	}
+	struct ExpectedResponse: Response {}
 }
 
 extension Client {
@@ -297,8 +289,7 @@ struct IssueActionRequest: JSONJSONRequest, BacklogStorable {
 	let action: IssueAction
 	
 	func applyToClient(_ response: ExpectedResponse) {
-		assert(issueID == response.issue.id)
-		Client.shared.storage.issues[response.issue.id] = response.issue
+		Client.shared.storage.issues[response.issue.id]?.update(from: response.issue)
 		Client.shared.saveShared()
 	}
 	

@@ -16,8 +16,7 @@ class BuildingListViewController: UITableViewController, LoadedViewController {
 	@IBOutlet var refreshHintLabel: UILabel!
 	
 	@IBAction func clientModeSwitched() {
-		Client.shared.isInClientMode = clientModeSwitch.isOn
-		Client.shared.saveShared()
+		defaults.isInClientMode = clientModeSwitch.isOn
 		updateClientModeAppearance()
 	}
 	
@@ -76,7 +75,7 @@ class BuildingListViewController: UITableViewController, LoadedViewController {
 		let user = Client.shared.user!
 		welcomeLabel.text = Localization.welcome(user.givenName)
 		
-		clientModeSwitch.isOn = Client.shared.isInClientMode
+		clientModeSwitch.isOn = defaults.isInClientMode
 		updateClientModeAppearance()
 		
 		buildings = Array(Client.shared.storage.buildings.values)
@@ -93,11 +92,11 @@ class BuildingListViewController: UITableViewController, LoadedViewController {
 	}
 	
 	func updateClientModeAppearance() {
-		let isInClientMode = Client.shared.isInClientMode
+		let color = defaults.isInClientMode ? UIColor.clientMode : nil
 		UIView.animate(withDuration: 0.1) {
-			self.clientModeCell.backgroundColor = isInClientMode ? .clientMode : nil
+			self.clientModeCell.backgroundColor = color
 		}
-		UINavigationBar.appearance().barTintColor = isInClientMode ? .clientMode : nil
+		UINavigationBar.appearance().barTintColor = color
 	}
 	
 	func showMapList(for building: Building, animated: Bool = true) {
@@ -134,11 +133,5 @@ extension BuildingListViewController: UICollectionViewDelegate {
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		let building = buildings[indexPath.item]
 		showMapList(for: building)
-	}
-}
-
-extension Client {
-	var backgroundColor: UIColor {
-		return isInClientMode ? #colorLiteral(red: 1, green: 0.945, blue: 0.9, alpha: 1) : #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
 	}
 }
