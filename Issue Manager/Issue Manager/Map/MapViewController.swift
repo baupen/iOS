@@ -55,8 +55,9 @@ class MapViewController: UIViewController, LoadedViewController {
 	override func viewWillLayoutSubviews() {
 		super.viewWillLayoutSubviews()
 		
+		let hasMap = (holder as? Map)?.filename != nil
 		let safeArea = UIEdgeInsetsInsetRect(view.bounds, view.safeAreaInsets)
-		let allowedHeight = safeArea.height * 2/3
+		let allowedHeight = safeArea.height * (hasMap ? 2/3 : 1)
 		blurHeightConstraint.constant = allowedHeight + safeArea.height
 		listHeightConstraint.constant = allowedHeight
 		pullableView.maxHeight = allowedHeight
@@ -92,12 +93,16 @@ class MapViewController: UIViewController, LoadedViewController {
 		
 		navigationItem.title = holder?.name ?? Localization.title
 		
+		if let map = holder as? Map {
+			issueListController.map = map
+			pullableView.isHidden = false
+		} else {
+			pullableView.isHidden = true
+		}
+		
 		if let map = holder as? Map, let filename = map.filename {
 			let url = Map.cacheURL(filename: filename)
 			asyncLoadPDF(at: url)
-			
-			pullableView.isHidden = false
-			issueListController.map = map
 		} else {
 			pdfController = nil
 			if let holder = holder {
@@ -105,7 +110,6 @@ class MapViewController: UIViewController, LoadedViewController {
 			} else {
 				fallbackLabel.text = Localization.noMapSelected
 			}
-			pullableView.isHidden = true
 		}
 	}
 	

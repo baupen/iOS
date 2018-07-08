@@ -807,7 +807,7 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="LUO-ML-7li">
-                                                            <rect key="frame" x="8" y="8" width="687" height="27.5"/>
+                                                            <rect key="frame" x="8" y="8" width="687.5" height="27.5"/>
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7j7-fo-OC8">
                                                                     <rect key="frame" x="0.0" y="4" width="20" height="20"/>
@@ -821,22 +821,22 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                                                     </connections>
                                                                 </button>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="799" verticalHuggingPriority="251" horizontalCompressionResistancePriority="800" text="#123" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IDP-Ek-oyi">
-                                                                    <rect key="frame" x="32" y="3.5" width="60" height="20.5"/>
+                                                                    <rect key="frame" x="32" y="3.5" width="54" height="20.5"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="vd3-5Q-Bhm"/>
+                                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="54" id="wju-Kd-os5"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" text="Etwas ist falsch!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="67y-Qi-4Yk">
-                                                                    <rect key="frame" x="104" y="3.5" width="528" height="20.5"/>
+                                                                    <rect key="frame" x="98" y="3.5" width="534.5" height="20.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="500" verticalHuggingPriority="251" horizontalCompressionResistancePriority="800" text="Maler" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="em9-qY-Md6">
-                                                                    <rect key="frame" x="644" y="3.5" width="43" height="20.5"/>
+                                                                    <rect key="frame" x="644.5" y="3.5" width="43" height="20.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>

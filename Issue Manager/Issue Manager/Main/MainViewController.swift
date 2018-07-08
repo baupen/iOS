@@ -67,9 +67,8 @@ class MasterNavigationController: UINavigationController {
 		detailNav.viewControllers = [] // can't pop root view controller explicitly
 		mapController.didMove(toParentViewController: nil)
 		
-		if let map = mapController.holder as? Map, map.filename != nil {
+		if mapController.holder is Map {
 			// worth keeping around
-			
 			pushViewController(mapController, animated: true)
 			mapController.didMove(toParentViewController: self)
 		}
