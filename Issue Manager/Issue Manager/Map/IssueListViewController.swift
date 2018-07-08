@@ -7,6 +7,7 @@ class IssueListViewController: UIViewController {
 	typealias Localization = L10n.Map.IssueList
 	
 	@IBOutlet var summaryLabel: UILabel!
+	@IBOutlet var topSeparator: UIView!
 	@IBOutlet var issueTableView: UITableView!
 	
 	var pullableView: PullableView!
@@ -16,12 +17,19 @@ class IssueListViewController: UIViewController {
 			update()
 		}
 	}
-	var issues: [Issue] = []
+	
+	var issues: [Issue] = [] {
+		didSet {
+			issueTableView.reloadData()
+		}
+	}
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		issueTableView.panGestureRecognizer.addTarget(self, action: #selector(listPanned))
+		topSeparator.frame.size.height = 1 / UIScreen.main.scale // 1px
+		topSeparator.backgroundColor = issueTableView.separatorColor
 		
 		update()
 	}
@@ -41,7 +49,6 @@ class IssueListViewController: UIViewController {
 	private var scrollOffset: CGFloat = 0
 	
 	@objc func listPanned(_ recognizer: UIPanGestureRecognizer) {
-		print(scrollOffset)
 		switch recognizer.state {
 		case .possible:
 			break
@@ -72,6 +79,18 @@ class IssueListViewController: UIViewController {
 				fakePanRecognizer.state = .possible
 			}
 		}
+	}
+}
+
+extension IssueListViewController: UITableViewDataSource {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return issues.count
+	}
+	
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell = tableView.dequeue(IssueCell.self, for: indexPath)!
+		cell.issue = issues[indexPath.row]
+		return cell
 	}
 }
 

@@ -785,10 +785,83 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                         </constraints>
                                         <viewLayoutGuide key="safeArea" id="apj-CG-thG"/>
                                     </view>
-                                    <tableView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eSQ-Ii-ycc">
+                                    <tableView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" sectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="eSQ-Ii-ycc">
                                         <rect key="frame" x="0.0" y="64" width="703" height="192"/>
                                         <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <view key="tableHeaderView" contentMode="scaleToFill" id="kSJ-C9-VR1" userLabel="Top Separator">
+                                            <rect key="frame" x="0.0" y="0.0" width="703" height="0.0"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </view>
+                                        <view key="tableFooterView" contentMode="scaleToFill" id="jdB-af-gpG" userLabel="Empty footer to hide empty cells">
+                                            <rect key="frame" x="0.0" y="72" width="703" height="0.0"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </view>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Issue Cell" id="X3S-og-f79" customClass="IssueCell" customModule="Issue_Manager" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="28" width="703" height="44"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="X3S-og-f79" id="dE6-pX-HX1">
+                                                    <rect key="frame" x="0.0" y="0.0" width="703" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="LUO-ML-7li">
+                                                            <rect key="frame" x="8" y="8" width="687" height="27.5"/>
+                                                            <subviews>
+                                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7j7-fo-OC8">
+                                                                    <rect key="frame" x="0.0" y="4" width="20" height="20"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" secondItem="7j7-fo-OC8" secondAttribute="height" multiplier="1:1" id="3eI-Vs-Sdj"/>
+                                                                        <constraint firstAttribute="width" constant="20" id="4Ge-ax-Cbx"/>
+                                                                    </constraints>
+                                                                    <state key="normal" image="mark_unmarked"/>
+                                                                    <connections>
+                                                                        <action selector="markButtonPressed" destination="X3S-og-f79" eventType="touchUpInside" id="v3g-j3-YEl"/>
+                                                                    </connections>
+                                                                </button>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="799" verticalHuggingPriority="251" horizontalCompressionResistancePriority="800" text="#123" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IDP-Ek-oyi">
+                                                                    <rect key="frame" x="32" y="3.5" width="60" height="20.5"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="vd3-5Q-Bhm"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" text="Etwas ist falsch!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="67y-Qi-4Yk">
+                                                                    <rect key="frame" x="104" y="3.5" width="528" height="20.5"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="500" verticalHuggingPriority="251" horizontalCompressionResistancePriority="800" text="Maler" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="em9-qY-Md6">
+                                                                    <rect key="frame" x="644" y="3.5" width="43" height="20.5"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                        </stackView>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="trailingMargin" secondItem="LUO-ML-7li" secondAttribute="trailing" id="7xa-AE-bms"/>
+                                                        <constraint firstItem="LUO-ML-7li" firstAttribute="top" secondItem="dE6-pX-HX1" secondAttribute="topMargin" id="Rxc-GK-vhY"/>
+                                                        <constraint firstAttribute="bottomMargin" secondItem="LUO-ML-7li" secondAttribute="bottom" id="ZV3-xN-mkk"/>
+                                                        <constraint firstItem="LUO-ML-7li" firstAttribute="leading" secondItem="dE6-pX-HX1" secondAttribute="leadingMargin" id="xAN-gP-ZAn"/>
+                                                    </constraints>
+                                                </tableViewCellContentView>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <connections>
+                                                    <outlet property="descriptionLabel" destination="67y-Qi-4Yk" id="bjD-qP-Z6u"/>
+                                                    <outlet property="markButton" destination="7j7-fo-OC8" id="qaQ-rW-sey"/>
+                                                    <outlet property="numberLabel" destination="IDP-Ek-oyi" id="g9v-Li-v1I"/>
+                                                    <outlet property="tradeLabel" destination="em9-qY-Md6" id="6qm-xG-U6n"/>
+                                                </connections>
+                                            </tableViewCell>
+                                        </prototypes>
                                         <connections>
+                                            <outlet property="dataSource" destination="XdX-XP-UgZ" id="1oK-cj-Pfn"/>
                                             <outlet property="delegate" destination="XdX-XP-UgZ" id="XRv-j3-QBy"/>
                                         </connections>
                                     </tableView>
@@ -806,6 +879,7 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                     <connections>
                         <outlet property="issueTableView" destination="eSQ-Ii-ycc" id="BBf-ez-6TU"/>
                         <outlet property="summaryLabel" destination="5mB-PJ-gr9" id="l74-fz-SFv"/>
+                        <outlet property="topSeparator" destination="kSJ-C9-VR1" id="gyQ-ex-VLo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="61v-Hv-iZJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -814,6 +888,7 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
         </scene>
     </scenes>
     <resources>
+        <image name="mark_unmarked" width="32" height="32"/>
         <namedColor name="Attention">
             <color red="0.99199998378753662" green="0.49399998784065247" blue="0.078000001609325409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

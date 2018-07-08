@@ -81,8 +81,14 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Map.issue
+// CONTEXT: Wird anstelle der Funktion angezeigt, wenn kein Handwerker gesetzt ist.
+"map.issue_list.no_craftsman" = "<kein Handwerker>";
+// CONTEXT: Wird anstelle der Beschreibung angezeigt, wenn sie nicht gesetzt ist.
+"map.issue_list.no_description" = "<keine Beschreibung>";
 // CONTEXT: Fasst kurz zusammen, was für Pendenzen in einem Bereich sind. Das erste %s wird durch die Anzahl offener Pendenzen ersetzt, das zweite durch die Anzahl insgesamt (innerhalb des Bereichs)
 "map.issue_list.summary" = "%@ Pendenzen offen; %@ insgesamt";
+// CONTEXT: Wird anstelle der Nummer (z.B. #123) angezeigt, wenn eine Pendenz noch nicht registriert ist.
+"map.issue_list.unregistered" = "neu";
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Map.no
