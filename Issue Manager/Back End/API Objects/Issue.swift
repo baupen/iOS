@@ -61,6 +61,18 @@ final class Issue: FileContainer {
 		/// review by supervisor
 		var review: Event?
 		
+		var simplified: Simplified {
+			if registration == nil {
+				return .new
+			} else if response == nil {
+				return .registered
+			} else if review == nil {
+				return .responded
+			} else {
+				return .reviewed
+			}
+		}
+		
 		struct Event: Codable {
 			var time: Date
 			/// the name whoever caused the event chose
@@ -70,6 +82,11 @@ final class Issue: FileContainer {
 				self.time = time
 				self.author = author
 			}
+		}
+		
+		/// a simplified representation of the status
+		enum Simplified: CaseIterable {
+			case new, registered, responded, reviewed
 		}
 	}
 }

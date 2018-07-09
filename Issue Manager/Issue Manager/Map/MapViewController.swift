@@ -16,6 +16,13 @@ class MapViewController: UIViewController, LoadedViewController {
 	@IBOutlet var blurHeightConstraint: NSLayoutConstraint!
 	@IBOutlet var listHeightConstraint: NSLayoutConstraint!
 	
+	var markers: [IssueMarker] = []
+	var markerAlpha: CGFloat = 0.1 {
+		didSet {
+			pdfController?.overlayView.alpha = markerAlpha
+		}
+	}
+	
 	var issueListController: IssueListViewController!
 	
 	var pdfController: SimplePDFViewController? {
@@ -41,6 +48,10 @@ class MapViewController: UIViewController, LoadedViewController {
 			update()
 		}
 	}
+	
+	var issues: [Issue] = []
+	
+	var visibleStatuses = Set(Issue.Status.Simplified.allCases)
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -95,14 +106,14 @@ class MapViewController: UIViewController, LoadedViewController {
 		
 		navigationItem.title = holder?.name ?? Localization.title
 		
-		if let map = holder as? Map {
-			issueListController.map = map
-			pullableView.isHidden = false
-		} else {
-			pullableView.isHidden = true
-		}
+		let map = holder as? Map
 		
-		if let map = holder as? Map, let filename = map.filename {
+		issues = Array(map?.allIssues() ?? .init([]))
+		
+		issueListController.map = map
+		pullableView.isHidden = map == nil
+		
+		if let filename = map?.filename {
 			let url = Map.cacheURL(filename: filename)
 			asyncLoadPDF(at: url)
 		} else {
@@ -134,7 +145,9 @@ class MapViewController: UIViewController, LoadedViewController {
 			self.pdfController = SimplePDFViewController() <- {
 				$0.delegate = self
 				$0.page = page
+				$0.overlayView.alpha = self.markerAlpha
 			}
+			self.updateMarkers()
 		}
 		
 		page.catch { error in
@@ -146,15 +159,43 @@ class MapViewController: UIViewController, LoadedViewController {
 			self.fallbackLabel.text = Localization.couldNotLoad
 		}
 	}
+	
+	private func updateMarkers() {
+		guard let pdfController = pdfController else { return }
+		
+		markers.forEach { $0.removeFromSuperview() }
+		markers = issues.map { issue in
+			IssueMarker() <- {
+				$0.issue = issue
+				$0.zoomScale = pdfController.scrollView.zoomScale
+				$0.buttonAction = { [unowned self] in
+					_ = self // will need this later on
+					print("marker pressed for", issue)
+				}
+			}
+		}
+		markers.forEach(pdfController.overlayView.addSubview)
+		
+		updateMarkerAppearance()
+	}
+	
+	func updateMarkerAppearance() {
+		for (marker, issue) in zip(markers, issues) {
+			marker.update()
+			marker.isHidden = !visibleStatuses.contains(issue.status.simplified)
+		}
+	}
 }
 
 extension MapViewController: SimplePDFViewControllerDelegate {
 	func pdfZoomed(to scale: CGFloat) {
-		
+		markers.forEach { $0.zoomScale = scale }
 	}
 	
 	func pdfFinishedLoading() {
 		activityIndicator.stopAnimating()
 		fallbackLabel.text = nil
+		
+		markerAlpha = 1
 	}
 }
