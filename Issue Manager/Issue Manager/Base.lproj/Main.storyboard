@@ -54,7 +54,7 @@
                                     <visualEffectView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0fQ-ZQ-GOx">
                                         <rect key="frame" x="0.0" y="0.0" width="703.5" height="512"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="0Gy-ZS-TQM">
-                                            <rect key="frame" x="0.0" y="0.0" width="703" height="512"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="703.5" height="512"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rHo-jf-rQe">
@@ -158,7 +158,7 @@
         <scene sceneID="cN8-uD-Xw3">
             <objects>
                 <tableViewController storyboardIdentifier="Building List" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Bne-PF-7lo" userLabel="Building List" customClass="BuildingListViewController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" delaysContentTouches="NO" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="IMy-is-gSU">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" delaysContentTouches="NO" dataMode="static" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="IMy-is-gSU">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -170,11 +170,11 @@
                         <sections>
                             <tableViewSection id="vJt-cO-WbV">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="80" id="Hbe-OZ-mUc">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="80" id="Hbe-OZ-mUc" userLabel="Welcome">
                                         <rect key="frame" x="0.0" y="0.0" width="1024" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Hbe-OZ-mUc" id="eib-mP-Vvz">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="80"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="79.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" alignment="lastBaseline" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="p2L-fg-B9b">
@@ -198,93 +198,20 @@
                                                         </button>
                                                     </subviews>
                                                 </stackView>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aSI-Ck-wm9" userLabel="Separator">
-                                                    <rect key="frame" x="20" y="79" width="1004" height="1"/>
-                                                    <color key="backgroundColor" white="0.90000000000000002" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="ZHV-Lw-G8e"/>
-                                                    </constraints>
-                                                </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="aSI-Ck-wm9" firstAttribute="leading" secondItem="eib-mP-Vvz" secondAttribute="leadingMargin" id="A4d-gf-j4g"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="p2L-fg-B9b" secondAttribute="bottom" constant="8" id="B68-vK-96S"/>
-                                                <constraint firstAttribute="bottom" secondItem="aSI-Ck-wm9" secondAttribute="bottom" id="G2v-QC-6Lf"/>
-                                                <constraint firstAttribute="trailing" secondItem="aSI-Ck-wm9" secondAttribute="trailing" id="Xrw-ph-h3i"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="p2L-fg-B9b" secondAttribute="trailing" id="dMH-OI-fec"/>
                                                 <constraint firstItem="p2L-fg-B9b" firstAttribute="top" secondItem="eib-mP-Vvz" secondAttribute="topMargin" constant="8" id="mYh-wZ-RbG"/>
                                                 <constraint firstItem="p2L-fg-B9b" firstAttribute="leading" secondItem="eib-mP-Vvz" secondAttribute="leadingMargin" id="uOL-Xs-NqW"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="140" id="ekp-oq-wh0">
-                                        <rect key="frame" x="0.0" y="80" width="1024" height="140"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ekp-oq-wh0" id="E4V-Ya-no3">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="140"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="ahp-Jy-3OO">
-                                                    <rect key="frame" x="20" y="19" width="984" height="102"/>
-                                                    <subviews>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="800" verticalCompressionResistancePriority="800" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="T61-VI-Ejm">
-                                                            <rect key="frame" x="0.0" y="0.0" width="984" height="45"/>
-                                                            <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="200" verticalHuggingPriority="500" text="Abnahmemodus" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bda-vp-dyl">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="927" height="33.5"/>
-                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
-                                                                    <nil key="textColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                    <userDefinedRuntimeAttributes>
-                                                                        <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="building_list.client_mode.title"/>
-                                                                    </userDefinedRuntimeAttributes>
-                                                                </label>
-                                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NEh-JP-6pw">
-                                                                    <rect key="frame" x="935" y="0.0" width="51" height="31"/>
-                                                                    <color key="onTintColor" name="Main"/>
-                                                                    <connections>
-                                                                        <action selector="clientModeSwitched" destination="Bne-PF-7lo" eventType="valueChanged" id="7Yu-Qq-NDp"/>
-                                                                    </connections>
-                                                                </switch>
-                                                            </subviews>
-                                                        </stackView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="200" verticalHuggingPriority="790" verticalCompressionResistancePriority="790" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EhS-Q3-eBX" userLabel="Client Mode Description">
-                                                            <rect key="frame" x="0.0" y="61" width="984" height="41"/>
-                                                            <string key="text">Im Abnahmemodus werden nur die Pendenzen angezeigt, die auch im Abnahmemodus erfasst wurden.
-Im Abnahmemodus erfasste Pendenzen werden hingegen auch sonst angezeigt.</string>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                            <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="building_list.client_mode.description"/>
-                                                            </userDefinedRuntimeAttributes>
-                                                        </label>
-                                                    </subviews>
-                                                </stackView>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Mz-23-4oT" userLabel="Separator">
-                                                    <rect key="frame" x="20" y="139" width="1004" height="1"/>
-                                                    <color key="backgroundColor" white="0.90000000000000002" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="3br-4T-ofq"/>
-                                                    </constraints>
-                                                </view>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="bottomMargin" secondItem="ahp-Jy-3OO" secondAttribute="bottom" constant="8" id="2gi-Sh-NkL"/>
-                                                <constraint firstAttribute="bottom" secondItem="1Mz-23-4oT" secondAttribute="bottom" id="3eq-9V-bL5"/>
-                                                <constraint firstItem="ahp-Jy-3OO" firstAttribute="top" secondItem="E4V-Ya-no3" secondAttribute="topMargin" constant="8" id="8o9-9H-KBn"/>
-                                                <constraint firstAttribute="trailing" secondItem="1Mz-23-4oT" secondAttribute="trailing" id="KC0-MJ-XSh"/>
-                                                <constraint firstItem="ahp-Jy-3OO" firstAttribute="leading" secondItem="E4V-Ya-no3" secondAttribute="leadingMargin" id="QW4-dF-tJe"/>
-                                                <constraint firstItem="1Mz-23-4oT" firstAttribute="leading" secondItem="E4V-Ya-no3" secondAttribute="leadingMargin" id="bb1-Wr-0ET"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="ahp-Jy-3OO" secondAttribute="trailing" id="qfx-8h-IWc"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="400" id="xxT-rY-px6">
-                                        <rect key="frame" x="0.0" y="220" width="1024" height="400"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="400" id="xxT-rY-px6" userLabel="Buildings">
+                                        <rect key="frame" x="0.0" y="80" width="1024" height="400"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xxT-rY-px6" id="mi9-4L-9Qt">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="400"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="399.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="200" verticalHuggingPriority="200" verticalCompressionResistancePriority="800" text="Gebäude" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Njl-Dw-vOS">
@@ -429,6 +356,57 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                                 <constraint firstAttribute="trailing" secondItem="Zp8-gD-E9i" secondAttribute="trailing" id="vn9-2r-GFt"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="6qc-QJ-bLk" secondAttribute="trailing" id="wTH-eS-oQt"/>
                                                 <constraint firstAttribute="bottom" secondItem="Zp8-gD-E9i" secondAttribute="bottom" id="yEz-tL-8DJ"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="140" id="ekp-oq-wh0" userLabel="Client Mode">
+                                        <rect key="frame" x="0.0" y="480" width="1024" height="140"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ekp-oq-wh0" id="E4V-Ya-no3">
+                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="139.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="ahp-Jy-3OO">
+                                                    <rect key="frame" x="20" y="19" width="984" height="102"/>
+                                                    <subviews>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="800" verticalCompressionResistancePriority="800" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="T61-VI-Ejm">
+                                                            <rect key="frame" x="0.0" y="0.0" width="984" height="65.5"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="200" verticalHuggingPriority="500" text="Abnahmemodus" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bda-vp-dyl">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="927" height="33.5"/>
+                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="building_list.client_mode.title"/>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </label>
+                                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NEh-JP-6pw">
+                                                                    <rect key="frame" x="935" y="0.0" width="51" height="31"/>
+                                                                    <color key="onTintColor" name="Main"/>
+                                                                    <connections>
+                                                                        <action selector="clientModeSwitched" destination="Bne-PF-7lo" eventType="valueChanged" id="7Yu-Qq-NDp"/>
+                                                                    </connections>
+                                                                </switch>
+                                                            </subviews>
+                                                        </stackView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="200" verticalHuggingPriority="790" verticalCompressionResistancePriority="790" text="Im Abnahmemodus werden nur die Pendenzen angezeigt, die auch im Abnahmemodus erfasst wurden." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EhS-Q3-eBX" userLabel="Client Mode Description">
+                                                            <rect key="frame" x="0.0" y="81.5" width="984" height="20.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="building_list.client_mode.description"/>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="ahp-Jy-3OO" secondAttribute="bottom" constant="8" id="2gi-Sh-NkL"/>
+                                                <constraint firstItem="ahp-Jy-3OO" firstAttribute="top" secondItem="E4V-Ya-no3" secondAttribute="topMargin" constant="8" id="8o9-9H-KBn"/>
+                                                <constraint firstItem="ahp-Jy-3OO" firstAttribute="leading" secondItem="E4V-Ya-no3" secondAttribute="leadingMargin" id="QW4-dF-tJe"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="ahp-Jy-3OO" secondAttribute="trailing" id="qfx-8h-IWc"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -947,7 +925,7 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                             </connections>
                         </barButtonItem>
                         <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="map.issue_filter.title"/>
+                            <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="map.status_filter.title"/>
                         </userDefinedRuntimeAttributes>
                     </navigationItem>
                 </tableViewController>

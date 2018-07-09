@@ -79,9 +79,8 @@ class MapViewController: UIViewController, LoadedViewController {
 	override func viewWillLayoutSubviews() {
 		super.viewWillLayoutSubviews()
 		
-		let hasMap = (holder as? Map)?.filename != nil
 		let safeArea = UIEdgeInsetsInsetRect(view.bounds, view.safeAreaInsets)
-		let allowedHeight = safeArea.height * (hasMap ? 2/3 : 1)
+		let allowedHeight = safeArea.height
 		blurHeightConstraint.constant = allowedHeight + safeArea.height
 		listHeightConstraint.constant = allowedHeight
 		pullableView.maxHeight = allowedHeight

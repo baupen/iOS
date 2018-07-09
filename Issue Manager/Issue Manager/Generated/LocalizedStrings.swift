@@ -62,7 +62,7 @@ internal enum L10n {
     }
 
     internal enum ClientMode {
-      /// Im Abnahmemodus werden nur die Pendenzen angezeigt, die auch im Abnahmemodus erfasst wurden.\nIm Abnahmemodus erfasste Pendenzen werden hingegen auch sonst angezeigt.
+      /// Im Abnahmemodus werden nur die Pendenzen angezeigt, die auch im Abnahmemodus erfasst wurden.
       internal static let description = L10n.tr("Localizable", "building_list.client_mode.description")
       /// Abnahmemodus
       internal static let title = L10n.tr("Localizable", "building_list.client_mode.title")

@@ -35,7 +35,7 @@
 // CONTEXT: Beschreibt, wie viele Mängel es in einem Gebäude insgesamt gibt. Wird nach building_list.building_summary.open_issues angezeigt, daher darf gerne das Wort "Mängel" weggelassen werden. %s wird durch die Anzahl offener Mängel ersetzt, z.b. "%s insgesamt"
 "building_list.building_summary.total_issues" = "%@ insgesamt";
 // CONTEXT: Beschreibung für den Abnahmemodus
-"building_list.client_mode.description" = "Im Abnahmemodus werden nur die Pendenzen angezeigt, die auch im Abnahmemodus erfasst wurden.\nIm Abnahmemodus erfasste Pendenzen werden hingegen auch sonst angezeigt.";
+"building_list.client_mode.description" = "Im Abnahmemodus werden nur die Pendenzen angezeigt, die auch im Abnahmemodus erfasst wurden.";
 // CONTEXT: Titel für den Schalter um Abnahmemodus an- und auszuschalten. (Abnahmemodus ist für wenn man mit dem Käufer herumläuft und inspiziert; dabei werden die "normalen" Mängel nicht angezeigt.)
 "building_list.client_mode.title" = "Abnahmemodus";
 // CONTEXT: Knopf oben links zum ausloggen
