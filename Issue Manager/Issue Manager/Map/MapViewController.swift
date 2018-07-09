@@ -15,6 +15,10 @@ class MapViewController: UIViewController, LoadedViewController {
 	@IBOutlet var pullableView: PullableView!
 	@IBOutlet var blurHeightConstraint: NSLayoutConstraint!
 	@IBOutlet var listHeightConstraint: NSLayoutConstraint!
+	@IBOutlet var filterItem: UIBarButtonItem!
+	
+	// the filter popover's done button and the add marker popover's cancel button link to this
+	@IBAction func backToMap(_ segue: UIStoryboardSegue) {}
 	
 	var markers: [IssueMarker] = []
 	var markerAlpha: CGFloat = 0.1 {
@@ -51,12 +55,19 @@ class MapViewController: UIViewController, LoadedViewController {
 	
 	var issues: [Issue] = []
 	
-	var visibleStatuses = Set(Issue.Status.Simplified.allCases)
+	var visibleStatuses = Set(Issue.Status.Simplified.allCases) {
+		didSet {
+			updateMarkerAppearance()
+			filterItem.image = visibleStatuses == Set(Issue.Status.Simplified.allCases) ? #imageLiteral(resourceName: "filter_disabled.pdf") : #imageLiteral(resourceName: "filter_enabled.pdf")
+		}
+	}
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		update()
+		
+		visibleStatuses = Set(Issue.Status.Simplified.allCases) // TODO load from defaults
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -84,9 +95,19 @@ class MapViewController: UIViewController, LoadedViewController {
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		// called in the beginning when the list controller is embedded
-		issueListController = (segue.destination as! IssueListViewController)
-		issueListController.pullableView = pullableView
+		switch segue.identifier {
+		case "embedIssueList":
+			// called in the beginning when the list controller is embedded
+			issueListController = (segue.destination as! IssueListViewController)
+			issueListController.pullableView = pullableView
+		case "showIssueFilter":
+			let navController = segue.destination as! UINavigationController
+			let filterController = navController.topViewController as! StatusFilterViewController
+			filterController.selected = visibleStatuses
+			filterController.delegate = self
+		default:
+			fatalError("unrecognized segue identifier: \(segue.identifier ?? "<no identifier>")")
+		}
 	}
 	
 	private func updateBarButtonItem() {
@@ -198,5 +219,11 @@ extension MapViewController: SimplePDFViewControllerDelegate {
 		fallbackLabel.text = nil
 		
 		markerAlpha = 1
+	}
+}
+
+extension MapViewController: StatusFilterViewControllerDelegate {
+	func statusFilterChanged(to newValue: Set<Issue.Status.Simplified>) {
+		visibleStatuses = newValue
 	}
 }

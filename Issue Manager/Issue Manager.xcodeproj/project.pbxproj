@@ -39,6 +39,7 @@
 		952CB48C20E8429D00E6B664 /* BuildingListLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952CB48B20E8429D00E6B664 /* BuildingListLayout.swift */; };
 		9550E0E220F2C7FF00921387 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9584F24B20E936BD00A8C884 /* UserDefaults.swift */; };
 		9550E0E620F2E70700921387 /* IssueMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9550E0E520F2E70700921387 /* IssueMarker.swift */; };
+		9550E0E820F38D7600921387 /* StatusFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9550E0E720F38D7600921387 /* StatusFilterViewController.swift */; };
 		9553707020F18C10005D81C8 /* PullToExpand.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9553706720F18BE1005D81C8 /* PullToExpand.framework */; };
 		9553707120F18C10005D81C8 /* PullToExpand.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9553706720F18BE1005D81C8 /* PullToExpand.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9553707520F1A5E2005D81C8 /* IssueListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9553707420F1A5E2005D81C8 /* IssueListViewController.swift */; };
@@ -253,6 +254,7 @@
 		952CB48720E830A300E6B664 /* BuildingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingCell.swift; sourceTree = "<group>"; };
 		952CB48B20E8429D00E6B664 /* BuildingListLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingListLayout.swift; sourceTree = "<group>"; };
 		9550E0E520F2E70700921387 /* IssueMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueMarker.swift; sourceTree = "<group>"; };
+		9550E0E720F38D7600921387 /* StatusFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusFilterViewController.swift; sourceTree = "<group>"; };
 		9553706220F18BE1005D81C8 /* PullToExpand.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PullToExpand.xcodeproj; path = ../../PullToExpand/PullToExpand/PullToExpand.xcodeproj; sourceTree = "<group>"; };
 		9553707420F1A5E2005D81C8 /* IssueListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListViewController.swift; sourceTree = "<group>"; };
 		9554234E20DC781E009CCCE0 /* NetworkObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkObjects.swift; sourceTree = "<group>"; };
@@ -525,6 +527,7 @@
 		95870B2C20E9C03900BB1B39 /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				9550E0E720F38D7600921387 /* StatusFilterViewController.swift */,
 				9583C2D420DC757800452695 /* MapViewController.swift */,
 				9550E0E520F2E70700921387 /* IssueMarker.swift */,
 				95BBF32020F26F49006E162E /* IssueCell.swift */,
@@ -828,6 +831,7 @@
 				95B9BA6620DEC7FA00261954 /* Requests.swift in Sources */,
 				9554234F20DC781E009CCCE0 /* NetworkObjects.swift in Sources */,
 				9583C2D820DC76F200452695 /* User.swift in Sources */,
+				9550E0E820F38D7600921387 /* StatusFilterViewController.swift in Sources */,
 				95BBF32120F26F49006E162E /* IssueCell.swift in Sources */,
 				9511A13D20DD559500101ADE /* Atomic.swift in Sources */,
 				950283A820E70C46001A5083 /* LocalizedStrings.swift in Sources */,

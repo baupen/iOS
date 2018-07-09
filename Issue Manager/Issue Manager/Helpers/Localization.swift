@@ -45,3 +45,13 @@ extension UIButton {
 		}
 	}
 }
+
+extension UINavigationItem {
+	@IBInspectable
+	var localizedTitle: String {
+		get { return "" }
+		set(key) {
+			title = localizedString(key)
+		}
+	}
+}

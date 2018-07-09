@@ -69,6 +69,20 @@ internal enum L10n {
     }
   }
 
+  internal enum Issue {
+
+    internal enum Status {
+      /// Im Foyer
+      internal static let new = L10n.tr("Localizable", "issue.status.new")
+      /// Im Verzeichnis
+      internal static let registered = L10n.tr("Localizable", "issue.status.registered")
+      /// Beantwortet
+      internal static let responded = L10n.tr("Localizable", "issue.status.responded")
+      /// Abgeschlossen
+      internal static let reviewed = L10n.tr("Localizable", "issue.status.reviewed")
+    }
+  }
+
   internal enum Login {
     /// Eingeloggt Bleiben
     internal static let stayLoggedIn = L10n.tr("Localizable", "login.stay_logged_in")
@@ -134,6 +148,17 @@ internal enum L10n {
       }
       /// neu
       internal static let unregistered = L10n.tr("Localizable", "map.issue_list.unregistered")
+    }
+
+    internal enum StatusFilter {
+      /// Es werden alle Mängel angezeigt.
+      internal static let allSelected = L10n.tr("Localizable", "map.status_filter.all_selected")
+      /// Es werden keine Mängel angezeigt.
+      internal static let noneSelected = L10n.tr("Localizable", "map.status_filter.none_selected")
+      /// Es werden nur Mängel mit einem der ausgewählten Status angezeigt.
+      internal static let someSelected = L10n.tr("Localizable", "map.status_filter.some_selected")
+      /// Filter nach Status
+      internal static let title = L10n.tr("Localizable", "map.status_filter.title")
     }
   }
 

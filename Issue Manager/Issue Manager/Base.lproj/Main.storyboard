@@ -54,7 +54,7 @@
                                     <visualEffectView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0fQ-ZQ-GOx">
                                         <rect key="frame" x="0.0" y="0.0" width="703.5" height="512"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="0Gy-ZS-TQM">
-                                            <rect key="frame" x="0.0" y="0.0" width="703.5" height="512"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="703" height="512"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rHo-jf-rQe">
@@ -63,7 +63,7 @@
                                                         <constraint firstAttribute="height" constant="256" id="tbp-3z-9r2"/>
                                                     </constraints>
                                                     <connections>
-                                                        <segue destination="XdX-XP-UgZ" kind="embed" id="oIu-NA-CAA"/>
+                                                        <segue destination="XdX-XP-UgZ" kind="embed" identifier="embedIssueList" id="oIu-NA-CAA"/>
                                                     </connections>
                                                 </containerView>
                                             </subviews>
@@ -131,11 +131,20 @@
                         <viewLayoutGuide key="safeArea" id="VUw-jc-0yf"/>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Detail" id="mOI-FS-AaM"/>
+                    <navigationItem key="navigationItem" title="Detail" id="mOI-FS-AaM">
+                        <barButtonItem key="rightBarButtonItem" image="filter_disabled" id="3w7-54-fmg">
+                            <connections>
+                                <segue destination="vtj-ft-jtK" kind="popoverPresentation" identifier="showIssueFilter" popoverAnchorBarButtonItem="3w7-54-fmg" id="s2X-hv-9QT">
+                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                </segue>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="activityIndicator" destination="elz-u4-mxA" id="Paa-GH-0Rl"/>
                         <outlet property="blurHeightConstraint" destination="f9P-g7-BFL" id="3CA-1n-t1H"/>
                         <outlet property="fallbackLabel" destination="9Cf-dE-GqE" id="uj7-dO-mcT"/>
+                        <outlet property="filterItem" destination="3w7-54-fmg" id="Yym-J4-g4y"/>
                         <outlet property="listHeightConstraint" destination="tbp-3z-9r2" id="HrW-Nu-aF6"/>
                         <outlet property="pdfContainerView" destination="g4F-zU-ri6" id="pRf-qb-AVn"/>
                         <outlet property="pullableView" destination="Axp-84-gLn" id="c3V-tK-ZCC"/>
@@ -899,8 +908,75 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
             </objects>
             <point key="canvasLocation" x="709" y="820"/>
         </scene>
+        <!--Filter nach Status-->
+        <scene sceneID="Cng-52-hy9">
+            <objects>
+                <tableViewController storyboardIdentifier="StatusFilter" id="Bfc-S7-GGm" customClass="StatusFilterViewController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="AGp-gF-W33">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="Status" textLabel="H9A-yc-rjb" style="IBUITableViewCellStyleDefault" id="iNe-H1-nc3">
+                                <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iNe-H1-nc3" id="zEe-no-L85">
+                                    <rect key="frame" x="0.0" y="0.0" width="335" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="H9A-yc-rjb">
+                                            <rect key="frame" x="16" y="0.0" width="319" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Bfc-S7-GGm" id="Wkr-Ms-k3T"/>
+                            <outlet property="delegate" destination="Bfc-S7-GGm" id="hEi-70-gyj"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Filter nach Status" id="OJF-lh-wTZ">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="JEl-lL-nCj">
+                            <connections>
+                                <segue destination="9yb-Gn-S7D" kind="unwind" unwindAction="backToMap:" id="wIn-Kv-ygr"/>
+                            </connections>
+                        </barButtonItem>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="map.issue_filter.title"/>
+                        </userDefinedRuntimeAttributes>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WjX-dk-UF2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="9yb-Gn-S7D" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="2202" y="129"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="6Vg-ET-7dq">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="vtj-ft-jtK" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="rNG-1A-zxC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Bfc-S7-GGm" kind="relationship" relationship="rootViewController" id="c8J-MR-epc"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sBd-Fj-8dI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1478" y="129"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="filter_disabled" width="24" height="24"/>
         <image name="issue_new" width="64" height="64"/>
         <image name="mark_unmarked" width="32" height="32"/>
         <namedColor name="Attention">
