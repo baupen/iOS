@@ -7,8 +7,9 @@ class IssueListViewController: UIViewController {
 	typealias Localization = L10n.Map.IssueList
 	
 	@IBOutlet var summaryLabel: UILabel!
-	@IBOutlet var topSeparator: UIView!
+	@IBOutlet var separatorView: UIView!
 	@IBOutlet var issueTableView: UITableView!
+	@IBOutlet var separatorHeightConstraint: NSLayoutConstraint!
 	
 	var pullableView: PullableView!
 	
@@ -27,9 +28,10 @@ class IssueListViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
+		separatorHeightConstraint.constant = 1 / UIScreen.main.scale // 1px
+		separatorView.backgroundColor = issueTableView.separatorColor
+		
 		issueTableView.panGestureRecognizer.addTarget(self, action: #selector(listPanned))
-		topSeparator.frame.size.height = 1 / UIScreen.main.scale // 1px
-		topSeparator.backgroundColor = issueTableView.separatorColor
 		
 		update()
 	}

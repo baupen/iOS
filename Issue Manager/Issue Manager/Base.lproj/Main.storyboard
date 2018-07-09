@@ -785,14 +785,16 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                         </constraints>
                                         <viewLayoutGuide key="safeArea" id="apj-CG-thG"/>
                                     </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kSJ-C9-VR1" userLabel="Top Separator">
+                                        <rect key="frame" x="0.0" y="64" width="703" height="1"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="DG9-rP-OI2"/>
+                                        </constraints>
+                                    </view>
                                     <tableView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" sectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="eSQ-Ii-ycc">
-                                        <rect key="frame" x="0.0" y="64" width="703" height="192"/>
+                                        <rect key="frame" x="0.0" y="65" width="703" height="191"/>
                                         <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <view key="tableHeaderView" contentMode="scaleToFill" id="kSJ-C9-VR1" userLabel="Top Separator">
-                                            <rect key="frame" x="0.0" y="0.0" width="703" height="0.0"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </view>
                                         <view key="tableFooterView" contentMode="scaleToFill" id="jdB-af-gpG" userLabel="Empty footer to hide empty cells">
                                             <rect key="frame" x="0.0" y="72" width="703" height="0.0"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
@@ -888,8 +890,9 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                     </view>
                     <connections>
                         <outlet property="issueTableView" destination="eSQ-Ii-ycc" id="BBf-ez-6TU"/>
+                        <outlet property="separatorHeightConstraint" destination="DG9-rP-OI2" id="1Mp-0H-Vir"/>
+                        <outlet property="separatorView" destination="kSJ-C9-VR1" id="r8q-Mb-xrZ"/>
                         <outlet property="summaryLabel" destination="5mB-PJ-gr9" id="l74-fz-SFv"/>
-                        <outlet property="topSeparator" destination="kSJ-C9-VR1" id="gyQ-ex-VLo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="61v-Hv-iZJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
