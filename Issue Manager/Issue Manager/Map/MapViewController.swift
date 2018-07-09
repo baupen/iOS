@@ -20,6 +20,8 @@ class MapViewController: UIViewController, LoadedViewController {
 	
 	var pdfController: SimplePDFViewController? {
 		didSet {
+			oldValue?.delegate = nil
+			// embed/unembed controller
 			guard pdfController != oldValue else { return }
 			if let old = oldValue {
 				old.willMove(toParentViewController: nil)
@@ -113,6 +115,7 @@ class MapViewController: UIViewController, LoadedViewController {
 		}
 	}
 	
+	private var currentLoadingTaskID: UUID!
 	func asyncLoadPDF(at url: URL) {
 		let page = Future
 			.init(asyncOn: .global()) { try PDFDocument(at: url).page(0) }
@@ -121,18 +124,37 @@ class MapViewController: UIViewController, LoadedViewController {
 		pdfController = nil
 		fallbackLabel.text = Localization.pdfLoading
 		activityIndicator.startAnimating()
-		page.always(activityIndicator.stopAnimating)
+		
+		let taskID = UUID()
+		currentLoadingTaskID = taskID
 		
 		page.then { page in
+			guard taskID == self.currentLoadingTaskID else { return }
+			
 			self.pdfController = SimplePDFViewController() <- {
+				$0.delegate = self
 				$0.page = page
 			}
 		}
 		
 		page.catch { error in
+			guard taskID == self.currentLoadingTaskID else { return }
+			
 			print("Error while loading PDF!", error.localizedDescription)
 			dump(error)
+			self.activityIndicator.stopAnimating()
 			self.fallbackLabel.text = Localization.couldNotLoad
 		}
+	}
+}
+
+extension MapViewController: SimplePDFViewControllerDelegate {
+	func pdfZoomed(to scale: CGFloat) {
+		
+	}
+	
+	func pdfFinishedLoading() {
+		activityIndicator.stopAnimating()
+		fallbackLabel.text = nil
 	}
 }
