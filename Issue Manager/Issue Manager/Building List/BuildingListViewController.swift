@@ -18,6 +18,7 @@ class BuildingListViewController: UITableViewController, LoadedViewController {
 	@IBAction func clientModeSwitched() {
 		defaults.isInClientMode = clientModeSwitch.isOn
 		updateClientModeAppearance()
+		buildingListView.reloadData()
 	}
 	
 	// unwind segue
@@ -80,14 +81,8 @@ class BuildingListViewController: UITableViewController, LoadedViewController {
 		
 		buildings = Array(Client.shared.storage.buildings.values)
 		
-		let refreshControl = UIRefreshControl()
-		refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
-		tableView.refreshControl = refreshControl
-		
-		if let id = defaults.lastBuildingID, let lastBuilding = Client.shared.storage.buildings[id] {
-			DispatchQueue.main.async {
-				self.showMapList(for: lastBuilding, animated: false)
-			}
+		tableView.refreshControl = UIRefreshControl() <- {
+			$0.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
 		}
 	}
 	
@@ -100,8 +95,6 @@ class BuildingListViewController: UITableViewController, LoadedViewController {
 	}
 	
 	func showMapList(for building: Building, animated: Bool = true) {
-		defaults.lastBuildingID = building.id
-		
 		let main = storyboard!.instantiate(MainViewController.self)!
 		main.building = building
 		
