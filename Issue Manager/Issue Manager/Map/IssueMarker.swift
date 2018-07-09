@@ -41,18 +41,7 @@ class IssueMarker: UIView {
 	}
 	
 	func update() {
-		let image: UIImage
-		switch issue.status.simplified {
-		case .new:
-			image = #imageLiteral(resourceName: "issue_created.pdf")
-		case .registered:
-			image = #imageLiteral(resourceName: "issue_new.pdf")
-		case .responded:
-			image = #imageLiteral(resourceName: "issue_responded.pdf")
-		case .reviewed:
-			image = #imageLiteral(resourceName: "issue_reviewed.pdf")
-		}
-		button.setImage(image, for: .normal)
+		button.setImage(issue.status.image, for: .normal)
 		
 		reposition()
 	}
@@ -66,5 +55,20 @@ class IssueMarker: UIView {
 	private func reposition() {
 		center.x = superview!.bounds.width * CGFloat(issue.position!.x)
 		center.y = superview!.bounds.height * CGFloat(issue.position!.y)
+	}
+}
+
+extension Issue.Status {
+	var image: UIImage {
+		switch simplified {
+		case .new:
+			return #imageLiteral(resourceName: "issue_created.pdf")
+		case .registered:
+			return #imageLiteral(resourceName: "issue_new.pdf")
+		case .responded:
+			return #imageLiteral(resourceName: "issue_responded.pdf")
+		case .reviewed:
+			return #imageLiteral(resourceName: "issue_reviewed.pdf")
+		}
 	}
 }

@@ -54,7 +54,7 @@
                                     <visualEffectView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0fQ-ZQ-GOx">
                                         <rect key="frame" x="0.0" y="0.0" width="703.5" height="512"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="0Gy-ZS-TQM">
-                                            <rect key="frame" x="0.0" y="0.0" width="703" height="512"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="703.5" height="512"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rHo-jf-rQe">
@@ -807,7 +807,7 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="LUO-ML-7li">
-                                                            <rect key="frame" x="8" y="8" width="687.5" height="27.5"/>
+                                                            <rect key="frame" x="8" y="8" width="649" height="27.5"/>
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7j7-fo-OC8">
                                                                     <rect key="frame" x="0.0" y="4" width="20" height="20"/>
@@ -830,30 +830,40 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" text="Etwas ist falsch!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="67y-Qi-4Yk">
-                                                                    <rect key="frame" x="98" y="3.5" width="534.5" height="20.5"/>
+                                                                    <rect key="frame" x="98" y="3.5" width="496" height="20.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="500" verticalHuggingPriority="251" horizontalCompressionResistancePriority="800" text="Maler" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="em9-qY-Md6">
-                                                                    <rect key="frame" x="644.5" y="3.5" width="43" height="20.5"/>
+                                                                    <rect key="frame" x="606" y="3.5" width="43" height="20.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
                                                         </stackView>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="issue_new" translatesAutoresizingMaskIntoConstraints="NO" id="fog-AI-NCl">
+                                                            <rect key="frame" x="665" y="7" width="30" height="30"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="fog-AI-NCl" secondAttribute="height" multiplier="1:1" id="1uy-gd-GBH"/>
+                                                                <constraint firstAttribute="width" constant="30" id="cXm-1i-Yd5"/>
+                                                            </constraints>
+                                                        </imageView>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstAttribute="trailingMargin" secondItem="LUO-ML-7li" secondAttribute="trailing" id="7xa-AE-bms"/>
+                                                        <constraint firstAttribute="trailingMargin" secondItem="fog-AI-NCl" secondAttribute="trailing" id="Ntv-rn-R6U"/>
                                                         <constraint firstItem="LUO-ML-7li" firstAttribute="top" secondItem="dE6-pX-HX1" secondAttribute="topMargin" id="Rxc-GK-vhY"/>
                                                         <constraint firstAttribute="bottomMargin" secondItem="LUO-ML-7li" secondAttribute="bottom" id="ZV3-xN-mkk"/>
+                                                        <constraint firstItem="fog-AI-NCl" firstAttribute="centerY" secondItem="dE6-pX-HX1" secondAttribute="centerY" id="hyz-sD-sIX"/>
+                                                        <constraint firstItem="fog-AI-NCl" firstAttribute="leading" secondItem="LUO-ML-7li" secondAttribute="trailing" constant="8" id="llO-Th-kLB"/>
                                                         <constraint firstItem="LUO-ML-7li" firstAttribute="leading" secondItem="dE6-pX-HX1" secondAttribute="leadingMargin" id="xAN-gP-ZAn"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <connections>
                                                     <outlet property="descriptionLabel" destination="67y-Qi-4Yk" id="bjD-qP-Z6u"/>
+                                                    <outlet property="iconView" destination="fog-AI-NCl" id="47q-ah-bQE"/>
                                                     <outlet property="markButton" destination="7j7-fo-OC8" id="qaQ-rW-sey"/>
                                                     <outlet property="numberLabel" destination="IDP-Ek-oyi" id="g9v-Li-v1I"/>
                                                     <outlet property="tradeLabel" destination="em9-qY-Md6" id="6qm-xG-U6n"/>
@@ -888,6 +898,7 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
         </scene>
     </scenes>
     <resources>
+        <image name="issue_new" width="64" height="64"/>
         <image name="mark_unmarked" width="32" height="32"/>
         <namedColor name="Attention">
             <color red="0.99199998378753662" green="0.49399998784065247" blue="0.078000001609325409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

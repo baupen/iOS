@@ -11,6 +11,7 @@ class IssueCell: UITableViewCell, LoadedTableCell {
 	@IBOutlet var numberLabel: UILabel!
 	@IBOutlet var descriptionLabel: UILabel!
 	@IBOutlet var tradeLabel: UILabel!
+	@IBOutlet var iconView: UIImageView!
 	
 	@IBAction func markButtonPressed() {
 		issue.mark()
@@ -36,6 +37,8 @@ class IssueCell: UITableViewCell, LoadedTableCell {
 		
 		let craftsman = issue.craftsman.flatMap { Client.shared.storage.craftsmen[$0] }
 		tradeLabel.setText(to: craftsman?.trade, fallback: Localization.noCraftsman)
+		
+		iconView.image = issue.status.image
 	}
 }
 
