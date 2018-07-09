@@ -428,8 +428,8 @@
 		952CB48A20E830CD00E6B664 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				9584F24D20E936ED00A8C884 /* LoginWindowView.swift */,
 				95AB959220E572C900A0AE8D /* LoginViewController.swift */,
+				9584F24D20E936ED00A8C884 /* LoginWindowView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -525,10 +525,10 @@
 		95870B2C20E9C03900BB1B39 /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				9583C2D420DC757800452695 /* MapViewController.swift */,
 				9550E0E520F2E70700921387 /* IssueMarker.swift */,
 				95BBF32020F26F49006E162E /* IssueCell.swift */,
 				9553707420F1A5E2005D81C8 /* IssueListViewController.swift */,
-				9583C2D420DC757800452695 /* MapViewController.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";

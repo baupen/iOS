@@ -146,6 +146,7 @@ class MapViewController: UIViewController, LoadedViewController {
 				$0.delegate = self
 				$0.page = page
 				$0.overlayView.alpha = self.markerAlpha
+				$0.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: self.pullableView.minHeight, right: 0)
 			}
 			self.updateMarkers()
 		}
@@ -170,7 +171,7 @@ class MapViewController: UIViewController, LoadedViewController {
 				$0.zoomScale = pdfController.scrollView.zoomScale
 				$0.buttonAction = { [unowned self] in
 					_ = self // will need this later on
-					print("marker pressed for", issue)
+					print("marker pressed for", issue.id)
 				}
 			}
 		}
