@@ -72,7 +72,7 @@ internal enum L10n {
   internal enum Issue {
 
     internal enum Status {
-      /// Im Foyer
+      /// Neu
       internal static let new = L10n.tr("Localizable", "issue.status.new")
       /// Im Verzeichnis
       internal static let registered = L10n.tr("Localizable", "issue.status.registered")
