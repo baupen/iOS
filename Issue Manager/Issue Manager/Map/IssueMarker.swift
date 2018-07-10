@@ -62,9 +62,9 @@ extension Issue.Status {
 	var image: UIImage {
 		switch simplified {
 		case .new:
-			return #imageLiteral(resourceName: "issue_created.pdf")
+			return #imageLiteral(resourceName: "issue_new.pdf") 
 		case .registered:
-			return #imageLiteral(resourceName: "issue_new.pdf")
+			return #imageLiteral(resourceName: "issue_created.pdf")
 		case .responded:
 			return #imageLiteral(resourceName: "issue_responded.pdf")
 		case .reviewed:
