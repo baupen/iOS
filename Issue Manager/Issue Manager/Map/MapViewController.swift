@@ -184,6 +184,8 @@ class MapViewController: UIViewController, LoadedViewController {
 	private func updateMarkers() {
 		guard let pdfController = pdfController else { return }
 		
+		pdfController.view.layoutIfNeeded()
+		
 		markers.forEach { $0.removeFromSuperview() }
 		markers = issues.map { issue in
 			IssueMarker() <- {
