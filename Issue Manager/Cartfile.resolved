@@ -1,1 +1,3 @@
 github "ashleymills/Reachability.swift" "v4.1.0"
+github "juliand665/PullToExpand" "1.0.0"
+github "mangelio/SimplePDFKit" "1.0.1"

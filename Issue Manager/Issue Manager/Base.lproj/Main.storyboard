@@ -110,6 +110,12 @@
                                     <userDefinedRuntimeAttribute type="size" keyPath="layer.shadowOffset">
                                         <size key="value" width="0.0" height="0.0"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="damping">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="stiffness">
+                                        <real key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
@@ -955,7 +961,7 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
     </scenes>
     <resources>
         <image name="filter_disabled" width="24" height="24"/>
-        <image name="issue_new" width="64" height="64"/>
+        <image name="issue_new" width="128" height="128"/>
         <image name="mark_unmarked" width="32" height="32"/>
         <namedColor name="Attention">
             <color red="0.99199998378753662" green="0.49399998784065247" blue="0.078000001609325409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
