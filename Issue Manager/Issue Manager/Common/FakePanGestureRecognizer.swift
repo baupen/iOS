@@ -3,6 +3,8 @@
 import UIKit
 
 class FakePanRecognizer: UIPanGestureRecognizer {
+	typealias State = UIGestureRecognizerState // TODO remove in swift 4.2
+	
 	var fakeTranslation = CGPoint.zero {
 		didSet {
 			let now = Date()
@@ -17,7 +19,7 @@ class FakePanRecognizer: UIPanGestureRecognizer {
 	var lastUpdateTime: Date?
 	private var fakeState = State.possible
 	
-	override var state: UIGestureRecognizerState {
+	override var state: State {
 		get { return fakeState }
 		set { fakeState = newValue }
 	}

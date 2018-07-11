@@ -85,7 +85,9 @@ final class Issue: FileContainer {
 		}
 		
 		/// a simplified representation of the status
-		enum Simplified: CaseIterable {
+		enum Simplified { // TODO make CaseIterable in swift 4.2
+			static let allCases = [new, registered, responded, reviewed] // TODO remove in swift 4.2
+			
 			case new, registered, responded, reviewed
 		}
 	}
