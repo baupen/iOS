@@ -62,14 +62,14 @@ final class Issue: FileContainer {
 		var review: Event?
 		
 		var simplified: Simplified {
-			if registration == nil {
-				return .new
-			} else if response == nil {
-				return .registered
-			} else if review == nil {
-				return .responded
-			} else {
+			if review != nil {
 				return .reviewed
+			} else if response != nil {
+				return .responded
+			} else if registration != nil {
+				return .registered
+			} else {
+				return .new
 			}
 		}
 		
@@ -102,6 +102,7 @@ extension Issue {
 		return status.response != nil
 	}
 	
+	/// - note: does _not_ imply `hasResponse`!
 	var isReviewed: Bool {
 		return status.review != nil
 	}

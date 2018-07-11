@@ -146,6 +146,10 @@ internal enum L10n {
       internal static func summary(_ p1: String, _ p2: String) -> String {
         return L10n.tr("Localizable", "map.issue_list.summary", p1, p2)
       }
+      /// Filter aktiv: %@/%@ Pendenzen angezeigt
+      internal static func summaryFiltered(_ p1: String, _ p2: String) -> String {
+        return L10n.tr("Localizable", "map.issue_list.summary_filtered", p1, p2)
+      }
       /// neu
       internal static let unregistered = L10n.tr("Localizable", "map.issue_list.unregistered")
     }

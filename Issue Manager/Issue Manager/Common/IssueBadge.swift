@@ -47,11 +47,9 @@ class IssueBadge: UIView {
 	
 	func update() {
 		let issues = shouldUseRecursiveIssues ? holder.recursiveIssues() : (holder as! Map).allIssues()
+		// async because there could be a lot of issues (e.g. if we're calculating it for a whole building)
 		let issueCount = BasicFuture(asyncOn: .global()) {
-			issues
-				.lazy
-				.filter { $0.hasResponse && !$0.isReviewed }
-				.count
+			issues.count { $0.hasResponse && $0.isOpen }
 		}
 		
 		issueCount.on(.main).then { count in

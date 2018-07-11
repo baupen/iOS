@@ -55,19 +55,19 @@ class MapViewController: UIViewController, LoadedViewController {
 	
 	var issues: [Issue] = []
 	
-	var visibleStatuses = Set(Issue.Status.Simplified.allCases) {
+	var visibleStatuses = Issue.allStatuses {
 		didSet {
 			updateMarkerAppearance()
-			filterItem.image = visibleStatuses == Set(Issue.Status.Simplified.allCases) ? #imageLiteral(resourceName: "filter_disabled.pdf") : #imageLiteral(resourceName: "filter_enabled.pdf")
+			filterItem.image = visibleStatuses == Issue.allStatuses ? #imageLiteral(resourceName: "filter_disabled.pdf") : #imageLiteral(resourceName: "filter_enabled.pdf")
+			issueListController.visibleStatuses = visibleStatuses
 		}
 	}
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
+		visibleStatuses = Issue.allStatuses // TODO load from defaults
 		update()
-		
-		visibleStatuses = Set(Issue.Status.Simplified.allCases) // TODO load from defaults
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -227,4 +227,8 @@ extension MapViewController: StatusFilterViewControllerDelegate {
 	func statusFilterChanged(to newValue: Set<Issue.Status.Simplified>) {
 		visibleStatuses = newValue
 	}
+}
+
+extension Issue {
+	static let allStatuses = Set(Issue.Status.Simplified.allCases)
 }

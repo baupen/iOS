@@ -43,11 +43,9 @@ class MapCell: UITableViewCell, LoadedTableCell {
 		nameLabel!.text = map.name
 		
 		let issues = shouldUseRecursiveIssues ? map.recursiveIssues() : map.allIssues()
+		// async because there could be a lot of issues (e.g. if we're calculating it for a high-level map)
 		let openIssueCount = BasicFuture(asyncOn: .global()) {
-			issues
-				.lazy
-				.filter { !$0.isReviewed }
-				.count
+			issues.count { $0.isOpen }
 		}
 		openIssueCount.on(.main).then { count in
 			self.openIssuesLabel?.text = Localization.openIssues(String(count))

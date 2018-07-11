@@ -32,3 +32,9 @@ func ??? <Wrapped>(optional: Wrapped?, error: @autoclosure () -> Error) throws -
 	}
 	return unwrapped
 }
+
+extension Sequence {
+	func count(where condition: (Element) throws -> Bool) rethrows -> Int {
+		return try lazy.filter(condition).count
+	}
+}

@@ -63,12 +63,14 @@ class BuildingCell: UICollectionViewCell, LoadedCollectionCell {
 		
 		issueBadge.holder = building
 		
+		// async because there could be a lot of issues (e.g. if we're calculating it for a whole building)
 		DispatchQueue.global().async {
 			let issues = self.building.recursiveIssues()
-			let openIssues = issues.filter { !$0.isReviewed }
+			let openCount = issues.count { $0.isOpen }
+			let totalCount = issues.count
 			DispatchQueue.main.async {
-				self.totalIssuesLabel.text = Localization.totalIssues(String(issues.count))
-				self.openIssuesLabel.text = Localization.openIssues(String(openIssues.count))
+				self.totalIssuesLabel.text = Localization.totalIssues(String(totalCount))
+				self.openIssuesLabel.text = Localization.openIssues(String(openCount))
 			}
 		}
 	}

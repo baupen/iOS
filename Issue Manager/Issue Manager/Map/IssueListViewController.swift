@@ -13,13 +13,20 @@ class IssueListViewController: UIViewController {
 	
 	var pullableView: PullableView!
 	
+	/// set this before setting `map` initially or before loading the view to avoid calculating stuff twice
+	var visibleStatuses = Issue.allStatuses {
+		didSet {
+			update()
+		}
+	}
+	
 	var map: Map? {
 		didSet {
 			update()
 		}
 	}
 	
-	var issues: [Issue] = [] {
+	private var issues: [Issue] = [] {
 		didSet {
 			issueTableView.reloadData()
 		}
@@ -39,9 +46,18 @@ class IssueListViewController: UIViewController {
 	func update() {
 		guard isViewLoaded, let map = map else { return }
 		
-		issues = Array(map.allIssues())
-		let openIssues = issues.lazy.filter { !$0.isReviewed }.count
-		summaryLabel.text = Localization.summary(String(openIssues), String(issues.count))
+		let allIssues = map.allIssues()
+		issues = allIssues.filter {
+			visibleStatuses.contains($0.status.simplified)
+		}
+		
+		let openCount = issues.count { $0.isOpen }
+		let totalCount = allIssues.count
+		if visibleStatuses == Issue.allStatuses {
+			summaryLabel.text = Localization.summary(String(openCount), String(totalCount))
+		} else {
+			summaryLabel.text = Localization.summaryFiltered(String(issues.count), String(totalCount))
+		}
 	}
 	
 	// MARK: PullableView-UIScrollView interaction 
