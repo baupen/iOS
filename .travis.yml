@@ -2,6 +2,6 @@ language: swift
 before_install:
   - cd Issue\ Manager
 osx_image: xcode9.4
-install: carthage bootstrap
+install: carthage bootstrap --platform iOS
 script:
   - xcodebuild clean build -sdk iphonesimulator -project Issue\ Manager.xcodeproj/ -scheme Issue\ Manager CODE_SIGNING_REQUIRED=NO
