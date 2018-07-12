@@ -39,8 +39,11 @@ class MapListViewController: UITableViewController, LoadedViewController {
 				// deselect map unless currently shown
 				let mapController = mainController.detailNav.mapController
 				let currentMap = mapController.holder
-				if currentMap?.id != map(for: selected).id {
+				if map(for: selected).id != currentMap?.id {
 					tableView.deselectRow(at: selected, animated: true)
+				} else if !map(for: selected).children.isEmpty {
+					// must have navigated back from map's sublist
+					showOwnMap()
 				}
 			} else {
 				// compact; always deselect
