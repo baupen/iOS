@@ -48,7 +48,7 @@
                                 <color key="textColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Axp-84-gLn" customClass="PullableView" customModule="PullToExpand">
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Axp-84-gLn" customClass="PullableView" customModule="PullToExpand">
                                 <rect key="frame" x="0.0" y="512" width="703.5" height="256"/>
                                 <subviews>
                                     <visualEffectView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0fQ-ZQ-GOx">
@@ -58,7 +58,7 @@
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rHo-jf-rQe">
-                                                    <rect key="frame" x="0.0" y="0.0" width="703.5" height="256"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="703" height="256"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="256" id="tbp-3z-9r2"/>
                                                     </constraints>
@@ -738,17 +738,17 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
             <objects>
                 <viewController id="XdX-XP-UgZ" customClass="IssueListViewController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" opaque="NO" contentMode="scaleToFill" id="eaQ-Dp-CWK">
-                        <rect key="frame" x="0.0" y="0.0" width="703.5" height="256"/>
+                        <rect key="frame" x="0.0" y="0.0" width="703" height="256"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7Ad-BC-5Kd">
-                                <rect key="frame" x="0.0" y="0.0" width="703.5" height="256"/>
+                                <rect key="frame" x="0.0" y="0.0" width="703" height="256"/>
                                 <subviews>
                                     <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8RX-4M-Ilf">
-                                        <rect key="frame" x="0.0" y="0.0" width="703.5" height="64"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="703" height="64"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZbN-Ox-zZ9" userLabel="Indicator">
-                                                <rect key="frame" x="334" y="4" width="36" height="5"/>
+                                                <rect key="frame" x="333.5" y="4" width="36" height="5"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.25" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="5" id="9X6-ow-dzM"/>
@@ -779,36 +779,35 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                         <viewLayoutGuide key="safeArea" id="apj-CG-thG"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kSJ-C9-VR1" userLabel="Top Separator">
-                                        <rect key="frame" x="0.0" y="64" width="703.5" height="1"/>
+                                        <rect key="frame" x="0.0" y="64" width="703" height="1"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="DG9-rP-OI2"/>
                                         </constraints>
                                     </view>
                                     <tableView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" sectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="eSQ-Ii-ycc">
-                                        <rect key="frame" x="0.0" y="65" width="703.5" height="191"/>
+                                        <rect key="frame" x="0.0" y="65" width="703" height="191"/>
                                         <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <view key="tableFooterView" contentMode="scaleToFill" id="jdB-af-gpG" userLabel="Empty footer to hide empty cells">
-                                            <rect key="frame" x="0.0" y="72" width="703.5" height="0.0"/>
+                                            <rect key="frame" x="0.0" y="72" width="703" height="0.0"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Issue Cell" id="X3S-og-f79" customClass="IssueCell" customModule="Issue_Manager" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="703.5" height="44"/>
+                                                <rect key="frame" x="0.0" y="28" width="703" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="X3S-og-f79" id="dE6-pX-HX1">
-                                                    <rect key="frame" x="0.0" y="0.0" width="703.5" height="43.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="703" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="LUO-ML-7li">
-                                                            <rect key="frame" x="8" y="8" width="649.5" height="27.5"/>
+                                                            <rect key="frame" x="8" y="8" width="687" height="27.5"/>
                                                             <subviews>
-                                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7j7-fo-OC8">
-                                                                    <rect key="frame" x="0.0" y="4" width="20" height="20"/>
+                                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7j7-fo-OC8">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="27.5" height="27.5"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" secondItem="7j7-fo-OC8" secondAttribute="height" multiplier="1:1" id="3eI-Vs-Sdj"/>
-                                                                        <constraint firstAttribute="width" constant="20" id="4Ge-ax-Cbx"/>
                                                                     </constraints>
                                                                     <state key="normal" image="mark_unmarked"/>
                                                                     <connections>
@@ -816,7 +815,7 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                                                     </connections>
                                                                 </button>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="799" verticalHuggingPriority="251" horizontalCompressionResistancePriority="800" text="#123" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IDP-Ek-oyi">
-                                                                    <rect key="frame" x="32" y="3.5" width="54" height="20.5"/>
+                                                                    <rect key="frame" x="39.5" y="3.5" width="54" height="20.5"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="54" id="wju-Kd-os5"/>
                                                                     </constraints>
@@ -825,33 +824,33 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" text="Etwas ist falsch!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="67y-Qi-4Yk">
-                                                                    <rect key="frame" x="98" y="3.5" width="496.5" height="20.5"/>
+                                                                    <rect key="frame" x="105.5" y="3.5" width="487" height="20.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="500" verticalHuggingPriority="251" horizontalCompressionResistancePriority="800" text="Maler" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="em9-qY-Md6">
-                                                                    <rect key="frame" x="606.5" y="3.5" width="43" height="20.5"/>
+                                                                    <rect key="frame" x="604.5" y="3.5" width="43" height="20.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" image="flat_issue_new" translatesAutoresizingMaskIntoConstraints="NO" id="fog-AI-NCl">
+                                                                    <rect key="frame" x="659.5" y="0.0" width="27.5" height="27.5"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" secondItem="fog-AI-NCl" secondAttribute="height" multiplier="1:1" id="1uy-gd-GBH"/>
+                                                                    </constraints>
+                                                                </imageView>
                                                             </subviews>
-                                                        </stackView>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="issue_new" translatesAutoresizingMaskIntoConstraints="NO" id="fog-AI-NCl">
-                                                            <rect key="frame" x="665.5" y="7" width="30" height="30"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" secondItem="fog-AI-NCl" secondAttribute="height" multiplier="1:1" id="1uy-gd-GBH"/>
-                                                                <constraint firstAttribute="width" constant="30" id="cXm-1i-Yd5"/>
+                                                                <constraint firstAttribute="height" priority="999" constant="22" id="bVQ-IB-Efo"/>
                                                             </constraints>
-                                                        </imageView>
+                                                        </stackView>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstAttribute="trailingMargin" secondItem="fog-AI-NCl" secondAttribute="trailing" id="Ntv-rn-R6U"/>
+                                                        <constraint firstAttribute="trailingMargin" secondItem="LUO-ML-7li" secondAttribute="trailing" id="Ipw-Kx-UJs"/>
                                                         <constraint firstItem="LUO-ML-7li" firstAttribute="top" secondItem="dE6-pX-HX1" secondAttribute="topMargin" id="Rxc-GK-vhY"/>
                                                         <constraint firstAttribute="bottomMargin" secondItem="LUO-ML-7li" secondAttribute="bottom" id="ZV3-xN-mkk"/>
-                                                        <constraint firstItem="fog-AI-NCl" firstAttribute="centerY" secondItem="dE6-pX-HX1" secondAttribute="centerY" id="hyz-sD-sIX"/>
-                                                        <constraint firstItem="fog-AI-NCl" firstAttribute="leading" secondItem="LUO-ML-7li" secondAttribute="trailing" constant="8" id="llO-Th-kLB"/>
                                                         <constraint firstItem="LUO-ML-7li" firstAttribute="leading" secondItem="dE6-pX-HX1" secondAttribute="leadingMargin" id="xAN-gP-ZAn"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
@@ -901,22 +900,45 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="Status" textLabel="H9A-yc-rjb" style="IBUITableViewCellStyleDefault" id="iNe-H1-nc3">
-                                <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="Status Cell" rowHeight="50" id="iNe-H1-nc3" customClass="StatusCell" customModule="Issue_Manager" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="55.5" width="375" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iNe-H1-nc3" id="zEe-no-L85">
-                                    <rect key="frame" x="0.0" y="0.0" width="335" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="335" height="49.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="H9A-yc-rjb">
-                                            <rect key="frame" x="16" y="0.0" width="319" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="xTD-Gz-5Pp">
+                                            <rect key="frame" x="16" y="14" width="311" height="22"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" image="flat_issue_new" translatesAutoresizingMaskIntoConstraints="NO" id="hwv-k2-g01">
+                                                    <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="hwv-k2-g01" secondAttribute="height" multiplier="1:1" id="1R3-hg-ajy"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Neu" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ALj-0b-AKs">
+                                                    <rect key="frame" x="30" y="1" width="281" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="height" priority="999" constant="22" id="7EA-Xc-HbT"/>
+                                            </constraints>
+                                        </stackView>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottomMargin" secondItem="xTD-Gz-5Pp" secondAttribute="bottom" constant="3" id="0Kz-HZ-wp3"/>
+                                        <constraint firstItem="xTD-Gz-5Pp" firstAttribute="top" secondItem="zEe-no-L85" secondAttribute="topMargin" constant="3" id="1Ot-NF-C2E"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="xTD-Gz-5Pp" secondAttribute="trailing" id="8M0-0D-ZME"/>
+                                        <constraint firstItem="xTD-Gz-5Pp" firstAttribute="leading" secondItem="zEe-no-L85" secondAttribute="leadingMargin" id="Ga5-lq-RcB"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="iconView" destination="hwv-k2-g01" id="4j5-6w-0VT"/>
+                                    <outlet property="nameLabel" destination="ALj-0b-AKs" id="LJp-SV-UIp"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -961,7 +983,7 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
     </scenes>
     <resources>
         <image name="filter_disabled" width="24" height="24"/>
-        <image name="issue_new" width="128" height="128"/>
+        <image name="flat_issue_new" width="96" height="96"/>
         <image name="mark_unmarked" width="32" height="32"/>
         <namedColor name="Attention">
             <color red="0.99199998378753662" green="0.49399998784065247" blue="0.078000001609325409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

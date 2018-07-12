@@ -93,6 +93,7 @@
 		95953B4920DFD99A001ED1B7 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B9BA6720DEDF0400261954 /* Storage.swift */; };
 		95953B4A20DFD99A001ED1B7 /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B9BA6520DEC7FA00261954 /* Requests.swift */; };
 		95953B4C20DFFAED001ED1B7 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95953B4B20DFFAED001ED1B7 /* JSON.swift */; };
+		9597935020F7AC2400AA40C1 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9597934F20F7AC2400AA40C1 /* Resources.swift */; };
 		95A7B24D20E3FFE200A928D6 /* Backlog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A7B24C20E3FFE200A928D6 /* Backlog.swift */; };
 		95A7B24E20E3FFE200A928D6 /* Backlog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A7B24C20E3FFE200A928D6 /* Backlog.swift */; };
 		95AA606920EEFA700067A656 /* MapHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AA606820EEFA700067A656 /* MapHolder.swift */; };
@@ -281,6 +282,7 @@
 		95953B1E20DFCD90001ED1B7 /* Testing */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Testing; sourceTree = BUILT_PRODUCTS_DIR; };
 		95953B2020DFCD90001ED1B7 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		95953B4B20DFFAED001ED1B7 /* JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
+		9597934F20F7AC2400AA40C1 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 		95A7B24C20E3FFE200A928D6 /* Backlog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Backlog.swift; sourceTree = "<group>"; };
 		95AA606820EEFA700067A656 /* MapHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapHolder.swift; sourceTree = "<group>"; };
 		95AB959220E572C900A0AE8D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -342,6 +344,7 @@
 				95D2C2AD20E5C3E700D887C8 /* Localization.swift */,
 				9506A96220EDAAAD00AF6AB7 /* Colors.swift */,
 				9511A10320DD3A7100101ADE /* Loading.swift */,
+				9597934F20F7AC2400AA40C1 /* Resources.swift */,
 				9583C2D220DC74BA00452695 /* UIHelpers.swift */,
 			);
 			path = Helpers;
@@ -810,6 +813,7 @@
 				9511A0FF20DD379800101ADE /* Codable.swift in Sources */,
 				9583C2BF20DC748800452695 /* AppDelegate.swift in Sources */,
 				9511A11F20DD4F5600101ADE /* Client.swift in Sources */,
+				9597935020F7AC2400AA40C1 /* Resources.swift in Sources */,
 				9511A13C20DD559500101ADE /* ExecutionContext.swift in Sources */,
 				9583C2D520DC757800452695 /* MapViewController.swift in Sources */,
 				95B9BA6820DEDF0400261954 /* Storage.swift in Sources */,

@@ -38,7 +38,7 @@ class IssueCell: UITableViewCell, LoadedTableCell {
 		let craftsman = issue.craftsman.flatMap { Client.shared.storage.craftsmen[$0] }
 		tradeLabel.setText(to: craftsman?.trade, fallback: Localization.noCraftsman)
 		
-		iconView.image = issue.status.image
+		iconView.image = issue.status.simplified.flatIcon
 	}
 }
 

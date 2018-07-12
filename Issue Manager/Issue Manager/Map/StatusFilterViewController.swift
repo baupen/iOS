@@ -26,10 +26,10 @@ class StatusFilterViewController: UITableViewController {
 	}
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "Status", for: indexPath)
+		let cell = tableView.dequeue(StatusCell.self, for: indexPath)!
 		let status = Status.allCases[indexPath.row]
 		
-		cell.textLabel!.text = status.localizedName.capitalized
+		cell.status = status
 		cell.accessoryType = selected.contains(status) ? .checkmark : .none
 		
 		return cell
@@ -57,23 +57,20 @@ class StatusFilterViewController: UITableViewController {
 	}
 }
 
-extension Issue.Status.Simplified {
-	typealias Localization = L10n.Issue.Status
-	
-	var localizedName: String {
-		switch self {
-		case .new:
-			return Localization.new
-		case .registered:
-			return Localization.registered
-		case .responded:
-			return Localization.responded
-		case .reviewed:
-			return Localization.reviewed
-		}
-	}
-}
-
 protocol StatusFilterViewControllerDelegate {
 	func statusFilterChanged(to newValue: Set<Issue.Status.Simplified>)
+}
+
+class StatusCell: UITableViewCell, LoadedTableCell {
+	static let reuseID = "Status Cell"
+	
+	@IBOutlet var iconView: UIImageView!
+	@IBOutlet var nameLabel: UILabel!
+	
+	var status: Issue.Status.Simplified! {
+		didSet {
+			iconView.image = status.flatIcon
+			nameLabel.text = status.localizedName.capitalized
+		}
+	}
 }
