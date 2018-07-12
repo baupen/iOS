@@ -58,12 +58,12 @@
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rHo-jf-rQe">
-                                                    <rect key="frame" x="0.0" y="0.0" width="704" height="256"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="703.5" height="256"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="256" id="tbp-3z-9r2"/>
                                                     </constraints>
                                                     <connections>
-                                                        <segue destination="XdX-XP-UgZ" kind="embed" identifier="embedIssueList" id="oIu-NA-CAA"/>
+                                                        <segue destination="XdX-XP-UgZ" kind="embed" identifier="" id="oIu-NA-CAA"/>
                                                     </connections>
                                                 </containerView>
                                             </subviews>
@@ -140,7 +140,7 @@
                     <navigationItem key="navigationItem" title="Detail" id="mOI-FS-AaM">
                         <barButtonItem key="rightBarButtonItem" image="filter_disabled" id="3w7-54-fmg">
                             <connections>
-                                <segue destination="vtj-ft-jtK" kind="popoverPresentation" identifier="showIssueFilter" popoverAnchorBarButtonItem="3w7-54-fmg" id="s2X-hv-9QT">
+                                <segue destination="vtj-ft-jtK" kind="popoverPresentation" identifier="" popoverAnchorBarButtonItem="3w7-54-fmg" id="s2X-hv-9QT">
                                     <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                 </segue>
                             </connections>
@@ -940,10 +940,10 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
             </objects>
             <point key="canvasLocation" x="2202" y="129"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Status Filter Navigation Controller-->
         <scene sceneID="6Vg-ET-7dq">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="vtj-ft-jtK" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="vtj-ft-jtK" customClass="StatusFilterNavigationController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="rNG-1A-zxC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>

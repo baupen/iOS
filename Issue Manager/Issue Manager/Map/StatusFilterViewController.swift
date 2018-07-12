@@ -2,6 +2,12 @@
 
 import UIKit
 
+class StatusFilterNavigationController: UINavigationController {
+	var statusFilterController: StatusFilterViewController {
+		return topViewController as! StatusFilterViewController
+	}
+}
+
 class StatusFilterViewController: UITableViewController {
 	typealias Localization = L10n.Map.StatusFilter
 	typealias Status = Issue.Status.Simplified

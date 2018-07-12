@@ -95,18 +95,17 @@ class MapViewController: UIViewController, LoadedViewController {
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		switch segue.identifier {
-		case "embedIssueList":
+		switch segue.destination {
+		case let issueList as IssueListViewController:
 			// called in the beginning when the list controller is embedded
-			issueListController = (segue.destination as! IssueListViewController)
+			issueListController = issueList
 			issueListController.pullableView = pullableView
-		case "showIssueFilter":
-			let navController = segue.destination as! UINavigationController
-			let filterController = navController.topViewController as! StatusFilterViewController
+		case let statusFilterNav as StatusFilterNavigationController:
+			let filterController = statusFilterNav.statusFilterController
 			filterController.selected = visibleStatuses
 			filterController.delegate = self
 		default:
-			fatalError("unrecognized segue identifier: \(segue.identifier ?? "<no identifier>")")
+			fatalError("unrecognized segue to \(segue.destination)")
 		}
 	}
 	
