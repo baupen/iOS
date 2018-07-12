@@ -60,13 +60,14 @@ class MapViewController: UIViewController, LoadedViewController {
 			updateMarkerAppearance()
 			filterItem.image = visibleStatuses == Issue.allStatuses ? #imageLiteral(resourceName: "filter_disabled.pdf") : #imageLiteral(resourceName: "filter_enabled.pdf")
 			issueListController.visibleStatuses = visibleStatuses
+			defaults.hiddenStatuses = Array(Issue.allStatuses.subtracting(visibleStatuses))
 		}
 	}
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		visibleStatuses = Issue.allStatuses // TODO load from defaults
+		visibleStatuses = Issue.allStatuses.subtracting(defaults.hiddenStatuses)
 		update()
 	}
 	
