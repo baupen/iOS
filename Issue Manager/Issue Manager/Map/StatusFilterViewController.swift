@@ -74,3 +74,11 @@ class StatusCell: UITableViewCell, LoadedTableCell {
 		}
 	}
 }
+
+class TrilinearImageView: UIImageView {
+	override func awakeFromNib() {
+		super.awakeFromNib()
+		
+		layer.minificationFilter = kCAFilterTrilinear
+	}
+}
