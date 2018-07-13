@@ -72,10 +72,25 @@
 "issue.status.new" = "Neu";
 // CONTEXT: Status einer Pendenz, die ins Verzeichnis aufgenommen wurde, aber sonst noch nichts.
 "issue.status.registered" = "Im Verzeichnis";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Issue.status.registered
+// CONTEXT: Beschreibt genauer, wie die Pendenz registriert wurde. %s wird durch den Namen des Registrierers ersetzt.
+"issue.status.registered_by" = "Registriert von %@";
 // CONTEXT: Status einer Pendenz, die vom Handwerker beantwortet wurde.
 "issue.status.responded" = "Beantwortet";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Issue.status.responded
+// CONTEXT: Beschreibt genauer, wie die Pendenz beantwortet wurde. %s wird durch den Namen des Beantworters ersetzt.
+"issue.status.responded_by" = "Beantwortet von %@";
 // CONTEXT: Status einer Pendenz, die abgeschlossen ist.
 "issue.status.reviewed" = "Abgeschlossen";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Issue.status.reviewed
+// CONTEXT: Beschreibt genauer, wie die Pendenz bestätigt wurde. %s wird durch den Namen des Bestätigers ersetzt.
+"issue.status.reviewed_by" = "Bestätigt von %@";
 // CONTEXT: Wird anstelle der Nummer (z.B. #123) angezeigt, wenn eine Pendenz noch nicht registriert ist.
 "issue.unregistered" = "neu";
 

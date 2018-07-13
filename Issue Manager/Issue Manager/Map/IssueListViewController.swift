@@ -118,7 +118,7 @@ extension IssueListViewController: UITableViewDataSource {
 
 extension IssueListViewController: UITableViewDelegate {
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		if let cell = tableView.cellForRow(at: indexPath), cell.isHighlighted {
+		if indexPath == tableView.indexPathForSelectedRow || tableView.cellForRow(at: indexPath)?.isHighlighted == true {
 			return UITableViewAutomaticDimension
 		} else {
 			return 38 // bit of a magic number but eh
@@ -130,11 +130,14 @@ extension IssueListViewController: UITableViewDelegate {
 			let cell = tableView.cellForRow(at: currentSelection)!
 			tableView.performBatchUpdates({ 
 				cell.isHighlighted = false
+				
+				if indexPath == currentSelection {
+					tableView.deselectRow(at: indexPath, animated: true)
+				}
 			}, completion: nil)
 			
 			if indexPath == currentSelection {
-				tableView.deselectRow(at: indexPath, animated: true)
-				return nil
+				return nil // don't reselect
 			}
 		}
 		return indexPath

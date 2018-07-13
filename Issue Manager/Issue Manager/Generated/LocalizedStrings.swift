@@ -97,10 +97,22 @@ internal enum L10n {
       internal static let new = L10n.tr("Localizable", "issue.status.new")
       /// Im Verzeichnis
       internal static let registered = L10n.tr("Localizable", "issue.status.registered")
+      /// Registriert von %@
+      internal static func registeredBy(_ p1: String) -> String {
+        return L10n.tr("Localizable", "issue.status.registered_by", p1)
+      }
       /// Beantwortet
       internal static let responded = L10n.tr("Localizable", "issue.status.responded")
+      /// Beantwortet von %@
+      internal static func respondedBy(_ p1: String) -> String {
+        return L10n.tr("Localizable", "issue.status.responded_by", p1)
+      }
       /// Abgeschlossen
       internal static let reviewed = L10n.tr("Localizable", "issue.status.reviewed")
+      /// Bestätigt von %@
+      internal static func reviewedBy(_ p1: String) -> String {
+        return L10n.tr("Localizable", "issue.status.reviewed_by", p1)
+      }
     }
   }
 

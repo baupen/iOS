@@ -44,3 +44,27 @@ extension Issue.Status.Simplified {
 		}
 	}
 }
+
+extension Issue.Status {
+	typealias Localization = L10n.Issue.Status
+	
+	var localizedMultilineDescription: String {
+		guard let registration = registration else {
+			return Localization.new
+		}
+		
+		var description = "• \(Localization.registeredBy(registration.author))"
+		
+		if let response = response {
+			description += "\n• "
+			description += Localization.respondedBy(response.author)
+		}
+		
+		if let review = review {
+			description += "\n• "
+			description += Localization.reviewedBy(review.author)
+		}
+		
+		return description
+	}
+}

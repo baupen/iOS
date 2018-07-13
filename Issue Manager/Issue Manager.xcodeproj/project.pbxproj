@@ -37,6 +37,7 @@
 		9529A63D20EECF8600C7E0A0 /* IssueBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9529A63C20EECF8600C7E0A0 /* IssueBadge.swift */; };
 		952CB48820E830A300E6B664 /* BuildingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952CB48720E830A300E6B664 /* BuildingCell.swift */; };
 		952CB48C20E8429D00E6B664 /* BuildingListLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952CB48B20E8429D00E6B664 /* BuildingListLayout.swift */; };
+		95339A3020F8445100A01F07 /* SeparatorLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95339A2F20F8445100A01F07 /* SeparatorLine.swift */; };
 		9550E0E220F2C7FF00921387 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9584F24B20E936BD00A8C884 /* UserDefaults.swift */; };
 		9550E0E620F2E70700921387 /* IssueMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9550E0E520F2E70700921387 /* IssueMarker.swift */; };
 		9550E0E820F38D7600921387 /* StatusFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9550E0E720F38D7600921387 /* StatusFilterViewController.swift */; };
@@ -254,6 +255,7 @@
 		9529A63C20EECF8600C7E0A0 /* IssueBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueBadge.swift; sourceTree = "<group>"; };
 		952CB48720E830A300E6B664 /* BuildingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingCell.swift; sourceTree = "<group>"; };
 		952CB48B20E8429D00E6B664 /* BuildingListLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingListLayout.swift; sourceTree = "<group>"; };
+		95339A2F20F8445100A01F07 /* SeparatorLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeparatorLine.swift; sourceTree = "<group>"; };
 		9550E0E520F2E70700921387 /* IssueMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueMarker.swift; sourceTree = "<group>"; };
 		9550E0E720F38D7600921387 /* StatusFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusFilterViewController.swift; sourceTree = "<group>"; };
 		9553707420F1A5E2005D81C8 /* IssueListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListViewController.swift; sourceTree = "<group>"; };
@@ -412,6 +414,7 @@
 		95283A0F20E9A5760095D4C5 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				95339A2F20F8445100A01F07 /* SeparatorLine.swift */,
 				9529A63C20EECF8600C7E0A0 /* IssueBadge.swift */,
 				9584F24720E92DB800A8C884 /* TextFieldContainer.swift */,
 				9584F24920E92F8E00A8C884 /* CenteringScrollViewDelegate.swift */,
@@ -835,6 +838,7 @@
 				95B9BA6620DEC7FA00261954 /* Requests.swift in Sources */,
 				9554234F20DC781E009CCCE0 /* NetworkObjects.swift in Sources */,
 				9583C2D820DC76F200452695 /* User.swift in Sources */,
+				95339A3020F8445100A01F07 /* SeparatorLine.swift in Sources */,
 				9550E0E820F38D7600921387 /* StatusFilterViewController.swift in Sources */,
 				95BBF32120F26F49006E162E /* IssueCell.swift in Sources */,
 				9511A13D20DD559500101ADE /* Atomic.swift in Sources */,
