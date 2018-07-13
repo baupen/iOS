@@ -5,7 +5,7 @@ import UIKit
 fileprivate let markerSize = CGSize(width: 32, height: 32)
 
 class IssueMarker: UIView {
-	var issue: Issue!
+	let issue: Issue
 	
 	var zoomScale: CGFloat = 1 {
 		didSet {
@@ -17,7 +17,9 @@ class IssueMarker: UIView {
 	
 	private let button = UIButton()
 	
-	init() {
+	init(issue: Issue) {
+		self.issue = issue
+		
 		super.init(frame: CGRect(origin: .zero, size: markerSize))
 		autoresizingMask = [ // keep relative position during superview resize
 			.flexibleTopMargin,

@@ -46,19 +46,24 @@
 "building_list.title" = "Gebäude";
 // CONTEXT: Der Willkommenstext oben. %s wird mit dem Vornamen ersetzt.
 "building_list.welcome" = "Willkommen, %@";
-// CONTEXT: Steht links vom Handwerker; sollte ":" am Ende haben.
-"issue.craftsman" = "Handwerker:";
-// CONTEXT: Steht links von der Beschreibung; sollte ":" am Ende haben.
-"issue.description" = "Beschreibung:";
+// CONTEXT: Überschrift für den Handwerker.
+"issue.craftsman" = "Handwerker";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Issue.craftsman
+// CONTEXT: Überschrift für den Namen des verantwortlichen Handwerkers.
+"issue.craftsman_name" = "Name";
+// CONTEXT: Überschrift für die Beschreibung.
+"issue.description" = "Beschreibung";
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Issue.is
-// CONTEXT: Steht links davon, ob die Pendenz im Abnahmemodus aufgenommen wurde; sollte ":" am Ende haben.
-"issue.is_client_mode" = "Abnahmemodus:";
+// CONTEXT: Überschrift dafür, ob die Pendenz im Abnahmemodus aufgenommen wurde.
+"issue.is_client_mode" = "Abnahmemodus";
 // CONTEXT: Drückt aus, dass die Pendenz nicht im Abnahmemodus aufgenommen wurde.
-"issue.is_client_mode.false" = "Nein";
+"issue.is_client_mode.false" = "Normal aufgenommen";
 // CONTEXT: Drückt aus, dass die Pendenz im Abnahmemodus aufgenommen wurde.
-"issue.is_client_mode.true" = "Ja";
+"issue.is_client_mode.true" = "Im Abnahmemodus aufgenommen";
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Issue.no
@@ -66,8 +71,8 @@
 "issue.no_craftsman" = "kein Handwerker";
 // CONTEXT: Wird anstelle der Beschreibung angezeigt, wenn sie nicht gesetzt ist.
 "issue.no_description" = "keine Beschreibung";
-// CONTEXT: Steht links vom Status; sollte ":" am Ende haben.
-"issue.status" = "Status:";
+// CONTEXT: Überschrift für den Status.
+"issue.status" = "Status";
 // CONTEXT: Status einer Pendenz, die noch nicht im Verzeichnis (also noch editierbar) ist.
 "issue.status.new" = "Neu";
 // CONTEXT: Status einer Pendenz, die ins Verzeichnis aufgenommen wurde, aber sonst noch nichts.
@@ -91,6 +96,8 @@
 // MARK: Issue.status.reviewed
 // CONTEXT: Beschreibt genauer, wie die Pendenz bestätigt wurde. %s wird durch den Namen des Bestätigers ersetzt.
 "issue.status.reviewed_by" = "Bestätigt von %@";
+// CONTEXT: Überschrift für die Funktion des verantwortlichen Handwerkers.
+"issue.trade" = "Funktion";
 // CONTEXT: Wird anstelle der Nummer (z.B. #123) angezeigt, wenn eine Pendenz noch nicht registriert ist.
 "issue.unregistered" = "neu";
 
@@ -168,3 +175,15 @@
 "map_list.section.child_maps" = "Untergeordnete Bereiche";
 // CONTEXT: Überschrift des Abschnitts in der Liste für den entsprechenden Bereich
 "map_list.section.this_map" = "Dieser Bereich";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: New
+// CONTEXT: Titel für das "Pendenz Bearbeiten"-Popup, wenn die Pendenz erstellt wird.
+"new_issue.title_creating" = "Neue Pendenz";
+// CONTEXT: Titel für das "Pendenz Bearbeiten"-Popup, wenn die Pendenz bearbeitet wird.
+"new_issue.title_editing" = "Pendenz Bearbeiten";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: View
+// CONTEXT: Titel für das Popup, worin die Details einer Pendenz angezeigt werden.
+"view_issue.title" = "Pendenzdetails";

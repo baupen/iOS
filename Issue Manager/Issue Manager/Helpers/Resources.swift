@@ -53,15 +53,15 @@ extension Issue.Status {
 			return Localization.new
 		}
 		
-		var description = "• \(Localization.registeredBy(registration.author))"
+		var description = Localization.registeredBy(registration.author)
 		
 		if let response = response {
-			description += "\n• "
+			description += "\n"
 			description += Localization.respondedBy(response.author)
 		}
 		
 		if let review = review {
-			description += "\n• "
+			description += "\n"
 			description += Localization.reviewedBy(review.author)
 		}
 		

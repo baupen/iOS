@@ -20,6 +20,24 @@ class MapViewController: UIViewController, LoadedViewController {
 	// the filter popover's done button and the add marker popover's cancel button link to this
 	@IBAction func backToMap(_ segue: UIStoryboardSegue) {}
 	
+	// the issue popovers' done buttons link to this
+	@IBAction func backToMapWithUpdates(_ segue: UIStoryboardSegue) {
+		updateMarkers()
+		issueListController.update()
+		
+		// reload map list etc.
+		guard let map = holder as? Map else {
+			print("trying to update map controller without map")
+			return
+		}
+		
+		let mainController = splitViewController as! MainViewController
+		for viewController in mainController.masterNav.viewControllers {
+			let mapListController = viewController as! MapListViewController
+			mapListController.reload(map)
+		}
+	}
+	
 	var markers: [IssueMarker] = []
 	var markerAlpha: CGFloat = 0.1 {
 		didSet {
@@ -189,12 +207,10 @@ class MapViewController: UIViewController, LoadedViewController {
 		
 		markers.forEach { $0.removeFromSuperview() }
 		markers = issues.map { issue in
-			IssueMarker() <- {
-				$0.issue = issue
+			IssueMarker(issue: issue) <- {
 				$0.zoomScale = pdfController.scrollView.zoomScale
 				$0.buttonAction = { [unowned self] in
-					_ = self // will need this later on
-					print("marker pressed for", issue.id)
+					self.showDetails(for: issue)
 				}
 			}
 		}
@@ -208,6 +224,16 @@ class MapViewController: UIViewController, LoadedViewController {
 			marker.update()
 			marker.isHidden = !visibleStatuses.contains(issue.status.simplified)
 		}
+	}
+	
+	func showDetails(for issue: Issue) {
+		let viewController = storyboard!.instantiate(ViewIssueViewController.self)!
+		viewController.issue = issue
+		
+		let navController = UINavigationController(rootViewController: viewController)
+		navController.modalPresentationStyle = .formSheet
+		
+		present(navController, animated: true)
 	}
 }
 

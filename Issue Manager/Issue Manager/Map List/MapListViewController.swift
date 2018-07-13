@@ -96,6 +96,17 @@ class MapListViewController: UITableViewController, LoadedViewController {
 		}
 	}
 	
+	/// reloads the cell for the given map, if currently visible
+	func reload(_ map: Map) {
+		guard holder.children.contains(map.id) else { return }
+		for cell in tableView.visibleCells {
+			let mapCell = cell as! MapCell
+			if mapCell.map.id == map.id {
+				mapCell.update()
+			}
+		}
+	}
+	
 	// MARK: - Table View
 	
 	override func numberOfSections(in tableView: UITableView) -> Int {

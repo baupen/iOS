@@ -70,25 +70,29 @@ internal enum L10n {
   }
 
   internal enum Issue {
-    /// Handwerker:
+    /// Handwerker
     internal static let craftsman = L10n.tr("Localizable", "issue.craftsman")
-    /// Beschreibung:
+    /// Name
+    internal static let craftsmanName = L10n.tr("Localizable", "issue.craftsman_name")
+    /// Beschreibung
     internal static let description = L10n.tr("Localizable", "issue.description")
-    /// Abnahmemodus:
+    /// Abnahmemodus
     internal static let isClientMode = L10n.tr("Localizable", "issue.is_client_mode")
     /// kein Handwerker
     internal static let noCraftsman = L10n.tr("Localizable", "issue.no_craftsman")
     /// keine Beschreibung
     internal static let noDescription = L10n.tr("Localizable", "issue.no_description")
-    /// Status:
+    /// Status
     internal static let status = L10n.tr("Localizable", "issue.status")
+    /// Funktion
+    internal static let trade = L10n.tr("Localizable", "issue.trade")
     /// neu
     internal static let unregistered = L10n.tr("Localizable", "issue.unregistered")
 
     internal enum IsClientMode {
-      /// Nein
+      /// Normal aufgenommen
       internal static let `false` = L10n.tr("Localizable", "issue.is_client_mode.false")
-      /// Ja
+      /// Im Abnahmemodus aufgenommen
       internal static let `true` = L10n.tr("Localizable", "issue.is_client_mode.true")
     }
 
@@ -210,6 +214,18 @@ internal enum L10n {
       /// Dieser Bereich
       internal static let thisMap = L10n.tr("Localizable", "map_list.section.this_map")
     }
+  }
+
+  internal enum NewIssue {
+    /// Neue Pendenz
+    internal static let titleCreating = L10n.tr("Localizable", "new_issue.title_creating")
+    /// Pendenz Bearbeiten
+    internal static let titleEditing = L10n.tr("Localizable", "new_issue.title_editing")
+  }
+
+  internal enum ViewIssue {
+    /// Pendenzdetails
+    internal static let title = L10n.tr("Localizable", "view_issue.title")
   }
 }
 // swiftlint:enable explicit_type_interface identifier_name line_length nesting type_body_length type_name

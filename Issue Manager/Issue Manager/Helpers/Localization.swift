@@ -11,7 +11,11 @@ extension UILabel {
 	var localizedText: String {
 		get { return "" }
 		set(key) {
-			text = localizedString(key)
+			if key.hasSuffix(":") { // cheeky shorthand because i use this a lot
+				text = "\(localizedString(String(key.dropLast()))):"
+			} else {
+				text = localizedString(key)
+			}
 		}
 	}
 }

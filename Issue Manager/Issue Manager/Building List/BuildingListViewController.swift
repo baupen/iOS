@@ -21,8 +21,9 @@ class BuildingListViewController: UITableViewController, LoadedViewController {
 		buildingListView.reloadData()
 	}
 	
-	// unwind segue
-	@IBAction func backToBuildingList(_ segue: UIStoryboardSegue) {}
+	@IBAction func backToBuildingList(_ segue: UIStoryboardSegue) {
+		buildingListView.reloadData()
+	}
 	
 	@objc func refresh(_ refresher: UIRefreshControl) {
 		isRefreshing = true
