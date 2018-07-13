@@ -26,9 +26,10 @@ class IssueCell: UITableViewCell, LoadedTableCell {
 	}
 	
 	@IBAction func showInMapPressed() {
-		// TODO
-		
+		delegate?.zoomMap(to: issue)
 	}
+	
+	weak var delegate: IssueCellDelegate?
 	
 	var issue: Issue! {
 		didSet {
@@ -83,9 +84,6 @@ class IssueCell: UITableViewCell, LoadedTableCell {
 	}
 }
 
-fileprivate extension UILabel {
-	func setText(to text: String?, fallback: String) {
-		self.text = text ?? fallback
-		self.alpha = text != nil ? 1 : 0.5
-	}
+protocol IssueCellDelegate: AnyObject {
+	func zoomMap(to issue: Issue)
 }

@@ -99,6 +99,7 @@ class MapViewController: UIViewController, LoadedViewController {
 		case let issueList as IssueListViewController:
 			// called in the beginning when the list controller is embedded
 			issueListController = issueList
+			issueListController.issueCellDelegate = self
 			issueListController.pullableView = pullableView
 		case let statusFilterNav as StatusFilterNavigationController:
 			let filterController = statusFilterNav.statusFilterController
@@ -226,6 +227,35 @@ extension MapViewController: SimplePDFViewControllerDelegate {
 extension MapViewController: StatusFilterViewControllerDelegate {
 	func statusFilterChanged(to newValue: Set<Issue.Status.Simplified>) {
 		visibleStatuses = newValue
+	}
+}
+
+extension MapViewController: IssueCellDelegate {
+	func zoomMap(to issue: Issue) {
+		guard let position = issue.position else {
+			print("attempting to zoom to issue with no position!")
+			return
+		}
+		
+		pullableView.contract()
+		
+		let pdfController = self.pdfController!
+		let marker = markers.first { $0.issue === issue }!
+		let size = pdfController.overlayView.bounds.size * CGFloat(position.zoomScale)
+		let centeredRect = CGRect(origin: marker.center - size / 2,
+								  size: size)
+		pdfController.scrollView.zoom(to: centeredRect, animated: true)
+		
+		// scale up and down to draw attention (important if can't center because scale too small)
+		let originalTransform = marker.transform
+		UIView.animateKeyframes(withDuration: 0.5, delay: 0.1, animations: {
+			UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.5) {
+				marker.transform = originalTransform.scaledBy(x: 2, y: 2)
+			}
+			UIView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 0.5) {
+				marker.transform = originalTransform
+			}
+		})
 	}
 }
 

@@ -167,7 +167,7 @@ enum RequestError: Error {
 	case serverError(JSendError)
 }
 
-fileprivate func debugRepresentation(of data: Data, maxLength: Int = 500) -> String {
+fileprivate func debugRepresentation(of data: Data, maxLength: Int = 1000) -> String {
 	guard data.count <= maxLength else { return "<\(data.count) bytes>" }
 	
 	return String(bytes: data, encoding: .utf8)?

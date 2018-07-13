@@ -53,7 +53,12 @@ class IssueMarker: UIView {
 	}
 	
 	private func reposition() {
-		center.x = superview!.bounds.width * CGFloat(issue.position!.x)
-		center.y = superview!.bounds.height * CGFloat(issue.position!.y)
+		if let position = issue.position {
+			center.x = superview!.bounds.width * CGFloat(position.x)
+			center.y = superview!.bounds.height * CGFloat(position.y)
+			isHidden = false
+		} else {
+			isHidden = true
+		}
 	}
 }

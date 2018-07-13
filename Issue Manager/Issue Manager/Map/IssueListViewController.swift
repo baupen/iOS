@@ -11,6 +11,9 @@ class IssueListViewController: UIViewController {
 	@IBOutlet var issueTableView: UITableView!
 	@IBOutlet var separatorHeightConstraint: NSLayoutConstraint!
 	
+	/// - note: set this _before_ the list loads its data
+	weak var issueCellDelegate: IssueCellDelegate?
+	
 	var pullableView: PullableView! {
 		didSet {
 			pullableView.tapRecognizer.delegate = self
@@ -110,9 +113,10 @@ extension IssueListViewController: UITableViewDataSource {
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeue(IssueCell.self, for: indexPath)!
-		cell.issue = issues[indexPath.row]
-		return cell
+		return tableView.dequeue(IssueCell.self, for: indexPath)! <- {
+			$0.delegate = issueCellDelegate
+			$0.issue = issues[indexPath.row]
+		}
 	}
 }
 
@@ -127,14 +131,15 @@ extension IssueListViewController: UITableViewDelegate {
 	
 	func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
 		if let currentSelection = tableView.indexPathForSelectedRow {
-			let cell = tableView.cellForRow(at: currentSelection)!
-			tableView.performBatchUpdates({ 
-				cell.isHighlighted = false
-				
-				if indexPath == currentSelection {
-					tableView.deselectRow(at: indexPath, animated: true)
-				}
-			}, completion: nil)
+			if let cell = tableView.cellForRow(at: currentSelection) {
+				tableView.performBatchUpdates({ 
+					cell.isHighlighted = false
+					
+					if indexPath == currentSelection {
+						tableView.deselectRow(at: indexPath, animated: true)
+					}
+				}, completion: nil)
+			}
 			
 			if indexPath == currentSelection {
 				return nil // don't reselect
@@ -148,6 +153,7 @@ extension IssueListViewController: UITableViewDelegate {
 		tableView.performBatchUpdates({ 
 			cell.isHighlighted = true
 		}, completion: nil)
+		tableView.scrollToRow(at: indexPath, at: .none, animated: true)
 	}
 }
 
