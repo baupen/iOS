@@ -11,7 +11,11 @@ class IssueListViewController: UIViewController {
 	@IBOutlet var issueTableView: UITableView!
 	@IBOutlet var separatorHeightConstraint: NSLayoutConstraint!
 	
-	var pullableView: PullableView!
+	var pullableView: PullableView! {
+		didSet {
+			pullableView.tapRecognizer.delegate = self
+		}
+	}
 	
 	/// set this before setting `map` initially or before loading the view to avoid calculating stuff twice
 	var visibleStatuses = Issue.allStatuses {
@@ -112,4 +116,44 @@ extension IssueListViewController: UITableViewDataSource {
 	}
 }
 
-extension IssueListViewController: UITableViewDelegate {}
+extension IssueListViewController: UITableViewDelegate {
+	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+		if let cell = tableView.cellForRow(at: indexPath), cell.isHighlighted {
+			return UITableViewAutomaticDimension
+		} else {
+			return 38 // bit of a magic number but eh
+		}
+	}
+	
+	func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+		if let currentSelection = tableView.indexPathForSelectedRow {
+			let cell = tableView.cellForRow(at: currentSelection)!
+			tableView.performBatchUpdates({ 
+				cell.isHighlighted = false
+			}, completion: nil)
+			
+			if indexPath == currentSelection {
+				tableView.deselectRow(at: indexPath, animated: true)
+				return nil
+			}
+		}
+		return indexPath
+	}
+	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		let cell = tableView.cellForRow(at: indexPath)!
+		tableView.performBatchUpdates({ 
+			cell.isHighlighted = true
+		}, completion: nil)
+	}
+}
+
+extension IssueListViewController: UIGestureRecognizerDelegate {
+	func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+		if let view = touch.view, view.isDescendant(of: issueTableView) {
+			return false // don't interfere with taps in table
+		} else {
+			return true
+		}
+	}
+}

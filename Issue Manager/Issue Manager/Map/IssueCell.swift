@@ -3,7 +3,7 @@
 import UIKit
 
 class IssueCell: UITableViewCell, LoadedTableCell {
-	typealias Localization = L10n.Map.IssueList
+	typealias Localization = L10n.Issue
 	
 	static let reuseID = "Issue Cell"
 	
@@ -13,9 +13,18 @@ class IssueCell: UITableViewCell, LoadedTableCell {
 	@IBOutlet var tradeLabel: UILabel!
 	@IBOutlet var iconView: UIImageView!
 	
-	@IBAction func markButtonPressed() {
+	@IBOutlet var expandedView: UIView!
+	@IBOutlet var showInMapButton: UIButton!
+	@IBOutlet var craftsmanLabel: UILabel!
+	@IBOutlet var expandedTradeLabel: UILabel!
+	
+	@IBAction func markPressed() {
 		issue.mark()
 		update()
+	}
+	
+	@IBAction func showInMapPressed() {
+		// TODO
 	}
 	
 	var issue: Issue! {
@@ -24,8 +33,17 @@ class IssueCell: UITableViewCell, LoadedTableCell {
 		}
 	}
 	
+	override func awakeFromNib() {
+		super.awakeFromNib()
+		
+		selectedBackgroundView = UIView() <- {
+			$0.backgroundColor = UIColor.main.withAlphaComponent(0.2)
+		}
+	}
+	
 	override func layoutSubviews() {
-		tradeLabel.isHidden = frame.width < 500 // arguably arbitrary
+		tradeLabel.isHidden = isHighlighted || frame.width < 500 // arguably arbitrary
+		descriptionLabel.isHidden = isHighlighted
 		
 		super.layoutSubviews()
 	}
@@ -37,8 +55,12 @@ class IssueCell: UITableViewCell, LoadedTableCell {
 		
 		let craftsman = issue.craftsman.flatMap { Client.shared.storage.craftsmen[$0] }
 		tradeLabel.setText(to: craftsman?.trade, fallback: Localization.noCraftsman)
+		craftsmanLabel.setText(to: craftsman?.name, fallback: Localization.noCraftsman)
+		expandedTradeLabel.setText(to: craftsman?.trade, fallback: Localization.noCraftsman)
 		
 		iconView.image = issue.status.simplified.flatIcon
+		
+		showInMapButton.isEnabled = issue.position != nil
 	}
 }
 

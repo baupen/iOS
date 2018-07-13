@@ -70,6 +70,27 @@ internal enum L10n {
   }
 
   internal enum Issue {
+    /// Handwerker:
+    internal static let craftsman = L10n.tr("Localizable", "issue.craftsman")
+    /// Beschreibung:
+    internal static let description = L10n.tr("Localizable", "issue.description")
+    /// Abnahmemodus:
+    internal static let isClientMode = L10n.tr("Localizable", "issue.is_client_mode")
+    /// kein Handwerker
+    internal static let noCraftsman = L10n.tr("Localizable", "issue.no_craftsman")
+    /// keine Beschreibung
+    internal static let noDescription = L10n.tr("Localizable", "issue.no_description")
+    /// Status:
+    internal static let status = L10n.tr("Localizable", "issue.status")
+    /// neu
+    internal static let unregistered = L10n.tr("Localizable", "issue.unregistered")
+
+    internal enum IsClientMode {
+      /// Nein
+      internal static let `false` = L10n.tr("Localizable", "issue.is_client_mode.false")
+      /// Ja
+      internal static let `true` = L10n.tr("Localizable", "issue.is_client_mode.true")
+    }
 
     internal enum Status {
       /// Neu
@@ -138,10 +159,8 @@ internal enum L10n {
     internal static let title = L10n.tr("Localizable", "map.title")
 
     internal enum IssueList {
-      /// <kein Handwerker>
-      internal static let noCraftsman = L10n.tr("Localizable", "map.issue_list.no_craftsman")
-      /// <keine Beschreibung>
-      internal static let noDescription = L10n.tr("Localizable", "map.issue_list.no_description")
+      /// Auf Grundriss ansehen
+      internal static let showInMap = L10n.tr("Localizable", "map.issue_list.show_in_map")
       /// %@ Pendenzen offen; %@ insgesamt
       internal static func summary(_ p1: String, _ p2: String) -> String {
         return L10n.tr("Localizable", "map.issue_list.summary", p1, p2)
@@ -150,8 +169,6 @@ internal enum L10n {
       internal static func summaryFiltered(_ p1: String, _ p2: String) -> String {
         return L10n.tr("Localizable", "map.issue_list.summary_filtered", p1, p2)
       }
-      /// neu
-      internal static let unregistered = L10n.tr("Localizable", "map.issue_list.unregistered")
     }
 
     internal enum StatusFilter {
