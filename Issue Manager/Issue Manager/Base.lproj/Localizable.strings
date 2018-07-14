@@ -135,8 +135,10 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Map.issue
+// CONTEXT: Knopf, um die Details einer Pendenz anzuzeigen.
+"map.issue_list.show_details" = "Details Anzeigen";
 // CONTEXT: Knopf, um die in der liste ausgewählte Pendenz auf dem Grundriss anzuzeigen.
-"map.issue_list.show_in_map" = "Auf Grundriss ansehen";
+"map.issue_list.show_in_map" = "Auf Grundriss Anzeigen";
 // CONTEXT: Fasst kurz zusammen, was für Pendenzen in einem Bereich sind. Das erste %s wird durch die Anzahl offener Pendenzen ersetzt, das zweite durch die Anzahl insgesamt (innerhalb des Bereichs).
 "map.issue_list.summary" = "%@ Pendenzen offen; %@ insgesamt";
 // CONTEXT: Wird statt map.issue_list.summary angezeigt, wenn ein Filter aktiv ist. das erste %s wird durch die Anzahl Pendenzen ersetzt, die dem Filter entsprechen und somit angezeigt werden; das Zweite wird weiterhin durch die Gesamtzahl ersetzt.
@@ -195,8 +197,10 @@
 "view_issue.details" = "Details";
 // CONTEXT: Überschrift für das Bild einer Pendenz
 "view_issue.image" = "Foto";
+// CONTEXT: Steht anstelle des Fotos da, wenn kein Foto gesetzt ist.
+"view_issue.image_placeholder" = "Kein Foto gesetzt.";
 // CONTEXT: Knopf, um eine Pendenz als abgeschlossen zu markieren, obwohl der Handwerker sie nicht beantwortet hat.
-"view_issue.mark_as_completed" = "Als abgeschlossen markieren";
+"view_issue.mark_as_completed" = "Als Abgeschlossen Markieren";
 // CONTEXT: Knopf, um die Antwort vom Handwerker abzulehnen und sie somit rückgängig zu machen.
 "view_issue.reject_response" = "Ablehnen";
 // CONTEXT: Wird über den Aktionen angezeigt, wenn die Pendenz vom Handwerker beantwortet wurde.
@@ -208,4 +212,4 @@
 // CONTEXT: Titel für das Popup, worin die Details einer Pendenz angezeigt werden.
 "view_issue.title" = "Pendenzdetails";
 // CONTEXT: Knopf, um den Abschluss einer Pendenz rückgangig zu machen und sie somit wieder zu eröffnen.
-"view_issue.undo_review" = "Wieder eröffnen";
+"view_issue.undo_review" = "Wieder Eröffnen";

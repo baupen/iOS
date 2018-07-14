@@ -19,14 +19,19 @@ class IssueCell: UITableViewCell, LoadedTableCell {
 	@IBOutlet var craftsmanLabel: UILabel!
 	@IBOutlet var clientModeLabel: UILabel!
 	@IBOutlet var statusLabel: UILabel!
+	@IBOutlet var actionsView: UIStackView!
 	
 	@IBAction func markPressed() {
 		issue.mark()
 		update()
 	}
 	
-	@IBAction func showInMapPressed() {
+	@IBAction func showInMap() {
 		delegate?.zoomMap(to: issue)
+	}
+	
+	@IBAction func showDetails() {
+		delegate?.showDetails(for: issue)
 	}
 	
 	weak var delegate: IssueCellDelegate?
@@ -43,6 +48,10 @@ class IssueCell: UITableViewCell, LoadedTableCell {
 		}
 	}
 	
+	private var isCompact: Bool {
+		return frame.width < 500
+	}
+	
 	override func awakeFromNib() {
 		super.awakeFromNib()
 		
@@ -53,12 +62,13 @@ class IssueCell: UITableViewCell, LoadedTableCell {
 	
 	override func layoutSubviews() {
 		updateVisibility()
+		actionsView.axis = isCompact ? .vertical : .horizontal
 		
 		super.layoutSubviews()
 	}
 	
 	func updateVisibility() {
-		tradeLabel.isHidden = isHighlighted || frame.width < 500 // arguably arbitrary
+		tradeLabel.isHidden = isHighlighted || isCompact
 		descriptionLabel.isHidden = isHighlighted
 	}
 	
@@ -86,4 +96,5 @@ class IssueCell: UITableViewCell, LoadedTableCell {
 
 protocol IssueCellDelegate: AnyObject {
 	func zoomMap(to issue: Issue)
+	func showDetails(for issue: Issue)
 }

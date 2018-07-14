@@ -960,18 +960,29 @@ Maler</string>
                                                                                         <constraint firstAttribute="height" constant="1" id="X30-Tr-HW1"/>
                                                                                     </constraints>
                                                                                 </view>
-                                                                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3bx-QB-Czz">
+                                                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="3bx-QB-Czz">
                                                                                     <rect key="frame" x="0.0" y="240.5" width="687" height="33"/>
                                                                                     <subviews>
                                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UNM-ch-LeV">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="687" height="33"/>
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="343.5" height="33"/>
                                                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
-                                                                                            <state key="normal" title="Auf Grundriss ansehen"/>
+                                                                                            <state key="normal" title="Auf Grundriss Anzeigen"/>
                                                                                             <userDefinedRuntimeAttributes>
                                                                                                 <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="map.issue_list.show_in_map"/>
                                                                                             </userDefinedRuntimeAttributes>
                                                                                             <connections>
-                                                                                                <action selector="showInMapPressed" destination="X3S-og-f79" eventType="touchUpInside" id="Dom-7f-cjb"/>
+                                                                                                <action selector="showInMap" destination="X3S-og-f79" eventType="touchUpInside" id="Dom-7f-cjb"/>
+                                                                                            </connections>
+                                                                                        </button>
+                                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g7l-jr-fb1">
+                                                                                            <rect key="frame" x="343.5" y="0.0" width="343.5" height="33"/>
+                                                                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                                                                            <state key="normal" title="Details Anzeigen"/>
+                                                                                            <userDefinedRuntimeAttributes>
+                                                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="map.issue_list.show_details"/>
+                                                                                            </userDefinedRuntimeAttributes>
+                                                                                            <connections>
+                                                                                                <action selector="showDetails" destination="X3S-og-f79" eventType="touchUpInside" id="muc-lW-Kjj"/>
                                                                                             </connections>
                                                                                         </button>
                                                                                     </subviews>
@@ -1003,6 +1014,7 @@ Maler</string>
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <connections>
+                                                    <outlet property="actionsView" destination="3bx-QB-Czz" id="CLd-eS-xFH"/>
                                                     <outlet property="clientModeLabel" destination="Oqu-tl-KrD" id="hMe-Eq-E1o"/>
                                                     <outlet property="craftsmanLabel" destination="Shy-g3-Y7T" id="4sN-jM-Z83"/>
                                                     <outlet property="descriptionLabel" destination="67y-Qi-4Yk" id="bjD-qP-Z6u"/>
@@ -1463,7 +1475,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vR3-G2-DlT">
                                                             <rect key="frame" x="0.0" y="0.0" width="125" height="27.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <state key="normal" title="Als abgeschlossen markieren"/>
+                                                            <state key="normal" title="Als Abgeschlossen Markieren"/>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="view_issue.mark_as_completed"/>
                                                             </userDefinedRuntimeAttributes>
@@ -1496,7 +1508,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mdV-Nf-etQ">
                                                             <rect key="frame" x="399" y="0.0" width="125" height="27.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <state key="normal" title="Wieder eröffnen"/>
+                                                            <state key="normal" title="Wieder Eröffnen"/>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="view_issue.undo_review"/>
                                                             </userDefinedRuntimeAttributes>

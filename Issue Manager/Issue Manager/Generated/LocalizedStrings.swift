@@ -175,7 +175,9 @@ internal enum L10n {
     internal static let title = L10n.tr("Localizable", "map.title")
 
     internal enum IssueList {
-      /// Auf Grundriss ansehen
+      /// Details Anzeigen
+      internal static let showDetails = L10n.tr("Localizable", "map.issue_list.show_details")
+      /// Auf Grundriss Anzeigen
       internal static let showInMap = L10n.tr("Localizable", "map.issue_list.show_in_map")
       /// %@ Pendenzen offen; %@ insgesamt
       internal static func summary(_ p1: String, _ p2: String) -> String {
@@ -234,13 +236,15 @@ internal enum L10n {
     internal static let details = L10n.tr("Localizable", "view_issue.details")
     /// Foto
     internal static let image = L10n.tr("Localizable", "view_issue.image")
-    /// Als abgeschlossen markieren
+    /// Kein Foto gesetzt.
+    internal static let imagePlaceholder = L10n.tr("Localizable", "view_issue.image_placeholder")
+    /// Als Abgeschlossen Markieren
     internal static let markAsCompleted = L10n.tr("Localizable", "view_issue.mark_as_completed")
     /// Ablehnen
     internal static let rejectResponse = L10n.tr("Localizable", "view_issue.reject_response")
     /// Pendenzdetails
     internal static let title = L10n.tr("Localizable", "view_issue.title")
-    /// Wieder eröffnen
+    /// Wieder Eröffnen
     internal static let undoReview = L10n.tr("Localizable", "view_issue.undo_review")
 
     internal enum Summary {
