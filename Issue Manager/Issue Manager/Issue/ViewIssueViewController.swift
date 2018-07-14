@@ -12,6 +12,8 @@ class ViewIssueViewController: UITableViewController, LoadedViewController {
 	@IBOutlet var markButton: UIButton!
 	@IBOutlet var clientModeLabel: UILabel!
 	
+	@IBOutlet var imageView: UIImageView!
+	
 	@IBOutlet var craftsmanTradeLabel: UILabel!
 	@IBOutlet var craftsmanNameLabel: UILabel!
 	
@@ -64,6 +66,11 @@ class ViewIssueViewController: UITableViewController, LoadedViewController {
 		markButton.setImage(issue.isMarked ? #imageLiteral(resourceName: "mark_marked.pdf") : #imageLiteral(resourceName: "mark_unmarked.pdf"), for: .normal)
 		clientModeLabel.text = issue.wasAddedWithClient ? L10n.Issue.IsClientMode.true : L10n.Issue.IsClientMode.false
 		
+		imageView.image = issue.imageFilename.flatMap {
+			// TODO fall back on localURL for other views
+			UIImage(contentsOfFile: Issue.cacheURL(filename: $0).path)
+		}
+		
 		let craftsman = issue.craftsman.flatMap { Client.shared.storage.craftsmen[$0] }
 		craftsmanTradeLabel.setText(to: craftsman?.trade, fallback: L10n.Issue.noCraftsman)
 		craftsmanNameLabel.setText(to: craftsman?.name, fallback: L10n.Issue.noCraftsman)
@@ -88,16 +95,17 @@ class ViewIssueViewController: UITableViewController, LoadedViewController {
 			summaryLabel.text = Localization.Summary.reviewed
 		}
 		
-		tableView.performBatchUpdates({}) // invalidate previously calculated row heights
+		tableView.performBatchUpdates(nil) // invalidate previously calculated row heights
 	}
 	
 	override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 		// can't localize from storyboard
 		switch section {
 		case 0: return nil
-		case 1: return L10n.Issue.craftsman
-		case 2: return Localization.details
-		case 3: return Localization.actions
+		case 1: return Localization.image
+		case 2: return Localization.craftsman
+		case 3: return Localization.details
+		case 4: return Localization.actions
 		default: fatalError("unrecognized section \(section)!")
 		}
 	}

@@ -228,8 +228,12 @@ internal enum L10n {
     internal static let acceptResponse = L10n.tr("Localizable", "view_issue.accept_response")
     /// Aktionen
     internal static let actions = L10n.tr("Localizable", "view_issue.actions")
+    /// Handwerker
+    internal static let craftsman = L10n.tr("Localizable", "view_issue.craftsman")
     /// Details
     internal static let details = L10n.tr("Localizable", "view_issue.details")
+    /// Foto
+    internal static let image = L10n.tr("Localizable", "view_issue.image")
     /// Als abgeschlossen markieren
     internal static let markAsCompleted = L10n.tr("Localizable", "view_issue.mark_as_completed")
     /// Ablehnen

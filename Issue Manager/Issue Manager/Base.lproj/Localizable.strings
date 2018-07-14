@@ -189,8 +189,12 @@
 "view_issue.accept_response" = "Annehmen";
 // CONTEXT: Überschrift für die Aktionen, die auf eine Pendenz ausgeführt werden können.
 "view_issue.actions" = "Aktionen";
+// CONTEXT: Überschrift für die Details des zugewiesenen Handwerkers.
+"view_issue.craftsman" = "Handwerker";
 // CONTEXT: Überschrift für die Details einer Pendenz.
 "view_issue.details" = "Details";
+// CONTEXT: Überschrift für das Bild einer Pendenz
+"view_issue.image" = "Foto";
 // CONTEXT: Knopf, um eine Pendenz als abgeschlossen zu markieren, obwohl der Handwerker sie nicht beantwortet hat.
 "view_issue.mark_as_completed" = "Als abgeschlossen markieren";
 // CONTEXT: Knopf, um die Antwort vom Handwerker abzulehnen und sie somit rückgängig zu machen.
