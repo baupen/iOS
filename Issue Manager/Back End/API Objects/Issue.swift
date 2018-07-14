@@ -153,7 +153,7 @@ extension Issue {
 		assert(hasResponse)
 		assert(!isReviewed)
 		
-		status.review = nil
+		status.response = nil
 		Client.shared.performed(.revert, on: self)
 		
 		Client.shared.saveShared()

@@ -224,8 +224,29 @@ internal enum L10n {
   }
 
   internal enum ViewIssue {
+    /// Annehmen
+    internal static let acceptResponse = L10n.tr("Localizable", "view_issue.accept_response")
+    /// Aktionen
+    internal static let actions = L10n.tr("Localizable", "view_issue.actions")
+    /// Details
+    internal static let details = L10n.tr("Localizable", "view_issue.details")
+    /// Als abgeschlossen markieren
+    internal static let markAsCompleted = L10n.tr("Localizable", "view_issue.mark_as_completed")
+    /// Ablehnen
+    internal static let rejectResponse = L10n.tr("Localizable", "view_issue.reject_response")
     /// Pendenzdetails
     internal static let title = L10n.tr("Localizable", "view_issue.title")
+    /// Wieder eröffnen
+    internal static let undoReview = L10n.tr("Localizable", "view_issue.undo_review")
+
+    internal enum Summary {
+      /// Diese Pendenz wurde vom Handwerker beantwortet.\nDu kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) oder ablehnen (und sie somit rückgängig machen).
+      internal static let hasResponse = L10n.tr("Localizable", "view_issue.summary.has_response")
+      /// Diese Pendenz wurde noch nicht vom Handwerker beantwortet.\nDu kannst sie trotzdem bestätigen und somit als abgeschlossen markieren.
+      internal static let noResponse = L10n.tr("Localizable", "view_issue.summary.no_response")
+      /// Diese Pendenz wurde bereits abgeschlossen.\nDu kannst die Bestätigung rückgangig machen, um sie wieder zu eröffnen.
+      internal static let reviewed = L10n.tr("Localizable", "view_issue.summary.reviewed")
+    }
   }
 }
 // swiftlint:enable explicit_type_interface identifier_name line_length nesting type_body_length type_name

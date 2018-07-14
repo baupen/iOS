@@ -32,11 +32,15 @@ class Client {
 	}
 	
 	/// the backlog of requests that couldn't be sent due to connection issues
-	private var backlog = Backlog()
+	private var backlog = Backlog() {
+		didSet { try? saveBacklog() }
+	}
 	/// used to automatically attempt to clear the backlog at regular intervals
 	private var backlogClearingTimer: Timer!
 	/// any dependent requests are executed on this queue, so as to avoid bad interleavings and races and such
 	private let linearQueue = DispatchQueue(label: "dependent request execution")
+	/// saving to disk is done on this queue to avoid clogging up other queues
+	private let savingQueue = DispatchQueue(label: "saving client")
 	
 	private init() {
 		loadShared()
@@ -55,7 +59,9 @@ class Client {
 	func send<R: Request>(_ request: R) -> Future<R.ExpectedResponse> {
 		return dispatch(request)
 			.map { taskResult in try self.extractData(from: taskResult, for: request) }
-			.then(request.applyToClient)
+			.then { response in
+				DispatchQueue.main.sync { request.applyToClient(response) } // to avoid data races
+		}
 	}
 	
 	private func startTask<R: Request>(for request: R) -> Future<TaskResult> {
@@ -75,6 +81,7 @@ class Client {
 					print("Communication error during request \(request.method): \(error.localizedDescription)")
 					dump(error)
 					self.backlog.appendIfPossible(request)
+					self.saveShared()
 					throw RequestError.communicationError(error)
 				}
 			}
@@ -181,7 +188,6 @@ fileprivate func debugRepresentation(of data: Data, maxLength: Int = 1000) -> St
 
 extension Client {
 	func loadShared() {
-		let defaults = UserDefaults.standard
 		do {
 			user = try defaults.decode(forKey: "Client.shared.user")
 			storage = try defaults.decode(forKey: "Client.shared.storage") ?? storage
@@ -195,16 +201,22 @@ extension Client {
 	}
 	
 	func saveShared() {
-		let defaults = UserDefaults.standard
-		do {
-			try defaults.encode(user, forKey: "Client.shared.user")
-			try defaults.encode(storage, forKey: "Client.shared.storage")
-			try defaults.encode(backlog, forKey: "Client.shared.backlog")
-			print("Client saved!")
-		} catch {
-			print("Client could not be saved!")
-			print(error.localizedDescription)
-			print(error)
+		savingQueue.async {
+			do {
+				try defaults.encode(self.user, forKey: "Client.shared.user")
+				try defaults.encode(self.storage, forKey: "Client.shared.storage")
+				try self.saveBacklog()
+				print("Client saved!")
+			} catch {
+				print("Client could not be saved!")
+				print(error.localizedDescription)
+				print(error)
+			}
 		}
+	}
+	
+	// more lightweight variant of saveShared()
+	func saveBacklog() throws {
+		try defaults.encode(backlog, forKey: "Client.shared.backlog")
 	}
 }

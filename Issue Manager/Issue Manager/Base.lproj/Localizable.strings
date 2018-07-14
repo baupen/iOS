@@ -185,5 +185,23 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: View
+// CONTEXT: Knopf, um die Antwort vom Handwerker anzunehmen und somit die Pendenz als abgeschlossen zu markieren.
+"view_issue.accept_response" = "Annehmen";
+// CONTEXT: Überschrift für die Aktionen, die auf eine Pendenz ausgeführt werden können.
+"view_issue.actions" = "Aktionen";
+// CONTEXT: Überschrift für die Details einer Pendenz.
+"view_issue.details" = "Details";
+// CONTEXT: Knopf, um eine Pendenz als abgeschlossen zu markieren, obwohl der Handwerker sie nicht beantwortet hat.
+"view_issue.mark_as_completed" = "Als abgeschlossen markieren";
+// CONTEXT: Knopf, um die Antwort vom Handwerker abzulehnen und sie somit rückgängig zu machen.
+"view_issue.reject_response" = "Ablehnen";
+// CONTEXT: Wird über den Aktionen angezeigt, wenn die Pendenz vom Handwerker beantwortet wurde.
+"view_issue.summary.has_response" = "Diese Pendenz wurde vom Handwerker beantwortet.\nDu kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) oder ablehnen (und sie somit rückgängig machen).";
+// CONTEXT: Wird über den Aktionen angezeigt, wenn die Pendenz vom Handwerker noch keine Antwort erhalten hat.
+"view_issue.summary.no_response" = "Diese Pendenz wurde noch nicht vom Handwerker beantwortet.\nDu kannst sie trotzdem bestätigen und somit als abgeschlossen markieren.";
+// CONTEXT: Wird über den Aktionen angezeigt, wenn die Pendenz bereits abgeschlossen wurde.
+"view_issue.summary.reviewed" = "Diese Pendenz wurde bereits abgeschlossen.\nDu kannst die Bestätigung rückgangig machen, um sie wieder zu eröffnen.";
 // CONTEXT: Titel für das Popup, worin die Details einer Pendenz angezeigt werden.
 "view_issue.title" = "Pendenzdetails";
+// CONTEXT: Knopf, um den Abschluss einer Pendenz rückgangig zu machen und sie somit wieder zu eröffnen.
+"view_issue.undo_review" = "Wieder eröffnen";
