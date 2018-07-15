@@ -121,7 +121,7 @@ class TradeSelectionHandler: SimpleSelectionHandler {
 	
 	var items: [String]
 	var currentItem: String?
-	var selectionCallback: SelectionCallback
+	var selectionCallback: (String?) -> Void
 	
 	init(in building: Building, currentTrade: String?, callback: @escaping SelectionCallback) {
 		self.items = building.allTrades().sorted()
@@ -151,7 +151,7 @@ class CraftsmanSelectionHandler: SimpleSelectionHandler {
 	
 	var items: [Craftsman]
 	var currentItem: Craftsman?
-	var selectionCallback: SelectionCallback
+	var selectionCallback: (Craftsman?) -> Void
 	var trade: String?
 	
 	var title: String {
