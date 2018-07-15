@@ -79,8 +79,8 @@ class IssueCell: UITableViewCell, LoadedTableCell {
 		
 		numberLabel.setText(to: issue.number.map { "#\($0)" }, fallback: Localization.unregistered)
 		
-		descriptionLabel.setText(to: issue.description, fallback: Localization.noDescription)
-		expandedDescriptionLabel.setText(to: issue.description, fallback: Localization.noDescription)
+		descriptionLabel.setText(to: issue.description?.nonEmptyOptional, fallback: Localization.noDescription)
+		expandedDescriptionLabel.setText(to: issue.description?.nonEmptyOptional, fallback: Localization.noDescription)
 		
 		showInMapButton.isEnabled = issue.position != nil
 		

@@ -75,7 +75,7 @@ class ViewIssueViewController: UITableViewController, LoadedViewController {
 		craftsmanTradeLabel.setText(to: craftsman?.trade, fallback: L10n.Issue.noCraftsman)
 		craftsmanNameLabel.setText(to: craftsman?.name, fallback: L10n.Issue.noCraftsman)
 		
-		descriptionLabel.setText(to: issue.description, fallback: L10n.Issue.noDescription)
+		descriptionLabel.setText(to: issue.description?.nonEmptyOptional, fallback: L10n.Issue.noDescription)
 		statusLabel.text = issue.status.localizedMultilineDescription
 		
 		let status = issue.status.simplified

@@ -63,3 +63,9 @@ extension UILabel {
 		self.alpha = text != nil ? 1 : 0.5
 	}
 }
+
+extension Collection {
+	var nonEmptyOptional: Self? {
+		return isEmpty ? nil : self
+	}
+}
