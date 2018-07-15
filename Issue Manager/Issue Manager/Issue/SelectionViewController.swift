@@ -18,7 +18,7 @@ class SelectionViewController: UIViewController {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
-		handler.prepare(tableView)
+		handler.prepare(tableView, in: self)
 	}
 	
 	func update() {
@@ -32,24 +32,25 @@ class SelectionViewController: UIViewController {
 
 protocol AnySelectionHandler: UITableViewDelegate, UITableViewDataSource {
 	var title: String { get }
-	
-	func prepare(_ tableView: UITableView)
+	func prepare(_ tableView: UITableView, in controller: UIViewController)
 }
 
 class SelectionHandler<Handler: SimpleSelectionHandler>: NSObject, AnySelectionHandler {
 	typealias Item = Handler.Item
 	
 	private var handler: Handler
+	private var viewController: UIViewController!
 	
 	var title: String {
-		return Handler.title
+		return handler.title
 	}
 	
 	init(wrapping handler: Handler) {
 		self.handler = handler
 	}
 	
-	func prepare(_ tableView: UITableView) {
+	func prepare(_ tableView: UITableView, in controller: UIViewController) {
+		self.viewController = controller
 		if let current = handler.currentItem, let index = handler.items.index(of: current) {
 			tableView.selectRow(at: [1, index], animated: true, scrollPosition: .middle)
 		} else {
@@ -78,8 +79,13 @@ class SelectionHandler<Handler: SimpleSelectionHandler>: NSObject, AnySelectionH
 		}
 	}
 	
+	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+		return UITableViewAutomaticDimension
+	}
+	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		handler.selectionCallback(indexPath.section == 0 ? nil : handler.items[indexPath.row])
+		viewController.navigationController!.popViewController(animated: true)
 	}
 }
 
@@ -90,7 +96,7 @@ protocol SimpleSelectionHandler: AnyObject {
 	
 	typealias SelectionCallback = (Item?) -> Void
 	
-	static var title: String { get }
+	var title: String { get }
 	
 	var items: [Item] { get }
 	var currentItem: Item? { get }
@@ -111,7 +117,7 @@ class TradeSelectionHandler: SimpleSelectionHandler {
 	typealias Cell = TradeCell
 	typealias EmptyCell = NoTradeCell
 	
-	static let title = Localization.title
+	let title = Localization.title
 	
 	var items: [String]
 	var currentItem: String?
@@ -125,10 +131,6 @@ class TradeSelectionHandler: SimpleSelectionHandler {
 	
 	func configure(_ cell: Cell, for trade: String) {
 		cell.nameLabel.text = trade
-	}
-	
-	func selected(_ trade: String?) {
-		print(trade ?? "<no trade>", "selected!")
 	}
 }
 
@@ -147,26 +149,26 @@ class CraftsmanSelectionHandler: SimpleSelectionHandler {
 	typealias Cell = CraftsmanCell
 	typealias EmptyCell = NoCraftsmanCell
 	
-	static let title = Localization.title
-	
 	var items: [Craftsman]
 	var currentItem: Craftsman?
 	var selectionCallback: SelectionCallback
+	var trade: String?
 	
-	init(in building: Building, forTrade trade: String?, current: Craftsman?, callback: @escaping SelectionCallback) {
-		self.items = building.allCraftsmen()
-			.filter { trade == nil || $0.trade == trade }
-			.sorted { $0.name < $1.name }
+	var title: String {
+		return trade ?? Localization.title
+	}
+	
+	init(options: [Craftsman], trade: String?, current: Craftsman?, callback: @escaping SelectionCallback) {
+		self.trade = trade
+		self.items = options
 		self.currentItem = current
 		self.selectionCallback = callback
 	}
 	
 	func configure(_ cell: Cell, for craftsman: Craftsman) {
 		cell.nameLabel.text = craftsman.name
-	}
-	
-	func selected(_ craftsman: Craftsman?) {
-		print(craftsman?.name ?? "<no craftsman>", "selected!")
+		cell.tradeLabel.text = craftsman.trade
+		cell.tradeLabel.isHidden = trade != nil // all the same trade anyway
 	}
 }
 
@@ -178,4 +180,5 @@ class CraftsmanCell: UITableViewCell, LoadedTableCell {
 	static let reuseID = "Craftsman Cell"
 	
 	@IBOutlet var nameLabel: UILabel!
+	@IBOutlet var tradeLabel: UILabel!
 }

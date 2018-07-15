@@ -53,18 +53,26 @@ final class EditIssueViewController: UITableViewController, LoadedViewController
 	
 	private var trade: String? {
 		didSet {
-			craftsmanTradeLabel.setText(to: craftsman?.trade, fallback: Localization.noTrade)
+			craftsmanTradeLabel.setText(to: trade, fallback: Localization.noTrade)
 			suggestionsHandler.trade = trade
+			
+			if trade != craftsman?.trade {
+				if trade != nil, possibleCraftsmen().count == 1 {
+					craftsman = possibleCraftsmen()[0]
+				} else {
+					craftsman = nil
+				}
+			}
 		}
 	}
 	
 	private var craftsman: Craftsman? {
 		didSet {
 			craftsmanNameLabel.setText(to: craftsman?.name, fallback: L10n.Issue.noCraftsman)
-			trade = craftsman?.trade
 		}
 	}
 	
+	private var building: Building!
 	private var suggestionsHandler = SuggestionsHandler()
 	
 	override func viewDidLoad() {
@@ -82,6 +90,8 @@ final class EditIssueViewController: UITableViewController, LoadedViewController
 		assert(issue?.isRegistered != true)
 		guard isViewLoaded else { return }
 		
+		building = issue.accessMap().accessBuilding()
+		
 		navigationItem.title = isCreating ? Localization.titleCreating : Localization.titleEditing
 		
 		let wasAddedWithClient = issue?.wasAddedWithClient ?? defaults.isInClientMode
@@ -90,6 +100,7 @@ final class EditIssueViewController: UITableViewController, LoadedViewController
 		isIssueMarked = issue?.isMarked ?? false
 		
 		craftsman = issue?.accessCraftsman()
+		trade = craftsman?.trade
 		
 		descriptionField.text = issue?.description
 		descriptionChanged()
@@ -112,6 +123,12 @@ final class EditIssueViewController: UITableViewController, LoadedViewController
 		}
 	}
 	
+	func possibleCraftsmen() -> [Craftsman] {
+		return building.allCraftsmen()
+			.filter { trade == nil || $0.trade == trade }
+			.sorted { $0.name < $1.name }
+	}
+	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		switch segue.identifier {
 		case "cancel":
@@ -121,14 +138,14 @@ final class EditIssueViewController: UITableViewController, LoadedViewController
 		case "select trade":
 			let selectionController = segue.destination as! SelectionViewController
 			selectionController.handler = TradeSelectionHandler(
-				in: issue.accessMap().accessBuilding(),
+				in: building,
 				currentTrade: trade
 			) { self.trade = $0 }.wrapped()
 		case "select craftsman":
 			let selectionController = segue.destination as! SelectionViewController
 			selectionController.handler = CraftsmanSelectionHandler(
-				in: issue.accessMap().accessBuilding(),
-				forTrade: trade,
+				options: possibleCraftsmen(),
+				trade: trade,
 				current: craftsman
 			) { self.craftsman = $0 }.wrapped()
 		default:
@@ -149,21 +166,6 @@ final class EditIssueViewController: UITableViewController, LoadedViewController
 	
 	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		return UITableViewAutomaticDimension
-	}
-	
-	override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-		return [craftsmanNameCell, craftsmanTradeCell].contains(tableView.cellForRow(at: indexPath)) ? indexPath : nil
-	}
-	
-	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		switch tableView.cellForRow(at: indexPath)! {
-		case craftsmanNameCell:
-			break
-		case craftsmanTradeCell:
-			break
-		default:
-			fatalError("unselectable row at \(indexPath) selected!")
-		}
 	}
 }
 

@@ -1580,7 +1580,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                         <sections>
                             <tableViewSection id="Aji-FC-EZ8" userLabel="Facts">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="fOL-k8-TiD" userLabel="Basics">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="fOL-k8-TiD" userLabel="Basics">
                                         <rect key="frame" x="0.0" y="35" width="540" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fOL-k8-TiD" id="gHr-uD-rV3">
@@ -1631,7 +1631,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="CKR-Mc-eHL" userLabel="Client Mode">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="CKR-Mc-eHL" userLabel="Client Mode">
                                         <rect key="frame" x="0.0" y="79" width="540" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CKR-Mc-eHL" id="suc-M6-t72">
@@ -1671,7 +1671,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                             </tableViewSection>
                             <tableViewSection headerTitle="Foto" id="oG0-cn-SUS" userLabel="Image">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="322" id="zeo-OF-HfK" userLabel="Image">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="322" id="zeo-OF-HfK" userLabel="Image">
                                         <rect key="frame" x="0.0" y="179" width="540" height="322"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zeo-OF-HfK" id="X1r-Mi-uGU">
@@ -1792,7 +1792,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                             </tableViewSection>
                             <tableViewSection headerTitle="Beschreibung" id="UG7-0k-28l" userLabel="Description">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="mHG-MX-E35" userLabel="Description">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="mHG-MX-E35" userLabel="Description">
                                         <rect key="frame" x="0.0" y="701" width="540" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mHG-MX-E35" id="345-34-lbU">
@@ -1822,7 +1822,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="200" id="Bge-3o-NlX" userLabel="Suggestions">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="200" id="Bge-3o-NlX" userLabel="Suggestions">
                                         <rect key="frame" x="0.0" y="745" width="540" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Bge-3o-NlX" id="wch-uu-9ye">
@@ -1947,7 +1947,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                             <rect key="frame" x="0.0" y="0.0" width="540" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Keine Funktion" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O87-rj-n8Z">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Keine Funktion" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O87-rj-n8Z">
                                                     <rect key="frame" x="15" y="14" width="510" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -1972,7 +1972,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                             <rect key="frame" x="0.0" y="0.0" width="540" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Maler" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vgw-Pz-3Xx">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Maler" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vgw-Pz-3Xx">
                                                     <rect key="frame" x="15" y="14" width="510" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -1997,7 +1997,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                             <rect key="frame" x="0.0" y="0.0" width="540" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Keine Handwerker" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bjx-KR-DBI">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Keine Handwerker" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bjx-KR-DBI">
                                                     <rect key="frame" x="15" y="14" width="510" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -2015,29 +2015,41 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Craftsman Cell" id="6RQ-wD-xrl" customClass="CraftsmanCell" customModule="Issue_Manager" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="187.5" width="540" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Craftsman Cell" rowHeight="100" id="6RQ-wD-xrl" customClass="CraftsmanCell" customModule="Issue_Manager" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="187.5" width="540" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6RQ-wD-xrl" id="olX-vv-yAB">
-                                            <rect key="frame" x="0.0" y="0.0" width="540" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="540" height="99.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Malerfirma GmbH" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pnd-DZ-ZKD">
-                                                    <rect key="frame" x="15" y="14" width="510" height="16"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="VTe-f0-DOb">
+                                                    <rect key="frame" x="15" y="14" width="510" height="72"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="799" verticalCompressionResistancePriority="799" text="Malerfirma GmbH" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pnd-DZ-ZKD">
+                                                            <rect key="frame" x="0.0" y="0.0" width="510" height="43.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="800" verticalCompressionResistancePriority="800" text="Maler" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xCX-RW-AkQ">
+                                                            <rect key="frame" x="0.0" y="51.5" width="510" height="20.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="pnd-DZ-ZKD" firstAttribute="top" secondItem="olX-vv-yAB" secondAttribute="topMargin" constant="3" id="Drx-0N-Sin"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="pnd-DZ-ZKD" secondAttribute="trailing" id="GN3-AT-fKV"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="pnd-DZ-ZKD" secondAttribute="bottom" constant="3" id="SHD-iu-tcJ"/>
-                                                <constraint firstItem="pnd-DZ-ZKD" firstAttribute="leading" secondItem="olX-vv-yAB" secondAttribute="leadingMargin" id="lRT-iq-aB9"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="VTe-f0-DOb" secondAttribute="bottom" constant="3" id="65z-ea-tkG"/>
+                                                <constraint firstItem="VTe-f0-DOb" firstAttribute="top" secondItem="olX-vv-yAB" secondAttribute="topMargin" constant="3" id="Jdu-uV-NK1"/>
+                                                <constraint firstItem="VTe-f0-DOb" firstAttribute="leading" secondItem="olX-vv-yAB" secondAttribute="leadingMargin" id="jCw-1m-Tg3"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="VTe-f0-DOb" secondAttribute="trailing" id="kCH-Ru-lC5"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="nameLabel" destination="pnd-DZ-ZKD" id="Zop-JE-Wd5"/>
+                                            <outlet property="tradeLabel" destination="xCX-RW-AkQ" id="7BM-va-3qS"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
