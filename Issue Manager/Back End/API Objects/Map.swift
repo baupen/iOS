@@ -5,7 +5,7 @@ import Foundation
 final class Map: MapHolder, FileContainer {
 	let meta: ObjectMeta
 	let children: [UUID]
-	let issues: [UUID]
+	var issues: [UUID]
 	let filename: String?
 	let name: String
 	

@@ -6,7 +6,7 @@ final class Storage: Codable {
 	private(set) var craftsmen: [UUID: Craftsman] = [:]
 	private(set) var buildings: [UUID: Building] = [:]
 	private(set) var maps: [UUID: Map] = [:]
-	// try not to mutate these directly
+	// try not to mutate these from outside the backend group
 	internal(set) var issues: [UUID: Issue] = [:]
 	
 	private var fileContainers: [FileContainer] {
@@ -41,10 +41,11 @@ final class Storage: Codable {
 		fileContainers.forEach { $0.downloadFile() }
 	}
 	
-	func add(_ issue: Issue, in building: Building) {
+	func add(_ issue: Issue) {
 		assert(issues[issue.id] == nil)
 		
 		issues[issue.id] = issue
+		maps[issue.map]!.issues.append(issue.id)
 		Client.shared.issueCreated(issue)
 		
 		Client.shared.saveShared()

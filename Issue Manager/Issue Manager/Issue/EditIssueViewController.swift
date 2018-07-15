@@ -2,6 +2,12 @@
 
 import UIKit
 
+final class EditIssueNavigationController: UINavigationController {
+	var editIssueController: EditIssueViewController {
+		return topViewController as! EditIssueViewController
+	}
+}
+
 final class EditIssueViewController: UITableViewController, LoadedViewController {
 	typealias Localization = L10n.ViewIssue
 	
@@ -10,9 +16,7 @@ final class EditIssueViewController: UITableViewController, LoadedViewController
 	@IBOutlet var markButton: UIButton!
 	@IBOutlet var clientModeLabel: UILabel!
 	
-	@IBOutlet var craftsmanTradeCell: UITableViewCell!
 	@IBOutlet var craftsmanTradeLabel: UILabel!
-	@IBOutlet var craftsmanNameCell: UITableViewCell!
 	@IBOutlet var craftsmanNameLabel: UILabel!
 	
 	@IBOutlet var descriptionCell: UITableViewCell!
@@ -118,6 +122,7 @@ final class EditIssueViewController: UITableViewController, LoadedViewController
 		
 		if isCreating {
 			update(issue)
+			Client.shared.storage.add(issue)
 		} else {
 			issue.change(transform: update)
 		}

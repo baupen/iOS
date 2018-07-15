@@ -51,6 +51,12 @@ final class Issue: FileContainer {
 		var x: Double
 		var y: Double
 		var zoomScale: Double
+		
+		init(x: Double, y: Double, zoomScale: Double) {
+			self.x = x
+			self.y = y
+			self.zoomScale = zoomScale
+		}
 	}
 	
 	struct Status: Codable {

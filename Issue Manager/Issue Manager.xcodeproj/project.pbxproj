@@ -49,6 +49,7 @@
 		95512B1020FBEAC400878163 /* IssueUpdateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95512B0F20FBEAC400878163 /* IssueUpdateRequest.swift */; };
 		95512B1220FBEAD800878163 /* IssueDeletionRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95512B1120FBEAD800878163 /* IssueDeletionRequest.swift */; };
 		95512B1420FBEAE300878163 /* IssueActionRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95512B1320FBEAE300878163 /* IssueActionRequest.swift */; };
+		95512B1620FBFDE500878163 /* IssuePositioner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95512B1520FBFDE500878163 /* IssuePositioner.swift */; };
 		9553707520F1A5E2005D81C8 /* IssueListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9553707420F1A5E2005D81C8 /* IssueListViewController.swift */; };
 		9554234F20DC781E009CCCE0 /* NetworkObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9554234E20DC781E009CCCE0 /* NetworkObjects.swift */; };
 		9554235120DC7921009CCCE0 /* Hashing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9554235020DC7921009CCCE0 /* Hashing.swift */; };
@@ -279,6 +280,7 @@
 		95512B0F20FBEAC400878163 /* IssueUpdateRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueUpdateRequest.swift; sourceTree = "<group>"; };
 		95512B1120FBEAD800878163 /* IssueDeletionRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDeletionRequest.swift; sourceTree = "<group>"; };
 		95512B1320FBEAE300878163 /* IssueActionRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueActionRequest.swift; sourceTree = "<group>"; };
+		95512B1520FBFDE500878163 /* IssuePositioner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssuePositioner.swift; sourceTree = "<group>"; };
 		9553707420F1A5E2005D81C8 /* IssueListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListViewController.swift; sourceTree = "<group>"; };
 		9554234E20DC781E009CCCE0 /* NetworkObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkObjects.swift; sourceTree = "<group>"; };
 		9554235020DC7921009CCCE0 /* Hashing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hashing.swift; sourceTree = "<group>"; };
@@ -563,6 +565,7 @@
 			children = (
 				9550E0E720F38D7600921387 /* StatusFilterViewController.swift */,
 				9583C2D420DC757800452695 /* MapViewController.swift */,
+				95512B1520FBFDE500878163 /* IssuePositioner.swift */,
 				9550E0E520F2E70700921387 /* IssueMarker.swift */,
 				95BBF32020F26F49006E162E /* IssueCell.swift */,
 				9553707420F1A5E2005D81C8 /* IssueListViewController.swift */,
@@ -908,6 +911,7 @@
 				95BBF32120F26F49006E162E /* IssueCell.swift in Sources */,
 				9511A13D20DD559500101ADE /* Atomic.swift in Sources */,
 				950283A820E70C46001A5083 /* LocalizedStrings.swift in Sources */,
+				95512B1620FBFDE500878163 /* IssuePositioner.swift in Sources */,
 				9584F24E20E936ED00A8C884 /* LoginWindowView.swift in Sources */,
 				9553707520F1A5E2005D81C8 /* IssueListViewController.swift in Sources */,
 				9511A10820DD3BD100101ADE /* Craftsman.swift in Sources */,

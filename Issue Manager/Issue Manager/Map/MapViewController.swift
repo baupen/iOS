@@ -9,27 +9,32 @@ class MapViewController: UIViewController, LoadedViewController {
 	
 	static let storyboardID = "Map"
 	
+	@IBOutlet var filterItem: UIBarButtonItem!
+	@IBOutlet var addItem: UIBarButtonItem!
+	
 	@IBOutlet var fallbackLabel: UILabel!
 	@IBOutlet var pdfContainerView: UIView!
 	@IBOutlet var activityIndicator: UIActivityIndicatorView!
 	@IBOutlet var pullableView: PullableView!
 	@IBOutlet var blurHeightConstraint: NSLayoutConstraint!
 	@IBOutlet var listHeightConstraint: NSLayoutConstraint!
-	@IBOutlet var filterItem: UIBarButtonItem!
+	@IBOutlet var issuePositioner: IssuePositioner!
 	
 	// the filter popover's done button and the add marker popover's cancel button link to this
 	@IBAction func backToMap(_ segue: UIStoryboardSegue) {}
 	
 	// the issue popovers' done buttons link to this
 	@IBAction func backToMapWithUpdates(_ segue: UIStoryboardSegue) {
-		updateMarkers()
-		issueListController.update()
-		
-		// reload map list etc.
 		guard let map = holder as? Map else {
-			print("trying to update map controller without map")
+			assertionFailure("trying to update map controller without map")
 			return
 		}
+		
+		isAddingIssue = false // done (if started)
+		
+		issues = Array(map.allIssues())
+		updateMarkers()
+		issueListController.update()
 		
 		let mainController = splitViewController as! MainViewController
 		for viewController in mainController.masterNav.viewControllers {
@@ -38,10 +43,26 @@ class MapViewController: UIViewController, LoadedViewController {
 		}
 	}
 	
+	@IBAction func beginAddingIssue() {
+		isAddingIssue = true
+	}
+	
+	@IBAction func cancelAddingIssue() {
+		isAddingIssue = false
+	}
+	
 	var markers: [IssueMarker] = []
 	var markerAlpha: CGFloat = 0.1 {
 		didSet {
 			pdfController?.overlayView.alpha = markerAlpha
+		}
+	}
+	
+	var isAddingIssue = false {
+		didSet {
+			markerAlpha = isAddingIssue ? 0.25 : 1
+			addItem.isEnabled = !isAddingIssue
+			issuePositioner.isHidden = !isAddingIssue
 		}
 	}
 	
@@ -123,6 +144,18 @@ class MapViewController: UIViewController, LoadedViewController {
 			let filterController = statusFilterNav.statusFilterController
 			filterController.selected = visibleStatuses
 			filterController.delegate = self
+		case let editIssueNav as EditIssueNavigationController:
+			let editController = editIssueNav.editIssueController
+			editController.isCreating = true // otherwise we wouldn't be using a segue
+			if isAddingIssue {
+				let position = Issue.Position(
+					at: issuePositioner.relativePosition(in: pdfController!.overlayView),
+					zoomScale: pdfController!.scrollView.zoomScale
+				)
+				editController.issue = Issue(at: position, in: holder as! Map)
+			} else {
+				editController.issue = Issue(in: holder as! Map)
+			}
 		default:
 			fatalError("unrecognized segue to \(segue.destination)")
 		}
@@ -143,11 +176,19 @@ class MapViewController: UIViewController, LoadedViewController {
 	func update() {
 		guard isViewLoaded else { return }
 		
+		isAddingIssue = false
+		
 		navigationItem.title = holder?.name ?? Localization.title
 		
 		let map = holder as? Map
 		
-		issues = Array(map?.allIssues() ?? .init([]))
+		addItem.isEnabled = map != nil
+		
+		if let map = map {
+			issues = Array(map.allIssues())
+		} else {
+			issues = []
+		}
 		
 		issueListController.map = map
 		pullableView.isHidden = map == nil
