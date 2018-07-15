@@ -7,6 +7,7 @@ let defaults = UserDefaults.standard
 fileprivate let isInClientModeKey = "isInClientMode"
 fileprivate let stayLoggedInKey = "stayLoggedIn"
 fileprivate let hiddenStatusesKey = "hiddenStatuses"
+fileprivate let suggestionsKey = "suggestions"
 
 func registerDefaults() {
 	defaults.register(
@@ -40,5 +41,10 @@ extension UserDefaults {
 			let raw = newValue.map { $0.rawValue }
 			set(raw, forKey: hiddenStatusesKey)
 		}
+	}
+	
+	var rawSuggestions: Data? {
+		get { return data(forKey: suggestionsKey) }
+		set { set(newValue, forKey: suggestionsKey) }
 	}
 }

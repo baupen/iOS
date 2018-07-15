@@ -71,7 +71,7 @@ class ViewIssueViewController: UITableViewController, LoadedViewController {
 			UIImage(contentsOfFile: Issue.cacheURL(filename: $0).path)
 		}
 		
-		let craftsman = issue.craftsman.flatMap { Client.shared.storage.craftsmen[$0] }
+		let craftsman = issue.accessCraftsman()
 		craftsmanTradeLabel.setText(to: craftsman?.trade, fallback: L10n.Issue.noCraftsman)
 		craftsmanNameLabel.setText(to: craftsman?.name, fallback: L10n.Issue.noCraftsman)
 		

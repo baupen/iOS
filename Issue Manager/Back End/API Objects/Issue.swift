@@ -159,3 +159,9 @@ extension Issue {
 		Client.shared.saveShared()
 	}
 }
+
+extension Issue {
+	func accessCraftsman() -> Craftsman? {
+		return craftsman.flatMap { Client.shared.storage.craftsmen[$0] }
+	}
+}

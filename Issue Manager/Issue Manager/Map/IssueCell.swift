@@ -84,7 +84,7 @@ class IssueCell: UITableViewCell, LoadedTableCell {
 		
 		showInMapButton.isEnabled = issue.position != nil
 		
-		let craftsman = issue.craftsman.flatMap { Client.shared.storage.craftsmen[$0] }
+		let craftsman = issue.accessCraftsman()
 		tradeLabel.setText(to: craftsman?.trade, fallback: Localization.noCraftsman)
 		craftsmanLabel.setText(to: craftsman.map { "\($0.name)\n\($0.trade)" }, fallback: Localization.noCraftsman)
 		

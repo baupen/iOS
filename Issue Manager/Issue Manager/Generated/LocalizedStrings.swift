@@ -78,9 +78,9 @@ internal enum L10n {
     internal static let description = L10n.tr("Localizable", "issue.description")
     /// Abnahmemodus
     internal static let isClientMode = L10n.tr("Localizable", "issue.is_client_mode")
-    /// kein Handwerker
+    /// Kein Handwerker
     internal static let noCraftsman = L10n.tr("Localizable", "issue.no_craftsman")
-    /// keine Beschreibung
+    /// Keine Beschreibung
     internal static let noDescription = L10n.tr("Localizable", "issue.no_description")
     /// Status
     internal static let status = L10n.tr("Localizable", "issue.status")
@@ -218,13 +218,6 @@ internal enum L10n {
     }
   }
 
-  internal enum NewIssue {
-    /// Neue Pendenz
-    internal static let titleCreating = L10n.tr("Localizable", "new_issue.title_creating")
-    /// Pendenz Bearbeiten
-    internal static let titleEditing = L10n.tr("Localizable", "new_issue.title_editing")
-  }
-
   internal enum ViewIssue {
     /// Annehmen
     internal static let acceptResponse = L10n.tr("Localizable", "view_issue.accept_response")
@@ -232,18 +225,28 @@ internal enum L10n {
     internal static let actions = L10n.tr("Localizable", "view_issue.actions")
     /// Handwerker
     internal static let craftsman = L10n.tr("Localizable", "view_issue.craftsman")
+    /// Beschreibung
+    internal static let description = L10n.tr("Localizable", "view_issue.description")
     /// Details
     internal static let details = L10n.tr("Localizable", "view_issue.details")
     /// Foto
     internal static let image = L10n.tr("Localizable", "view_issue.image")
-    /// Kein Foto gesetzt.
+    /// Kein Foto gesetzt
     internal static let imagePlaceholder = L10n.tr("Localizable", "view_issue.image_placeholder")
     /// Als Abgeschlossen Markieren
     internal static let markAsCompleted = L10n.tr("Localizable", "view_issue.mark_as_completed")
+    /// Keine passenden Vorschläge
+    internal static let noSuggestions = L10n.tr("Localizable", "view_issue.no_suggestions")
+    /// Keine Funktion
+    internal static let noTrade = L10n.tr("Localizable", "view_issue.no_trade")
     /// Ablehnen
     internal static let rejectResponse = L10n.tr("Localizable", "view_issue.reject_response")
+    /// Neue Pendenz
+    internal static let titleCreating = L10n.tr("Localizable", "view_issue.title_creating")
+    /// Pendenz Bearbeiten
+    internal static let titleEditing = L10n.tr("Localizable", "view_issue.title_editing")
     /// Pendenzdetails
-    internal static let title = L10n.tr("Localizable", "view_issue.title")
+    internal static let titleViewing = L10n.tr("Localizable", "view_issue.title_viewing")
     /// Wieder Eröffnen
     internal static let undoReview = L10n.tr("Localizable", "view_issue.undo_review")
 

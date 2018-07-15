@@ -227,11 +227,12 @@ class MapViewController: UIViewController, LoadedViewController {
 	}
 	
 	func showDetails(for issue: Issue) {
-		let viewController = storyboard!.instantiate(ViewIssueViewController.self)!
-		viewController.issue = issue
+		let viewController = issue.isRegistered
+			? storyboard!.instantiate(ViewIssueViewController.self)! <- { $0.issue = issue }
+			: storyboard!.instantiate(EditIssueViewController.self)! <- { $0.issue = issue }
 		
 		let navController = UINavigationController(rootViewController: viewController)
-		navController.modalPresentationStyle = .formSheet
+			<- { $0.modalPresentationStyle = .formSheet }
 		
 		present(navController, animated: true)
 	}

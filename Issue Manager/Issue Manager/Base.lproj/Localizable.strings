@@ -68,9 +68,9 @@
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Issue.no
 // CONTEXT: Wird anstelle der Funktion angezeigt, wenn kein Handwerker gesetzt ist.
-"issue.no_craftsman" = "kein Handwerker";
+"issue.no_craftsman" = "Kein Handwerker";
 // CONTEXT: Wird anstelle der Beschreibung angezeigt, wenn sie nicht gesetzt ist.
-"issue.no_description" = "keine Beschreibung";
+"issue.no_description" = "Keine Beschreibung";
 // CONTEXT: Überschrift für den Status.
 "issue.status" = "Status";
 // CONTEXT: Status einer Pendenz, die noch nicht im Verzeichnis (also noch editierbar) ist.
@@ -179,13 +179,6 @@
 "map_list.section.this_map" = "Dieser Bereich";
 
 ////////////////////////////////////////////////////////////////////////////////
-// MARK: New
-// CONTEXT: Titel für das "Pendenz Bearbeiten"-Popup, wenn die Pendenz erstellt wird.
-"new_issue.title_creating" = "Neue Pendenz";
-// CONTEXT: Titel für das "Pendenz Bearbeiten"-Popup, wenn die Pendenz bearbeitet wird.
-"new_issue.title_editing" = "Pendenz Bearbeiten";
-
-////////////////////////////////////////////////////////////////////////////////
 // MARK: View
 // CONTEXT: Knopf, um die Antwort vom Handwerker anzunehmen und somit die Pendenz als abgeschlossen zu markieren.
 "view_issue.accept_response" = "Annehmen";
@@ -193,14 +186,20 @@
 "view_issue.actions" = "Aktionen";
 // CONTEXT: Überschrift für die Details des zugewiesenen Handwerkers.
 "view_issue.craftsman" = "Handwerker";
+// CONTEXT: Überschrift für die Beschreibung.
+"view_issue.description" = "Beschreibung";
 // CONTEXT: Überschrift für die Details einer Pendenz.
 "view_issue.details" = "Details";
 // CONTEXT: Überschrift für das Bild einer Pendenz
 "view_issue.image" = "Foto";
 // CONTEXT: Steht anstelle des Fotos da, wenn kein Foto gesetzt ist.
-"view_issue.image_placeholder" = "Kein Foto gesetzt.";
+"view_issue.image_placeholder" = "Kein Foto gesetzt";
 // CONTEXT: Knopf, um eine Pendenz als abgeschlossen zu markieren, obwohl der Handwerker sie nicht beantwortet hat.
 "view_issue.mark_as_completed" = "Als Abgeschlossen Markieren";
+// CONTEXT: Wird anstelle der Vorschläge angezeigt, wenn es keinen zutreffenden gibt.
+"view_issue.no_suggestions" = "Keine passenden Vorschläge";
+// CONTEXT: Wird anstelle der Funktion angezeigt, wenn sie noch nicht ausgewählt wurde.
+"view_issue.no_trade" = "Keine Funktion";
 // CONTEXT: Knopf, um die Antwort vom Handwerker abzulehnen und sie somit rückgängig zu machen.
 "view_issue.reject_response" = "Ablehnen";
 // CONTEXT: Wird über den Aktionen angezeigt, wenn die Pendenz vom Handwerker beantwortet wurde.
@@ -209,7 +208,11 @@
 "view_issue.summary.no_response" = "Diese Pendenz wurde noch nicht vom Handwerker beantwortet.\nDu kannst sie trotzdem bestätigen und somit als abgeschlossen markieren.";
 // CONTEXT: Wird über den Aktionen angezeigt, wenn die Pendenz bereits abgeschlossen wurde.
 "view_issue.summary.reviewed" = "Diese Pendenz wurde bereits abgeschlossen.\nDu kannst die Bestätigung rückgangig machen, um sie wieder zu eröffnen.";
+// CONTEXT: Titel für das "Pendenz Bearbeiten"-Popup, wenn die Pendenz erstellt wird.
+"view_issue.title_creating" = "Neue Pendenz";
+// CONTEXT: Titel für das "Pendenz Bearbeiten"-Popup, wenn die Pendenz bearbeitet wird.
+"view_issue.title_editing" = "Pendenz Bearbeiten";
 // CONTEXT: Titel für das Popup, worin die Details einer Pendenz angezeigt werden.
-"view_issue.title" = "Pendenzdetails";
+"view_issue.title_viewing" = "Pendenzdetails";
 // CONTEXT: Knopf, um den Abschluss einer Pendenz rückgangig zu machen und sie somit wieder zu eröffnen.
 "view_issue.undo_review" = "Wieder Eröffnen";
