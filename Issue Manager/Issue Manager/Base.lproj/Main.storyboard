@@ -58,7 +58,7 @@
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rHo-jf-rQe">
-                                                    <rect key="frame" x="0.0" y="0.0" width="703.5" height="256"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="703" height="256"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="256" id="tbp-3z-9r2"/>
                                                     </constraints>
@@ -1745,6 +1745,9 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                 <constraint firstItem="js7-u6-qCt" firstAttribute="leading" secondItem="2ZA-eL-OKi" secondAttribute="leadingMargin" id="sPx-2b-Jco"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="v7T-jr-5gP" kind="show" identifier="select trade" id="QK8-t8-g4B"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="w2x-8V-zpl" userLabel="Name">
                                         <rect key="frame" x="0.0" y="601" width="540" height="44"/>
@@ -1781,6 +1784,9 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                 <constraint firstAttribute="trailingMargin" secondItem="D65-XC-hde" secondAttribute="trailing" id="z8H-2B-JT7"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="v7T-jr-5gP" kind="show" identifier="select craftsman" id="a5G-fh-9Or"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -1922,6 +1928,139 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
             </objects>
             <point key="canvasLocation" x="1478" y="1713"/>
         </scene>
+        <!--Handwerker-->
+        <scene sceneID="iVi-3j-O2i">
+            <objects>
+                <viewController id="v7T-jr-5gP" customClass="SelectionViewController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="C5q-4m-Lnh">
+                        <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="skY-0c-hX2">
+                                <rect key="frame" x="0.0" y="50" width="540" height="570"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="No Trade Cell" id="M4s-FH-Plf" customClass="NoTradeCell" customModule="Issue_Manager" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="55.5" width="540" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="M4s-FH-Plf" id="mkw-gM-fwr">
+                                            <rect key="frame" x="0.0" y="0.0" width="540" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Keine Funktion" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O87-rj-n8Z">
+                                                    <rect key="frame" x="15" y="14" width="510" height="16"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="view_issue.select_trade.none"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="O87-rj-n8Z" secondAttribute="trailing" id="BSn-Lp-nm0"/>
+                                                <constraint firstItem="O87-rj-n8Z" firstAttribute="leading" secondItem="mkw-gM-fwr" secondAttribute="leadingMargin" id="FRE-38-pbf"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="O87-rj-n8Z" secondAttribute="bottom" constant="3" id="JKD-yf-gVp"/>
+                                                <constraint firstItem="O87-rj-n8Z" firstAttribute="top" secondItem="mkw-gM-fwr" secondAttribute="topMargin" constant="3" id="sqC-CT-rPV"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Trade Cell" id="O9Y-hn-jb4" customClass="TradeCell" customModule="Issue_Manager" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="99.5" width="540" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="O9Y-hn-jb4" id="U9c-Hc-eIs">
+                                            <rect key="frame" x="0.0" y="0.0" width="540" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Maler" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vgw-Pz-3Xx">
+                                                    <rect key="frame" x="15" y="14" width="510" height="16"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Vgw-Pz-3Xx" secondAttribute="trailing" id="R9E-Qd-wU0"/>
+                                                <constraint firstItem="Vgw-Pz-3Xx" firstAttribute="leading" secondItem="U9c-Hc-eIs" secondAttribute="leadingMargin" id="kqj-xO-MuT"/>
+                                                <constraint firstItem="Vgw-Pz-3Xx" firstAttribute="top" secondItem="U9c-Hc-eIs" secondAttribute="topMargin" constant="3" id="nDf-RS-CK2"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="Vgw-Pz-3Xx" secondAttribute="bottom" constant="3" id="sXR-hi-iW4"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="nameLabel" destination="Vgw-Pz-3Xx" id="oTN-el-wK3"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="No Craftsman Cell" id="jOV-kN-rDg" customClass="NoCraftsmanCell" customModule="Issue_Manager" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="143.5" width="540" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jOV-kN-rDg" id="i1B-Vc-QnX">
+                                            <rect key="frame" x="0.0" y="0.0" width="540" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Keine Handwerker" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bjx-KR-DBI">
+                                                    <rect key="frame" x="15" y="14" width="510" height="16"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="view_issue.select_craftsman.none"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="bjx-KR-DBI" firstAttribute="top" secondItem="i1B-Vc-QnX" secondAttribute="topMargin" constant="3" id="5na-2a-1o8"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="bjx-KR-DBI" secondAttribute="bottom" constant="3" id="EUF-VH-hFD"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="bjx-KR-DBI" secondAttribute="trailing" id="mal-Os-YFm"/>
+                                                <constraint firstItem="bjx-KR-DBI" firstAttribute="leading" secondItem="i1B-Vc-QnX" secondAttribute="leadingMargin" id="x40-Kq-7Og"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Craftsman Cell" id="6RQ-wD-xrl" customClass="CraftsmanCell" customModule="Issue_Manager" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="187.5" width="540" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6RQ-wD-xrl" id="olX-vv-yAB">
+                                            <rect key="frame" x="0.0" y="0.0" width="540" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Malerfirma GmbH" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pnd-DZ-ZKD">
+                                                    <rect key="frame" x="15" y="14" width="510" height="16"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="pnd-DZ-ZKD" firstAttribute="top" secondItem="olX-vv-yAB" secondAttribute="topMargin" constant="3" id="Drx-0N-Sin"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="pnd-DZ-ZKD" secondAttribute="trailing" id="GN3-AT-fKV"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="pnd-DZ-ZKD" secondAttribute="bottom" constant="3" id="SHD-iu-tcJ"/>
+                                                <constraint firstItem="pnd-DZ-ZKD" firstAttribute="leading" secondItem="olX-vv-yAB" secondAttribute="leadingMargin" id="lRT-iq-aB9"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="nameLabel" destination="pnd-DZ-ZKD" id="Zop-JE-Wd5"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="VBJ-hI-E8b" firstAttribute="trailing" secondItem="skY-0c-hX2" secondAttribute="trailing" id="nFz-0O-GsF"/>
+                            <constraint firstItem="skY-0c-hX2" firstAttribute="top" secondItem="VBJ-hI-E8b" secondAttribute="top" id="zCS-Os-wd7"/>
+                            <constraint firstItem="VBJ-hI-E8b" firstAttribute="bottom" secondItem="skY-0c-hX2" secondAttribute="bottom" id="zPs-h1-Obb"/>
+                            <constraint firstItem="skY-0c-hX2" firstAttribute="leading" secondItem="VBJ-hI-E8b" secondAttribute="leading" id="zbb-dW-47q"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="VBJ-hI-E8b"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Handwerker" id="bqc-Oy-pal"/>
+                    <connections>
+                        <outlet property="tableView" destination="skY-0c-hX2" id="cV2-wy-JKf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nuB-Rn-5m8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2202" y="1713"/>
+        </scene>
     </scenes>
     <resources>
         <image name="filter_disabled" width="24" height="24"/>
@@ -1934,5 +2073,8 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
             <color red="0.20399999618530273" green="0.20399999618530273" blue="0.46700000762939453" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="a5G-fh-9Or"/>
+    </inferredMetricsTieBreakers>
     <color key="tintColor" name="Main"/>
 </document>

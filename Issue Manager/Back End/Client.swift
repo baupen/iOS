@@ -4,7 +4,7 @@ import Foundation
 
 typealias TaskResult = (data: Data, response: HTTPURLResponse)
 
-class Client {
+final class Client {
 	static let shared = Client()
 	
 	/// the user we're currently logged in as

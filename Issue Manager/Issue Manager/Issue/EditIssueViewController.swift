@@ -2,7 +2,7 @@
 
 import UIKit
 
-class EditIssueViewController: UITableViewController, LoadedViewController {
+final class EditIssueViewController: UITableViewController, LoadedViewController {
 	typealias Localization = L10n.ViewIssue
 	
 	static let storyboardID = "Edit Issue"
@@ -118,6 +118,19 @@ class EditIssueViewController: UITableViewController, LoadedViewController {
 			break
 		case "save":
 			save()
+		case "select trade":
+			let selectionController = segue.destination as! SelectionViewController
+			selectionController.handler = TradeSelectionHandler(
+				in: issue.accessMap().accessBuilding(),
+				currentTrade: trade
+			) { self.trade = $0 }.wrapped()
+		case "select craftsman":
+			let selectionController = segue.destination as! SelectionViewController
+			selectionController.handler = CraftsmanSelectionHandler(
+				in: issue.accessMap().accessBuilding(),
+				forTrade: trade,
+				current: craftsman
+			) { self.craftsman = $0 }.wrapped()
 		default:
 			fatalError("unrecognized segue named \(segue.identifier ?? "<no identifier>")")
 		}

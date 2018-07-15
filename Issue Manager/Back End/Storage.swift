@@ -26,13 +26,22 @@ final class Storage: Codable {
 		issues    = try container.decodeValue(forKey: .issues)
 		
 		downloadMissingFiles()
+		DispatchQueue.main.async(execute: updateHelpers)
+	}
+	
+	func updateHelpers() {
+		for (buildingID, building) in buildings {
+			for map in building.recursiveChildren() {
+				map.buildingID = buildingID
+			}
+		}
 	}
 	
 	func downloadMissingFiles() {
 		fileContainers.forEach { $0.downloadFile() }
 	}
 	
-	func add(_ issue: Issue) {
+	func add(_ issue: Issue, in building: Building) {
 		assert(issues[issue.id] == nil)
 		
 		issues[issue.id] = issue

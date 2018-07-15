@@ -94,6 +94,20 @@ final class Issue: FileContainer {
 }
 
 extension Issue {
+	func accessCraftsman() -> Craftsman? {
+		return craftsman.flatMap { Client.shared.storage.craftsmen[$0] }
+	}
+	
+	func accessMap() -> Map {
+		return Client.shared.storage.maps[map]!
+	}
+	
+	func accessBuilding() -> Building {
+		return accessMap().accessBuilding()
+	}
+}
+
+extension Issue {
 	var isRegistered: Bool {
 		return status.registration != nil
 	}
@@ -157,11 +171,5 @@ extension Issue {
 		Client.shared.performed(.revert, on: self)
 		
 		Client.shared.saveShared()
-	}
-}
-
-extension Issue {
-	func accessCraftsman() -> Craftsman? {
-		return craftsman.flatMap { Client.shared.storage.craftsmen[$0] }
 	}
 }

@@ -139,6 +139,7 @@ extension Client {
 			}
 			storage[keyPath: path][removed] = nil
 		}
+		storage.updateHelpers()
 	}
 }
 

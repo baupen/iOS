@@ -202,6 +202,14 @@
 "view_issue.no_trade" = "Keine Funktion";
 // CONTEXT: Knopf, um die Antwort vom Handwerker abzulehnen und sie somit rückgängig zu machen.
 "view_issue.reject_response" = "Ablehnen";
+// CONTEXT: Knopf, um keinen Handwerker auszuwählen.
+"view_issue.select_craftsman.none" = "Kein Handwerker";
+// CONTEXT: Titel für die Ansicht zum auswählen des Namens.
+"view_issue.select_craftsman.title" = "Handwerker";
+// CONTEXT: Knopf, um keine Funktion auszuwählen.
+"view_issue.select_trade.none" = "Keine Funktion";
+// CONTEXT: Titel für die Ansicht zum auswählen der Funktion.
+"view_issue.select_trade.title" = "Funktionen";
 // CONTEXT: Wird über den Aktionen angezeigt, wenn die Pendenz vom Handwerker beantwortet wurde.
 "view_issue.summary.has_response" = "Diese Pendenz wurde vom Handwerker beantwortet.\nDu kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) oder ablehnen (und sie somit rückgängig machen).";
 // CONTEXT: Wird über den Aktionen angezeigt, wenn die Pendenz vom Handwerker noch keine Antwort erhalten hat.

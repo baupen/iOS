@@ -11,7 +11,7 @@ extension APIObject {
 	var id: UUID { return meta.id }
 }
 
-struct ObjectMeta: Codable {
+struct ObjectMeta: Codable, Equatable {
 	var id = UUID()
 	var lastChangeTime = Date()
 }

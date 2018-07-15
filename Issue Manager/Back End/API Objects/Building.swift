@@ -28,3 +28,13 @@ struct Building: MapHolder, FileContainer {
 		var country: String?
 	}
 }
+
+extension Building {
+	func allCraftsmen() -> [Craftsman] {
+		return craftsmen.compactMap { Client.shared.storage.craftsmen[$0] }
+	}
+	
+	func allTrades() -> Set<String> {
+		return Set(allCraftsmen().map { $0.trade })
+	}
+}

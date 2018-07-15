@@ -250,6 +250,20 @@ internal enum L10n {
     /// Wieder Eröffnen
     internal static let undoReview = L10n.tr("Localizable", "view_issue.undo_review")
 
+    internal enum SelectCraftsman {
+      /// Kein Handwerker
+      internal static let `none` = L10n.tr("Localizable", "view_issue.select_craftsman.none")
+      /// Handwerker
+      internal static let title = L10n.tr("Localizable", "view_issue.select_craftsman.title")
+    }
+
+    internal enum SelectTrade {
+      /// Keine Funktion
+      internal static let `none` = L10n.tr("Localizable", "view_issue.select_trade.none")
+      /// Funktionen
+      internal static let title = L10n.tr("Localizable", "view_issue.select_trade.title")
+    }
+
     internal enum Summary {
       /// Diese Pendenz wurde vom Handwerker beantwortet.\nDu kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) oder ablehnen (und sie somit rückgängig machen).
       internal static let hasResponse = L10n.tr("Localizable", "view_issue.summary.has_response")

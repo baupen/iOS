@@ -112,6 +112,7 @@
 		95BBF32120F26F49006E162E /* IssueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BBF32020F26F49006E162E /* IssueCell.swift */; };
 		95BD516020E985FC00FCB7EB /* Reachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95BD515520E985C600FCB7EB /* Reachability.framework */; };
 		95BD516120E985FC00FCB7EB /* Reachability.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 95BD515520E985C600FCB7EB /* Reachability.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		95C7341520FB9BBC00924B26 /* SelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C7341420FB9BBC00924B26 /* SelectionViewController.swift */; };
 		95D2C2AE20E5C3E700D887C8 /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D2C2AD20E5C3E700D887C8 /* Localization.swift */; };
 		95D2C2B120E5C50200D887C8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 95D2C2B320E5C50200D887C8 /* Localizable.strings */; };
 /* End PBXBuildFile section */
@@ -305,6 +306,7 @@
 		95BBF31820F26373006E162E /* FakePanGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakePanGestureRecognizer.swift; sourceTree = "<group>"; };
 		95BBF32020F26F49006E162E /* IssueCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCell.swift; sourceTree = "<group>"; };
 		95BD514B20E985C600FCB7EB /* Reachability.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Reachability.xcodeproj; path = Carthage/Checkouts/Reachability.swift/Reachability.xcodeproj; sourceTree = "<group>"; };
+		95C7341420FB9BBC00924B26 /* SelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionViewController.swift; sourceTree = "<group>"; };
 		95D2C2AD20E5C3E700D887C8 /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
 		95D2C2B520E5C52700D887C8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -574,10 +576,11 @@
 		95A66C7220F91805008F10DA /* Issue */ = {
 			isa = PBXGroup;
 			children = (
-				9502843820FADAB300880AD7 /* SuggestionsView.swift */,
-				9502842C20FAB67A00880AD7 /* EditIssueViewController.swift */,
 				95A66C7920F9181D008F10DA /* ViewIssueViewController.swift */,
+				9502842C20FAB67A00880AD7 /* EditIssueViewController.swift */,
+				95C7341420FB9BBC00924B26 /* SelectionViewController.swift */,
 				9502843420FACDD800880AD7 /* Suggestions.swift */,
+				9502843820FADAB300880AD7 /* SuggestionsView.swift */,
 			);
 			path = Issue;
 			sourceTree = "<group>";
@@ -844,6 +847,7 @@
 				9597935020F7AC2400AA40C1 /* Resources.swift in Sources */,
 				9511A13C20DD559500101ADE /* ExecutionContext.swift in Sources */,
 				9583C2D520DC757800452695 /* MapViewController.swift in Sources */,
+				95C7341520FB9BBC00924B26 /* SelectionViewController.swift in Sources */,
 				95B9BA6820DEDF0400261954 /* Storage.swift in Sources */,
 				95870B3020E9C06B00BB1B39 /* MapCell.swift in Sources */,
 				9511A14420DD56D700101ADE /* MiscHelpers.swift in Sources */,
