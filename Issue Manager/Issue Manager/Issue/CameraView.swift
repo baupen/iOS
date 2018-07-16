@@ -84,6 +84,7 @@ final class CameraView: UIView {
 		}
 		
 		let settings = AVCapturePhotoSettings() // jpeg
+		settings.flashMode = photoOutput.supportedFlashModes.contains(.auto) ? .auto : .off
 		photoOutput.capturePhoto(with: settings, delegate: self)
 	}
 	
