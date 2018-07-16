@@ -1844,9 +1844,9 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="400" id="rRU-2U-gMG"/>
                                                     </constraints>
                                                 </imageView>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t22-2D-d02" customClass="CameraView" customModule="Issue_Manager" customModuleProvider="target">
+                                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t22-2D-d02" customClass="CameraView" customModule="Issue_Manager" customModuleProvider="target">
                                                     <rect key="frame" x="70" y="11" width="400" height="300"/>
-                                                    <color key="backgroundColor" name="Main"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
                                             </subviews>
                                             <constraints>
@@ -2067,11 +2067,13 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                         </userDefinedRuntimeAttributes>
                     </navigationItem>
                     <connections>
+                        <outlet property="cameraView" destination="t22-2D-d02" id="x2p-4u-btt"/>
                         <outlet property="clientModeLabel" destination="m5X-bS-xsE" id="N5N-SM-alw"/>
                         <outlet property="craftsmanNameLabel" destination="9qr-hs-NAf" id="Lla-9n-5Bz"/>
                         <outlet property="craftsmanTradeLabel" destination="sYl-fi-2Ln" id="fRf-qv-Oki"/>
                         <outlet property="descriptionCell" destination="mHG-MX-E35" id="VEQ-rW-xxJ"/>
                         <outlet property="descriptionField" destination="7qO-WW-9qL" id="6Ai-7u-0rk"/>
+                        <outlet property="imageView" destination="uMf-Vv-Gg9" id="EXB-xj-MDz"/>
                         <outlet property="markButton" destination="xrz-80-JfA" id="ndc-LE-oYa"/>
                         <outlet property="suggestionsHeight" destination="x8o-8x-9Zq" id="wBJ-GF-Oks"/>
                         <outlet property="suggestionsTableView" destination="lxE-n3-M6o" id="eDl-q0-Ha0"/>

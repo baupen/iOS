@@ -51,6 +51,7 @@
 		95512B1420FBEAE300878163 /* IssueActionRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95512B1320FBEAE300878163 /* IssueActionRequest.swift */; };
 		95512B1620FBFDE500878163 /* IssuePositioner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95512B1520FBFDE500878163 /* IssuePositioner.swift */; };
 		95512B1820FC22D200878163 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95512B1720FC22D200878163 /* CameraView.swift */; };
+		95512B2220FC317A00878163 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 95512B2020FC317A00878163 /* InfoPlist.strings */; };
 		9553707520F1A5E2005D81C8 /* IssueListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9553707420F1A5E2005D81C8 /* IssueListViewController.swift */; };
 		9554234F20DC781E009CCCE0 /* NetworkObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9554234E20DC781E009CCCE0 /* NetworkObjects.swift */; };
 		9554235120DC7921009CCCE0 /* Hashing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9554235020DC7921009CCCE0 /* Hashing.swift */; };
@@ -283,6 +284,8 @@
 		95512B1320FBEAE300878163 /* IssueActionRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueActionRequest.swift; sourceTree = "<group>"; };
 		95512B1520FBFDE500878163 /* IssuePositioner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssuePositioner.swift; sourceTree = "<group>"; };
 		95512B1720FC22D200878163 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		95512B2120FC317A00878163 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		95512B2920FC318500878163 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9553707420F1A5E2005D81C8 /* IssueListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListViewController.swift; sourceTree = "<group>"; };
 		9554234E20DC781E009CCCE0 /* NetworkObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkObjects.swift; sourceTree = "<group>"; };
 		9554235020DC7921009CCCE0 /* Hashing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hashing.swift; sourceTree = "<group>"; };
@@ -531,6 +534,7 @@
 				9502843620FAD42300880AD7 /* default_suggestions.json */,
 				9583C2C720DC748B00452695 /* Assets.xcassets */,
 				95D2C2B320E5C50200D887C8 /* Localizable.strings */,
+				95512B2020FC317A00878163 /* InfoPlist.strings */,
 				9583C2CC20DC748B00452695 /* Info.plist */,
 			);
 			path = "Issue Manager";
@@ -596,8 +600,8 @@
 			isa = PBXGroup;
 			children = (
 				95A66C7920F9181D008F10DA /* ViewIssueViewController.swift */,
-				95512B1720FC22D200878163 /* CameraView.swift */,
 				9502842C20FAB67A00880AD7 /* EditIssueViewController.swift */,
+				95512B1720FC22D200878163 /* CameraView.swift */,
 				95C7341420FB9BBC00924B26 /* SelectionViewController.swift */,
 				95D1C9BC20FBDE96006A9C19 /* SelectionHandlers.swift */,
 				9502843420FACDD800880AD7 /* Suggestions.swift */,
@@ -802,6 +806,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9502843720FAD42300880AD7 /* default_suggestions.json in Resources */,
+				95512B2220FC317A00878163 /* InfoPlist.strings in Resources */,
 				9583C2CB20DC748B00452695 /* LaunchScreen.storyboard in Resources */,
 				95D2C2B120E5C50200D887C8 /* Localizable.strings in Resources */,
 				9583C2C820DC748B00452695 /* Assets.xcassets in Resources */,
@@ -838,13 +843,13 @@
 			name = "Run Poesie";
 			outputPaths = (
 				"Issue Manager/Base.lproj/Localizable.strings",
-				"Issue Manager/Base.lproj/Localizable.stringsdict",
 				"Issue Manager/it.lproj/Localizable.strings",
-				"Issue Manager/it.lproj/Localizable.stringsdict",
+				"Issue Manager/Base.lproj/InfoPlist.strings",
+				"Issue Manager/it.lproj/InfoPlist.strings",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which poesie >/dev/null; then\n    cd \"Issue Manager\"\n    poesie --lang de --token \"8921aa79c88bf258f7e28b3a25c1ee11\" --project 194177 --ios Base.lproj/Localizable.strings\n    poesie --lang it --token \"8921aa79c88bf258f7e28b3a25c1ee11\" --project 194177 --ios it.lproj/Localizable.strings\nelse\n    echo \"warning: Poesie not installed\"\nfi";
+			shellScript = "if which poesie >/dev/null; then\n    cd \"Issue Manager\"\n    poesie --lang de --token \"8921aa79c88bf258f7e28b3a25c1ee11\" --project 194177 --ios Base.lproj/Localizable.strings\n    poesie --lang it --token \"8921aa79c88bf258f7e28b3a25c1ee11\" --project 194177 --ios it.lproj/Localizable.strings\n    poesie --lang de --token \"8921aa79c88bf258f7e28b3a25c1ee11\" --project 197855 --ios Base.lproj/InfoPlist.strings\n    poesie --lang it --token \"8921aa79c88bf258f7e28b3a25c1ee11\" --project 197855 --ios it.lproj/InfoPlist.strings\nelse\n    echo \"warning: Poesie not installed\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -990,6 +995,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		95512B2020FC317A00878163 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				95512B2120FC317A00878163 /* Base */,
+				95512B2920FC318500878163 /* it */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		9583C2C420DC748800452695 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

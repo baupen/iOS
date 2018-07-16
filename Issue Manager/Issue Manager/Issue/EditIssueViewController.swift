@@ -16,6 +16,9 @@ final class EditIssueViewController: UITableViewController, LoadedViewController
 	@IBOutlet var markButton: UIButton!
 	@IBOutlet var clientModeLabel: UILabel!
 	
+	@IBOutlet var imageView: UIImageView!
+	@IBOutlet var cameraView: CameraView!
+	
 	@IBOutlet var craftsmanTradeLabel: UILabel!
 	@IBOutlet var craftsmanNameLabel: UILabel!
 	
@@ -32,8 +35,8 @@ final class EditIssueViewController: UITableViewController, LoadedViewController
 		// make suggestions visible
 		let indexPath = tableView.indexPath(for: descriptionCell)!
 		// after the table view scrolls by itself
-		DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
-			self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+		DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) { [tableView] in
+			tableView!.scrollToRow(at: indexPath, at: .top, animated: true)
 		}
 	}
 	
@@ -76,6 +79,15 @@ final class EditIssueViewController: UITableViewController, LoadedViewController
 		}
 	}
 	
+	private var image: UIImage? {
+		didSet {
+			hasChangedImage = true
+			imageView.image = image
+			cameraView.isHidden = image != nil
+		}
+	}
+	private var hasChangedImage = false
+	
 	private var building: Building!
 	private var suggestionsHandler = SuggestionsHandler()
 	
@@ -85,6 +97,8 @@ final class EditIssueViewController: UITableViewController, LoadedViewController
 		suggestionsHeight.constant = SuggestionsHandler.intrinsicHeight
 		suggestionsHandler.tableView = suggestionsTableView
 		suggestionsHandler.delegate = self
+		
+		cameraView.delegate = self
 		
 		update()
 	}
@@ -109,7 +123,11 @@ final class EditIssueViewController: UITableViewController, LoadedViewController
 		descriptionField.text = issue?.description
 		descriptionChanged()
 		
-		// TODO image
+		image = issue.imageFilename.flatMap {
+			UIImage(contentsOfFile: Issue.cacheURL(filename: $0).path)
+				?? UIImage(contentsOfFile: Issue.localURL(filename: $0).path)
+		}
+		hasChangedImage = false
 	}
 	
 	private func save() {
@@ -117,7 +135,23 @@ final class EditIssueViewController: UITableViewController, LoadedViewController
 			issue.isMarked = isIssueMarked
 			issue.craftsman = craftsman?.id
 			issue.description = descriptionField.text
-			// TODO image
+			
+			if hasChangedImage {
+				if let image = image {
+					let filename = "\(UUID()).jpg"
+					
+					let url = Issue.localURL(filename: filename)
+					do {
+						try image.saveJPEG(to: url)
+						issue.imageFilename = filename
+					} catch {
+						showAlert(titled: Localization.CouldNotSaveImage.title, message: error.localizedDescription)
+						issue.imageFilename = nil
+					}
+				} else {
+					issue.imageFilename = nil
+				}
+			}
 		}
 		
 		if isCreating {
@@ -184,5 +218,26 @@ extension EditIssueViewController: UITextFieldDelegate {
 extension EditIssueViewController: SuggestionsHandlerDelegate {
 	func use(_ suggestion: Suggestion) {
 		descriptionField.text = suggestion.text
+	}
+}
+
+extension EditIssueViewController: CameraViewDelegate {
+	func pictureTaken(_ image: UIImage) {
+		self.image = image
+		self.hasChangedImage = true
+	}
+	
+	func pictureFailed(with error: Error) {
+		showAlert(titled: Localization.CouldNotTakePicture.title, message: error.localizedDescription)
+	}
+}
+
+extension UIImage {
+	func saveJPEG(to url: URL) throws {
+		guard let jpg = UIImageJPEGRepresentation(self, 0.75) else {
+			throw NSError(localizedDescription: "Could not generate JPEG representation for image!")
+		}
+		print("Saving file to", url)
+		try jpg.write(to: url)
 	}
 }

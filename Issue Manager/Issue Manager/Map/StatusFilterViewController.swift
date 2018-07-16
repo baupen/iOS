@@ -12,7 +12,7 @@ class StatusFilterViewController: UITableViewController {
 	typealias Localization = L10n.Map.StatusFilter
 	typealias Status = Issue.Status.Simplified
 	
-	var delegate: StatusFilterViewControllerDelegate?
+	weak var delegate: StatusFilterViewControllerDelegate?
 	var selected: Set<Status>!
 	
 	// MARK: - Table view data source
@@ -57,7 +57,7 @@ class StatusFilterViewController: UITableViewController {
 	}
 }
 
-protocol StatusFilterViewControllerDelegate {
+protocol StatusFilterViewControllerDelegate: AnyObject {
 	func statusFilterChanged(to newValue: Set<Issue.Status.Simplified>)
 }
 

@@ -250,6 +250,16 @@ internal enum L10n {
     /// Wieder Eröffnen
     internal static let undoReview = L10n.tr("Localizable", "view_issue.undo_review")
 
+    internal enum CouldNotSaveImage {
+      /// Das Bild konnte nicht abgespeichert werden!
+      internal static let title = L10n.tr("Localizable", "view_issue.could_not_save_image.title")
+    }
+
+    internal enum CouldNotTakePicture {
+      /// Fotoaufnahme fehlgeschlagen!
+      internal static let title = L10n.tr("Localizable", "view_issue.could_not_take_picture.title")
+    }
+
     internal enum SelectCraftsman {
       /// Kein Handwerker
       internal static let `none` = L10n.tr("Localizable", "view_issue.select_craftsman.none")

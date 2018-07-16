@@ -4,71 +4,147 @@ import UIKit
 import AVFoundation
 
 final class CameraView: UIView {
-	var videoCaptureDevice: AVCaptureDevice!
-	var captureSession: AVCaptureSession!
-	var videoPreviewLayer: AVCaptureVideoPreviewLayer?
+	var captureSession: AVCaptureSession?
+	var captureDevice: AVCaptureDevice?
+	var captureInput: AVCaptureDeviceInput?
+	var photoOutput: AVCapturePhotoOutput?
+	var previewLayer: AVCaptureVideoPreviewLayer?
+	
+	weak var delegate: CameraViewDelegate?
+	
+	override var isHidden: Bool {
+		didSet {
+			if isHidden {
+				captureSession = nil
+			} else {
+				configure()
+			}
+		}
+	}
 	
 	override func awakeFromNib() {
 		super.awakeFromNib()
 		
-		videoCaptureDevice = AVCaptureDevice.default(for: .video)
-		do {
-			let input = try AVCaptureDeviceInput(device: videoCaptureDevice)
-			let session = AVCaptureSession()
-			self.captureSession = session
-			session.addInput(input)
-			let previewLayer = AVCaptureVideoPreviewLayer(session: session)
-			videoPreviewLayer = previewLayer
-			layer.addSublayer(previewLayer)
-			previewLayer.videoGravity = .resizeAspectFill
-			session.startRunning()
-		} catch {
-			print("could not set up camera!", error.localizedDescription)
-			dump(error)
+		NotificationCenter.default.addObserver(self, selector: #selector(updateOrientation), name: .UIApplicationDidChangeStatusBarOrientation, object: nil)
+		
+		let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
+		addGestureRecognizer(tapRecognizer)
+	}
+	
+	func configure() {
+		guard captureSession == nil else { return } // already configured
+		
+		DispatchQueue.global().async {
+			do {
+				let session = AVCaptureSession()
+				self.captureSession = session
+				
+				let device = AVCaptureDevice.default(for: .video)!
+				self.captureDevice = device
+				let input = try AVCaptureDeviceInput(device: device)
+				self.captureInput = input
+				session.addInput(input)
+				
+				let photoOutput = AVCapturePhotoOutput()
+				self.photoOutput = photoOutput
+				session.sessionPreset = .photo
+				session.addOutput(photoOutput)
+				
+				let previewLayer = AVCaptureVideoPreviewLayer(session: session)
+				self.previewLayer = previewLayer
+				previewLayer.videoGravity = .resizeAspectFill
+				
+				session.startRunning()
+				
+				DispatchQueue.main.async {
+					self.layer.addSublayer(previewLayer)
+					self.updateOrientation()
+				}
+			} catch {
+				print("could not set up camera!", error.localizedDescription)
+				dump(error)
+			}
 		}
 	}
 	
-	func takePhoto() -> Future<UIImage> {
-		captureSession.beginConfiguration()
-		let photoOutput = AVCapturePhotoOutput()
-		captureSession.sessionPreset = .medium
-		captureSession.addOutput(photoOutput)
-		captureSession.commitConfiguration()
+	func takePhoto() {
+		guard let photoOutput = photoOutput else {
+			delegate?.pictureFailed(with: CameraViewError.cameraNotConfigured)
+			return
+		}
 		
 		let settings = AVCapturePhotoSettings() // jpeg
-		settings.flashMode = .auto
-		return Future { resolver in photoOutput.capturePhoto(with: settings, delegate: CaptureDelegate(using: resolver)) }
-			.map { UIImage(cgImage: $0.cgImageRepresentation()!.takeRetainedValue()).applyingOrientation() }
+		photoOutput.capturePhoto(with: settings, delegate: self)
 	}
 	
 	override func layoutSubviews() {
 		super.layoutSubviews()
 		
-		videoPreviewLayer?.frame = layer.bounds
+		previewLayer?.frame = layer.bounds
 	}
 	
-	private class CaptureDelegate: NSObject, AVCapturePhotoCaptureDelegate {
-		var resolver: Resolver<AVCapturePhoto>
-		
-		init(using resolver: Resolver<AVCapturePhoto>) {
-			self.resolver = resolver
-		}
-		
-		func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
-			if let error = error {
-				resolver.reject(with: error)
-			} else {
-				resolver.fulfill(with: photo)
-			}
+	@objc func updateOrientation() {
+		let orientation = UIApplication.shared.statusBarOrientation // kinda dirty
+		previewLayer?.connection!.videoOrientation = .init(representing: orientation)
+		photoOutput?.connection(with: .video)!.videoOrientation = .init(representing: orientation)
+	}
+	
+	@objc func viewTapped(_ tapRecognizer: UITapGestureRecognizer) {
+		if tapRecognizer.state == .recognized {
+			takePhoto()
 		}
 	}
 }
 
+extension CameraView: AVCapturePhotoCaptureDelegate {
+	func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
+		if let error = error {
+			delegate?.pictureFailed(with: error)
+		} else {
+			let image = UIImage(data: photo.fileDataRepresentation()!)!
+			delegate?.pictureTaken(image.cropped())
+		}
+	}
+}
+
+protocol CameraViewDelegate: AnyObject {
+	func pictureTaken(_ image: UIImage)
+	func pictureFailed(with error: Error)
+}
+
+enum CameraViewError: Error {
+	case cameraNotConfigured
+}
+
 extension UIImage {
-	func applyingOrientation() -> UIImage {
-		UIGraphicsBeginImageContextWithOptions(size, false, scale)
+	/// crops to 4:3, applying orientation in the process
+	func cropped() -> UIImage {
+		let newRect = AVMakeRect(
+			aspectRatio: CGSize(width: 4, height: 3),
+			insideRect: CGRect(origin: .zero, size: size)
+		)
+		UIGraphicsBeginImageContextWithOptions(newRect.size, true, scale)
 		defer { UIGraphicsEndImageContext() }
-		draw(in: CGRect(origin: .zero, size: size))
+		draw(in: CGRect(origin: -newRect.origin, size: size))
 		return UIGraphicsGetImageFromCurrentImageContext()!
+	}
+}
+
+extension AVCaptureVideoOrientation {
+	fileprivate init(representing orientation: UIInterfaceOrientation) {
+		// no, this is not a nop
+		switch orientation {
+		case .portrait:
+			self = .portrait
+		case .portraitUpsideDown:
+			self = .portraitUpsideDown
+		case .landscapeRight:
+			self = .landscapeRight
+		case .landscapeLeft:
+			self = .landscapeLeft
+		case .unknown:
+			print("unknown interface orientation!")
+			self = .portrait
+		}
 	}
 }

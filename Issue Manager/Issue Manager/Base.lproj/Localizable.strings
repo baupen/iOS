@@ -184,6 +184,10 @@
 "view_issue.accept_response" = "Annehmen";
 // CONTEXT: Überschrift für die Aktionen, die auf eine Pendenz ausgeführt werden können.
 "view_issue.actions" = "Aktionen";
+// CONTEXT: Titel des Alerts für wenn das Bild nicht abgespeichert werden kann.
+"view_issue.could_not_save_image.title" = "Das Bild konnte nicht abgespeichert werden!";
+// CONTEXT: Titel des Alerts für wenn kein Foto gemacht werden konnte.
+"view_issue.could_not_take_picture.title" = "Fotoaufnahme fehlgeschlagen!";
 // CONTEXT: Überschrift für die Details des zugewiesenen Handwerkers.
 "view_issue.craftsman" = "Handwerker";
 // CONTEXT: Überschrift für die Beschreibung.
