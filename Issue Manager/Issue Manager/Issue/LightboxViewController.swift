@@ -7,10 +7,6 @@ final class LightboxViewController: UIViewController {
 	@IBOutlet var imageView: UIImageView!
 	@IBOutlet var aspectRatioConstraint: NSLayoutConstraint!
 	
-	@IBAction func dismissLightbox() {
-		dismiss(animated: true)
-	}
-	
 	var image: UIImage! {
 		didSet {
 			update()
@@ -20,8 +16,26 @@ final class LightboxViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
+		transitioningDelegate = self
+		
 		update()
 	}
+	
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		
+		UIView.animate(withDuration: animated ? 0.2 : 0) {
+			self.isFullyShown = true
+		}
+	}
+	
+	private var isFullyShown = false {
+		didSet {
+			setNeedsStatusBarAppearanceUpdate()
+		}
+	}
+	
+	override var prefersStatusBarHidden: Bool { return isFullyShown }
 	
 	func update() {
 		guard isViewLoaded, let image = image else { return }
@@ -41,5 +55,71 @@ final class LightboxViewController: UIViewController {
 		} else {
 			scrollView.setZoomScale(scrollView.minimumZoomScale, animated: true)
 		}
+	}
+	
+	private var transition: UIPercentDrivenInteractiveTransition?
+	@IBAction func viewDragged(_ panRecognizer: UIPanGestureRecognizer) {
+		let translation = panRecognizer.translation(in: view)
+		let velocity = panRecognizer.velocity(in: view)
+		let progress = translation.y / view.bounds.height
+		
+		switch panRecognizer.state {
+		case .began:
+			transition = .init()
+			dismiss(animated: true)
+		case .changed:
+			transition!.update(progress)
+		case .ended:
+			let progressVelocity = velocity.y / view.bounds.height
+			if progress + 0.25 * progressVelocity > 0.5 {
+				transition!.finish()
+			} else {
+				transition!.cancel()
+			}
+			transition = nil
+		case .cancelled, .failed:
+			transition!.cancel()
+			transition = nil
+		case .possible:
+			break
+		}
+	}
+}
+
+extension LightboxViewController: UIViewControllerTransitioningDelegate {
+	func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+		return DismissAnimator()
+	}
+	
+	func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+		return transition
+	}
+}
+
+fileprivate class Interactor: UIPercentDrivenInteractiveTransition {}
+
+fileprivate class DismissAnimator: NSObject, UIViewControllerAnimatedTransitioning {
+	func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+		return 0.5
+	}
+	
+	func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+		let lightboxController = transitionContext.viewController(forKey: .from) as! LightboxViewController
+		let toVC = transitionContext.viewController(forKey: .to)!
+		
+		transitionContext.containerView.insertSubview(toVC.view, belowSubview: lightboxController.view)
+		
+		let pulledView = lightboxController.imageView!
+		let offset = lightboxController.view.bounds.height
+		let finalFrame = pulledView.frame.offsetBy(dx: 0, dy: offset)
+		
+		UIView.animate(
+			withDuration: transitionDuration(using: transitionContext),
+			animations: {
+				pulledView.frame = finalFrame
+				lightboxController.view.backgroundColor = .clear
+		}, completion: { _ in
+			transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+		})
 	}
 }
