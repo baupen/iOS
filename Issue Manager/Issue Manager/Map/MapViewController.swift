@@ -38,8 +38,7 @@ class MapViewController: UIViewController, LoadedViewController {
 		
 		let mainController = splitViewController as! MainViewController
 		for viewController in mainController.masterNav.viewControllers {
-			let mapListController = viewController as! MapListViewController
-			mapListController.reload(map)
+			(viewController as? MapListViewController)?.reload(map)
 		}
 	}
 	

@@ -1414,20 +1414,42 @@ Maler</string>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Tg9-v9-hne">
                                                     <rect key="frame" x="70" y="11" width="400" height="300"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="400" id="Vlo-zP-OVg"/>
+                                                        <constraint firstAttribute="width" constant="400" id="Vlo-zP-OVg"/>
                                                         <constraint firstAttribute="width" secondItem="Tg9-v9-hne" secondAttribute="height" multiplier="4:3" id="m5Y-I4-aqI"/>
                                                     </constraints>
+                                                    <variation key="widthClass=compact">
+                                                        <mask key="constraints">
+                                                            <exclude reference="Vlo-zP-OVg"/>
+                                                        </mask>
+                                                    </variation>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="ItY-0n-acO" firstAttribute="centerY" secondItem="p9n-lL-VHw" secondAttribute="centerY" id="4kT-gx-ZRW"/>
+                                                <constraint firstItem="Tg9-v9-hne" firstAttribute="top" secondItem="p9n-lL-VHw" secondAttribute="top" id="616-0S-ykC"/>
                                                 <constraint firstItem="Tg9-v9-hne" firstAttribute="top" secondItem="p9n-lL-VHw" secondAttribute="topMargin" id="LgI-i1-cRC"/>
                                                 <constraint firstItem="ItY-0n-acO" firstAttribute="centerX" secondItem="p9n-lL-VHw" secondAttribute="centerX" id="MA5-wd-zzo"/>
-                                                <constraint firstItem="Tg9-v9-hne" firstAttribute="leading" secondItem="p9n-lL-VHw" secondAttribute="leadingMargin" priority="750" id="gjX-P4-hyJ"/>
+                                                <constraint firstAttribute="bottom" secondItem="Tg9-v9-hne" secondAttribute="bottom" priority="999" id="ZYS-JL-fcG"/>
+                                                <constraint firstItem="Tg9-v9-hne" firstAttribute="leading" secondItem="p9n-lL-VHw" secondAttribute="leading" id="gjX-P4-hyJ"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="Tg9-v9-hne" secondAttribute="bottom" priority="999" id="hd4-FI-43a"/>
                                                 <constraint firstItem="Tg9-v9-hne" firstAttribute="centerX" secondItem="p9n-lL-VHw" secondAttribute="centerX" id="mXP-s3-knk"/>
                                                 <constraint firstItem="ItY-0n-acO" firstAttribute="width" secondItem="Tg9-v9-hne" secondAttribute="width" id="yld-PB-CJq"/>
                                             </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="616-0S-ykC"/>
+                                                    <exclude reference="ZYS-JL-fcG"/>
+                                                    <exclude reference="gjX-P4-hyJ"/>
+                                                </mask>
+                                            </variation>
+                                            <variation key="widthClass=compact">
+                                                <mask key="constraints">
+                                                    <include reference="616-0S-ykC"/>
+                                                    <exclude reference="LgI-i1-cRC"/>
+                                                    <include reference="ZYS-JL-fcG"/>
+                                                    <include reference="gjX-P4-hyJ"/>
+                                                </mask>
+                                            </variation>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -1841,8 +1863,13 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                     <rect key="frame" x="70" y="11" width="400" height="300"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="uMf-Vv-Gg9" secondAttribute="height" multiplier="4:3" id="Oml-qC-R64"/>
-                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="400" id="rRU-2U-gMG"/>
+                                                        <constraint firstAttribute="width" constant="400" id="rRU-2U-gMG"/>
                                                     </constraints>
+                                                    <variation key="widthClass=compact">
+                                                        <mask key="constraints">
+                                                            <exclude reference="rRU-2U-gMG"/>
+                                                        </mask>
+                                                    </variation>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7mN-iH-wXi" userLabel="Remove Image Button">
                                                     <rect key="frame" x="74" y="15" width="44" height="44"/>
@@ -1893,7 +1920,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                         </stackView>
                                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t22-2D-d02" customClass="CameraView" customModule="Issue_Manager" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="400" height="300"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </view>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Gz-5I-dcz" userLabel="Image Library Button">
@@ -1932,18 +1959,36 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                             <constraints>
                                                 <constraint firstItem="dXf-yj-EIL" firstAttribute="centerY" secondItem="uMf-Vv-Gg9" secondAttribute="centerY" id="1F6-6k-qVR"/>
                                                 <constraint firstItem="xzO-NC-90a" firstAttribute="centerY" secondItem="X1r-Mi-uGU" secondAttribute="centerY" id="1UJ-f1-lop"/>
+                                                <constraint firstAttribute="bottom" secondItem="uMf-Vv-Gg9" secondAttribute="bottom" priority="999" id="8Cw-ui-eTX"/>
                                                 <constraint firstItem="uMf-Vv-Gg9" firstAttribute="top" secondItem="X1r-Mi-uGU" secondAttribute="topMargin" id="Fqo-fz-irD"/>
                                                 <constraint firstItem="dXf-yj-EIL" firstAttribute="height" secondItem="uMf-Vv-Gg9" secondAttribute="height" id="GLO-Tp-nWt"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="uMf-Vv-Gg9" secondAttribute="bottom" priority="999" id="MNP-n2-kOv"/>
                                                 <constraint firstItem="uMf-Vv-Gg9" firstAttribute="centerX" secondItem="X1r-Mi-uGU" secondAttribute="centerX" id="N8h-cH-fJe"/>
                                                 <constraint firstItem="7mN-iH-wXi" firstAttribute="leading" secondItem="uMf-Vv-Gg9" secondAttribute="leading" constant="4" id="RDx-Ky-Jjn"/>
                                                 <constraint firstItem="xzO-NC-90a" firstAttribute="width" secondItem="uMf-Vv-Gg9" secondAttribute="width" id="UG8-5c-uNh"/>
-                                                <constraint firstItem="uMf-Vv-Gg9" firstAttribute="leading" secondItem="X1r-Mi-uGU" secondAttribute="leadingMargin" priority="750" id="UT1-c4-TXn"/>
+                                                <constraint firstItem="uMf-Vv-Gg9" firstAttribute="leading" secondItem="X1r-Mi-uGU" secondAttribute="leading" id="UT1-c4-TXn"/>
                                                 <constraint firstItem="dXf-yj-EIL" firstAttribute="width" secondItem="uMf-Vv-Gg9" secondAttribute="width" id="Vj3-JS-wOX"/>
+                                                <constraint firstItem="uMf-Vv-Gg9" firstAttribute="top" secondItem="X1r-Mi-uGU" secondAttribute="top" id="cTI-oa-v5V"/>
                                                 <constraint firstItem="dXf-yj-EIL" firstAttribute="centerX" secondItem="uMf-Vv-Gg9" secondAttribute="centerX" id="fnl-WW-vON"/>
                                                 <constraint firstItem="7mN-iH-wXi" firstAttribute="top" secondItem="uMf-Vv-Gg9" secondAttribute="top" constant="4" id="ftB-3C-3Nr"/>
                                                 <constraint firstItem="xzO-NC-90a" firstAttribute="centerX" secondItem="X1r-Mi-uGU" secondAttribute="centerX" id="oEc-m5-EL1"/>
                                             </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="8Cw-ui-eTX"/>
+                                                    <exclude reference="UT1-c4-TXn"/>
+                                                    <exclude reference="cTI-oa-v5V"/>
+                                                </mask>
+                                            </variation>
+                                            <variation key="widthClass=compact">
+                                                <mask key="constraints">
+                                                    <include reference="8Cw-ui-eTX"/>
+                                                    <exclude reference="Fqo-fz-irD"/>
+                                                    <exclude reference="MNP-n2-kOv"/>
+                                                    <include reference="UT1-c4-TXn"/>
+                                                    <include reference="cTI-oa-v5V"/>
+                                                </mask>
+                                            </variation>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -2094,7 +2139,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vorschlag" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yP4-7b-yg0">
-                                                                        <rect key="frame" x="0.0" y="8" width="524" height="27.5"/>
+                                                                        <rect key="frame" x="0.0" y="8" width="398" height="27.5"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
@@ -2208,7 +2253,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                 <rect key="frame" x="0.0" y="50" width="540" height="570"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="No Trade Cell" id="M4s-FH-Plf" customClass="NoTradeCell" customModule="Issue_Manager" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="No Trade Cell" id="M4s-FH-Plf" customClass="NoTradeCell" customModule="Issue_Manager" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.5" width="540" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="M4s-FH-Plf" id="mkw-gM-fwr">
@@ -2216,7 +2261,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Keine Funktion" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O87-rj-n8Z">
-                                                    <rect key="frame" x="15" y="14" width="510" height="16"/>
+                                                    <rect key="frame" x="15" y="14" width="26" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -2233,7 +2278,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Trade Cell" id="O9Y-hn-jb4" customClass="TradeCell" customModule="Issue_Manager" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Trade Cell" id="O9Y-hn-jb4" customClass="TradeCell" customModule="Issue_Manager" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="99.5" width="540" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="O9Y-hn-jb4" id="U9c-Hc-eIs">
@@ -2241,7 +2286,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Maler" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vgw-Pz-3Xx">
-                                                    <rect key="frame" x="15" y="14" width="510" height="16"/>
+                                                    <rect key="frame" x="15" y="14" width="26" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -2258,7 +2303,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                             <outlet property="nameLabel" destination="Vgw-Pz-3Xx" id="oTN-el-wK3"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="No Craftsman Cell" id="jOV-kN-rDg" customClass="NoCraftsmanCell" customModule="Issue_Manager" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="No Craftsman Cell" id="jOV-kN-rDg" customClass="NoCraftsmanCell" customModule="Issue_Manager" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="143.5" width="540" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jOV-kN-rDg" id="i1B-Vc-QnX">
@@ -2266,7 +2311,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Keine Handwerker" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bjx-KR-DBI">
-                                                    <rect key="frame" x="15" y="14" width="510" height="16"/>
+                                                    <rect key="frame" x="15" y="14" width="26" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -2283,7 +2328,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Craftsman Cell" rowHeight="100" id="6RQ-wD-xrl" customClass="CraftsmanCell" customModule="Issue_Manager" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Craftsman Cell" rowHeight="100" id="6RQ-wD-xrl" customClass="CraftsmanCell" customModule="Issue_Manager" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="187.5" width="540" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6RQ-wD-xrl" id="olX-vv-yAB">
@@ -2291,16 +2336,16 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="VTe-f0-DOb">
-                                                    <rect key="frame" x="15" y="14" width="510" height="72"/>
+                                                    <rect key="frame" x="15" y="14" width="26" height="72"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="799" verticalCompressionResistancePriority="799" text="Malerfirma GmbH" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pnd-DZ-ZKD">
-                                                            <rect key="frame" x="0.0" y="0.0" width="510" height="43.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="26" height="23"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="800" verticalCompressionResistancePriority="800" text="Maler" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xCX-RW-AkQ">
-                                                            <rect key="frame" x="0.0" y="51.5" width="510" height="20.5"/>
+                                                            <rect key="frame" x="0.0" y="31" width="26" height="41"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
