@@ -50,6 +50,7 @@
 		95512B1220FBEAD800878163 /* IssueDeletionRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95512B1120FBEAD800878163 /* IssueDeletionRequest.swift */; };
 		95512B1420FBEAE300878163 /* IssueActionRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95512B1320FBEAE300878163 /* IssueActionRequest.swift */; };
 		95512B1620FBFDE500878163 /* IssuePositioner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95512B1520FBFDE500878163 /* IssuePositioner.swift */; };
+		95512B1820FC22D200878163 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95512B1720FC22D200878163 /* CameraView.swift */; };
 		9553707520F1A5E2005D81C8 /* IssueListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9553707420F1A5E2005D81C8 /* IssueListViewController.swift */; };
 		9554234F20DC781E009CCCE0 /* NetworkObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9554234E20DC781E009CCCE0 /* NetworkObjects.swift */; };
 		9554235120DC7921009CCCE0 /* Hashing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9554235020DC7921009CCCE0 /* Hashing.swift */; };
@@ -281,6 +282,7 @@
 		95512B1120FBEAD800878163 /* IssueDeletionRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDeletionRequest.swift; sourceTree = "<group>"; };
 		95512B1320FBEAE300878163 /* IssueActionRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueActionRequest.swift; sourceTree = "<group>"; };
 		95512B1520FBFDE500878163 /* IssuePositioner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssuePositioner.swift; sourceTree = "<group>"; };
+		95512B1720FC22D200878163 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		9553707420F1A5E2005D81C8 /* IssueListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListViewController.swift; sourceTree = "<group>"; };
 		9554234E20DC781E009CCCE0 /* NetworkObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkObjects.swift; sourceTree = "<group>"; };
 		9554235020DC7921009CCCE0 /* Hashing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hashing.swift; sourceTree = "<group>"; };
@@ -594,6 +596,7 @@
 			isa = PBXGroup;
 			children = (
 				95A66C7920F9181D008F10DA /* ViewIssueViewController.swift */,
+				95512B1720FC22D200878163 /* CameraView.swift */,
 				9502842C20FAB67A00880AD7 /* EditIssueViewController.swift */,
 				95C7341420FB9BBC00924B26 /* SelectionViewController.swift */,
 				95D1C9BC20FBDE96006A9C19 /* SelectionHandlers.swift */,
@@ -867,6 +870,7 @@
 				95A7B24D20E3FFE200A928D6 /* Backlog.swift in Sources */,
 				95D1C9BD20FBDE96006A9C19 /* SelectionHandlers.swift in Sources */,
 				952CB48C20E8429D00E6B664 /* BuildingListLayout.swift in Sources */,
+				95512B1820FC22D200878163 /* CameraView.swift in Sources */,
 				9511A13F20DD559500101ADE /* Future+Foundation.swift in Sources */,
 				9550E0E620F2E70700921387 /* IssueMarker.swift in Sources */,
 				9584F24C20E936BD00A8C884 /* UserDefaults.swift in Sources */,

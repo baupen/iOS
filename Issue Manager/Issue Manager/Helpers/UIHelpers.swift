@@ -28,15 +28,6 @@ extension UIViewController {
 	}
 }
 
-extension UIImage {
-	func applyingOrientation() -> UIImage {
-		UIGraphicsBeginImageContextWithOptions(size, false, scale)
-		defer { UIGraphicsEndImageContext() }
-		draw(in: CGRect(origin: .zero, size: size))
-		return UIGraphicsGetImageFromCurrentImageContext()!
-	}
-}
-
 extension UILayoutPriority: ExpressibleByFloatLiteral {
 	public init(floatLiteral value: Float) {
 		self.init(value)

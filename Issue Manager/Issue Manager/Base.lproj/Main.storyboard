@@ -1844,15 +1844,23 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="400" id="rRU-2U-gMG"/>
                                                     </constraints>
                                                 </imageView>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t22-2D-d02" customClass="CameraView" customModule="Issue_Manager" customModuleProvider="target">
+                                                    <rect key="frame" x="70" y="11" width="400" height="300"/>
+                                                    <color key="backgroundColor" name="Main"/>
+                                                </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="xzO-NC-90a" firstAttribute="centerY" secondItem="X1r-Mi-uGU" secondAttribute="centerY" id="1UJ-f1-lop"/>
+                                                <constraint firstItem="t22-2D-d02" firstAttribute="leading" secondItem="uMf-Vv-Gg9" secondAttribute="leading" id="73W-EK-JC9"/>
+                                                <constraint firstItem="t22-2D-d02" firstAttribute="top" secondItem="uMf-Vv-Gg9" secondAttribute="top" id="97U-IQ-m3y"/>
                                                 <constraint firstItem="uMf-Vv-Gg9" firstAttribute="top" secondItem="X1r-Mi-uGU" secondAttribute="topMargin" id="Fqo-fz-irD"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="uMf-Vv-Gg9" secondAttribute="bottom" priority="999" id="MNP-n2-kOv"/>
                                                 <constraint firstItem="uMf-Vv-Gg9" firstAttribute="centerX" secondItem="X1r-Mi-uGU" secondAttribute="centerX" id="N8h-cH-fJe"/>
                                                 <constraint firstItem="xzO-NC-90a" firstAttribute="width" secondItem="uMf-Vv-Gg9" secondAttribute="width" id="UG8-5c-uNh"/>
                                                 <constraint firstItem="uMf-Vv-Gg9" firstAttribute="leading" secondItem="X1r-Mi-uGU" secondAttribute="leadingMargin" priority="750" id="UT1-c4-TXn"/>
+                                                <constraint firstItem="t22-2D-d02" firstAttribute="width" secondItem="uMf-Vv-Gg9" secondAttribute="width" id="gcs-X1-RYF"/>
                                                 <constraint firstItem="xzO-NC-90a" firstAttribute="centerX" secondItem="X1r-Mi-uGU" secondAttribute="centerX" id="oEc-m5-EL1"/>
+                                                <constraint firstItem="t22-2D-d02" firstAttribute="height" secondItem="uMf-Vv-Gg9" secondAttribute="height" id="zTp-5Q-7Dj"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>

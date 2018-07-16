@@ -28,8 +28,6 @@ class LoginViewController: UIViewController {
 	/// - note: only ever change this from the main queue
 	var isLoggingIn = false {
 		didSet {
-			let isLoggingIn = self.isLoggingIn // capture
-			
 			self.usernameField.isEnabled = !isLoggingIn
 			self.passwordField.isEnabled = !isLoggingIn
 			self.textFieldView.alpha = isLoggingIn ? 0.5 : 1
