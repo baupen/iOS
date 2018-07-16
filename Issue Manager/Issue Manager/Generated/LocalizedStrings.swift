@@ -254,6 +254,13 @@ internal enum L10n {
     /// Wieder Eröffnen
     internal static let undoReview = L10n.tr("Localizable", "view_issue.undo_review")
 
+    internal enum CouldNotOpenLibrary {
+      /// Um die Fotoauswahl zu öffnen, braucht diese App in den Einstellungen Zugriff auf deine Fotos.
+      internal static let message = L10n.tr("Localizable", "view_issue.could_not_open_library.message")
+      /// Fotoauswahl nicht möglich!
+      internal static let title = L10n.tr("Localizable", "view_issue.could_not_open_library.title")
+    }
+
     internal enum CouldNotSaveImage {
       /// Das Bild konnte nicht abgespeichert werden!
       internal static let title = L10n.tr("Localizable", "view_issue.could_not_save_image.title")

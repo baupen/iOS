@@ -87,6 +87,14 @@ final class CameraView: UIView {
 		photoOutput.capturePhoto(with: settings, delegate: self)
 	}
 	
+	func prepareImagePicker(for source: UIImagePickerControllerSourceType) -> UIImagePickerController? {
+		guard UIImagePickerController.isSourceTypeAvailable(source) else { return nil }
+		let picker = UIImagePickerController()
+		picker.delegate = self
+		picker.sourceType = source
+		return picker
+	}
+	
 	override func layoutSubviews() {
 		super.layoutSubviews()
 		
@@ -117,10 +125,23 @@ extension CameraView: AVCapturePhotoCaptureDelegate {
 	}
 }
 
+extension CameraView: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+	func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+		picker.presentingViewController!.dismiss(animated: true)
+	}
+	
+	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
+		let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+		delegate?.pictureSelected(image.cropped())
+		picker.presentingViewController!.dismiss(animated: true)
+	}
+}
+
 protocol CameraViewDelegate: AnyObject {
 	func cameraFailed(with error: Error)
 	func pictureTaken(_ image: UIImage)
 	func pictureFailed(with error: Error)
+	func pictureSelected(_ image: UIImage)
 }
 
 enum CameraViewError: Error {

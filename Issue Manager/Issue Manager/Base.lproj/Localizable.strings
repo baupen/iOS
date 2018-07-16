@@ -186,6 +186,10 @@
 "view_issue.actions" = "Aktionen";
 // CONTEXT: Wird anstelle der Kameraansicht angezeigt, wenn nicht auf die Kamera zugegriffen werden kann.
 "view_issue.could_not_activate_camera" = "Die Kamera konnte nicht aktiviert werden!";
+// CONTEXT: Nachricht des Alerts für wenn die Fotoauswahl nicht geöffnet werden konnte.
+"view_issue.could_not_open_library.message" = "Um die Fotoauswahl zu öffnen, braucht diese App in den Einstellungen Zugriff auf deine Fotos.";
+// CONTEXT: Titel des Alerts für wenn die Fotoauswahl nicht geöffnet werden konnte.
+"view_issue.could_not_open_library.title" = "Fotoauswahl nicht möglich!";
 // CONTEXT: Titel des Alerts für wenn das Bild nicht abgespeichert werden kann.
 "view_issue.could_not_save_image.title" = "Das Bild konnte nicht abgespeichert werden!";
 // CONTEXT: Titel des Alerts für wenn kein Foto gemacht werden konnte.

@@ -49,8 +49,19 @@ final class EditIssueViewController: UITableViewController, LoadedViewController
 		image = nil
 	}
 	
-	@IBAction func openImagePicker() {
-		// TODO
+	@IBAction func openImagePicker(_ sender: UIView) {
+		guard let picker = cameraView.prepareImagePicker(for: .photoLibrary) else {
+			showAlert(
+				titled: Localization.CouldNotOpenLibrary.title,
+				message: Localization.CouldNotOpenLibrary.message
+			)
+			return
+		}
+		picker.modalPresentationStyle = .popover
+		let popover = picker.popoverPresentationController!
+		popover.sourceView = sender
+		popover.sourceRect = sender.bounds
+		present(picker, animated: true)
 	}
 	
 	@IBAction func retryCamera() {
@@ -239,13 +250,16 @@ extension EditIssueViewController: CameraViewDelegate {
 		showAlert(titled: Localization.couldNotActivateCamera, message: error.localizedFailureReason)
 	}
 	
-	func pictureTaken(_ image: UIImage) {
-		self.image = image
-		self.hasChangedImage = true
-	}
-	
 	func pictureFailed(with error: Error) {
 		showAlert(titled: Localization.CouldNotTakePicture.title, message: error.localizedFailureReason)
+	}
+	
+	func pictureTaken(_ image: UIImage) {
+		self.image = image
+	}
+	
+	func pictureSelected(_ image: UIImage) {
+		self.image = image
 	}
 }
 
