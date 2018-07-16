@@ -2,10 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSCameraUsageDescription</key>
-	<string>localized in InfoPlist.strings</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>localized in InfoPlist.strings</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>de</string>
 	<key>CFBundleDisplayName</key>
@@ -26,11 +22,10 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
-	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>localized in InfoPlist.strings</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>localized in InfoPlist.strings</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
