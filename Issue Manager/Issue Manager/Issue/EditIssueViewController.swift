@@ -198,6 +198,8 @@ final class EditIssueViewController: UITableViewController, LoadedViewController
 			break
 		case "save":
 			save()
+		case "delete":
+			Client.shared.storage.remove(issue)
 		case "select trade":
 			let selectionController = segue.destination as! SelectionViewController
 			selectionController.handler = TradeSelectionHandler(
@@ -216,6 +218,10 @@ final class EditIssueViewController: UITableViewController, LoadedViewController
 		}
 	}
 	
+	override func numberOfSections(in tableView: UITableView) -> Int {
+		return isCreating ? 4 : 5 // can't delete issue when creating
+	}
+	
 	override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 		// can't localize from storyboard
 		switch section {
@@ -223,6 +229,7 @@ final class EditIssueViewController: UITableViewController, LoadedViewController
 		case 1: return Localization.image
 		case 2: return Localization.craftsman
 		case 3: return Localization.description
+		case 4: return Localization.actions
 		default: fatalError("unrecognized section \(section)!")
 		}
 	}

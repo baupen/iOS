@@ -197,7 +197,7 @@
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rHo-jf-rQe">
-                                                    <rect key="frame" x="0.0" y="0.0" width="703.5" height="256"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="703" height="256"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="256" id="tbp-3z-9r2"/>
                                                     </constraints>
@@ -1993,7 +1993,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                         <rect key="frame" x="0.0" y="601" width="540" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="w2x-8V-zpl" id="gkw-iu-gD0">
-                                            <rect key="frame" x="0.0" y="0.0" width="514" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="502" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="D65-XC-hde">
@@ -2124,6 +2124,35 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                 <constraint firstItem="S4e-A4-RkI" firstAttribute="centerX" secondItem="wch-uu-9ye" secondAttribute="centerX" id="p6k-HG-Kd1"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Aktionen" id="kvz-Uf-HIP" userLabel="Delete">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="pve-xL-UrK" userLabel="Delete">
+                                        <rect key="frame" x="0.0" y="1001" width="540" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pve-xL-UrK" id="g72-fk-d87">
+                                            <rect key="frame" x="0.0" y="0.0" width="540" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pendenz Löschen" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Nu-lH-PSM">
+                                                    <rect key="frame" x="8" y="11" width="524" height="21.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.75" green="0.0" blue="0.012499999999999956" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="9Nu-lH-PSM" secondAttribute="trailing" id="Awv-sg-TXq"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="9Nu-lH-PSM" secondAttribute="bottom" constant="3" id="JFN-hR-XXk"/>
+                                                <constraint firstItem="9Nu-lH-PSM" firstAttribute="leading" secondItem="g72-fk-d87" secondAttribute="leadingMargin" id="TMa-bX-RTC"/>
+                                                <constraint firstItem="9Nu-lH-PSM" firstAttribute="top" secondItem="g72-fk-d87" secondAttribute="topMargin" constant="3" id="hTs-iy-h1B"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="Uxf-G5-Ofn" kind="unwind" identifier="delete" unwindAction="backToMapWithUpdates:" id="30u-2z-Ea0"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
