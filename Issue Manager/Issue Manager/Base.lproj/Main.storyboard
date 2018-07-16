@@ -1875,9 +1875,9 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                     </variation>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7mN-iH-wXi" userLabel="Remove Image Button">
-                                                    <rect key="frame" x="74" y="15" width="44" height="44"/>
+                                                    <rect key="frame" x="74" y="15" width="32" height="32"/>
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <state key="normal" image="cross"/>
+                                                    <state key="normal" image="trash"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowOpacity">
                                                             <real key="value" value="0.25"/>
@@ -1927,7 +1927,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </view>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Gz-5I-dcz" userLabel="Image Library Button">
-                                                            <rect key="frame" x="352" y="0.0" width="44" height="44"/>
+                                                            <rect key="frame" x="364" y="4" width="32" height="32"/>
                                                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <state key="normal" image="library"/>
                                                             <userDefinedRuntimeAttributes>
@@ -1952,7 +1952,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                         <constraint firstItem="VBN-3z-jb2" firstAttribute="leading" secondItem="dXf-yj-EIL" secondAttribute="leadingMargin" id="ba5-xn-t2C"/>
                                                         <constraint firstAttribute="trailing" secondItem="1Gz-5I-dcz" secondAttribute="trailing" constant="4" id="fBH-YV-2xs"/>
                                                         <constraint firstItem="VBN-3z-jb2" firstAttribute="centerX" secondItem="dXf-yj-EIL" secondAttribute="centerX" id="fN4-Ja-n6I"/>
-                                                        <constraint firstItem="1Gz-5I-dcz" firstAttribute="top" secondItem="dXf-yj-EIL" secondAttribute="top" id="u9H-wQ-moK"/>
+                                                        <constraint firstItem="1Gz-5I-dcz" firstAttribute="top" secondItem="dXf-yj-EIL" secondAttribute="top" constant="4" id="u9H-wQ-moK"/>
                                                     </constraints>
                                                     <connections>
                                                         <outlet property="cameraView" destination="t22-2D-d02" id="iZK-rV-tUa"/>
@@ -2485,12 +2485,12 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
         </scene>
     </scenes>
     <resources>
-        <image name="cross" width="44" height="44"/>
         <image name="crosshair" width="128" height="128"/>
         <image name="filter_disabled" width="24" height="24"/>
         <image name="flat_issue_new" width="96" height="96"/>
-        <image name="library" width="44" height="44"/>
+        <image name="library" width="32" height="32"/>
         <image name="mark_unmarked" width="32" height="32"/>
+        <image name="trash" width="32" height="32"/>
         <namedColor name="Attention">
             <color red="0.99199998378753662" green="0.49399998784065247" blue="0.078000001609325409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -2500,7 +2500,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="iOy-9i-ghB"/>
-        <segue reference="PB9-0e-xdP"/>
+        <segue reference="OdI-J8-6Ad"/>
         <segue reference="a5G-fh-9Or"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="Main"/>

@@ -47,7 +47,7 @@ final class LightboxViewController: UIViewController {
 	}
 	
 	@IBAction func doubleTapped(_ tapRecognizer: UITapGestureRecognizer) {
-		guard tapRecognizer.state == .ended else { return }
+		guard tapRecognizer.state == .recognized else { return }
 		
 		let position = tapRecognizer.location(in: imageView)
 		if scrollView.zoomScale == scrollView.minimumZoomScale {
