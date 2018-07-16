@@ -3,6 +3,10 @@
 import UIKit
 import AVFoundation
 
+final class CameraContainerView: UIView {
+	@IBOutlet var cameraView: CameraView!
+}
+
 final class CameraView: UIView {
 	var captureSession: AVCaptureSession?
 	var captureDevice: AVCaptureDevice?
@@ -12,16 +16,6 @@ final class CameraView: UIView {
 	
 	weak var delegate: CameraViewDelegate?
 	
-	override var isHidden: Bool {
-		didSet {
-			if isHidden {
-				captureSession = nil
-			} else {
-				configure()
-			}
-		}
-	}
-	
 	override func awakeFromNib() {
 		super.awakeFromNib()
 		
@@ -29,21 +23,39 @@ final class CameraView: UIView {
 		
 		let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
 		addGestureRecognizer(tapRecognizer)
+		
+		configure()
+	}
+	
+	deinit {
+		captureSession?.stopRunning()
 	}
 	
 	func configure() {
-		guard captureSession == nil else { return } // already configured
+		guard captureSession?.isRunning != true else { return } // already configured
 		
 		DispatchQueue.global().async {
-			do {
+			if self.captureSession == nil {
 				let session = AVCaptureSession()
 				self.captureSession = session
 				
 				let device = AVCaptureDevice.default(for: .video)!
 				self.captureDevice = device
-				let input = try AVCaptureDeviceInput(device: device)
-				self.captureInput = input
-				session.addInput(input)
+				
+				do {
+					let input = try AVCaptureDeviceInput(device: device)
+					self.captureInput = input
+					session.addInput(input)
+				} catch {
+					print("could not set up camera!")
+					dump(error)
+					DispatchQueue.main.async {
+						self.isHidden = true
+						self.delegate?.cameraFailed(with: error)
+					}
+					
+					return
+				}
 				
 				let photoOutput = AVCapturePhotoOutput()
 				self.photoOutput = photoOutput
@@ -54,16 +66,14 @@ final class CameraView: UIView {
 				self.previewLayer = previewLayer
 				previewLayer.videoGravity = .resizeAspectFill
 				
-				session.startRunning()
-				
 				DispatchQueue.main.async {
 					self.layer.addSublayer(previewLayer)
 					self.updateOrientation()
+					self.isHidden = false
 				}
-			} catch {
-				print("could not set up camera!", error.localizedDescription)
-				dump(error)
 			}
+			
+			self.captureSession!.startRunning()
 		}
 	}
 	
@@ -108,6 +118,7 @@ extension CameraView: AVCapturePhotoCaptureDelegate {
 }
 
 protocol CameraViewDelegate: AnyObject {
+	func cameraFailed(with error: Error)
 	func pictureTaken(_ image: UIImage)
 	func pictureFailed(with error: Error)
 }

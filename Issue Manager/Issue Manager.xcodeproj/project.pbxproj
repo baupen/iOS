@@ -521,7 +521,6 @@
 			children = (
 				950283A620E70C46001A5083 /* Generated */,
 				9511A10020DD3A0F00101ADE /* Helpers */,
-				9583C2BE20DC748800452695 /* AppDelegate.swift */,
 				95283A0F20E9A5760095D4C5 /* Common */,
 				952CB48A20E830CD00E6B664 /* Login */,
 				952CB48920E830BF00E6B664 /* Building List */,
@@ -529,6 +528,7 @@
 				95870B2B20E9C03200BB1B39 /* Map List */,
 				95870B2C20E9C03900BB1B39 /* Map */,
 				95A66C7220F91805008F10DA /* Issue */,
+				9583C2BE20DC748800452695 /* AppDelegate.swift */,
 				9583C2C420DC748800452695 /* Main.storyboard */,
 				9583C2C920DC748B00452695 /* LaunchScreen.storyboard */,
 				9502843620FAD42300880AD7 /* default_suggestions.json */,

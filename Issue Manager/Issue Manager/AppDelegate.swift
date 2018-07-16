@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 	
 	func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]? = nil) -> Bool {
 		registerDefaults()
-		UIView.appearance().tintColor = .main
+		window!.tintColor = .main
 		
 		// disables state restoration animations
 		window!.isHidden = false

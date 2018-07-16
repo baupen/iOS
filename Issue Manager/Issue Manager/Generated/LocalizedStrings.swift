@@ -223,6 +223,8 @@ internal enum L10n {
     internal static let acceptResponse = L10n.tr("Localizable", "view_issue.accept_response")
     /// Aktionen
     internal static let actions = L10n.tr("Localizable", "view_issue.actions")
+    /// Die Kamera konnte nicht aktiviert werden!
+    internal static let couldNotActivateCamera = L10n.tr("Localizable", "view_issue.could_not_activate_camera")
     /// Handwerker
     internal static let craftsman = L10n.tr("Localizable", "view_issue.craftsman")
     /// Beschreibung
@@ -241,6 +243,8 @@ internal enum L10n {
     internal static let noTrade = L10n.tr("Localizable", "view_issue.no_trade")
     /// Ablehnen
     internal static let rejectResponse = L10n.tr("Localizable", "view_issue.reject_response")
+    /// Erneut Versuchen
+    internal static let retryCamera = L10n.tr("Localizable", "view_issue.retry_camera")
     /// Neue Pendenz
     internal static let titleCreating = L10n.tr("Localizable", "view_issue.title_creating")
     /// Pendenz Bearbeiten

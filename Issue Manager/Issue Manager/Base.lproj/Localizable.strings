@@ -184,6 +184,8 @@
 "view_issue.accept_response" = "Annehmen";
 // CONTEXT: Überschrift für die Aktionen, die auf eine Pendenz ausgeführt werden können.
 "view_issue.actions" = "Aktionen";
+// CONTEXT: Wird anstelle der Kameraansicht angezeigt, wenn nicht auf die Kamera zugegriffen werden kann.
+"view_issue.could_not_activate_camera" = "Die Kamera konnte nicht aktiviert werden!";
 // CONTEXT: Titel des Alerts für wenn das Bild nicht abgespeichert werden kann.
 "view_issue.could_not_save_image.title" = "Das Bild konnte nicht abgespeichert werden!";
 // CONTEXT: Titel des Alerts für wenn kein Foto gemacht werden konnte.
@@ -206,6 +208,8 @@
 "view_issue.no_trade" = "Keine Funktion";
 // CONTEXT: Knopf, um die Antwort vom Handwerker abzulehnen und sie somit rückgängig zu machen.
 "view_issue.reject_response" = "Ablehnen";
+// CONTEXT: Knopf, um erneut zu versuchen, die Kamera aufzustarten, nachdem es fehlgeschlagen ist.
+"view_issue.retry_camera" = "Erneut Versuchen";
 // CONTEXT: Knopf, um keinen Handwerker auszuwählen.
 "view_issue.select_craftsman.none" = "Kein Handwerker";
 // CONTEXT: Titel für die Ansicht zum auswählen des Namens.

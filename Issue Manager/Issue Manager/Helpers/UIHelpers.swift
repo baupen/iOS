@@ -60,3 +60,9 @@ extension Collection {
 		return isEmpty ? nil : self
 	}
 }
+
+extension Error {
+	var localizedFailureReason: String {
+		return (self as NSError).localizedFailureReason ?? localizedDescription
+	}
+}

@@ -17,6 +17,7 @@ final class EditIssueViewController: UITableViewController, LoadedViewController
 	@IBOutlet var clientModeLabel: UILabel!
 	
 	@IBOutlet var imageView: UIImageView!
+	@IBOutlet var cameraContainerView: CameraContainerView!
 	@IBOutlet var cameraView: CameraView!
 	
 	@IBOutlet var craftsmanTradeLabel: UILabel!
@@ -42,6 +43,18 @@ final class EditIssueViewController: UITableViewController, LoadedViewController
 	
 	@IBAction func descriptionChanged() {
 		suggestionsHandler.currentDescription = descriptionField.text
+	}
+	
+	@IBAction func removeImage() {
+		image = nil
+	}
+	
+	@IBAction func openImagePicker() {
+		// TODO
+	}
+	
+	@IBAction func retryCamera() {
+		cameraView.configure()
 	}
 	
 	var issue: Issue! {
@@ -83,7 +96,7 @@ final class EditIssueViewController: UITableViewController, LoadedViewController
 		didSet {
 			hasChangedImage = true
 			imageView.image = image
-			cameraView.isHidden = image != nil
+			cameraContainerView.isHidden = image != nil
 		}
 	}
 	private var hasChangedImage = false
@@ -222,13 +235,17 @@ extension EditIssueViewController: SuggestionsHandlerDelegate {
 }
 
 extension EditIssueViewController: CameraViewDelegate {
+	func cameraFailed(with error: Error) {
+		showAlert(titled: Localization.couldNotActivateCamera, message: error.localizedFailureReason)
+	}
+	
 	func pictureTaken(_ image: UIImage) {
 		self.image = image
 		self.hasChangedImage = true
 	}
 	
 	func pictureFailed(with error: Error) {
-		showAlert(titled: Localization.CouldNotTakePicture.title, message: error.localizedDescription)
+		showAlert(titled: Localization.CouldNotTakePicture.title, message: error.localizedFailureReason)
 	}
 }
 
