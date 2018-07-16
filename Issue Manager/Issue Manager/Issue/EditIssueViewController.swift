@@ -192,6 +192,15 @@ final class EditIssueViewController: UITableViewController, LoadedViewController
 			.sorted { $0.name < $1.name }
 	}
 	
+	override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+		switch identifier {
+		case "lightbox":
+			return image != nil
+		default:
+			return true
+		}
+	}
+	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		switch segue.identifier {
 		case "cancel":
@@ -200,6 +209,9 @@ final class EditIssueViewController: UITableViewController, LoadedViewController
 			save()
 		case "delete":
 			Client.shared.storage.remove(issue)
+		case "lightbox":
+			let lightboxController = segue.destination as! LightboxViewController
+			lightboxController.image = image!
 		case "select trade":
 			let selectionController = segue.destination as! SelectionViewController
 			selectionController.handler = TradeSelectionHandler(

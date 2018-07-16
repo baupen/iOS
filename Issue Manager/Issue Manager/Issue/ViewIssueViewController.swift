@@ -52,6 +52,12 @@ class ViewIssueViewController: UITableViewController, LoadedViewController {
 		}
 	}
 	
+	private var image: UIImage? {
+		didSet {
+			imageView.image = image
+		}
+	}
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -66,7 +72,7 @@ class ViewIssueViewController: UITableViewController, LoadedViewController {
 		markButton.setImage(issue.isMarked ? #imageLiteral(resourceName: "mark_marked.pdf") : #imageLiteral(resourceName: "mark_unmarked.pdf"), for: .normal)
 		clientModeLabel.text = issue.wasAddedWithClient ? L10n.Issue.IsClientMode.true : L10n.Issue.IsClientMode.false
 		
-		imageView.image = issue.imageFilename.flatMap {
+		image = issue.imageFilename.flatMap {
 			// TODO fall back on localURL for other views
 			UIImage(contentsOfFile: Issue.cacheURL(filename: $0).path)
 		}
@@ -96,6 +102,25 @@ class ViewIssueViewController: UITableViewController, LoadedViewController {
 		}
 		
 		tableView.performBatchUpdates(nil) // invalidate previously calculated row heights
+	}
+	
+	override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+		switch identifier {
+		case "lightbox":
+			return image != nil
+		default:
+			return true
+		}
+	}
+	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		switch segue.identifier {
+		case "lightbox":
+			let lightboxController = segue.destination as! LightboxViewController
+			lightboxController.image = image!
+		default:
+			break
+		}
 	}
 	
 	override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

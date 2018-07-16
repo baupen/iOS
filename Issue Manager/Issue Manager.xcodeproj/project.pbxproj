@@ -109,6 +109,7 @@
 		95A66C7A20F9181D008F10DA /* ViewIssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A66C7920F9181D008F10DA /* ViewIssueViewController.swift */; };
 		95A7B24D20E3FFE200A928D6 /* Backlog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A7B24C20E3FFE200A928D6 /* Backlog.swift */; };
 		95A7B24E20E3FFE200A928D6 /* Backlog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A7B24C20E3FFE200A928D6 /* Backlog.swift */; };
+		95A995CB20FD3BED006A1EE8 /* LightboxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A995CA20FD3BED006A1EE8 /* LightboxViewController.swift */; };
 		95AA606920EEFA700067A656 /* MapHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AA606820EEFA700067A656 /* MapHolder.swift */; };
 		95AB959320E572C900A0AE8D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AB959220E572C900A0AE8D /* LoginViewController.swift */; };
 		95B2735320DE7AD600D2BD44 /* Multipart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B2735220DE7AD600D2BD44 /* Multipart.swift */; };
@@ -315,6 +316,7 @@
 		9597934F20F7AC2400AA40C1 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 		95A66C7920F9181D008F10DA /* ViewIssueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewIssueViewController.swift; sourceTree = "<group>"; };
 		95A7B24C20E3FFE200A928D6 /* Backlog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Backlog.swift; sourceTree = "<group>"; };
+		95A995CA20FD3BED006A1EE8 /* LightboxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightboxViewController.swift; sourceTree = "<group>"; };
 		95AA606820EEFA700067A656 /* MapHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapHolder.swift; sourceTree = "<group>"; };
 		95AB959220E572C900A0AE8D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		95B2735220DE7AD600D2BD44 /* Multipart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Multipart.swift; sourceTree = "<group>"; };
@@ -602,6 +604,7 @@
 				95A66C7920F9181D008F10DA /* ViewIssueViewController.swift */,
 				9502842C20FAB67A00880AD7 /* EditIssueViewController.swift */,
 				95512B1720FC22D200878163 /* CameraView.swift */,
+				95A995CA20FD3BED006A1EE8 /* LightboxViewController.swift */,
 				95C7341420FB9BBC00924B26 /* SelectionViewController.swift */,
 				95D1C9BC20FBDE96006A9C19 /* SelectionHandlers.swift */,
 				9502843420FACDD800880AD7 /* Suggestions.swift */,
@@ -861,6 +864,7 @@
 				9583C2C120DC748800452695 /* MainViewController.swift in Sources */,
 				95B9BA6A20DEEE8500261954 /* FileContainer.swift in Sources */,
 				95BBF31920F26373006E162E /* FakePanGestureRecognizer.swift in Sources */,
+				95A995CB20FD3BED006A1EE8 /* LightboxViewController.swift in Sources */,
 				95512B1420FBEAE300878163 /* IssueActionRequest.swift in Sources */,
 				9511A10C20DD3C0500101ADE /* Issue.swift in Sources */,
 				951FDD4B20E59AA200268BEB /* KeyboardLayoutConstraint.swift in Sources */,

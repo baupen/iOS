@@ -1300,14 +1300,14 @@ Maler</string>
         <scene sceneID="k6M-a7-FE1">
             <objects>
                 <tableViewController storyboardIdentifier="View Issue" modalPresentationStyle="formSheet" id="eHl-SE-8vo" customClass="ViewIssueViewController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="Fx9-K1-UdM">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="Fx9-K1-UdM">
                         <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
                             <tableViewSection id="wKC-dL-nh0" userLabel="Facts">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="8T9-QZ-PxJ" userLabel="Basics">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="8T9-QZ-PxJ" userLabel="Basics">
                                         <rect key="frame" x="0.0" y="35" width="540" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8T9-QZ-PxJ" id="93m-GS-ZJe">
@@ -1355,7 +1355,7 @@ Maler</string>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="BRf-Yf-9rn" userLabel="Client Mode">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="BRf-Yf-9rn" userLabel="Client Mode">
                                         <rect key="frame" x="0.0" y="79" width="540" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BRf-Yf-9rn" id="Ks2-Ep-R9e">
@@ -1451,12 +1451,15 @@ Maler</string>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="L56-qw-CXN" kind="presentation" identifier="lightbox" id="PB9-0e-xdP"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="Handwerker" id="i0c-jD-ELh" userLabel="Craftsman">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="8C6-Wq-JRG" userLabel="Trade">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="8C6-Wq-JRG" userLabel="Trade">
                                         <rect key="frame" x="0.0" y="557" width="540" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8C6-Wq-JRG" id="Z4G-ZM-xB5">
@@ -1492,7 +1495,7 @@ Maler</string>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Iq1-wv-lK0" userLabel="Name">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="Iq1-wv-lK0" userLabel="Name">
                                         <rect key="frame" x="0.0" y="601" width="540" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Iq1-wv-lK0" id="wCY-Ex-nvN">
@@ -1532,7 +1535,7 @@ Maler</string>
                             </tableViewSection>
                             <tableViewSection headerTitle="Details" id="Vur-cr-aWP" userLabel="Details">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Mq6-L3-ld2" userLabel="Description">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="Mq6-L3-ld2" userLabel="Description">
                                         <rect key="frame" x="0.0" y="701" width="540" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Mq6-L3-ld2" id="LDs-9p-u9x">
@@ -1568,7 +1571,7 @@ Maler</string>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="80" id="qDA-pz-DxK" userLabel="Status">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="80" id="qDA-pz-DxK" userLabel="Status">
                                         <rect key="frame" x="0.0" y="745" width="540" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qDA-pz-DxK" id="Kd0-MS-a9x">
@@ -1610,7 +1613,7 @@ Beantwortet von Malerfirma GmbH</string>
                             </tableViewSection>
                             <tableViewSection headerTitle="Aktionen" id="FfC-sF-YPy" userLabel="Actions">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="130" id="qtY-rR-p1G" userLabel="Summary">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="130" id="qtY-rR-p1G" userLabel="Summary">
                                         <rect key="frame" x="0.0" y="881" width="540" height="130"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qtY-rR-p1G" id="8I7-uM-cuk">
@@ -1634,7 +1637,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="twH-Bk-u17" userLabel="Status Actions">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="twH-Bk-u17" userLabel="Status Actions">
                                         <rect key="frame" x="0.0" y="1011" width="540" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="twH-Bk-u17" id="4b0-Ku-SKP">
@@ -1990,6 +1993,9 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="L56-qw-CXN" kind="presentation" identifier="lightbox" id="OdI-J8-6Ad"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -2253,7 +2259,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                 <rect key="frame" x="0.0" y="50" width="540" height="570"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="No Trade Cell" id="M4s-FH-Plf" customClass="NoTradeCell" customModule="Issue_Manager" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="No Trade Cell" id="M4s-FH-Plf" customClass="NoTradeCell" customModule="Issue_Manager" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.5" width="540" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="M4s-FH-Plf" id="mkw-gM-fwr">
@@ -2261,7 +2267,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Keine Funktion" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O87-rj-n8Z">
-                                                    <rect key="frame" x="15" y="14" width="26" height="16"/>
+                                                    <rect key="frame" x="15" y="14" width="510" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -2278,7 +2284,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Trade Cell" id="O9Y-hn-jb4" customClass="TradeCell" customModule="Issue_Manager" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Trade Cell" id="O9Y-hn-jb4" customClass="TradeCell" customModule="Issue_Manager" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="99.5" width="540" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="O9Y-hn-jb4" id="U9c-Hc-eIs">
@@ -2286,7 +2292,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Maler" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vgw-Pz-3Xx">
-                                                    <rect key="frame" x="15" y="14" width="26" height="16"/>
+                                                    <rect key="frame" x="15" y="14" width="510" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -2303,7 +2309,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                             <outlet property="nameLabel" destination="Vgw-Pz-3Xx" id="oTN-el-wK3"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="No Craftsman Cell" id="jOV-kN-rDg" customClass="NoCraftsmanCell" customModule="Issue_Manager" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="No Craftsman Cell" id="jOV-kN-rDg" customClass="NoCraftsmanCell" customModule="Issue_Manager" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="143.5" width="540" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jOV-kN-rDg" id="i1B-Vc-QnX">
@@ -2311,7 +2317,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Keine Handwerker" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bjx-KR-DBI">
-                                                    <rect key="frame" x="15" y="14" width="26" height="16"/>
+                                                    <rect key="frame" x="15" y="14" width="510" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -2328,7 +2334,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Craftsman Cell" rowHeight="100" id="6RQ-wD-xrl" customClass="CraftsmanCell" customModule="Issue_Manager" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Craftsman Cell" rowHeight="100" id="6RQ-wD-xrl" customClass="CraftsmanCell" customModule="Issue_Manager" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="187.5" width="540" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6RQ-wD-xrl" id="olX-vv-yAB">
@@ -2336,16 +2342,16 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="VTe-f0-DOb">
-                                                    <rect key="frame" x="15" y="14" width="26" height="72"/>
+                                                    <rect key="frame" x="15" y="14" width="510" height="72"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="799" verticalCompressionResistancePriority="799" text="Malerfirma GmbH" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pnd-DZ-ZKD">
-                                                            <rect key="frame" x="0.0" y="0.0" width="26" height="23"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="510" height="43.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="800" verticalCompressionResistancePriority="800" text="Maler" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xCX-RW-AkQ">
-                                                            <rect key="frame" x="0.0" y="31" width="26" height="41"/>
+                                                            <rect key="frame" x="0.0" y="51.5" width="510" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
@@ -2386,6 +2392,72 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
             </objects>
             <point key="canvasLocation" x="2926" y="129"/>
         </scene>
+        <!--Lightbox View Controller-->
+        <scene sceneID="SyO-2W-hGA">
+            <objects>
+                <viewController id="L56-qw-CXN" customClass="LightboxViewController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="noV-d0-89B">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" maximumZoomScale="4" translatesAutoresizingMaskIntoConstraints="NO" id="IMr-LA-CgM">
+                                <rect key="frame" x="0.0" y="20" width="1024" height="748"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bP3-F6-Phf">
+                                        <rect key="frame" x="0.0" y="0.0" width="1024" height="546"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="bP3-F6-Phf" secondAttribute="height" multiplier="15:8" id="fXs-0a-TGf"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="bP3-F6-Phf" secondAttribute="trailing" id="6dt-gq-ZJR"/>
+                                    <constraint firstItem="bP3-F6-Phf" firstAttribute="height" relation="lessThanOrEqual" secondItem="IMr-LA-CgM" secondAttribute="height" id="ANd-so-hAv"/>
+                                    <constraint firstAttribute="bottom" secondItem="bP3-F6-Phf" secondAttribute="bottom" id="Ace-pt-7il"/>
+                                    <constraint firstItem="bP3-F6-Phf" firstAttribute="width" secondItem="IMr-LA-CgM" secondAttribute="width" priority="500" id="GpT-7r-Nan"/>
+                                    <constraint firstItem="bP3-F6-Phf" firstAttribute="height" secondItem="IMr-LA-CgM" secondAttribute="height" priority="500" id="MSe-Bh-iuV"/>
+                                    <constraint firstItem="bP3-F6-Phf" firstAttribute="width" relation="lessThanOrEqual" secondItem="IMr-LA-CgM" secondAttribute="width" id="eVW-ft-ujG"/>
+                                    <constraint firstItem="bP3-F6-Phf" firstAttribute="leading" secondItem="IMr-LA-CgM" secondAttribute="leading" id="enJ-qA-QUK"/>
+                                    <constraint firstItem="bP3-F6-Phf" firstAttribute="top" secondItem="IMr-LA-CgM" secondAttribute="top" id="xaR-gK-Dcc"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="delegate" destination="A9B-p8-McJ" id="eLG-I8-66L"/>
+                                </connections>
+                            </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PSA-9s-Gf5">
+                                <rect key="frame" x="4" y="24" width="30" height="30"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="×"/>
+                                <connections>
+                                    <action selector="dismissLightbox" destination="L56-qw-CXN" eventType="touchUpInside" id="Fd5-ZN-QaD"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="PSA-9s-Gf5" firstAttribute="top" secondItem="RxO-O2-oIB" secondAttribute="top" constant="4" id="GeR-32-eUH"/>
+                            <constraint firstItem="IMr-LA-CgM" firstAttribute="top" secondItem="RxO-O2-oIB" secondAttribute="top" id="Iyl-p4-QbK"/>
+                            <constraint firstItem="RxO-O2-oIB" firstAttribute="trailing" secondItem="IMr-LA-CgM" secondAttribute="trailing" id="Ja4-0T-8VE"/>
+                            <constraint firstItem="PSA-9s-Gf5" firstAttribute="leading" secondItem="RxO-O2-oIB" secondAttribute="leading" constant="4" id="NoR-7k-8hM"/>
+                            <constraint firstItem="IMr-LA-CgM" firstAttribute="leading" secondItem="RxO-O2-oIB" secondAttribute="leading" id="kck-Hg-QSV"/>
+                            <constraint firstItem="RxO-O2-oIB" firstAttribute="bottom" secondItem="IMr-LA-CgM" secondAttribute="bottom" id="wjz-8t-xPw"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="RxO-O2-oIB"/>
+                    </view>
+                    <connections>
+                        <outlet property="aspectRatioConstraint" destination="fXs-0a-TGf" id="BcZ-ui-sgk"/>
+                        <outlet property="imageView" destination="bP3-F6-Phf" id="6Y8-wp-mbo"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2QD-0x-dkE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="A9B-p8-McJ" customClass="CenteringScrollViewDelegate" customModule="Issue_Manager" customModuleProvider="target">
+                    <connections>
+                        <outlet property="viewForZooming" destination="bP3-F6-Phf" id="0cq-rD-Ucj"/>
+                    </connections>
+                </customObject>
+            </objects>
+            <point key="canvasLocation" x="2926" y="895"/>
+        </scene>
         <!--Edit Issue Navigation Controller-->
         <scene sceneID="70h-iN-VE7">
             <objects>
@@ -2421,6 +2493,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="iOy-9i-ghB"/>
+        <segue reference="PB9-0e-xdP"/>
         <segue reference="a5G-fh-9Or"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="Main"/>
