@@ -3,6 +3,7 @@
 import UIKit
 
 final class LightboxViewController: UIViewController {
+	@IBOutlet var scrollView: UIScrollView!
 	@IBOutlet var imageView: UIImageView!
 	@IBOutlet var aspectRatioConstraint: NSLayoutConstraint!
 	
@@ -29,5 +30,16 @@ final class LightboxViewController: UIViewController {
 		aspectRatioConstraint.isActive = false
 		aspectRatioConstraint = imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor, multiplier: image.size.width / image.size.height)
 		aspectRatioConstraint.isActive = true
+	}
+	
+	@IBAction func doubleTapped(_ tapRecognizer: UITapGestureRecognizer) {
+		guard tapRecognizer.state == .ended else { return }
+		
+		let position = tapRecognizer.location(in: imageView)
+		if scrollView.zoomScale == scrollView.minimumZoomScale {
+			scrollView.zoom(to: CGRect(origin: position, size: .zero), animated: true)
+		} else {
+			scrollView.setZoomScale(scrollView.minimumZoomScale, animated: true)
+		}
 	}
 }

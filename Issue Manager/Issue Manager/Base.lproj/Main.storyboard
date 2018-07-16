@@ -2410,6 +2410,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                         </constraints>
                                     </imageView>
                                 </subviews>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="bP3-F6-Phf" secondAttribute="trailing" id="6dt-gq-ZJR"/>
                                     <constraint firstItem="bP3-F6-Phf" firstAttribute="height" relation="lessThanOrEqual" secondItem="IMr-LA-CgM" secondAttribute="height" id="ANd-so-hAv"/>
@@ -2422,6 +2423,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                 </constraints>
                                 <connections>
                                     <outlet property="delegate" destination="A9B-p8-McJ" id="eLG-I8-66L"/>
+                                    <outletCollection property="gestureRecognizers" destination="Iv1-dN-gqf" appends="YES" id="H4W-s5-7Ms"/>
                                 </connections>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PSA-9s-Gf5">
@@ -2447,6 +2449,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                     <connections>
                         <outlet property="aspectRatioConstraint" destination="fXs-0a-TGf" id="BcZ-ui-sgk"/>
                         <outlet property="imageView" destination="bP3-F6-Phf" id="6Y8-wp-mbo"/>
+                        <outlet property="scrollView" destination="IMr-LA-CgM" id="EVR-Mu-YOt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2QD-0x-dkE" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2455,6 +2458,11 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                         <outlet property="viewForZooming" destination="bP3-F6-Phf" id="0cq-rD-Ucj"/>
                     </connections>
                 </customObject>
+                <tapGestureRecognizer numberOfTapsRequired="2" id="Iv1-dN-gqf">
+                    <connections>
+                        <action selector="doubleTapped:" destination="L56-qw-CXN" id="aGN-kA-g2e"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2926" y="895"/>
         </scene>
