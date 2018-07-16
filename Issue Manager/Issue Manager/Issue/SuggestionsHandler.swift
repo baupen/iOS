@@ -6,7 +6,7 @@ fileprivate let rowHeight: CGFloat = 37
 
 class SuggestionsHandler: NSObject, UITableViewDataSource, UITableViewDelegate {
 	static let intrinsicHeight = CGFloat(suggestionCount) * rowHeight - 1
-	static let suggestionCount = 5
+	static let suggestionCount = 3
 	
 	var tableView: UITableView! {
 		didSet {
