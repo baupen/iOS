@@ -11,7 +11,7 @@ class BuildingListLayout: UICollectionViewFlowLayout {
 		let availableSize = UIEdgeInsetsInsetRect(collectionView.bounds, sectionInset).size
 		let minimumWidth: CGFloat = 300
 		let spacing = minimumLineSpacing
-		let amount = ((availableSize.width + spacing) / (minimumWidth + spacing)).rounded(.down)
+		let amount = max(1, ((availableSize.width + spacing) / (minimumWidth + spacing)).rounded(.down))
 		let cellWidth = (availableSize.width - (amount - 1) * spacing) / amount
 		itemSize = CGSize(width: cellWidth, height: availableSize.height)
 	}
