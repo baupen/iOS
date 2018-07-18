@@ -25,8 +25,11 @@ final class Storage: Codable {
 		maps      = try container.decodeValue(forKey: .maps)
 		issues    = try container.decodeValue(forKey: .issues)
 		
-		downloadMissingFiles()
-		DispatchQueue.main.async(execute: updateHelpers)
+		// not yet; Client.shared isn't initialized yet
+		DispatchQueue.global().async {
+			self.downloadMissingFiles()
+			self.updateHelpers()
+		}
 	}
 	
 	func updateHelpers() {

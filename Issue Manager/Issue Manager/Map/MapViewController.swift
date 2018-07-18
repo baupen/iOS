@@ -30,7 +30,7 @@ class MapViewController: UIViewController, LoadedViewController {
 			return
 		}
 		
-		isAddingIssue = false // done (if started)
+		isPlacingIssue = false // done (if started)
 		
 		issues = Array(map.allIssues())
 		updateMarkers()
@@ -43,11 +43,11 @@ class MapViewController: UIViewController, LoadedViewController {
 	}
 	
 	@IBAction func beginAddingIssue() {
-		isAddingIssue = true
+		isPlacingIssue = true
 	}
 	
 	@IBAction func cancelAddingIssue() {
-		isAddingIssue = false
+		isPlacingIssue = false
 	}
 	
 	var markers: [IssueMarker] = []
@@ -57,11 +57,11 @@ class MapViewController: UIViewController, LoadedViewController {
 		}
 	}
 	
-	var isAddingIssue = false {
+	var isPlacingIssue = false {
 		didSet {
-			markerAlpha = isAddingIssue ? 0.25 : 1
-			addItem.isEnabled = !isAddingIssue
-			issuePositioner.isHidden = !isAddingIssue
+			markerAlpha = isPlacingIssue ? 0.25 : 1
+			addItem.isEnabled = !isPlacingIssue
+			issuePositioner.isHidden = !isPlacingIssue
 		}
 	}
 	
@@ -146,12 +146,12 @@ class MapViewController: UIViewController, LoadedViewController {
 		case let editIssueNav as EditIssueNavigationController:
 			let editController = editIssueNav.editIssueController
 			editController.isCreating = true // otherwise we wouldn't be using a segue
-			if isAddingIssue {
+			if isPlacingIssue {
 				let position = Issue.Position(
 					at: issuePositioner.relativePosition(in: pdfController!.overlayView),
 					zoomScale: pdfController!.scrollView.zoomScale
 				)
-				editController.issue = Issue(at: position, in: holder as! Map)
+				editController.issue = Issue(at: isPlacingIssue ? position : nil, in: holder as! Map)
 			} else {
 				editController.issue = Issue(in: holder as! Map)
 			}
@@ -175,7 +175,7 @@ class MapViewController: UIViewController, LoadedViewController {
 	func update() {
 		guard isViewLoaded else { return }
 		
-		isAddingIssue = false
+		isPlacingIssue = false
 		
 		navigationItem.title = holder?.name ?? Localization.title
 		

@@ -145,6 +145,11 @@
 "map.issue_list.summary_filtered" = "Filter aktiv: %@/%@ Pendenzen angezeigt";
 
 ////////////////////////////////////////////////////////////////////////////////
+// MARK: Map.new
+// CONTEXT: Knopf, um eine neue Pendenz ohne Position zu erfassen.
+"map.new_unpositioned_issue" = "Bereichweite Pendenz Erfassen";
+
+////////////////////////////////////////////////////////////////////////////////
 // MARK: Map.no
 // CONTEXT: Wird angezeigt, wenn kein Bereich ausgewählt ist.
 "map.no_map_selected" = "Wähle links einen Bereich aus, um hier den zugehörigen Grundriss zu sehen.";
