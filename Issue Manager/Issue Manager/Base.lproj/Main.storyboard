@@ -1781,17 +1781,17 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
             <objects>
                 <tableViewController storyboardIdentifier="Edit Issue" modalPresentationStyle="formSheet" id="Hkg-Cj-0r5" customClass="EditIssueViewController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="a62-Gy-FYR">
-                        <rect key="frame" x="0.0" y="0.0" width="703" height="256"/>
+                        <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
                             <tableViewSection id="Aji-FC-EZ8" userLabel="Facts">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="fOL-k8-TiD" userLabel="Basics">
-                                        <rect key="frame" x="0.0" y="35" width="703" height="44"/>
+                                        <rect key="frame" x="0.0" y="35" width="540" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fOL-k8-TiD" id="gHr-uD-rV3">
-                                            <rect key="frame" x="0.0" y="0.0" width="703" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="540" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="R0I-Ij-sxf">
@@ -1839,10 +1839,10 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="CKR-Mc-eHL" userLabel="Client Mode">
-                                        <rect key="frame" x="0.0" y="79" width="703" height="44"/>
+                                        <rect key="frame" x="0.0" y="79" width="540" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CKR-Mc-eHL" id="suc-M6-t72">
-                                            <rect key="frame" x="0.0" y="0.0" width="703" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="540" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="yfF-Af-fzv">
@@ -1879,10 +1879,10 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                             <tableViewSection headerTitle="Foto" id="oG0-cn-SUS" userLabel="Image">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="322" id="zeo-OF-HfK" userLabel="Image">
-                                        <rect key="frame" x="0.0" y="179" width="703" height="322"/>
+                                        <rect key="frame" x="0.0" y="179" width="540" height="322"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zeo-OF-HfK" id="X1r-Mi-uGU">
-                                            <rect key="frame" x="0.0" y="0.0" width="703" height="321.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="540" height="321.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kein Foto gesetzt" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xzO-NC-90a">
@@ -1929,7 +1929,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                     <rect key="frame" x="70" y="11" width="400" height="300"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="VBN-3z-jb2">
-                                                            <rect key="frame" x="8" y="115.5" width="384" height="69.5"/>
+                                                            <rect key="frame" x="8" y="114" width="384" height="72.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Die Kamera konnte nicht aktiviert werden!" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kDq-dP-GwV">
                                                                     <rect key="frame" x="32.5" y="0.0" width="319" height="20.5"/>
@@ -1941,7 +1941,8 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TiN-bL-448" userLabel="Retry Camera Button">
-                                                                    <rect key="frame" x="131" y="39.5" width="122" height="30"/>
+                                                                    <rect key="frame" x="124" y="39.5" width="136" height="33"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <state key="normal" title="Erneut Versuchen"/>
                                                                     <userDefinedRuntimeAttributes>
@@ -2034,10 +2035,10 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                             <tableViewSection headerTitle="Handwerker" id="nVm-Ci-m0j" userLabel="Craftsman">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="ny7-Zo-LQB" userLabel="Trade">
-                                        <rect key="frame" x="0.0" y="557" width="703" height="44"/>
+                                        <rect key="frame" x="0.0" y="557" width="540" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ny7-Zo-LQB" id="2ZA-eL-OKi">
-                                            <rect key="frame" x="0.0" y="0.0" width="677" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="502" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="js7-u6-qCt">
@@ -2073,10 +2074,10 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="w2x-8V-zpl" userLabel="Name">
-                                        <rect key="frame" x="0.0" y="601" width="703" height="44"/>
+                                        <rect key="frame" x="0.0" y="601" width="540" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="w2x-8V-zpl" id="gkw-iu-gD0">
-                                            <rect key="frame" x="0.0" y="0.0" width="677" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="514" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="D65-XC-hde">
@@ -2116,10 +2117,10 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                             <tableViewSection headerTitle="Beschreibung" id="UG7-0k-28l" userLabel="Description">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="mHG-MX-E35" userLabel="Description">
-                                        <rect key="frame" x="0.0" y="701" width="703" height="44"/>
+                                        <rect key="frame" x="0.0" y="701" width="540" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mHG-MX-E35" id="345-34-lbU">
-                                            <rect key="frame" x="0.0" y="0.0" width="703" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="540" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Etwas ist falsch!" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="7qO-WW-9qL">
@@ -2146,10 +2147,10 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="200" id="Bge-3o-NlX" userLabel="Suggestions">
-                                        <rect key="frame" x="0.0" y="745" width="703" height="200"/>
+                                        <rect key="frame" x="0.0" y="745" width="540" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Bge-3o-NlX" id="wch-uu-9ye">
-                                            <rect key="frame" x="0.0" y="0.0" width="703" height="199.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="540" height="199.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Keine passenden Vorschläge" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S4e-A4-RkI">
@@ -2213,10 +2214,10 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                             <tableViewSection headerTitle="Aktionen" id="kvz-Uf-HIP" userLabel="Delete">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="pve-xL-UrK" userLabel="Delete">
-                                        <rect key="frame" x="0.0" y="1001" width="703" height="44"/>
+                                        <rect key="frame" x="0.0" y="1001" width="540" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pve-xL-UrK" id="g72-fk-d87">
-                                            <rect key="frame" x="0.0" y="0.0" width="703" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="540" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pendenz Löschen" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Nu-lH-PSM">
@@ -2284,18 +2285,18 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
             <objects>
                 <viewController id="v7T-jr-5gP" customClass="SelectionViewController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="C5q-4m-Lnh">
-                        <rect key="frame" x="0.0" y="0.0" width="703" height="256"/>
+                        <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="skY-0c-hX2">
-                                <rect key="frame" x="0.0" y="70" width="703" height="186"/>
+                                <rect key="frame" x="0.0" y="50" width="540" height="570"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="No Trade Cell" id="M4s-FH-Plf" customClass="NoTradeCell" customModule="Issue_Manager" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.5" width="703" height="44"/>
+                                        <rect key="frame" x="0.0" y="55.5" width="540" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="M4s-FH-Plf" id="mkw-gM-fwr">
-                                            <rect key="frame" x="0.0" y="0.0" width="703" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="540" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Keine Funktion" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O87-rj-n8Z">
@@ -2317,10 +2318,10 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Trade Cell" id="O9Y-hn-jb4" customClass="TradeCell" customModule="Issue_Manager" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="99.5" width="703" height="44"/>
+                                        <rect key="frame" x="0.0" y="99.5" width="540" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="O9Y-hn-jb4" id="U9c-Hc-eIs">
-                                            <rect key="frame" x="0.0" y="0.0" width="703" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="540" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Maler" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vgw-Pz-3Xx">
@@ -2342,10 +2343,10 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="No Craftsman Cell" id="jOV-kN-rDg" customClass="NoCraftsmanCell" customModule="Issue_Manager" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="143.5" width="703" height="44"/>
+                                        <rect key="frame" x="0.0" y="143.5" width="540" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jOV-kN-rDg" id="i1B-Vc-QnX">
-                                            <rect key="frame" x="0.0" y="0.0" width="703" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="540" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Keine Handwerker" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bjx-KR-DBI">
@@ -2367,10 +2368,10 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Craftsman Cell" rowHeight="100" id="6RQ-wD-xrl" customClass="CraftsmanCell" customModule="Issue_Manager" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="187.5" width="703" height="100"/>
+                                        <rect key="frame" x="0.0" y="187.5" width="540" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6RQ-wD-xrl" id="olX-vv-yAB">
-                                            <rect key="frame" x="0.0" y="0.0" width="703" height="99.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="540" height="99.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="VTe-f0-DOb">
@@ -2429,14 +2430,14 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
             <objects>
                 <viewController id="L56-qw-CXN" customClass="LightboxViewController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="noV-d0-89B">
-                        <rect key="frame" x="0.0" y="0.0" width="703" height="256"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" maximumZoomScale="4" translatesAutoresizingMaskIntoConstraints="NO" id="IMr-LA-CgM">
-                                <rect key="frame" x="0.0" y="0.0" width="703" height="256"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bP3-F6-Phf">
-                                        <rect key="frame" x="0.0" y="0.0" width="480" height="256"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="1024" height="546"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="bP3-F6-Phf" secondAttribute="height" multiplier="15:8" id="fXs-0a-TGf"/>
                                         </constraints>
@@ -2502,8 +2503,9 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="formSheet" id="zCk-9X-XNY" customClass="EditIssueNavigationController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <modalFormSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="x3v-mG-RsT">
-                        <rect key="frame" x="0.0" y="0.0" width="703" height="50"/>
+                        <rect key="frame" x="0.0" y="0.0" width="540" height="50"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

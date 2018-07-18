@@ -9,8 +9,6 @@ final class CameraContainerView: UIView {
 
 final class CameraView: UIView {
 	var captureSession: AVCaptureSession?
-	var captureDevice: AVCaptureDevice?
-	var captureInput: AVCaptureDeviceInput?
 	var photoOutput: AVCapturePhotoOutput?
 	var previewLayer: AVCaptureVideoPreviewLayer?
 	
@@ -36,44 +34,45 @@ final class CameraView: UIView {
 		
 		DispatchQueue.global().async {
 			if self.captureSession == nil {
-				let session = AVCaptureSession()
-				self.captureSession = session
-				
-				let device = AVCaptureDevice.default(for: .video)!
-				self.captureDevice = device
-				
-				do {
-					let input = try AVCaptureDeviceInput(device: device)
-					self.captureInput = input
-					session.addInput(input)
-				} catch {
-					print("could not set up camera!")
-					dump(error)
-					DispatchQueue.main.async {
-						self.isHidden = true
-						self.delegate?.cameraFailed(with: error)
-					}
-					
-					return
-				}
-				
-				let photoOutput = AVCapturePhotoOutput()
-				self.photoOutput = photoOutput
-				session.sessionPreset = .photo
-				session.addOutput(photoOutput)
-				
-				let previewLayer = AVCaptureVideoPreviewLayer(session: session)
-				self.previewLayer = previewLayer
-				previewLayer.videoGravity = .resizeAspectFill
-				
-				DispatchQueue.main.async {
-					self.layer.addSublayer(previewLayer)
-					self.updateOrientation()
-					self.isHidden = false
-				}
+				self.tryToConfigureSession()
 			}
 			
-			self.captureSession!.startRunning()
+			self.captureSession?.startRunning()
+		}
+	}
+	
+	private func tryToConfigureSession() {
+		do {
+			let session = AVCaptureSession()
+			
+			let device = try AVCaptureDevice.default(for: .video) ??? CameraViewError.noCameraAvailable
+			let input = try AVCaptureDeviceInput(device: device)
+			session.addInput(input)
+			
+			let photoOutput = AVCapturePhotoOutput()
+			self.photoOutput = photoOutput
+			session.sessionPreset = .photo
+			session.addOutput(photoOutput)
+			
+			let previewLayer = AVCaptureVideoPreviewLayer(session: session)
+			self.previewLayer = previewLayer
+			previewLayer.videoGravity = .resizeAspectFill
+			
+			captureSession = session
+			
+			DispatchQueue.main.async {
+				self.layer.addSublayer(previewLayer)
+				self.updateOrientation()
+				self.isHidden = false
+			}
+		} catch {
+			print("Could not set up camera!")
+			dump(error)
+			
+			DispatchQueue.main.async {
+				self.isHidden = true
+				self.delegate?.cameraFailed(with: error)
+			}
 		}
 	}
 	
@@ -104,8 +103,9 @@ final class CameraView: UIView {
 	
 	@objc func updateOrientation() {
 		let orientation = UIApplication.shared.statusBarOrientation // kinda dirty
-		previewLayer?.connection!.videoOrientation = .init(representing: orientation)
-		photoOutput?.connection(with: .video)!.videoOrientation = .init(representing: orientation)
+		let videoOrientation = AVCaptureVideoOrientation(representing: orientation)
+		previewLayer?.connection!.videoOrientation = videoOrientation
+		photoOutput?.connection(with: .video)!.videoOrientation = videoOrientation
 	}
 	
 	@objc func viewTapped(_ tapRecognizer: UITapGestureRecognizer) {
@@ -146,6 +146,10 @@ protocol CameraViewDelegate: AnyObject {
 }
 
 enum CameraViewError: Error {
+	/// Happens e.g. on the simulator, where there is no camera device available.
+	case noCameraAvailable
+	
+	/// Is thrown when you try to take a picture while the camera isn't set up.
 	case cameraNotConfigured
 }
 
