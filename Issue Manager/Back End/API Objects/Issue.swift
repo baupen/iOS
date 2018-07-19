@@ -2,7 +2,7 @@
 
 import Foundation
 
-final class Issue {
+final class Issue: APIObject {
 	// NB: update `update(from:)` when adding/removing stored properties!
 	var meta = ObjectMeta()
 	var number: Int?
