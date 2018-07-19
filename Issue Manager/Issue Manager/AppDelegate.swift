@@ -1,7 +1,6 @@
 // Created by Julian Dunskus
 
 import UIKit
-import Reachability
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
