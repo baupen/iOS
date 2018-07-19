@@ -142,26 +142,6 @@ final class Client {
 	}
 }
 
-extension Future {
-	func await() throws -> Value {
-		let group = DispatchGroup()
-		group.enter()
-		always(group.leave)
-		group.wait()
-		
-		var result: Result<Value>?
-		self.then { result = .success($0) }
-		self.catch { result = .failure($0) }
-		
-		switch result! {
-		case .success(let value):
-			return value
-		case .failure(let error):
-			throw error
-		}
-	}
-}
-
 /// An error that occurs while interfacing with the server.
 enum RequestError: Error {
 	/// You tried to do something that requires authentication without being authenticated.
