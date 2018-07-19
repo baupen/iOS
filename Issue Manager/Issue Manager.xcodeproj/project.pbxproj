@@ -37,6 +37,7 @@
 		9511A14120DD559500101ADE /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9511A13320DD559500101ADE /* Promise.swift */; };
 		9511A14220DD559500101ADE /* Future+extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9511A13420DD559500101ADE /* Future+extras.swift */; };
 		9511A14420DD56D700101ADE /* MiscHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9511A14320DD56D700101ADE /* MiscHelpers.swift */; };
+		9512666A20FFE08E00155162 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9512666920FFE08D00155162 /* Reachability.swift */; };
 		951FDD4B20E59AA200268BEB /* KeyboardLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951FDD4A20E59AA100268BEB /* KeyboardLayoutConstraint.swift */; };
 		9529A63D20EECF8600C7E0A0 /* IssueBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9529A63C20EECF8600C7E0A0 /* IssueBadge.swift */; };
 		952CB48820E830A300E6B664 /* BuildingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952CB48720E830A300E6B664 /* BuildingCell.swift */; };
@@ -118,8 +119,6 @@
 		95B9BA6A20DEEE8500261954 /* FileContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B9BA6920DEEE8400261954 /* FileContainer.swift */; };
 		95BBF31920F26373006E162E /* FakePanGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BBF31820F26373006E162E /* FakePanGestureRecognizer.swift */; };
 		95BBF32120F26F49006E162E /* IssueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BBF32020F26F49006E162E /* IssueCell.swift */; };
-		95BD516020E985FC00FCB7EB /* Reachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95BD515520E985C600FCB7EB /* Reachability.framework */; };
-		95BD516120E985FC00FCB7EB /* Reachability.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 95BD515520E985C600FCB7EB /* Reachability.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		95C7341520FB9BBC00924B26 /* SelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C7341420FB9BBC00924B26 /* SelectionViewController.swift */; };
 		95D1C9BD20FBDE96006A9C19 /* SelectionHandlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D1C9BC20FBDE96006A9C19 /* SelectionHandlers.swift */; };
 		95D1C9C620FBDFB9006A9C19 /* LoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D1C9C520FBDFB9006A9C19 /* LoginRequest.swift */; };
@@ -164,55 +163,6 @@
 			remoteGlobalIDString = 954CFBEB20E9AEC20014E02F;
 			remoteInfo = SimplePDFKit;
 		};
-		95BD515420E985C600FCB7EB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 95BD514B20E985C600FCB7EB /* Reachability.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = AA7344721BE7678B008AFE69;
-			remoteInfo = Reachability;
-		};
-		95BD515620E985C600FCB7EB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 95BD514B20E985C600FCB7EB /* Reachability.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 00C54B111C09CD9C001C3F12;
-			remoteInfo = ReachabilityMac;
-		};
-		95BD515820E985C600FCB7EB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 95BD514B20E985C600FCB7EB /* Reachability.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 57A45A2A1C197F4800384AE4;
-			remoteInfo = ReachabilityTV;
-		};
-		95BD515A20E985C600FCB7EB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 95BD514B20E985C600FCB7EB /* Reachability.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = AA7344901BE76820008AFE69;
-			remoteInfo = ReachabilitySample;
-		};
-		95BD515C20E985C600FCB7EB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 95BD514B20E985C600FCB7EB /* Reachability.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 00C54B1F1C09CF67001C3F12;
-			remoteInfo = ReachabilityMacSample;
-		};
-		95BD515E20E985C600FCB7EB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 95BD514B20E985C600FCB7EB /* Reachability.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 57A45A011C197BE800384AE4;
-			remoteInfo = ReachabilityAppleTVSample;
-		};
-		95BD516220E985FC00FCB7EB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 95BD514B20E985C600FCB7EB /* Reachability.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = AA7344711BE7678B008AFE69;
-			remoteInfo = Reachability;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -224,7 +174,6 @@
 			files = (
 				9575001E20F5AC9D00B1019E /* PullToExpand.framework in Embed Frameworks */,
 				9575002220F5ACA000B1019E /* SimplePDFKit.framework in Embed Frameworks */,
-				95BD516120E985FC00FCB7EB /* Reachability.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -272,6 +221,7 @@
 		9511A13320DD559500101ADE /* Promise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Promise.swift; sourceTree = "<group>"; };
 		9511A13420DD559500101ADE /* Future+extras.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Future+extras.swift"; sourceTree = "<group>"; };
 		9511A14320DD56D700101ADE /* MiscHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiscHelpers.swift; sourceTree = "<group>"; };
+		9512666920FFE08D00155162 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		951FDD4A20E59AA100268BEB /* KeyboardLayoutConstraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardLayoutConstraint.swift; sourceTree = "<group>"; };
 		9529A63C20EECF8600C7E0A0 /* IssueBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueBadge.swift; sourceTree = "<group>"; };
 		952CB48720E830A300E6B664 /* BuildingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingCell.swift; sourceTree = "<group>"; };
@@ -325,7 +275,6 @@
 		95B9BA6920DEEE8400261954 /* FileContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileContainer.swift; sourceTree = "<group>"; };
 		95BBF31820F26373006E162E /* FakePanGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakePanGestureRecognizer.swift; sourceTree = "<group>"; };
 		95BBF32020F26F49006E162E /* IssueCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCell.swift; sourceTree = "<group>"; };
-		95BD514B20E985C600FCB7EB /* Reachability.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Reachability.xcodeproj; path = Carthage/Checkouts/Reachability.swift/Reachability.xcodeproj; sourceTree = "<group>"; };
 		95C7341420FB9BBC00924B26 /* SelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionViewController.swift; sourceTree = "<group>"; };
 		95D1C9BC20FBDE96006A9C19 /* SelectionHandlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionHandlers.swift; sourceTree = "<group>"; };
 		95D1C9C520FBDFB9006A9C19 /* LoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequest.swift; sourceTree = "<group>"; };
@@ -341,7 +290,6 @@
 			files = (
 				9575001D20F5AC9D00B1019E /* PullToExpand.framework in Frameworks */,
 				9575002120F5ACA000B1019E /* SimplePDFKit.framework in Frameworks */,
-				95BD516020E985FC00FCB7EB /* Reachability.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -403,6 +351,7 @@
 		9511A12320DD558700101ADE /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				9512666920FFE08D00155162 /* Reachability.swift */,
 				951FDD4A20E59AA100268BEB /* KeyboardLayoutConstraint.swift */,
 				9511A12420DD559500101ADE /* Promise */,
 			);
@@ -499,7 +448,6 @@
 			children = (
 				9575001720F5AC8700B1019E /* PullToExpand.xcodeproj */,
 				9575000E20F5AC8200B1019E /* SimplePDFKit.xcodeproj */,
-				95BD514B20E985C600FCB7EB /* Reachability.xcodeproj */,
 				9554235220DC796A009CCCE0 /* BridgingHeader.h */,
 				9511A12320DD558700101ADE /* Libraries */,
 				9583C2D620DC76CE00452695 /* Back End */,
@@ -613,19 +561,6 @@
 			path = Issue;
 			sourceTree = "<group>";
 		};
-		95BD514C20E985C600FCB7EB /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				95BD515520E985C600FCB7EB /* Reachability.framework */,
-				95BD515720E985C600FCB7EB /* Reachability.framework */,
-				95BD515920E985C600FCB7EB /* Reachability.framework */,
-				95BD515B20E985C600FCB7EB /* ReachabilitySample.app */,
-				95BD515D20E985C600FCB7EB /* ReachabilityMacSample.app */,
-				95BD515F20E985C600FCB7EB /* ReachabilityAppleTVSample.app */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		95D1C9C420FBDF44006A9C19 /* Requests */ = {
 			isa = PBXGroup;
 			children = (
@@ -657,7 +592,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				95BD516320E985FC00FCB7EB /* PBXTargetDependency */,
 				9575002020F5AC9D00B1019E /* PBXTargetDependency */,
 				9575002420F5ACA000B1019E /* PBXTargetDependency */,
 			);
@@ -721,10 +655,6 @@
 					ProjectRef = 9575001720F5AC8700B1019E /* PullToExpand.xcodeproj */;
 				},
 				{
-					ProductGroup = 95BD514C20E985C600FCB7EB /* Products */;
-					ProjectRef = 95BD514B20E985C600FCB7EB /* Reachability.xcodeproj */;
-				},
-				{
 					ProductGroup = 9575000F20F5AC8200B1019E /* Products */;
 					ProjectRef = 9575000E20F5AC8200B1019E /* SimplePDFKit.xcodeproj */;
 				},
@@ -757,48 +687,6 @@
 			fileType = wrapper.framework;
 			path = PullToExpand.framework;
 			remoteRef = 9575001B20F5AC8700B1019E /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		95BD515520E985C600FCB7EB /* Reachability.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Reachability.framework;
-			remoteRef = 95BD515420E985C600FCB7EB /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		95BD515720E985C600FCB7EB /* Reachability.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Reachability.framework;
-			remoteRef = 95BD515620E985C600FCB7EB /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		95BD515920E985C600FCB7EB /* Reachability.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Reachability.framework;
-			remoteRef = 95BD515820E985C600FCB7EB /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		95BD515B20E985C600FCB7EB /* ReachabilitySample.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = ReachabilitySample.app;
-			remoteRef = 95BD515A20E985C600FCB7EB /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		95BD515D20E985C600FCB7EB /* ReachabilityMacSample.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = ReachabilityMacSample.app;
-			remoteRef = 95BD515C20E985C600FCB7EB /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		95BD515F20E985C600FCB7EB /* ReachabilityAppleTVSample.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = ReachabilityAppleTVSample.app;
-			remoteRef = 95BD515E20E985C600FCB7EB /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -863,6 +751,7 @@
 			files = (
 				9583C2C120DC748800452695 /* MainViewController.swift in Sources */,
 				95B9BA6A20DEEE8500261954 /* FileContainer.swift in Sources */,
+				9512666A20FFE08E00155162 /* Reachability.swift in Sources */,
 				95BBF31920F26373006E162E /* FakePanGestureRecognizer.swift in Sources */,
 				95A995CB20FD3BED006A1EE8 /* LightboxViewController.swift in Sources */,
 				95512B1420FBEAE300878163 /* IssueActionRequest.swift in Sources */,
@@ -990,11 +879,6 @@
 			isa = PBXTargetDependency;
 			name = SimplePDFKit;
 			targetProxy = 9575002320F5ACA000B1019E /* PBXContainerItemProxy */;
-		};
-		95BD516320E985FC00FCB7EB /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Reachability;
-			targetProxy = 95BD516220E985FC00FCB7EB /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
