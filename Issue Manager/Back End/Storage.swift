@@ -28,15 +28,6 @@ final class Storage: Codable {
 		// not yet; Client.shared isn't initialized yet
 		DispatchQueue.global().async {
 			self.downloadMissingFiles()
-			self.updateHelpers()
-		}
-	}
-	
-	func updateHelpers() {
-		for (buildingID, building) in buildings {
-			for map in building.recursiveChildren() {
-				map.buildingID = buildingID
-			}
 		}
 	}
 	

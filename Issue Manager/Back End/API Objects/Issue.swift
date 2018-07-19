@@ -2,7 +2,7 @@
 
 import Foundation
 
-final class Issue: FileContainer {
+final class Issue {
 	// NB: update `update(from:)` when adding/removing stored properties!
 	var meta = ObjectMeta()
 	var number: Int?
@@ -14,10 +14,6 @@ final class Issue: FileContainer {
 	var map: UUID // only really used before registration
 	var status: Status = Status()
 	var position: Position?
-	
-	static let pathPrefix = "issue"
-	static let downloadRequestPath = \FileDownloadRequest.issue
-	var filename: String? { return imageFilename }
 	
 	init(at position: Position? = nil, in map: Map) {
 		self.wasAddedWithClient = defaults.isInClientMode
@@ -97,6 +93,12 @@ final class Issue: FileContainer {
 			case new, registered, responded, reviewed
 		}
 	}
+}
+
+extension Issue: FileContainer {
+	static let pathPrefix = "issue"
+	static let downloadRequestPath = \FileDownloadRequest.issue
+	var filename: String? { return imageFilename }
 }
 
 extension Issue {

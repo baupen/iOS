@@ -8,10 +8,12 @@ struct User: APIObject {
 	var givenName: String
 	var familyName: String
 	
-	// TODO make non-optional once API updated
+	// set by request, not API
 	var username: String!
 	var passwordHash: String!
-	
+}
+
+extension User {
 	var fullName: String {
 		return "\(givenName) \(familyName)"
 	}
