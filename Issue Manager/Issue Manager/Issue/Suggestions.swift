@@ -39,7 +39,7 @@ class SuggestionStorage {
 			
 			storage = try decoder.decode(from: raw)
 			#if DEBUG
-			storage["Hochbauzeichner"] = [
+			storage["hochbauzeichner"] = [
 				Suggestion(text: "Unebene oberfläche"),
 				Suggestion(text: "Zu ebene Oberfläche!"),
 				Suggestion(text: "Unebene unterfläche :p"),
@@ -56,8 +56,7 @@ class SuggestionStorage {
 	
 	private let savingQueue = DispatchQueue(label: "suggestions saving")
 	func save() {
-		let storage = self.storage
-		savingQueue.async {
+		savingQueue.async { [storage] in
 			do {
 				let raw = try self.encoder.encode(storage)
 				defaults.rawSuggestions = raw
@@ -69,23 +68,37 @@ class SuggestionStorage {
 		}
 	}
 	
-	func suggestions(forTrade trade: String?, matching prefix: String?) -> [Suggestion] {
-		let options = trade
-			.flatMap { storage[$0].map(AnyCollection.init) } // specific values if available
-			?? AnyCollection(storage.lazy.flatMap { $0.value }) // fall back on all values
-		
-		let unsorted: AnyCollection<Suggestion>
-		if let prefix = prefix {
-			let lowercasedPrefix = prefix.lowercased()
-			unsorted = AnyCollection(options
-				.lazy
-				.filter { $0.text.lowercased().hasPrefix(lowercasedPrefix) }
-				.prefix(SuggestionsHandler.suggestionCount)
-			)
+	/// - returns: up to `count` suggestions matching the given prefix, sorted by similarity of the `trade` parameter to their trade and by occurrence count (descendingly) within a trade
+	func suggestions(forTrade trade: String?, matching prefix: String?, count: Int) -> [Suggestion] {
+		// sort trades by similarity to given trade, if applicable
+		let options: [[Suggestion]]
+		if let trade = trade?.lowercased() {
+			// all trades, sorted by similarity to given trade; most similar first
+			options = storage
+				.map { (distance: $0.key.distance(to: trade), suggestions: $0.value) }
+				.sorted { $0.distance < $1.distance }
+				.map { $0.suggestions }
 		} else {
-			unsorted = AnyCollection(options.prefix(SuggestionsHandler.suggestionCount))
+			// fall back on all values
+			options = [storage.values.flatMap { $0 }]
 		}
 		
-		return unsorted.sorted { $0.occurrences > $1.occurrences }
+		// only use suggestions matching the prefix, if applicable
+		let filtered: AnyCollection<[Suggestion]>
+		if let prefix = prefix?.lowercased() {
+			filtered = AnyCollection(options
+				.lazy
+				.map { $0.filter { $0.text.lowercased().hasPrefix(prefix) } }
+			)
+		} else {
+			filtered = AnyCollection(options)
+		}
+		
+		// only the first few elements
+		return Array(filtered
+			.lazy
+			.flatMap { $0.max(count, by: { $0.occurrences < $1.occurrences }) }
+			.prefix(count)
+		)
 	}
 }

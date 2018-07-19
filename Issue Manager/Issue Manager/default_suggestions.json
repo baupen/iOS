@@ -1,1535 +1,1535 @@
 {
-  "Duschetrennwand" : [
+  "duschetrennwand": [
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Duschetrennwand fehlt",
-      "occurrences" : 3
+      "lastUseTime": -63114076800,
+      "text": "Duschetrennwand fehlt",
+      "occurrences": 3
     }
   ],
-  "Bodenbeläge in Holz" : [
+  "bodenbeläge in holz": [
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Hick im Parkett",
-      "occurrences" : 2
+      "lastUseTime": -63114076800,
+      "text": "Hick im Parkett",
+      "occurrences": 2
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Loch im Parkett",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Loch im Parkett",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Sockelleisten fehlen",
-      "occurrences" : 7
+      "lastUseTime": -63114076800,
+      "text": "Sockelleisten fehlen",
+      "occurrences": 7
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Spalt im Parkett ausharzen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Spalt im Parkett ausharzen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Absatz bei Parkettstoss",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Absatz bei Parkettstoss",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Kratz im Parkett",
-      "occurrences" : 2
+      "lastUseTime": -63114076800,
+      "text": "Kratz im Parkett",
+      "occurrences": 2
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Kittfugen bei Fenstern und Türfuttern fehlen",
-      "occurrences" : 2
+      "lastUseTime": -63114076800,
+      "text": "Kittfugen bei Fenstern und Türfuttern fehlen",
+      "occurrences": 2
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Offene Astlöcher",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Offene Astlöcher",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Kittfugen fehlen",
-      "occurrences" : 3
+      "lastUseTime": -63114076800,
+      "text": "Kittfugen fehlen",
+      "occurrences": 3
     }
   ],
-  "Heizungsinstallationen" : [
+  "heizungsinstallationen": [
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Dämmung schneiden bei Rohr und kitten",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Dämmung schneiden bei Rohr und kitten",
+      "occurrences": 1
     }
   ],
-  "Küche" : [
+  "küche": [
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Abdeckung Holzoptik",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Abdeckung Holzoptik",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Wände mit Sägemehl verschmutzt",
-      "occurrences" : 4
+      "lastUseTime": -63114076800,
+      "text": "Wände mit Sägemehl verschmutzt",
+      "occurrences": 4
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Tiefkühler brummt manchmal",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Tiefkühler brummt manchmal",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Front zu Wohnzimmer verzogen",
-      "occurrences" : 2
+      "lastUseTime": -63114076800,
+      "text": "Front zu Wohnzimmer verzogen",
+      "occurrences": 2
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Kleiner Kratzer im Spülbecken wird belassen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Kleiner Kratzer im Spülbecken wird belassen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Schublade Einstellen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Schublade Einstellen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Gitter unter Kühlschrank fehlt",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Gitter unter Kühlschrank fehlt",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Tablar fehlt",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Tablar fehlt",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Kunstoffabdeckungen Oberschrank innen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Kunstoffabdeckungen Oberschrank innen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Möbel wechseln Holzoptik",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Möbel wechseln Holzoptik",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Leimreste auf Kante",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Leimreste auf Kante",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Kästli lässt sich nicht öffnen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Kästli lässt sich nicht öffnen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Deckenblende fehlt",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Deckenblende fehlt",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Ein kleiner Spot funktioniert nicht",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Ein kleiner Spot funktioniert nicht",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Zwei kleine Spots funktionieren nicht",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Zwei kleine Spots funktionieren nicht",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Filterarretierung defekt",
-      "occurrences" : 2
+      "lastUseTime": -63114076800,
+      "text": "Filterarretierung defekt",
+      "occurrences": 2
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Gewürzfach geht nicht auf",
-      "occurrences" : 2
+      "lastUseTime": -63114076800,
+      "text": "Gewürzfach geht nicht auf",
+      "occurrences": 2
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Sockel lose",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Sockel lose",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Seitenwand zu kurz",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Seitenwand zu kurz",
+      "occurrences": 1
     }
   ],
-  "Schreinerarbeiten" : [
+  "schreinerarbeiten": [
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Lüftungsverkleidung fehlt",
-      "occurrences" : 2
+      "lastUseTime": -63114076800,
+      "text": "Lüftungsverkleidung fehlt",
+      "occurrences": 2
     }
   ],
-  "Baureinigung" : [
+  "baureinigung": [
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Fürfutter reinigen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Fürfutter reinigen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Lüftungsschrank reinigen",
-      "occurrences" : 6
+      "lastUseTime": -63114076800,
+      "text": "Lüftungsschrank reinigen",
+      "occurrences": 6
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Nassreinigung Frühling",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Nassreinigung Frühling",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Fensterrahmen reinigen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Fensterrahmen reinigen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Fleck auf Glas",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Fleck auf Glas",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Blende reinigen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Blende reinigen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Silikon auf Glaskeramikkochfeld",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Silikon auf Glaskeramikkochfeld",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Türe reinigen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Türe reinigen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Rohr Reinigen",
-      "occurrences" : 4
+      "lastUseTime": -63114076800,
+      "text": "Rohr Reinigen",
+      "occurrences": 4
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Reinigung Boden",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Reinigung Boden",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Seitenwand Küche reinigen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Seitenwand Küche reinigen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Lichtschacht reinigen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Lichtschacht reinigen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Wand reinigen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Wand reinigen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Reinigung Fensterrahmen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Reinigung Fensterrahmen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Folie Abläufe entfernen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Folie Abläufe entfernen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Silikon auf Parkett",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Silikon auf Parkett",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Küchenabdeckung reinigen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Küchenabdeckung reinigen",
+      "occurrences": 1
     }
   ],
-  "Aufzug" : [
+  "aufzug": [
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Zwei Spots defekt",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Zwei Spots defekt",
+      "occurrences": 1
     }
   ],
-  "Baumeisterarbeiten" : [
+  "baumeisterarbeiten": [
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Löcher in Wand",
-      "occurrences" : 14
+      "lastUseTime": -63114076800,
+      "text": "Löcher in Wand",
+      "occurrences": 14
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Rostflecken Decke",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Rostflecken Decke",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Sanitärschlitz schliessen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Sanitärschlitz schliessen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Wassereindringung Boden",
-      "occurrences" : 3
+      "lastUseTime": -63114076800,
+      "text": "Wassereindringung Boden",
+      "occurrences": 3
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Ecke unregelmässig",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Ecke unregelmässig",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Kiesnester schliessen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Kiesnester schliessen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Kante abgebrochen",
-      "occurrences" : 4
+      "lastUseTime": -63114076800,
+      "text": "Kante abgebrochen",
+      "occurrences": 4
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Kiesnester ausbessern",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Kiesnester ausbessern",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Wassernase fehlt",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Wassernase fehlt",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Betonkosmetik",
-      "occurrences" : 2
+      "lastUseTime": -63114076800,
+      "text": "Betonkosmetik",
+      "occurrences": 2
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Schaltafelreste Deckenuntersicht",
-      "occurrences" : 2
+      "lastUseTime": -63114076800,
+      "text": "Schaltafelreste Deckenuntersicht",
+      "occurrences": 2
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Wandsockel nachbessern",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Wandsockel nachbessern",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Schalungsschoner schliessen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Schalungsschoner schliessen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Wassereindringung Fuge Boden Wand",
-      "occurrences" : 2
+      "lastUseTime": -63114076800,
+      "text": "Wassereindringung Fuge Boden Wand",
+      "occurrences": 2
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Loch an Decke",
-      "occurrences" : 2
+      "lastUseTime": -63114076800,
+      "text": "Loch an Decke",
+      "occurrences": 2
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Dachrand teilweise abgebrochen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Dachrand teilweise abgebrochen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Bleistiftstriche auf Wand",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Bleistiftstriche auf Wand",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Nägel in Decke",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Nägel in Decke",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Farbreste auf Wand",
-      "occurrences" : 6
+      "lastUseTime": -63114076800,
+      "text": "Farbreste auf Wand",
+      "occurrences": 6
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Sichtwände sind noch zu reinigen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Sichtwände sind noch zu reinigen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Deckenschlitz schliessen Raum oben",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Deckenschlitz schliessen Raum oben",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Wassernasenprofil entfernen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Wassernasenprofil entfernen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Wassereindringung Wand",
-      "occurrences" : 3
+      "lastUseTime": -63114076800,
+      "text": "Wassereindringung Wand",
+      "occurrences": 3
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Schaumreste auf Wand",
-      "occurrences" : 2
+      "lastUseTime": -63114076800,
+      "text": "Schaumreste auf Wand",
+      "occurrences": 2
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Wasser auf Boden entfernen",
-      "occurrences" : 2
+      "lastUseTime": -63114076800,
+      "text": "Wasser auf Boden entfernen",
+      "occurrences": 2
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Bleistiftstriche auf Decke",
-      "occurrences" : 7
+      "lastUseTime": -63114076800,
+      "text": "Bleistiftstriche auf Decke",
+      "occurrences": 7
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Bindestellen schliessen",
-      "occurrences" : 11
+      "lastUseTime": -63114076800,
+      "text": "Bindestellen schliessen",
+      "occurrences": 11
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Plastikfolie auf Wand abschneiden",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Plastikfolie auf Wand abschneiden",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Wandschlitz schliessen Raum oben",
-      "occurrences" : 2
+      "lastUseTime": -63114076800,
+      "text": "Wandschlitz schliessen Raum oben",
+      "occurrences": 2
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Wandaussparung zumauern",
-      "occurrences" : 2
+      "lastUseTime": -63114076800,
+      "text": "Wandaussparung zumauern",
+      "occurrences": 2
     }
   ],
-  "Abdichtungen\/Flachdach" : [
+  "abdichtungen\/flachdach": [
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Speier Vordach fehlt",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Speier Vordach fehlt",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Wasser längs Wand am Boden",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Wasser längs Wand am Boden",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Bitumen abschleifen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Bitumen abschleifen",
+      "occurrences": 1
     }
   ],
-  "Schliessanlage" : [
+  "schliessanlage": [
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Zylinder entfernen da Fluchtweg",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Zylinder entfernen da Fluchtweg",
+      "occurrences": 1
     }
   ],
-  "Elektroinstallationen" : [
+  "elektroinstallationen": [
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Sonnerie fehlt",
-      "occurrences" : 2
+      "lastUseTime": -63114076800,
+      "text": "Sonnerie fehlt",
+      "occurrences": 2
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Beschriftung Multimedia",
-      "occurrences" : 5
+      "lastUseTime": -63114076800,
+      "text": "Beschriftung Multimedia",
+      "occurrences": 5
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Kabel Markise befestigen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Kabel Markise befestigen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Sensor reagiert nicht richtig",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Sensor reagiert nicht richtig",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Lamellenstore funktioniert nicht",
-      "occurrences" : 2
+      "lastUseTime": -63114076800,
+      "text": "Lamellenstore funktioniert nicht",
+      "occurrences": 2
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Warmwasserzähler anschliessen",
-      "occurrences" : 4
+      "lastUseTime": -63114076800,
+      "text": "Warmwasserzähler anschliessen",
+      "occurrences": 4
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Blinddeckel fehlt",
-      "occurrences" : 20
+      "lastUseTime": -63114076800,
+      "text": "Blinddeckel fehlt",
+      "occurrences": 20
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "UV fertigstellen inkl Legende",
-      "occurrences" : 2
+      "lastUseTime": -63114076800,
+      "text": "UV fertigstellen inkl Legende",
+      "occurrences": 2
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Lüftung läuft immer",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Lüftung läuft immer",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Schalter fehlen",
-      "occurrences" : 8
+      "lastUseTime": -63114076800,
+      "text": "Schalter fehlen",
+      "occurrences": 8
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Zeitschaltuhr einstellen 7 Uhr bis 20 Uhr",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Zeitschaltuhr einstellen 7 Uhr bis 20 Uhr",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Küchengeräte anschliessen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Küchengeräte anschliessen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "fl Röhre schmutzig",
-      "occurrences" : 2
+      "lastUseTime": -63114076800,
+      "text": "fl Röhre schmutzig",
+      "occurrences": 2
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Lüftung läuft nicht",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Lüftung läuft nicht",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Anschluss markisen",
-      "occurrences" : 8
+      "lastUseTime": -63114076800,
+      "text": "Anschluss markisen",
+      "occurrences": 8
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Glaskeramik anschliessen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Glaskeramik anschliessen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Markisen anschliessen",
-      "occurrences" : 3
+      "lastUseTime": -63114076800,
+      "text": "Markisen anschliessen",
+      "occurrences": 3
     }
   ],
-  "Maler\/Gipser" : [
+  "maler\/gipser": [
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Acrylfuge erstellen",
-      "occurrences" : 11
+      "lastUseTime": -63114076800,
+      "text": "Acrylfuge erstellen",
+      "occurrences": 11
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Fensterrahmen Ausbessern",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Fensterrahmen Ausbessern",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Decke nachschleifen \/ säubern",
-      "occurrences" : 34
+      "lastUseTime": -63114076800,
+      "text": "Decke nachschleifen \/ säubern",
+      "occurrences": 34
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Wand nachstreichen",
-      "occurrences" : 4
+      "lastUseTime": -63114076800,
+      "text": "Wand nachstreichen",
+      "occurrences": 4
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Klebeband entfernen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Klebeband entfernen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Wand ausbessern",
-      "occurrences" : 16
+      "lastUseTime": -63114076800,
+      "text": "Wand ausbessern",
+      "occurrences": 16
     }
   ],
-  "Fassadendämmung" : [
+  "fassadendämmung": [
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Riss im Putz",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Riss im Putz",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Kante ausbessern",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Kante ausbessern",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Folie Fensterbänke entfernen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Folie Fensterbänke entfernen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Um Lüftunggitter Spalt schliessen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Um Lüftunggitter Spalt schliessen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Farbe auf Lüftungsgitter",
-      "occurrences" : 16
+      "lastUseTime": -63114076800,
+      "text": "Farbe auf Lüftungsgitter",
+      "occurrences": 16
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Fleck auf Wand",
-      "occurrences" : 2
+      "lastUseTime": -63114076800,
+      "text": "Fleck auf Wand",
+      "occurrences": 2
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Loch bei Rauchabzugkasten",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Loch bei Rauchabzugkasten",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Um Türzarge abglätten",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Um Türzarge abglätten",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Schlüsselrohr montieren",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Schlüsselrohr montieren",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Gerüstoch schliessen",
-      "occurrences" : 3
+      "lastUseTime": -63114076800,
+      "text": "Gerüstoch schliessen",
+      "occurrences": 3
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Wand streichen",
-      "occurrences" : 2
+      "lastUseTime": -63114076800,
+      "text": "Wand streichen",
+      "occurrences": 2
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Verputz ergänzen bei Lüftungsgitter",
-      "occurrences" : 4
+      "lastUseTime": -63114076800,
+      "text": "Verputz ergänzen bei Lüftungsgitter",
+      "occurrences": 4
     }
   ],
-  "Garderoben" : [
+  "garderoben": [
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Lüftungsverkleidung fertigstellen",
-      "occurrences" : 7
+      "lastUseTime": -63114076800,
+      "text": "Lüftungsverkleidung fertigstellen",
+      "occurrences": 7
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Verschluss Oberschrank defekt",
-      "occurrences" : 7
+      "lastUseTime": -63114076800,
+      "text": "Verschluss Oberschrank defekt",
+      "occurrences": 7
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Lüftungsverkleidung oben ergänzen und allseitig fugen",
-      "occurrences" : 7
+      "lastUseTime": -63114076800,
+      "text": "Lüftungsverkleidung oben ergänzen und allseitig fugen",
+      "occurrences": 7
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Schrank fertigstellen",
-      "occurrences" : 2
+      "lastUseTime": -63114076800,
+      "text": "Schrank fertigstellen",
+      "occurrences": 2
     }
   ],
-  "Malerarbeiten" : [
+  "malerarbeiten": [
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Garderobe streichen",
-      "occurrences" : 6
+      "lastUseTime": -63114076800,
+      "text": "Garderobe streichen",
+      "occurrences": 6
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Kratz im Rahmen streichen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Kratz im Rahmen streichen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Kittfuge Türleibung",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Kittfuge Türleibung",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Farbreste Seitenwand vorne",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Farbreste Seitenwand vorne",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Kante Oberschrank Passleiste malen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Kante Oberschrank Passleiste malen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Farbspuren auf Kante Seitenwand",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Farbspuren auf Kante Seitenwand",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Rostiger Nagel",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Rostiger Nagel",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Farbe auf Natursteinabdeckung",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Farbe auf Natursteinabdeckung",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Zwei Flecken ausbesserungen an Decke",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Zwei Flecken ausbesserungen an Decke",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Türzarge Streichen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Türzarge Streichen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Kittfuge unsauber ausgeführt",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Kittfuge unsauber ausgeführt",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Ecke Unitex streichen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Ecke Unitex streichen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Farbe auf Plättli",
-      "occurrences" : 8
+      "lastUseTime": -63114076800,
+      "text": "Farbe auf Plättli",
+      "occurrences": 8
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "rwa Futter und Verkleidung streichen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "rwa Futter und Verkleidung streichen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Loch Tablarkante",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Loch Tablarkante",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Wand oben nachbessern",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Wand oben nachbessern",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Oberhalb Rohr streichen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Oberhalb Rohr streichen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Fuge gerissen",
-      "occurrences" : 8
+      "lastUseTime": -63114076800,
+      "text": "Fuge gerissen",
+      "occurrences": 8
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Lüftungsverkleidung streichen",
-      "occurrences" : 28
+      "lastUseTime": -63114076800,
+      "text": "Lüftungsverkleidung streichen",
+      "occurrences": 28
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Wand abwaschbare Farbe matt",
-      "occurrences" : 2
+      "lastUseTime": -63114076800,
+      "text": "Wand abwaschbare Farbe matt",
+      "occurrences": 2
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Kante Lüftungsschrank fertig streichen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Kante Lüftungsschrank fertig streichen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Anschluss an Flügelwand unsauber",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Anschluss an Flügelwand unsauber",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Kratz Oberschrankrückwand",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Kratz Oberschrankrückwand",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Farbe auf Gummidichtungen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Farbe auf Gummidichtungen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Farbe auf Rohrdämmung",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Farbe auf Rohrdämmung",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Nagel in Decke",
-      "occurrences" : 2
+      "lastUseTime": -63114076800,
+      "text": "Nagel in Decke",
+      "occurrences": 2
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Kittfuge fehlt Lüftungsverkleidung innen",
-      "occurrences" : 2
+      "lastUseTime": -63114076800,
+      "text": "Kittfuge fehlt Lüftungsverkleidung innen",
+      "occurrences": 2
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Kittfuge untersicht",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Kittfuge untersicht",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Abplatzungen Decke",
-      "occurrences" : 2
+      "lastUseTime": -63114076800,
+      "text": "Abplatzungen Decke",
+      "occurrences": 2
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Fleck an Wand",
-      "occurrences" : 22
+      "lastUseTime": -63114076800,
+      "text": "Fleck an Wand",
+      "occurrences": 22
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Vorstehendes Eisen decke",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Vorstehendes Eisen decke",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Hick in Türe",
-      "occurrences" : 2
+      "lastUseTime": -63114076800,
+      "text": "Hick in Türe",
+      "occurrences": 2
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Bei Türzarge malen",
-      "occurrences" : 2
+      "lastUseTime": -63114076800,
+      "text": "Bei Türzarge malen",
+      "occurrences": 2
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Kittfuge gerissen",
-      "occurrences" : 2
+      "lastUseTime": -63114076800,
+      "text": "Kittfuge gerissen",
+      "occurrences": 2
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Kittfuge fehlt",
-      "occurrences" : 5
+      "lastUseTime": -63114076800,
+      "text": "Kittfuge fehlt",
+      "occurrences": 5
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Kittfuge Sockel fehlt",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Kittfuge Sockel fehlt",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Bindestelle streichen",
-      "occurrences" : 5
+      "lastUseTime": -63114076800,
+      "text": "Bindestelle streichen",
+      "occurrences": 5
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Farbe auf Vorhangschiene",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Farbe auf Vorhangschiene",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Nagel in Decke entfernen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Nagel in Decke entfernen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Kante Treppenuntersicht streichen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Kante Treppenuntersicht streichen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Kick Türe unten",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Kick Türe unten",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Kittfuge Liftverkleidung",
-      "occurrences" : 6
+      "lastUseTime": -63114076800,
+      "text": "Kittfuge Liftverkleidung",
+      "occurrences": 6
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Kleine Beschädigung Türblatt",
-      "occurrences" : 2
+      "lastUseTime": -63114076800,
+      "text": "Kleine Beschädigung Türblatt",
+      "occurrences": 2
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Türblatt aussen streichen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Türblatt aussen streichen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Kittfuge Fensteranschluss fehlt",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Kittfuge Fensteranschluss fehlt",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Kittfuge Fensterrahmen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Kittfuge Fensterrahmen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Bei Elektrorohr schliessen",
-      "occurrences" : 2
+      "lastUseTime": -63114076800,
+      "text": "Bei Elektrorohr schliessen",
+      "occurrences": 2
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Deckenfuge Nachbessern",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Deckenfuge Nachbessern",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Löcher in Wand",
-      "occurrences" : 14
+      "lastUseTime": -63114076800,
+      "text": "Löcher in Wand",
+      "occurrences": 14
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Loch In Wand",
-      "occurrences" : 3
+      "lastUseTime": -63114076800,
+      "text": "Loch In Wand",
+      "occurrences": 3
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Rohr reinigen",
-      "occurrences" : 4
+      "lastUseTime": -63114076800,
+      "text": "Rohr reinigen",
+      "occurrences": 4
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Fleck an Decke",
-      "occurrences" : 8
+      "lastUseTime": -63114076800,
+      "text": "Fleck an Decke",
+      "occurrences": 8
     }
   ],
-  "Gipserarbeiten" : [
+  "gipserarbeiten": [
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Fleck an Wand",
-      "occurrences" : 22
+      "lastUseTime": -63114076800,
+      "text": "Fleck an Wand",
+      "occurrences": 22
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Ausklinkung Vorhangschiene fehlt",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Ausklinkung Vorhangschiene fehlt",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Loch Pfeiler unten",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Loch Pfeiler unten",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Loch Sockelplatte",
-      "occurrences" : 2
+      "lastUseTime": -63114076800,
+      "text": "Loch Sockelplatte",
+      "occurrences": 2
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Ringförmige Abzeichnung in Wand",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Ringförmige Abzeichnung in Wand",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Fuge nachbessern",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Fuge nachbessern",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Trennfuge ungleichmässig",
-      "occurrences" : 3
+      "lastUseTime": -63114076800,
+      "text": "Trennfuge ungleichmässig",
+      "occurrences": 3
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Kante defekt",
-      "occurrences" : 3
+      "lastUseTime": -63114076800,
+      "text": "Kante defekt",
+      "occurrences": 3
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Oberhalb Sockel nachbessern",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Oberhalb Sockel nachbessern",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Diverse Flecken auf Wand",
-      "occurrences" : 13
+      "lastUseTime": -63114076800,
+      "text": "Diverse Flecken auf Wand",
+      "occurrences": 13
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Abrieb ergänzen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Abrieb ergänzen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Verputz oben auf chromschiene",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Verputz oben auf chromschiene",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Riss bei Rahmen",
-      "occurrences" : 5
+      "lastUseTime": -63114076800,
+      "text": "Riss bei Rahmen",
+      "occurrences": 5
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Unitexplatte fehlt an Decke",
-      "occurrences" : 2
+      "lastUseTime": -63114076800,
+      "text": "Unitexplatte fehlt an Decke",
+      "occurrences": 2
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Kittfuge bei Türfutter fehlt",
-      "occurrences" : 3
+      "lastUseTime": -63114076800,
+      "text": "Kittfuge bei Türfutter fehlt",
+      "occurrences": 3
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Kittfuge zu Fensterrahmen",
-      "occurrences" : 2
+      "lastUseTime": -63114076800,
+      "text": "Kittfuge zu Fensterrahmen",
+      "occurrences": 2
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Fleck auf Wand oben",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Fleck auf Wand oben",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Leibung aussen 2. Anstrich fehlt",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Leibung aussen 2. Anstrich fehlt",
+      "occurrences": 1
     }
   ],
-  "Glasdach" : [
+  "glasdach": [
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Glaselemente fehlen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Glaselemente fehlen",
+      "occurrences": 1
     }
   ],
-  "Fenster" : [
+  "fenster": [
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Geräusch Dichtung beim Betätigen",
-      "occurrences" : 9
+      "lastUseTime": -63114076800,
+      "text": "Geräusch Dichtung beim Betätigen",
+      "occurrences": 9
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Hebeschiebetüre quietscht",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Hebeschiebetüre quietscht",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Ein Stück Dichtungsband in Ecke fehlt",
-      "occurrences" : 9
+      "lastUseTime": -63114076800,
+      "text": "Ein Stück Dichtungsband in Ecke fehlt",
+      "occurrences": 9
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Kanten Abdeckblech aussen nachbessern",
-      "occurrences" : 8
+      "lastUseTime": -63114076800,
+      "text": "Kanten Abdeckblech aussen nachbessern",
+      "occurrences": 8
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Deckleiste anbringen",
-      "occurrences" : 3
+      "lastUseTime": -63114076800,
+      "text": "Deckleiste anbringen",
+      "occurrences": 3
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Plastikabdeckung Fensterband fehlt",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Plastikabdeckung Fensterband fehlt",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Kratz im Fensterrahmen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Kratz im Fensterrahmen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Dichtungsband gelöst",
-      "occurrences" : 15
+      "lastUseTime": -63114076800,
+      "text": "Dichtungsband gelöst",
+      "occurrences": 15
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Glas verkratzt",
-      "occurrences" : 11
+      "lastUseTime": -63114076800,
+      "text": "Glas verkratzt",
+      "occurrences": 11
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Loch im Falz oben",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Loch im Falz oben",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Gummidichtung defekt",
-      "occurrences" : 15
+      "lastUseTime": -63114076800,
+      "text": "Gummidichtung defekt",
+      "occurrences": 15
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Seitlich ausschäumen",
-      "occurrences" : 8
+      "lastUseTime": -63114076800,
+      "text": "Seitlich ausschäumen",
+      "occurrences": 8
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Verriegelung im Falz falsch gebohrt",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Verriegelung im Falz falsch gebohrt",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Kleine Beschädigung Flügelrahmen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Kleine Beschädigung Flügelrahmen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Fenster einstellen",
-      "occurrences" : 28
+      "lastUseTime": -63114076800,
+      "text": "Fenster einstellen",
+      "occurrences": 28
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Glas defekt",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Glas defekt",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Unten ausschäumen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Unten ausschäumen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Kittfuge oben fehlt",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Kittfuge oben fehlt",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Verriegelung im Falz fehlt",
-      "occurrences" : 2
+      "lastUseTime": -63114076800,
+      "text": "Verriegelung im Falz fehlt",
+      "occurrences": 2
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Bben ausschäumen",
-      "occurrences" : 3
+      "lastUseTime": -63114076800,
+      "text": "Bben ausschäumen",
+      "occurrences": 3
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Griff lose",
-      "occurrences" : 2
+      "lastUseTime": -63114076800,
+      "text": "Griff lose",
+      "occurrences": 2
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Kittfuge unsauber",
-      "occurrences" : 14
+      "lastUseTime": -63114076800,
+      "text": "Kittfuge unsauber",
+      "occurrences": 14
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Loch bei Elektrorohr",
-      "occurrences" : 16
+      "lastUseTime": -63114076800,
+      "text": "Loch bei Elektrorohr",
+      "occurrences": 16
     }
   ],
-  "Platten" : [
+  "platten": [
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Sockelplatten fehlt",
-      "occurrences" : 2
+      "lastUseTime": -63114076800,
+      "text": "Sockelplatten fehlt",
+      "occurrences": 2
     }
   ],
-  "Lüftung" : [
+  "lüftung": [
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Wasser läuft aus Lüftungsgerät",
-      "occurrences" : 2
+      "lastUseTime": -63114076800,
+      "text": "Wasser läuft aus Lüftungsgerät",
+      "occurrences": 2
     }
   ],
-  "Plattenarbeiten" : [
+  "plattenarbeiten": [
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Kitt auf verputz Entfernen beim Sockel",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Kitt auf verputz Entfernen beim Sockel",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Platten umdeponieren in Heizung",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Platten umdeponieren in Heizung",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Loch Mörtelfuge",
-      "occurrences" : 6
+      "lastUseTime": -63114076800,
+      "text": "Loch Mörtelfuge",
+      "occurrences": 6
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Kleine Beschädigung retouchieren",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Kleine Beschädigung retouchieren",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Zementfuge ergänzen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Zementfuge ergänzen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Klebrige Stelle auf Boden",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Klebrige Stelle auf Boden",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Schmales Stück Plättli fehlt",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Schmales Stück Plättli fehlt",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Plattenabschluss oben Verfugen",
-      "occurrences" : 4
+      "lastUseTime": -63114076800,
+      "text": "Plattenabschluss oben Verfugen",
+      "occurrences": 4
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Mörtelfuge füllen",
-      "occurrences" : 2
+      "lastUseTime": -63114076800,
+      "text": "Mörtelfuge füllen",
+      "occurrences": 2
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Platte gerissen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Platte gerissen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Kittfuge fehlt",
-      "occurrences" : 5
+      "lastUseTime": -63114076800,
+      "text": "Kittfuge fehlt",
+      "occurrences": 5
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Fuge Offen",
-      "occurrences" : 3
+      "lastUseTime": -63114076800,
+      "text": "Fuge Offen",
+      "occurrences": 3
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Zwei kleine Löcher in Plättli retouchieren",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Zwei kleine Löcher in Plättli retouchieren",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Scharfkantige Ecke fugen",
-      "occurrences" : 4
+      "lastUseTime": -63114076800,
+      "text": "Scharfkantige Ecke fugen",
+      "occurrences": 4
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Loch Sockelfuge",
-      "occurrences" : 19
+      "lastUseTime": -63114076800,
+      "text": "Loch Sockelfuge",
+      "occurrences": 19
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Bei Wannenrand vertikal fugen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Bei Wannenrand vertikal fugen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "In Duscherinne ausfugen",
-      "occurrences" : 2
+      "lastUseTime": -63114076800,
+      "text": "In Duscherinne ausfugen",
+      "occurrences": 2
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Fuge unten Übergang",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Fuge unten Übergang",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Kittfuge unsauber",
-      "occurrences" : 14
+      "lastUseTime": -63114076800,
+      "text": "Kittfuge unsauber",
+      "occurrences": 14
     }
   ],
-  "Bauleitung" : [
+  "bauleitung": [
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Öltank oben rostig",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Öltank oben rostig",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Gummipuffer anbringen",
-      "occurrences" : 4
+      "lastUseTime": -63114076800,
+      "text": "Gummipuffer anbringen",
+      "occurrences": 4
     }
   ],
-  "Kücheneinrichtungen" : [
+  "kücheneinrichtungen": [
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Durchgehende Schrauben im Schrank innen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Durchgehende Schrauben im Schrank innen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Schwarze Fuge fehlt",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Schwarze Fuge fehlt",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Abdeckungen auf Drehtürlibeschläge fehlen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Abdeckungen auf Drehtürlibeschläge fehlen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Front zu Wohnzimmer verzogen",
-      "occurrences" : 2
+      "lastUseTime": -63114076800,
+      "text": "Front zu Wohnzimmer verzogen",
+      "occurrences": 2
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Schubladen einstellen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Schubladen einstellen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Berührungsschutz montieren",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Berührungsschutz montieren",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Sichtseite fehlt",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Sichtseite fehlt",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Fuge unter Abdeckung fehlt",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Fuge unter Abdeckung fehlt",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Mikrowellengerät fehlt",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Mikrowellengerät fehlt",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Stöpsel Spülbecken einstellen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Stöpsel Spülbecken einstellen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Kratzer Abdeckung",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Kratzer Abdeckung",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Lüftereinsatz einbauen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Lüftereinsatz einbauen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Glaswand fehlt",
-      "occurrences" : 2
+      "lastUseTime": -63114076800,
+      "text": "Glaswand fehlt",
+      "occurrences": 2
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Abdeckung auf Loch innen fehlt",
-      "occurrences" : 2
+      "lastUseTime": -63114076800,
+      "text": "Abdeckung auf Loch innen fehlt",
+      "occurrences": 2
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Küchensockel montieren",
-      "occurrences" : 2
+      "lastUseTime": -63114076800,
+      "text": "Küchensockel montieren",
+      "occurrences": 2
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Silikonreste auf Abdeckung neben Fuge",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Silikonreste auf Abdeckung neben Fuge",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Kittfuge oberhalb Granitsockel fehlt",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Kittfuge oberhalb Granitsockel fehlt",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Kittfuge Glaskeramik defekt",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Kittfuge Glaskeramik defekt",
+      "occurrences": 1
     }
   ],
-  "Duschetrennwände" : [
+  "duschetrennwände": [
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Kratz in Trennwand Höhe Spiegelschrank",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Kratz in Trennwand Höhe Spiegelschrank",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Duschetrennwand fehlt",
-      "occurrences" : 3
+      "lastUseTime": -63114076800,
+      "text": "Duschetrennwand fehlt",
+      "occurrences": 3
     }
   ],
-  "Sonnenschutz" : [
+  "sonnenschutz": [
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Lamellenstoren defekt",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Lamellenstoren defekt",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Lamellenstore funktioniert nicht",
-      "occurrences" : 2
+      "lastUseTime": -63114076800,
+      "text": "Lamellenstore funktioniert nicht",
+      "occurrences": 2
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Lamellenstoren fehlt",
-      "occurrences" : 2
+      "lastUseTime": -63114076800,
+      "text": "Lamellenstoren fehlt",
+      "occurrences": 2
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Lamellenstore schief",
-      "occurrences" : 5
+      "lastUseTime": -63114076800,
+      "text": "Lamellenstore schief",
+      "occurrences": 5
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Programmierung markisen",
-      "occurrences" : 2
+      "lastUseTime": -63114076800,
+      "text": "Programmierung markisen",
+      "occurrences": 2
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Markisenseil montieren",
-      "occurrences" : 2
+      "lastUseTime": -63114076800,
+      "text": "Markisenseil montieren",
+      "occurrences": 2
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Makisenseile montieren",
-      "occurrences" : 6
+      "lastUseTime": -63114076800,
+      "text": "Makisenseile montieren",
+      "occurrences": 6
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Lamellenstoren fehlen überall",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Lamellenstoren fehlen überall",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Lamellenstoren fehlen",
-      "occurrences" : 2
+      "lastUseTime": -63114076800,
+      "text": "Lamellenstoren fehlen",
+      "occurrences": 2
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Markisen fehlen",
-      "occurrences" : 3
+      "lastUseTime": -63114076800,
+      "text": "Markisen fehlen",
+      "occurrences": 3
     }
   ],
-  "Türen \/ Schliessanlage" : [
+  "türen \/ schliessanlage": [
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Rahmen beschädigt",
-      "occurrences" : 3
+      "lastUseTime": -63114076800,
+      "text": "Rahmen beschädigt",
+      "occurrences": 3
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Kratzer Oberfläche",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Kratzer Oberfläche",
+      "occurrences": 1
     }
   ],
-  "Aussentüren" : [
+  "aussentüren": [
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Türe schliesst nicht",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Türe schliesst nicht",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Türöffner klemmt",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Türöffner klemmt",
+      "occurrences": 1
     }
   ],
-  "Sanitärinstallationen" : [
+  "sanitärinstallationen": [
     {
-      "lastUseTime" : -63114076800,
-      "text" : "wm Syphon fehlt",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "wm Syphon fehlt",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Schublade steht an Waschtisch an",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Schublade steht an Waschtisch an",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Syphon undicht",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Syphon undicht",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Küchenarmatur anschliessen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Küchenarmatur anschliessen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Combair Gerät anschliessen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Combair Gerät anschliessen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Blaue Rohrdämmungen schneiden",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Blaue Rohrdämmungen schneiden",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Gurgelgeräusch Ablauf",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Gurgelgeräusch Ablauf",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Auszugsbrausenschlauch schlägt an",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Auszugsbrausenschlauch schlägt an",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Handtuchhalter fehlt",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Handtuchhalter fehlt",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Warmwasserzähler montieren",
-      "occurrences" : 4
+      "lastUseTime": -63114076800,
+      "text": "Warmwasserzähler montieren",
+      "occurrences": 4
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Waschtischventil einstellen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Waschtischventil einstellen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "WC Spülung einstellen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "WC Spülung einstellen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Geschirrspüler anschliessen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Geschirrspüler anschliessen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "WC kein Wasser",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "WC kein Wasser",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Kittfuge bei WC möglich?",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Kittfuge bei WC möglich?",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Schublade steht an Ventilbetätigung an",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Schublade steht an Ventilbetätigung an",
+      "occurrences": 1
     }
   ],
-  "Metallbau" : [
+  "metallbau": [
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Alu matt profil treppenuntersicht",
-      "occurrences" : 3
+      "lastUseTime": -63114076800,
+      "text": "Alu matt profil treppenuntersicht",
+      "occurrences": 3
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Lamellengitter anbringen",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Lamellengitter anbringen",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Kittfuge seitlich fehlt",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Kittfuge seitlich fehlt",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Rammschutz Kamin",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Rammschutz Kamin",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Cover Verglasungselement defekt",
-      "occurrences" : 1
+      "lastUseTime": -63114076800,
+      "text": "Cover Verglasungselement defekt",
+      "occurrences": 1
     },
     {
-      "lastUseTime" : -63114076800,
-      "text" : "Kittfuge unten fehlt",
-      "occurrences" : 2
+      "lastUseTime": -63114076800,
+      "text": "Kittfuge unten fehlt",
+      "occurrences": 2
     }
   ]
 }

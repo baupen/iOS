@@ -50,7 +50,11 @@ class SuggestionsHandler: NSObject, UITableViewDataSource, UITableViewDelegate {
 		updatingQueue.async {
 			guard self.currentTaskID == taskID else { return }
 			
-			let suggestions = SuggestionStorage.shared.suggestions(forTrade: trade, matching: currentDescription)
+			let suggestions = SuggestionStorage.shared.suggestions(
+				forTrade: trade,
+				matching: currentDescription,
+				count: SuggestionsHandler.suggestionCount
+			)
 			
 			DispatchQueue.main.async {
 				self.suggestions = suggestions

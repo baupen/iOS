@@ -55,6 +55,8 @@
 		9553707520F1A5E2005D81C8 /* IssueListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9553707420F1A5E2005D81C8 /* IssueListViewController.swift */; };
 		9554234F20DC781E009CCCE0 /* NetworkObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9554234E20DC781E009CCCE0 /* NetworkObjects.swift */; };
 		9554235120DC7921009CCCE0 /* Hashing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9554235020DC7921009CCCE0 /* Hashing.swift */; };
+		956015342100C50500F84600 /* StringDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956015332100C50500F84600 /* StringDistance.swift */; };
+		956015372101302700F84600 /* SmallestN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956015362101302700F84600 /* SmallestN.swift */; };
 		9575001D20F5AC9D00B1019E /* PullToExpand.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9575001C20F5AC8700B1019E /* PullToExpand.framework */; };
 		9575001E20F5AC9D00B1019E /* PullToExpand.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9575001C20F5AC8700B1019E /* PullToExpand.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9575002120F5ACA000B1019E /* SimplePDFKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9575001420F5AC8200B1019E /* SimplePDFKit.framework */; };
@@ -225,6 +227,8 @@
 		9554234E20DC781E009CCCE0 /* NetworkObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkObjects.swift; sourceTree = "<group>"; };
 		9554235020DC7921009CCCE0 /* Hashing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hashing.swift; sourceTree = "<group>"; };
 		9554235220DC796A009CCCE0 /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
+		956015332100C50500F84600 /* StringDistance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringDistance.swift; sourceTree = "<group>"; };
+		956015362101302700F84600 /* SmallestN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallestN.swift; sourceTree = "<group>"; };
 		9575000E20F5AC8200B1019E /* SimplePDFKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SimplePDFKit.xcodeproj; path = Carthage/Checkouts/SimplePDFKit/SimplePDFKit/SimplePDFKit.xcodeproj; sourceTree = "<group>"; };
 		9575001720F5AC8700B1019E /* PullToExpand.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PullToExpand.xcodeproj; path = Carthage/Checkouts/PullToExpand/PullToExpand/PullToExpand.xcodeproj; sourceTree = "<group>"; };
 		957E16A920E7D81B00F3DEA1 /* BuildingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingListViewController.swift; sourceTree = "<group>"; };
@@ -539,8 +543,10 @@
 				95A995CA20FD3BED006A1EE8 /* LightboxViewController.swift */,
 				95C7341420FB9BBC00924B26 /* SelectionViewController.swift */,
 				95D1C9BC20FBDE96006A9C19 /* SelectionHandlers.swift */,
-				9502843420FACDD800880AD7 /* Suggestions.swift */,
 				9502843820FADAB300880AD7 /* SuggestionsHandler.swift */,
+				9502843420FACDD800880AD7 /* Suggestions.swift */,
+				956015332100C50500F84600 /* StringDistance.swift */,
+				956015362101302700F84600 /* SmallestN.swift */,
 			);
 			path = Issue;
 			sourceTree = "<group>";
@@ -736,6 +742,7 @@
 				9583C2C120DC748800452695 /* MainViewController.swift in Sources */,
 				95B9BA6A20DEEE8500261954 /* FileContainer.swift in Sources */,
 				9512666A20FFE08E00155162 /* Reachability.swift in Sources */,
+				956015342100C50500F84600 /* StringDistance.swift in Sources */,
 				95BBF31920F26373006E162E /* FakePanGestureRecognizer.swift in Sources */,
 				95A995CB20FD3BED006A1EE8 /* LightboxViewController.swift in Sources */,
 				95512B1420FBEAE300878163 /* IssueActionRequest.swift in Sources */,
@@ -805,6 +812,7 @@
 				95A66C7A20F9181D008F10DA /* ViewIssueViewController.swift in Sources */,
 				95512B1020FBEAC400878163 /* IssueUpdateRequest.swift in Sources */,
 				9511A10220DD3A2700101ADE /* Geometry.swift in Sources */,
+				956015372101302700F84600 /* SmallestN.swift in Sources */,
 				9583C2D320DC74BA00452695 /* UIHelpers.swift in Sources */,
 				95512B1220FBEAD800878163 /* IssueDeletionRequest.swift in Sources */,
 			);
