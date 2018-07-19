@@ -20,7 +20,11 @@ final class Client {
 	/// current local representation of all the data
 	var storage = Storage()
 	
+	#if DEBUG
 	private let baseURL = URL(string: "https://dev.app.mangel.io/api/external")!
+	#else
+	private let baseURL = URL(string: "https://app.mangel.io/api/external")!
+	#endif
 	
 	private let urlSession = URLSession.shared
 	
