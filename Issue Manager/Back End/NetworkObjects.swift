@@ -30,6 +30,7 @@ protocol Request {
 	static var isIndependent: Bool { get }
 	
 	var method: String { get }
+	var username: String { get }
 	
 	func applyToClient(_ response: ExpectedResponse)
 	
@@ -39,6 +40,8 @@ protocol Request {
 
 extension Request {
 	func applyToClient(_ response: ExpectedResponse) {}
+	
+	var username: String { return Client.shared.user!.username }
 }
 
 extension Request where Self: BacklogStorable {

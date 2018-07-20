@@ -20,11 +20,19 @@ final class Client {
 	/// current local representation of all the data
 	var storage = Storage()
 	
-	#if DEBUG
-	private let baseURL = URL(string: "https://dev.app.mangel.io/api/external")!
-	#else
-	private let baseURL = URL(string: "https://app.mangel.io/api/external")!
-	#endif
+	private let domainOverrides: [String: URL] = {
+		let path = Bundle.main.path(forResource: "domains.private", ofType: "json")!
+		do {
+			let raw = try Data(contentsOf: URL(fileURLWithPath: path))
+			return try JSONDecoder().decode(from: raw)
+		} catch {
+			print("Could not load servers!", error.localizedDescription)
+			dump(error)
+			return [:]
+		}
+	}()
+	/// used when there's no domain override for the given username
+	private let fallbackDomain = URL(string: "https://dev.app.mangel.io")!
 	
 	private let urlSession = URLSession.shared
 	
@@ -134,7 +142,9 @@ final class Client {
 	}
 	
 	private func apiURL<R: Request>(for request: R) -> URL {
-		return baseURL.appendingPathComponent(request.method)
+		let usernameDomain = request.username.components(separatedBy: "@").last
+		let domain = usernameDomain.flatMap { domainOverrides[$0] } ?? fallbackDomain
+		return domain.appendingPathComponent("api/external/\(request.method)")
 	}
 	
 	private func send(_ request: URLRequest) -> Future<TaskResult> {

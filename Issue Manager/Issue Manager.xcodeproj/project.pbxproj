@@ -94,6 +94,7 @@
 		95953B4A20DFD99A001ED1B7 /* RequestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B9BA6520DEC7FA00261954 /* RequestHelpers.swift */; };
 		95953B4C20DFFAED001ED1B7 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95953B4B20DFFAED001ED1B7 /* JSON.swift */; };
 		9597935020F7AC2400AA40C1 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9597934F20F7AC2400AA40C1 /* Resources.swift */; };
+		95A4E65A210230FC00591EAE /* domains.private.json in Resources */ = {isa = PBXBuildFile; fileRef = 95A4E659210230FC00591EAE /* domains.private.json */; };
 		95A66C7A20F9181D008F10DA /* ViewIssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A66C7920F9181D008F10DA /* ViewIssueViewController.swift */; };
 		95A7B24D20E3FFE200A928D6 /* Backlog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A7B24C20E3FFE200A928D6 /* Backlog.swift */; };
 		95A7B24E20E3FFE200A928D6 /* Backlog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A7B24C20E3FFE200A928D6 /* Backlog.swift */; };
@@ -252,6 +253,7 @@
 		95953B2020DFCD90001ED1B7 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		95953B4B20DFFAED001ED1B7 /* JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
 		9597934F20F7AC2400AA40C1 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
+		95A4E659210230FC00591EAE /* domains.private.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = domains.private.json; sourceTree = "<group>"; };
 		95A66C7920F9181D008F10DA /* ViewIssueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewIssueViewController.swift; sourceTree = "<group>"; };
 		95A7B24C20E3FFE200A928D6 /* Backlog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Backlog.swift; sourceTree = "<group>"; };
 		95A995CA20FD3BED006A1EE8 /* LightboxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightboxViewController.swift; sourceTree = "<group>"; };
@@ -470,6 +472,7 @@
 				9583C2C420DC748800452695 /* Main.storyboard */,
 				9583C2C920DC748B00452695 /* LaunchScreen.storyboard */,
 				9502843620FAD42300880AD7 /* default_suggestions.json */,
+				95A4E659210230FC00591EAE /* domains.private.json */,
 				9583C2C720DC748B00452695 /* Assets.xcassets */,
 				95D2C2B320E5C50200D887C8 /* Localizable.strings */,
 				95512B2020FC317A00878163 /* InfoPlist.strings */,
@@ -576,6 +579,7 @@
 				950283A920E70DA4001A5083 /* Run SwiftGen */,
 				9583C2B720DC748800452695 /* Sources */,
 				9583C2B820DC748800452695 /* Frameworks */,
+				95A4E6572102302400591EAE /* Generate Private Files (if necessary) */,
 				9583C2B920DC748800452695 /* Resources */,
 				9511A11D20DD407E00101ADE /* Embed Frameworks */,
 			);
@@ -688,6 +692,7 @@
 			files = (
 				9502843720FAD42300880AD7 /* default_suggestions.json in Resources */,
 				95512B2220FC317A00878163 /* InfoPlist.strings in Resources */,
+				95A4E65A210230FC00591EAE /* domains.private.json in Resources */,
 				9583C2CB20DC748B00452695 /* LaunchScreen.storyboard in Resources */,
 				95D2C2B120E5C50200D887C8 /* Localizable.strings in Resources */,
 				9583C2C820DC748B00452695 /* Assets.xcassets in Resources */,
@@ -731,6 +736,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which poesie >/dev/null; then\n    cd \"Issue Manager\"\n    poesie --lang de --token \"8921aa79c88bf258f7e28b3a25c1ee11\" --project 194177 --ios Base.lproj/Localizable.strings\n    poesie --lang it --token \"8921aa79c88bf258f7e28b3a25c1ee11\" --project 194177 --ios it.lproj/Localizable.strings\n    poesie --lang de --token \"8921aa79c88bf258f7e28b3a25c1ee11\" --project 197855 --ios Base.lproj/InfoPlist.strings\n    poesie --lang it --token \"8921aa79c88bf258f7e28b3a25c1ee11\" --project 197855 --ios it.lproj/InfoPlist.strings\nelse\n    echo \"warning: Poesie not installed\"\nfi\n";
+		};
+		95A4E6572102302400591EAE /* Generate Private Files (if necessary) */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Generate Private Files (if necessary)";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "find . -name '*.public.*' -exec ./generate_private.sh {} +\nexit 0\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
