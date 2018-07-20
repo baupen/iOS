@@ -197,7 +197,7 @@
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rHo-jf-rQe">
-                                                    <rect key="frame" x="0.0" y="0.0" width="703" height="256"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="704" height="256"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="256" id="tbp-3z-9r2"/>
                                                     </constraints>
@@ -939,11 +939,6 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                         <rect key="frame" x="0.0" y="65" width="703" height="397"/>
                                         <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <inset key="separatorInset" minX="52" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <view key="tableFooterView" contentMode="scaleToFill" id="jdB-af-gpG" userLabel="Empty footer to hide empty cells">
-                                            <rect key="frame" x="0.0" y="348" width="703" height="0.0"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </view>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Issue Cell" rowHeight="320" id="X3S-og-f79" customClass="IssueCell" customModule="Issue_Manager" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="28" width="703" height="320"/>
@@ -953,10 +948,10 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="lBw-YZ-MlN">
-                                                            <rect key="frame" x="8" y="8" width="687" height="303.5"/>
+                                                            <rect key="frame" x="15" y="11" width="673" height="298"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="LUO-ML-7li">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="687" height="22"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="673" height="22"/>
                                                                     <subviews>
                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" image="flat_issue_new" translatesAutoresizingMaskIntoConstraints="NO" id="fog-AI-NCl" customClass="TrilinearImageView" customModule="Issue_Manager" customModuleProvider="target">
                                                                             <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
@@ -980,16 +975,16 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <view opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="100" horizontalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="ted-VG-Feb" userLabel="Spacer (for expanded state)">
-                                                                            <rect key="frame" x="244" y="0.0" width="348" height="22"/>
+                                                                            <rect key="frame" x="244" y="0.0" width="334" height="22"/>
                                                                         </view>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="500" verticalHuggingPriority="251" horizontalCompressionResistancePriority="800" text="Maler" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="em9-qY-Md6">
-                                                                            <rect key="frame" x="607" y="0.0" width="43" height="22"/>
+                                                                            <rect key="frame" x="593" y="0.0" width="43" height="22"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7j7-fo-OC8">
-                                                                            <rect key="frame" x="665" y="0.0" width="22" height="22"/>
+                                                                            <rect key="frame" x="651" y="0.0" width="22" height="22"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" secondItem="7j7-fo-OC8" secondAttribute="height" multiplier="1:1" id="3eI-Vs-Sdj"/>
                                                                             </constraints>
@@ -1004,20 +999,20 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                                                     </constraints>
                                                                 </stackView>
                                                                 <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FSe-gy-7WF" userLabel="Expanded View">
-                                                                    <rect key="frame" x="0.0" y="30" width="687" height="273.5"/>
+                                                                    <rect key="frame" x="0.0" y="30" width="673" height="268"/>
                                                                     <subviews>
                                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="0xf-f8-sLf">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="687" height="273.5"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="673" height="268"/>
                                                                             <subviews>
                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="azY-zF-HrC" userLabel="Separator" customClass="SeparatorLine" customModule="Issue_Manager" customModuleProvider="target">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="687" height="1"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="673" height="1"/>
                                                                                     <color key="backgroundColor" white="0.0" alpha="0.25" colorSpace="calibratedWhite"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="height" constant="1" id="dgr-id-DJ5"/>
                                                                                     </constraints>
                                                                                 </view>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="200" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="sZ7-dJ-tWE" userLabel="Description">
-                                                                                    <rect key="frame" x="0.0" y="23.5" width="687" height="20.5"/>
+                                                                                    <rect key="frame" x="0.0" y="23" width="673" height="20.5"/>
                                                                                     <subviews>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="800" verticalHuggingPriority="251" horizontalCompressionResistancePriority="900" text="Beschreibung:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kn0-17-wq6">
                                                                                             <rect key="frame" x="0.0" y="0.0" width="130" height="20.5"/>
@@ -1029,7 +1024,7 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                                                                             </userDefinedRuntimeAttributes>
                                                                                         </label>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="200" verticalHuggingPriority="100" horizontalCompressionResistancePriority="200" verticalCompressionResistancePriority="200" text="Etwas ist falsch!" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MGR-UU-vfh">
-                                                                                            <rect key="frame" x="138" y="0.0" width="549" height="20.5"/>
+                                                                                            <rect key="frame" x="138" y="0.0" width="535" height="20.5"/>
                                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                             <nil key="textColor"/>
                                                                                             <nil key="highlightedColor"/>
@@ -1037,7 +1032,7 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                                                                     </subviews>
                                                                                 </stackView>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="800" verticalCompressionResistancePriority="800" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="LRM-vN-RA2" userLabel="Craftsman">
-                                                                                    <rect key="frame" x="0.0" y="67" width="687" height="41"/>
+                                                                                    <rect key="frame" x="0.0" y="65" width="673" height="41"/>
                                                                                     <subviews>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="800" horizontalCompressionResistancePriority="900" verticalCompressionResistancePriority="250" text="Handwerker:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KzX-dL-fRc">
                                                                                             <rect key="frame" x="0.0" y="0.0" width="130" height="20.5"/>
@@ -1049,10 +1044,10 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                                                                             </userDefinedRuntimeAttributes>
                                                                                         </label>
                                                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="AZC-s6-FJy">
-                                                                                            <rect key="frame" x="138" y="0.0" width="549" height="41"/>
+                                                                                            <rect key="frame" x="138" y="0.0" width="535" height="41"/>
                                                                                             <subviews>
                                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Shy-g3-Y7T">
-                                                                                                    <rect key="frame" x="0.0" y="0.0" width="549" height="41"/>
+                                                                                                    <rect key="frame" x="0.0" y="0.0" width="535" height="41"/>
                                                                                                     <string key="text">Malerfirma GmbH
 Maler</string>
                                                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -1064,7 +1059,7 @@ Maler</string>
                                                                                     </subviews>
                                                                                 </stackView>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="htu-bp-Qww" userLabel="Client Mode">
-                                                                                    <rect key="frame" x="0.0" y="130.5" width="687" height="20.5"/>
+                                                                                    <rect key="frame" x="0.0" y="128" width="673" height="20.5"/>
                                                                                     <subviews>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="800" verticalHuggingPriority="251" horizontalCompressionResistancePriority="900" text="Abnahmemodus:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YyI-ws-4EP">
                                                                                             <rect key="frame" x="0.0" y="0.0" width="130" height="20.5"/>
@@ -1076,7 +1071,7 @@ Maler</string>
                                                                                             </userDefinedRuntimeAttributes>
                                                                                         </label>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="200" verticalHuggingPriority="100" horizontalCompressionResistancePriority="200" verticalCompressionResistancePriority="200" text="Ja" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oqu-tl-KrD">
-                                                                                            <rect key="frame" x="138" y="0.0" width="549" height="20.5"/>
+                                                                                            <rect key="frame" x="138" y="0.0" width="535" height="20.5"/>
                                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                             <nil key="textColor"/>
                                                                                             <nil key="highlightedColor"/>
@@ -1084,7 +1079,7 @@ Maler</string>
                                                                                     </subviews>
                                                                                 </stackView>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="200" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="t9n-Ih-HNp" userLabel="Status">
-                                                                                    <rect key="frame" x="0.0" y="173.5" width="687" height="20.5"/>
+                                                                                    <rect key="frame" x="0.0" y="170" width="673" height="20.5"/>
                                                                                     <subviews>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="800" verticalHuggingPriority="251" horizontalCompressionResistancePriority="900" text="Status:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p7f-t6-5ei" userLabel="Status:">
                                                                                             <rect key="frame" x="0.0" y="0.0" width="130" height="20.5"/>
@@ -1096,7 +1091,7 @@ Maler</string>
                                                                                             </userDefinedRuntimeAttributes>
                                                                                         </label>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="200" verticalHuggingPriority="100" horizontalCompressionResistancePriority="200" verticalCompressionResistancePriority="200" text="Registriert von Julian" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OXl-vS-TbP">
-                                                                                            <rect key="frame" x="138" y="0.0" width="549" height="20.5"/>
+                                                                                            <rect key="frame" x="138" y="0.0" width="535" height="20.5"/>
                                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                             <nil key="textColor"/>
                                                                                             <nil key="highlightedColor"/>
@@ -1104,17 +1099,17 @@ Maler</string>
                                                                                     </subviews>
                                                                                 </stackView>
                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SjD-Ox-Qrb" userLabel="Separator" customClass="SeparatorLine" customModule="Issue_Manager" customModuleProvider="target">
-                                                                                    <rect key="frame" x="0.0" y="217" width="687" height="1"/>
+                                                                                    <rect key="frame" x="0.0" y="212.5" width="673" height="1"/>
                                                                                     <color key="backgroundColor" white="0.0" alpha="0.25" colorSpace="calibratedWhite"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="height" constant="1" id="X30-Tr-HW1"/>
                                                                                     </constraints>
                                                                                 </view>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="3bx-QB-Czz">
-                                                                                    <rect key="frame" x="0.0" y="240.5" width="687" height="33"/>
+                                                                                    <rect key="frame" x="0.0" y="235" width="673" height="33"/>
                                                                                     <subviews>
                                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UNM-ch-LeV">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="343.5" height="33"/>
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="336.5" height="33"/>
                                                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                                                             <state key="normal" title="Auf Grundriss Anzeigen"/>
                                                                                             <userDefinedRuntimeAttributes>
@@ -1125,7 +1120,7 @@ Maler</string>
                                                                                             </connections>
                                                                                         </button>
                                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g7l-jr-fb1">
-                                                                                            <rect key="frame" x="343.5" y="0.0" width="343.5" height="33"/>
+                                                                                            <rect key="frame" x="336.5" y="0.0" width="336.5" height="33"/>
                                                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                                                             <state key="normal" title="Details Anzeigen"/>
                                                                                             <userDefinedRuntimeAttributes>
@@ -2417,6 +2412,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                         <viewLayoutGuide key="safeArea" id="VBJ-hI-E8b"/>
                     </view>
                     <navigationItem key="navigationItem" title="Handwerker" id="bqc-Oy-pal"/>
+                    <modalFormSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="skY-0c-hX2" id="cV2-wy-JKf"/>
                     </connections>
