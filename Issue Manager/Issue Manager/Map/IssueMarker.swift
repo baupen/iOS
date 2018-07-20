@@ -15,6 +15,12 @@ class IssueMarker: UIView {
 	
 	var buttonAction: (() -> Void)!
 	
+	var isStatusShown = true {
+		didSet {
+			updateVisibility()
+		}
+	}
+	
 	private let button = UIButton()
 	
 	init(issue: Issue) {
@@ -44,8 +50,12 @@ class IssueMarker: UIView {
 	
 	func update() {
 		button.setImage(issue.status.simplified.shadedIcon, for: .normal)
-		
+		updateVisibility()
 		reposition()
+	}
+	
+	func updateVisibility() {
+		isHidden = !isStatusShown || issue.position == nil
 	}
 	
 	private func resize() {
@@ -55,12 +65,9 @@ class IssueMarker: UIView {
 	}
 	
 	private func reposition() {
-		if let position = issue.position {
-			center.x = CGFloat(position.x) * superview!.bounds.width
-			center.y = CGFloat(position.y) * superview!.bounds.height
-			isHidden = false
-		} else {
-			isHidden = true
-		}
+		guard let position = issue.position else { return }
+		
+		center.x = CGFloat(position.x) * superview!.bounds.width
+		center.y = CGFloat(position.y) * superview!.bounds.height
 	}
 }

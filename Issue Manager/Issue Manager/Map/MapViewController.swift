@@ -262,7 +262,7 @@ class MapViewController: UIViewController, LoadedViewController {
 	func updateMarkerAppearance() {
 		for (marker, issue) in zip(markers, issues) {
 			marker.update()
-			marker.isHidden = !visibleStatuses.contains(issue.status.simplified)
+			marker.isStatusShown = visibleStatuses.contains(issue.status.simplified)
 		}
 	}
 	
