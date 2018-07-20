@@ -38,14 +38,6 @@ class SuggestionStorage {
 			}
 			
 			storage = try decoder.decode(from: raw)
-			#if DEBUG
-			storage["hochbauzeichner"] = [
-				Suggestion(text: "Unebene oberfläche"),
-				Suggestion(text: "Zu ebene Oberfläche!"),
-				Suggestion(text: "Unebene unterfläche :p"),
-				Suggestion(text: "Unantastbares Problem"),
-			]
-			#endif
 			print("Suggestions loaded!")
 		} catch {
 			storage = [:]
