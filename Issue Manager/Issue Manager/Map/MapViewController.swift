@@ -246,7 +246,7 @@ class MapViewController: UIViewController, LoadedViewController {
 		pdfController.view.layoutIfNeeded()
 		
 		markers.forEach { $0.removeFromSuperview() }
-		markers = issues.map { issue in
+		markers = issues.filter { $0.position != nil }.map { issue in
 			IssueMarker(issue: issue) <- {
 				$0.zoomScale = pdfController.scrollView.zoomScale
 				$0.buttonAction = { [unowned self] in
@@ -260,9 +260,9 @@ class MapViewController: UIViewController, LoadedViewController {
 	}
 	
 	func updateMarkerAppearance() {
-		for (marker, issue) in zip(markers, issues) {
+		for marker in markers {
 			marker.update()
-			marker.isStatusShown = visibleStatuses.contains(issue.status.simplified)
+			marker.isStatusShown = visibleStatuses.contains(marker.issue.status.simplified)
 		}
 	}
 	
