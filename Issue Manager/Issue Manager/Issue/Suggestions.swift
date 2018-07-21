@@ -2,7 +2,7 @@
 
 import Foundation
 
-struct Suggestion: Codable {
+final class Suggestion: Codable {
 	var text: String
 	var occurrences: Int
 	var lastUseTime: Date
@@ -11,6 +11,11 @@ struct Suggestion: Codable {
 		self.text = text
 		self.occurrences = 1
 		self.lastUseTime = Date()
+	}
+	
+	func use() {
+		occurrences += 1
+		lastUseTime = Date()
 	}
 }
 
@@ -92,5 +97,21 @@ class SuggestionStorage {
 			.flatMap { $0.max(count, by: { $0.occurrences < $1.occurrences }) }
 			.prefix(count)
 		)
+	}
+	
+	func used(description: String?, forTrade trade: String?) {
+		guard let description = description else { return }
+		
+		let tradeKey = trade ?? ""
+		
+		let previous = storage[tradeKey]?.first { $0.text.lowercased() == description.lowercased() }
+		if let previous = previous {
+			previous.occurrences += 1
+			previous.lastUseTime = Date()
+		} else {
+			storage[tradeKey, default: []].append(Suggestion(text: description))
+		}
+		
+		save()
 	}
 }

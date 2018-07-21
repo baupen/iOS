@@ -114,6 +114,7 @@ final class EditIssueViewController: UITableViewController, LoadedViewController
 	
 	private var building: Building!
 	private var suggestionsHandler = SuggestionsHandler()
+	private var originalDescription: String?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -146,6 +147,7 @@ final class EditIssueViewController: UITableViewController, LoadedViewController
 		
 		descriptionField.text = issue?.description
 		descriptionChanged()
+		originalDescription = issue?.description
 		
 		image = issue.imageFilename.flatMap {
 			UIImage(contentsOfFile: Issue.cacheURL(filename: $0).path)
@@ -183,6 +185,10 @@ final class EditIssueViewController: UITableViewController, LoadedViewController
 			Client.shared.storage.add(issue)
 		} else {
 			issue.change(transform: update)
+		}
+		
+		if issue.description != originalDescription {
+			SuggestionStorage.shared.used(description: issue.description, forTrade: trade)
 		}
 	}
 	
