@@ -2674,7 +2674,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                 <rect key="frame" x="78" y="70" width="868" height="651"/>
                                 <gestureRecognizers/>
                                 <connections>
-                                    <outletCollection property="gestureRecognizers" destination="vuL-d9-kgw" appends="YES" id="guP-6O-QPI"/>
+                                    <outletCollection property="gestureRecognizers" destination="2B1-Ly-Y0s" appends="YES" id="5rh-Zd-D2n"/>
                                 </connections>
                             </imageView>
                         </subviews>
@@ -2726,11 +2726,11 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TnM-Vq-yaM" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="ixu-H2-PB4" userLabel="Exit" sceneMemberID="exit"/>
-                <panGestureRecognizer minimumNumberOfTouches="1" id="vuL-d9-kgw">
+                <pongPressGestureRecognizer allowableMovement="1000000" minimumPressDuration="0.0" id="2B1-Ly-Y0s">
                     <connections>
-                        <action selector="fingerDragged:" destination="5NQ-5a-rcK" id="cvN-j5-5IG"/>
+                        <action selector="fingerDragged:" destination="5NQ-5a-rcK" id="Lc3-ZH-Bky"/>
                     </connections>
-                </panGestureRecognizer>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3649.8046874999995" y="1687.5"/>
         </scene>

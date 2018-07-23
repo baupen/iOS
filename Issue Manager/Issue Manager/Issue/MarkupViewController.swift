@@ -123,10 +123,11 @@ class MarkupViewController: UIViewController {
 	
 	private var startPosition: CGPoint!
 	private var lastPosition: CGPoint!
-	@IBAction func fingerDragged(_ panRecognizer: UIPanGestureRecognizer) {
-		let position = panRecognizer.location(in: foregroundView) / foregroundView.bounds.size * image.size
+	// pan recognizers have a slight delay before they activate, unlike long press recognizers (which are more customizable)
+	@IBAction func fingerDragged(_ recognizer: UILongPressGestureRecognizer) {
+		let position = recognizer.location(in: foregroundView) / foregroundView.bounds.size * image.size
 		
-		switch panRecognizer.state {
+		switch recognizer.state {
 		case .began:
 			startPosition = position
 			lastPosition = position
