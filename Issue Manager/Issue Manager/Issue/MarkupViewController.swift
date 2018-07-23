@@ -2,8 +2,6 @@
 
 import UIKit
 
-fileprivate let unitRect = CGRect(origin: .zero, size: .one)
-
 class MarkupNavigationController: UINavigationController {
 	var markupController: MarkupViewController {
 		return topViewController as! MarkupViewController
@@ -46,6 +44,9 @@ class MarkupViewController: UIViewController {
 	
 	private var hasDrawn = false
 	private var displayLink: CADisplayLink?
+	private var fullRect: CGRect {
+		return CGRect(origin: .zero, size: image.size)
+	}
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -74,10 +75,10 @@ class MarkupViewController: UIViewController {
 			wipContext.saveGState()
 			defer { wipContext.restoreGState() }
 			
-			wipContext.draw(image.cgImage!, in: unitRect)
-			wipContext.translateBy(x: 0, y: 1)
+			wipContext.draw(image.cgImage!, in: fullRect)
+			wipContext.translateBy(x: 0, y: image.size.height)
 			wipContext.scaleBy(x: 1, y: -1)
-			wipContext.draw(drawingContext.makeImage()!, in: unitRect)
+			wipContext.draw(drawingContext.makeImage()!, in: fullRect)
 			let newImage = UIImage(cgImage: wipContext.makeImage()!)
 			
 			let editIssueController = segue.destination as! EditIssueViewController
@@ -106,8 +107,7 @@ class MarkupViewController: UIViewController {
 		let context = UIGraphicsGetCurrentContext()!
 		UIGraphicsEndImageContext()
 		
-		context.scaleBy(x: image.size.width, y: image.size.height) // normalize to 0...1
-		context.setLineWidth(0.01)
+		context.setLineWidth(0.01 * min(image.size.width, image.size.height))
 		context.setStrokeColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
 		context.setLineCap(.round)
 		context.setLineJoin(.round)
@@ -124,7 +124,7 @@ class MarkupViewController: UIViewController {
 	private var startPosition: CGPoint!
 	private var lastPosition: CGPoint!
 	@IBAction func fingerDragged(_ panRecognizer: UIPanGestureRecognizer) {
-		let position = panRecognizer.location(in: foregroundView) / foregroundView.bounds.size
+		let position = panRecognizer.location(in: foregroundView) / foregroundView.bounds.size * image.size
 		
 		switch panRecognizer.state {
 		case .began:
@@ -138,10 +138,10 @@ class MarkupViewController: UIViewController {
 				wipContext.addLine(to: position)
 				wipContext.strokePath()
 			case .rectangle:
-				wipContext.clear(unitRect)
+				wipContext.clear(fullRect)
 				wipContext.stroke(CGRect(origin: startPosition, size: (position - startPosition).asSize))
 			case .circle:
-				wipContext.clear(unitRect)
+				wipContext.clear(fullRect)
 				wipContext.strokeEllipse(in: CGRect(origin: startPosition, size: (position - startPosition).asSize))
 			}
 			
@@ -150,14 +150,14 @@ class MarkupViewController: UIViewController {
 			drawingContext.saveGState()
 			defer { drawingContext.restoreGState() }
 			
-			drawingContext.translateBy(x: 0, y: 1)
+			drawingContext.translateBy(x: 0, y: image.size.height)
 			drawingContext.scaleBy(x: 1, y: -1)
-			drawingContext.draw(wipContext.makeImage()!, in: unitRect)
+			drawingContext.draw(wipContext.makeImage()!, in: fullRect)
 			foregroundView.image = UIImage(cgImage: drawingContext.makeImage()!)
 			
 			fallthrough
 		case .cancelled, .failed:
-			wipContext.clear(unitRect)
+			wipContext.clear(fullRect)
 			lastPosition = nil
 		case .possible:
 			break
