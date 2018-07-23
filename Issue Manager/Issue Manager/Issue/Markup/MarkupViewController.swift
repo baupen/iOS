@@ -107,8 +107,11 @@ class MarkupViewController: UIViewController {
 		}
 	}
 	
+	private var imageUnit: CGFloat!
 	private func update() {
 		guard isViewLoaded, let image = image else { return }
+		
+		imageUnit = 0.01 * min(image.size.width, image.size.height)
 		
 		backgroundView.image = image
 		aspectRatioConstraint.isActive = false
@@ -127,7 +130,7 @@ class MarkupViewController: UIViewController {
 		let context = UIGraphicsGetCurrentContext()!
 		UIGraphicsEndImageContext()
 		
-		context.setLineWidth(0.01 * min(image.size.width, image.size.height))
+		context.setLineWidth(imageUnit)
 		context.setStrokeColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
 		context.setLineCap(.round)
 		context.setLineJoin(.round)
@@ -165,6 +168,8 @@ class MarkupViewController: UIViewController {
 			lastPosition = position
 			fallthrough
 		case .changed:
+			let offset = position - startPosition
+			
 			switch mode! {
 			case .freeDraw:
 				wipContext.move(to: lastPosition)
@@ -172,10 +177,20 @@ class MarkupViewController: UIViewController {
 				wipContext.strokePath()
 			case .rectangle:
 				wipContext.clear(fullRect)
-				wipContext.stroke(CGRect(origin: startPosition, size: (position - startPosition).asSize))
+				wipContext.stroke(CGRect(origin: startPosition, size: offset.asSize))
 			case .circle:
 				wipContext.clear(fullRect)
-				wipContext.strokeEllipse(in: CGRect(origin: startPosition, size: (position - startPosition).asSize))
+				wipContext.strokeEllipse(in: CGRect(origin: startPosition, size: offset.asSize))
+			case .arrow:
+				wipContext.clear(fullRect)
+				wipContext.move(to: startPosition)
+				wipContext.addLine(to: position)
+				let perpendicular = CGVector(dx: -offset.y, dy: offset.x)
+				let tipLength = imageUnit * 5
+				wipContext.move(to: position - (offset + perpendicular).withLength(tipLength))
+				wipContext.addLine(to: position)
+				wipContext.addLine(to: position - (offset - perpendicular).withLength(tipLength))
+				wipContext.strokePath()
 			}
 			
 			lastPosition = position
@@ -213,11 +228,18 @@ class MarkupViewController: UIViewController {
 		case freeDraw = 0
 		case rectangle = 1
 		case circle = 2
+		case arrow = 3
 	}
 }
 
 class ModeChangeButton: UIButton {
 	override var isSelected: Bool {
 		didSet { tintColor = isSelected ? .main : #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.25) }
+	}
+}
+
+extension Vector2 {
+	func withLength(_ length: CGFloat) -> Self {
+		return self * length / self.length
 	}
 }
