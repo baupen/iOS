@@ -187,7 +187,7 @@
                                     <outlet property="topView" destination="bKI-Zh-sqe" id="EFI-hx-63o"/>
                                 </connections>
                             </view>
-                            <view verifyAmbiguity="off" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Axp-84-gLn" customClass="PullableView" customModule="PullToExpand">
+                            <view verifyAmbiguity="off" opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Axp-84-gLn" customClass="PullableView" customModule="PullToExpand">
                                 <rect key="frame" x="0.0" y="512" width="703.5" height="256"/>
                                 <subviews>
                                     <visualEffectView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0fQ-ZQ-GOx">
@@ -197,7 +197,7 @@
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rHo-jf-rQe">
-                                                    <rect key="frame" x="0.0" y="0.0" width="703" height="256"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="704" height="256"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="256" id="tbp-3z-9r2"/>
                                                     </constraints>
@@ -2535,10 +2535,10 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                 <rect key="frame" x="0.0" y="70" width="1024" height="698"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" horizontalHuggingPriority="100" verticalHuggingPriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="m6a-TN-TfK">
-                                        <rect key="frame" x="0.0" y="0.0" width="1024" height="652"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="1024" height="651"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="100" verticalHuggingPriority="100" horizontalCompressionResistancePriority="100" verticalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="vec-af-Kp1">
-                                                <rect key="frame" x="77.5" y="0.0" width="869" height="652"/>
+                                                <rect key="frame" x="78" y="0.0" width="868" height="651"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="vec-af-Kp1" secondAttribute="height" multiplier="4:3" id="6av-Uv-0Fl"/>
                                                 </constraints>
@@ -2552,6 +2552,14 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                             <constraint firstItem="vec-af-Kp1" firstAttribute="centerY" secondItem="m6a-TN-TfK" secondAttribute="centerY" id="kqT-Ul-tMy"/>
                                             <constraint firstItem="vec-af-Kp1" firstAttribute="width" relation="lessThanOrEqual" secondItem="m6a-TN-TfK" secondAttribute="width" id="uSL-Ox-TBM"/>
                                             <constraint firstItem="vec-af-Kp1" firstAttribute="height" secondItem="m6a-TN-TfK" secondAttribute="height" priority="500" id="uqA-De-wCM"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fqP-mt-zQV" userLabel="Separator">
+                                        <rect key="frame" x="0.0" y="651" width="1024" height="1"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" priority="500" constant="1" id="kNd-hc-TA6"/>
+                                            <constraint firstAttribute="height" priority="500" constant="1" id="ucW-rp-GQC"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" translatesAutoresizingMaskIntoConstraints="NO" id="1ud-LI-XdE">
@@ -2607,11 +2615,12 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                                 </connections>
                                                             </button>
                                                         </subviews>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <variation key="heightClass=compact" axis="vertical"/>
                                                     </stackView>
                                                     <view contentMode="scaleToFill" horizontalHuggingPriority="100" verticalHuggingPriority="100" horizontalCompressionResistancePriority="100" verticalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="X2s-xl-TJ8" userLabel="Spacer">
                                                         <rect key="frame" x="152" y="0.0" width="742" height="30"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </view>
                                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7cS-qv-4o4" userLabel="Free Draw" customClass="ModeChangeButton" customModule="Issue_Manager" customModuleProvider="target">
                                                         <rect key="frame" x="902" y="0.0" width="30" height="30"/>
@@ -2647,7 +2656,6 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                 <variation key="heightClass=compact" axis="vertical"/>
                                             </stackView>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="trailingMargin" secondItem="Z2a-wb-ccp" secondAttribute="trailing" id="PWF-Ec-ged"/>
                                             <constraint firstItem="Z2a-wb-ccp" firstAttribute="top" secondItem="1ud-LI-XdE" secondAttribute="topMargin" id="Zc2-vJ-Jcl"/>
@@ -2659,11 +2667,11 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                 <variation key="heightClass=compact" axis="horizontal"/>
                             </stackView>
                             <imageView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3I5-Fm-wBz">
-                                <rect key="frame" x="77.5" y="70" width="869" height="652"/>
+                                <rect key="frame" x="78" y="70" width="868" height="651"/>
                                 <gestureRecognizers/>
                             </imageView>
                             <imageView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NCw-Ug-8cn" userLabel="WIP View">
-                                <rect key="frame" x="77.5" y="70" width="869" height="652"/>
+                                <rect key="frame" x="78" y="70" width="868" height="651"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="vuL-d9-kgw" appends="YES" id="guP-6O-QPI"/>

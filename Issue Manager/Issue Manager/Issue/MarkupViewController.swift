@@ -25,7 +25,7 @@ class MarkupViewController: UIViewController {
 	}
 	
 	@IBAction func changeMode(_ sender: UIButton) {
-		mode = EditingMode(rawValue: sender.tag)!
+		mode = Mode(rawValue: sender.tag)!
 		print("switched to mode", sender.tag)
 	}
 	
@@ -35,7 +35,7 @@ class MarkupViewController: UIViewController {
 		}
 	}
 	
-	var mode: EditingMode! {
+	var mode: Mode! {
 		didSet {
 			modeButtons.forEach { $0.isSelected = $0.tag == mode.rawValue }
 		}
@@ -109,6 +109,8 @@ class MarkupViewController: UIViewController {
 		context.scaleBy(x: image.size.width, y: image.size.height) // normalize to 0...1
 		context.setLineWidth(0.01)
 		context.setStrokeColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
+		context.setLineCap(.round)
+		context.setLineJoin(.round)
 		
 		return context
 	}
@@ -164,9 +166,15 @@ class MarkupViewController: UIViewController {
 		hasDrawn = true
 	}
 	
-	enum EditingMode: Int {
+	enum Mode: Int {
 		case freeDraw = 0
 		case rectangle = 1
 		case circle = 2
+	}
+}
+
+class ModeChangeButton: UIButton {
+	override var isSelected: Bool {
+		didSet { tintColor = isSelected ? .main : #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.25) }
 	}
 }

@@ -43,9 +43,3 @@ class ColorChangeButton: UIButton {
 		layer.borderWidth = isChosen ? 4 : 1
 	}
 }
-
-class ModeChangeButton: UIButton {
-	override var isSelected: Bool {
-		didSet { tintColor = isSelected ? .main : #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.25) }
-	}
-}
