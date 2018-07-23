@@ -68,6 +68,27 @@ class MarkupViewController: UIViewController {
 		displayLink?.invalidate()
 	}
 	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		switch segue.identifier {
+		case "save":
+			wipContext.saveGState()
+			defer { wipContext.restoreGState() }
+			
+			wipContext.draw(image.cgImage!, in: unitRect)
+			wipContext.translateBy(x: 0, y: 1)
+			wipContext.scaleBy(x: 1, y: -1)
+			wipContext.draw(drawingContext.makeImage()!, in: unitRect)
+			let newImage = UIImage(cgImage: wipContext.makeImage()!)
+			
+			let editIssueController = segue.destination as! EditIssueViewController
+			editIssueController.image = newImage
+		case "cancel":
+			break
+		default:
+			fatalError("unrecognized segue with identifier \(segue.identifier ?? "<no identifier>")")
+		}
+	}
+	
 	func update() {
 		guard isViewLoaded, let image = image else { return }
 		

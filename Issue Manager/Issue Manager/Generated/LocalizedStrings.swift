@@ -220,6 +220,11 @@ internal enum L10n {
     }
   }
 
+  internal enum Markup {
+    /// Zeichnen
+    internal static let title = L10n.tr("Localizable", "markup.title")
+  }
+
   internal enum ViewIssue {
     /// Annehmen
     internal static let acceptResponse = L10n.tr("Localizable", "view_issue.accept_response")
@@ -239,6 +244,8 @@ internal enum L10n {
     internal static let imagePlaceholder = L10n.tr("Localizable", "view_issue.image_placeholder")
     /// Als Abgeschlossen Markieren
     internal static let markAsCompleted = L10n.tr("Localizable", "view_issue.mark_as_completed")
+    /// Auf Foto Zeichnen
+    internal static let markup = L10n.tr("Localizable", "view_issue.markup")
     /// Keine passenden Vorschläge
     internal static let noSuggestions = L10n.tr("Localizable", "view_issue.no_suggestions")
     /// Keine Funktion

@@ -69,6 +69,9 @@ final class EditIssueViewController: UITableViewController, LoadedViewController
 		cameraView.configure()
 	}
 	
+	// the markup editor's buttons link to this
+	@IBAction func backToIssueEditor(_ segue: UIStoryboardSegue) {}
+	
 	var issue: Issue! {
 		didSet { update() }
 	}
@@ -104,7 +107,7 @@ final class EditIssueViewController: UITableViewController, LoadedViewController
 		}
 	}
 	
-	private var image: UIImage? {
+	var image: UIImage? {
 		didSet {
 			hasChangedImage = true
 			imageView.image = image

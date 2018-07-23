@@ -2523,7 +2523,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
             </objects>
             <point key="canvasLocation" x="2926" y="895"/>
         </scene>
-        <!--Markup View Controller-->
+        <!--Zeichnen-->
         <scene sceneID="mDm-og-bQU">
             <objects>
                 <viewController id="5NQ-5a-rcK" customClass="MarkupViewController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
@@ -2687,7 +2687,21 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="88Z-Nc-3VW"/>
                     </view>
-                    <navigationItem key="navigationItem" id="G4d-NX-QKT"/>
+                    <navigationItem key="navigationItem" title="Zeichnen" id="G4d-NX-QKT">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="ocD-Aj-PDR">
+                            <connections>
+                                <segue destination="ixu-H2-PB4" kind="unwind" identifier="cancel" unwindAction="backToIssueEditor:" id="XyX-am-jbu"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="save" id="xrP-b5-jb1">
+                            <connections>
+                                <segue destination="ixu-H2-PB4" kind="unwind" identifier="save" unwindAction="backToIssueEditor:" id="q5J-pg-OnO"/>
+                            </connections>
+                        </barButtonItem>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="markup.title"/>
+                        </userDefinedRuntimeAttributes>
+                    </navigationItem>
                     <connections>
                         <outlet property="aspectRatioConstraint" destination="6av-Uv-0Fl" id="PkT-tN-xh1"/>
                         <outlet property="backgroundView" destination="vec-af-Kp1" id="sbb-Wv-DvC"/>
@@ -2703,6 +2717,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TnM-Vq-yaM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="ixu-H2-PB4" userLabel="Exit" sceneMemberID="exit"/>
                 <panGestureRecognizer minimumNumberOfTouches="1" id="vuL-d9-kgw">
                     <connections>
                         <action selector="fingerDragged:" destination="5NQ-5a-rcK" id="cvN-j5-5IG"/>

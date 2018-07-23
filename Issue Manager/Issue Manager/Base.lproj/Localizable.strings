@@ -182,6 +182,8 @@
 "map_list.section.child_maps" = "Untergeordnete Bereiche";
 // CONTEXT: Überschrift des Abschnitts in der Liste für den entsprechenden Bereich
 "map_list.section.this_map" = "Dieser Bereich";
+// CONTEXT: Kurzer Titel für die "Auf Foto Zeichnen"-Ansicht
+"markup.title" = "Zeichnen";
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: View
@@ -211,6 +213,8 @@
 "view_issue.image_placeholder" = "Kein Foto gesetzt";
 // CONTEXT: Knopf, um eine Pendenz als abgeschlossen zu markieren, obwohl der Handwerker sie nicht beantwortet hat.
 "view_issue.mark_as_completed" = "Als Abgeschlossen Markieren";
+// CONTEXT: Knopf, um die Ansicht zu öffnen, mit der man auf das Foto zeichnen kann.
+"view_issue.markup" = "Auf Foto Zeichnen";
 // CONTEXT: Wird anstelle der Vorschläge angezeigt, wenn es keinen zutreffenden gibt.
 "view_issue.no_suggestions" = "Keine passenden Vorschläge";
 // CONTEXT: Wird anstelle der Funktion angezeigt, wenn sie noch nicht ausgewählt wurde.
