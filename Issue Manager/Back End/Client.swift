@@ -49,6 +49,8 @@ final class Client {
 	}
 	/// used to automatically attempt to clear the backlog at regular intervals
 	private var backlogClearingTimer: Timer!
+	/// while this is true, all requests will be dispatched directly and on the global queue to avoid deadlocks
+	private var isClearingBacklog = false
 	/// any dependent requests are executed on this queue, so as to avoid bad interleavings and races and such
 	private let linearQueue = DispatchQueue(label: "dependent request execution")
 	/// saving to disk is done on this queue to avoid clogging up other queues
@@ -82,7 +84,7 @@ final class Client {
 	}
 	
 	private func dispatch<R: Request>(_ request: R) -> Future<TaskResult> {
-		if R.isIndependent {
+		if R.isIndependent || isClearingBacklog {
 			return startTask(for: request)
 		} else {
 			return Future(asyncOn: linearQueue) {
@@ -102,6 +104,9 @@ final class Client {
 	
 	/// only ever run this on linearQueue
 	private func clearBacklog() throws {
+		isClearingBacklog = true
+		defer { isClearingBacklog = false }
+		
 		while let request = backlog.first {
 			do {
 				try request.send().await()
