@@ -26,7 +26,7 @@ final class Client {
 			let raw = try Data(contentsOf: URL(fileURLWithPath: path))
 			return try JSONDecoder().decode(from: raw)
 		} catch {
-			print("Could not load servers!", error.localizedDescription)
+			print("Could not load servers!", error.localizedFailureReason)
 			dump(error)
 			return [:]
 		}
@@ -90,7 +90,7 @@ final class Client {
 					try self.clearBacklog()
 					return try self.startTask(for: request).await()
 				} catch RequestError.communicationError(let error) {
-					print("Communication error during request \(request.method): \(error.localizedDescription)")
+					print("Communication error during request \(request.method): \(error.localizedFailureReason)")
 					dump(error)
 					self.backlog.appendIfPossible(request)
 					self.saveShared()
@@ -106,11 +106,11 @@ final class Client {
 			do {
 				try request.send().await()
 			} catch RequestError.communicationError(let error) {
-				print("Communication error whilst clearing request \(request.method) from backlog: \(error.localizedDescription)")
+				print("Communication error whilst clearing request \(request.method) from backlog: \(error.localizedFailureReason)")
 				dump(error)
 				throw RequestError.communicationError(error)
 			} catch {
-				print("Error occurred whilst clearing request \(request.method) from backlog; ignoring: \(error.localizedDescription)")
+				print("Error occurred whilst clearing request \(request.method) from backlog; ignoring: \(error.localizedFailureReason)")
 				dump(error)
 			}
 			backlog.removeFirst()
@@ -189,7 +189,7 @@ extension Client {
 			print("Client loaded!")
 		} catch {
 			print("Client could not be loaded!")
-			print(error.localizedDescription)
+			print(error.localizedFailureReason)
 			print(error)
 		}
 	}
@@ -203,7 +203,7 @@ extension Client {
 				print("Client saved!")
 			} catch {
 				print("Client could not be saved!")
-				print(error.localizedDescription)
+				print(error.localizedFailureReason)
 				print(error)
 			}
 		}

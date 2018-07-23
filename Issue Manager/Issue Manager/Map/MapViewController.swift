@@ -233,7 +233,7 @@ class MapViewController: UIViewController, LoadedViewController {
 		page.catch { error in
 			guard taskID == self.currentLoadingTaskID else { return }
 			
-			print("Error while loading PDF!", error.localizedDescription)
+			print("Error while loading PDF!", error.localizedFailureReason)
 			dump(error)
 			self.activityIndicator.stopAnimating()
 			self.fallbackLabel.text = Localization.couldNotLoad

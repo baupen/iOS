@@ -46,7 +46,7 @@ class SuggestionStorage {
 			print("Suggestions loaded!")
 		} catch {
 			storage = [:]
-			print("Could not load suggestions!", error.localizedDescription)
+			print("Could not load suggestions!", error.localizedFailureReason)
 			dump(error)
 		}
 	}
@@ -59,7 +59,7 @@ class SuggestionStorage {
 				defaults.rawSuggestions = raw
 				print("Suggestions saved!")
 			} catch {
-				print("Could not save suggestions!", error.localizedDescription)
+				print("Could not save suggestions!", error.localizedFailureReason)
 				dump(error)
 			}
 		}

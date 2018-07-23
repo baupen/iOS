@@ -79,7 +79,7 @@ class LoginViewController: UIViewController {
 		}
 		
 		result.catch { error in
-			print("Login Failed!", error.localizedDescription)
+			print("Login Failed!", error.localizedFailureReason)
 			dump(error)
 			
 			switch error {

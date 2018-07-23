@@ -21,7 +21,7 @@ func logOutcome<T>(of future: Future<T>, as method: String) {
 	
 	future.catch { error in
 		print("\(method) encountered error:")
-		print(error.localizedDescription)
+		print(error.localizedFailureReason)
 		dump(error)
 	}
 }

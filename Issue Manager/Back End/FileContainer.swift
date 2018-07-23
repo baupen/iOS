@@ -71,9 +71,11 @@ extension FileContainer {
 		
 		result.catch { error in
 			print("Could not download the file named \(filename)")
-			print(error.localizedDescription)
+			print(error.localizedFailureReason)
 			dump(error)
+			print("container to download file for:")
 			dump(self)
+			print()
 		}
 	}
 	

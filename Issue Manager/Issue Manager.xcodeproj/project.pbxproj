@@ -24,6 +24,7 @@
 		9511A12220DD509600101ADE /* JSend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9511A12120DD509600101ADE /* JSend.swift */; };
 		9511A14420DD56D700101ADE /* MiscHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9511A14320DD56D700101ADE /* MiscHelpers.swift */; };
 		9512666A20FFE08E00155162 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9512666920FFE08D00155162 /* Reachability.swift */; };
+		9514FC4D210545C700099EC5 /* MarkupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9514FC4C210545C700099EC5 /* MarkupViewController.swift */; };
 		951FDD4B20E59AA200268BEB /* KeyboardLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951FDD4A20E59AA100268BEB /* KeyboardLayoutConstraint.swift */; };
 		9529A63D20EECF8600C7E0A0 /* IssueBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9529A63C20EECF8600C7E0A0 /* IssueBadge.swift */; };
 		952CB48820E830A300E6B664 /* BuildingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952CB48720E830A300E6B664 /* BuildingCell.swift */; };
@@ -196,6 +197,7 @@
 		9511A12120DD509600101ADE /* JSend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSend.swift; sourceTree = "<group>"; };
 		9511A14320DD56D700101ADE /* MiscHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiscHelpers.swift; sourceTree = "<group>"; };
 		9512666920FFE08D00155162 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		9514FC4C210545C700099EC5 /* MarkupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkupViewController.swift; sourceTree = "<group>"; };
 		951FDD4A20E59AA100268BEB /* KeyboardLayoutConstraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardLayoutConstraint.swift; sourceTree = "<group>"; };
 		9529A63C20EECF8600C7E0A0 /* IssueBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueBadge.swift; sourceTree = "<group>"; };
 		952CB48720E830A300E6B664 /* BuildingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingCell.swift; sourceTree = "<group>"; };
@@ -540,6 +542,7 @@
 		95A66C7220F91805008F10DA /* Issue */ = {
 			isa = PBXGroup;
 			children = (
+				9514FC4C210545C700099EC5 /* MarkupViewController.swift */,
 				95A66C7920F9181D008F10DA /* ViewIssueViewController.swift */,
 				9502842C20FAB67A00880AD7 /* EditIssueViewController.swift */,
 				95512B1720FC22D200878163 /* CameraView.swift */,
@@ -831,6 +834,7 @@
 				95A66C7A20F9181D008F10DA /* ViewIssueViewController.swift in Sources */,
 				95512B1020FBEAC400878163 /* IssueUpdateRequest.swift in Sources */,
 				9511A10220DD3A2700101ADE /* Geometry.swift in Sources */,
+				9514FC4D210545C700099EC5 /* MarkupViewController.swift in Sources */,
 				956015372101302700F84600 /* SmallestN.swift in Sources */,
 				9583C2D320DC74BA00452695 /* UIHelpers.swift in Sources */,
 				95512B1220FBEAD800878163 /* IssueDeletionRequest.swift in Sources */,
