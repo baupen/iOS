@@ -2644,11 +2644,11 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                         <variation key="heightClass=compact" axis="vertical"/>
                                                     </stackView>
                                                     <view contentMode="scaleToFill" horizontalHuggingPriority="100" verticalHuggingPriority="100" horizontalCompressionResistancePriority="100" verticalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="X2s-xl-TJ8" userLabel="Spacer">
-                                                        <rect key="frame" x="228" y="0.0" width="666" height="30"/>
+                                                        <rect key="frame" x="228" y="0.0" width="291" height="30"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </view>
                                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7cS-qv-4o4" userLabel="Free Draw" customClass="ModeChangeButton" customModule="Issue_Manager" customModuleProvider="target">
-                                                        <rect key="frame" x="902" y="0.0" width="30" height="30"/>
+                                                        <rect key="frame" x="527" y="0.0" width="30" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="7cS-qv-4o4" secondAttribute="height" multiplier="1:1" id="f3E-yb-XBG"/>
                                                         </constraints>
@@ -2658,7 +2658,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="1" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ECB-c3-zVQ" userLabel="Rectangle" customClass="ModeChangeButton" customModule="Issue_Manager" customModuleProvider="target">
-                                                        <rect key="frame" x="940" y="0.0" width="30" height="30"/>
+                                                        <rect key="frame" x="565" y="0.0" width="30" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="ECB-c3-zVQ" secondAttribute="height" multiplier="1:1" id="5Iy-xh-cGW"/>
                                                         </constraints>
@@ -2668,7 +2668,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="2" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F9h-KL-le9" userLabel="Circle" customClass="ModeChangeButton" customModule="Issue_Manager" customModuleProvider="target">
-                                                        <rect key="frame" x="978" y="0.0" width="30" height="30"/>
+                                                        <rect key="frame" x="603" y="0.0" width="30" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="F9h-KL-le9" secondAttribute="height" multiplier="1:1" id="Bpg-rd-lNb"/>
                                                         </constraints>
@@ -2677,10 +2677,38 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                             <action selector="changeMode:" destination="5NQ-5a-rcK" eventType="touchUpInside" id="DB8-P2-qv5"/>
                                                         </connections>
                                                     </button>
+                                                    <view contentMode="scaleToFill" horizontalHuggingPriority="100" verticalHuggingPriority="100" horizontalCompressionResistancePriority="100" verticalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="pg3-cu-YyP" userLabel="Spacer">
+                                                        <rect key="frame" x="641" y="0.0" width="291" height="30"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </view>
+                                                    <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Koe-cw-9yt" userLabel="Undo">
+                                                        <rect key="frame" x="940" y="0.0" width="30" height="30"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="Koe-cw-9yt" secondAttribute="height" multiplier="1:1" id="1Xt-iJ-3zK"/>
+                                                        </constraints>
+                                                        <state key="normal" image="markup_undo"/>
+                                                        <connections>
+                                                            <action selector="undo" destination="5NQ-5a-rcK" eventType="touchUpInside" id="Gn9-GL-iRA"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hkf-5K-KNv" userLabel="Redo">
+                                                        <rect key="frame" x="978" y="0.0" width="30" height="30"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="hkf-5K-KNv" secondAttribute="height" multiplier="1:1" id="04R-iI-4JZ"/>
+                                                        </constraints>
+                                                        <state key="normal" image="markup_redo"/>
+                                                        <connections>
+                                                            <action selector="redo" destination="5NQ-5a-rcK" eventType="touchUpInside" id="sdf-wJ-1tx"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="30" id="1R7-Kq-8qg"/>
+                                                    <constraint firstItem="hkf-5K-KNv" firstAttribute="width" secondItem="hkf-5K-KNv" secondAttribute="height" multiplier="1:1" id="2lJ-IS-4Xd"/>
+                                                    <constraint firstItem="Koe-cw-9yt" firstAttribute="width" secondItem="Koe-cw-9yt" secondAttribute="height" multiplier="1:1" id="KC7-Tf-7bA"/>
                                                     <constraint firstAttribute="height" constant="30" id="KFb-WO-sqW"/>
+                                                    <constraint firstItem="X2s-xl-TJ8" firstAttribute="width" secondItem="pg3-cu-YyP" secondAttribute="width" id="gek-I5-zPF"/>
+                                                    <constraint firstItem="hkf-5K-KNv" firstAttribute="width" secondItem="hkf-5K-KNv" secondAttribute="height" multiplier="1:1" id="w0y-lo-E2k"/>
                                                 </constraints>
                                                 <variation key="default">
                                                     <mask key="constraints">
@@ -2753,6 +2781,8 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                         <outlet property="aspectRatioConstraint" destination="6av-Uv-0Fl" id="PkT-tN-xh1"/>
                         <outlet property="backgroundView" destination="vec-af-Kp1" id="sbb-Wv-DvC"/>
                         <outlet property="foregroundView" destination="3I5-Fm-wBz" id="gIZ-58-Iad"/>
+                        <outlet property="redoButton" destination="hkf-5K-KNv" id="aAx-WF-cpJ"/>
+                        <outlet property="undoButton" destination="Koe-cw-9yt" id="vCf-1U-UZe"/>
                         <outlet property="wipView" destination="NCw-Ug-8cn" id="hL3-QQ-OUt"/>
                         <outletCollection property="colorChangeButtons" destination="f5D-fN-htB" collectionClass="NSMutableArray" id="g01-Tf-5vO"/>
                         <outletCollection property="colorChangeButtons" destination="bkf-35-Wrc" collectionClass="NSMutableArray" id="X2H-Io-s05"/>
@@ -2821,7 +2851,9 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
         <image name="mark_unmarked" width="32" height="32"/>
         <image name="markup_circle" width="32" height="32"/>
         <image name="markup_pen" width="32" height="32"/>
+        <image name="markup_redo" width="30" height="30"/>
         <image name="markup_square" width="32" height="32"/>
+        <image name="markup_undo" width="30" height="30"/>
         <image name="trash" width="32" height="32"/>
         <namedColor name="Attention">
             <color red="0.99199998378753662" green="0.49399998784065247" blue="0.078000001609325409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

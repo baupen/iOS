@@ -9,7 +9,7 @@ final class UndoBuffer<Content> {
 	private var position = -1
 	
 	var canUndo: Bool {
-		return position >= 0
+		return position > 0
 	}
 	
 	var canRedo: Bool {
@@ -20,8 +20,18 @@ final class UndoBuffer<Content> {
 		self.size = size
 	}
 	
+	func clear() {
+		position = -1
+		buffer = []
+	}
+	
 	func push(_ content: Content) {
 		if buffer.count < size {
+			if position + 1 < buffer.count {
+				// clear redo states
+				buffer.removeLast(buffer.count - (position + 1))
+			}
+			
 			buffer.append(content)
 			position += 1
 		} else {
@@ -32,13 +42,13 @@ final class UndoBuffer<Content> {
 	
 	func undo() -> Content {
 		precondition(canUndo)
-		defer { position -= 1 }
+		position -= 1
 		return buffer[position]
 	}
 	
 	func redo() -> Content {
 		precondition(canRedo)
-		defer { position += 1 }
+		position += 1
 		return buffer[position]
 	}
 }

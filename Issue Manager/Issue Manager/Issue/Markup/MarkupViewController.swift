@@ -17,6 +17,9 @@ class MarkupViewController: UIViewController {
 	@IBOutlet var colorChangeButtons: [ColorChangeButton]!
 	@IBOutlet var modeButtons: [UIButton]!
 	
+	@IBOutlet var undoButton: UIButton!
+	@IBOutlet var redoButton: UIButton!
+	
 	@IBAction func changeColor(_ sender: ColorChangeButton) {
 		guard isSelectingColor else {
 			isSelectingColor = true
@@ -30,7 +33,14 @@ class MarkupViewController: UIViewController {
 	
 	@IBAction func changeMode(_ sender: UIButton) {
 		mode = Mode(rawValue: sender.tag)!
-		print("switched to mode", sender.tag)
+	}
+	
+	@IBAction func undo() {
+		undo(to: undoBuffer.undo())
+	}
+	
+	@IBAction func redo() {
+		undo(to: undoBuffer.redo())
 	}
 	
 	var image: UIImage! {
@@ -45,11 +55,10 @@ class MarkupViewController: UIViewController {
 		}
 	}
 	
-	var drawingContext: CGContext!
-	var wipContext: CGContext!
+	private var drawingContext: CGContext!
+	private var wipContext: CGContext!
 	
-	private var hasDrawn = false
-	private var displayLink: CADisplayLink?
+	private var displayLink: CADisplayLink!
 	private var fullRect: CGRect {
 		return CGRect(origin: .zero, size: image.size)
 	}
@@ -69,22 +78,12 @@ class MarkupViewController: UIViewController {
 		super.viewDidLoad()
 		
 		mode = .freeDraw
-		self.colorChangeButtons.forEach { $0.isShown = $0.isChosen }
-		
-		update()
-	}
-	
-	override func viewDidAppear(_ animated: Bool) {
-		super.viewDidAppear(animated)
+		colorChangeButtons.forEach { $0.isShown = $0.isChosen }
+		updateUndoButtons()
 		
 		displayLink = CADisplayLink(target: self, selector: #selector(updateImage))
-		displayLink?.add(to: .main, forMode: .commonModes)
-	}
-	
-	override func viewDidDisappear(_ animated: Bool) {
-		super.viewDidDisappear(animated)
 		
-		displayLink?.invalidate()
+		update()
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -108,7 +107,7 @@ class MarkupViewController: UIViewController {
 		}
 	}
 	
-	func update() {
+	private func update() {
 		guard isViewLoaded, let image = image else { return }
 		
 		backgroundView.image = image
@@ -118,6 +117,9 @@ class MarkupViewController: UIViewController {
 		
 		drawingContext = makeContext(size: image.size)
 		wipContext = makeContext(size: image.size)
+		
+		undoBuffer.clear()
+		undoBuffer.push(drawingContext.makeImage()!)
 	}
 	
 	private func makeContext(size: CGSize) -> CGContext {
@@ -134,9 +136,19 @@ class MarkupViewController: UIViewController {
 	}
 	
 	@objc func updateImage() {
-		if hasDrawn {
-			wipView.image = UIImage(cgImage: wipContext.makeImage()!)
-		}
+		wipView.image = UIImage(cgImage: wipContext.makeImage()!)
+	}
+	
+	private func undo(to snapshot: CGImage) {
+		drawingContext.clear(fullRect)
+		draw(snapshot)
+		foregroundView.image = UIImage(cgImage: snapshot)
+		updateUndoButtons()
+	}
+	
+	private func updateUndoButtons() {
+		undoButton.isEnabled = undoBuffer.canUndo
+		redoButton.isEnabled = undoBuffer.canRedo
 	}
 	
 	private var startPosition: CGPoint!
@@ -147,6 +159,8 @@ class MarkupViewController: UIViewController {
 		
 		switch recognizer.state {
 		case .began:
+			displayLink.add(to: .main, forMode: .commonModes)
+			
 			startPosition = position
 			lastPosition = position
 			fallthrough
@@ -166,23 +180,33 @@ class MarkupViewController: UIViewController {
 			
 			lastPosition = position
 		case .ended:
-			drawingContext.saveGState()
-			defer { drawingContext.restoreGState() }
+			draw(wipContext.makeImage()!)
 			
-			drawingContext.translateBy(x: 0, y: image.size.height)
-			drawingContext.scaleBy(x: 1, y: -1)
-			drawingContext.draw(wipContext.makeImage()!, in: fullRect)
-			foregroundView.image = UIImage(cgImage: drawingContext.makeImage()!)
+			let snapshot = drawingContext.makeImage()!
+			foregroundView.image = UIImage(cgImage: snapshot)
+			undoBuffer.push(snapshot)
+			updateUndoButtons()
 			
 			fallthrough
 		case .cancelled, .failed:
 			wipContext.clear(fullRect)
+			wipView.image = nil
+			startPosition = nil
 			lastPosition = nil
+			
+			displayLink.remove(from: .main, forMode: .commonModes)
 		case .possible:
 			break
 		}
+	}
+	
+	func draw(_ snapshot: CGImage) {
+		drawingContext.saveGState()
+		defer { drawingContext.restoreGState() }
 		
-		hasDrawn = true
+		drawingContext.translateBy(x: 0, y: image.size.height)
+		drawingContext.scaleBy(x: 1, y: -1)
+		drawingContext.draw(snapshot, in: fullRect)
 	}
 	
 	enum Mode: Int {
