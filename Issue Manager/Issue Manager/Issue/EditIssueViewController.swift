@@ -19,6 +19,7 @@ final class EditIssueViewController: UITableViewController, LoadedViewController
 	@IBOutlet var imageView: UIImageView!
 	@IBOutlet var cameraContainerView: CameraContainerView!
 	@IBOutlet var cameraView: CameraView!
+	@IBOutlet var markupButton: UIButton!
 	
 	@IBOutlet var craftsmanTradeLabel: UILabel!
 	@IBOutlet var craftsmanNameLabel: UILabel!
@@ -108,6 +109,7 @@ final class EditIssueViewController: UITableViewController, LoadedViewController
 			hasChangedImage = true
 			imageView.image = image
 			cameraContainerView.isHidden = image != nil
+			markupButton.isEnabled = image != nil
 		}
 	}
 	private var hasChangedImage = false
@@ -171,7 +173,7 @@ final class EditIssueViewController: UITableViewController, LoadedViewController
 						try image.saveJPEG(to: url)
 						issue.imageFilename = filename
 					} catch {
-						showAlert(titled: Localization.CouldNotSaveImage.title, message: error.localizedDescription)
+						showAlert(titled: Localization.CouldNotSaveImage.title, message: error.localizedFailureReason)
 						issue.imageFilename = nil
 					}
 				} else {
@@ -218,6 +220,9 @@ final class EditIssueViewController: UITableViewController, LoadedViewController
 		case "lightbox":
 			let lightboxController = segue.destination as! LightboxViewController
 			lightboxController.image = image!
+		case "markup":
+			let markupNavController = segue.destination as! MarkupNavigationController
+			markupNavController.markupController.image = image!
 		case "select trade":
 			let selectionController = segue.destination as! SelectionViewController
 			selectionController.handler = TradeSelectionHandler(
