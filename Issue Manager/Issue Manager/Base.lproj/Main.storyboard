@@ -2201,7 +2201,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vorschlag" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yP4-7b-yg0">
-                                                                        <rect key="frame" x="0.0" y="8" width="524" height="27.5"/>
+                                                                        <rect key="frame" x="0.0" y="8" width="304" height="27.5"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
@@ -2535,10 +2535,10 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                 <rect key="frame" x="0.0" y="70" width="1024" height="698"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" horizontalHuggingPriority="100" verticalHuggingPriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="m6a-TN-TfK">
-                                        <rect key="frame" x="0.0" y="0.0" width="1024" height="651"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="1024" height="652"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="100" verticalHuggingPriority="100" horizontalCompressionResistancePriority="100" verticalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="vec-af-Kp1">
-                                                <rect key="frame" x="78" y="0.0" width="868" height="651"/>
+                                                <rect key="frame" x="77.5" y="0.0" width="869" height="652"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="vec-af-Kp1" secondAttribute="height" multiplier="4:3" id="6av-Uv-0Fl"/>
                                                 </constraints>
@@ -2555,7 +2555,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fqP-mt-zQV" userLabel="Separator">
-                                        <rect key="frame" x="0.0" y="651" width="1024" height="1"/>
+                                        <rect key="frame" x="0.0" y="652" width="1024" height="0.0"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" priority="500" constant="1" id="kNd-hc-TA6"/>
@@ -2569,7 +2569,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                 <rect key="frame" x="8" y="8" width="1008" height="30"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="900" verticalHuggingPriority="900" horizontalCompressionResistancePriority="900" verticalCompressionResistancePriority="900" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="IxQ-m0-bYc" userLabel="Colors">
-                                                        <rect key="frame" x="0.0" y="0.0" width="144" height="30"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="220" height="30"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="blL-O7-7Tu" userLabel="Black" customClass="ColorChangeButton" customModule="Issue_Manager" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
@@ -2594,8 +2594,28 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                                     <action selector="changeColor:" destination="5NQ-5a-rcK" eventType="touchUpInside" id="Dht-R6-67o"/>
                                                                 </connections>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bkf-35-Wrc" userLabel="Red" customClass="ColorChangeButton" customModule="Issue_Manager" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zw0-FN-oC5" userLabel="Green" customClass="ColorChangeButton" customModule="Issue_Manager" customModuleProvider="target">
                                                                 <rect key="frame" x="76" y="0.0" width="30" height="30"/>
+                                                                <color key="backgroundColor" red="0.55634254220000001" green="0.97934550050000002" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" secondItem="zw0-FN-oC5" secondAttribute="height" multiplier="1:1" id="9vw-Pj-Y2a"/>
+                                                                </constraints>
+                                                                <connections>
+                                                                    <action selector="changeColor:" destination="5NQ-5a-rcK" eventType="touchUpInside" id="VxM-Jh-jQJ"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GaE-A7-wCN" userLabel="Yellow" customClass="ColorChangeButton" customModule="Issue_Manager" customModuleProvider="target">
+                                                                <rect key="frame" x="114" y="0.0" width="30" height="30"/>
+                                                                <color key="backgroundColor" red="0.99942404029999998" green="0.88335834440000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" secondItem="GaE-A7-wCN" secondAttribute="height" multiplier="1:1" id="3Y6-e0-Q8J"/>
+                                                                </constraints>
+                                                                <connections>
+                                                                    <action selector="changeColor:" destination="5NQ-5a-rcK" eventType="touchUpInside" id="pe8-bS-U85"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bkf-35-Wrc" userLabel="Red" customClass="ColorChangeButton" customModule="Issue_Manager" customModuleProvider="target">
+                                                                <rect key="frame" x="152" y="0.0" width="30" height="30"/>
                                                                 <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="bkf-35-Wrc" secondAttribute="height" multiplier="1:1" id="PC4-gV-6Xk"/>
@@ -2605,7 +2625,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f5D-fN-htB" userLabel="Blue" customClass="ColorChangeButton" customModule="Issue_Manager" customModuleProvider="target">
-                                                                <rect key="frame" x="114" y="0.0" width="30" height="30"/>
+                                                                <rect key="frame" x="190" y="0.0" width="30" height="30"/>
                                                                 <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="f5D-fN-htB" secondAttribute="height" multiplier="1:1" id="qfk-2R-C95"/>
@@ -2616,10 +2636,15 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                             </button>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstItem="GaE-A7-wCN" firstAttribute="width" secondItem="GaE-A7-wCN" secondAttribute="height" multiplier="1:1" id="DeS-1A-kt3"/>
+                                                            <constraint firstItem="GaE-A7-wCN" firstAttribute="width" secondItem="GaE-A7-wCN" secondAttribute="height" multiplier="1:1" id="Mhz-u4-rmc"/>
+                                                            <constraint firstItem="zw0-FN-oC5" firstAttribute="width" secondItem="zw0-FN-oC5" secondAttribute="height" multiplier="1:1" id="hzO-Vs-eps"/>
+                                                        </constraints>
                                                         <variation key="heightClass=compact" axis="vertical"/>
                                                     </stackView>
                                                     <view contentMode="scaleToFill" horizontalHuggingPriority="100" verticalHuggingPriority="100" horizontalCompressionResistancePriority="100" verticalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="X2s-xl-TJ8" userLabel="Spacer">
-                                                        <rect key="frame" x="152" y="0.0" width="742" height="30"/>
+                                                        <rect key="frame" x="228" y="0.0" width="666" height="30"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </view>
                                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7cS-qv-4o4" userLabel="Free Draw" customClass="ModeChangeButton" customModule="Issue_Manager" customModuleProvider="target">
@@ -2653,7 +2678,21 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                         </connections>
                                                     </button>
                                                 </subviews>
-                                                <variation key="heightClass=compact" axis="vertical"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="30" id="1R7-Kq-8qg"/>
+                                                    <constraint firstAttribute="height" constant="30" id="KFb-WO-sqW"/>
+                                                </constraints>
+                                                <variation key="default">
+                                                    <mask key="constraints">
+                                                        <exclude reference="1R7-Kq-8qg"/>
+                                                    </mask>
+                                                </variation>
+                                                <variation key="heightClass=compact" axis="vertical">
+                                                    <mask key="constraints">
+                                                        <include reference="1R7-Kq-8qg"/>
+                                                        <exclude reference="KFb-WO-sqW"/>
+                                                    </mask>
+                                                </variation>
                                             </stackView>
                                         </subviews>
                                         <constraints>
@@ -2667,11 +2706,11 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                 <variation key="heightClass=compact" axis="horizontal"/>
                             </stackView>
                             <imageView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3I5-Fm-wBz">
-                                <rect key="frame" x="78" y="70" width="868" height="651"/>
+                                <rect key="frame" x="77.5" y="70" width="869" height="652"/>
                                 <gestureRecognizers/>
                             </imageView>
                             <imageView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NCw-Ug-8cn" userLabel="WIP View">
-                                <rect key="frame" x="78" y="70" width="868" height="651"/>
+                                <rect key="frame" x="77.5" y="70" width="869" height="652"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="2B1-Ly-Y0s" appends="YES" id="5rh-Zd-D2n"/>
@@ -2722,6 +2761,8 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                         <outletCollection property="modeButtons" destination="7cS-qv-4o4" collectionClass="NSMutableArray" id="J3h-nb-Yb6"/>
                         <outletCollection property="modeButtons" destination="ECB-c3-zVQ" collectionClass="NSMutableArray" id="ojb-vh-VMi"/>
                         <outletCollection property="modeButtons" destination="F9h-KL-le9" collectionClass="NSMutableArray" id="VNj-z5-wfS"/>
+                        <outletCollection property="colorChangeButtons" destination="zw0-FN-oC5" collectionClass="NSMutableArray" id="9NJ-Fx-eKa"/>
+                        <outletCollection property="colorChangeButtons" destination="GaE-A7-wCN" collectionClass="NSMutableArray" id="SSe-bS-wz1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TnM-Vq-yaM" userLabel="First Responder" sceneMemberID="firstResponder"/>

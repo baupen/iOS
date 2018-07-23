@@ -18,8 +18,14 @@ class MarkupViewController: UIViewController {
 	@IBOutlet var modeButtons: [UIButton]!
 	
 	@IBAction func changeColor(_ sender: ColorChangeButton) {
+		guard isSelectingColor else {
+			isSelectingColor = true
+			return
+		}
+		
 		colorChangeButtons.forEach { $0.isChosen = $0 === sender }
 		wipContext.setStrokeColor(sender.color.cgColor)
+		isSelectingColor = false
 	}
 	
 	@IBAction func changeMode(_ sender: UIButton) {
@@ -33,7 +39,7 @@ class MarkupViewController: UIViewController {
 		}
 	}
 	
-	var mode: Mode! {
+	private var mode: Mode! {
 		didSet {
 			modeButtons.forEach { $0.isSelected = $0.tag == mode.rawValue }
 		}
@@ -47,11 +53,23 @@ class MarkupViewController: UIViewController {
 	private var fullRect: CGRect {
 		return CGRect(origin: .zero, size: image.size)
 	}
+	private var undoBuffer = UndoBuffer<CGImage>(size: 5)
+	
+	private var isSelectingColor = false {
+		didSet {
+			UIView.animate(withDuration: 0.1) { [isSelectingColor] in
+				self.colorChangeButtons.forEach { $0.isShown = isSelectingColor || $0.isChosen }
+				self.modeButtons.forEach { $0.isHidden = isSelectingColor }
+				self.view.layoutIfNeeded()
+			}
+		}
+	}
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		mode = .freeDraw
+		self.colorChangeButtons.forEach { $0.isShown = $0.isChosen }
 		
 		update()
 	}

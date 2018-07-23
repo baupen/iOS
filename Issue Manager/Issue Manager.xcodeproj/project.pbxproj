@@ -96,6 +96,7 @@
 		95D1C9C820FBE07D006A9C19 /* ReadRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D1C9C720FBE07D006A9C19 /* ReadRequest.swift */; };
 		95D2C2AE20E5C3E700D887C8 /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D2C2AD20E5C3E700D887C8 /* Localization.swift */; };
 		95D2C2B120E5C50200D887C8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 95D2C2B320E5C50200D887C8 /* Localizable.strings */; };
+		95EE7DFD21060CB100B603EF /* UndoBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EE7DFC21060CB100B603EF /* UndoBuffer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -244,6 +245,7 @@
 		95D1C9C720FBE07D006A9C19 /* ReadRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadRequest.swift; sourceTree = "<group>"; };
 		95D2C2AD20E5C3E700D887C8 /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
 		95D2C2B520E5C52700D887C8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		95EE7DFC21060CB100B603EF /* UndoBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoBuffer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -518,6 +520,7 @@
 			isa = PBXGroup;
 			children = (
 				9514FC4C210545C700099EC5 /* MarkupViewController.swift */,
+				95EE7DFC21060CB100B603EF /* UndoBuffer.swift */,
 				9514FC4F21055D6500099EC5 /* ColorChangeButton.swift */,
 			);
 			path = Markup;
@@ -799,6 +802,7 @@
 				9550E0E820F38D7600921387 /* StatusFilterViewController.swift in Sources */,
 				9533E77C210026A300BB19D1 /* BasicFuture+extras.swift in Sources */,
 				95BBF32120F26F49006E162E /* IssueCell.swift in Sources */,
+				95EE7DFD21060CB100B603EF /* UndoBuffer.swift in Sources */,
 				950283A820E70C46001A5083 /* LocalizedStrings.swift in Sources */,
 				95512B1620FBFDE500878163 /* IssuePositioner.swift in Sources */,
 				9584F24E20E936ED00A8C884 /* LoginWindowView.swift in Sources */,
