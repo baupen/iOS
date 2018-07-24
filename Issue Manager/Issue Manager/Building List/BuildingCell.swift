@@ -84,7 +84,7 @@ class BuildingCell: UICollectionViewCell, LoadedCollectionCell {
 				imageTimer?.invalidate()
 			} else {
 				// because images may not be downloaded right away and we don't have a callback for that
-				imageTimer = .scheduledTimer(withTimeInterval: 5, repeats: true) { _ in
+				imageTimer = .scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
 					self.updateImage()
 				}
 			}
