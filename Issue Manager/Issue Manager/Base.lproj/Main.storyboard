@@ -193,7 +193,7 @@
                                     <visualEffectView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0fQ-ZQ-GOx">
                                         <rect key="frame" x="0.0" y="0.0" width="703.5" height="512"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="0Gy-ZS-TQM">
-                                            <rect key="frame" x="0.0" y="0.0" width="703.5" height="512"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="703" height="512"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rHo-jf-rQe">
@@ -2304,10 +2304,10 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
             </objects>
             <point key="canvasLocation" x="2202" y="129"/>
         </scene>
-        <!--Handwerker-->
+        <!--Selection-->
         <scene sceneID="iVi-3j-O2i">
             <objects>
-                <viewController id="v7T-jr-5gP" customClass="SelectionViewController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="v7T-jr-5gP" userLabel="Selection" customClass="SelectionViewController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="C5q-4m-Lnh">
                         <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2450,10 +2450,10 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
             </objects>
             <point key="canvasLocation" x="2926" y="129"/>
         </scene>
-        <!--Lightbox View Controller-->
+        <!--Lightbox-->
         <scene sceneID="SyO-2W-hGA">
             <objects>
-                <viewController id="L56-qw-CXN" customClass="LightboxViewController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="L56-qw-CXN" userLabel="Lightbox" customClass="LightboxViewController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="noV-d0-89B">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2523,10 +2523,10 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
             </objects>
             <point key="canvasLocation" x="2926" y="895"/>
         </scene>
-        <!--Zeichnen-->
+        <!--Markup-->
         <scene sceneID="mDm-og-bQU">
             <objects>
-                <viewController id="5NQ-5a-rcK" customClass="MarkupViewController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="5NQ-5a-rcK" userLabel="Markup" customClass="MarkupViewController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="H2p-7s-DUQ">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2651,6 +2651,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                         <rect key="frame" x="508" y="0.0" width="30" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="7cS-qv-4o4" secondAttribute="height" multiplier="1:1" id="f3E-yb-XBG"/>
+                                                            <constraint firstAttribute="width" constant="30" id="vgn-tt-TeE"/>
                                                         </constraints>
                                                         <state key="normal" image="markup_pen"/>
                                                         <connections>
@@ -2713,25 +2714,14 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                     </button>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="30" id="1R7-Kq-8qg"/>
                                                     <constraint firstItem="hkf-5K-KNv" firstAttribute="width" secondItem="hkf-5K-KNv" secondAttribute="height" multiplier="1:1" id="2lJ-IS-4Xd"/>
+                                                    <constraint firstItem="X2s-xl-TJ8" firstAttribute="height" secondItem="pg3-cu-YyP" secondAttribute="height" id="8f3-Zp-PN8"/>
                                                     <constraint firstItem="Koe-cw-9yt" firstAttribute="width" secondItem="Koe-cw-9yt" secondAttribute="height" multiplier="1:1" id="KC7-Tf-7bA"/>
-                                                    <constraint firstAttribute="height" constant="30" id="KFb-WO-sqW"/>
                                                     <constraint firstItem="Hu1-HF-U8a" firstAttribute="width" secondItem="Hu1-HF-U8a" secondAttribute="height" multiplier="1:1" id="gWV-YV-IKV"/>
                                                     <constraint firstItem="X2s-xl-TJ8" firstAttribute="width" secondItem="pg3-cu-YyP" secondAttribute="width" id="gek-I5-zPF"/>
                                                     <constraint firstItem="hkf-5K-KNv" firstAttribute="width" secondItem="hkf-5K-KNv" secondAttribute="height" multiplier="1:1" id="w0y-lo-E2k"/>
                                                 </constraints>
-                                                <variation key="default">
-                                                    <mask key="constraints">
-                                                        <exclude reference="1R7-Kq-8qg"/>
-                                                    </mask>
-                                                </variation>
-                                                <variation key="heightClass=compact" axis="vertical">
-                                                    <mask key="constraints">
-                                                        <include reference="1R7-Kq-8qg"/>
-                                                        <exclude reference="KFb-WO-sqW"/>
-                                                    </mask>
-                                                </variation>
+                                                <variation key="heightClass=compact" axis="vertical"/>
                                             </stackView>
                                         </subviews>
                                         <constraints>

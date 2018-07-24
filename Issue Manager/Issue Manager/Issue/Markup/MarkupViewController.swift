@@ -62,7 +62,7 @@ class MarkupViewController: UIViewController {
 	private var fullRect: CGRect {
 		return CGRect(origin: .zero, size: image.size)
 	}
-	private var undoBuffer = UndoBuffer<CGImage>(size: 5)
+	private var undoBuffer: UndoBuffer<CGImage>!
 	
 	private var isSelectingColor = false {
 		didSet {
@@ -77,13 +77,20 @@ class MarkupViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
+		update()
+		
 		mode = .freeDraw
 		colorChangeButtons.forEach { $0.isShown = $0.isChosen }
 		updateUndoButtons()
 		
 		displayLink = CADisplayLink(target: self, selector: #selector(updateImage))
+	}
+	
+	override func viewDidDisappear(_ animated: Bool) {
+		super.viewDidDisappear(animated)
 		
-		update()
+		displayLink.invalidate()
+		displayLink = nil // release, because apparently invalidate() doesn't release us
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -121,8 +128,11 @@ class MarkupViewController: UIViewController {
 		drawingContext = makeContext(size: image.size)
 		wipContext = makeContext(size: image.size)
 		
-		undoBuffer.clear()
-		undoBuffer.push(drawingContext.makeImage()!)
+		let imageSize = image.cgImage!.width * image.cgImage!.bytesPerRow
+		let allowedSize = 200 << 20 // 200 MB
+		undoBuffer = .init(size: allowedSize / imageSize)
+		print(undoBuffer.size)
+		undoBuffer.push(drawingContext.makeImage()!) // empty base state
 	}
 	
 	private func makeContext(size: CGSize) -> CGContext {
@@ -180,8 +190,9 @@ class MarkupViewController: UIViewController {
 				wipContext.stroke(CGRect(origin: startPosition, size: offset.asSize))
 			case .circle:
 				wipContext.clear(fullRect)
-				wipContext.strokeEllipse(in: CGRect(origin: startPosition, size: offset.asSize))
+				wipContext.strokeEllipse(in: CGRect(origin: startPosition - offset, size: 2 * offset.asSize))
 			case .arrow:
+				guard offset.length > 0 else { return } // pls no NaN
 				wipContext.clear(fullRect)
 				wipContext.move(to: startPosition)
 				wipContext.addLine(to: position)

@@ -26,6 +26,8 @@ final class UndoBuffer<Content> {
 	}
 	
 	func push(_ content: Content) {
+		guard size > 0 else { return } // always-empty buffer
+		
 		if buffer.count < size {
 			if position + 1 < buffer.count {
 				// clear redo states
@@ -35,6 +37,7 @@ final class UndoBuffer<Content> {
 			buffer.append(content)
 			position += 1
 		} else {
+			// buffer full; cycle
 			buffer.removeFirst()
 			buffer.append(content)
 		}
