@@ -130,7 +130,7 @@ class MarkupViewController: UIViewController {
 		
 		let imageSize = image.cgImage!.width * image.cgImage!.bytesPerRow
 		let allowedSize = 200 << 20 // 200 MB
-		undoBuffer = .init(size: allowedSize / imageSize)
+		undoBuffer = UndoBuffer(size: allowedSize / imageSize)
 		print(undoBuffer.size)
 		undoBuffer.push(drawingContext.makeImage()!) // empty base state
 	}
