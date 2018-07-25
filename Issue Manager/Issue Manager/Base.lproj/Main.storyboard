@@ -193,7 +193,7 @@
                                     <visualEffectView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0fQ-ZQ-GOx">
                                         <rect key="frame" x="0.0" y="0.0" width="703.5" height="512"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="0Gy-ZS-TQM">
-                                            <rect key="frame" x="0.0" y="0.0" width="703" height="512"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="703.5" height="512"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rHo-jf-rQe">
@@ -2021,6 +2021,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
+                                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
                                             <segue destination="L56-qw-CXN" kind="presentation" identifier="lightbox" id="OdI-J8-6Ad"/>
                                         </connections>
