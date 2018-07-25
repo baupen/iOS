@@ -36,6 +36,9 @@ class MainViewController: UISplitViewController, LoadedViewController {
 		// no way to gracefully fail from here; may as well crash if something goes wrong
 		let buildingID = coder.decodeObject(forKey: "buildingID") as! UUID
 		building = Client.shared.storage.buildings[buildingID]!
+		
+		let mapList = masterNav.topViewController as! MapListViewController
+		mapList.refreshManually()
 	}
 }
 

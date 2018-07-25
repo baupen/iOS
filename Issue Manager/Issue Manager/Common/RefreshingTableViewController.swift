@@ -52,4 +52,11 @@ class RefreshingTableViewController: UITableViewController {
 	}
 	
 	func refreshCompleted() {}
+	
+	func refreshManually() {
+		let refresher = self.tableView.refreshControl!
+		refresher.beginRefreshing()
+		self.refresh(refresher)
+		self.tableView.scrollRectToVisible(refresher.bounds, animated: true)
+	}
 }

@@ -69,7 +69,9 @@ class MapListViewController: RefreshingTableViewController, LoadedViewController
 		
 		let isValid = handleRefresh()
 		if isValid {
-			mainController.detailNav.mapController.holder = holder
+			if !mainController.isCollapsed {
+				mainController.detailNav.mapController.holder = holder
+			}
 		} else {
 			showAlert(
 				titled: Localization.MapRemoved.title,

@@ -53,6 +53,25 @@ class BuildingListViewController: RefreshingTableViewController, LoadedViewContr
 		buildings = Array(Client.shared.storage.buildings.values)
 	}
 	
+	private var needsRefresh = false
+	override func decodeRestorableState(with coder: NSCoder) {
+		super.decodeRestorableState(with: coder)
+		
+		needsRefresh = true
+	}
+	
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		
+		// have to wait because we're not presenting anything yet
+		DispatchQueue.main.async {
+			if self.needsRefresh, self.presentedViewController == nil {
+				self.refreshManually()
+				self.needsRefresh = false
+			}
+		}
+	}
+	
 	override func refreshCompleted() {
 		super.refreshCompleted()
 		
