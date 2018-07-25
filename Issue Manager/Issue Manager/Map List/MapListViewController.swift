@@ -2,7 +2,7 @@
 
 import UIKit
 
-class MapListViewController: UITableViewController, LoadedViewController {
+class MapListViewController: RefreshingTableViewController, LoadedViewController {
 	typealias Localization = L10n.MapList
 	
 	static let storyboardID = "Map List"
@@ -11,26 +11,32 @@ class MapListViewController: UITableViewController, LoadedViewController {
 	
 	var holder: MapHolder! {
 		didSet {
-			navigationItem.title = holder.name
-			
-			maps = holder.childMaps().sorted { $0.name < $1.name }
+			update()
 		}
 	}
 	
-	var maps: [Map] = [] {
+	private var maps: [Map]! {
 		didSet {
 			tableView.reloadData()
 		}
 	}
 	
-	var mainController: MainViewController {
+	private var mainController: MainViewController {
 		return splitViewController as! MainViewController
+	}
+	
+	override var isRefreshing: Bool {
+		didSet {
+			tableView.visibleCells.forEach { ($0 as! MapCell).isRefreshing = isRefreshing }
+		}
 	}
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		clearsSelectionOnViewWillAppear = false
+		
+		update()
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -56,6 +62,48 @@ class MapListViewController: UITableViewController, LoadedViewController {
 		navigationItem.leftBarButtonItem = holder is Building ? backToBuildingsButton : nil
 		
 		super.viewWillAppear(animated)
+	}
+	
+	override func refreshCompleted() {
+		super.refreshCompleted()
+		
+		let isValid = handleRefresh()
+		if isValid {
+			mainController.detailNav.mapController.holder = holder
+		} else {
+			showAlert(
+				titled: Localization.MapRemoved.title,
+				message: Localization.MapRemoved.message
+			) {
+				self.performSegue(withIdentifier: "back to building list", sender: self)
+			}
+		}
+		
+		for viewController in navigationController!.viewControllers where viewController !== self {
+			(viewController as? MapListViewController)?.handleRefresh()
+		}
+	}
+	
+	/// - returns: whether or not the holder is still valid
+	@discardableResult private func handleRefresh() -> Bool {
+		if holder is Building, let building = Client.shared.storage.buildings[holder.id] {
+			holder = building
+			return true
+		} else if holder is Map, let map = Client.shared.storage.maps[holder.id] {
+			holder = map
+			return true
+		} else {
+			maps = []
+			return false
+		}
+	}
+	
+	func update() {
+		guard isViewLoaded, let holder = holder else { return }
+		
+		navigationItem.title = holder.name
+		
+		maps = holder.childMaps().sorted { $0.name < $1.name }
 	}
 	
 	func showOwnMap() {

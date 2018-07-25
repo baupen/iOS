@@ -4,7 +4,7 @@ import UIKit
 import SimplePDFKit
 import PullToExpand
 
-class MapViewController: UIViewController, LoadedViewController {
+final class MapViewController: UIViewController, LoadedViewController {
 	typealias Localization = L10n.Map
 	
 	static let storyboardID = "Map"

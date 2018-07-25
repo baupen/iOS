@@ -11,6 +11,16 @@ class MapCell: UITableViewCell, LoadedTableCell {
 	@IBOutlet var openIssuesLabel: UILabel!
 	@IBOutlet var issueBadge: IssueBadge!
 	
+	var isRefreshing = false {
+		didSet {
+			UIView.animate(withDuration: 0.1) {
+				self.contentView.alpha = self.isRefreshing ? 0.25 : 1
+			}
+			
+			isUserInteractionEnabled = !isRefreshing
+		}
+	}
+	
 	var shouldUseRecursiveIssues = true
 	var map: Map! {
 		didSet {

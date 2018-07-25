@@ -671,7 +671,7 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                 <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="building_list.title"/>
                             </userDefinedRuntimeAttributes>
                             <connections>
-                                <segue destination="856-u4-AOv" kind="unwind" unwindAction="backToBuildingList:" id="C7o-oG-doc"/>
+                                <segue destination="856-u4-AOv" kind="unwind" identifier="back to building list" unwindAction="backToBuildingList:" id="C7o-oG-doc"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

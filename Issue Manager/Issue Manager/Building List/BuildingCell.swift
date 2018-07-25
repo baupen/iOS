@@ -26,6 +26,7 @@ class BuildingCell: UICollectionViewCell, LoadedCollectionCell {
 	var isRefreshing = false {
 		didSet {
 			updateAppearance()
+			isUserInteractionEnabled = !isRefreshing
 		}
 	}
 	

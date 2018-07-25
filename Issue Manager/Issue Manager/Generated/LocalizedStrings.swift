@@ -205,6 +205,13 @@ internal enum L10n {
 
   internal enum MapList {
 
+    internal enum MapRemoved {
+      /// Dieser Bereich existiert nicht mehr. Du wirst jetzt zurück zur Gebäudeauswahl geleitet.
+      internal static let message = L10n.tr("Localizable", "map_list.map_removed.message")
+      /// Bereich Entfernt!
+      internal static let title = L10n.tr("Localizable", "map_list.map_removed.title")
+    }
+
     internal enum MapSummary {
       /// %@ offene Pendenzen
       internal static func openIssues(_ p1: String) -> String {

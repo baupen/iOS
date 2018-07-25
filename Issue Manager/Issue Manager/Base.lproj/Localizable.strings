@@ -176,6 +176,10 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Map
+// CONTEXT: Nachricht des Alerts für wenn der ausgewählte Bereich nicht mehr existiert.
+"map_list.map_removed.message" = "Dieser Bereich existiert nicht mehr. Du wirst jetzt zurück zur Gebäudeauswahl geleitet.";
+// CONTEXT: Titel des Alerts für wenn der ausgewählte Bereich nicht mehr existiert.
+"map_list.map_removed.title" = "Bereich Entfernt!";
 // CONTEXT: Beschreibt für einen Grundriss, wieviele offene Pendenzen er (rekursiv) enthält; %s wird durch die Anzahl ersetzt.
 "map_list.map_summary.open_issues" = "%@ offene Pendenzen";
 // CONTEXT: Überschrift des Abschnitts in der Liste für die untergeordneten Bereiche

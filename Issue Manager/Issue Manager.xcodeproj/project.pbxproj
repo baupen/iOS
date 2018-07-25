@@ -97,6 +97,7 @@
 		95D2C2AE20E5C3E700D887C8 /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D2C2AD20E5C3E700D887C8 /* Localization.swift */; };
 		95D2C2B120E5C50200D887C8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 95D2C2B320E5C50200D887C8 /* Localizable.strings */; };
 		95EE7DFD21060CB100B603EF /* UndoBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EE7DFC21060CB100B603EF /* UndoBuffer.swift */; };
+		95FC9DC121080BB700044C93 /* RefreshingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FC9DC021080BB700044C93 /* RefreshingTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -246,6 +247,7 @@
 		95D2C2AD20E5C3E700D887C8 /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
 		95D2C2B520E5C52700D887C8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		95EE7DFC21060CB100B603EF /* UndoBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoBuffer.swift; sourceTree = "<group>"; };
+		95FC9DC021080BB700044C93 /* RefreshingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshingTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -324,6 +326,7 @@
 				9584F24720E92DB800A8C884 /* TextFieldContainer.swift */,
 				9584F24920E92F8E00A8C884 /* CenteringScrollViewDelegate.swift */,
 				95BBF31820F26373006E162E /* FakePanGestureRecognizer.swift */,
+				95FC9DC021080BB700044C93 /* RefreshingTableViewController.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -738,6 +741,7 @@
 			files = (
 				9583C2C120DC748800452695 /* MainViewController.swift in Sources */,
 				95B9BA6A20DEEE8500261954 /* FileContainer.swift in Sources */,
+				95FC9DC121080BB700044C93 /* RefreshingTableViewController.swift in Sources */,
 				9512666A20FFE08E00155162 /* Reachability.swift in Sources */,
 				956015342100C50500F84600 /* StringDistance.swift in Sources */,
 				95BBF31920F26373006E162E /* FakePanGestureRecognizer.swift in Sources */,
