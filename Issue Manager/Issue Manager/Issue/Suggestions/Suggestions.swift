@@ -77,12 +77,12 @@ class SuggestionStorage {
 				.map { $0.suggestions }
 		} else {
 			// fall back on all values
-			options = [storage.values.flatMap { $0 }]
+			options = Array(storage.values)
 		}
 		
 		// only use suggestions matching the prefix, if applicable
 		let filtered: AnyCollection<[Suggestion]>
-		if let prefix = prefix?.lowercased() {
+		if let prefix = prefix?.nonEmptyOptional?.lowercased() {
 			filtered = AnyCollection(options
 				.lazy
 				.map { $0.filter { $0.text.lowercased().hasPrefix(prefix) } }
@@ -91,12 +91,18 @@ class SuggestionStorage {
 			filtered = AnyCollection(options)
 		}
 		
-		// only the first few elements
-		return Array(filtered
-			.lazy
-			.flatMap { $0.max(count, by: { $0.occurrences < $1.occurrences }) }
-			.prefix(count)
-		)
+		var matches: [Suggestion] = []
+		for group in filtered {
+			matches.append(
+				contentsOf: group
+					.filter { option in !matches.contains(where: { $0.text == option.text }) } // no duplicates
+					.max(count - matches.count, by: { $0.occurrences < $1.occurrences })
+			)
+			guard matches.count < count else {
+				break // done
+			}
+		}
+		return matches
 	}
 	
 	func used(description: String?, forTrade trade: String?) {

@@ -4,6 +4,8 @@ import UIKit
 
 fileprivate let rowHeight: CGFloat = 37
 
+fileprivate typealias SuggestionMatch = (suggestion: Suggestion, matchingPrefix: String?)
+
 class SuggestionsHandler: NSObject, UITableViewDataSource, UITableViewDelegate {
 	static let intrinsicHeight = CGFloat(suggestionCount) * rowHeight - 1
 	static let suggestionCount = 3
@@ -30,9 +32,10 @@ class SuggestionsHandler: NSObject, UITableViewDataSource, UITableViewDelegate {
 		}
 	}
 	
-	private var suggestions: [Suggestion] = [] {
+	private var suggestionsPrefix: String?
+	private var matches: [SuggestionMatch] = [] {
 		didSet {
-			tableView.isHidden = suggestions.isEmpty
+			tableView.isHidden = matches.isEmpty
 			tableView.reloadData()
 		}
 	}
@@ -46,29 +49,29 @@ class SuggestionsHandler: NSObject, UITableViewDataSource, UITableViewDelegate {
 		currentTaskID = taskID
 		
 		let trade = self.trade
-		let currentDescription = self.currentDescription
+		let prefix = self.currentDescription?.nonEmptyOptional
 		updatingQueue.async {
 			guard self.currentTaskID == taskID else { return }
 			
 			let suggestions = SuggestionStorage.shared.suggestions(
 				forTrade: trade,
-				matching: currentDescription,
+				matching: prefix,
 				count: SuggestionsHandler.suggestionCount
 			)
 			
 			DispatchQueue.main.async {
-				self.suggestions = suggestions
+				self.matches = suggestions.map { ($0, prefix) }
 			}
 		}
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return min(SuggestionsHandler.suggestionCount, suggestions.count)
+		return min(SuggestionsHandler.suggestionCount, matches.count)
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		return tableView.dequeue(SuggestionCell.self, for: indexPath)! <- {
-			$0.suggestion = suggestions[indexPath.row]
+			$0.match = matches[indexPath.row]
 		}
 	}
 	
@@ -79,7 +82,7 @@ class SuggestionsHandler: NSObject, UITableViewDataSource, UITableViewDelegate {
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		tableView.deselectRow(at: indexPath, animated: true)
 		
-		delegate?.use(suggestions[indexPath.row])
+		delegate?.use(matches[indexPath.row].suggestion)
 	}
 }
 
@@ -92,9 +95,23 @@ class SuggestionCell: UITableViewCell, LoadedTableCell {
 	
 	@IBOutlet var suggestionLabel: UILabel!
 	
-	var suggestion: Suggestion! {
+	fileprivate var match: SuggestionMatch! {
 		didSet {
-			suggestionLabel.text = suggestion.text
+			if let prefix = match.matchingPrefix {
+				let text = NSMutableAttributedString(string: match.suggestion.text)
+				let matchingRange = NSRange(location: 0, length: prefix.count)
+				text.addAttributes(
+					[
+						.backgroundColor: #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 0.2),
+						.underlineStyle: NSUnderlineStyle.styleSingle.rawValue,
+						.underlineColor: #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 0.5)
+					],
+					range: matchingRange
+				)
+				suggestionLabel.attributedText = text
+			} else {
+				suggestionLabel.text = match.suggestion.text
+			}
 		}
 	}
 }
