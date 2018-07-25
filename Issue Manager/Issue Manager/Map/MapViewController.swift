@@ -43,11 +43,18 @@ class MapViewController: UIViewController, LoadedViewController {
 	}
 	
 	@IBAction func beginAddingIssue() {
-		isPlacingIssue = true
+		issuePositioner.center = CGPoint(x: view.bounds.width, y: 0) // more or less where the add button is
+		let center = view.bounds.size.asPoint / 2
+		UIView.animate(withDuration: 0.25) {
+			self.isPlacingIssue = true
+			self.issuePositioner.center = center
+		}
 	}
 	
 	@IBAction func cancelAddingIssue() {
-		isPlacingIssue = false
+		UIView.animate(withDuration: 0.25) {
+			self.isPlacingIssue = false
+		}
 	}
 	
 	var markers: [IssueMarker] = []
