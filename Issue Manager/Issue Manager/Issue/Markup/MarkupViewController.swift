@@ -99,9 +99,9 @@ class MarkupViewController: UIViewController {
 			wipContext.saveGState()
 			defer { wipContext.restoreGState() }
 			
-			wipContext.draw(image.cgImage!, in: fullRect)
 			wipContext.translateBy(x: 0, y: image.size.height)
 			wipContext.scaleBy(x: 1, y: -1)
+			wipContext.draw(image.cgImage!, in: fullRect)
 			wipContext.draw(drawingContext.makeImage()!, in: fullRect)
 			let newImage = UIImage(cgImage: wipContext.makeImage()!)
 			
