@@ -58,6 +58,18 @@ extension Client {
 			user = newUser
 		}
 		
+		let removed = Set(response.removedIssueIDs) // for efficient lookup
+		for map in storage.maps.values {
+			// TODO Swift 4.2: map.issues.removeAll(where: removed.contains)
+			map.issues = map.issues.filter { !removed.contains($0) }
+		}
+		
+		for issue in response.changedIssues {
+			if let map = storage.maps[issue.map], !map.issues.contains(issue.id) {
+				map.issues.append(issue.id)
+			}
+		}
+		
 		saveShared()
 	}
 	
