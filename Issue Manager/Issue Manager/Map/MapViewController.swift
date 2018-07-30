@@ -316,8 +316,10 @@ extension MapViewController: IssueCellDelegate {
 		let pdfController = self.pdfController!
 		let marker = markers.first { $0.issue === issue }!
 		let size = pdfController.contentView.bounds.size * CGFloat(position.zoomScale)
-		let centeredRect = CGRect(origin: marker.center - size / 2,
-								  size: size)
+		let centeredRect = CGRect(
+			origin: marker.center - size / 2,
+			size: size
+		)
 		pdfController.scrollView.zoom(to: centeredRect, animated: true)
 		
 		// scale up and down to draw attention (important if can't center because scale too small)

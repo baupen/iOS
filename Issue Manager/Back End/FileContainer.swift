@@ -4,15 +4,19 @@ import Foundation
 
 private let manager = FileManager.default
 
-private let baseCacheURL = try! manager.url(for: .cachesDirectory,
-											in: .userDomainMask,
-											appropriateFor: nil,
-											create: true)
+private let baseCacheURL = try! manager.url(
+	for: .cachesDirectory,
+	in: .userDomainMask,
+	appropriateFor: nil,
+	create: true
+)
 
-private let baseLocalURL = try! manager.url(for: .documentDirectory,
-											in: .userDomainMask,
-											appropriateFor: nil,
-											create: true)
+private let baseLocalURL = try! manager.url(
+	for: .documentDirectory,
+	in: .userDomainMask,
+	appropriateFor: nil,
+	create: true
+)
 
 protocol FileContainer: APIObject {
 	static var pathPrefix: String { get }
@@ -48,8 +52,10 @@ extension FileContainer {
 				previous.deleteFile()
 			case let (prev?, new?) where prev == new: // same file
 				// move after uploading
-				try? manager.moveItem(at: Self.localURL(filename: prev),
-									  to: Self.cacheURL(filename: new))
+				try? manager.moveItem(
+					at: Self.localURL(filename: prev),
+					to: Self.cacheURL(filename: new)
+				)
 				return
 			case (_?, _?): // different file
 				previous.deleteFile()

@@ -73,9 +73,7 @@ extension Client {
 		saveShared()
 	}
 	
-	private func updateEntries<T: APIObject>(in path: WritableKeyPath<Storage, [UUID: T]>,
-											 changing changedEntries: [T],
-											 removing removedIDs: [UUID]) {
+	private func updateEntries<T: APIObject>(in path: WritableKeyPath<Storage, [UUID: T]>, changing changedEntries: [T], removing removedIDs: [UUID]) {
 		for changed in changedEntries {
 			let previous = storage[keyPath: path][changed.id]
 			storage[keyPath: path][changed.id] = changed

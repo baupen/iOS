@@ -105,8 +105,10 @@ class LoginViewController: UIViewController {
 		let password = passwordField.text!
 		guard let user = Client.shared.user else {
 			if showingAlerts {
-				showAlert(titled: L10n.Alert.ConnectionIssues.title,
-						  message: L10n.Alert.ConnectionIssues.message)
+				showAlert(
+					titled: L10n.Alert.ConnectionIssues.title,
+					message: L10n.Alert.ConnectionIssues.message
+				)
 			}
 			return
 		}
@@ -129,13 +131,17 @@ class LoginViewController: UIViewController {
 	}
 	
 	func showUnknownUsernameAlert(username: String) {
-		showAlert(titled: Localization.Alert.WrongUsername.title,
-				  message: Localization.Alert.WrongUsername.message(username))
+		showAlert(
+			titled: Localization.Alert.WrongUsername.title,
+			message: Localization.Alert.WrongUsername.message(username)
+		)
 	}
 	
 	func showWrongPasswordAlert(username: String) {
-		showAlert(titled: Localization.Alert.WrongPassword.title,
-				  message: Localization.Alert.WrongPassword.message(username))
+		showAlert(
+			titled: Localization.Alert.WrongPassword.title,
+			message: Localization.Alert.WrongPassword.message(username)
+		)
 	}
 	
 	func showBuildingList(animated: Bool = true) {

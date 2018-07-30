@@ -11,12 +11,14 @@ extension UISplitViewController {
 }
 
 extension UIViewController {
-	func showAlert(titled title: String?,
-				   message: String?,
-				   canCancel: Bool = false,
-				   okMessage: String = L10n.Alert.okay,
-				   okStyle: UIAlertActionStyle = .default,
-				   okHandler: (() -> Void)? = nil) {
+	func showAlert(
+		titled title: String?,
+		message: String?,
+		canCancel: Bool = false,
+		okMessage: String = L10n.Alert.okay,
+		okStyle: UIAlertActionStyle = .default,
+		okHandler: (() -> Void)? = nil
+	) {
 		let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
 		if canCancel {
 			alert.addAction(UIAlertAction(title: L10n.Alert.cancel, style: .cancel, handler: nil))
