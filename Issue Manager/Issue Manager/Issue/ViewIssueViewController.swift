@@ -64,6 +64,12 @@ class ViewIssueViewController: UITableViewController, LoadedViewController {
 		update()
 	}
 	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		tableView.reloadData()
+	}
+	
 	func update() {
 		guard isViewLoaded, let issue = issue else { return }
 		

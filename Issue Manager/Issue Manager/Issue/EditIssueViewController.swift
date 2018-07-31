@@ -133,6 +133,12 @@ final class EditIssueViewController: UITableViewController, LoadedViewController
 		update()
 	}
 	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		tableView.reloadData()
+	}
+	
 	// only call this when absolutely necessary; overwrites content in text fields
 	private func update() {
 		assert(issue?.isRegistered != true)
