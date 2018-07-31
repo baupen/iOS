@@ -163,7 +163,7 @@ final class MapViewController: UIViewController, LoadedViewController {
 			if isPlacingIssue {
 				let position = Issue.Position(
 					at: issuePositioner.relativePosition(in: pdfController!.overlayView),
-					zoomScale: pdfController!.scrollView.zoomScale
+					zoomScale: pdfController!.scrollView.zoomScale / pdfController!.scrollView.minimumZoomScale
 				)
 				editController.issue = Issue(at: isPlacingIssue ? position : nil, in: holder as! Map)
 			} else {
