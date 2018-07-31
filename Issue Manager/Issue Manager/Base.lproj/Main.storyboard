@@ -107,7 +107,7 @@
                                                     <constraint firstAttribute="bottom" secondItem="bKI-Zh-sqe" secondAttribute="bottom" id="uNh-iP-1Ug"/>
                                                 </constraints>
                                             </view>
-                                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="crosshair" translatesAutoresizingMaskIntoConstraints="NO" id="qmw-Dt-zDu">
+                                            <imageView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="crosshair" translatesAutoresizingMaskIntoConstraints="NO" id="qmw-Dt-zDu">
                                                 <rect key="frame" x="2.5" y="68" width="96" height="96"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="qmw-Dt-zDu" secondAttribute="height" multiplier="1:1" id="95K-uV-vRn"/>
@@ -197,7 +197,7 @@
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rHo-jf-rQe">
-                                                    <rect key="frame" x="0.0" y="0.0" width="703" height="256"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="703.5" height="256"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="256" id="tbp-3z-9r2"/>
                                                     </constraints>

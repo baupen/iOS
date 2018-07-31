@@ -21,7 +21,9 @@ final class MapViewController: UIViewController, LoadedViewController {
 	@IBOutlet var issuePositioner: IssuePositioner!
 	
 	// the filter popover's done button and the add marker popover's cancel button link to this
-	@IBAction func backToMap(_ segue: UIStoryboardSegue) {}
+	@IBAction func backToMap(_ segue: UIStoryboardSegue) {
+		cancelAddingIssue() // even if issue editor closed by cancelling
+	}
 	
 	// the issue popovers' done buttons link to this
 	@IBAction func backToMapWithUpdates(_ segue: UIStoryboardSegue) {
@@ -30,7 +32,7 @@ final class MapViewController: UIViewController, LoadedViewController {
 			return
 		}
 		
-		isPlacingIssue = false // done (if started)
+		cancelAddingIssue() // done (if started)
 		
 		issues = map.allIssues()
 		updateMarkers()
@@ -43,13 +45,16 @@ final class MapViewController: UIViewController, LoadedViewController {
 	}
 	
 	@IBAction func beginAddingIssue() {
-		pullableView.contract()
+		if !pullableView.isCompact {
+			pullableView.contract()
+		}
 		
 		issuePositioner.center = CGPoint(x: view.bounds.width, y: 0) // more or less where the add button is
-		let center = view.bounds.size.asPoint / 2
+		view.setNeedsLayout()
+		
 		UIView.animate(withDuration: 0.25) {
 			self.isPlacingIssue = true
-			self.issuePositioner.center = center
+			self.view.layoutIfNeeded() // centers issue positioner according to constraints
 		}
 	}
 	
