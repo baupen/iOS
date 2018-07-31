@@ -1389,32 +1389,30 @@ Maler</string>
                                             <rect key="frame" x="0.0" y="0.0" width="540" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="h3O-O3-zcP">
-                                                    <rect key="frame" x="20" y="14" width="500" height="16"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" text="Im Abnahmemodus aufgenommen" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qv5-fH-HbG">
-                                                            <rect key="frame" x="0.0" y="0.0" width="153" height="16"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" white="0.0" alpha="0.75" colorSpace="calibratedWhite"/>
-                                                            <nil key="highlightedColor"/>
-                                                            <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="view_issue.is_client_mode"/>
-                                                            </userDefinedRuntimeAttributes>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Ja" textAlignment="right" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OuV-IJ-QrG">
-                                                            <rect key="frame" x="482" y="0.0" width="18" height="16"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                </stackView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" text="Im Abnahmemodus aufgenommen" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qv5-fH-HbG">
+                                                    <rect key="frame" x="20" y="14" width="263" height="16"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="0.0" alpha="0.75" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="view_issue.is_client_mode"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Ja" textAlignment="right" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OuV-IJ-QrG">
+                                                    <rect key="frame" x="502" y="14" width="18" height="16"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="h3O-O3-zcP" firstAttribute="top" secondItem="Ks2-Ep-R9e" secondAttribute="topMargin" constant="3" id="cSJ-zA-bds"/>
-                                                <constraint firstItem="h3O-O3-zcP" firstAttribute="leading" secondItem="Ks2-Ep-R9e" secondAttribute="leadingMargin" id="f5A-0p-lF1"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="h3O-O3-zcP" secondAttribute="trailing" id="sGI-Qd-r6A"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="h3O-O3-zcP" secondAttribute="bottom" constant="3" id="x4A-2S-3f1"/>
+                                                <constraint firstItem="OuV-IJ-QrG" firstAttribute="top" secondItem="Ks2-Ep-R9e" secondAttribute="topMargin" constant="3" id="5Cf-kh-5EQ"/>
+                                                <constraint firstItem="Qv5-fH-HbG" firstAttribute="leading" secondItem="Ks2-Ep-R9e" secondAttribute="leadingMargin" id="9Ru-Pe-8Vw"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="OuV-IJ-QrG" secondAttribute="bottom" constant="3" id="ADi-NY-K1X"/>
+                                                <constraint firstItem="Qv5-fH-HbG" firstAttribute="top" secondItem="Ks2-Ep-R9e" secondAttribute="topMargin" constant="3" id="EAg-mY-ojW"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="OuV-IJ-QrG" secondAttribute="trailing" id="brB-in-k5u"/>
+                                                <constraint firstItem="OuV-IJ-QrG" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Qv5-fH-HbG" secondAttribute="trailing" constant="8" id="e38-Lb-2UY"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="Qv5-fH-HbG" secondAttribute="bottom" constant="3" id="tMO-9w-N39"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
