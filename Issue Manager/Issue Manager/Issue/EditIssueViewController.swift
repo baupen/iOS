@@ -14,7 +14,6 @@ final class EditIssueViewController: UITableViewController, LoadedViewController
 	static let storyboardID = "Edit Issue"
 	
 	@IBOutlet var markButton: UIButton!
-	@IBOutlet var clientModeLabel: UILabel!
 	
 	@IBOutlet var imageView: UIImageView!
 	@IBOutlet var cameraContainerView: CameraContainerView!
@@ -147,9 +146,6 @@ final class EditIssueViewController: UITableViewController, LoadedViewController
 		building = issue.accessMap().accessBuilding()
 		
 		navigationItem.title = isCreating ? Localization.titleCreating : Localization.titleEditing
-		
-		let wasAddedWithClient = issue?.wasAddedWithClient ?? defaults.isInClientMode
-		clientModeLabel.text = wasAddedWithClient ? L10n.Issue.IsClientMode.true : L10n.Issue.IsClientMode.false
 		
 		isIssueMarked = issue?.isMarked ?? false
 		
