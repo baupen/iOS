@@ -192,11 +192,11 @@ internal enum L10n {
     }
 
     internal enum StatusFilter {
-      /// Es werden alle Mängel angezeigt.
+      /// Es werden alle Pendenzen angezeigt.
       internal static let allSelected = L10n.tr("Localizable", "map.status_filter.all_selected")
-      /// Es werden keine Mängel angezeigt.
+      /// Es werden keine Pendenzen angezeigt.
       internal static let noneSelected = L10n.tr("Localizable", "map.status_filter.none_selected")
-      /// Es werden nur Mängel mit einem der ausgewählten Status angezeigt.
+      /// Es werden nur Pendenzen mit einem der ausgewählten Status angezeigt.
       internal static let someSelected = L10n.tr("Localizable", "map.status_filter.some_selected")
       /// Filter nach Status
       internal static let title = L10n.tr("Localizable", "map.status_filter.title")

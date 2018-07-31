@@ -164,11 +164,11 @@
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Map.status
 // CONTEXT: Wird unter der Liste im Filter angezeigt, wenn alle Status angezeigt werden.
-"map.status_filter.all_selected" = "Es werden alle Mängel angezeigt.";
+"map.status_filter.all_selected" = "Es werden alle Pendenzen angezeigt.";
 // CONTEXT: Wird unter der Liste im Filter angezeigt, wenn keine Status angezeigt werden.
-"map.status_filter.none_selected" = "Es werden keine Mängel angezeigt.";
+"map.status_filter.none_selected" = "Es werden keine Pendenzen angezeigt.";
 // CONTEXT: Wird unter der Liste im Filter angezeigt, wenn nur manche Status angezeigt werden.
-"map.status_filter.some_selected" = "Es werden nur Mängel mit einem der ausgewählten Status angezeigt.";
+"map.status_filter.some_selected" = "Es werden nur Pendenzen mit einem der ausgewählten Status angezeigt.";
 // CONTEXT: Titel für das Popup, womit die Pendenzen gefiltert werden können.
 "map.status_filter.title" = "Filter nach Status";
 // CONTEXT: Titel für die Grundrissansicht. (Wird angezeigt, wenn kein Grundriss ausgewählt ist.)
