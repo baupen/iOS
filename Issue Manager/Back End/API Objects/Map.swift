@@ -23,8 +23,14 @@ extension Map: MapHolder {
 }
 
 extension Map {
-	func allIssues() -> AnyCollection<Issue> {
-		return AnyCollection(issues.lazy.compactMap { Client.shared.storage.issues[$0] })
+	func allIssues() -> [Issue] {
+		if defaults.isInClientMode {
+			return issues.lazy
+				.compactMap { Client.shared.storage.issues[$0] }
+				.filter { $0.wasAddedWithClient }
+		} else {
+			return issues.compactMap { Client.shared.storage.issues[$0] }
+		}
 	}
 	
 	func accessBuilding() -> Building {

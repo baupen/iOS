@@ -32,7 +32,7 @@ final class MapViewController: UIViewController, LoadedViewController {
 		
 		isPlacingIssue = false // done (if started)
 		
-		issues = Array(map.allIssues())
+		issues = map.allIssues()
 		updateMarkers()
 		issueListController.update()
 		
@@ -190,11 +190,7 @@ final class MapViewController: UIViewController, LoadedViewController {
 		
 		addItem.isEnabled = map != nil
 		
-		if let map = map {
-			issues = Array(map.allIssues())
-		} else {
-			issues = []
-		}
+		issues = map?.allIssues() ?? []
 		
 		issueListController.map = map
 		pullableView.isHidden = map == nil
