@@ -185,6 +185,7 @@ class MapListViewController: RefreshingTableViewController, LoadedViewController
 				$0.shouldUseRecursiveIssues = false
 			}
 			$0.map = map(for: indexPath)
+			$0.isRefreshing = isRefreshing
 		}
 	}
 	
