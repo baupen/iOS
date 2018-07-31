@@ -58,7 +58,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Issue.is
-// CONTEXT: Überschrift dafür, ob die Pendenz im Abnahmemodus aufgenommen wurde.
+// CONTEXT: Überschrift dafür, ob die Pendenz im Abnahmemodus aufgenommen wurde. Diese Überschrift sollte möglichst kurz sein, da sie auf eine Zeile passen muss (wird in der Pendenzliste angezeigt).
 "issue.is_client_mode" = "Abnahmemodus";
 // CONTEXT: Drückt aus, dass die Pendenz nicht im Abnahmemodus aufgenommen wurde.
 "issue.is_client_mode.false" = "Normal aufgenommen";
@@ -215,6 +215,12 @@
 "view_issue.image" = "Foto";
 // CONTEXT: Steht anstelle des Fotos da, wenn kein Foto gesetzt ist.
 "view_issue.image_placeholder" = "Kein Foto gesetzt";
+// CONTEXT: Überschrift dafür, ob die Pendenz im Abnahmemodus aufgenommen wurde. Diese Überschrift darf etwas länger sein, da sie auch über mehrere Zeilen angezeigt werden kann.
+"view_issue.is_client_mode" = "Im Abnahmemodus aufgenommen";
+// CONTEXT: Drückt kurz aus, dass die Pendenz nicht im Abnahmemodus aufgenommen wurde.
+"view_issue.is_client_mode.false" = "Nein";
+// CONTEXT: Drückt kurz aus, dass die Pendenz im Abnahmemodus aufgenommen wurde.
+"view_issue.is_client_mode.true" = "Ja";
 // CONTEXT: Knopf, um eine Pendenz als abgeschlossen zu markieren, obwohl der Handwerker sie nicht beantwortet hat.
 "view_issue.mark_as_completed" = "Als Abgeschlossen Markieren";
 // CONTEXT: Knopf, um die Ansicht zu öffnen, mit der man auf das Foto zeichnen kann.

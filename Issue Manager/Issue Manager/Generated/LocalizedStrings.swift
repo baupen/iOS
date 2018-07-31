@@ -249,6 +249,8 @@ internal enum L10n {
     internal static let image = L10n.tr("Localizable", "view_issue.image")
     /// Kein Foto gesetzt
     internal static let imagePlaceholder = L10n.tr("Localizable", "view_issue.image_placeholder")
+    /// Im Abnahmemodus aufgenommen
+    internal static let isClientMode = L10n.tr("Localizable", "view_issue.is_client_mode")
     /// Als Abgeschlossen Markieren
     internal static let markAsCompleted = L10n.tr("Localizable", "view_issue.mark_as_completed")
     /// Auf Foto Zeichnen
@@ -285,6 +287,13 @@ internal enum L10n {
     internal enum CouldNotTakePicture {
       /// Fotoaufnahme fehlgeschlagen!
       internal static let title = L10n.tr("Localizable", "view_issue.could_not_take_picture.title")
+    }
+
+    internal enum IsClientMode {
+      /// Nein
+      internal static let `false` = L10n.tr("Localizable", "view_issue.is_client_mode.false")
+      /// Ja
+      internal static let `true` = L10n.tr("Localizable", "view_issue.is_client_mode.true")
     }
 
     internal enum SelectCraftsman {
