@@ -43,6 +43,8 @@ final class MapViewController: UIViewController, LoadedViewController {
 	}
 	
 	@IBAction func beginAddingIssue() {
+		pullableView.contract()
+		
 		issuePositioner.center = CGPoint(x: view.bounds.width, y: 0) // more or less where the add button is
 		let center = view.bounds.size.asPoint / 2
 		UIView.animate(withDuration: 0.25) {
