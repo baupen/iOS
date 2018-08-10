@@ -78,11 +78,6 @@ final class Client {
 		}
 	}
 	
-	private func startTask<R: Request>(for request: R) -> Future<TaskResult> {
-		return Future { try urlRequest(body: request) }
-			.flatMap(send)
-	}
-	
 	private func dispatch<R: Request>(_ request: R) -> Future<TaskResult> {
 		if R.isIndependent || isClearingBacklog {
 			return startTask(for: request)
@@ -120,6 +115,11 @@ final class Client {
 			}
 			backlog.removeFirst()
 		}
+	}
+	
+	private func startTask<R: Request>(for request: R) -> Future<TaskResult> {
+		return Future { try urlRequest(body: request) }
+			.flatMap(send)
 	}
 	
 	private func extractData<R: Request>(from taskResult: TaskResult, for request: R) throws -> R.ExpectedResponse {

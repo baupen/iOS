@@ -100,8 +100,6 @@ extension LightboxViewController: UIViewControllerTransitioningDelegate {
 	}
 }
 
-fileprivate class Interactor: UIPercentDrivenInteractiveTransition {}
-
 fileprivate class PresentAnimator: NSObject, UIViewControllerAnimatedTransitioning {
 	func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
 		return 0.25
