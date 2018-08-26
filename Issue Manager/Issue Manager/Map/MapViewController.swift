@@ -83,18 +83,13 @@ final class MapViewController: UIViewController, LoadedViewController {
 	
 	var pdfController: SimplePDFViewController? {
 		didSet {
-			oldValue?.delegate = nil
-			// embed/unembed controller
 			guard pdfController != oldValue else { return }
 			if let old = oldValue {
-				old.willMove(toParentViewController: nil)
-				old.view.removeFromSuperview()
-				old.removeFromParentViewController()
+				old.delegate = nil
+				unembed(old)
 			}
 			if let new = pdfController {
-				addChildViewController(new)
-				pdfContainerView.addSubview(new.view)
-				new.didMove(toParentViewController: self)
+				embed(new, within: pdfContainerView)
 			}
 		}
 	}

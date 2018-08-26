@@ -30,6 +30,20 @@ extension UIViewController {
 	}
 }
 
+extension UIViewController {
+	func embed(_ child: UIViewController, within view: UIView) {
+		addChildViewController(child)
+		view.addSubview(child.view)
+		child.didMove(toParentViewController: self)
+	}
+	
+	func unembed(_ child: UIViewController) {
+		child.willMove(toParentViewController: nil)
+		child.view.removeFromSuperview()
+		child.removeFromParentViewController()
+	}
+}
+
 extension UILayoutPriority: ExpressibleByFloatLiteral {
 	public init(floatLiteral value: Float) {
 		self.init(value)
