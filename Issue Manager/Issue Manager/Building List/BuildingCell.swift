@@ -18,9 +18,7 @@ class BuildingCell: UICollectionViewCell, LoadedCollectionCell {
 	@IBOutlet var issueBadge: IssueBadge!
 	
 	override var isHighlighted: Bool {
-		didSet {
-			updateAppearance()
-		}
+		didSet { updateAppearance() }
 	}
 	
 	var isRefreshing = false {
@@ -31,9 +29,7 @@ class BuildingCell: UICollectionViewCell, LoadedCollectionCell {
 	}
 	
 	var building: Building! {
-		didSet {
-			update()
-		}
+		didSet { update() }
 	}
 	
 	override func awakeFromNib() {

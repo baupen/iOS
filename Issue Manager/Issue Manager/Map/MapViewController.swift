@@ -66,9 +66,7 @@ final class MapViewController: UIViewController, LoadedViewController {
 	
 	var markers: [IssueMarker] = []
 	var markerAlpha: CGFloat = 0.1 {
-		didSet {
-			pdfController?.overlayView.alpha = markerAlpha
-		}
+		didSet { pdfController?.overlayView.alpha = markerAlpha }
 	}
 	
 	var isPlacingIssue = false {
@@ -95,9 +93,7 @@ final class MapViewController: UIViewController, LoadedViewController {
 	}
 	
 	var holder: MapHolder? {
-		didSet {
-			update()
-		}
+		didSet { update() }
 	}
 	
 	var issues: [Issue] = []

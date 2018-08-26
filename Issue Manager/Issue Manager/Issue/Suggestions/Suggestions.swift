@@ -23,9 +23,7 @@ class SuggestionStorage {
 	static let shared = SuggestionStorage()
 	
 	private var storage: [String: [Suggestion]] {
-		didSet {
-			save()
-		}
+		didSet { save() }
 	}
 	
 	let decoder = JSONDecoder()

@@ -47,15 +47,11 @@ class ViewIssueViewController: UITableViewController, LoadedViewController {
 	}
 	
 	var issue: Issue! {
-		didSet {
-			update()
-		}
+		didSet { update() }
 	}
 	
 	private var image: UIImage? {
-		didSet {
-			imageView.image = image
-		}
+		didSet { imageView.image = image }
 	}
 	
 	override func viewDidLoad() {

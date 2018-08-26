@@ -8,9 +8,7 @@ final class LightboxViewController: UIViewController {
 	@IBOutlet var aspectRatioConstraint: NSLayoutConstraint!
 	
 	var image: UIImage! {
-		didSet {
-			update()
-		}
+		didSet { update() }
 	}
 	
 	override func viewDidLoad() {
@@ -30,9 +28,7 @@ final class LightboxViewController: UIViewController {
 	}
 	
 	private var isFullyShown = false {
-		didSet {
-			setNeedsStatusBarAppearanceUpdate()
-		}
+		didSet { setNeedsStatusBarAppearanceUpdate() }
 	}
 	
 	override var prefersStatusBarHidden: Bool { return isFullyShown }

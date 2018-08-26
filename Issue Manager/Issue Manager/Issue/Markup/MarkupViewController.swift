@@ -44,9 +44,7 @@ class MarkupViewController: UIViewController {
 	}
 	
 	var image: UIImage! {
-		didSet {
-			update()
-		}
+		didSet { update() }
 	}
 	
 	private var mode: Mode! {

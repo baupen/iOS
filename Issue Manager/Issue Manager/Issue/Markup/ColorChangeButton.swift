@@ -5,9 +5,7 @@ import UIKit
 @IBDesignable
 class ColorChangeButton: UIButton {
 	@IBInspectable var isChosen: Bool = false {
-		didSet {
-			updateAppearance()
-		}
+		didSet { updateAppearance() }
 	}
 	
 	var color: UIColor {

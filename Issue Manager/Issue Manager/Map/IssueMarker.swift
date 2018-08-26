@@ -8,17 +8,13 @@ class IssueMarker: UIView {
 	let issue: Issue
 	
 	var zoomScale: CGFloat = 1 {
-		didSet {
-			resize()
-		}
+		didSet { resize() }
 	}
 	
 	var buttonAction: (() -> Void)!
 	
 	var isStatusShown = true {
-		didSet {
-			updateVisibility()
-		}
+		didSet { updateVisibility() }
 	}
 	
 	private let button = UIButton()

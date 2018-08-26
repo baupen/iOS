@@ -10,15 +10,11 @@ class MapListViewController: RefreshingTableViewController, LoadedViewController
 	@IBOutlet var backToBuildingsButton: UIBarButtonItem!
 	
 	var holder: MapHolder! {
-		didSet {
-			update()
-		}
+		didSet { update() }
 	}
 	
 	private var maps: [Map]! {
-		didSet {
-			tableView.reloadData()
-		}
+		didSet { tableView.reloadData() }
 	}
 	
 	private var mainController: MainViewController {

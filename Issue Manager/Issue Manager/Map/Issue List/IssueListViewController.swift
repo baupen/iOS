@@ -22,21 +22,15 @@ class IssueListViewController: UIViewController {
 	
 	/// set this before setting `map` initially or before loading the view to avoid calculating stuff twice
 	var visibleStatuses = Issue.allStatuses {
-		didSet {
-			update()
-		}
+		didSet { update() }
 	}
 	
 	var map: Map? {
-		didSet {
-			update()
-		}
+		didSet { update() }
 	}
 	
 	private var issues: [Issue] = [] {
-		didSet {
-			issueTableView.reloadData()
-		}
+		didSet { issueTableView.reloadData() }
 	}
 	
 	override func viewDidLoad() {

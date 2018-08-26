@@ -23,9 +23,7 @@ class MapCell: UITableViewCell, LoadedTableCell {
 	
 	var shouldUseRecursiveIssues = true
 	var map: Map! {
-		didSet {
-			update()
-		}
+		didSet { update() }
 	}
 	
 	override func awakeFromNib() {

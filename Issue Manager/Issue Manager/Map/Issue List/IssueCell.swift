@@ -37,15 +37,11 @@ class IssueCell: UITableViewCell, LoadedTableCell {
 	weak var delegate: IssueCellDelegate?
 	
 	var issue: Issue! {
-		didSet {
-			update()
-		}
+		didSet { update() }
 	}
 	
 	override var isHighlighted: Bool {
-		didSet {
-			updateVisibility()
-		}
+		didSet { updateVisibility() }
 	}
 	
 	private var isCompact: Bool {
