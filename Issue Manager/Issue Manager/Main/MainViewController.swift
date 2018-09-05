@@ -34,7 +34,7 @@ class MainViewController: UISplitViewController, LoadedViewController {
 		super.decodeRestorableState(with: coder)
 		
 		// no way to gracefully fail from here; may as well crash if something goes wrong
-		let buildingID = coder.decodeObject(forKey: "buildingID") as! UUID
+		let buildingID = ID<Building>(coder.decodeObject(forKey: "buildingID") as! UUID)
 		building = Client.shared.storage.buildings[buildingID]!
 		
 		let mapList = masterNav.topViewController as! MapListViewController

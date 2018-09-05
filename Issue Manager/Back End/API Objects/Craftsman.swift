@@ -3,7 +3,7 @@
 import Foundation
 
 struct Craftsman: APIObject, Equatable {
-	var meta: ObjectMeta
+	var meta: ObjectMeta<Craftsman>
 	var name: String
 	var trade: String
 }

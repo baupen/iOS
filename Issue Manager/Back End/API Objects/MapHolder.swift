@@ -2,9 +2,9 @@
 
 import Foundation
 
-protocol MapHolder: APIObject {
+protocol MapHolder: AnyAPIObject {
 	var name: String { get }
-	var children: [UUID] { get }
+	var children: [ID<Map>] { get }
 	
 	func childMaps() -> [Map]
 	func recursiveChildren() -> [Map]

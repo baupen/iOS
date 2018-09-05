@@ -2,3 +2,256 @@
  * Exported from POEditor - https://poeditor.com
  *******************************************************************************/
 
+// CONTEXT: "Abbrechen" Knopf in einem Alert
+"alert.cancel" = "Annulla";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Alert.connection
+// CONTEXT: Nachricht des Alerts für wenn man Verbindungsprobleme hat.
+"alert.connection_issues.message" = "Non è stato possibile stabilire una connessione.";
+// CONTEXT: Titel des Alerts für wenn man Verbindungsprobleme hat.
+"alert.connection_issues.title" = "Problema di connessione";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Alert.invalid
+// CONTEXT: Nachricht des Alerts für wenn der Token, der bei der Anmeldung erhalten wurde, nicht mehr gültig ist, z.B. wenn auf der Website das Passwort geändert wurde.
+"alert.invalid_session.message" = "Per favore effettua nuovamente il login.";
+// CONTEXT: Titel des Alerts für wenn der Token, der bei der Anmeldung erhalten wurde, nicht mehr gültig ist, z.B. wenn auf der Website das Passwort geändert wurde.
+"alert.invalid_session.title" = "Sessione non valida!";
+// CONTEXT: "OK" Knopf in einem Alert
+"alert.okay" = "OK";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Alert.unknown
+// CONTEXT: Nachricht für den Alert, dass beim aktualisieren ein unbekannter Fehler aufgetreten ist. %s wird durch eine (nicht benutzerfreundliche) Beschreibung des Fehlers ersetzt.
+"alert.unknown_sync_error.message" = "Durante l'aggiornamento si è verificato un errore sconosciuto. Per favore riprova più tardi.\n\nNel caso in cui l'errore persista, il seguente testo potrebbe essere d'aiuto al supporto tecnico:\n%@";
+// CONTEXT: Titel für den Alert, dass beim aktualisieren ein unbekannter Fehler aufgetreten ist.
+"alert.unknown_sync_error.title" = "Errore sconosciuto!";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Building
+// CONTEXT: Beschreibt, wie viele Mängel in einem Gebäude offen sind. %s wird durch die Anzahl offener Mängel ersetzt, z.b. "%s offene Mängel"
+"building_list.building_summary.open_issues" = "%@ pendenze aperte";
+// CONTEXT: Beschreibt, wie viele Mängel es in einem Gebäude insgesamt gibt. Wird nach building_list.building_summary.open_issues angezeigt, daher darf gerne das Wort "Mängel" weggelassen werden. %s wird durch die Anzahl offener Mängel ersetzt, z.b. "%s insgesamt"
+"building_list.building_summary.total_issues" = "%@ in totale";
+// CONTEXT: Beschreibung für den Abnahmemodus
+"building_list.client_mode.description" = "Nella modalità sopralluogo (con l'acquirente/locatario), vengono mostrate solo le pendenze registrate in modalità sopralluogo.";
+// CONTEXT: Titel für den Schalter um Abnahmemodus an- und auszuschalten. (Abnahmemodus ist für wenn man mit dem Käufer herumläuft und inspiziert; dabei werden die "normalen" Mängel nicht angezeigt.)
+"building_list.client_mode.title" = "Modalità sopralluogo";
+// CONTEXT: Knopf oben links zum ausloggen
+"building_list.log_out" = "Logout";
+// CONTEXT: Wird anstelle der Gebäude angezeigt, wenn man noch nie synchronisiert hat. Sollte den Benutzer darauf hinweisen, dass er durch runterziehen synchronisieren kann.
+"building_list.refresh_hint" = "Ancora nessun dato caricato!\nScorri in basso per sincronizzare i dati locali con il server.";
+// CONTEXT: Titel für die Gebäudeliste-Ansicht; wird auch für den Back-Button aus der Grundrissliste verwendet.
+"building_list.title" = "Edificio";
+// CONTEXT: Der Willkommenstext oben. %s wird mit dem Vornamen ersetzt.
+"building_list.welcome" = "Benvenuto, %@";
+// CONTEXT: Überschrift für den Handwerker.
+"issue.craftsman" = "Operaio";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Issue.craftsman
+// CONTEXT: Überschrift für den Namen des verantwortlichen Handwerkers.
+"issue.craftsman_name" = "Nome";
+// CONTEXT: Überschrift für die Beschreibung.
+"issue.description" = "Descrizione";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Issue.is
+// CONTEXT: Überschrift dafür, ob die Pendenz im Abnahmemodus aufgenommen wurde. Diese Überschrift sollte möglichst kurz sein, da sie auf eine Zeile passen muss (wird in der Pendenzliste angezeigt).
+"issue.is_client_mode" = "Modalità sopralluogo";
+// CONTEXT: Drückt aus, dass die Pendenz nicht im Abnahmemodus aufgenommen wurde.
+"issue.is_client_mode.false" = "Inserita normalmente";
+// CONTEXT: Drückt aus, dass die Pendenz im Abnahmemodus aufgenommen wurde.
+"issue.is_client_mode.true" = "Inserita in modalità sopralluogo";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Issue.no
+// CONTEXT: Wird anstelle der Funktion angezeigt, wenn kein Handwerker gesetzt ist.
+"issue.no_craftsman" = "Nessun operaio";
+// CONTEXT: Wird anstelle der Beschreibung angezeigt, wenn sie nicht gesetzt ist.
+"issue.no_description" = "Nessuna descrizione";
+// CONTEXT: Überschrift für den Status.
+"issue.status" = "Stato";
+// CONTEXT: Status einer Pendenz, die noch nicht im Verzeichnis (also noch editierbar) ist.
+"issue.status.new" = "Nuova";
+// CONTEXT: Status einer Pendenz, die ins Verzeichnis aufgenommen wurde, aber sonst noch nichts.
+"issue.status.registered" = "Nel registro";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Issue.status.registered
+// CONTEXT: Beschreibt genauer, wie die Pendenz registriert wurde. %s wird durch den Namen des Registrierers ersetzt.
+"issue.status.registered_by" = "Registrata da %@";
+// CONTEXT: Status einer Pendenz, die vom Handwerker beantwortet wurde.
+"issue.status.responded" = "Pendenza risposta";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Issue.status.responded
+// CONTEXT: Beschreibt genauer, wie die Pendenz beantwortet wurde. %s wird durch den Namen des Beantworters ersetzt.
+"issue.status.responded_by" = "Pendenza risposta da %@";
+// CONTEXT: Status einer Pendenz, die abgeschlossen ist.
+"issue.status.reviewed" = "Terminata";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Issue.status.reviewed
+// CONTEXT: Beschreibt genauer, wie die Pendenz bestätigt wurde. %s wird durch den Namen des Bestätigers ersetzt.
+"issue.status.reviewed_by" = "Confermata da %@";
+// CONTEXT: Überschrift für die Funktion des verantwortlichen Handwerkers.
+"issue.trade" = "Funzione";
+// CONTEXT: Wird anstelle der Nummer (z.B. #123) angezeigt, wenn eine Pendenz noch nicht registriert ist.
+"issue.unregistered" = "Nuova";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Login.alert.login
+// CONTEXT: Nachricht des Alerts für wenn man sich aus einem unbekannten Grund nicht einloggen kann.
+"login.alert.login_error.message" = "C'è stato un problema durante il login! Se possibile, verrà effettuato un login locale.";
+// CONTEXT: Titel des Alerts für wenn man sich aus einem unbekannten Grund nicht einloggen kann.
+"login.alert.login_error.title" = "Errore sconosciuto!";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Login.alert.wrong
+// CONTEXT: Nachricht des Alerts für wenn man das falsche Passwort eingegeben hat. %s wird durch den Benutzernamen ersetzt.
+"login.alert.wrong_password.message" = "Questa password non è corretta per l'utente %@.";
+// CONTEXT: Titel des Alerts für wenn man das falsche Passwort eingegeben hat.
+"login.alert.wrong_password.title" = "Password incorretta!";
+// CONTEXT: Nachricht des Alerts für wenn man einen falschen Benutzernamen eingegeben hat. %s wird durch den Benutzernamen ersetzt.
+"login.alert.wrong_username.message" = "Il nome utente %@ non esiste.";
+// CONTEXT: Titel des Alerts für wenn man einen falschen Benutzernamen eingegeben hat.
+"login.alert.wrong_username.title" = "Nome utente errato";
+// CONTEXT: Platzhalter für das Passwort im Login-Screen
+"login.placeholder.password" = "Password";
+// CONTEXT: Platzhalter für den Benutzernamen im Login-Screen
+"login.placeholder.username" = "Nome utente";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Login.stay
+// CONTEXT: Steht beim Schalter, durch den man eingeloggt bleibt, auch wenn die App neugestartet wird.
+"login.stay_logged_in" = "Restare connesso";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Map.could
+// CONTEXT: Wird angezeigt, wenn das PDF nicht geladen werden konnte.
+"map.could_not_load" = "Non è stato possibile caricare la pianta!";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Map.issue
+// CONTEXT: Knopf, um die Details einer Pendenz anzuzeigen.
+"map.issue_list.show_details" = "Mostra dettagli";
+// CONTEXT: Knopf, um die in der liste ausgewählte Pendenz auf dem Grundriss anzuzeigen.
+"map.issue_list.show_in_map" = "Mostrare sulla pianta";
+// CONTEXT: Fasst kurz zusammen, was für Pendenzen in einem Bereich sind. Das erste %s wird durch die Anzahl offener Pendenzen ersetzt, das zweite durch die Anzahl insgesamt (innerhalb des Bereichs).
+"map.issue_list.summary" = "%@ pendenze aperte; %@ in totale";
+// CONTEXT: Wird statt map.issue_list.summary angezeigt, wenn ein Filter aktiv ist. das erste %s wird durch die Anzahl Pendenzen ersetzt, die dem Filter entsprechen und somit angezeigt werden; das Zweite wird weiterhin durch die Gesamtzahl ersetzt.
+"map.issue_list.summary_filtered" = "Filtro attivo: %@/%@ pendenze visualizzate.";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Map.new
+// CONTEXT: Knopf, um eine neue Pendenz ohne Position zu erfassen.
+"map.new_unpositioned_issue" = "Registrare pendenza senza posizione";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Map.no
+// CONTEXT: Wird angezeigt, wenn kein Bereich ausgewählt ist.
+"map.no_map_selected" = "Scegli una zona a sinistra, per visualizzare qui la relativa pianta.";
+// CONTEXT: Wird angezeigt, wenn ein Bereich ausgewählt wurde, für den es keinen Grundriss/kein PDF gibt. %s wird durch den Namen des Bereichs ersetzt.
+"map.no_pdf" = "La zona \"%@\" non ha nessuna pianta.";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Map.pdf
+// CONTEXT: Wird angezeigt, während der Grundriss geladen wird.
+"map.pdf_loading" = "Caricamento pianta...";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Map.status
+// CONTEXT: Wird unter der Liste im Filter angezeigt, wenn alle Status angezeigt werden.
+"map.status_filter.all_selected" = "Visualizzare tutte le pendenze.";
+// CONTEXT: Wird unter der Liste im Filter angezeigt, wenn keine Status angezeigt werden.
+"map.status_filter.none_selected" = "Nessuna pendenza visualizzata.";
+// CONTEXT: Wird unter der Liste im Filter angezeigt, wenn nur manche Status angezeigt werden.
+"map.status_filter.some_selected" = "Visualizzare solo le pendenze con uno degli stati selezionati.";
+// CONTEXT: Titel für das Popup, womit die Pendenzen gefiltert werden können.
+"map.status_filter.title" = "Filtra per stato";
+// CONTEXT: Titel für die Grundrissansicht. (Wird angezeigt, wenn kein Grundriss ausgewählt ist.)
+"map.title" = "Pianta";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Map
+// CONTEXT: Nachricht des Alerts für wenn der ausgewählte Bereich nicht mehr existiert.
+"map_list.map_removed.message" = "Questa zona non esiste più. Verrai reindirizzato alla scelta dell'edificio.";
+// CONTEXT: Titel des Alerts für wenn der ausgewählte Bereich nicht mehr existiert.
+"map_list.map_removed.title" = "Zona rimossa!";
+// CONTEXT: Beschreibt für einen Grundriss, wieviele offene Pendenzen er (rekursiv) enthält; %s wird durch die Anzahl ersetzt.
+"map_list.map_summary.open_issues" = "%@ pendenze aperte";
+// CONTEXT: Überschrift des Abschnitts in der Liste für die untergeordneten Bereiche
+"map_list.section.child_maps" = "Zone subalterne";
+// CONTEXT: Überschrift des Abschnitts in der Liste für den entsprechenden Bereich
+"map_list.section.this_map" = "Questa zona";
+// CONTEXT: Kurzer Titel für die "Auf Foto Zeichnen"-Ansicht
+"markup.title" = "Disegnare";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: View
+// CONTEXT: Knopf, um die Antwort vom Handwerker anzunehmen und somit die Pendenz als abgeschlossen zu markieren.
+"view_issue.accept_response" = "Approvare";
+// CONTEXT: Überschrift für die Aktionen, die auf eine Pendenz ausgeführt werden können.
+"view_issue.actions" = "Azioni";
+// CONTEXT: Wird anstelle der Kameraansicht angezeigt, wenn nicht auf die Kamera zugegriffen werden kann.
+"view_issue.could_not_activate_camera" = "Non è stato possibile attivare la fotocamera!";
+// CONTEXT: Nachricht des Alerts für wenn die Fotoauswahl nicht geöffnet werden konnte.
+"view_issue.could_not_open_library.message" = "Per aprire la galleria, questa app necessita del permesso di accedere alle tue foto (impostazioni dispositivo).";
+// CONTEXT: Titel des Alerts für wenn die Fotoauswahl nicht geöffnet werden konnte.
+"view_issue.could_not_open_library.title" = "Impossibile aprire la galleria!";
+// CONTEXT: Titel des Alerts für wenn das Bild nicht abgespeichert werden kann.
+"view_issue.could_not_save_image.title" = "Non è stato possibile salvare l'immagine!";
+// CONTEXT: Titel des Alerts für wenn kein Foto gemacht werden konnte.
+"view_issue.could_not_take_picture.title" = "Impossibile scattare la fotografia!";
+// CONTEXT: Überschrift für die Details des zugewiesenen Handwerkers.
+"view_issue.craftsman" = "Operaio";
+// CONTEXT: Überschrift für die Beschreibung.
+"view_issue.description" = "Descrizione";
+// CONTEXT: Überschrift für die Details einer Pendenz.
+"view_issue.details" = "Dettagli";
+// CONTEXT: Überschrift für das Bild einer Pendenz
+"view_issue.image" = "Foto";
+// CONTEXT: Steht anstelle des Fotos da, wenn kein Foto gesetzt ist.
+"view_issue.image_placeholder" = "Nessuna foto caricata";
+// CONTEXT: Überschrift dafür, ob die Pendenz im Abnahmemodus aufgenommen wurde. Diese Überschrift darf etwas länger sein, da sie auch über mehrere Zeilen angezeigt werden kann.
+"view_issue.is_client_mode" = "Inserita in modalità sopralluogo";
+// CONTEXT: Drückt kurz aus, dass die Pendenz nicht im Abnahmemodus aufgenommen wurde.
+"view_issue.is_client_mode.false" = "No";
+// CONTEXT: Drückt kurz aus, dass die Pendenz im Abnahmemodus aufgenommen wurde.
+"view_issue.is_client_mode.true" = "Sì";
+// CONTEXT: Knopf, um eine Pendenz als abgeschlossen zu markieren, obwohl der Handwerker sie nicht beantwortet hat.
+"view_issue.mark_as_completed" = "Marcare come terminata";
+// CONTEXT: Knopf, um die Ansicht zu öffnen, mit der man auf das Foto zeichnen kann.
+"view_issue.markup" = "Disegnare sulla foto";
+// CONTEXT: Wird anstelle der Vorschläge angezeigt, wenn es keinen zutreffenden gibt.
+"view_issue.no_suggestions" = "Nessun suggerimento adatto";
+// CONTEXT: Wird anstelle der Funktion angezeigt, wenn sie noch nicht ausgewählt wurde.
+"view_issue.no_trade" = "Nessuna funzione";
+// CONTEXT: Knopf, um die Antwort vom Handwerker abzulehnen und sie somit rückgängig zu machen.
+"view_issue.reject_response" = "Respingere";
+// CONTEXT: Knopf, um erneut zu versuchen, die Kamera aufzustarten, nachdem es fehlgeschlagen ist.
+"view_issue.retry_camera" = "Tentare nuovamente";
+// CONTEXT: Knopf, um keinen Handwerker auszuwählen.
+"view_issue.select_craftsman.none" = "Nessun operaio";
+// CONTEXT: Titel für die Ansicht zum auswählen des Namens.
+"view_issue.select_craftsman.title" = "Operaio";
+// CONTEXT: Knopf, um keine Funktion auszuwählen.
+"view_issue.select_trade.none" = "Nessuna funzione";
+// CONTEXT: Titel für die Ansicht zum auswählen der Funktion.
+"view_issue.select_trade.title" = "Funzioni";
+// CONTEXT: Wird über den Aktionen angezeigt, wenn die Pendenz vom Handwerker beantwortet wurde.
+"view_issue.summary.has_response" = "A questa pendenza è stata data una risposta dall'operaio. Puoi confermare questa risposta (per terminare la pendenza) oppure respingerla (e quindi revocarla).";
+// CONTEXT: Wird über den Aktionen angezeigt, wenn die Pendenz vom Handwerker noch keine Antwort erhalten hat.
+"view_issue.summary.no_response" = "A questa pendenza non è ancora stata data risposta dall'operaio. Puoi comunque confermarla e di conseguenza marcarla come terminata.";
+// CONTEXT: Wird über den Aktionen angezeigt, wenn die Pendenz bereits abgeschlossen wurde.
+"view_issue.summary.reviewed" = "Questa pendenza è già stata chiusa. \nPuoi revocare la conferma, in modo da riaprirla.";
+// CONTEXT: Titel für das "Pendenz Bearbeiten"-Popup, wenn die Pendenz erstellt wird.
+"view_issue.title_creating" = "Nuova pendenza";
+// CONTEXT: Titel für das "Pendenz Bearbeiten"-Popup, wenn die Pendenz bearbeitet wird.
+"view_issue.title_editing" = "Elaborare la pendenza";
+// CONTEXT: Titel für das Popup, worin die Details einer Pendenz angezeigt werden.
+"view_issue.title_viewing" = "Dettagli della pendenza";
+// CONTEXT: Knopf, um den Abschluss einer Pendenz rückgangig zu machen und sie somit wieder zu eröffnen.
+"view_issue.undo_review" = "Aprire nuovamente";

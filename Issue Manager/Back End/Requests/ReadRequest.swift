@@ -8,11 +8,11 @@ struct ReadRequest: JSONJSONRequest {
 	var method: String { return "read" }
 	
 	let authenticationToken: String
-	let user: ObjectMeta
-	let craftsmen: [ObjectMeta]
-	let buildings: [ObjectMeta]
-	let maps: [ObjectMeta]
-	let issues: [ObjectMeta]
+	let user: ObjectMeta<User>
+	let craftsmen: [ObjectMeta<Craftsman>]
+	let buildings: [ObjectMeta<Building>]
+	let maps: [ObjectMeta<Map>]
+	let issues: [ObjectMeta<Issue>]
 	
 	func applyToClient(_ response: ExpectedResponse) {
 		Client.shared.update(from: response)
@@ -20,13 +20,13 @@ struct ReadRequest: JSONJSONRequest {
 	
 	struct ExpectedResponse: Response {
 		let changedCraftsmen: [Craftsman]
-		let removedCraftsmanIDs: [UUID]
+		let removedCraftsmanIDs: [ID<Craftsman>]
 		let changedBuildings: [Building]
-		let removedBuildingIDs: [UUID]
+		let removedBuildingIDs: [ID<Building>]
 		let changedMaps: [Map]
-		let removedMapIDs: [UUID]
+		let removedMapIDs: [ID<Map>]
 		let changedIssues: [Issue]
-		let removedIssueIDs: [UUID]
+		let removedIssueIDs: [ID<Issue>]
 		let changedUser: User?
 	}
 }
@@ -73,16 +73,20 @@ extension Client {
 		saveShared()
 	}
 	
-	private func updateEntries<T: APIObject>(in path: WritableKeyPath<Storage, [UUID: T]>, changing changedEntries: [T], removing removedIDs: [UUID]) {
+	private func updateEntries<T: APIObject>(
+		in path: WritableKeyPath<Storage, [ID<T>: T]>,
+		changing changedEntries: [T],
+		removing removedIDs: [ID<T>])
+	{
 		for changed in changedEntries {
 			let previous = storage[keyPath: path][changed.id]
 			storage[keyPath: path][changed.id] = changed
-			if let container = changed as? FileContainer {
-				container.downloadFile(previous: previous as? FileContainer)
+			if let container = changed as? AnyFileContainer {
+				container.downloadFile(previous: previous as? AnyFileContainer)
 			}
 		}
 		for removed in removedIDs {
-			if let container = storage[keyPath: path][removed] as? FileContainer {
+			if let container = storage[keyPath: path][removed] as? AnyFileContainer {
 				container.deleteFile()
 			}
 			storage[keyPath: path][removed] = nil

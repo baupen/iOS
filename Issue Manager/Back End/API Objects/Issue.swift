@@ -4,14 +4,14 @@ import Foundation
 
 final class Issue: APIObject {
 	// NB: update `update(from:)` when adding/removing stored properties!
-	var meta = ObjectMeta()
+	var meta = ObjectMeta<Issue>()
 	var number: Int?
 	var isMarked = false
 	var wasAddedWithClient: Bool // "abnahmemodus"
 	var imageFilename: String?
 	var description: String?
-	var craftsman: UUID?
-	var map: UUID // only really used before registration
+	var craftsman: ID<Craftsman>?
+	var map: ID<Map> // only really used before registration
 	var status: Status = Status()
 	var position: Position?
 	

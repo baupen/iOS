@@ -1,3 +1,4 @@
 github "juliand665/PullToExpand" "1.2"
 github "mangelio/SimplePDFKit" "1.1"
+github "timvermeulen/Newtype" "0bb0e42800fd47acd7fe63f9773e6ef874674af2"
 github "timvermeulen/Promise" "1.11.0"

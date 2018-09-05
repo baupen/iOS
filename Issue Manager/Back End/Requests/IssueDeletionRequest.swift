@@ -10,7 +10,7 @@ struct IssueDeletionRequest: JSONJSONRequest, BacklogStorable {
 	var method: String { return "issue/delete" }
 	
 	let authenticationToken: String
-	let issueID: UUID
+	let issueID: ID<Issue>
 	
 	func applyToClient(_ response: ExpectedResponse) {
 		Client.shared.storage.issues[issueID]?.deleteFile()

@@ -3,12 +3,12 @@
 import Foundation
 
 final class Map: APIObject {
-	let meta: ObjectMeta
-	let children: [UUID]
-	var issues: [UUID]
+	let meta: ObjectMeta<Map>
+	let children: [ID<Map>]
+	var issues: [ID<Issue>]
 	let filename: String?
 	let name: String
-	let buildingID: UUID
+	let buildingID: ID<Building>
 }
 
 extension Map: FileContainer {

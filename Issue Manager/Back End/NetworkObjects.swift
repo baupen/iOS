@@ -2,18 +2,61 @@
 
 import Foundation
 
-protocol APIObject: Codable {
-	var meta: ObjectMeta { get }
-	var id: UUID { get }
+struct ID<Object: APIObject>: Codable, Hashable, CustomStringConvertible {
+	var rawValue: UUID
+	
+	var description: String {
+		return rawValue.description
+	}
+	
+	var hashValue: Int {
+		return rawValue.hashValue
+	}
+	
+	init() {
+		self.rawValue = UUID()
+	}
+	
+	init(_ rawValue: UUID) {
+		self.rawValue = rawValue
+	}
+	
+	init(from decoder: Decoder) throws {
+		rawValue = try UUID(from: decoder)
+	}
+	
+	func encode(to encoder: Encoder) throws {
+		try rawValue.encode(to: encoder)
+	}
+}
+
+protocol AnyAPIObject: Codable {
+	var rawMeta: AnyObjectMeta { get }
+	var rawID: UUID { get }
+}
+
+protocol APIObject: AnyAPIObject {
+	var meta: ObjectMeta<Self> { get }
+	var id: ID<Self> { get }
 }
 
 extension APIObject {
-	var id: UUID { return meta.id }
+	var id: ID<Self> { return meta.id }
+	
+	var rawMeta: AnyObjectMeta { return meta }
+	var rawID: UUID { return id.rawValue }
 }
 
-struct ObjectMeta: Codable, Equatable {
-	var id = UUID()
+protocol AnyObjectMeta {
+	var rawID: UUID { get }
+	var lastChangeTime: Date { get }
+}
+
+struct ObjectMeta<Object: APIObject>: AnyObjectMeta, Codable, Equatable {
+	var id = ID<Object>()
 	var lastChangeTime = Date()
+	
+	var rawID: UUID { return id.rawValue }
 }
 
 protocol Response: Decodable {}

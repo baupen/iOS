@@ -3,7 +3,7 @@
 import Foundation
 
 struct User: APIObject {
-	var meta: ObjectMeta
+	var meta: ObjectMeta<User>
 	var authenticationToken: String
 	var givenName: String
 	var familyName: String

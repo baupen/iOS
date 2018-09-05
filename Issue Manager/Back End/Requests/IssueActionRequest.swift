@@ -15,7 +15,7 @@ struct IssueActionRequest: JSONJSONRequest, BacklogStorable {
 	var method: String { return "issue/\(action.rawValue)" }
 	
 	let authenticationToken: String
-	let issueID: UUID
+	let issueID: ID<Issue>
 	let action: IssueAction
 	
 	func applyToClient(_ response: ExpectedResponse) {

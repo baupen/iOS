@@ -40,7 +40,7 @@ class MapListViewController: RefreshingTableViewController, LoadedViewController
 			if !mainController.isCollapsed {
 				// deselect map unless currently shown
 				let mapController = mainController.detailNav.mapController
-				let currentMap = mapController.holder
+				let currentMap = mapController.holder as? Map
 				if map(for: selected).id != currentMap?.id {
 					tableView.deselectRow(at: selected, animated: true)
 				} else if !map(for: selected).children.isEmpty {
@@ -84,10 +84,10 @@ class MapListViewController: RefreshingTableViewController, LoadedViewController
 	
 	/// - returns: whether or not the holder is still valid
 	@discardableResult private func handleRefresh() -> Bool {
-		if holder is Building, let building = Client.shared.storage.buildings[holder.id] {
+		if let oldBuilding = holder as? Building, let building = Client.shared.storage.buildings[oldBuilding.id] {
 			holder = building
 			return true
-		} else if holder is Map, let map = Client.shared.storage.maps[holder.id] {
+		} else if let oldMap = holder as? Map, let map = Client.shared.storage.maps[oldMap.id] {
 			holder = map
 			return true
 		} else {
@@ -114,7 +114,7 @@ class MapListViewController: RefreshingTableViewController, LoadedViewController
 				tableView.deselectRow(at: selected, animated: true)
 			}
 			
-			if holder.id != mapController.holder?.id {
+			if holder.rawID != mapController.holder?.rawID {
 				mapController.holder = holder
 			}
 		} else {

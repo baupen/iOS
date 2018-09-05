@@ -3,12 +3,12 @@
 import Foundation
 
 struct Building: APIObject {
-	var meta: ObjectMeta
+	var meta: ObjectMeta<Building>
 	var name: String
 	var address: Address
 	var imageFilename: String?
-	var maps: [UUID]
-	var craftsmen: [UUID]
+	var maps: [ID<Map>]
+	var craftsmen: [ID<Craftsman>]
 	
 	struct Address: Codable {
 		/// first two address lines (multiline)
@@ -26,7 +26,7 @@ extension Building: FileContainer {
 }
 
 extension Building: MapHolder {
-	var children: [UUID] { return maps }
+	var children: [ID<Map>] { return maps }
 	
 	func recursiveChildren() -> [Map] {
 		return childMaps().flatMap { $0.recursiveChildren() }

@@ -18,11 +18,17 @@ private let baseLocalURL = try! manager.url(
 	create: true
 )
 
-protocol FileContainer: APIObject {
-	static var pathPrefix: String { get }
-	static var downloadRequestPath: DownloadRequestPath { get }
-	
+protocol AnyFileContainer: AnyAPIObject {
 	var filename: String? { get }
+	
+	func deleteFile()
+	func downloadFile()
+	func downloadFile(previous: AnyFileContainer?)
+}
+
+protocol FileContainer: AnyFileContainer, APIObject {
+	static var pathPrefix: String { get }
+	static var downloadRequestPath: DownloadRequestPath<Self> { get }
 	
 	static func cacheURL(filename: String) -> URL
 	static func localURL(filename: String) -> URL
@@ -41,7 +47,11 @@ extension FileContainer {
 		return url
 	}
 	
-	func downloadFile(previous: FileContainer? = nil) {
+	func downloadFile() {
+		downloadFile(previous: nil)
+	}
+	
+	func downloadFile(previous: AnyFileContainer?) {
 		if let previous = previous {
 			switch (previous.filename, filename) {
 			case (nil, nil): // never had file

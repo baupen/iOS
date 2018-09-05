@@ -3,14 +3,14 @@
 import Foundation
 
 final class Storage: Codable {
-	private(set) var craftsmen: [UUID: Craftsman] = [:]
-	private(set) var buildings: [UUID: Building] = [:]
-	private(set) var maps: [UUID: Map] = [:]
+	private(set) var craftsmen: [ID<Craftsman>: Craftsman] = [:]
+	private(set) var buildings: [ID<Building>: Building] = [:]
+	private(set) var maps: [ID<Map>: Map] = [:]
 	// try not to mutate these from outside the backend group
-	internal(set) var issues: [UUID: Issue] = [:]
+	internal(set) var issues: [ID<Issue>: Issue] = [:]
 	
-	private var fileContainers: [FileContainer] {
-		return Array(buildings.values) as [FileContainer]
+	private var fileContainers: [AnyFileContainer] {
+		return Array(buildings.values) as [AnyFileContainer]
 			+ Array(maps.values)
 			+ Array(issues.values)
 	}
