@@ -27,7 +27,7 @@ class MainViewController: UISplitViewController, LoadedViewController {
 	override func encodeRestorableState(with coder: NSCoder) {
 		super.encodeRestorableState(with: coder)
 		
-		coder.encode(building.id, forKey: "buildingID")
+		coder.encode(building.id.rawValue, forKey: "buildingID")
 	}
 	
 	override func decodeRestorableState(with coder: NSCoder) {
