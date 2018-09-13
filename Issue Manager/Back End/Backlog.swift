@@ -1,6 +1,7 @@
 // Created by Julian Dunskus
 
 import Foundation
+import Promise
 
 /**
 A request that can be stored for later execution and released whenever the connection comes back later.

@@ -1,6 +1,7 @@
 // Created by Julian Dunskus
 
 import UIKit
+import Promise
 
 class IssueBadge: UIView {
 	let label = UILabel() <- {

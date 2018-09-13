@@ -3,6 +3,7 @@
 import UIKit
 import SimplePDFKit
 import PullToExpand
+import Promise
 
 final class MapViewController: UIViewController, LoadedViewController {
 	typealias Localization = L10n.Map

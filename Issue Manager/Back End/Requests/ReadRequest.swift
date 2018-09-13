@@ -1,6 +1,7 @@
 // Created by Julian Dunskus
 
 import Foundation
+import Promise
 
 struct ReadRequest: JSONJSONRequest {
 	static let isIndependent = false

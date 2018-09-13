@@ -1,6 +1,7 @@
 // Created by Julian Dunskus
 
 import Foundation
+import Promise
 
 typealias DownloadRequestPath<T: APIObject> = WritableKeyPath<FileDownloadRequest, ObjectMeta<T>?>
 

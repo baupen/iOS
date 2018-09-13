@@ -1,6 +1,7 @@
 // Created by Julian Dunskus
 
 import Foundation
+import Promise
 
 extension Client {
 	func getUser() -> Future<User> {

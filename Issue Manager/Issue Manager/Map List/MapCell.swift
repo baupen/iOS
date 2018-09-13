@@ -1,6 +1,7 @@
 // Created by Julian Dunskus
 
 import UIKit
+import Promise
 
 class MapCell: UITableViewCell, LoadedTableCell {
 	typealias Localization = L10n.MapList.MapSummary
