@@ -17,8 +17,6 @@ final class MapViewController: UIViewController, LoadedViewController {
 	@IBOutlet var pdfContainerView: UIView!
 	@IBOutlet var activityIndicator: UIActivityIndicatorView!
 	@IBOutlet var pullableView: PullableView!
-	@IBOutlet var blurHeightConstraint: NSLayoutConstraint!
-	@IBOutlet var listHeightConstraint: NSLayoutConstraint!
 	@IBOutlet var issuePositioner: IssuePositioner!
 	
 	// the filter popover's done button and the add marker popover's cancel button link to this
@@ -125,10 +123,7 @@ final class MapViewController: UIViewController, LoadedViewController {
 		super.viewWillLayoutSubviews()
 		
 		let safeArea = view.bounds.inset(by: view.safeAreaInsets)
-		let allowedHeight = safeArea.height
-		blurHeightConstraint.constant = allowedHeight + safeArea.height
-		listHeightConstraint.constant = allowedHeight
-		pullableView.maxHeight = allowedHeight
+		pullableView.maxHeight = safeArea.height
 	}
 	
 	// not called at all in initial instantiation for some reason (hence the additional call in viewWillAppear)
