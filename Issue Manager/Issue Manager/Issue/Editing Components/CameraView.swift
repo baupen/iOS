@@ -17,7 +17,7 @@ final class CameraView: UIView {
 	override func awakeFromNib() {
 		super.awakeFromNib()
 		
-		NotificationCenter.default.addObserver(self, selector: #selector(updateOrientation), name: .UIApplicationDidChangeStatusBarOrientation, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(updateOrientation), name: UIApplication.didChangeStatusBarOrientationNotification, object: nil)
 		
 		let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
 		addGestureRecognizer(tapRecognizer)
@@ -87,7 +87,7 @@ final class CameraView: UIView {
 		photoOutput.capturePhoto(with: settings, delegate: self)
 	}
 	
-	func prepareImagePicker(for source: UIImagePickerControllerSourceType) -> UIImagePickerController? {
+	func prepareImagePicker(for source: UIImagePickerController.SourceType) -> UIImagePickerController? {
 		guard UIImagePickerController.isSourceTypeAvailable(source) else { return nil }
 		let picker = UIImagePickerController()
 		picker.delegate = self
@@ -131,8 +131,8 @@ extension CameraView: UIImagePickerControllerDelegate, UINavigationControllerDel
 		picker.presentingViewController!.dismiss(animated: true)
 	}
 	
-	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
-		let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+		let image = info[.originalImage] as! UIImage
 		delegate?.pictureSelected(image.cropped())
 		picker.presentingViewController!.dismiss(animated: true)
 	}

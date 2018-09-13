@@ -103,7 +103,7 @@ class SuggestionCell: UITableViewCell, LoadedTableCell {
 				text.addAttributes(
 					[
 						.backgroundColor: #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 0.2),
-						.underlineStyle: NSUnderlineStyle.styleSingle.rawValue,
+						.underlineStyle: NSUnderlineStyle.single.rawValue,
 						.underlineColor: #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 0.5)
 					],
 					range: matchingRange

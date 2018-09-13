@@ -8,7 +8,7 @@ class BuildingListLayout: UICollectionViewFlowLayout {
 		
 		guard let collectionView = collectionView else { return }
 		
-		let availableSize = UIEdgeInsetsInsetRect(collectionView.bounds, sectionInset).size
+		let availableSize = collectionView.bounds.inset(by: sectionInset).size
 		let minimumWidth: CGFloat = 300
 		let spacing = minimumLineSpacing
 		let amount = max(1, ((availableSize.width + spacing) / (minimumWidth + spacing)).rounded(.down))

@@ -122,7 +122,7 @@ extension IssueListViewController: UITableViewDataSource {
 extension IssueListViewController: UITableViewDelegate {
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		if indexPath == tableView.indexPathForSelectedRow || tableView.cellForRow(at: indexPath)?.isHighlighted == true {
-			return UITableViewAutomaticDimension
+			return UITableView.automaticDimension
 		} else {
 			return 38 // bit of a magic number but eh
 		}

@@ -263,7 +263,7 @@ final class EditIssueViewController: UITableViewController, LoadedViewController
 	}
 	
 	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		return UITableViewAutomaticDimension
+		return UITableView.automaticDimension
 	}
 }
 
@@ -300,7 +300,7 @@ extension EditIssueViewController: CameraViewDelegate {
 
 extension UIImage {
 	func saveJPEG(to url: URL) throws {
-		guard let jpg = UIImageJPEGRepresentation(self, 0.75) else {
+		guard let jpg = jpegData(compressionQuality: 0.75) else {
 			throw NSError(localizedDescription: "Could not generate JPEG representation for image!")
 		}
 		print("Saving file to", url)

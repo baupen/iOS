@@ -123,7 +123,7 @@ final class MapViewController: UIViewController, LoadedViewController {
 	override func viewWillLayoutSubviews() {
 		super.viewWillLayoutSubviews()
 		
-		let safeArea = UIEdgeInsetsInsetRect(view.bounds, view.safeAreaInsets)
+		let safeArea = view.bounds.inset(by: view.safeAreaInsets)
 		let allowedHeight = safeArea.height
 		blurHeightConstraint.constant = allowedHeight + safeArea.height
 		listHeightConstraint.constant = allowedHeight
@@ -131,8 +131,8 @@ final class MapViewController: UIViewController, LoadedViewController {
 	}
 	
 	// not called at all in initial instantiation for some reason (hence the additional call in viewWillAppear)
-	override func didMove(toParentViewController parent: UIViewController?) {
-		super.didMove(toParentViewController: parent)
+	override func didMove(toParent parent: UIViewController?) {
+		super.didMove(toParent: parent)
 		
 		updateBarButtonItem()
 	}

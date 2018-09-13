@@ -58,7 +58,7 @@ class MasterNavigationController: UINavigationController {
 		
 		detailNav.pushViewController(mapController, animated: false) // auto-pops from self
 		viewControllers = viewControllers // update own controllers in case top was popped off
-		mapController.didMove(toParentViewController: detailNav)
+		mapController.didMove(toParent: detailNav)
 		
 		return detailNav
 	}
@@ -68,12 +68,12 @@ class MasterNavigationController: UINavigationController {
 		
 		let mapController = detailNav.mapController
 		detailNav.viewControllers = [] // can't pop root view controller explicitly
-		mapController.didMove(toParentViewController: nil)
+		mapController.didMove(toParent: nil)
 		
 		if mapController.holder is Map {
 			// worth keeping around
 			pushViewController(mapController, animated: true)
-			mapController.didMove(toParentViewController: self)
+			mapController.didMove(toParent: self)
 		}
 	}
 }

@@ -36,14 +36,18 @@ public class KeyboardLayoutConstraint: NSLayoutConstraint {
 		
 		offset = constant
 		
-		NotificationCenter.default.addObserver(self,
-											   selector: #selector(keyboardWillShowNotification),
-											   name: .UIKeyboardWillShow,
-											   object: nil)
-		NotificationCenter.default.addObserver(self,
-											   selector: #selector(keyboardWillHideNotification),
-											   name: .UIKeyboardWillHide,
-											   object: nil)
+		NotificationCenter.default.addObserver(
+			self,
+			selector: #selector(keyboardWillShowNotification),
+			name: UIResponder.keyboardWillShowNotification,
+			object: nil
+		)
+		NotificationCenter.default.addObserver(
+			self,
+			selector: #selector(keyboardWillHideNotification),
+			name: UIResponder.keyboardWillHideNotification,
+			object: nil
+		)
 	}
 	
 	deinit {
@@ -53,7 +57,7 @@ public class KeyboardLayoutConstraint: NSLayoutConstraint {
 	@objc func keyboardWillShowNotification(_ notification: Notification) {
 		guard let userInfo = notification.userInfo else { return }
 		
-		guard let frame = userInfo[UIKeyboardFrameEndUserInfoKey] as? CGRect else { return }
+		guard let frame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
 		visibleKeyboardHeight = frame.size.height
 		
 		animateChanges(accordingTo: userInfo)
@@ -69,15 +73,15 @@ public class KeyboardLayoutConstraint: NSLayoutConstraint {
 	
 	private func animateChanges(accordingTo userInfo: [AnyHashable: Any]) {
 		guard
-			let duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as? TimeInterval,
-			let options = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? UInt,
+			let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval,
+			let options = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt,
 			let window = UIApplication.shared.keyWindow
 			else { return }
 		
 		UIView.animate(
 			withDuration: duration,
 			delay: 0,
-			options: UIViewAnimationOptions(rawValue: options),
+			options: UIView.AnimationOptions(rawValue: options),
 			animations: window.layoutIfNeeded
 		)
 	}

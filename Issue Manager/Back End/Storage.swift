@@ -55,9 +55,3 @@ final class Storage: Codable {
 		Client.shared.saveShared()
 	}
 }
-
-extension Bool {
-	mutating func toggle() { // TODO remove in Swift 4.2
-		self = !self
-	}
-}

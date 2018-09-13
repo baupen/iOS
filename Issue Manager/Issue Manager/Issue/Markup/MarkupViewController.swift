@@ -170,7 +170,7 @@ class MarkupViewController: UIViewController {
 		
 		switch recognizer.state {
 		case .began:
-			displayLink.add(to: .main, forMode: .commonModes)
+			displayLink.add(to: .main, forMode: .common)
 			
 			startPosition = position
 			lastPosition = position
@@ -218,7 +218,7 @@ class MarkupViewController: UIViewController {
 			startPosition = nil
 			lastPosition = nil
 			
-			displayLink.remove(from: .main, forMode: .commonModes)
+			displayLink.remove(from: .main, forMode: .common)
 		case .possible:
 			break
 		}
