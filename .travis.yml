@@ -1,7 +1,10 @@
 language: swift
+osx_image: xcode10
 before_install:
   - cd Issue\ Manager
-osx_image: xcode10
-install: carthage bootstrap --platform iOS
+install:
+  - carthage bootstrap --platform iOS
 script:
   - xcodebuild clean build -sdk iphonesimulator -project Issue\ Manager.xcodeproj/ -scheme Issue\ Manager CODE_SIGNING_REQUIRED=NO
+after_failure:
+  - cat carthage-xcodebuild.*.log
