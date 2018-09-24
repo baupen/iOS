@@ -4,7 +4,6 @@ before_install:
   - cd Issue\ Manager
 install:
   - carthage bootstrap --platform iOS
+  - find /var/ -name carthage-xcodebuild.*.log -exec cat {} "+"
 script:
   - xcodebuild clean build -sdk iphonesimulator -project Issue\ Manager.xcodeproj/ -scheme Issue\ Manager CODE_SIGNING_REQUIRED=NO
-after_failure:
-  - find /var/ -name carthage-xcodebuild.*.log -exec cat {} "+"
