@@ -157,7 +157,7 @@ final class Client {
 		let path = request.url!.relativePath
 		print("\(path): sending \(debugRepresentation(of: request.httpBody!))")
 		return urlSession.dataTask(with: request)
-			.mapError(RequestError.communicationError)
+			.transformError { _, error in throw RequestError.communicationError(error) }
 			.always { print("\(path): finished") }
 	}
 }
