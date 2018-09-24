@@ -124,7 +124,7 @@ extension IssueListViewController: UITableViewDelegate {
 		if indexPath == tableView.indexPathForSelectedRow || tableView.cellForRow(at: indexPath)?.isHighlighted == true {
 			return UITableView.automaticDimension
 		} else {
-			return 38 // bit of a magic number but eh
+			return 44 // bit of a magic number but eh. also it's the recommended minimum tap target size so ¯\_(ツ)_/¯
 		}
 	}
 	
