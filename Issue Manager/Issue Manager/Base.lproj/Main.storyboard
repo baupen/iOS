@@ -197,7 +197,7 @@
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rHo-jf-rQe">
-                                                    <rect key="frame" x="0.0" y="0.0" width="703.5" height="698"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="703" height="698"/>
                                                     <connections>
                                                         <segue destination="XdX-XP-UgZ" kind="embed" identifier="" id="oIu-NA-CAA"/>
                                                     </connections>
@@ -731,7 +731,7 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <nil key="textColor"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                                <textInputTraits key="textInputTraits" returnKeyType="next" textContentType="username"/>
+                                                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next" textContentType="username"/>
                                                                                 <attributedString key="userComments">
                                                                                     <fragment content="placeholder for username field">
                                                                                         <attributes>
@@ -1781,17 +1781,18 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                             <rect key="frame" x="0.0" y="0.0" width="540" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="R0I-Ij-sxf">
-                                                    <rect key="frame" x="20" y="14" width="500" height="16"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="R0I-Ij-sxf">
+                                                    <rect key="frame" x="20" y="0.0" width="500" height="43.5"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" image="flat_issue_new" translatesAutoresizingMaskIntoConstraints="NO" id="avj-jt-HZf" customClass="TrilinearImageView" customModule="Issue_Manager" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
+                                                            <rect key="frame" x="0.0" y="8" width="28" height="28"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" secondItem="avj-jt-HZf" secondAttribute="height" multiplier="1:1" id="nNe-Mq-XMs"/>
+                                                                <constraint firstAttribute="width" secondItem="avj-jt-HZf" secondAttribute="height" multiplier="1:1" id="2ty-dU-1xo"/>
+                                                                <constraint firstAttribute="width" constant="28" id="YxR-Br-R3S"/>
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="799" verticalHuggingPriority="251" horizontalCompressionResistancePriority="800" text="neu" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pg3-uF-Bk7">
-                                                            <rect key="frame" x="236" y="0.0" width="28.5" height="16"/>
+                                                            <rect key="frame" x="228" y="11.5" width="28.5" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
@@ -1800,9 +1801,9 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xrz-80-JfA">
-                                                            <rect key="frame" x="484" y="0.0" width="16" height="16"/>
+                                                            <rect key="frame" x="456.5" y="0.0" width="43.5" height="43.5"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" secondItem="xrz-80-JfA" secondAttribute="height" multiplier="1:1" id="FYU-OP-DJN"/>
+                                                                <constraint firstAttribute="width" secondItem="xrz-80-JfA" secondAttribute="height" multiplier="1:1" id="h2I-Ph-Nfx"/>
                                                             </constraints>
                                                             <state key="normal" image="mark_unmarked"/>
                                                             <connections>
@@ -1811,15 +1812,14 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                         </button>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="xrz-80-JfA" firstAttribute="width" secondItem="xrz-80-JfA" secondAttribute="height" multiplier="1:1" id="Czs-og-f5Q"/>
-                                                        <constraint firstItem="avj-jt-HZf" firstAttribute="width" secondItem="avj-jt-HZf" secondAttribute="height" multiplier="1:1" id="F3m-Hl-HuY"/>
-                                                        <constraint firstAttribute="height" priority="999" constant="22" id="Fz0-G0-EOL"/>
+                                                        <constraint firstItem="xrz-80-JfA" firstAttribute="height" secondItem="R0I-Ij-sxf" secondAttribute="height" id="1k7-kH-xin"/>
+                                                        <constraint firstAttribute="height" priority="999" constant="44" id="Fz0-G0-EOL"/>
                                                     </constraints>
                                                 </stackView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottomMargin" secondItem="R0I-Ij-sxf" secondAttribute="bottom" constant="3" id="94h-V0-Kea"/>
-                                                <constraint firstItem="R0I-Ij-sxf" firstAttribute="top" secondItem="gHr-uD-rV3" secondAttribute="topMargin" constant="3" id="H8Z-0t-vMw"/>
+                                                <constraint firstAttribute="bottom" secondItem="R0I-Ij-sxf" secondAttribute="bottom" id="94h-V0-Kea"/>
+                                                <constraint firstItem="R0I-Ij-sxf" firstAttribute="top" secondItem="gHr-uD-rV3" secondAttribute="top" id="H8Z-0t-vMw"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="R0I-Ij-sxf" secondAttribute="trailing" id="jED-Y8-L4I"/>
                                                 <constraint firstItem="R0I-Ij-sxf" firstAttribute="leading" secondItem="gHr-uD-rV3" secondAttribute="leadingMargin" id="zSG-vC-kNj"/>
                                             </constraints>
@@ -2822,8 +2822,8 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="iOy-9i-ghB"/>
-        <segue reference="PB9-0e-xdP"/>
+        <segue reference="L64-rs-k1Y"/>
+        <segue reference="OdI-J8-6Ad"/>
         <segue reference="a5G-fh-9Or"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="Main"/>

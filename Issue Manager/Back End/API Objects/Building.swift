@@ -2,13 +2,13 @@
 
 import Foundation
 
-struct Building: APIObject {
-	var meta: ObjectMeta<Building>
-	var name: String
-	var address: Address
-	var imageFilename: String?
-	var maps: [ID<Map>]
-	var craftsmen: [ID<Craftsman>]
+final class Building: APIObject {
+	let meta: ObjectMeta<Building>
+	let name: String
+	let address: Address
+	let imageFilename: String?
+	let maps: [ID<Map>]
+	let craftsmen: [ID<Craftsman>]
 	
 	struct Address: Codable {
 		/// first two address lines (multiline)

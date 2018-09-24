@@ -201,10 +201,10 @@ extension Client {
 	}
 	
 	func saveShared() {
-		savingQueue.async {
+		savingQueue.async { [user, storage] in
 			do {
-				try defaults.encode(self.user, forKey: "Client.shared.user")
-				try defaults.encode(self.storage, forKey: "Client.shared.storage")
+				try defaults.encode(user, forKey: "Client.shared.user")
+				try defaults.encode(storage, forKey: "Client.shared.storage")
 				try self.saveBacklog()
 				print("Client saved!")
 			} catch {
