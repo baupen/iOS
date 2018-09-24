@@ -61,7 +61,7 @@ extension Client {
 		
 		let removed = Set(response.removedIssueIDs) // for efficient lookup
 		for map in storage.maps.values {
-			map.issues.removeAll(where: { !removed.contains($0) })
+			map.issues.removeAll(where: { removed.contains($0) })
 		}
 		
 		for issue in response.changedIssues {
