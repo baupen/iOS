@@ -75,7 +75,7 @@ class ViewIssueViewController: UITableViewController, LoadedViewController {
 		clientModeLabel.text = issue.wasAddedWithClient ? Localization.IsClientMode.true : Localization.IsClientMode.false
 		
 		image = issue.imageFilename.flatMap {
-			// TODO fall back on localURL for other views
+			// TODO: fall back on localURL for other views
 			UIImage(contentsOfFile: Issue.cacheURL(filename: $0).path)
 		}
 		

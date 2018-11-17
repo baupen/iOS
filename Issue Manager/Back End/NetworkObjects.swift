@@ -61,11 +61,7 @@ struct ObjectMeta<Object: APIObject>: AnyObjectMeta, Codable, Equatable {
 
 protocol Response: Decodable {}
 
-/**
-A basic request doesn't say anything about its response, which makes it handy for `Data` requests and abstraction.
-
-Conform to one of the more specific protocols rather than this.
-*/
+/// Conform to one of the more specific protocols rather than this.
 protocol Request {
 	associatedtype ExpectedResponse
 	

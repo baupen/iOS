@@ -82,3 +82,23 @@ extension Error {
 		return (self as NSError).localizedFailureReason ?? localizedDescription
 	}
 }
+
+extension Point {
+	init(_ point: CGPoint) {
+		self.init(
+			x: Double(point.x),
+			y: Double(point.y)
+		)
+	}
+}
+
+extension UIColor {
+	convenience init(_ color: Color) {
+		self.init(
+			red: CGFloat(color.red) / 255,
+			green: CGFloat(color.green) / 255,
+			blue: CGFloat(color.blue) / 255,
+			alpha: 1
+		)
+	}
+}

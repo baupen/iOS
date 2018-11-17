@@ -35,7 +35,7 @@ class BuildingListViewController: RefreshingTableViewController, LoadedViewContr
 	private var buildings: [Building] = [] {
 		didSet {
 			buildings.sort {
-				$0.name < $1.name // TODO use last opened date instead
+				$0.name < $1.name // TODO: use last opened date instead
 			}
 			refreshHintLabel.isHidden = !buildings.isEmpty
 		}

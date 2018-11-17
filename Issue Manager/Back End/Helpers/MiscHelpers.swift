@@ -12,16 +12,12 @@ extension NSError {
 	}
 }
 
-@discardableResult fileprivate func with<T>(_ object: T, do transform: (inout T) throws -> Void) rethrows -> T {
+infix operator <-: NilCoalescingPrecedence
+
+@discardableResult public func <- <T>(object: T, transform: (inout T) throws -> Void) rethrows -> T {
 	var copy = object
 	try transform(&copy)
 	return copy
-}
-
-infix operator <-: NilCoalescingPrecedence
-
-@discardableResult public func <- <T>(lhs: T, rhs: (inout T) throws -> Void) rethrows -> T {
-	return try with(lhs, do: rhs)
 }
 
 infix operator ???: NilCoalescingPrecedence
