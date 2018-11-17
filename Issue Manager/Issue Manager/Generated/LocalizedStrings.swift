@@ -1,3 +1,4 @@
+// swiftlint:disable all
 // Generated using SwiftGen, by O.Halligon — https://github.com/SwiftGen/SwiftGen
 
 import Foundation
@@ -5,7 +6,10 @@ import Foundation
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 
-// swiftlint:disable explicit_type_interface identifier_name line_length nesting type_body_length type_name
+// MARK: - Strings
+
+// swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
+// swiftlint:disable nesting type_body_length type_name
 internal enum L10n {
 
   internal enum Alert {
@@ -13,21 +17,18 @@ internal enum L10n {
     internal static let cancel = L10n.tr("Localizable", "alert.cancel")
     /// OK
     internal static let okay = L10n.tr("Localizable", "alert.okay")
-
     internal enum ConnectionIssues {
       /// Es konnte keine Verbindung zum Dienst aufgebaut werden.
       internal static let message = L10n.tr("Localizable", "alert.connection_issues.message")
       /// Verbindungsproblem
       internal static let title = L10n.tr("Localizable", "alert.connection_issues.title")
     }
-
     internal enum InvalidSession {
       /// Bitte loggen sie sich wieder neu ein.
       internal static let message = L10n.tr("Localizable", "alert.invalid_session.message")
       /// Ungültige Sitzung!
       internal static let title = L10n.tr("Localizable", "alert.invalid_session.title")
     }
-
     internal enum UnknownSyncError {
       /// Beim aktualisieren ist ein unbekannter Fehler aufgetreten. Bitte versuch es später nochmal.\n\nFalls der Fehler bestehen bleibt, könnte der folgende Text dem Support behilflich sein:\n%@
       internal static func message(_ p1: String) -> String {
@@ -49,7 +50,6 @@ internal enum L10n {
     internal static func welcome(_ p1: String) -> String {
       return L10n.tr("Localizable", "building_list.welcome", p1)
     }
-
     internal enum BuildingSummary {
       /// %@ offene Pendenzen
       internal static func openIssues(_ p1: String) -> String {
@@ -60,7 +60,6 @@ internal enum L10n {
         return L10n.tr("Localizable", "building_list.building_summary.total_issues", p1)
       }
     }
-
     internal enum ClientMode {
       /// Im Abnahmemodus werden nur die Pendenzen angezeigt, die auch im Abnahmemodus erfasst wurden.
       internal static let description = L10n.tr("Localizable", "building_list.client_mode.description")
@@ -88,14 +87,12 @@ internal enum L10n {
     internal static let trade = L10n.tr("Localizable", "issue.trade")
     /// neu
     internal static let unregistered = L10n.tr("Localizable", "issue.unregistered")
-
     internal enum IsClientMode {
       /// Normal aufgenommen
       internal static let `false` = L10n.tr("Localizable", "issue.is_client_mode.false")
       /// Im Abnahmemodus aufgenommen
       internal static let `true` = L10n.tr("Localizable", "issue.is_client_mode.true")
     }
-
     internal enum Status {
       /// Neu
       internal static let new = L10n.tr("Localizable", "issue.status.new")
@@ -123,16 +120,13 @@ internal enum L10n {
   internal enum Login {
     /// Eingeloggt Bleiben
     internal static let stayLoggedIn = L10n.tr("Localizable", "login.stay_logged_in")
-
     internal enum Alert {
-
       internal enum LoginError {
         /// Beim einloggen ist ein Fehler aufgetreten! Du wirst falls möglich lokal eingeloggt.
         internal static let message = L10n.tr("Localizable", "login.alert.login_error.message")
         /// Unbekannter Fehler!
         internal static let title = L10n.tr("Localizable", "login.alert.login_error.title")
       }
-
       internal enum WrongPassword {
         /// Das ist nicht das richtige Passwort für den Benutzer %@.
         internal static func message(_ p1: String) -> String {
@@ -141,7 +135,6 @@ internal enum L10n {
         /// Falsches Passwort!
         internal static let title = L10n.tr("Localizable", "login.alert.wrong_password.title")
       }
-
       internal enum WrongUsername {
         /// Es gibt keinen Benutzer namens %@.
         internal static func message(_ p1: String) -> String {
@@ -151,7 +144,6 @@ internal enum L10n {
         internal static let title = L10n.tr("Localizable", "login.alert.wrong_username.title")
       }
     }
-
     internal enum Placeholder {
       /// Passwort
       internal static let password = L10n.tr("Localizable", "login.placeholder.password")
@@ -175,7 +167,6 @@ internal enum L10n {
     internal static let pdfLoading = L10n.tr("Localizable", "map.pdf_loading")
     /// Grundriss
     internal static let title = L10n.tr("Localizable", "map.title")
-
     internal enum IssueList {
       /// Details Anzeigen
       internal static let showDetails = L10n.tr("Localizable", "map.issue_list.show_details")
@@ -190,7 +181,6 @@ internal enum L10n {
         return L10n.tr("Localizable", "map.issue_list.summary_filtered", p1, p2)
       }
     }
-
     internal enum StatusFilter {
       /// Es werden alle Pendenzen angezeigt.
       internal static let allSelected = L10n.tr("Localizable", "map.status_filter.all_selected")
@@ -204,21 +194,18 @@ internal enum L10n {
   }
 
   internal enum MapList {
-
     internal enum MapRemoved {
       /// Dieser Bereich existiert nicht mehr. Du wirst jetzt zurück zur Gebäudeauswahl geleitet.
       internal static let message = L10n.tr("Localizable", "map_list.map_removed.message")
       /// Bereich Entfernt!
       internal static let title = L10n.tr("Localizable", "map_list.map_removed.title")
     }
-
     internal enum MapSummary {
       /// %@ offene Pendenzen
       internal static func openIssues(_ p1: String) -> String {
         return L10n.tr("Localizable", "map_list.map_summary.open_issues", p1)
       }
     }
-
     internal enum Section {
       /// Untergeordnete Bereiche
       internal static let childMaps = L10n.tr("Localizable", "map_list.section.child_maps")
@@ -271,45 +258,38 @@ internal enum L10n {
     internal static let titleViewing = L10n.tr("Localizable", "view_issue.title_viewing")
     /// Wieder Eröffnen
     internal static let undoReview = L10n.tr("Localizable", "view_issue.undo_review")
-
     internal enum CouldNotOpenLibrary {
       /// Um die Fotoauswahl zu öffnen, braucht diese App in den Einstellungen Zugriff auf deine Fotos.
       internal static let message = L10n.tr("Localizable", "view_issue.could_not_open_library.message")
       /// Fotoauswahl nicht möglich!
       internal static let title = L10n.tr("Localizable", "view_issue.could_not_open_library.title")
     }
-
     internal enum CouldNotSaveImage {
       /// Das Bild konnte nicht abgespeichert werden!
       internal static let title = L10n.tr("Localizable", "view_issue.could_not_save_image.title")
     }
-
     internal enum CouldNotTakePicture {
       /// Fotoaufnahme fehlgeschlagen!
       internal static let title = L10n.tr("Localizable", "view_issue.could_not_take_picture.title")
     }
-
     internal enum IsClientMode {
       /// Nein
       internal static let `false` = L10n.tr("Localizable", "view_issue.is_client_mode.false")
       /// Ja
       internal static let `true` = L10n.tr("Localizable", "view_issue.is_client_mode.true")
     }
-
     internal enum SelectCraftsman {
       /// Kein Handwerker
       internal static let `none` = L10n.tr("Localizable", "view_issue.select_craftsman.none")
       /// Handwerker
       internal static let title = L10n.tr("Localizable", "view_issue.select_craftsman.title")
     }
-
     internal enum SelectTrade {
       /// Keine Funktion
       internal static let `none` = L10n.tr("Localizable", "view_issue.select_trade.none")
       /// Funktionen
       internal static let title = L10n.tr("Localizable", "view_issue.select_trade.title")
     }
-
     internal enum Summary {
       /// Diese Pendenz wurde vom Handwerker beantwortet.\nDu kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) oder ablehnen (und sie somit rückgängig machen).
       internal static let hasResponse = L10n.tr("Localizable", "view_issue.summary.has_response")
@@ -320,7 +300,10 @@ internal enum L10n {
     }
   }
 }
-// swiftlint:enable explicit_type_interface identifier_name line_length nesting type_body_length type_name
+// swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
+// swiftlint:enable nesting type_body_length type_name
+
+// MARK: - Implementation Details
 
 extension L10n {
   private static func tr(_ table: String, _ key: String, _ args: CVarArg...) -> String {
