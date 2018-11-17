@@ -60,7 +60,7 @@ class IssueMarker: UIView {
 	}
 	
 	private func reposition() {
-		guard let position = issue.position else { return }
+		guard let position = issue.position?.point else { return }
 		
 		center.x = CGFloat(position.x) * superview!.bounds.width
 		center.y = CGFloat(position.y) * superview!.bounds.height

@@ -44,13 +44,11 @@ final class Issue: APIObject {
 	}
 	
 	struct Position: Codable {
-		var x: Double
-		var y: Double
+		var point: Point
 		var zoomScale: Double
 		
-		init(x: Double, y: Double, zoomScale: Double) {
-			self.x = x
-			self.y = y
+		init(at point: Point, zoomScale: Double) {
+			self.point = point
 			self.zoomScale = zoomScale
 		}
 	}

@@ -5,10 +5,17 @@ import Foundation
 final class Map: APIObject {
 	let meta: ObjectMeta<Map>
 	let children: [ID<Map>]
+	let sectors: [Sector]
 	var issues: [ID<Issue>]
 	let filename: String?
 	let name: String
 	let buildingID: ID<Building>
+	
+	final class Sector: Codable {
+		let name: String
+		let color: Color
+		let points: [Point]
+	}
 }
 
 extension Map: FileContainer {

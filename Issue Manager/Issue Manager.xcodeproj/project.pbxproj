@@ -12,6 +12,7 @@
 		9502843520FACDD800880AD7 /* Suggestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9502843420FACDD800880AD7 /* Suggestions.swift */; };
 		9502843720FAD42300880AD7 /* default_suggestions.json in Resources */ = {isa = PBXBuildFile; fileRef = 9502843620FAD42300880AD7 /* default_suggestions.json */; };
 		9502843920FADAB300880AD7 /* SuggestionsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9502843820FADAB300880AD7 /* SuggestionsHandler.swift */; };
+		9503A3FD21A04F7C00C46603 /* MiscObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9503A3FC21A04F7C00C46603 /* MiscObjects.swift */; };
 		9506A96320EDAAAD00AF6AB7 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9506A96220EDAAAD00AF6AB7 /* Colors.swift */; };
 		9511A0FF20DD379800101ADE /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9511A0FE20DD379800101ADE /* Codable.swift */; };
 		9511A10220DD3A2700101ADE /* Geometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9511A10120DD3A2700101ADE /* Geometry.swift */; };
@@ -93,6 +94,7 @@
 		9502843420FACDD800880AD7 /* Suggestions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Suggestions.swift; sourceTree = "<group>"; };
 		9502843620FAD42300880AD7 /* default_suggestions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = default_suggestions.json; sourceTree = "<group>"; };
 		9502843820FADAB300880AD7 /* SuggestionsHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionsHandler.swift; sourceTree = "<group>"; };
+		9503A3FC21A04F7C00C46603 /* MiscObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiscObjects.swift; sourceTree = "<group>"; };
 		9506A96220EDAAAD00AF6AB7 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		9511A0FE20DD379800101ADE /* Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Codable.swift; sourceTree = "<group>"; };
 		9511A10120DD3A2700101ADE /* Geometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geometry.swift; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 		9511A12020DD4F6100101ADE /* API Objects */ = {
 			isa = PBXGroup;
 			children = (
+				9503A3FC21A04F7C00C46603 /* MiscObjects.swift */,
 				9583C2D720DC76F200452695 /* User.swift */,
 				9511A10520DD3B8E00101ADE /* Building.swift */,
 				9511A10720DD3BD100101ADE /* Craftsman.swift */,
@@ -538,7 +541,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftgen >/dev/null; then\n    cd \"Issue Manager\"\n    swiftgen\nelse\n    echo \"warning: SwiftGen not installed, download it from https://github.com/SwiftGen/SwiftGen\"\nfi";
+			shellScript = "if which swiftgen >/dev/null; then\n    cd \"Issue Manager\"\n    swiftgen\nelse\n    echo \"warning: SwiftGen not installed, download it from https://github.com/SwiftGen/SwiftGen\"\nfi\n";
 		};
 		950283AA20E71001001A5083 /* Run Poesie */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -668,6 +671,7 @@
 				9514FC4D210545C700099EC5 /* MarkupViewController.swift in Sources */,
 				956015372101302700F84600 /* SmallestN.swift in Sources */,
 				9583C2D320DC74BA00452695 /* UIHelpers.swift in Sources */,
+				9503A3FD21A04F7C00C46603 /* MiscObjects.swift in Sources */,
 				95512B1220FBEAD800878163 /* IssueDeletionRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
