@@ -5,7 +5,6 @@ import Foundation
 struct Point: Codable {
 	var x: Double
 	var y: Double
-	
 }
 
 struct Color: Codable {
