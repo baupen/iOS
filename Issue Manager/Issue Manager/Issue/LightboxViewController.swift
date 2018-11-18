@@ -96,12 +96,26 @@ extension LightboxViewController: UIViewControllerTransitioningDelegate {
 	}
 }
 
-fileprivate class PresentAnimator: NSObject, UIViewControllerAnimatedTransitioning {
+fileprivate class TransitionAnimator: NSObject, UIViewControllerAnimatedTransitioning {
 	func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
 		return 0.25
 	}
 	
-	func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+	func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {}
+	
+	fileprivate func animate(using transitionContext: UIViewControllerContextTransitioning, _ animations: @escaping () -> Void) {
+		UIView.animate(
+			withDuration: transitionDuration(using: transitionContext),
+			delay: 0,
+			options: transitionContext.isInteractive ? .curveLinear : .curveEaseInOut,
+			animations: animations,
+			completion: { _ in transitionContext.completeTransition(!transitionContext.transitionWasCancelled) }
+		)
+	}
+}
+
+fileprivate class PresentAnimator: TransitionAnimator {
+	override func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
 		let fromVC = transitionContext.viewController(forKey: .from)!
 		let lightboxController = transitionContext.viewController(forKey: .to) as! LightboxViewController
 		lightboxController.view.layoutIfNeeded()
@@ -114,26 +128,15 @@ fileprivate class PresentAnimator: NSObject, UIViewControllerAnimatedTransitioni
 		pulledView.frame = pulledView.frame.offsetBy(dx: 0, dy: offset)
 		lightboxController.view.backgroundColor = .clear
 		
-		UIView.animate(
-			withDuration: transitionDuration(using: transitionContext),
-			delay: 0,
-			options: transitionContext.isInteractive ? .curveLinear : .curveEaseInOut,
-			animations: {
-				pulledView.frame = finalFrame
-				lightboxController.view.backgroundColor = .black
-		},
-			completion: { _ in
-				transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
-		})
+		animate(using: transitionContext) {
+			pulledView.frame = finalFrame
+			lightboxController.view.backgroundColor = .black
+		}
 	}
 }
 
-fileprivate class DismissAnimator: NSObject, UIViewControllerAnimatedTransitioning {
-	func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-		return 0.25
-	}
-	
-	func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+fileprivate class DismissAnimator: TransitionAnimator {
+	override func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
 		let lightboxController = transitionContext.viewController(forKey: .from) as! LightboxViewController
 		let toVC = transitionContext.viewController(forKey: .to)!
 		
@@ -143,16 +146,9 @@ fileprivate class DismissAnimator: NSObject, UIViewControllerAnimatedTransitioni
 		let pulledView = lightboxController.imageView!
 		let finalFrame = pulledView.frame.offsetBy(dx: 0, dy: offset)
 		
-		UIView.animate(
-			withDuration: transitionDuration(using: transitionContext),
-			delay: 0,
-			options: transitionContext.isInteractive ? .curveLinear : .curveEaseInOut,
-			animations: {
-				pulledView.frame = finalFrame
-				lightboxController.view.backgroundColor = .clear
-		},
-			completion: { _ in
-				transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
-		})
+		animate(using: transitionContext) {
+			pulledView.frame = finalFrame
+			lightboxController.view.backgroundColor = .clear
+		}
 	}
 }
