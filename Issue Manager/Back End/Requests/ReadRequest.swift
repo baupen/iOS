@@ -19,6 +19,17 @@ struct ReadRequest: JSONJSONRequest {
 		Client.shared.update(from: response)
 	}
 	
+	func decode(from data: Data, using decoder: JSONDecoder) throws -> ExpectedResponse {
+		let raw: Data
+		if defaults.useFakeReadResponse {
+			let path = Bundle.main.path(forResource: "fake_read_response.private", ofType: "json")!
+			raw = try Data(contentsOf: URL(fileURLWithPath: path))
+		} else {
+			raw = data
+		}
+		return try decoder.decode(JSendSuccess<ExpectedResponse>.self, from: raw).data
+	}
+	
 	struct ExpectedResponse: Response {
 		let changedCraftsmen: [Craftsman]
 		let removedCraftsmanIDs: [ID<Craftsman>]
