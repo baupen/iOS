@@ -68,6 +68,8 @@ final class MapViewController: UIViewController, LoadedViewController {
 		didSet { pdfController?.overlayView.alpha = markerAlpha }
 	}
 	
+	var sectorViews: [SectorView] = []
+	
 	var isPlacingIssue = false {
 		didSet {
 			markerAlpha = isPlacingIssue ? 0.25 : 1
@@ -186,6 +188,9 @@ final class MapViewController: UIViewController, LoadedViewController {
 		
 		issues = map?.allIssues() ?? []
 		
+		sectorViews.forEach { $0.removeFromSuperview() }
+		sectorViews = map?.sectors.map(SectorView.init) ?? []
+		
 		issueListController.map = map
 		pullableView.isHidden = map == nil
 		
@@ -224,6 +229,7 @@ final class MapViewController: UIViewController, LoadedViewController {
 				$0.overlayView.alpha = self.markerAlpha
 				$0.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: self.pullableView.minHeight, right: 0)
 			}
+			self.updateSectors()
 			self.updateMarkers()
 		}
 		
@@ -235,6 +241,14 @@ final class MapViewController: UIViewController, LoadedViewController {
 			self.activityIndicator.stopAnimating()
 			self.fallbackLabel.text = Localization.couldNotLoad
 		}
+	}
+	
+	private func updateSectors() {
+		guard let pdfController = pdfController else { return }
+		
+		pdfController.view.layoutIfNeeded()
+		
+		sectorViews.forEach(pdfController.overlayView.addSubview)
 	}
 	
 	private func updateMarkers() {

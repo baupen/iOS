@@ -85,6 +85,7 @@
 		95EE7DFD21060CB100B603EF /* UndoBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EE7DFC21060CB100B603EF /* UndoBuffer.swift */; };
 		95F4DB00214AA2B3005C7D6D /* PullToExpand.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 952F69E5214A9F3D00A12CE9 /* PullToExpand.framework */; };
 		95F4DB01214AA2B3005C7D6D /* SimplePDFKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 952F69E4214A9F3D00A12CE9 /* SimplePDFKit.framework */; };
+		95F707BE21AB75B20092E3FC /* SectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F707BD21AB75B20092E3FC /* SectorView.swift */; };
 		95FC9DC121080BB700044C93 /* RefreshingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FC9DC021080BB700044C93 /* RefreshingTableViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -172,6 +173,7 @@
 		95D2C2B520E5C52700D887C8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		95DDA4D621AA47F5009628B0 /* fake_read_response.private.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fake_read_response.private.json; sourceTree = "<group>"; };
 		95EE7DFC21060CB100B603EF /* UndoBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoBuffer.swift; sourceTree = "<group>"; };
+		95F707BD21AB75B20092E3FC /* SectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectorView.swift; sourceTree = "<group>"; };
 		95FC9DC021080BB700044C93 /* RefreshingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshingTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -350,6 +352,7 @@
 			isa = PBXGroup;
 			children = (
 				9583C2D420DC757800452695 /* MapViewController.swift */,
+				95F707BD21AB75B20092E3FC /* SectorView.swift */,
 				95512B1520FBFDE500878163 /* IssuePositioner.swift */,
 				9550E0E520F2E70700921387 /* IssueMarker.swift */,
 				9550E0E720F38D7600921387 /* StatusFilterViewController.swift */,
@@ -660,6 +663,7 @@
 				95B9BA6620DEC7FA00261954 /* RequestHelpers.swift in Sources */,
 				9554234F20DC781E009CCCE0 /* NetworkObjects.swift in Sources */,
 				9583C2D820DC76F200452695 /* User.swift in Sources */,
+				95F707BE21AB75B20092E3FC /* SectorView.swift in Sources */,
 				95339A3020F8445100A01F07 /* SeparatorLine.swift in Sources */,
 				9550E0E820F38D7600921387 /* StatusFilterViewController.swift in Sources */,
 				95BBF32120F26F49006E162E /* IssueCell.swift in Sources */,
