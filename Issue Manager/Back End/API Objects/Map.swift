@@ -13,7 +13,7 @@ final class Map: APIObject {
 	
 	final class Sector: Codable {
 		let name: String
-		let color: Color
+		let color: Color?
 		let points: [Point]
 	}
 }

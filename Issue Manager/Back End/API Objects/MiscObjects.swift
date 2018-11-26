@@ -29,7 +29,7 @@ struct Color: Codable {
 	func encode(to encoder: Encoder) throws {
 		var container = encoder.singleValueContainer()
 		
-		let int = red << 16 | green << 8 | blue << 0
+		let int = Int(red) << 16 | Int(green) << 8 | Int(blue) << 0
 		let raw = "#" + String(int, radix: 16, uppercase: true)
 		try container.encode(raw)
 	}
