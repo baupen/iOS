@@ -10,7 +10,6 @@ struct LoginRequest: JSONJSONRequest {
 	
 	let username: String
 	let passwordHash: String
-	let clientVersion = 1
 	
 	func applyToClient(_ response: ExpectedResponse) {
 		Client.shared.user = response.user <- {

@@ -7,16 +7,16 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Alert.connection
-// CONTEXT: Nachricht des Alerts für wenn man Verbindungsprobleme hat.
+// CONTEXT: Nachricht für den Alert, dass man Verbindungsprobleme hat.
 "alert.connection_issues.message" = "Non è stato possibile stabilire una connessione.";
-// CONTEXT: Titel des Alerts für wenn man Verbindungsprobleme hat.
+// CONTEXT: Titel für den Alert, dass man Verbindungsprobleme hat.
 "alert.connection_issues.title" = "Problema di connessione";
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Alert.invalid
-// CONTEXT: Nachricht des Alerts für wenn der Token, der bei der Anmeldung erhalten wurde, nicht mehr gültig ist, z.B. wenn auf der Website das Passwort geändert wurde.
+// CONTEXT: Nachricht für den Alert, dass der Token, der bei der Anmeldung erhalten wurde, nicht mehr gültig ist, z.B. wenn auf der Website das Passwort geändert wurde.
 "alert.invalid_session.message" = "Per favore effettua nuovamente il login.";
-// CONTEXT: Titel des Alerts für wenn der Token, der bei der Anmeldung erhalten wurde, nicht mehr gültig ist, z.B. wenn auf der Website das Passwort geändert wurde.
+// CONTEXT: Titel für den Alert, dass der Token, der bei der Anmeldung erhalten wurde, nicht mehr gültig ist, z.B. wenn auf der Website das Passwort geändert wurde.
 "alert.invalid_session.title" = "Sessione non valida!";
 // CONTEXT: "OK" Knopf in einem Alert
 "alert.okay" = "OK";
@@ -103,20 +103,20 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Login.alert.login
-// CONTEXT: Nachricht des Alerts für wenn man sich aus einem unbekannten Grund nicht einloggen kann.
+// CONTEXT: Nachricht für den Alert, dass man sich aus einem unbekannten Grund nicht einloggen kann.
 "login.alert.login_error.message" = "C'è stato un problema durante il login! Se possibile, verrà effettuato un login locale.";
-// CONTEXT: Titel des Alerts für wenn man sich aus einem unbekannten Grund nicht einloggen kann.
+// CONTEXT: Titel für den Alert, dass man sich aus einem unbekannten Grund nicht einloggen kann.
 "login.alert.login_error.title" = "Errore sconosciuto!";
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Login.alert.wrong
-// CONTEXT: Nachricht des Alerts für wenn man das falsche Passwort eingegeben hat. %s wird durch den Benutzernamen ersetzt.
+// CONTEXT: Nachricht für den Alert, dass man das falsche Passwort eingegeben hat. %s wird durch den Benutzernamen ersetzt.
 "login.alert.wrong_password.message" = "Questa password non è corretta per l'utente %@.";
-// CONTEXT: Titel des Alerts für wenn man das falsche Passwort eingegeben hat.
+// CONTEXT: Titel für den Alert, dass man das falsche Passwort eingegeben hat.
 "login.alert.wrong_password.title" = "Password incorretta!";
-// CONTEXT: Nachricht des Alerts für wenn man einen falschen Benutzernamen eingegeben hat. %s wird durch den Benutzernamen ersetzt.
+// CONTEXT: Nachricht für den Alert, dass man einen falschen Benutzernamen eingegeben hat. %s wird durch den Benutzernamen ersetzt.
 "login.alert.wrong_username.message" = "Il nome utente %@ non esiste.";
-// CONTEXT: Titel des Alerts für wenn man einen falschen Benutzernamen eingegeben hat.
+// CONTEXT: Titel für den Alert, dass man einen falschen Benutzernamen eingegeben hat.
 "login.alert.wrong_username.title" = "Nome utente errato";
 // CONTEXT: Platzhalter für das Passwort im Login-Screen
 "login.placeholder.password" = "Password";

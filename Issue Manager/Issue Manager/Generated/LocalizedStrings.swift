@@ -29,6 +29,12 @@ internal enum L10n {
       /// Ungültige Sitzung!
       internal static let title = L10n.tr("Localizable", "alert.invalid_session.title")
     }
+    internal enum OutdatedClient {
+      /// Diese Version der App kann nicht mehr mit dem Server kommunizieren. Bitte installier das neuste Update, um die App weiter zu benutzen.
+      internal static let message = L10n.tr("Localizable", "alert.outdated_client.message")
+      /// Update Erforderlich
+      internal static let title = L10n.tr("Localizable", "alert.outdated_client.title")
+    }
     internal enum UnknownSyncError {
       /// Beim aktualisieren ist ein unbekannter Fehler aufgetreten. Bitte versuch es später nochmal.\n\nFalls der Fehler bestehen bleibt, könnte der folgende Text dem Support behilflich sein:\n%@
       internal static func message(_ p1: String) -> String {

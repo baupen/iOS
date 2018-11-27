@@ -2,17 +2,23 @@
 
 import Foundation
 
-struct JSendSuccess<Contents: Response>: Decodable {
-	var data: Contents
-}
-
-struct JSendFailure: Decodable {
-	var error: APIError
-	var message: String
-}
-
-struct JSendError: Decodable {
-	var message: String
+enum JSend {
+	struct Metadata: Decodable {
+		var version: Int
+	}
+	
+	struct Success<Contents: Response>: Decodable {
+		var data: Contents
+	}
+	
+	struct Failure: Decodable {
+		var error: APIError
+		var message: String
+	}
+	
+	struct Error: Decodable {
+		var message: String
+	}
 }
 
 enum APIError: Int, Error, Decodable {

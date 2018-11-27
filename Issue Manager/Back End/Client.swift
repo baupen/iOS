@@ -7,6 +7,7 @@ typealias TaskResult = (data: Data, response: HTTPURLResponse)
 
 final class Client {
 	static let shared = Client()
+	static let apiVersion = 1
 	
 	/// the user we're currently logged in as
 	var user: User? {
@@ -126,14 +127,20 @@ final class Client {
 	private func extractData<R: Request>(from taskResult: TaskResult, for request: R) throws -> R.ExpectedResponse {
 		let (data, response) = taskResult
 		print("\(request.method): status code: \(response.statusCode), body: \(debugRepresentation(of: data))")
+		
+		let metadata = try responseDecoder.decode(JSend.Metadata.self, from: data)
+		guard Client.apiVersion >= metadata.version else {
+			throw RequestError.outdatedClient(client: Client.apiVersion, server: metadata.version)
+		}
+		
 		switch response.statusCode {
 		case 200:
 			return try request.decode(from: data, using: responseDecoder)
 		case 400:
-			let failure = try responseDecoder.decode(JSendFailure.self, from: data)
+			let failure = try responseDecoder.decode(JSend.Failure.self, from: data)
 			throw RequestError.apiError(failure)
 		case 500:
-			let error = try responseDecoder.decode(JSendError.self, from: data)
+			let error = try responseDecoder.decode(JSend.Error.self, from: data)
 			throw RequestError.serverError(error)
 		case let code:
 			fatalError("Invalid status code \(code)")
@@ -169,9 +176,11 @@ enum RequestError: Error {
 	/// An error occurred during communication with the server. Likely causes include an unstable internet connection and the server being down.
 	case communicationError(Error)
 	/// The server didn't fulfill the request because something was wrong with it.
-	case apiError(JSendFailure)
+	case apiError(JSend.Failure)
 	/// The server encountered an error whilst fulfilling the request.
-	case serverError(JSendError)
+	case serverError(JSend.Error)
+	/// The client is outdated, so we'd rather not risk further communication.
+	case outdatedClient(client: Int, server: Int)
 }
 
 fileprivate func debugRepresentation(of data: Data, maxLength: Int = 1000) -> String {

@@ -81,21 +81,30 @@ class LoginViewController: UIViewController {
 		result.catch { error in
 			print("Login Failed!", error.localizedFailureReason)
 			dump(error)
-			
-			switch error {
-			case RequestError.apiError(let meta) where meta.error == .unknownUsername:
-				self.showUnknownUsernameAlert(username: username)
-			case RequestError.apiError(let meta) where meta.error == .wrongPassword:
-				self.showWrongPasswordAlert(username: username)
-			case RequestError.communicationError: // likely connection failure
-				self.attemptLocalLogin()
-			default:
-				self.showAlert(
-					titled: Localization.Alert.LoginError.title,
-					message: Localization.Alert.LoginError.message
-				) {
-					self.attemptLocalLogin(showingAlerts: false)
-				}
+			self.showAlert(for: error, username: username)
+		}
+	}
+	
+	func showAlert(for error: Error, username: String) {
+		switch error {
+		case RequestError.apiError(let meta) where meta.error == .unknownUsername:
+			showUnknownUsernameAlert(username: username)
+		case RequestError.apiError(let meta) where meta.error == .wrongPassword:
+			showWrongPasswordAlert(username: username)
+		case RequestError.communicationError: // likely connection failure
+			attemptLocalLogin()
+		case RequestError.outdatedClient(let client, let server):
+			print("Outdated client! client: \(client), server: \(server)")
+			showAlert(
+				titled: L10n.Alert.OutdatedClient.title,
+				message: L10n.Alert.OutdatedClient.message
+			)
+		default:
+			showAlert(
+				titled: Localization.Alert.LoginError.title,
+				message: Localization.Alert.LoginError.message
+			) {
+				self.attemptLocalLogin(showingAlerts: false)
 			}
 		}
 	}

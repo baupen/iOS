@@ -7,19 +7,26 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Alert.connection
-// CONTEXT: Nachricht des Alerts für wenn man Verbindungsprobleme hat.
+// CONTEXT: Nachricht für den Alert, dass man Verbindungsprobleme hat.
 "alert.connection_issues.message" = "Es konnte keine Verbindung zum Dienst aufgebaut werden.";
-// CONTEXT: Titel des Alerts für wenn man Verbindungsprobleme hat.
+// CONTEXT: Titel für den Alert, dass man Verbindungsprobleme hat.
 "alert.connection_issues.title" = "Verbindungsproblem";
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Alert.invalid
-// CONTEXT: Nachricht des Alerts für wenn der Token, der bei der Anmeldung erhalten wurde, nicht mehr gültig ist, z.B. wenn auf der Website das Passwort geändert wurde.
+// CONTEXT: Nachricht für den Alert, dass der Token, der bei der Anmeldung erhalten wurde, nicht mehr gültig ist, z.B. wenn auf der Website das Passwort geändert wurde.
 "alert.invalid_session.message" = "Bitte loggen sie sich wieder neu ein.";
-// CONTEXT: Titel des Alerts für wenn der Token, der bei der Anmeldung erhalten wurde, nicht mehr gültig ist, z.B. wenn auf der Website das Passwort geändert wurde.
+// CONTEXT: Titel für den Alert, dass der Token, der bei der Anmeldung erhalten wurde, nicht mehr gültig ist, z.B. wenn auf der Website das Passwort geändert wurde.
 "alert.invalid_session.title" = "Ungültige Sitzung!";
 // CONTEXT: "OK" Knopf in einem Alert
 "alert.okay" = "OK";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Alert.outdated
+// CONTEXT: Nachricht für den Alert, dass der Client zu alt ist, um mit dem Server zu interagieren.
+"alert.outdated_client.message" = "Diese Version der App kann nicht mehr mit dem Server kommunizieren. Bitte installier das neuste Update, um die App weiter zu benutzen.";
+// CONTEXT: Titel für den Alert, dass der Client zu alt ist, um mit dem Server zu interagieren.
+"alert.outdated_client.title" = "Update Erforderlich";
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Alert.unknown
@@ -103,20 +110,20 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Login.alert.login
-// CONTEXT: Nachricht des Alerts für wenn man sich aus einem unbekannten Grund nicht einloggen kann.
+// CONTEXT: Nachricht für den Alert, dass man sich aus einem unbekannten Grund nicht einloggen kann.
 "login.alert.login_error.message" = "Beim einloggen ist ein Fehler aufgetreten! Du wirst falls möglich lokal eingeloggt.";
-// CONTEXT: Titel des Alerts für wenn man sich aus einem unbekannten Grund nicht einloggen kann.
+// CONTEXT: Titel für den Alert, dass man sich aus einem unbekannten Grund nicht einloggen kann.
 "login.alert.login_error.title" = "Unbekannter Fehler!";
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Login.alert.wrong
-// CONTEXT: Nachricht des Alerts für wenn man das falsche Passwort eingegeben hat. %s wird durch den Benutzernamen ersetzt.
+// CONTEXT: Nachricht für den Alert, dass man das falsche Passwort eingegeben hat. %s wird durch den Benutzernamen ersetzt.
 "login.alert.wrong_password.message" = "Das ist nicht das richtige Passwort für den Benutzer %@.";
-// CONTEXT: Titel des Alerts für wenn man das falsche Passwort eingegeben hat.
+// CONTEXT: Titel für den Alert, dass man das falsche Passwort eingegeben hat.
 "login.alert.wrong_password.title" = "Falsches Passwort!";
-// CONTEXT: Nachricht des Alerts für wenn man einen falschen Benutzernamen eingegeben hat. %s wird durch den Benutzernamen ersetzt.
+// CONTEXT: Nachricht für den Alert, dass man einen falschen Benutzernamen eingegeben hat. %s wird durch den Benutzernamen ersetzt.
 "login.alert.wrong_username.message" = "Es gibt keinen Benutzer namens %@.";
-// CONTEXT: Titel des Alerts für wenn man einen falschen Benutzernamen eingegeben hat.
+// CONTEXT: Titel für den Alert, dass man einen falschen Benutzernamen eingegeben hat.
 "login.alert.wrong_username.title" = "Falscher Benutzername!";
 // CONTEXT: Platzhalter für das Passwort im Login-Screen
 "login.placeholder.password" = "Passwort";

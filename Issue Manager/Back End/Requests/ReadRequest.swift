@@ -27,7 +27,7 @@ struct ReadRequest: JSONJSONRequest {
 		} else {
 			raw = data
 		}
-		return try decoder.decode(JSendSuccess<ExpectedResponse>.self, from: raw).data
+		return try decoder.decode(JSend.Success<ExpectedResponse>.self, from: raw).data
 	}
 	
 	struct ExpectedResponse: Response {

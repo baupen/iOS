@@ -115,7 +115,7 @@ protocol JSONDecodingRequest: Request where ExpectedResponse: Response {}
 
 extension JSONDecodingRequest {
 	func decode(from data: Data, using decoder: JSONDecoder) throws -> ExpectedResponse {
-		return try decoder.decode(JSendSuccess<ExpectedResponse>.self, from: data).data
+		return try decoder.decode(JSend.Success<ExpectedResponse>.self, from: data).data
 	}
 }
 

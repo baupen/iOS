@@ -17,29 +17,36 @@ class RefreshingTableViewController: UITableViewController {
 		result.then {
 			self.refreshCompleted()
 		}
-		result.catch { error in
-			typealias Alert = L10n.Alert
-			switch error {
-			case RequestError.communicationError:
-				self.showAlert(
-					titled: Alert.ConnectionIssues.title,
-					message: Alert.ConnectionIssues.message
-				)
-			case RequestError.apiError(let failure) where failure.error == .invalidToken:
-				self.showAlert(
-					titled: Alert.InvalidSession.title,
-					message: Alert.InvalidSession.message
-				) {
-					self.dismiss(animated: true)
-				}
-			default:
-				var errorDesc = ""
-				dump(error, to: &errorDesc)
-				self.showAlert(
-					titled: Alert.UnknownSyncError.title,
-					message: Alert.UnknownSyncError.message(errorDesc)
-				)
+		result.catch(showAlert)
+	}
+	
+	private func showAlert(for error: Error) {
+		typealias Alert = L10n.Alert
+		switch error {
+		case RequestError.communicationError:
+			self.showAlert(
+				titled: Alert.ConnectionIssues.title,
+				message: Alert.ConnectionIssues.message
+			)
+		case RequestError.apiError(let failure) where failure.error == .invalidToken:
+			self.showAlert(
+				titled: Alert.InvalidSession.title,
+				message: Alert.InvalidSession.message
+			) {
+				self.dismiss(animated: true)
 			}
+		case RequestError.outdatedClient:
+			self.showAlert(
+				titled: L10n.Alert.OutdatedClient.title,
+				message: L10n.Alert.OutdatedClient.message
+			)
+		default:
+			var errorDesc = ""
+			dump(error, to: &errorDesc)
+			self.showAlert(
+				titled: Alert.UnknownSyncError.title,
+				message: Alert.UnknownSyncError.message(errorDesc)
+			)
 		}
 	}
 	
