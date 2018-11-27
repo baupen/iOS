@@ -6,10 +6,7 @@ class MainViewController: UISplitViewController, LoadedViewController {
 	static let storyboardID = "Main"
 	
 	var building: Building! {
-		didSet {
-			let mapList = masterNav.topViewController as! MapListViewController
-			mapList.holder = building
-		}
+		didSet { masterNav.mapList.holder = building }
 	}
 	
 	var masterNav: MasterNavigationController!
@@ -33,16 +30,25 @@ class MainViewController: UISplitViewController, LoadedViewController {
 	override func decodeRestorableState(with coder: NSCoder) {
 		super.decodeRestorableState(with: coder)
 		
-		// no way to gracefully fail from here; may as well crash if something goes wrong
 		let buildingID = ID<Building>(coder.decodeObject(forKey: "buildingID") as! UUID)
-		building = Client.shared.storage.buildings[buildingID]!
-		
-		let mapList = masterNav.topViewController as! MapListViewController
-		mapList.refreshManually()
+		if let building = Client.shared.storage.buildings[buildingID] {
+			self.building = building
+			masterNav.mapList.refreshManually()
+		} else {
+			// building to decode has been deleted; this can only really happen in dev environment
+			children.forEach(unembed) // cancel loading actual content
+			DispatchQueue.main.async { // not in parent quite yet
+				self.dismiss(animated: false)
+			}
+		}
 	}
 }
 
 class MasterNavigationController: UINavigationController {
+	var mapList: MapListViewController {
+		return topViewController as! MapListViewController
+	}
+	
 	override var title: String? {
 		get { return topViewController!.navigationItem.title }
 		set {} // dummy
