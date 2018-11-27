@@ -30,7 +30,6 @@ struct Color: Codable {
 		var container = encoder.singleValueContainer()
 		
 		let int = Int(red) << 16 | Int(green) << 8 | Int(blue) << 0
-		let raw = "#" + String(int, radix: 16, uppercase: true)
-		try container.encode(raw)
+		try container.encode(String(format: "#%06x", int))
 	}
 }
