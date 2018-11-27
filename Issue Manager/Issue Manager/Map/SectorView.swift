@@ -28,12 +28,13 @@ final class SectorView: UIView {
 		isOpaque = false
 		defer { isHighlighted = false } // trigger alpha change
 		
-		let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleTap))
+		let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
 		longPressRecognizer.minimumPressDuration = 0.1
 		longPressRecognizer.allowableMovement = 1
 		addGestureRecognizer(longPressRecognizer)
 		
 		let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+		tapRecognizer.numberOfTapsRequired = 2
 		addGestureRecognizer(tapRecognizer)
 	}
 	
@@ -77,7 +78,15 @@ final class SectorView: UIView {
 		context.strokePath()
 	}
 	
-	@objc func handleTap(_ recognizer: UIGestureRecognizer) {
+	@objc func handleTap(_ recognizer: UITapGestureRecognizer) {
+		delegate?.zoomMap(to: sector)
+		self.isHighlighted = true
+		UIView.animate(withDuration: 0.3) {
+			self.isHighlighted = false
+		}
+	}
+	
+	@objc func handleLongPress(_ recognizer: UILongPressGestureRecognizer) {
 		let isInside = point(inside: recognizer.location(in: self), with: nil)
 		switch recognizer.state {
 		case .began:
@@ -91,7 +100,6 @@ final class SectorView: UIView {
 		case .ended:
 			if isInside {
 				delegate?.zoomMap(to: sector)
-				isHighlighted = true
 			}
 			fallthrough
 		case .cancelled:
