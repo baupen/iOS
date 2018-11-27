@@ -5,14 +5,11 @@ import UIKit
 final class SectorView: UIView {
 	let sector: Map.Sector
 	
+	weak var delegate: SectorViewDelegate?
+	
 	private var path: CGPath!
 	private var isHighlighted = false {
-		didSet {
-			guard isHighlighted != oldValue else { return }
-			UIView.animate(withDuration: 0.1) { [isHighlighted] in
-				self.alpha = isHighlighted ? 0.8 : 0.3
-			}
-		}
+		didSet { alpha = isHighlighted ? 0.8 : 0.3 }
 	}
 	
 	init(_ sector: Map.Sector) {
@@ -29,7 +26,7 @@ final class SectorView: UIView {
 		]
 		
 		isOpaque = false
-		alpha = 0.3
+		defer { isHighlighted = false } // trigger alpha change
 		
 		let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleTap))
 		longPressRecognizer.minimumPressDuration = 0.1
@@ -48,15 +45,8 @@ final class SectorView: UIView {
 		super.didMoveToSuperview()
 		
 		if let superview = superview {
-			let scaledPoints = sector.points
-				.map(CGPoint.init)
-				.map { $0 * superview.bounds.size }
-			
-			path = CGMutablePath() <- {
-				$0.addLines(between: scaledPoints)
-				$0.closeSubpath()
-			}
-			
+			let scaledPoints = sector.points.map { CGPoint($0) * superview.bounds.size }
+			path = CGPath.polygon(corners: scaledPoints)
 			frame = path.boundingBox
 		}
 	}
@@ -93,17 +83,27 @@ final class SectorView: UIView {
 		case .began:
 			isHighlighted = true
 		case .changed:
-			isHighlighted = isInside
+			if isInside != isHighlighted {
+				UIView.animate(withDuration: 0.1) {
+					self.isHighlighted = isInside
+				}
+			}
 		case .ended:
 			if isInside {
-				print("tap recognized!")
-				// TODO: delegate thingy
+				delegate?.zoomMap(to: sector)
+				isHighlighted = true
 			}
 			fallthrough
 		case .cancelled:
-			isHighlighted = false
+			UIView.animate(withDuration: 0.3) {
+				self.isHighlighted = false
+			}
 		case .failed, .possible:
 			break
 		}
 	}
+}
+
+protocol SectorViewDelegate: AnyObject {
+	func zoomMap(to sector: Map.Sector)
 }

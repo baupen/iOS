@@ -190,6 +190,7 @@ final class MapViewController: UIViewController, LoadedViewController {
 		
 		sectorViews.forEach { $0.removeFromSuperview() }
 		sectorViews = map?.sectors.map(SectorView.init) ?? []
+		sectorViews.forEach { $0.delegate = self }
 		
 		issueListController.map = map
 		pullableView.isHidden = map == nil
@@ -244,10 +245,8 @@ final class MapViewController: UIViewController, LoadedViewController {
 	}
 	
 	private func updateSectors() {
-		guard let pdfController = pdfController else { return }
-		
+		let pdfController = self.pdfController!
 		pdfController.view.layoutIfNeeded()
-		
 		sectorViews.forEach(pdfController.overlayView.addSubview)
 	}
 	
@@ -336,6 +335,16 @@ extension MapViewController: IssueCellDelegate {
 				marker.transform = originalTransform
 			}
 		})
+	}
+}
+
+extension MapViewController: SectorViewDelegate {
+	func zoomMap(to sector: Map.Sector) {
+		let pdfController = self.pdfController!
+		
+		let path = CGPath.polygon(corners: sector.points.map(CGPoint.init))
+		let rect = path.boundingBox * pdfController.contentView.bounds.size
+		pdfController.scrollView.zoom(to: rect, animated: true)
 	}
 }
 
