@@ -228,7 +228,7 @@ final class MapViewController: UIViewController, LoadedViewController {
 				$0.delegate = self
 				$0.page = page
 				$0.overlayView.alpha = self.markerAlpha
-				$0.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: self.pullableView.minHeight, right: 0)
+				$0.additionalSafeAreaInsets.bottom += self.pullableView.minHeight
 			}
 			self.updateSectors()
 			self.updateMarkers()

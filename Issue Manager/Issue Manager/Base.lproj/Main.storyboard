@@ -37,7 +37,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g4F-zU-ri6" userLabel="PDF Container View">
-                                <rect key="frame" x="0.0" y="70" width="703.5" height="698"/>
+                                <rect key="frame" x="0.0" y="0.0" width="703.5" height="768"/>
                             </containerView>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="elz-u4-mxA">
                                 <rect key="frame" x="342" y="370.5" width="20" height="20"/>
@@ -197,7 +197,7 @@
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rHo-jf-rQe">
-                                                    <rect key="frame" x="0.0" y="0.0" width="704" height="698"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="703.5" height="698"/>
                                                     <connections>
                                                         <segue destination="XdX-XP-UgZ" kind="embed" identifier="" id="oIu-NA-CAA"/>
                                                     </connections>
@@ -260,15 +260,15 @@
                             <constraint firstItem="VUw-jc-0yf" firstAttribute="trailing" secondItem="Axp-84-gLn" secondAttribute="trailing" id="JYh-B1-nwg"/>
                             <constraint firstItem="Xk5-hI-15Z" firstAttribute="centerX" secondItem="svH-Pt-448" secondAttribute="centerX" id="UZm-7l-Gmg"/>
                             <constraint firstItem="Axp-84-gLn" firstAttribute="leading" secondItem="VUw-jc-0yf" secondAttribute="leading" id="Wac-kP-f7Y"/>
-                            <constraint firstItem="g4F-zU-ri6" firstAttribute="top" secondItem="VUw-jc-0yf" secondAttribute="top" id="bKe-LR-qsS"/>
+                            <constraint firstItem="g4F-zU-ri6" firstAttribute="top" secondItem="svH-Pt-448" secondAttribute="top" id="bKe-LR-qsS"/>
                             <constraint firstItem="9Cf-dE-GqE" firstAttribute="centerY" secondItem="VUw-jc-0yf" secondAttribute="centerY" id="dLi-md-ijV"/>
                             <constraint firstItem="Xk5-hI-15Z" firstAttribute="centerY" secondItem="svH-Pt-448" secondAttribute="centerY" id="eD1-u2-ouK"/>
-                            <constraint firstItem="VUw-jc-0yf" firstAttribute="bottom" secondItem="g4F-zU-ri6" secondAttribute="bottom" id="h1b-2h-6Kx"/>
-                            <constraint firstItem="g4F-zU-ri6" firstAttribute="leading" secondItem="VUw-jc-0yf" secondAttribute="leading" id="k14-DP-nee"/>
+                            <constraint firstAttribute="bottom" secondItem="g4F-zU-ri6" secondAttribute="bottom" id="h1b-2h-6Kx"/>
+                            <constraint firstItem="g4F-zU-ri6" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leading" id="k14-DP-nee"/>
                             <constraint firstItem="VUw-jc-0yf" firstAttribute="bottom" secondItem="Axp-84-gLn" secondAttribute="bottom" id="lW3-Nd-DUG"/>
                             <constraint firstItem="0fQ-ZQ-GOx" firstAttribute="height" secondItem="VUw-jc-0yf" secondAttribute="height" multiplier="2" id="nAO-Pc-p4y"/>
                             <constraint firstItem="9Cf-dE-GqE" firstAttribute="width" secondItem="VUw-jc-0yf" secondAttribute="width" multiplier="0.8" id="rfh-Rd-rb7"/>
-                            <constraint firstItem="VUw-jc-0yf" firstAttribute="trailing" secondItem="g4F-zU-ri6" secondAttribute="trailing" id="wQv-77-KwU"/>
+                            <constraint firstAttribute="trailing" secondItem="g4F-zU-ri6" secondAttribute="trailing" id="wQv-77-KwU"/>
                             <constraint firstItem="9Cf-dE-GqE" firstAttribute="centerX" secondItem="VUw-jc-0yf" secondAttribute="centerX" id="zEK-Nr-tUp"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VUw-jc-0yf"/>
@@ -2827,7 +2827,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="L64-rs-k1Y"/>
+        <segue reference="O8y-cm-e0k"/>
         <segue reference="OdI-J8-6Ad"/>
         <segue reference="a5G-fh-9Or"/>
     </inferredMetricsTieBreakers>
