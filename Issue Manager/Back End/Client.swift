@@ -75,8 +75,10 @@ final class Client {
 	func send<R: Request>(_ request: R) -> Future<R.ExpectedResponse> {
 		return dispatch(request)
 			.map { taskResult in try self.extractData(from: taskResult, for: request) }
-			.then { response in
-				DispatchQueue.main.sync { request.applyToClient(response) } // to avoid data races
+			.map { response in // map instead of then, to avoid data races
+				assert(OperationQueue.current!.underlyingQueue == DispatchQueue.main)
+				request.applyToClient(response)
+				return response
 		}
 	}
 	
