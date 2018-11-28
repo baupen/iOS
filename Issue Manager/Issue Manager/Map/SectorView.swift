@@ -4,22 +4,40 @@ import UIKit
 
 final class SectorView: UIView {
 	let sector: Map.Sector
+	let color: UIColor!
 	
 	weak var delegate: SectorViewDelegate?
 	
 	private var path: CGPath!
 	private var isHighlighted = false {
-		didSet { alpha = isHighlighted ? 0.8 : 0.3 }
+		didSet { drawingView.alpha = isHighlighted ? 0.8 : 0.3 }
+	}
+	
+	private let drawingView = DrawingView() <- {
+		$0.autoresizingMask = .flexibleSize
+		$0.isOpaque = false
+	}
+	
+	private let nameLabel = UILabel() <- {
+		$0.autoresizingMask = .flexibleSize
+		$0.alpha = 0.75
+		$0.textAlignment = .center
 	}
 	
 	init(_ sector: Map.Sector) {
 		self.sector = sector
+		color = sector.color.map(UIColor.init) ?? #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
 		
 		super.init(frame: .zero)
 		autoresizingMask = [.flexibleMargins, .flexibleSize] // keep relative position and size during superview resize
 		
-		isOpaque = false
+		addSubview(drawingView)
+		drawingView.drawingBlock = { [unowned self] in self._draw($0) }
 		defer { isHighlighted = false } // trigger alpha change
+		
+		addSubview(nameLabel)
+		nameLabel.text = sector.name
+		nameLabel.textColor = color
 		
 		let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
 		longPressRecognizer.minimumPressDuration = 0.1
@@ -51,13 +69,13 @@ final class SectorView: UIView {
 		return path.contains(point + frame.origin)
 	}
 	
-	override func draw(_ rect: CGRect) {
+	/// called by `DrawingView`
+	func _draw(_ rect: CGRect) {
 		let context = UIGraphicsGetCurrentContext()!
 		context.translateBy(x: -frame.origin.x, y: -frame.origin.y)
 		
 		context.setLineWidth(0.005 * superview!.bounds.size.length)
 		
-		let color = sector.color.map(UIColor.init) ?? #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
 		context.setFillColor(color.withAlphaComponent(0.5).cgColor)
 		context.setStrokeColor(color.cgColor)
 		
