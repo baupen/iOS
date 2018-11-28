@@ -16,14 +16,7 @@ final class SectorView: UIView {
 		self.sector = sector
 		
 		super.init(frame: .zero)
-		autoresizingMask = [ // keep relative position and size during superview resize
-			.flexibleTopMargin,
-			.flexibleBottomMargin,
-			.flexibleLeftMargin,
-			.flexibleRightMargin,
-			.flexibleWidth,
-			.flexibleHeight
-		]
+		autoresizingMask = [.flexibleMargins, .flexibleSize] // keep relative position and size during superview resize
 		
 		isOpaque = false
 		defer { isHighlighted = false } // trigger alpha change

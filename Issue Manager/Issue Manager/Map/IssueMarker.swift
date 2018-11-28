@@ -23,16 +23,11 @@ class IssueMarker: UIView {
 		self.issue = issue
 		
 		super.init(frame: CGRect(origin: .zero, size: markerSize))
-		autoresizingMask = [ // keep relative position during superview resize
-			.flexibleTopMargin,
-			.flexibleBottomMargin,
-			.flexibleLeftMargin,
-			.flexibleRightMargin,
-		]
+		autoresizingMask = .flexibleMargins // keep relative position during superview resize
 		
 		addSubview(button)
 		button.frame = self.bounds
-		button.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+		button.autoresizingMask = .flexibleSize
 		button.addTarget(self, action: #selector(buttonPressed(_:)), for: .touchUpInside)
 	}
 	

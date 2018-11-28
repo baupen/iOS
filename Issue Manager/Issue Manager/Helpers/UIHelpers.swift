@@ -120,3 +120,17 @@ extension CGPath {
 		}
 	}
 }
+
+extension UIView.AutoresizingMask {
+	static let flexibleSize: UIView.AutoresizingMask = [
+		flexibleWidth,
+		flexibleHeight
+	]
+	
+	static let flexibleMargins: UIView.AutoresizingMask = [
+		flexibleTopMargin,
+		flexibleBottomMargin,
+		flexibleLeftMargin,
+		flexibleRightMargin
+	]
+}
