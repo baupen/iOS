@@ -28,6 +28,7 @@ class ViewIssueViewController: UITableViewController, LoadedViewController {
 	
 	@IBAction func markIssue() {
 		issue.mark()
+		Haptics.generateFeedback(.strong)
 		update()
 	}
 	

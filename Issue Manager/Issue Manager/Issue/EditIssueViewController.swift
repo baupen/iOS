@@ -30,6 +30,7 @@ final class EditIssueViewController: UITableViewController, LoadedViewController
 	
 	@IBAction func markIssue() {
 		isIssueMarked.toggle()
+		Haptics.generateFeedback(.strong)
 	}
 	
 	@IBAction func descriptionBeganEditing() {

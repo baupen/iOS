@@ -23,6 +23,7 @@ class IssueCell: UITableViewCell, LoadedTableCell {
 	
 	@IBAction func markPressed() {
 		issue.mark()
+		Haptics.generateFeedback(.strong)
 		update()
 	}
 	

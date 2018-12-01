@@ -62,6 +62,7 @@
 		9584F24E20E936ED00A8C884 /* LoginWindowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9584F24D20E936ED00A8C884 /* LoginWindowView.swift */; };
 		95870B2E20E9C05300BB1B39 /* MapListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95870B2D20E9C05300BB1B39 /* MapListViewController.swift */; };
 		95870B3020E9C06B00BB1B39 /* MapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95870B2F20E9C06B00BB1B39 /* MapCell.swift */; };
+		95890A5D21B2E4D600510E44 /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95890A5C21B2E4D600510E44 /* Haptics.swift */; };
 		958AE1B221AE2E40008EBD95 /* DrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958AE1B121AE2E40008EBD95 /* DrawingView.swift */; };
 		9597935020F7AC2400AA40C1 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9597934F20F7AC2400AA40C1 /* Resources.swift */; };
 		95A4E65A210230FC00591EAE /* domains.private.json in Resources */ = {isa = PBXBuildFile; fileRef = 95A4E659210230FC00591EAE /* domains.private.json */; };
@@ -153,6 +154,7 @@
 		9584F24D20E936ED00A8C884 /* LoginWindowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWindowView.swift; sourceTree = "<group>"; };
 		95870B2D20E9C05300BB1B39 /* MapListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapListViewController.swift; sourceTree = "<group>"; };
 		95870B2F20E9C06B00BB1B39 /* MapCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCell.swift; sourceTree = "<group>"; };
+		95890A5C21B2E4D600510E44 /* Haptics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
 		958AE1B121AE2E40008EBD95 /* DrawingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingView.swift; sourceTree = "<group>"; };
 		9597934F20F7AC2400AA40C1 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 		95A4E659210230FC00591EAE /* domains.private.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = domains.private.json; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 				9506A96220EDAAAD00AF6AB7 /* Colors.swift */,
 				9511A10320DD3A7100101ADE /* Loading.swift */,
 				9597934F20F7AC2400AA40C1 /* Resources.swift */,
+				95890A5C21B2E4D600510E44 /* Haptics.swift */,
 				9583C2D220DC74BA00452695 /* UIHelpers.swift */,
 			);
 			path = Helpers;
@@ -648,6 +651,7 @@
 				95512B0820FBEAB300878163 /* FileDownloadRequest.swift in Sources */,
 				95B2735320DE7AD600D2BD44 /* Multipart.swift in Sources */,
 				9511A0FF20DD379800101ADE /* Codable.swift in Sources */,
+				95890A5D21B2E4D600510E44 /* Haptics.swift in Sources */,
 				9583C2BF20DC748800452695 /* AppDelegate.swift in Sources */,
 				9511A11F20DD4F5600101ADE /* Client.swift in Sources */,
 				9597935020F7AC2400AA40C1 /* Resources.swift in Sources */,
