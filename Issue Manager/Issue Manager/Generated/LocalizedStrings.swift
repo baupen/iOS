@@ -36,7 +36,7 @@ internal enum L10n {
       internal static let title = L10n.tr("Localizable", "alert.outdated_client.title")
     }
     internal enum UnknownSyncError {
-      /// Beim aktualisieren ist ein unbekannter Fehler aufgetreten. Bitte versuch es später nochmal.\n\nFalls der Fehler bestehen bleibt, könnte der folgende Text dem Support behilflich sein:\n%@
+      /// Beim Aktualisieren ist ein unbekannter Fehler aufgetreten. Bitte versuch es später nochmal.\n\nFalls der Fehler bestehen bleibt, könnte der folgende Text dem Support behilflich sein:\n%@
       internal static func message(_ p1: String) -> String {
         return L10n.tr("Localizable", "alert.unknown_sync_error.message", p1)
       }

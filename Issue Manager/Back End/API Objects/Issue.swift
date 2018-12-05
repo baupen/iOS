@@ -12,7 +12,7 @@ final class Issue: APIObject {
 	var description: String?
 	var craftsman: ID<Craftsman>?
 	var map: ID<Map> // only really used before registration
-	var status: Status = Status()
+	var status = Status()
 	var position: Position?
 	
 	init(at position: Position? = nil, in map: Map) {

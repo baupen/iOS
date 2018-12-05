@@ -31,7 +31,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Alert.unknown
 // CONTEXT: Nachricht für den Alert, dass beim aktualisieren ein unbekannter Fehler aufgetreten ist. %s wird durch eine (nicht benutzerfreundliche) Beschreibung des Fehlers ersetzt.
-"alert.unknown_sync_error.message" = "Beim aktualisieren ist ein unbekannter Fehler aufgetreten. Bitte versuch es später nochmal.\n\nFalls der Fehler bestehen bleibt, könnte der folgende Text dem Support behilflich sein:\n%@";
+"alert.unknown_sync_error.message" = "Beim Aktualisieren ist ein unbekannter Fehler aufgetreten. Bitte versuch es später nochmal.\n\nFalls der Fehler bestehen bleibt, könnte der folgende Text dem Support behilflich sein:\n%@";
 // CONTEXT: Titel für den Alert, dass beim aktualisieren ein unbekannter Fehler aufgetreten ist.
 "alert.unknown_sync_error.title" = "Unbekannter Fehler!";
 
