@@ -12,7 +12,7 @@ struct FileDownloadRequest: JSONDataRequest {
 	
 	// mutable for keypath stuff
 	private(set) var authenticationToken: String
-	private(set) var building: ObjectMeta<Building>? = nil
+	private(set) var constructionSite: ObjectMeta<ConstructionSite>? = nil
 	private(set) var map: ObjectMeta<Map>? = nil
 	private(set) var issue: ObjectMeta<Issue>? = nil
 	

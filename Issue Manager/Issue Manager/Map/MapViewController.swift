@@ -5,10 +5,8 @@ import SimplePDFKit
 import PullToExpand
 import Promise
 
-final class MapViewController: UIViewController, LoadedViewController {
+final class MapViewController: UIViewController, Reusable {
 	typealias Localization = L10n.Map
-	
-	static let storyboardID = "Map"
 	
 	@IBOutlet var filterItem: UIBarButtonItem!
 	@IBOutlet var addItem: UIBarButtonItem!

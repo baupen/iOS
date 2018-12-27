@@ -106,8 +106,8 @@ extension Issue {
 		return Client.shared.storage.maps[map]!
 	}
 	
-	func accessBuilding() -> Building {
-		return accessMap().accessBuilding()
+	func accessSite() -> ConstructionSite {
+		return accessMap().accessSite()
 	}
 }
 

@@ -11,7 +11,7 @@ struct ReadRequest: JSONJSONRequest {
 	let authenticationToken: String
 	let user: ObjectMeta<User>
 	let craftsmen: [ObjectMeta<Craftsman>]
-	let buildings: [ObjectMeta<Building>]
+	let sites: [ObjectMeta<ConstructionSite>]
 	let maps: [ObjectMeta<Map>]
 	let issues: [ObjectMeta<Issue>]
 	
@@ -33,8 +33,8 @@ struct ReadRequest: JSONJSONRequest {
 	struct ExpectedResponse: Response {
 		let changedCraftsmen: [Craftsman]
 		let removedCraftsmanIDs: [ID<Craftsman>]
-		let changedBuildings: [Building]
-		let removedBuildingIDs: [ID<Building>]
+		let changedSites: [ConstructionSite]
+		let removedSiteIDs: [ID<ConstructionSite>]
 		let changedMaps: [Map]
 		let removedMapIDs: [ID<Map>]
 		let changedIssues: [Issue]
@@ -51,7 +51,7 @@ extension Client {
 					authenticationToken: user.authenticationToken,
 					user: user.meta,
 					craftsmen: self.storage.craftsmen.values.map { $0.meta },
-					buildings: self.storage.buildings.values.map { $0.meta },
+					sites:     self.storage.sites    .values.map { $0.meta },
 					maps:      self.storage.maps     .values.map { $0.meta },
 					issues:    self.storage.issues   .values.map { $0.meta }
 				)
@@ -62,7 +62,7 @@ extension Client {
 	
 	fileprivate func update(from response: ReadRequest.ExpectedResponse) {
 		updateEntries(in: \.craftsmen, changing: response.changedCraftsmen, removing: response.removedCraftsmanIDs)
-		updateEntries(in: \.buildings, changing: response.changedBuildings, removing: response.removedBuildingIDs)
+		updateEntries(in: \.sites,     changing: response.changedSites,     removing: response.removedSiteIDs)
 		updateEntries(in: \.maps,      changing: response.changedMaps,      removing: response.removedMapIDs)
 		updateEntries(in: \.issues,    changing: response.changedIssues,    removing: response.removedIssueIDs)
 		

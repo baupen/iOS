@@ -89,8 +89,8 @@ class SelectionHandler<Handler: SimpleSelectionHandler>: NSObject, AnySelectionH
 
 protocol SimpleSelectionHandler: AnyObject {
 	associatedtype Item: Equatable
-	associatedtype Cell: LoadedTableCell
-	associatedtype EmptyCell: LoadedTableCell
+	associatedtype Cell: UITableViewCell, Reusable
+	associatedtype EmptyCell: UITableViewCell, Reusable
 	
 	typealias SelectionCallback = (Item?) -> Void
 	

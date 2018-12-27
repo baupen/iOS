@@ -89,9 +89,7 @@ protocol SuggestionsHandlerDelegate: AnyObject {
 	func use(_ suggestion: Suggestion)
 }
 
-class SuggestionCell: UITableViewCell, LoadedTableCell {
-	static let reuseID = "Suggestion Cell"
-	
+class SuggestionCell: UITableViewCell, Reusable {
 	@IBOutlet var suggestionLabel: UILabel!
 	
 	fileprivate var match: SuggestionMatch! {

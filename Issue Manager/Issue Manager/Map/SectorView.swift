@@ -4,7 +4,7 @@ import UIKit
 
 final class SectorView: UIView {
 	let sector: Map.Sector
-	let color: UIColor!
+	let color: UIColor
 	
 	weak var delegate: SectorViewDelegate?
 	
@@ -26,7 +26,7 @@ final class SectorView: UIView {
 	
 	init(_ sector: Map.Sector) {
 		self.sector = sector
-		color = sector.color.map(UIColor.init) ?? #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+		color = UIColor(sector.color)
 		
 		super.init(frame: .zero)
 		autoresizingMask = [.flexibleMargins, .flexibleSize] // keep relative position and size during superview resize

@@ -61,9 +61,7 @@ protocol StatusFilterViewControllerDelegate: AnyObject {
 	func statusFilterChanged(to newValue: Set<Issue.Status.Simplified>)
 }
 
-class StatusCell: UITableViewCell, LoadedTableCell {
-	static let reuseID = "Status Cell"
-	
+class StatusCell: UITableViewCell, Reusable {
 	@IBOutlet var iconView: UIImageView!
 	@IBOutlet var nameLabel: UILabel!
 	

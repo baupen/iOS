@@ -3,10 +3,8 @@
 import UIKit
 import Promise
 
-class MapCell: UITableViewCell, LoadedTableCell {
+class MapCell: UITableViewCell, Reusable {
 	typealias Localization = L10n.MapList.MapSummary
-	
-	static let reuseID = "Map Cell"
 	
 	@IBOutlet weak var nameLabel: UILabel!
 	@IBOutlet var openIssuesLabel: UILabel!

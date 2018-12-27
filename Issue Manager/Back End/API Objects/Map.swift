@@ -9,11 +9,11 @@ final class Map: APIObject {
 	var issues: [ID<Issue>]
 	let filename: String?
 	let name: String
-	let buildingID: ID<Building>
+	let siteID: ID<ConstructionSite>
 	
 	final class Sector: Codable {
 		let name: String
-		let color: Color?
+		let color: Color
 		let points: [Point]
 	}
 }
@@ -40,7 +40,7 @@ extension Map {
 		}
 	}
 	
-	func accessBuilding() -> Building {
-		return Client.shared.storage.buildings[buildingID]!
+	func accessSite() -> ConstructionSite {
+		return Client.shared.storage.sites[siteID]!
 	}
 }

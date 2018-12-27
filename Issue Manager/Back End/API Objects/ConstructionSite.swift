@@ -2,8 +2,8 @@
 
 import Foundation
 
-final class Building: APIObject {
-	let meta: ObjectMeta<Building>
+final class ConstructionSite: APIObject {
+	let meta: ObjectMeta<ConstructionSite>
 	let name: String
 	let address: Address
 	let imageFilename: String?
@@ -19,13 +19,13 @@ final class Building: APIObject {
 	}
 }
 
-extension Building: FileContainer {
-	static let pathPrefix = "building"
-	static let downloadRequestPath = \FileDownloadRequest.building
+extension ConstructionSite: FileContainer {
+	static let pathPrefix = "constructionSite"
+	static let downloadRequestPath = \FileDownloadRequest.constructionSite
 	var filename: String? { return imageFilename }
 }
 
-extension Building: MapHolder {
+extension ConstructionSite: MapHolder {
 	var children: [ID<Map>] { return maps }
 	
 	func recursiveChildren() -> [Map] {
@@ -33,7 +33,7 @@ extension Building: MapHolder {
 	}
 }
 
-extension Building {
+extension ConstructionSite {
 	func allCraftsmen() -> [Craftsman] {
 		return craftsmen.compactMap { Client.shared.storage.craftsmen[$0] }
 	}

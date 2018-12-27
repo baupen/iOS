@@ -2,11 +2,9 @@
 
 import UIKit
 
-class MainViewController: UISplitViewController, LoadedViewController {
-	static let storyboardID = "Main"
-	
-	var building: Building! {
-		didSet { masterNav.mapList.holder = building }
+class MainViewController: UISplitViewController, Reusable {
+	var site: ConstructionSite! {
+		didSet { masterNav.mapList.holder = site }
 	}
 	
 	var masterNav: MasterNavigationController!
@@ -24,18 +22,18 @@ class MainViewController: UISplitViewController, LoadedViewController {
 	override func encodeRestorableState(with coder: NSCoder) {
 		super.encodeRestorableState(with: coder)
 		
-		coder.encode(building.id.rawValue, forKey: "buildingID")
+		coder.encode(site.id.rawValue, forKey: "siteID")
 	}
 	
 	override func decodeRestorableState(with coder: NSCoder) {
 		super.decodeRestorableState(with: coder)
 		
-		let buildingID = ID<Building>(coder.decodeObject(forKey: "buildingID") as! UUID)
-		if let building = Client.shared.storage.buildings[buildingID] {
-			self.building = building
+		let siteID = ID<ConstructionSite>(coder.decodeObject(forKey: "siteID") as! UUID)
+		if let site = Client.shared.storage.sites[siteID] {
+			self.site = site
 			masterNav.mapList.refreshManually()
 		} else {
-			// building to decode has been deleted; this can only really happen in dev environment
+			// site to decode has been deleted; this can only really happen in dev environment
 			children.forEach(unembed) // cancel loading actual content
 			DispatchQueue.main.async { // not in parent quite yet
 				self.dismiss(animated: false)
@@ -60,7 +58,7 @@ class MasterNavigationController: UINavigationController {
 		let detailNav = mainController.detailNav!
 		
 		let mapController = topViewController as? MapViewController
-			?? storyboard!.instantiate()!
+			?? storyboard!.instantiate(MapViewController.self)!
 		
 		detailNav.pushViewController(mapController, animated: false) // auto-pops from self
 		viewControllers = viewControllers // update own controllers in case top was popped off
@@ -84,9 +82,7 @@ class MasterNavigationController: UINavigationController {
 	}
 }
 
-class DetailNavigationController: UINavigationController, LoadedViewController {
-	static let storyboardID = "Detail"
-	
+class DetailNavigationController: UINavigationController, Reusable {
 	var mapController: MapViewController {
 		return topViewController as! MapViewController
 	}

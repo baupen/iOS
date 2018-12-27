@@ -8,10 +8,8 @@ final class EditIssueNavigationController: UINavigationController {
 	}
 }
 
-final class EditIssueViewController: UITableViewController, LoadedViewController {
+final class EditIssueViewController: UITableViewController, Reusable {
 	typealias Localization = L10n.ViewIssue
-	
-	static let storyboardID = "Edit Issue"
 	
 	@IBOutlet var markButton: UIButton!
 	
@@ -117,7 +115,7 @@ final class EditIssueViewController: UITableViewController, LoadedViewController
 	}
 	private var hasChangedImage = false
 	
-	private var building: Building!
+	private var site: ConstructionSite!
 	private var suggestionsHandler = SuggestionsHandler()
 	private var originalDescription: String?
 	
@@ -144,7 +142,7 @@ final class EditIssueViewController: UITableViewController, LoadedViewController
 		assert(issue?.isRegistered != true)
 		guard isViewLoaded else { return }
 		
-		building = issue.accessMap().accessBuilding()
+		site = issue.accessMap().accessSite()
 		
 		navigationItem.title = isCreating ? Localization.titleCreating : Localization.titleEditing
 		
@@ -201,7 +199,7 @@ final class EditIssueViewController: UITableViewController, LoadedViewController
 	}
 	
 	func possibleCraftsmen() -> [Craftsman] {
-		return building.allCraftsmen()
+		return site.allCraftsmen()
 			.filter { trade == nil || $0.trade == trade }
 			.sorted { $0.name < $1.name }
 	}
@@ -232,7 +230,7 @@ final class EditIssueViewController: UITableViewController, LoadedViewController
 		case "select trade":
 			let selectionController = segue.destination as! SelectionViewController
 			selectionController.handler = TradeSelectionHandler(
-				in: building,
+				in: site,
 				currentTrade: trade
 			) { self.trade = $0 }.wrapped()
 		case "select craftsman":

@@ -13,8 +13,8 @@ class TradeSelectionHandler: SimpleSelectionHandler {
 	var currentItem: String?
 	var selectionCallback: (String?) -> Void
 	
-	init(in building: Building, currentTrade: String?, callback: @escaping SelectionCallback) {
-		self.items = building.allTrades().sorted()
+	init(in site: ConstructionSite, currentTrade: String?, callback: @escaping SelectionCallback) {
+		self.items = site.allTrades().sorted()
 		self.currentItem = currentTrade
 		self.selectionCallback = callback
 	}
@@ -24,17 +24,13 @@ class TradeSelectionHandler: SimpleSelectionHandler {
 	}
 }
 
-class NoTradeCell: UITableViewCell, LoadedTableCell {
-	static let reuseID = "No Trade Cell"
-}
+final class NoTradeCell: UITableViewCell, Reusable {}
 
-class TradeCell: UITableViewCell, LoadedTableCell {
-	static let reuseID = "Trade Cell"
-	
+final class TradeCell: UITableViewCell, Reusable {
 	@IBOutlet var nameLabel: UILabel!
 }
 
-class CraftsmanSelectionHandler: SimpleSelectionHandler {
+final class CraftsmanSelectionHandler: SimpleSelectionHandler {
 	typealias Localization = L10n.ViewIssue.SelectCraftsman
 	typealias Cell = CraftsmanCell
 	typealias EmptyCell = NoCraftsmanCell
@@ -62,13 +58,9 @@ class CraftsmanSelectionHandler: SimpleSelectionHandler {
 	}
 }
 
-class NoCraftsmanCell: UITableViewCell, LoadedTableCell {
-	static let reuseID = "No Craftsman Cell"
-}
+final class NoCraftsmanCell: UITableViewCell, Reusable {}
 
-class CraftsmanCell: UITableViewCell, LoadedTableCell {
-	static let reuseID = "Craftsman Cell"
-	
+final class CraftsmanCell: UITableViewCell, Reusable {
 	@IBOutlet var nameLabel: UILabel!
 	@IBOutlet var tradeLabel: UILabel!
 }

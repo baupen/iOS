@@ -34,25 +34,6 @@
 "alert.unknown_sync_error.message" = "Beim Aktualisieren ist ein unbekannter Fehler aufgetreten. Bitte versuch es später nochmal.\n\nFalls der Fehler bestehen bleibt, könnte der folgende Text dem Support behilflich sein:\n%@";
 // CONTEXT: Titel für den Alert, dass beim aktualisieren ein unbekannter Fehler aufgetreten ist.
 "alert.unknown_sync_error.title" = "Unbekannter Fehler!";
-
-////////////////////////////////////////////////////////////////////////////////
-// MARK: Building
-// CONTEXT: Beschreibt, wie viele Mängel in einem Gebäude offen sind. %s wird durch die Anzahl offener Mängel ersetzt, z.b. "%s offene Mängel"
-"building_list.building_summary.open_issues" = "%@ offene Pendenzen";
-// CONTEXT: Beschreibt, wie viele Mängel es in einem Gebäude insgesamt gibt. Wird nach building_list.building_summary.open_issues angezeigt, daher darf gerne das Wort "Mängel" weggelassen werden. %s wird durch die Anzahl offener Mängel ersetzt, z.b. "%s insgesamt"
-"building_list.building_summary.total_issues" = "%@ insgesamt";
-// CONTEXT: Beschreibung für den Abnahmemodus
-"building_list.client_mode.description" = "Im Abnahmemodus werden nur die Pendenzen angezeigt, die auch im Abnahmemodus erfasst wurden.";
-// CONTEXT: Titel für den Schalter um Abnahmemodus an- und auszuschalten. (Abnahmemodus ist für wenn man mit dem Käufer herumläuft und inspiziert; dabei werden die "normalen" Mängel nicht angezeigt.)
-"building_list.client_mode.title" = "Abnahmemodus";
-// CONTEXT: Knopf oben links zum ausloggen
-"building_list.log_out" = "Ausloggen";
-// CONTEXT: Wird anstelle der Gebäude angezeigt, wenn man noch nie synchronisiert hat. Sollte den Benutzer darauf hinweisen, dass er durch runterziehen synchronisieren kann.
-"building_list.refresh_hint" = "Noch keine Daten geladen!\nZieh runter, um die lokalen Daten mit dem Server zu synchronisieren.";
-// CONTEXT: Titel für die Gebäudeliste-Ansicht; wird auch für den Back-Button aus der Grundrissliste verwendet.
-"building_list.title" = "Gebäude";
-// CONTEXT: Der Willkommenstext oben. %s wird mit dem Vornamen ersetzt.
-"building_list.welcome" = "Willkommen, %@";
 // CONTEXT: Überschrift für den Handwerker.
 "issue.craftsman" = "Handwerker";
 
@@ -195,6 +176,25 @@
 "map_list.section.this_map" = "Dieser Bereich";
 // CONTEXT: Kurzer Titel für die "Auf Foto Zeichnen"-Ansicht
 "markup.title" = "Zeichnen";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Site
+// CONTEXT: Beschreibung für den Abnahmemodus
+"site_list.client_mode.description" = "Im Abnahmemodus werden nur die Pendenzen angezeigt, die auch im Abnahmemodus erfasst wurden.";
+// CONTEXT: Titel für den Schalter um Abnahmemodus an- und auszuschalten. (Abnahmemodus ist für wenn man mit dem Käufer herumläuft und inspiziert; dabei werden die "normalen" Mängel nicht angezeigt.)
+"site_list.client_mode.title" = "Abnahmemodus";
+// CONTEXT: Knopf oben links zum ausloggen
+"site_list.log_out" = "Ausloggen";
+// CONTEXT: Wird anstelle der Gebäude angezeigt, wenn man noch nie synchronisiert hat. Sollte den Benutzer darauf hinweisen, dass er durch runterziehen synchronisieren kann.
+"site_list.refresh_hint" = "Noch keine Daten geladen!\nZieh runter, um die lokalen Daten mit dem Server zu synchronisieren.";
+// CONTEXT: Beschreibt, wie viele Mängel in einem Gebäude offen sind. %s wird durch die Anzahl offener Mängel ersetzt, z.b. "%s offene Mängel"
+"site_list.site_summary.open_issues" = "%@ offene Pendenzen";
+// CONTEXT: Beschreibt, wie viele Mängel es in einem Gebäude insgesamt gibt. Wird nach site_list.site_summary.open_issues angezeigt, daher darf gerne das Wort "Mängel" weggelassen werden. %s wird durch die Anzahl offener Mängel ersetzt, z.b. "%s insgesamt"
+"site_list.site_summary.total_issues" = "%@ insgesamt";
+// CONTEXT: Titel für die Gebäudeliste-Ansicht; wird auch für den Back-Button aus der Grundrissliste verwendet.
+"site_list.title" = "Gebäude";
+// CONTEXT: Der Willkommenstext oben. %s wird mit dem Vornamen ersetzt.
+"site_list.welcome" = "Willkommen, %@";
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: View

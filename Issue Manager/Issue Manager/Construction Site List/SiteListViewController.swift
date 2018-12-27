@@ -2,40 +2,38 @@
 
 import UIKit
 
-class BuildingListViewController: RefreshingTableViewController, LoadedViewController {
-	fileprivate typealias Localization = L10n.BuildingList
-	
-	static let storyboardID = "Building List"
+class SiteListViewController: RefreshingTableViewController, Reusable {
+	fileprivate typealias Localization = L10n.SiteList
 	
 	@IBOutlet var welcomeLabel: UILabel!
 	@IBOutlet var clientModeSwitch: UISwitch!
 	@IBOutlet var clientModeCell: UITableViewCell!
-	@IBOutlet var buildingListView: UICollectionView!
+	@IBOutlet var siteListView: UICollectionView!
 	@IBOutlet var refreshHintLabel: UILabel!
 	
 	@IBAction func clientModeSwitched() {
 		defaults.isInClientMode = clientModeSwitch.isOn
 		updateClientModeAppearance()
-		buildingListView.reloadData()
+		siteListView.reloadData()
 	}
 	
-	@IBAction func backToBuildingList(_ segue: UIStoryboardSegue) {
-		buildings = Array(Client.shared.storage.buildings.values)
-		buildingListView.reloadData()
+	@IBAction func backToSiteList(_ segue: UIStoryboardSegue) {
+		sites = Array(Client.shared.storage.sites.values)
+		siteListView.reloadData()
 	}
 	
 	override var isRefreshing: Bool {
 		didSet {
-			buildingListView.visibleCells.forEach { ($0 as! BuildingCell).isRefreshing = isRefreshing }
+			siteListView.visibleCells.forEach { ($0 as! SiteCell).isRefreshing = isRefreshing }
 		}
 	}
 	
-	private var buildings: [Building] = [] {
+	private var sites: [ConstructionSite] = [] {
 		didSet {
-			buildings.sort {
+			sites.sort {
 				$0.name < $1.name // TODO: use last opened date instead
 			}
-			refreshHintLabel.isHidden = !buildings.isEmpty
+			refreshHintLabel.isHidden = !sites.isEmpty
 		}
 	}
 	
@@ -48,7 +46,7 @@ class BuildingListViewController: RefreshingTableViewController, LoadedViewContr
 		clientModeSwitch.isOn = defaults.isInClientMode
 		updateClientModeAppearance()
 		
-		buildings = Array(Client.shared.storage.buildings.values)
+		sites = Array(Client.shared.storage.sites.values)
 	}
 	
 	private var needsRefresh = false
@@ -73,8 +71,8 @@ class BuildingListViewController: RefreshingTableViewController, LoadedViewContr
 	override func refreshCompleted() {
 		super.refreshCompleted()
 		
-		self.buildings = Array(Client.shared.storage.buildings.values)
-		self.buildingListView.reloadData()
+		self.sites = Array(Client.shared.storage.sites.values)
+		self.siteListView.reloadData()
 	}
 	
 	func updateClientModeAppearance() {
@@ -85,9 +83,9 @@ class BuildingListViewController: RefreshingTableViewController, LoadedViewContr
 		UINavigationBar.appearance().barTintColor = color
 	}
 	
-	func showMapList(for building: Building, animated: Bool = true) {
+	func showMapList(for site: ConstructionSite, animated: Bool = true) {
 		let main = storyboard!.instantiate(MainViewController.self)!
-		main.building = building
+		main.site = site
 		
 		present(main, animated: animated)
 	}
@@ -97,25 +95,24 @@ class BuildingListViewController: RefreshingTableViewController, LoadedViewContr
 	}
 }
 
-extension BuildingListViewController: UICollectionViewDataSource {
+extension SiteListViewController: UICollectionViewDataSource {
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return buildings.count
+		return sites.count
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeue(BuildingCell.self, for: indexPath)!
+		let cell = collectionView.dequeue(SiteCell.self, for: indexPath)!
 		
-		let building = buildings[indexPath.item]
-		cell.building = building
+		cell.site = sites[indexPath.item]
 		cell.isRefreshing = isRefreshing
 		
 		return cell
 	}
 }
 
-extension BuildingListViewController: UICollectionViewDelegate {
+extension SiteListViewController: UICollectionViewDelegate {
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		let building = buildings[indexPath.item]
-		showMapList(for: building)
+		let site = sites[indexPath.item]
+		showMapList(for: site)
 	}
 }

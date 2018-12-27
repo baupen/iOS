@@ -2,12 +2,10 @@
 
 import UIKit
 
-class MapListViewController: RefreshingTableViewController, LoadedViewController {
+class MapListViewController: RefreshingTableViewController, Reusable {
 	typealias Localization = L10n.MapList
 	
-	static let storyboardID = "Map List"
-	
-	@IBOutlet var backToBuildingsButton: UIBarButtonItem!
+	@IBOutlet var backToSiteListButton: UIBarButtonItem!
 	
 	var holder: MapHolder! {
 		didSet { update() }
@@ -55,7 +53,7 @@ class MapListViewController: RefreshingTableViewController, LoadedViewController
 			showOwnMap()
 		}
 		
-		navigationItem.leftBarButtonItem = holder is Building ? backToBuildingsButton : nil
+		navigationItem.leftBarButtonItem = holder is ConstructionSite ? backToSiteListButton : nil
 		
 		super.viewWillAppear(animated)
 	}
@@ -73,7 +71,7 @@ class MapListViewController: RefreshingTableViewController, LoadedViewController
 				titled: Localization.MapRemoved.title,
 				message: Localization.MapRemoved.message
 			) {
-				self.performSegue(withIdentifier: "back to building list", sender: self)
+				self.performSegue(withIdentifier: "back to site list", sender: self)
 			}
 		}
 		
@@ -84,8 +82,8 @@ class MapListViewController: RefreshingTableViewController, LoadedViewController
 	
 	/// - returns: whether or not the holder is still valid
 	@discardableResult private func handleRefresh() -> Bool {
-		if let oldBuilding = holder as? Building, let building = Client.shared.storage.buildings[oldBuilding.id] {
-			holder = building
+		if let oldSite = holder as? ConstructionSite, let site = Client.shared.storage.sites[oldSite.id] {
+			holder = site
 			return true
 		} else if let oldMap = holder as? Map, let map = Client.shared.storage.maps[oldMap.id] {
 			holder = map

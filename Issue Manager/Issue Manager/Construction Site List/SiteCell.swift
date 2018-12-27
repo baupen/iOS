@@ -6,10 +6,8 @@ fileprivate let shadowOpacity: Float = 0.2
 fileprivate let shadowOffset = CGSize(width: 0, height: 6)
 fileprivate let shadowRadius: CGFloat = 12
 
-class BuildingCell: UICollectionViewCell, LoadedCollectionCell {
-	fileprivate typealias Localization = L10n.BuildingList.BuildingSummary
-	
-	static let reuseID = "Building Cell"
+class SiteCell: UICollectionViewCell, Reusable {
+	fileprivate typealias Localization = L10n.SiteList.SiteSummary
 	
 	@IBOutlet var imageView: UIImageView!
 	@IBOutlet var nameLabel: UILabel!
@@ -28,7 +26,7 @@ class BuildingCell: UICollectionViewCell, LoadedCollectionCell {
 		}
 	}
 	
-	var building: Building! {
+	var site: ConstructionSite! {
 		didSet { update() }
 	}
 	
@@ -56,14 +54,14 @@ class BuildingCell: UICollectionViewCell, LoadedCollectionCell {
 	
 	func update() {
 		updateImage()
-		nameLabel.text = building.name
+		nameLabel.text = site.name
 		
-		issueBadge.holder = building
+		issueBadge.holder = site
 		
-		// FIXME: only if still same building
-		// async because there could be a lot of issues (e.g. if we're calculating it for a whole building)
+		// FIXME: only if still same site
+		// async because there could be a lot of issues (e.g. if we're calculating it for a whole site)
 		DispatchQueue.global().async {
-			let issues = self.building.recursiveIssues()
+			let issues = self.site.recursiveIssues()
 			let openCount = issues.count { $0.isOpen }
 			let totalCount = issues.count
 			DispatchQueue.main.async {
@@ -75,8 +73,8 @@ class BuildingCell: UICollectionViewCell, LoadedCollectionCell {
 	
 	private var imageTimer: Timer?
 	func updateImage() {
-		if let imageFilename = building.imageFilename {
-			let imageURL = Building.cacheURL(filename: imageFilename)
+		if let imageFilename = site.imageFilename {
+			let imageURL = ConstructionSite.cacheURL(filename: imageFilename)
 			if let image = UIImage(contentsOfFile: imageURL.path) {
 				imageView.image = image
 				imageTimer?.invalidate()

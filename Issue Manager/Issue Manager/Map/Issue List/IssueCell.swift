@@ -2,10 +2,8 @@
 
 import UIKit
 
-class IssueCell: UITableViewCell, LoadedTableCell {
+class IssueCell: UITableViewCell, Reusable {
 	typealias Localization = L10n.Issue
-	
-	static let reuseID = "Issue Cell"
 	
 	@IBOutlet var markButton: UIButton!
 	@IBOutlet var numberLabel: UILabel!

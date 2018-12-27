@@ -45,35 +45,6 @@ internal enum L10n {
     }
   }
 
-  internal enum BuildingList {
-    /// Ausloggen
-    internal static let logOut = L10n.tr("Localizable", "building_list.log_out")
-    /// Noch keine Daten geladen!\nZieh runter, um die lokalen Daten mit dem Server zu synchronisieren.
-    internal static let refreshHint = L10n.tr("Localizable", "building_list.refresh_hint")
-    /// Gebäude
-    internal static let title = L10n.tr("Localizable", "building_list.title")
-    /// Willkommen, %@
-    internal static func welcome(_ p1: String) -> String {
-      return L10n.tr("Localizable", "building_list.welcome", p1)
-    }
-    internal enum BuildingSummary {
-      /// %@ offene Pendenzen
-      internal static func openIssues(_ p1: String) -> String {
-        return L10n.tr("Localizable", "building_list.building_summary.open_issues", p1)
-      }
-      /// %@ insgesamt
-      internal static func totalIssues(_ p1: String) -> String {
-        return L10n.tr("Localizable", "building_list.building_summary.total_issues", p1)
-      }
-    }
-    internal enum ClientMode {
-      /// Im Abnahmemodus werden nur die Pendenzen angezeigt, die auch im Abnahmemodus erfasst wurden.
-      internal static let description = L10n.tr("Localizable", "building_list.client_mode.description")
-      /// Abnahmemodus
-      internal static let title = L10n.tr("Localizable", "building_list.client_mode.title")
-    }
-  }
-
   internal enum Issue {
     /// Handwerker
     internal static let craftsman = L10n.tr("Localizable", "issue.craftsman")
@@ -223,6 +194,35 @@ internal enum L10n {
   internal enum Markup {
     /// Zeichnen
     internal static let title = L10n.tr("Localizable", "markup.title")
+  }
+
+  internal enum SiteList {
+    /// Ausloggen
+    internal static let logOut = L10n.tr("Localizable", "site_list.log_out")
+    /// Noch keine Daten geladen!\nZieh runter, um die lokalen Daten mit dem Server zu synchronisieren.
+    internal static let refreshHint = L10n.tr("Localizable", "site_list.refresh_hint")
+    /// Gebäude
+    internal static let title = L10n.tr("Localizable", "site_list.title")
+    /// Willkommen, %@
+    internal static func welcome(_ p1: String) -> String {
+      return L10n.tr("Localizable", "site_list.welcome", p1)
+    }
+    internal enum ClientMode {
+      /// Im Abnahmemodus werden nur die Pendenzen angezeigt, die auch im Abnahmemodus erfasst wurden.
+      internal static let description = L10n.tr("Localizable", "site_list.client_mode.description")
+      /// Abnahmemodus
+      internal static let title = L10n.tr("Localizable", "site_list.client_mode.title")
+    }
+    internal enum SiteSummary {
+      /// %@ offene Pendenzen
+      internal static func openIssues(_ p1: String) -> String {
+        return L10n.tr("Localizable", "site_list.site_summary.open_issues", p1)
+      }
+      /// %@ insgesamt
+      internal static func totalIssues(_ p1: String) -> String {
+        return L10n.tr("Localizable", "site_list.site_summary.total_issues", p1)
+      }
+    }
   }
 
   internal enum ViewIssue {

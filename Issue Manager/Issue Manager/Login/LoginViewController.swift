@@ -75,7 +75,7 @@ class LoginViewController: UIViewController {
 		
 		result.then {
 			print("Logged in as", Client.shared.user!.authenticationToken)
-			self.showBuildingList()
+			self.showSiteList()
 		}
 		
 		result.catch { error in
@@ -136,7 +136,7 @@ class LoginViewController: UIViewController {
 		}
 		
 		print("Logged in locally!")
-		showBuildingList()
+		showSiteList()
 	}
 	
 	func showUnknownUsernameAlert(username: String) {
@@ -153,8 +153,8 @@ class LoginViewController: UIViewController {
 		)
 	}
 	
-	func showBuildingList(animated: Bool = true) {
-		let controller = storyboard!.instantiate(BuildingListViewController.self)!
+	func showSiteList(animated: Bool = true) {
+		let controller = storyboard!.instantiate(SiteListViewController.self)!
 		controller.modalTransitionStyle = .flipHorizontal
 		present(controller, animated: animated)
 	}

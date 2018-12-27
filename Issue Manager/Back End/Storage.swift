@@ -4,13 +4,13 @@ import Foundation
 
 final class Storage: Codable {
 	private(set) var craftsmen: [ID<Craftsman>: Craftsman] = [:]
-	private(set) var buildings: [ID<Building>: Building] = [:]
+	private(set) var sites: [ID<ConstructionSite>: ConstructionSite] = [:]
 	private(set) var maps: [ID<Map>: Map] = [:]
 	// try not to mutate these from outside the backend group
 	internal(set) var issues: [ID<Issue>: Issue] = [:]
 	
 	private var fileContainers: [AnyFileContainer] {
-		return Array(buildings.values) as [AnyFileContainer]
+		return Array(sites.values) as [AnyFileContainer]
 			+ Array(maps.values)
 			+ Array(issues.values)
 	}
@@ -21,7 +21,7 @@ final class Storage: Codable {
 		let container = try decoder.container(keyedBy: CodingKeys.self)
 		
 		craftsmen = try container.decodeValue(forKey: .craftsmen)
-		buildings = try container.decodeValue(forKey: .buildings)
+		sites     = try container.decodeValue(forKey: .sites)
 		maps      = try container.decodeValue(forKey: .maps)
 		issues    = try container.decodeValue(forKey: .issues)
 		
