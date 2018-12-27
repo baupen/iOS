@@ -2,8 +2,6 @@
 
 import UIKit
 
-fileprivate let refreshingCellAlpha: CGFloat = 0.25
-
 class BuildingListViewController: RefreshingTableViewController, LoadedViewController {
 	fileprivate typealias Localization = L10n.BuildingList
 	

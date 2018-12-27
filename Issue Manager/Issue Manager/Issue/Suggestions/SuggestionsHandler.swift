@@ -32,7 +32,6 @@ class SuggestionsHandler: NSObject, UITableViewDataSource, UITableViewDelegate {
 		}
 	}
 	
-	private var suggestionsPrefix: String?
 	private var matches: [SuggestionMatch] = [] {
 		didSet {
 			tableView.isHidden = matches.isEmpty

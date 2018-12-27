@@ -36,8 +36,6 @@ protocol AnySelectionHandler: UITableViewDelegate, UITableViewDataSource {
 }
 
 class SelectionHandler<Handler: SimpleSelectionHandler>: NSObject, AnySelectionHandler {
-	typealias Item = Handler.Item
-	
 	private var handler: Handler
 	private var viewController: UIViewController!
 	
