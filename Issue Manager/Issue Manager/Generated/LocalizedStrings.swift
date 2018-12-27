@@ -172,7 +172,7 @@ internal enum L10n {
 
   internal enum MapList {
     internal enum MapRemoved {
-      /// Dieser Bereich existiert nicht mehr. Du wirst jetzt zurück zur Gebäudeauswahl geleitet.
+      /// Dieser Bereich existiert nicht mehr. Du wirst jetzt zurück zur Baustellenauswahl geleitet.
       internal static let message = L10n.tr("Localizable", "map_list.map_removed.message")
       /// Bereich Entfernt!
       internal static let title = L10n.tr("Localizable", "map_list.map_removed.title")
@@ -201,7 +201,7 @@ internal enum L10n {
     internal static let logOut = L10n.tr("Localizable", "site_list.log_out")
     /// Noch keine Daten geladen!\nZieh runter, um die lokalen Daten mit dem Server zu synchronisieren.
     internal static let refreshHint = L10n.tr("Localizable", "site_list.refresh_hint")
-    /// Gebäude
+    /// Baustellen
     internal static let title = L10n.tr("Localizable", "site_list.title")
     /// Willkommen, %@
     internal static func welcome(_ p1: String) -> String {

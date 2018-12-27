@@ -165,7 +165,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Map
 // CONTEXT: Nachricht des Alerts für wenn der ausgewählte Bereich nicht mehr existiert.
-"map_list.map_removed.message" = "Dieser Bereich existiert nicht mehr. Du wirst jetzt zurück zur Gebäudeauswahl geleitet.";
+"map_list.map_removed.message" = "Dieser Bereich existiert nicht mehr. Du wirst jetzt zurück zur Baustellenauswahl geleitet.";
 // CONTEXT: Titel des Alerts für wenn der ausgewählte Bereich nicht mehr existiert.
 "map_list.map_removed.title" = "Bereich Entfernt!";
 // CONTEXT: Beschreibt für einen Grundriss, wieviele offene Pendenzen er (rekursiv) enthält; %s wird durch die Anzahl ersetzt.
@@ -185,14 +185,14 @@
 "site_list.client_mode.title" = "Abnahmemodus";
 // CONTEXT: Knopf oben links zum ausloggen
 "site_list.log_out" = "Ausloggen";
-// CONTEXT: Wird anstelle der Gebäude angezeigt, wenn man noch nie synchronisiert hat. Sollte den Benutzer darauf hinweisen, dass er durch runterziehen synchronisieren kann.
+// CONTEXT: Wird anstelle der Baustellen angezeigt, wenn man noch nie synchronisiert hat. Sollte den Benutzer darauf hinweisen, dass er durch runterziehen synchronisieren kann.
 "site_list.refresh_hint" = "Noch keine Daten geladen!\nZieh runter, um die lokalen Daten mit dem Server zu synchronisieren.";
 // CONTEXT: Beschreibt, wie viele Mängel in einem Gebäude offen sind. %s wird durch die Anzahl offener Mängel ersetzt, z.b. "%s offene Mängel"
 "site_list.site_summary.open_issues" = "%@ offene Pendenzen";
 // CONTEXT: Beschreibt, wie viele Mängel es in einem Gebäude insgesamt gibt. Wird nach site_list.site_summary.open_issues angezeigt, daher darf gerne das Wort "Mängel" weggelassen werden. %s wird durch die Anzahl offener Mängel ersetzt, z.b. "%s insgesamt"
 "site_list.site_summary.total_issues" = "%@ insgesamt";
-// CONTEXT: Titel für die Gebäudeliste-Ansicht; wird auch für den Back-Button aus der Grundrissliste verwendet.
-"site_list.title" = "Gebäude";
+// CONTEXT: Titel für die Baustellenliste-Ansicht; wird auch für den Back-Button aus der Grundrissliste verwendet.
+"site_list.title" = "Baustellen";
 // CONTEXT: Der Willkommenstext oben. %s wird mit dem Vornamen ersetzt.
 "site_list.welcome" = "Willkommen, %@";
 
