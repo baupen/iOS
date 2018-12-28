@@ -180,9 +180,9 @@
 "site_list.log_out" = "Logout";
 // CONTEXT: Wird anstelle der Baustellen angezeigt, wenn man noch nie synchronisiert hat. Sollte den Benutzer darauf hinweisen, dass er durch runterziehen synchronisieren kann.
 "site_list.refresh_hint" = "Ancora nessun dato caricato!\nScorri in basso per sincronizzare i dati locali con il server.";
-// CONTEXT: Beschreibt, wie viele Mängel in einem Gebäude offen sind. %s wird durch die Anzahl offener Mängel ersetzt, z.b. "%s offene Mängel"
+// CONTEXT: Beschreibt, wie viele Mängel in einer Baustelle offen sind. %s wird durch die Anzahl offener Mängel ersetzt, z.b. "%s offene Mängel"
 "site_list.site_summary.open_issues" = "%@ pendenze aperte";
-// CONTEXT: Beschreibt, wie viele Mängel es in einem Gebäude insgesamt gibt. Wird nach site_list.site_summary.open_issues angezeigt, daher darf gerne das Wort "Mängel" weggelassen werden. %s wird durch die Anzahl offener Mängel ersetzt, z.b. "%s insgesamt"
+// CONTEXT: Beschreibt, wie viele Mängel es in einer Baustelle insgesamt gibt. Wird nach site_list.site_summary.open_issues angezeigt, daher darf gerne das Wort "Mängel" weggelassen werden. %s wird durch die Anzahl offener Mängel ersetzt, z.b. "%s insgesamt"
 "site_list.site_summary.total_issues" = "%@ in totale";
 // CONTEXT: Titel für die Baustellenliste-Ansicht; wird auch für den Back-Button aus der Grundrissliste verwendet.
 "site_list.title" = "Edificio";

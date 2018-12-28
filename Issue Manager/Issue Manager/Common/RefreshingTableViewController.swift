@@ -41,8 +41,11 @@ class RefreshingTableViewController: UITableViewController {
 				message: L10n.Alert.OutdatedClient.message
 			)
 		default:
-			var errorDesc = ""
-			dump(error, to: &errorDesc)
+			print("refresh error!")
+			dump(error)
+			let errorDesc = "" <- {
+				dump(error, to: &$0)
+			}
 			self.showAlert(
 				titled: Alert.UnknownSyncError.title,
 				message: Alert.UnknownSyncError.message(errorDesc)

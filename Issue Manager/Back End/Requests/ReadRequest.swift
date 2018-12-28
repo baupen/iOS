@@ -11,7 +11,7 @@ struct ReadRequest: JSONJSONRequest {
 	let authenticationToken: String
 	let user: ObjectMeta<User>
 	let craftsmen: [ObjectMeta<Craftsman>]
-	let sites: [ObjectMeta<ConstructionSite>]
+	let constructionSites: [ObjectMeta<ConstructionSite>]
 	let maps: [ObjectMeta<Map>]
 	let issues: [ObjectMeta<Issue>]
 	
@@ -33,8 +33,8 @@ struct ReadRequest: JSONJSONRequest {
 	struct ExpectedResponse: Response {
 		let changedCraftsmen: [Craftsman]
 		let removedCraftsmanIDs: [ID<Craftsman>]
-		let changedSites: [ConstructionSite]
-		let removedSiteIDs: [ID<ConstructionSite>]
+		let changedConstructionSites: [ConstructionSite]
+		let removedConstructionSiteIDs: [ID<ConstructionSite>]
 		let changedMaps: [Map]
 		let removedMapIDs: [ID<Map>]
 		let changedIssues: [Issue]
@@ -50,10 +50,10 @@ extension Client {
 				ReadRequest(
 					authenticationToken: user.authenticationToken,
 					user: user.meta,
-					craftsmen: self.storage.craftsmen.values.map { $0.meta },
-					sites:     self.storage.sites    .values.map { $0.meta },
-					maps:      self.storage.maps     .values.map { $0.meta },
-					issues:    self.storage.issues   .values.map { $0.meta }
+					craftsmen:         self.storage.craftsmen.values.map { $0.meta },
+					constructionSites: self.storage.sites    .values.map { $0.meta },
+					maps:              self.storage.maps     .values.map { $0.meta },
+					issues:            self.storage.issues   .values.map { $0.meta }
 				)
 			}
 			.flatMap(Client.shared.send)
@@ -61,10 +61,10 @@ extension Client {
 	}
 	
 	fileprivate func update(from response: ReadRequest.ExpectedResponse) {
-		updateEntries(in: \.craftsmen, changing: response.changedCraftsmen, removing: response.removedCraftsmanIDs)
-		updateEntries(in: \.sites,     changing: response.changedSites,     removing: response.removedSiteIDs)
-		updateEntries(in: \.maps,      changing: response.changedMaps,      removing: response.removedMapIDs)
-		updateEntries(in: \.issues,    changing: response.changedIssues,    removing: response.removedIssueIDs)
+		updateEntries(in: \.craftsmen, changing: response.changedCraftsmen,         removing: response.removedCraftsmanIDs)
+		updateEntries(in: \.sites,     changing: response.changedConstructionSites, removing: response.removedConstructionSiteIDs)
+		updateEntries(in: \.maps,      changing: response.changedMaps,              removing: response.removedMapIDs)
+		updateEntries(in: \.issues,    changing: response.changedIssues,            removing: response.removedIssueIDs)
 		
 		if let newUser = response.changedUser {
 			user = newUser
