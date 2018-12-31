@@ -300,9 +300,20 @@ extension EditIssueViewController: CameraViewDelegate {
 extension UIImage {
 	func saveJPEG(to url: URL) throws {
 		guard let jpg = jpegData(compressionQuality: 0.75) else {
-			throw NSError(localizedDescription: "Could not generate JPEG representation for image!")
+			throw ImageSavingError.couldNotGenerateRepresentation
 		}
 		print("Saving file to", url)
 		try jpg.write(to: url)
+	}
+}
+
+enum ImageSavingError: Error {
+	case couldNotGenerateRepresentation
+	
+	var localizedDescription: String { // """localized"""
+		switch self {
+		case .couldNotGenerateRepresentation:
+			return "Could not generate JPEG representation for image!"
+		}
 	}
 }

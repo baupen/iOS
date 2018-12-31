@@ -2,16 +2,6 @@
 
 import Foundation
 
-extension NSError {
-	/// Creates an `NSError` object with the specified parameters (because the default initializer is terrible).
-	convenience init(code: Int = 0, localizedDescription: String? = nil, localizedRecoverySuggestion: String? = nil) {
-		var userInfo: [String: Any] = [:]
-		userInfo[NSLocalizedDescriptionKey] = localizedDescription
-		userInfo[NSLocalizedRecoverySuggestionErrorKey] = localizedRecoverySuggestion
-		self.init(domain: "com.juliand665.LeagueKit", code: code, userInfo: userInfo)
-	}
-}
-
 infix operator <-: NilCoalescingPrecedence
 
 @discardableResult public func <- <T>(object: T, transform: (inout T) throws -> Void) rethrows -> T {
@@ -29,8 +19,20 @@ func ??? <Wrapped>(optional: Wrapped?, error: @autoclosure () -> Error) throws -
 	return unwrapped
 }
 
+extension Error {
+	var localizedFailureReason: String {
+		return (self as NSError).localizedFailureReason ?? localizedDescription
+	}
+}
+
 extension Sequence {
 	func count(where condition: (Element) throws -> Bool) rethrows -> Int {
 		return try lazy.filter(condition).count
+	}
+}
+
+extension Collection {
+	var nonEmptyOptional: Self? {
+		return isEmpty ? nil : self
 	}
 }
