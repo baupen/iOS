@@ -66,6 +66,9 @@ final class MapViewController: UIViewController, Reusable {
 		didSet { pdfController?.overlayView.alpha = markerAlpha }
 	}
 	
+	let sectorView = UIView(frame: CGRect(origin: .zero, size: .one)) <- {
+		$0.autoresizingMask = .flexibleSize
+	}
 	var sectorViews: [SectorView] = []
 	
 	var isPlacingIssue = false {
@@ -94,6 +97,7 @@ final class MapViewController: UIViewController, Reusable {
 	var holder: MapHolder? {
 		didSet { update() }
 	}
+	var map: Map? { return holder as? Map }
 	
 	var issues: [Issue] = []
 	
@@ -148,11 +152,13 @@ final class MapViewController: UIViewController, Reusable {
 			let editController = editIssueNav.editIssueController
 			editController.isCreating = true // otherwise we wouldn't be using a segue
 			if isPlacingIssue {
+				let map = holder as! Map
 				let position = Issue.Position(
 					at: issuePositioner.relativePosition(in: pdfController!.overlayView),
-					zoomScale: pdfController!.scrollView.zoomScale / pdfController!.scrollView.minimumZoomScale
+					zoomScale: pdfController!.scrollView.zoomScale / pdfController!.scrollView.minimumZoomScale,
+					in: map.file!
 				)
-				editController.issue = Issue(at: isPlacingIssue ? position : nil, in: holder as! Map)
+				editController.issue = Issue(at: isPlacingIssue ? position : nil, in: map)
 			} else {
 				editController.issue = Issue(in: holder as! Map)
 			}
@@ -180,8 +186,6 @@ final class MapViewController: UIViewController, Reusable {
 		
 		navigationItem.title = holder?.name ?? Localization.title
 		
-		let map = holder as? Map
-		
 		addItem.isEnabled = map != nil
 		
 		issues = map?.allIssues() ?? []
@@ -189,12 +193,13 @@ final class MapViewController: UIViewController, Reusable {
 		sectorViews.forEach { $0.removeFromSuperview() }
 		sectorViews = map?.sectors.map(SectorView.init) ?? []
 		sectorViews.forEach { $0.delegate = self }
+		sectorViews.forEach(sectorView.addSubview)
 		
 		issueListController.map = map
 		pullableView.isHidden = map == nil
 		
-		if let filename = map?.filename {
-			let url = Map.cacheURL(filename: filename)
+		if let file = map?.file {
+			let url = Map.cacheURL(for: file)
 			asyncLoadPDF(at: url)
 		} else {
 			pdfController = nil
@@ -245,7 +250,12 @@ final class MapViewController: UIViewController, Reusable {
 	private func updateSectors() {
 		let pdfController = self.pdfController!
 		pdfController.view.layoutIfNeeded()
-		sectorViews.forEach(pdfController.overlayView.addSubview)
+		if let sectorFrame = map?.sectorFrame {
+			pdfController.overlayView.addSubview(sectorView)
+			sectorView.frame = CGRect(sectorFrame) * pdfController.overlayView.bounds.size
+		} else {
+			sectorView.removeFromSuperview()
+		}
 	}
 	
 	private func updateMarkers() {

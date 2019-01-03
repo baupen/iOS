@@ -70,10 +70,11 @@ extension IssuePositioner: UIGestureRecognizerDelegate {
 }
 
 extension Issue.Position {
-	init(at point: CGPoint, zoomScale: CGFloat) {
+	init(at point: CGPoint, zoomScale: CGFloat, in file: File) {
 		self.init(
 			at: Point(point),
-			zoomScale: Double(1 / zoomScale)
+			zoomScale: Double(1 / zoomScale),
+			in: file
 		)
 	}
 }

@@ -6,8 +6,9 @@ final class Map: APIObject {
 	let meta: ObjectMeta<Map>
 	let children: [ID<Map>]
 	let sectors: [Sector]
+	let sectorFrame: Rectangle?
 	var issues: [ID<Issue>]
-	let filename: String?
+	let file: File?
 	let name: String
 	let constructionSiteID: ID<ConstructionSite>
 	

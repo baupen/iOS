@@ -155,9 +155,9 @@ final class EditIssueViewController: UITableViewController, Reusable {
 		descriptionChanged()
 		originalDescription = issue?.description
 		
-		image = issue.imageFilename.flatMap {
-			UIImage(contentsOfFile: Issue.cacheURL(filename: $0).path)
-				?? UIImage(contentsOfFile: Issue.localURL(filename: $0).path)
+		image = issue.image.flatMap {
+			UIImage(contentsOfFile: Issue.cacheURL(for: $0).path)
+				?? UIImage(contentsOfFile: Issue.localURL(for: $0).path)
 		}
 		hasChangedImage = false
 	}
@@ -170,18 +170,18 @@ final class EditIssueViewController: UITableViewController, Reusable {
 			
 			if hasChangedImage {
 				if let image = image {
-					let filename = "\(UUID()).jpg"
+					let file = File(filename: "\(UUID()).jpg", id: .init())
 					
-					let url = Issue.localURL(filename: filename)
+					let url = Issue.localURL(for: file)
 					do {
 						try image.saveJPEG(to: url)
-						issue.imageFilename = filename
+						issue.image = file
 					} catch {
 						showAlert(titled: Localization.CouldNotSaveImage.title, message: error.localizedFailureReason)
-						issue.imageFilename = nil
+						issue.image = nil
 					}
 				} else {
-					issue.imageFilename = nil
+					issue.image = nil
 				}
 			}
 		}

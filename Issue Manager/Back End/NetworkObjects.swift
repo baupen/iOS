@@ -2,7 +2,7 @@
 
 import Foundation
 
-struct ID<Object: APIObject>: Codable, Hashable, CustomStringConvertible {
+struct ID<Object>: Codable, Hashable, CustomStringConvertible {
 	var rawValue: UUID
 	
 	var description: String {
@@ -11,6 +11,10 @@ struct ID<Object: APIObject>: Codable, Hashable, CustomStringConvertible {
 	
 	var hashValue: Int {
 		return rawValue.hashValue
+	}
+	
+	var stringValue: String {
+		return rawValue.uuidString
 	}
 	
 	init() {

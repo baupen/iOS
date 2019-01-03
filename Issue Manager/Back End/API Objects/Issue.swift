@@ -8,7 +8,7 @@ final class Issue: APIObject {
 	var number: Int?
 	var isMarked = false
 	var wasAddedWithClient: Bool // "abnahmemodus"
-	var imageFilename: String?
+	var image: File?
 	var description: String?
 	var craftsman: ID<Craftsman>?
 	var map: ID<Map> // only really used before registration
@@ -35,7 +35,7 @@ final class Issue: APIObject {
 		update(\.number)
 		update(\.isMarked)
 		update(\.wasAddedWithClient)
-		update(\.imageFilename)
+		update(\.image)
 		update(\.description)
 		update(\.craftsman)
 		update(\.map)
@@ -46,10 +46,12 @@ final class Issue: APIObject {
 	struct Position: Codable {
 		var point: Point
 		var zoomScale: Double
+		var mapFileID: ID<File>
 		
-		init(at point: Point, zoomScale: Double) {
+		init(at point: Point, zoomScale: Double, in file: File) {
 			self.point = point
 			self.zoomScale = zoomScale
+			self.mapFileID = file.id
 		}
 	}
 	
@@ -94,7 +96,7 @@ final class Issue: APIObject {
 extension Issue: FileContainer {
 	static let pathPrefix = "issue"
 	static let downloadRequestPath = \FileDownloadRequest.issue
-	var filename: String? { return imageFilename }
+	var file: File? { return image }
 }
 
 extension Issue {
@@ -134,9 +136,9 @@ extension Issue {
 	func change(transform: (Issue) throws -> Void) rethrows {
 		assert(!isRegistered)
 		
-		let oldFilename = filename
+		let oldFile = file
 		try transform(self)
-		Client.shared.issueChanged(self, hasChangedFilename: filename != oldFilename)
+		Client.shared.issueChanged(self, hasChangedFile: file != oldFile)
 		
 		Client.shared.saveShared()
 	}

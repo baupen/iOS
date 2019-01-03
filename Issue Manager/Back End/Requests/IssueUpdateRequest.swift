@@ -31,7 +31,7 @@ extension Client {
 					method: "issue/create",
 					authenticationToken: user.authenticationToken,
 					issue: issue,
-					fileURL: issue.filename.map(Issue.localURL)
+					fileURL: issue.image.map(Issue.localURL)
 				)
 			}.flatMap(Client.shared.send)
 		
@@ -40,14 +40,14 @@ extension Client {
 }
 
 extension Client {
-	func issueChanged(_ issue: Issue, hasChangedFilename: Bool) {
+	func issueChanged(_ issue: Issue, hasChangedFile: Bool) {
 		let result = getUser()
 			.map { user in
 				IssueUpdateRequest(
 					method: "issue/update",
 					authenticationToken: user.authenticationToken,
 					issue: issue,
-					fileURL: hasChangedFilename ? issue.filename.map(Issue.localURL) : nil
+					fileURL: hasChangedFile ? issue.image.map(Issue.localURL) : nil
 				)
 			}.flatMap(Client.shared.send)
 		

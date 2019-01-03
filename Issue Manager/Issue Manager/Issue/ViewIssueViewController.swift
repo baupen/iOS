@@ -73,9 +73,9 @@ class ViewIssueViewController: UITableViewController, Reusable {
 		markButton.setImage(issue.isMarked ? #imageLiteral(resourceName: "mark_marked.pdf") : #imageLiteral(resourceName: "mark_unmarked.pdf"), for: .normal)
 		clientModeLabel.text = issue.wasAddedWithClient ? Localization.IsClientMode.true : Localization.IsClientMode.false
 		
-		image = issue.imageFilename.flatMap {
+		image = issue.image.flatMap {
 			// TODO: fall back on localURL for other views
-			UIImage(contentsOfFile: Issue.cacheURL(filename: $0).path)
+			UIImage(contentsOfFile: Issue.cacheURL(for: $0).path)
 		}
 		
 		let craftsman = issue.accessCraftsman()

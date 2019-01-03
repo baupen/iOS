@@ -32,6 +32,7 @@
 		952CB48820E830A300E6B664 /* SiteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952CB48720E830A300E6B664 /* SiteCell.swift */; };
 		952CB48C20E8429D00E6B664 /* SiteListLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952CB48B20E8429D00E6B664 /* SiteListLayout.swift */; };
 		95339A3020F8445100A01F07 /* SeparatorLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95339A2F20F8445100A01F07 /* SeparatorLine.swift */; };
+		953FFF6021D9BE7C00A917F2 /* Conversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953FFF5F21D9BE7C00A917F2 /* Conversion.swift */; };
 		9550E0E620F2E70700921387 /* IssueMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9550E0E520F2E70700921387 /* IssueMarker.swift */; };
 		9550E0E820F38D7600921387 /* StatusFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9550E0E720F38D7600921387 /* StatusFilterViewController.swift */; };
 		95512B0820FBEAB300878163 /* FileDownloadRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95512B0720FBEAB200878163 /* FileDownloadRequest.swift */; };
@@ -120,6 +121,7 @@
 		952F69E4214A9F3D00A12CE9 /* SimplePDFKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SimplePDFKit.framework; path = Carthage/Build/iOS/SimplePDFKit.framework; sourceTree = SOURCE_ROOT; };
 		952F69E5214A9F3D00A12CE9 /* PullToExpand.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PullToExpand.framework; path = Carthage/Build/iOS/PullToExpand.framework; sourceTree = SOURCE_ROOT; };
 		95339A2F20F8445100A01F07 /* SeparatorLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeparatorLine.swift; sourceTree = "<group>"; };
+		953FFF5F21D9BE7C00A917F2 /* Conversion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversion.swift; sourceTree = "<group>"; };
 		9550E0E520F2E70700921387 /* IssueMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueMarker.swift; sourceTree = "<group>"; };
 		9550E0E720F38D7600921387 /* StatusFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusFilterViewController.swift; sourceTree = "<group>"; };
 		95512B0720FBEAB200878163 /* FileDownloadRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDownloadRequest.swift; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 				9511A10320DD3A7100101ADE /* Reusable.swift */,
 				9597934F20F7AC2400AA40C1 /* Resources.swift */,
 				95890A5C21B2E4D600510E44 /* Haptics.swift */,
+				953FFF5F21D9BE7C00A917F2 /* Conversion.swift */,
 				9583C2D220DC74BA00452695 /* UIHelpers.swift */,
 			);
 			path = Helpers;
@@ -649,6 +652,7 @@
 				9511A10620DD3B8E00101ADE /* ConstructionSite.swift in Sources */,
 				9584F24820E92DB800A8C884 /* TextFieldContainer.swift in Sources */,
 				95512B0820FBEAB300878163 /* FileDownloadRequest.swift in Sources */,
+				953FFF6021D9BE7C00A917F2 /* Conversion.swift in Sources */,
 				95B2735320DE7AD600D2BD44 /* Multipart.swift in Sources */,
 				9511A0FF20DD379800101ADE /* Codable.swift in Sources */,
 				95890A5D21B2E4D600510E44 /* Haptics.swift in Sources */,

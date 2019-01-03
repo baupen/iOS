@@ -19,7 +19,7 @@ private let baseLocalURL = try! manager.url(
 )
 
 protocol AnyFileContainer: AnyAPIObject {
-	var filename: String? { get }
+	var file: File? { get }
 	
 	func deleteFile()
 	func downloadFile()
@@ -30,19 +30,19 @@ protocol FileContainer: AnyFileContainer, APIObject {
 	static var pathPrefix: String { get }
 	static var downloadRequestPath: DownloadRequestPath<Self> { get }
 	
-	static func cacheURL(filename: String) -> URL
-	static func localURL(filename: String) -> URL
+	static func cacheURL(for file: File) -> URL
+	static func localURL(for file: File) -> URL
 }
 
 extension FileContainer {
-	static func cacheURL(filename: String) -> URL {
-		let url = baseCacheURL.appendingPathComponent("files/\(Self.pathPrefix)/\(filename)")
+	static func cacheURL(for file: File) -> URL {
+		let url = baseCacheURL.appendingPathComponent("files/\(Self.pathPrefix)/\(file.id.stringValue)")
 		try? manager.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true)
 		return url
 	}
 	
-	static func localURL(filename: String) -> URL {
-		let url = baseLocalURL.appendingPathComponent("files/\(Self.pathPrefix)/\(filename)")
+	static func localURL(for file: File) -> URL {
+		let url = baseLocalURL.appendingPathComponent("files/\(Self.pathPrefix)/\(file.id.stringValue)")
 		try? manager.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true)
 		return url
 	}
@@ -53,7 +53,7 @@ extension FileContainer {
 	
 	func downloadFile(previous: AnyFileContainer?) {
 		if let previous = previous {
-			switch (previous.filename, filename) {
+			switch (previous.file, file) {
 			case (nil, nil): // never had file
 				return // nothing to do
 			case (nil, _?): // newly has file
@@ -63,8 +63,8 @@ extension FileContainer {
 			case let (prev?, new?) where prev == new: // same file
 				// move after uploading
 				try? manager.moveItem(
-					at: Self.localURL(filename: prev),
-					to: Self.cacheURL(filename: new)
+					at: Self.localURL(for: prev),
+					to: Self.cacheURL(for: new)
 				)
 				return
 			case (_?, _?): // different file
@@ -72,12 +72,12 @@ extension FileContainer {
 			}
 		}
 		
-		guard let filename = filename else { return }
-		let url = Self.cacheURL(filename: filename)
+		guard let file = file else { return }
+		let url = Self.cacheURL(for: file)
 		
 		guard !manager.fileExists(atPath: url.path) else { return }
 		
-		print("Downloading file \(filename) for \(Self.pathPrefix)")
+		print("Downloading \(file) for \(Self.pathPrefix)")
 		
 		let result = Client.shared.downloadFile(for: Self.downloadRequestPath, meta: meta)
 		result.then { data in
@@ -86,7 +86,7 @@ extension FileContainer {
 		}
 		
 		result.catch { error in
-			print("Could not download the file named \(filename)")
+			print("Could not download \(file)")
 			print(error.localizedFailureReason)
 			dump(error)
 			print("container to download file for:")
@@ -96,7 +96,7 @@ extension FileContainer {
 	}
 	
 	func deleteFile() {
-		try? filename.map(Self.cacheURL).map(manager.removeItem)
-		try? filename.map(Self.localURL).map(manager.removeItem)
+		try? file.map(Self.cacheURL).map(manager.removeItem)
+		try? file.map(Self.localURL).map(manager.removeItem)
 	}
 }

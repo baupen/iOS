@@ -6,7 +6,7 @@ final class ConstructionSite: APIObject {
 	let meta: ObjectMeta<ConstructionSite>
 	let name: String
 	let address: Address
-	let imageFilename: String?
+	let image: File?
 	let maps: [ID<Map>]
 	let craftsmen: [ID<Craftsman>]
 	
@@ -22,7 +22,7 @@ final class ConstructionSite: APIObject {
 extension ConstructionSite: FileContainer {
 	static let pathPrefix = "constructionSite"
 	static let downloadRequestPath = \FileDownloadRequest.constructionSite
-	var filename: String? { return imageFilename }
+	var file: File? { return image }
 }
 
 extension ConstructionSite: MapHolder {
