@@ -130,9 +130,10 @@ final class Client {
 		let (data, response) = taskResult
 		print("\(request.method): status code: \(response.statusCode), body: \(debugRepresentation(of: data))")
 		
-		let metadata = try responseDecoder.decode(JSend.Metadata.self, from: data)
-		guard Client.apiVersion >= metadata.version else {
-			throw RequestError.outdatedClient(client: Client.apiVersion, server: metadata.version)
+		if let metadata = try? responseDecoder.decode(JSend.Metadata.self, from: data) {
+			guard Client.apiVersion >= metadata.version else {
+				throw RequestError.outdatedClient(client: Client.apiVersion, server: metadata.version)
+			}
 		}
 		
 		switch response.statusCode {
