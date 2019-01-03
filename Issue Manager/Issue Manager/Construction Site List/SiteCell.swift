@@ -58,13 +58,14 @@ class SiteCell: UICollectionViewCell, Reusable {
 		
 		issueBadge.holder = site
 		
-		// FIXME: only if still same site
+		let meta = site.meta // capture current site
 		// async because there could be a lot of issues (e.g. if we're calculating it for a whole site)
 		DispatchQueue.global().async {
 			let issues = self.site.recursiveIssues()
 			let openCount = issues.count { $0.isOpen }
 			let totalCount = issues.count
 			DispatchQueue.main.async {
+				guard self.site.meta == meta else { return }
 				self.totalIssuesLabel.text = Localization.totalIssues(String(totalCount))
 				self.openIssuesLabel.text = Localization.openIssues(String(openCount))
 			}
@@ -73,8 +74,7 @@ class SiteCell: UICollectionViewCell, Reusable {
 	
 	private var imageTimer: Timer?
 	func updateImage() {
-		if let image = site.image {
-			let imageURL = ConstructionSite.cacheURL(for: image)
+		if let imageURL = site.image.map(ConstructionSite.cacheURL) {
 			if let image = UIImage(contentsOfFile: imageURL.path) {
 				imageView.image = image
 				imageTimer?.invalidate()
