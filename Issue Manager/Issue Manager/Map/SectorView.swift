@@ -10,7 +10,7 @@ final class SectorView: UIView {
 	
 	private var path: CGPath!
 	private var isHighlighted = false {
-		didSet { drawingView.alpha = isHighlighted ? 0.8 : 0.3 }
+		didSet { drawingView.alpha = isHighlighted ? 1 : 0.4 }
 	}
 	
 	private let drawingView = DrawingView() <- {
@@ -105,7 +105,7 @@ final class SectorView: UIView {
 		
 		context.setLineWidth(0.005 * superview!.bounds.size.length)
 		
-		context.setFillColor(color.withAlphaComponent(0.5).cgColor)
+		context.setFillColor(color.withAlphaComponent(0.25).cgColor)
 		context.setStrokeColor(color.cgColor)
 		
 		context.addPath(path)
