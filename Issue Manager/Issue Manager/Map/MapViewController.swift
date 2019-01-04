@@ -347,11 +347,10 @@ extension MapViewController: IssueCellDelegate {
 }
 
 extension MapViewController: SectorViewDelegate {
-	func zoomMap(to sector: Map.Sector) {
+	func zoomMap(to sectorView: SectorView) {
 		let pdfController = self.pdfController!
 		
-		let path = CGPath.polygon(corners: sector.points.map(CGPoint.init))
-		let rect = path.boundingBox * pdfController.contentView.bounds.size
+		let rect = pdfController.overlayView.convert(sectorView.bounds, from: sectorView)
 		pdfController.scrollView.zoom(to: rect, animated: true)
 	}
 }

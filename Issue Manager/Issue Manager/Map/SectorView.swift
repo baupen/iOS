@@ -53,20 +53,49 @@ final class SectorView: UIView {
 		fatalError()
 	}
 	
-	override func didMoveToSuperview() {
-		super.didMoveToSuperview()
+	override func layoutSubviews() {
+		super.layoutSubviews()
 		
-		if let superview = superview {
-			let scaledPoints = sector.points.map { CGPoint($0) * superview.bounds.size }
-			path = CGPath.polygon(corners: scaledPoints)
-			frame = path.boundingBox
-		}
+		updatePosition()
 	}
 	
 	override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
 		guard super.point(inside: point, with: event) else { return false }
 		
 		return path.contains(point + frame.origin)
+	}
+	
+	@objc func handleTap(_ recognizer: UITapGestureRecognizer) {
+		delegate?.zoomMap(to: self)
+		self.isHighlighted = true
+		UIView.animate(withDuration: 0.3) {
+			self.isHighlighted = false
+		}
+	}
+	
+	@objc func handleLongPress(_ recognizer: UILongPressGestureRecognizer) {
+		let isInside = point(inside: recognizer.location(in: self), with: nil)
+		switch recognizer.state {
+		case .began:
+			isHighlighted = true
+		case .changed:
+			if isInside != isHighlighted {
+				UIView.animate(withDuration: 0.1) {
+					self.isHighlighted = isInside
+				}
+			}
+		case .ended:
+			if isInside {
+				delegate?.zoomMap(to: self)
+			}
+			fallthrough
+		case .cancelled:
+			UIView.animate(withDuration: 0.3) {
+				self.isHighlighted = false
+			}
+		case .failed, .possible:
+			break
+		}
 	}
 	
 	/// called by `DrawingView`
@@ -89,40 +118,15 @@ final class SectorView: UIView {
 		context.strokePath()
 	}
 	
-	@objc func handleTap(_ recognizer: UITapGestureRecognizer) {
-		delegate?.zoomMap(to: sector)
-		self.isHighlighted = true
-		UIView.animate(withDuration: 0.3) {
-			self.isHighlighted = false
-		}
-	}
-	
-	@objc func handleLongPress(_ recognizer: UILongPressGestureRecognizer) {
-		let isInside = point(inside: recognizer.location(in: self), with: nil)
-		switch recognizer.state {
-		case .began:
-			isHighlighted = true
-		case .changed:
-			if isInside != isHighlighted {
-				UIView.animate(withDuration: 0.1) {
-					self.isHighlighted = isInside
-				}
-			}
-		case .ended:
-			if isInside {
-				delegate?.zoomMap(to: sector)
-			}
-			fallthrough
-		case .cancelled:
-			UIView.animate(withDuration: 0.3) {
-				self.isHighlighted = false
-			}
-		case .failed, .possible:
-			break
-		}
+	func updatePosition() {
+		guard let superview = superview else { return }
+		
+		let scaledPoints = sector.points.map { CGPoint($0) * superview.bounds.size }
+		path = CGPath.polygon(corners: scaledPoints)
+		frame = path.boundingBox
 	}
 }
 
 protocol SectorViewDelegate: AnyObject {
-	func zoomMap(to sector: Map.Sector)
+	func zoomMap(to sectorView: SectorView)
 }
