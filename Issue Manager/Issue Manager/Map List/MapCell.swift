@@ -60,5 +60,16 @@ class MapCell: UITableViewCell, Reusable {
 		
 		issueBadge.shouldUseRecursiveIssues = shouldUseRecursiveIssues
 		issueBadge.holder = map
+		
+		if map.children.isEmpty {
+			// fake accessory view so we have the same margins as with a disclosure indicator
+			accessoryView = UIView() <- {
+				$0.frame.size.width = 18 // oof, hardcoded size
+				$0.isHidden = true
+			}
+		} else {
+			accessoryView = nil
+			// nil makes it use accessoryType, which is a disclosure indicator
+		} 
 	}
 }
