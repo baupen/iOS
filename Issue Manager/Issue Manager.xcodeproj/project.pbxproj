@@ -478,7 +478,7 @@
 				9583C2B820DC748800452695 /* Frameworks */,
 				95A4E6572102302400591EAE /* Generate Private Files (if necessary) */,
 				9583C2B920DC748800452695 /* Resources */,
-				95F4DB02214AA2C0005C7D6D /* ShellScript */,
+				95F4DB02214AA2C0005C7D6D /* Copy Carthage Frameworks */,
 			);
 			buildRules = (
 			);
@@ -591,7 +591,7 @@
 			shellPath = /bin/sh;
 			shellScript = "find . -name '*.public.*' -exec ./generate_private.sh {} +\nexit 0\n";
 		};
-		95F4DB02214AA2C0005C7D6D /* ShellScript */ = {
+		95F4DB02214AA2C0005C7D6D /* Copy Carthage Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -603,6 +603,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/SimplePDFKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Promise.framework",
 			);
+			name = "Copy Carthage Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
