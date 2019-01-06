@@ -67,7 +67,8 @@ extension Client {
 		updateEntries(in: \.issues,    changing: response.changedIssues,            removing: response.removedIssueIDs)
 		
 		if let newUser = response.changedUser {
-			user = newUser
+			assert(localUser?.user.id == newUser.id)
+			localUser?.user = newUser
 		}
 		
 		let removed = Set(response.removedIssueIDs) // for efficient lookup

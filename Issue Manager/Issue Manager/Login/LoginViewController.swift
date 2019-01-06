@@ -46,8 +46,8 @@ class LoginViewController: UIViewController {
 		usernameField.delegate = self
 		passwordField.delegate = self
 		
-		if let username = Client.shared.user?.username, !username.isEmpty {
-			usernameField.text = Client.shared.user?.username
+		if let username = Client.shared.localUser?.username, !username.isEmpty {
+			usernameField.text = Client.shared.localUser?.username
 			
 			if !defaults.stayLoggedIn {
 				passwordField.becomeFirstResponder()
@@ -74,7 +74,7 @@ class LoginViewController: UIViewController {
 		}
 		
 		result.then {
-			print("Logged in as", Client.shared.user!.authenticationToken)
+			print("Logged in as", Client.shared.localUser!.user.authenticationToken)
 			self.showSiteList()
 		}
 		
@@ -112,7 +112,7 @@ class LoginViewController: UIViewController {
 	func attemptLocalLogin(showingAlerts: Bool = true) {
 		let username = usernameField.text!
 		let password = passwordField.text!
-		guard let user = Client.shared.user else {
+		guard let localUser = Client.shared.localUser else {
 			if showingAlerts {
 				showAlert(
 					titled: L10n.Alert.ConnectionIssues.title,
@@ -122,13 +122,13 @@ class LoginViewController: UIViewController {
 			return
 		}
 		
-		guard username == user.username else {
+		guard username == localUser.username else {
 			if showingAlerts {
 				showUnknownUsernameAlert(username: username)
 			}
 			return
 		}
-		guard password.sha256() == user.passwordHash else {
+		guard password.sha256() == localUser.passwordHash else {
 			if showingAlerts {
 				showWrongPasswordAlert(username: username)
 			}

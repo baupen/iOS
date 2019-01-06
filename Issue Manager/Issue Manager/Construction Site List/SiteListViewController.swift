@@ -40,7 +40,7 @@ class SiteListViewController: RefreshingTableViewController, Reusable {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		let user = Client.shared.user!
+		let user = Client.shared.localUser!.user
 		welcomeLabel.text = Localization.welcome(user.givenName)
 		
 		clientModeSwitch.isOn = defaults.isInClientMode

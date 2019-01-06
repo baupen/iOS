@@ -12,10 +12,11 @@ struct LoginRequest: JSONJSONRequest {
 	let passwordHash: String
 	
 	func applyToClient(_ response: ExpectedResponse) {
-		Client.shared.user = response.user <- {
-			$0.username = username
-			$0.passwordHash = passwordHash
-		}
+		Client.shared.localUser = LocalUser(
+			user: response.user,
+			username: username,
+			passwordHash: passwordHash
+		)
 		Client.shared.saveShared()
 	}
 	

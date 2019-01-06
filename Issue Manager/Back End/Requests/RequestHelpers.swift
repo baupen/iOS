@@ -5,7 +5,7 @@ import Promise
 
 extension Client {
 	func getUser() -> Future<User> {
-		return user.map(Future.fulfilled) ?? .rejected(with: RequestError.notAuthenticated)
+		return Future { try localUser?.user ??? RequestError.notAuthenticated }
 	}
 }
 

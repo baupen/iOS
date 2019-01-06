@@ -2,15 +2,17 @@
 
 import Foundation
 
+struct LocalUser: Codable {
+	var user: User
+	var username: String!
+	var passwordHash: String!	
+}
+
 struct User: APIObject {
 	var meta: ObjectMeta<User>
 	var authenticationToken: String
 	var givenName: String
 	var familyName: String
-	
-	// set by request, not API
-	var username: String!
-	var passwordHash: String!
 }
 
 extension User {

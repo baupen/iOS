@@ -10,10 +10,10 @@ final class Client {
 	static let apiVersion = 1
 	
 	/// the user we're currently logged in as
-	var user: User? {
+	var localUser: LocalUser? {
 		didSet {
-			guard let user = user else { return }
-			if let old = oldValue, user.id != old.id {
+			guard let localUser = localUser else { return }
+			if let old = oldValue, localUser.user.id != old.user.id {
 				storage = Storage() // invalidate after switching user
 			}
 		}
@@ -201,7 +201,7 @@ fileprivate func debugRepresentation(of data: Data, maxLength: Int = 1000) -> St
 extension Client {
 	func loadShared() {
 		do {
-			user = try defaults.decode(forKey: "Client.shared.user")
+			localUser = try defaults.decode(forKey: "Client.shared.localUser")
 			storage = try defaults.decode(forKey: "Client.shared.storage") ?? storage
 			backlog = try defaults.decode(forKey: "Client.shared.backlog") ?? backlog
 			print("Client loaded!")
@@ -213,9 +213,9 @@ extension Client {
 	}
 	
 	func saveShared() {
-		savingQueue.async { [user, storage] in
+		savingQueue.async { [localUser, storage] in
 			do {
-				try defaults.encode(user, forKey: "Client.shared.user")
+				try defaults.encode(localUser, forKey: "Client.shared.localUser")
 				try defaults.encode(storage, forKey: "Client.shared.storage")
 				try self.saveBacklog()
 				print("Client saved!")

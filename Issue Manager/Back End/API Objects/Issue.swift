@@ -154,7 +154,7 @@ extension Issue {
 		assert(isRegistered)
 		assert(!isReviewed)
 		
-		status.review = .init(at: Date(), by: Client.shared.user!.fullName)
+		status.review = .init(at: Date(), by: Client.shared.localUser!.user.fullName)
 		Client.shared.performed(.review, on: self)
 		
 		Client.shared.saveShared()

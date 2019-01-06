@@ -84,7 +84,7 @@ protocol Request {
 extension Request {
 	func applyToClient(_ response: ExpectedResponse) {}
 	
-	var username: String { return Client.shared.user!.username }
+	var username: String { return Client.shared.localUser!.username }
 }
 
 extension Request where Self: BacklogStorable {
