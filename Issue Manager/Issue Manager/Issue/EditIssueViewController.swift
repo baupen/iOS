@@ -90,8 +90,9 @@ final class EditIssueViewController: UITableViewController, Reusable {
 			suggestionsHandler.trade = trade
 			
 			if trade != craftsman?.trade {
-				if trade != nil, possibleCraftsmen().count == 1 {
-					craftsman = possibleCraftsmen()[0]
+				let options = possibleCraftsmen()
+				if trade != nil, options.count == 1 {
+					craftsman = options.first
 				} else {
 					craftsman = nil
 				}
@@ -102,6 +103,10 @@ final class EditIssueViewController: UITableViewController, Reusable {
 	private var craftsman: Craftsman? {
 		didSet {
 			craftsmanNameLabel.setText(to: craftsman?.name, fallback: L10n.Issue.noCraftsman)
+			
+			if let craftsman = craftsman, craftsman.trade != trade {
+				trade = craftsman.trade
+			}
 		}
 	}
 	
