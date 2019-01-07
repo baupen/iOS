@@ -4,8 +4,9 @@ import Foundation
 
 struct LocalUser: Codable {
 	var user: User
-	var username: String!
-	var passwordHash: String!	
+	
+	var username: String
+	var passwordHash: String	
 }
 
 struct User: APIObject {
