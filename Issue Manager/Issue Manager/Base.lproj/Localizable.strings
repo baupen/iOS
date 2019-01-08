@@ -202,6 +202,8 @@
 "view_issue.accept_response" = "Annehmen";
 // CONTEXT: Überschrift für die Aktionen, die auf eine Pendenz ausgeführt werden können.
 "view_issue.actions" = "Aktionen";
+// CONTEXT: Wird angezeigt, wenn der Nutzer noch nie ein Foto gemacht hat. Soll ihm sagen, dass er einfach durch Tippen irgendwo auf die Kameraansicht ein Foto machen kann.
+"view_issue.camera_control_hint" = "Tippe, um ein Foto zu machen.";
 // CONTEXT: Wird anstelle der Kameraansicht angezeigt, wenn nicht auf die Kamera zugegriffen werden kann.
 "view_issue.could_not_activate_camera" = "Die Kamera konnte nicht aktiviert werden!";
 // CONTEXT: Nachricht des Alerts für wenn die Fotoauswahl nicht geöffnet werden konnte.

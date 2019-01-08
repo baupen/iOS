@@ -17,6 +17,7 @@ final class EditIssueViewController: UITableViewController, Reusable {
 	@IBOutlet var cameraContainerView: CameraContainerView!
 	@IBOutlet var cameraView: CameraView!
 	@IBOutlet var markupButton: UIButton!
+	@IBOutlet var cameraControlHintView: UIView!
 	
 	@IBOutlet var craftsmanTradeLabel: UILabel!
 	@IBOutlet var craftsmanNameLabel: UILabel!
@@ -132,6 +133,8 @@ final class EditIssueViewController: UITableViewController, Reusable {
 		suggestionsHandler.delegate = self
 		
 		cameraView.delegate = self
+		
+		cameraControlHintView.isHidden = defaults.hasTakenPhoto
 		
 		update()
 	}
@@ -295,6 +298,8 @@ extension EditIssueViewController: CameraViewDelegate {
 	
 	func pictureTaken(_ image: UIImage) {
 		self.image = image
+		defaults.hasTakenPhoto = true
+		cameraControlHintView.isHidden = true
 	}
 	
 	func pictureSelected(_ image: UIImage) {

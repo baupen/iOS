@@ -1912,14 +1912,38 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                                 <action selector="openImagePicker:" destination="Hkg-Cj-0r5" eventType="touchUpInside" id="fu6-pF-3DN"/>
                                                             </connections>
                                                         </button>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bHD-Qc-Wyl">
+                                                            <rect key="frame" x="0.0" y="0.0" width="400" height="36.5"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="200" verticalHuggingPriority="500" text="Tippe, um ein Foto zu machen." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qsH-zU-1fo">
+                                                                    <rect key="frame" x="8" y="8" width="384" height="20.5"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="view_issue.camera_control_hint"/>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </label>
+                                                            </subviews>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <constraints>
+                                                                <constraint firstItem="qsH-zU-1fo" firstAttribute="leading" secondItem="bHD-Qc-Wyl" secondAttribute="leadingMargin" id="7rc-4L-zRJ"/>
+                                                                <constraint firstItem="qsH-zU-1fo" firstAttribute="top" secondItem="bHD-Qc-Wyl" secondAttribute="topMargin" id="7tT-4m-vIX"/>
+                                                                <constraint firstAttribute="bottomMargin" secondItem="qsH-zU-1fo" secondAttribute="bottom" id="kkP-us-Ymf"/>
+                                                                <constraint firstAttribute="trailingMargin" secondItem="qsH-zU-1fo" secondAttribute="trailing" id="mNy-zo-qkW"/>
+                                                            </constraints>
+                                                        </view>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="bHD-Qc-Wyl" secondAttribute="trailing" id="17q-8D-vfT"/>
                                                         <constraint firstItem="VBN-3z-jb2" firstAttribute="centerY" secondItem="dXf-yj-EIL" secondAttribute="centerY" id="9Kc-jU-sL2"/>
                                                         <constraint firstItem="VBN-3z-jb2" firstAttribute="leading" secondItem="dXf-yj-EIL" secondAttribute="leadingMargin" id="ba5-xn-t2C"/>
+                                                        <constraint firstItem="bHD-Qc-Wyl" firstAttribute="leading" secondItem="dXf-yj-EIL" secondAttribute="leading" id="dTI-ax-tss"/>
                                                         <constraint firstAttribute="trailing" secondItem="1Gz-5I-dcz" secondAttribute="trailing" constant="4" id="fBH-YV-2xs"/>
                                                         <constraint firstItem="VBN-3z-jb2" firstAttribute="centerX" secondItem="dXf-yj-EIL" secondAttribute="centerX" id="fN4-Ja-n6I"/>
                                                         <constraint firstAttribute="bottom" secondItem="1Gz-5I-dcz" secondAttribute="bottom" constant="4" id="u9H-wQ-moK"/>
+                                                        <constraint firstItem="bHD-Qc-Wyl" firstAttribute="top" secondItem="dXf-yj-EIL" secondAttribute="top" id="yvk-KV-laP"/>
                                                     </constraints>
                                                     <connections>
                                                         <outlet property="cameraView" destination="t22-2D-d02" id="iZK-rV-tUa"/>
@@ -2226,6 +2250,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                     </navigationItem>
                     <connections>
                         <outlet property="cameraContainerView" destination="dXf-yj-EIL" id="wi4-cq-uoO"/>
+                        <outlet property="cameraControlHintView" destination="bHD-Qc-Wyl" id="AfG-VQ-9ys"/>
                         <outlet property="cameraView" destination="t22-2D-d02" id="x2p-4u-btt"/>
                         <outlet property="craftsmanNameLabel" destination="9qr-hs-NAf" id="Lla-9n-5Bz"/>
                         <outlet property="craftsmanTradeLabel" destination="sYl-fi-2Ln" id="fRf-qv-Oki"/>
@@ -2805,7 +2830,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="O8y-cm-e0k"/>
-        <segue reference="PB9-0e-xdP"/>
+        <segue reference="OdI-J8-6Ad"/>
         <segue reference="a5G-fh-9Or"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="Main"/>

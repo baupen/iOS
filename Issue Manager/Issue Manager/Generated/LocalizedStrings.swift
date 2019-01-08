@@ -230,6 +230,8 @@ internal enum L10n {
     internal static let acceptResponse = L10n.tr("Localizable", "view_issue.accept_response")
     /// Aktionen
     internal static let actions = L10n.tr("Localizable", "view_issue.actions")
+    /// Tippe, um ein Foto zu machen.
+    internal static let cameraControlHint = L10n.tr("Localizable", "view_issue.camera_control_hint")
     /// Die Kamera konnte nicht aktiviert werden!
     internal static let couldNotActivateCamera = L10n.tr("Localizable", "view_issue.could_not_activate_camera")
     /// Handwerker

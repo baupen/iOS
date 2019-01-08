@@ -9,6 +9,7 @@ fileprivate let stayLoggedInKey = "stayLoggedIn"
 fileprivate let hiddenStatusesKey = "hiddenStatuses"
 fileprivate let suggestionsKey = "suggestions"
 fileprivate let useFakeReadResponseKey = "useFakeReadResponse"
+fileprivate let hasTakenPhotoKey = "hasTakenPhoto"
 
 func registerDefaults() {
 	defaults.register(
@@ -16,6 +17,7 @@ func registerDefaults() {
 			isInClientModeKey: false,
 			stayLoggedInKey: true,
 			hiddenStatusesKey: [],
+			hasTakenPhotoKey: false,
 		]
 	)
 }
@@ -52,5 +54,10 @@ extension UserDefaults {
 	/// used to fake sector data before they're added to the API; specified in the Xcode scheme's argument overrides
 	var useFakeReadResponse: Bool {
 		return bool(forKey: useFakeReadResponseKey)
+	}
+	
+	var hasTakenPhoto: Bool {
+		get { return bool(forKey: hasTakenPhotoKey) }
+		set { set(newValue, forKey: hasTakenPhotoKey) }
 	}
 }
