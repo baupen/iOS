@@ -197,7 +197,7 @@
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rHo-jf-rQe">
-                                                    <rect key="frame" x="0.0" y="0.0" width="704" height="698"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="703" height="698"/>
                                                     <connections>
                                                         <segue destination="XdX-XP-UgZ" kind="embed" identifier="" id="oIu-NA-CAA"/>
                                                     </connections>
@@ -1862,21 +1862,10 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                         </mask>
                                                     </variation>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7mN-iH-wXi" userLabel="Remove Image Button">
-                                                    <rect key="frame" x="74" y="15" width="32" height="32"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7mN-iH-wXi" userLabel="Remove Image Button" customClass="ImageControlButton" customModule="Issue_Manager" customModuleProvider="target">
+                                                    <rect key="frame" x="74" y="275" width="32" height="32"/>
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <state key="normal" image="trash"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowOpacity">
-                                                            <real key="value" value="0.25"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="size" keyPath="layer.shadowOffset">
-                                                            <size key="value" width="0.0" height="4"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowRadius">
-                                                            <integer key="value" value="8"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
                                                     <connections>
                                                         <action selector="removeImage" destination="Hkg-Cj-0r5" eventType="touchUpInside" id="dEg-Rm-2SX"/>
                                                     </connections>
@@ -1915,21 +1904,10 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </view>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Gz-5I-dcz" userLabel="Image Library Button">
-                                                            <rect key="frame" x="364" y="4" width="32" height="32"/>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Gz-5I-dcz" userLabel="Image Library Button" customClass="ImageControlButton" customModule="Issue_Manager" customModuleProvider="target">
+                                                            <rect key="frame" x="364" y="264" width="32" height="32"/>
                                                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <state key="normal" image="library"/>
-                                                            <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowOpacity">
-                                                                    <real key="value" value="0.25"/>
-                                                                </userDefinedRuntimeAttribute>
-                                                                <userDefinedRuntimeAttribute type="size" keyPath="layer.shadowOffset">
-                                                                    <size key="value" width="0.0" height="4"/>
-                                                                </userDefinedRuntimeAttribute>
-                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowRadius">
-                                                                    <integer key="value" value="8"/>
-                                                                </userDefinedRuntimeAttribute>
-                                                            </userDefinedRuntimeAttributes>
                                                             <connections>
                                                                 <action selector="openImagePicker:" destination="Hkg-Cj-0r5" eventType="touchUpInside" id="fu6-pF-3DN"/>
                                                             </connections>
@@ -1941,7 +1919,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                         <constraint firstItem="VBN-3z-jb2" firstAttribute="leading" secondItem="dXf-yj-EIL" secondAttribute="leadingMargin" id="ba5-xn-t2C"/>
                                                         <constraint firstAttribute="trailing" secondItem="1Gz-5I-dcz" secondAttribute="trailing" constant="4" id="fBH-YV-2xs"/>
                                                         <constraint firstItem="VBN-3z-jb2" firstAttribute="centerX" secondItem="dXf-yj-EIL" secondAttribute="centerX" id="fN4-Ja-n6I"/>
-                                                        <constraint firstItem="1Gz-5I-dcz" firstAttribute="top" secondItem="dXf-yj-EIL" secondAttribute="top" constant="4" id="u9H-wQ-moK"/>
+                                                        <constraint firstAttribute="bottom" secondItem="1Gz-5I-dcz" secondAttribute="bottom" constant="4" id="u9H-wQ-moK"/>
                                                     </constraints>
                                                     <connections>
                                                         <outlet property="cameraView" destination="t22-2D-d02" id="iZK-rV-tUa"/>
@@ -1962,7 +1940,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                 <constraint firstItem="dXf-yj-EIL" firstAttribute="width" secondItem="uMf-Vv-Gg9" secondAttribute="width" id="Vj3-JS-wOX"/>
                                                 <constraint firstItem="uMf-Vv-Gg9" firstAttribute="top" secondItem="X1r-Mi-uGU" secondAttribute="top" id="cTI-oa-v5V"/>
                                                 <constraint firstItem="dXf-yj-EIL" firstAttribute="centerX" secondItem="uMf-Vv-Gg9" secondAttribute="centerX" id="fnl-WW-vON"/>
-                                                <constraint firstItem="7mN-iH-wXi" firstAttribute="top" secondItem="uMf-Vv-Gg9" secondAttribute="top" constant="4" id="ftB-3C-3Nr"/>
+                                                <constraint firstItem="uMf-Vv-Gg9" firstAttribute="bottom" secondItem="7mN-iH-wXi" secondAttribute="bottom" constant="4" id="ftB-3C-3Nr"/>
                                                 <constraint firstItem="xzO-NC-90a" firstAttribute="centerX" secondItem="X1r-Mi-uGU" secondAttribute="centerX" id="oEc-m5-EL1"/>
                                             </constraints>
                                             <variation key="default">
@@ -2402,7 +2380,6 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                         <viewLayoutGuide key="safeArea" id="VBJ-hI-E8b"/>
                     </view>
                     <navigationItem key="navigationItem" title="Handwerker" id="bqc-Oy-pal"/>
-                    <modalFormSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="skY-0c-hX2" id="cV2-wy-JKf"/>
                     </connections>
@@ -2496,10 +2473,10 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                 <rect key="frame" x="0.0" y="70" width="1024" height="698"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" horizontalHuggingPriority="100" verticalHuggingPriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="m6a-TN-TfK">
-                                        <rect key="frame" x="0.0" y="0.0" width="1024" height="602"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="1024" height="652"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="100" verticalHuggingPriority="100" horizontalCompressionResistancePriority="100" verticalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="vec-af-Kp1">
-                                                <rect key="frame" x="110.5" y="0.0" width="803" height="602"/>
+                                                <rect key="frame" x="77.5" y="0.0" width="869" height="652"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="vec-af-Kp1" secondAttribute="height" multiplier="4:3" id="6av-Uv-0Fl"/>
                                                 </constraints>
@@ -2516,7 +2493,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fqP-mt-zQV" userLabel="Separator">
-                                        <rect key="frame" x="0.0" y="602" width="1024" height="50"/>
+                                        <rect key="frame" x="0.0" y="652" width="1024" height="0.0"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" priority="500" constant="1" id="kNd-hc-TA6"/>
@@ -2696,11 +2673,11 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                 <variation key="heightClass=compact" axis="horizontal"/>
                             </stackView>
                             <imageView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3I5-Fm-wBz">
-                                <rect key="frame" x="110.5" y="70" width="803" height="602"/>
+                                <rect key="frame" x="77.5" y="70" width="869" height="652"/>
                                 <gestureRecognizers/>
                             </imageView>
                             <imageView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NCw-Ug-8cn" userLabel="WIP View">
-                                <rect key="frame" x="110.5" y="70" width="803" height="602"/>
+                                <rect key="frame" x="77.5" y="70" width="869" height="652"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="2B1-Ly-Y0s" appends="YES" id="5rh-Zd-D2n"/>
@@ -2828,7 +2805,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="O8y-cm-e0k"/>
-        <segue reference="OdI-J8-6Ad"/>
+        <segue reference="PB9-0e-xdP"/>
         <segue reference="a5G-fh-9Or"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="Main"/>

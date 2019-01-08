@@ -322,3 +322,15 @@ enum ImageSavingError: Error {
 		}
 	}
 }
+
+@IBDesignable
+final class ImageControlButton: UIButton {
+	override func awakeFromNib() {
+		super.awakeFromNib()
+		
+		layer.shadowColor = UIColor.main.cgColor
+		layer.shadowOpacity = 0.75
+		layer.shadowOffset = CGSize(x: 0, y: 1)
+		layer.shadowRadius = 4
+	}
+}
