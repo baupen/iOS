@@ -12,7 +12,25 @@ final class CameraView: UIView {
 	var photoOutput: AVCapturePhotoOutput?
 	var previewLayer: AVCaptureVideoPreviewLayer?
 	
+	lazy var activityIndicator = UIActivityIndicatorView() <- {
+		$0.autoresizingMask = .flexibleMargins
+		$0.center = (bounds.size / 2).asPoint
+		$0.hidesWhenStopped = true
+	}
+	
 	weak var delegate: CameraViewDelegate?
+	
+	private var isProcessing = false {
+		didSet {
+			if isProcessing {
+				activityIndicator.startAnimating()
+			} else {
+				activityIndicator.stopAnimating()
+			}
+			previewLayer?.connection?.isEnabled = !isProcessing // pause
+			previewLayer?.opacity = isProcessing ? 0.5 : 1
+		}
+	}
 	
 	override func awakeFromNib() {
 		super.awakeFromNib()
@@ -21,6 +39,8 @@ final class CameraView: UIView {
 		
 		let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
 		addGestureRecognizer(tapRecognizer)
+		
+		addSubview(activityIndicator)
 		
 		configure()
 	}
@@ -84,6 +104,8 @@ final class CameraView: UIView {
 		}
 		
 		Haptics.generateFeedback(.weak)
+		isProcessing = true
+		
 		let settings = AVCapturePhotoSettings() // jpeg
 		settings.flashMode = photoOutput.supportedFlashModes.contains(.auto) ? .auto : .off
 		photoOutput.capturePhoto(with: settings, delegate: self)
@@ -126,6 +148,10 @@ extension CameraView: AVCapturePhotoCaptureDelegate {
 			Haptics.notify.notificationOccurred(.success)
 			let image = UIImage(data: photo.fileDataRepresentation()!)!
 			delegate?.pictureTaken(image.cropped())
+		}
+		
+		DispatchQueue.main.async { // otherwise it's somehow still visible but unpaused
+			self.isProcessing = false
 		}
 	}
 }
