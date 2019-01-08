@@ -74,10 +74,10 @@ class SiteCell: UICollectionViewCell, Reusable {
 	
 	private var imageTimer: Timer?
 	func updateImage() {
+		imageTimer?.invalidate()
 		if let imageURL = site.image.map(ConstructionSite.cacheURL) {
 			if let image = UIImage(contentsOfFile: imageURL.path) {
 				imageView.image = image
-				imageTimer?.invalidate()
 			} else {
 				// because images may not be downloaded right away and we don't have a callback for that
 				imageTimer = .scheduledTimer(withTimeInterval: 1, repeats: false) { _ in
