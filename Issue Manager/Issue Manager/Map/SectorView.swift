@@ -6,6 +6,14 @@ final class SectorView: UIView {
 	let sector: Map.Sector
 	let color: UIColor
 	
+	var zoomScale: CGFloat = 1 {
+		didSet {
+			let scale = UIScreen.main.scale * min(3, zoomScale)
+			//drawingView.contentScaleFactor = scale // too heavy performance impact
+			nameLabel.contentScaleFactor = scale
+		}
+	}
+	
 	weak var delegate: SectorViewDelegate?
 	
 	private var path: CGPath!

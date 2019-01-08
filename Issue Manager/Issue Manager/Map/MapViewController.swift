@@ -299,6 +299,7 @@ final class MapViewController: UIViewController, Reusable {
 extension MapViewController: SimplePDFViewControllerDelegate {
 	func pdfZoomed(to scale: CGFloat) {
 		markers.forEach { $0.zoomScale = scale }
+		sectorViews.forEach { $0.zoomScale = scale }
 	}
 	
 	func pdfFinishedLoading() {
