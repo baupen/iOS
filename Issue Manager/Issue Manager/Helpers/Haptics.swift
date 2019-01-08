@@ -1,29 +1,29 @@
 import UIKit
 
 class Haptics {
+	static let impact = UIImpactFeedbackGenerator()
+	static let select = UISelectionFeedbackGenerator()
+	static let notify = UINotificationFeedbackGenerator()
+	
 	/// Generates haptic feedback if possible, fails silently otherwise
 	static func generateFeedback(_ type: FeedbackType) {
 		switch type {
 		case .strong:
-			Generators.impact.impactOccurred()
+			Haptics.impact.impactOccurred()
 		case .weak:
-			Generators.select.selectionChanged()
+			Haptics.select.selectionChanged()
 		case .strongDouble:
-			Generators.notify.notificationOccurred(.success)
+			Haptics.notify.notificationOccurred(.success)
 		case .weakDouble:
-			Generators.notify.notificationOccurred(.warning)
+			Haptics.notify.notificationOccurred(.warning)
 		case .many:
-			Generators.notify.notificationOccurred(.error)
+			Haptics.notify.notificationOccurred(.error)
 		}
 	}
 	
-	private class Generators {
-		static let impact = UIImpactFeedbackGenerator()
-		static let select = UISelectionFeedbackGenerator()
-		static let notify = UINotificationFeedbackGenerator()
-	}
-	
 	enum FeedbackType {
-		case strong, weak, strongDouble, weakDouble, many
+		case strong
+		case weak
+		case strongDouble, weakDouble, many
 	}
 }

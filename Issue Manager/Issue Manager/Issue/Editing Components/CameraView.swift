@@ -78,10 +78,12 @@ final class CameraView: UIView {
 	
 	func takePhoto() {
 		guard let photoOutput = photoOutput else {
+			Haptics.notify.notificationOccurred(.error)
 			delegate?.pictureFailed(with: CameraViewError.cameraNotConfigured)
 			return
 		}
 		
+		Haptics.generateFeedback(.weak)
 		let settings = AVCapturePhotoSettings() // jpeg
 		settings.flashMode = photoOutput.supportedFlashModes.contains(.auto) ? .auto : .off
 		photoOutput.capturePhoto(with: settings, delegate: self)
@@ -118,8 +120,10 @@ final class CameraView: UIView {
 extension CameraView: AVCapturePhotoCaptureDelegate {
 	func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
 		if let error = error {
+			Haptics.notify.notificationOccurred(.error)
 			delegate?.pictureFailed(with: error)
 		} else {
+			Haptics.notify.notificationOccurred(.success)
 			let image = UIImage(data: photo.fileDataRepresentation()!)!
 			delegate?.pictureTaken(image.cropped())
 		}
