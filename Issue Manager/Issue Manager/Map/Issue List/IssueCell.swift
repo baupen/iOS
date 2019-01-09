@@ -39,7 +39,7 @@ class IssueCell: UITableViewCell, Reusable {
 		didSet { update() }
 	}
 	
-	override var isHighlighted: Bool {
+	override var isSelected: Bool {
 		didSet { updateVisibility() }
 	}
 	
@@ -63,11 +63,12 @@ class IssueCell: UITableViewCell, Reusable {
 	}
 	
 	func updateVisibility() {
-		tradeLabel.isHidden = isHighlighted || isCompact
-		descriptionLabel.isHidden = isHighlighted
+		tradeLabel.isHidden = isSelected || isCompact
 	}
 	
 	func update() {
+		updateVisibility()
+		
 		markButton.setImage(issue.isMarked ? #imageLiteral(resourceName: "mark_marked.pdf") : #imageLiteral(resourceName: "mark_unmarked.pdf"), for: .normal)
 		
 		iconView.image = issue.status.simplified.flatIcon

@@ -121,38 +121,41 @@ extension IssueListViewController: UITableViewDataSource {
 
 extension IssueListViewController: UITableViewDelegate {
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		if indexPath == tableView.indexPathForSelectedRow || tableView.cellForRow(at: indexPath)?.isHighlighted == true {
+		if indexPath == tableView.indexPathForSelectedRow || tableView.cellForRow(at: indexPath)?.isSelected == true {
 			return UITableView.automaticDimension
 		} else {
 			return 44 // bit of a magic number but eh. also it's the recommended minimum tap target size so ¯\_(ツ)_/¯
 		}
 	}
 	
+	// Using willSelect for animations over didSelect because it allows us to do everything during the batch update, rather than having isSelected already set by the table. This makes the animations look a lot nicer. 
+	
 	func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-		if let currentSelection = tableView.indexPathForSelectedRow {
-			if let cell = tableView.cellForRow(at: currentSelection) {
-				tableView.performBatchUpdates({ 
-					cell.isHighlighted = false
-					
-					if indexPath == currentSelection {
-						tableView.deselectRow(at: indexPath, animated: true)
-					}
-				}, completion: nil)
+		let currentSelection = tableView.indexPathForSelectedRow
+		
+		tableView.performBatchUpdates({
+			if let previous = currentSelection {
+				tableView.deselectRow(at: previous, animated: true)
 			}
 			
-			if indexPath == currentSelection {
-				return nil // don't reselect
-			}
-		}
+			//tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none) // using this instantly unhighlights the cell and then animates the rehighlighting during selection, which looks weird, so instead we call it in didSelect
+			tableView.cellForRow(at: indexPath)?.isSelected = true
+		}, completion: nil)
+		
 		return indexPath
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		let cell = tableView.cellForRow(at: indexPath)!
-		tableView.performBatchUpdates({ 
-			cell.isHighlighted = true
+		// scrolling works correctly at this point because the table now knows the cell's actual height
+		tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
+	}
+	
+	func tableView(_ tableView: UITableView, willDeselectRowAt indexPath: IndexPath) -> IndexPath? {
+		tableView.performBatchUpdates({
+			tableView.deselectRow(at: indexPath, animated: true)
 		}, completion: nil)
-		tableView.scrollToRow(at: indexPath, at: .none, animated: true)
+		
+		return indexPath
 	}
 }
 
