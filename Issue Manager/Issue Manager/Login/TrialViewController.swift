@@ -61,15 +61,14 @@ class TrialViewController: UIViewController {
 		return .lightContent
 	}
 	
-	required init?(coder aDecoder: NSCoder) {
-		super.init(coder: aDecoder)
+	override func awakeFromNib() {
+		super.awakeFromNib()
+		
 		transitioningDelegate = self
 	}
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
-		transitioningDelegate = self
 		
 		givenNameField.delegate = self
 		familyNameField.delegate = self
