@@ -5,7 +5,7 @@ import UIKit
 class LoginViewController: UIViewController {
 	fileprivate typealias Localization = L10n.Login
 	
-	@IBOutlet var textFieldView: UIStackView!
+	@IBOutlet var textFieldView: UIView!
 	@IBOutlet var usernameField: UITextField!
 	@IBOutlet var passwordField: UITextField!
 	@IBOutlet var activityIndicator: UIActivityIndicatorView!
@@ -28,14 +28,14 @@ class LoginViewController: UIViewController {
 	/// - note: only ever change this from the main queue
 	var isLoggingIn = false {
 		didSet {
-			self.usernameField.isEnabled = !isLoggingIn
-			self.passwordField.isEnabled = !isLoggingIn
-			self.textFieldView.alpha = isLoggingIn ? 0.5 : 1
+			usernameField.isEnabled = !isLoggingIn
+			passwordField.isEnabled = !isLoggingIn
+			textFieldView.alpha = isLoggingIn ? 0.5 : 1
 			
 			if isLoggingIn {
-				self.activityIndicator.startAnimating()
+				activityIndicator.startAnimating()
 			} else {
-				self.activityIndicator.stopAnimating()
+				activityIndicator.stopAnimating()
 			}
 		}
 	}

@@ -2,9 +2,15 @@
 
 import UIKit
 
+@IBDesignable
 class LoginWindowView: UIView {
-	required init?(coder decoder: NSCoder) {
-		super.init(coder: decoder)
+	override func prepareForInterfaceBuilder() {
+		awakeFromNib()
+	}
+	
+	override func awakeFromNib() {
+		super.awakeFromNib()
+		
 		layer.cornerRadius = 16
 		
 		layer.shadowOpacity = 0.25

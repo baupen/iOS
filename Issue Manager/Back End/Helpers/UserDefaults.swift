@@ -10,6 +10,7 @@ fileprivate let hiddenStatusesKey = "hiddenStatuses"
 fileprivate let suggestionsKey = "suggestions"
 fileprivate let useFakeReadResponseKey = "useFakeReadResponse"
 fileprivate let hasTakenPhotoKey = "hasTakenPhoto"
+fileprivate let trialUserKey = "trialUser"
 
 func registerDefaults() {
 	defaults.register(
@@ -59,5 +60,14 @@ extension UserDefaults {
 	var hasTakenPhoto: Bool {
 		get { return bool(forKey: hasTakenPhotoKey) }
 		set { set(newValue, forKey: hasTakenPhotoKey) }
+	}
+	
+	var trialUser: TrialUser? {
+		get {
+			return data(forKey: trialUserKey).map { try! JSONDecoder().decode(from: $0) }
+		}
+		set {
+			set(try! JSONEncoder().encode(newValue), forKey: trialUserKey)
+		}
 	}
 }

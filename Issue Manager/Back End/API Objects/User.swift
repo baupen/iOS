@@ -21,3 +21,8 @@ extension User {
 		return "\(givenName) \(familyName)"
 	}
 }
+
+struct TrialUser: Codable {
+	var username: String
+	var password: String	
+}

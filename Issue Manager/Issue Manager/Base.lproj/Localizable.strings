@@ -197,6 +197,36 @@
 "site_list.welcome" = "Willkommen, %@";
 
 ////////////////////////////////////////////////////////////////////////////////
+// MARK: Trial.back
+// CONTEXT: Knopf, um wieder zurück zum Login-Screen zu kommen.
+"trial.back_to_login" = "Zurück zum Login";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Trial.create
+// CONTEXT: Knopf, um ein neues Probekonto (zum ausprobieren) zu erstellen.
+"trial.create_account" = "Probekonto Erstellen";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Trial.existing
+// CONTEXT: Text, der beschreibt, dass man schon ein Probekonto erstellt hat und sich damit auch auf www.mangel.io anmelden kann.
+"trial.existing_account_hint" = "Du hast ein Probekonto erstellt. Die Anmeldung erfolgt mit den folgenden Daten, die du auch auf www.mangel.io verwenden kannst.";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Trial.log
+// CONTEXT: Knopf, um sich in ein bestehendes Probekonto einzuloggen.
+"trial.log_in" = "Einloggen";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Trial.placeholder.family
+// CONTEXT: Platzhalter für den Nachnamen im Trial-Screen
+"trial.placeholder.family_name" = "Nachname";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Trial.placeholder.given
+// CONTEXT: Platzhalter für den Vornamen im Trial-Screen
+"trial.placeholder.given_name" = "Vorname";
+
+////////////////////////////////////////////////////////////////////////////////
 // MARK: View
 // CONTEXT: Knopf, um die Antwort vom Handwerker anzunehmen und somit die Pendenz als abgeschlossen zu markieren.
 "view_issue.accept_response" = "Annehmen";

@@ -66,6 +66,8 @@
 		95890A5D21B2E4D600510E44 /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95890A5C21B2E4D600510E44 /* Haptics.swift */; };
 		958AE1B221AE2E40008EBD95 /* DrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958AE1B121AE2E40008EBD95 /* DrawingView.swift */; };
 		9597935020F7AC2400AA40C1 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9597934F20F7AC2400AA40C1 /* Resources.swift */; };
+		959E8A1E21EE9A7D00C29503 /* TrialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959E8A1D21EE9A7C00C29503 /* TrialViewController.swift */; };
+		959E8A2021EE9C4A00C29503 /* TrialRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959E8A1F21EE9C4A00C29503 /* TrialRequest.swift */; };
 		95A4E65A210230FC00591EAE /* domains.private.json in Resources */ = {isa = PBXBuildFile; fileRef = 95A4E659210230FC00591EAE /* domains.private.json */; };
 		95A66C7A20F9181D008F10DA /* ViewIssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A66C7920F9181D008F10DA /* ViewIssueViewController.swift */; };
 		95A7B24D20E3FFE200A928D6 /* Backlog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A7B24C20E3FFE200A928D6 /* Backlog.swift */; };
@@ -159,6 +161,8 @@
 		95890A5C21B2E4D600510E44 /* Haptics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
 		958AE1B121AE2E40008EBD95 /* DrawingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingView.swift; sourceTree = "<group>"; };
 		9597934F20F7AC2400AA40C1 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
+		959E8A1D21EE9A7C00C29503 /* TrialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrialViewController.swift; sourceTree = "<group>"; };
+		959E8A1F21EE9C4A00C29503 /* TrialRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrialRequest.swift; sourceTree = "<group>"; };
 		95A4E659210230FC00591EAE /* domains.private.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = domains.private.json; sourceTree = "<group>"; };
 		95A66C7920F9181D008F10DA /* ViewIssueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewIssueViewController.swift; sourceTree = "<group>"; };
 		95A7B24C20E3FFE200A928D6 /* Backlog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Backlog.swift; sourceTree = "<group>"; };
@@ -286,6 +290,7 @@
 			children = (
 				95AB959220E572C900A0AE8D /* LoginViewController.swift */,
 				9584F24D20E936ED00A8C884 /* LoginWindowView.swift */,
+				959E8A1D21EE9A7C00C29503 /* TrialViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -401,6 +406,7 @@
 				95512B0F20FBEAC400878163 /* IssueUpdateRequest.swift */,
 				95512B1120FBEAD800878163 /* IssueDeletionRequest.swift */,
 				95512B1320FBEAE300878163 /* IssueActionRequest.swift */,
+				959E8A1F21EE9C4A00C29503 /* TrialRequest.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -670,6 +676,7 @@
 				9502842D20FAB67A00880AD7 /* EditIssueViewController.swift in Sources */,
 				95AA606920EEFA700067A656 /* MapHolder.swift in Sources */,
 				9511A12220DD509600101ADE /* JSend.swift in Sources */,
+				959E8A1E21EE9A7D00C29503 /* TrialViewController.swift in Sources */,
 				95AB959320E572C900A0AE8D /* LoginViewController.swift in Sources */,
 				957E16AA20E7D81B00F3DEA1 /* SiteListViewController.swift in Sources */,
 				9502843520FACDD800880AD7 /* Suggestions.swift in Sources */,
@@ -687,6 +694,7 @@
 				9553707520F1A5E2005D81C8 /* IssueListViewController.swift in Sources */,
 				9511A10820DD3BD100101ADE /* Craftsman.swift in Sources */,
 				95A66C7A20F9181D008F10DA /* ViewIssueViewController.swift in Sources */,
+				959E8A2021EE9C4A00C29503 /* TrialRequest.swift in Sources */,
 				95512B1020FBEAC400878163 /* IssueUpdateRequest.swift in Sources */,
 				9511A10220DD3A2700101ADE /* Geometry.swift in Sources */,
 				9514FC4D210545C700099EC5 /* MarkupViewController.swift in Sources */,
