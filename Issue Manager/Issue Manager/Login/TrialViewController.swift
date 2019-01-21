@@ -2,10 +2,9 @@
 
 import UIKit
 
-class TrialViewController: UIViewController {
+class TrialViewController: LoginHandlerViewController {
 	fileprivate typealias Localization = L10n.Trial
 	
-	@IBOutlet var backgroundView: UIVisualEffectView!
 	@IBOutlet var loginWindowView: UIView!
 	
 	@IBOutlet var textFieldView: UIView!
@@ -22,6 +21,14 @@ class TrialViewController: UIViewController {
 	@IBAction func backgroundTapped(_ sender: UITapGestureRecognizer) {
 		givenNameField.resignFirstResponder()
 		familyNameField.resignFirstResponder()
+	}
+	
+	@IBAction func confirm() {
+		if let trialUser = trialUser {
+			logIn(username: trialUser.username, password: trialUser.password)
+		} else {
+			requestTrial()
+		}
 	}
 	
 	// unwind segue
@@ -44,14 +51,29 @@ class TrialViewController: UIViewController {
 		}
 	}
 	
+	/// - note: only ever change this from the main queue
+	override var isLoggingIn: Bool {
+		didSet {
+			labelView.alpha = isLoggingIn ? 0.5 : 1
+			
+			if isLoggingIn {
+				activityIndicator.startAnimating()
+			} else {
+				activityIndicator.stopAnimating()
+			}
+		}
+	}
+	
 	var trialUser: TrialUser? {
 		didSet {
 			let hasUser = trialUser != nil
-			if !hasUser {
-				givenNameField.becomeFirstResponder()
-			}
 			textFieldView.isShown = !hasUser
 			labelView.isShown = hasUser
+			
+			if let trialUser = trialUser {
+				usernameLabel.text = trialUser.username
+				passwordLabel.text = trialUser.password
+			}
 			
 			loginButton.setTitle(hasUser ? Localization.logIn : Localization.createAccount, for: .normal)
 		}
@@ -140,65 +162,36 @@ extension TrialViewController: UITextFieldDelegate {
 
 extension TrialViewController: UIViewControllerTransitioningDelegate {
 	func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-		return PresentAnimator()
+		return VerticalSlideTransitionAnimator(shouldMoveDown: false)
 	}
 	
 	func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-		return DismissAnimator()
+		return VerticalSlideTransitionAnimator(shouldMoveDown: true)
 	}
 }
 
-fileprivate class TransitionAnimator: NSObject, UIViewControllerAnimatedTransitioning {
-	func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-		return 0.25
+fileprivate class VerticalSlideTransitionAnimator: TransitionAnimator {
+	let shouldMoveDown: Bool
+	
+	init(shouldMoveDown: Bool) {
+		self.shouldMoveDown = shouldMoveDown
+		
+		super.init()
 	}
 	
-	func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {}
-	
-	fileprivate func animate(using transitionContext: UIViewControllerContextTransitioning, _ animations: @escaping () -> Void) {
-		UIView.animate(
-			withDuration: transitionDuration(using: transitionContext),
-			delay: 0,
-			options: transitionContext.isInteractive ? .curveLinear : .curveEaseInOut,
-			animations: animations,
-			completion: { _ in transitionContext.completeTransition(!transitionContext.transitionWasCancelled) }
-		)
-	}
-}
-
-fileprivate class PresentAnimator: TransitionAnimator {
 	override func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-		let trialController = transitionContext.viewController(forKey: .to) as! TrialViewController
-		trialController.view.layoutIfNeeded()
+		let fromView = transitionContext.viewController(forKey: .from)!.view!
+		let toView = transitionContext.viewController(forKey: .to)!.view!
 		
-		transitionContext.containerView.insertSubview(trialController.view, at: 0)
+		transitionContext.containerView.addSubview(toView)
+		let bounds = transitionContext.containerView.bounds
+		let offset = bounds.height * (shouldMoveDown ? -1 : +1)
 		
-		let offset = trialController.view.bounds.height
-		let pulledView = trialController.loginWindowView!
-		let finalFrame = pulledView.frame
-		pulledView.frame = pulledView.frame.offsetBy(dx: 0, dy: offset)
+		toView.frame = bounds.offsetBy(dx: 0, dy: offset)
 		
-		let effect = trialController.backgroundView.effect!
-		trialController.backgroundView.effect = nil
-		
-		animate(using: transitionContext) {
-			pulledView.frame = finalFrame
-			trialController.backgroundView.effect = effect
-		}
-	}
-}
-
-fileprivate class DismissAnimator: TransitionAnimator {
-	override func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-		let trialController = transitionContext.viewController(forKey: .from) as! TrialViewController
-		
-		let offset = trialController.view.bounds.height
-		let pulledView = trialController.loginWindowView!
-		let finalFrame = pulledView.frame.offsetBy(dx: 0, dy: offset)
-		
-		animate(using: transitionContext) {
-			pulledView.frame = finalFrame
-			trialController.backgroundView.effect = nil
+		animate(using: transitionContext) { 
+			fromView.frame = bounds.offsetBy(dx: 0, dy: -offset)
+			toView.frame = bounds
 		}
 	}
 }

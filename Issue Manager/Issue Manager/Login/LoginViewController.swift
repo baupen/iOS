@@ -2,7 +2,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: LoginHandlerViewController {
 	fileprivate typealias Localization = L10n.Login
 	
 	@IBOutlet var textFieldView: UIView!
@@ -26,7 +26,7 @@ class LoginViewController: UIViewController {
 	}
 	
 	/// - note: only ever change this from the main queue
-	var isLoggingIn = false {
+	override var isLoggingIn: Bool {
 		didSet {
 			usernameField.isEnabled = !isLoggingIn
 			passwordField.isEnabled = !isLoggingIn
@@ -38,6 +38,10 @@ class LoginViewController: UIViewController {
 				activityIndicator.stopAnimating()
 			}
 		}
+	}
+	
+	override var preferredStatusBarStyle: UIStatusBarStyle {
+		return .lightContent
 	}
 	
 	override func viewDidLoad() {
@@ -59,104 +63,8 @@ class LoginViewController: UIViewController {
 		stayLoggedInSwitch.isOn = defaults.stayLoggedIn
 	}
 	
-	override var preferredStatusBarStyle: UIStatusBarStyle {
-		return .lightContent
-	}
-	
 	func logIn() {
-		let username = usernameField.text!
-		let password = passwordField.text!
-		
-		isLoggingIn = true
-		let result = Client.shared.logIn(as: username, password: password).on(.main)
-		result.always {
-			self.isLoggingIn = false
-		}
-		
-		result.then {
-			print("Logged in as", Client.shared.localUser!.user.authenticationToken)
-			self.showSiteList()
-		}
-		
-		result.catch { error in
-			print("Login Failed!", error.localizedFailureReason)
-			dump(error)
-			self.showAlert(for: error, username: username)
-		}
-	}
-	
-	func showAlert(for error: Error, username: String) {
-		switch error {
-		case RequestError.apiError(let meta) where meta.error == .unknownUsername:
-			showUnknownUsernameAlert(username: username)
-		case RequestError.apiError(let meta) where meta.error == .wrongPassword:
-			showWrongPasswordAlert(username: username)
-		case RequestError.communicationError: // likely connection failure
-			attemptLocalLogin()
-		case RequestError.outdatedClient(let client, let server):
-			print("Outdated client! client: \(client), server: \(server)")
-			showAlert(
-				titled: L10n.Alert.OutdatedClient.title,
-				message: L10n.Alert.OutdatedClient.message
-			)
-		default:
-			showAlert(
-				titled: Localization.Alert.LoginError.title,
-				message: Localization.Alert.LoginError.message
-			) {
-				self.attemptLocalLogin(showingAlerts: false)
-			}
-		}
-	}
-	
-	func attemptLocalLogin(showingAlerts: Bool = true) {
-		let username = usernameField.text!
-		let password = passwordField.text!
-		guard let localUser = Client.shared.localUser else {
-			if showingAlerts {
-				showAlert(
-					titled: L10n.Alert.ConnectionIssues.title,
-					message: L10n.Alert.ConnectionIssues.message
-				)
-			}
-			return
-		}
-		
-		guard username == localUser.username else {
-			if showingAlerts {
-				showUnknownUsernameAlert(username: username)
-			}
-			return
-		}
-		guard password.sha256() == localUser.passwordHash else {
-			if showingAlerts {
-				showWrongPasswordAlert(username: username)
-			}
-			return
-		}
-		
-		print("Logged in locally!")
-		showSiteList()
-	}
-	
-	func showUnknownUsernameAlert(username: String) {
-		showAlert(
-			titled: Localization.Alert.WrongUsername.title,
-			message: Localization.Alert.WrongUsername.message(username)
-		)
-	}
-	
-	func showWrongPasswordAlert(username: String) {
-		showAlert(
-			titled: Localization.Alert.WrongPassword.title,
-			message: Localization.Alert.WrongPassword.message(username)
-		)
-	}
-	
-	func showSiteList(animated: Bool = true) {
-		let controller = storyboard!.instantiate(SiteListViewController.self)!
-		controller.modalTransitionStyle = .flipHorizontal
-		present(controller, animated: animated)
+		logIn(username: usernameField.text!, password: passwordField.text!)
 	}
 }
 

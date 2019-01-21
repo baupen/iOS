@@ -11,10 +11,14 @@ final class LightboxViewController: UIViewController {
 		didSet { update() }
 	}
 	
-	override func viewDidLoad() {
-		super.viewDidLoad()
+	override func awakeFromNib() {
+		super.awakeFromNib()
 		
 		transitioningDelegate = self
+	}
+	
+	override func viewDidLoad() {
+		super.viewDidLoad()
 		
 		update()
 	}
@@ -96,24 +100,7 @@ extension LightboxViewController: UIViewControllerTransitioningDelegate {
 	}
 }
 
-fileprivate class TransitionAnimator: NSObject, UIViewControllerAnimatedTransitioning {
-	func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-		return 0.25
-	}
-	
-	func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {}
-	
-	fileprivate func animate(using transitionContext: UIViewControllerContextTransitioning, _ animations: @escaping () -> Void) {
-		UIView.animate(
-			withDuration: transitionDuration(using: transitionContext),
-			delay: 0,
-			options: transitionContext.isInteractive ? .curveLinear : .curveEaseInOut,
-			animations: animations,
-			completion: { _ in transitionContext.completeTransition(!transitionContext.transitionWasCancelled) }
-		)
-	}
-}
-
+/// slides up and fades in black background
 fileprivate class PresentAnimator: TransitionAnimator {
 	override func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
 		let fromVC = transitionContext.viewController(forKey: .from)!
@@ -135,6 +122,7 @@ fileprivate class PresentAnimator: TransitionAnimator {
 	}
 }
 
+/// slides down and fades out black background
 fileprivate class DismissAnimator: TransitionAnimator {
 	override func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
 		let lightboxController = transitionContext.viewController(forKey: .from) as! LightboxViewController

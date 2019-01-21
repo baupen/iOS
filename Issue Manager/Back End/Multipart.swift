@@ -10,7 +10,7 @@ func encodeMultipartRequest(containing parts: [MultipartPart], into request: ino
 	request.httpBody = try parts
 		.lazy
 		.map { try rawBoundary + $0.makeFormData() }
-		.reduce(into: Data(), +=)
+		.joined()
 		+ "--\(boundary)--\r\n".data(using: .utf8)!
 }
 

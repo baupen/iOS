@@ -737,7 +737,7 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                                                 <state key="normal" title="Gratis Ausprobieren"/>
                                                                                 <connections>
-                                                                                    <segue destination="Tq3-HM-EmX" kind="presentation" modalPresentationStyle="overCurrentContext" id="MGX-1y-m8k"/>
+                                                                                    <segue destination="Tq3-HM-EmX" kind="presentation" id="MGX-1y-m8k"/>
                                                                                 </connections>
                                                                             </button>
                                                                         </subviews>
@@ -2846,14 +2846,6 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FgW-T8-BcE">
-                                <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="5mS-zf-hZL">
-                                    <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                </view>
-                                <blurEffect style="dark"/>
-                            </visualEffectView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="33O-7U-Cd0">
                                 <rect key="frame" x="0.0" y="20" width="1024" height="748"/>
                                 <subviews>
@@ -2888,7 +2880,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <nil key="textColor"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next" textContentType="username"/>
+                                                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next" textContentType="given-name"/>
                                                                                 <attributedString key="userComments">
                                                                                     <fragment content="placeholder for username field">
                                                                                         <attributes>
@@ -2913,12 +2905,12 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K5Q-DL-sAA" userLabel="Password Wrapper" customClass="TextFieldContainer" customModule="Issue_Manager" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="46" width="280" height="45"/>
                                                                         <subviews>
-                                                                            <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nachname" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Joa-of-T6J">
+                                                                            <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nachname" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Joa-of-T6J">
                                                                                 <rect key="frame" x="16" y="12" width="248" height="21"/>
                                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <nil key="textColor"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                                <textInputTraits key="textInputTraits" returnKeyType="go" secureTextEntry="YES" textContentType="password"/>
+                                                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="go" textContentType="family-name"/>
                                                                                 <userDefinedRuntimeAttributes>
                                                                                     <userDefinedRuntimeAttribute type="string" keyPath="localizedPlaceholder" value="trial.placeholder.family_name"/>
                                                                                 </userDefinedRuntimeAttributes>
@@ -3028,21 +3020,24 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                                 <rect key="frame" x="0.0" y="398.5" width="280" height="33"/>
                                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                                 <state key="normal" title="Probekonto Erstellen oder Einloggen"/>
+                                                                <connections>
+                                                                    <action selector="confirm" destination="Tq3-HM-EmX" eventType="touchUpInside" id="zpa-bV-23k"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                     </stackView>
                                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="q8q-zS-Wu7">
-                                                        <rect key="frame" x="130" y="100.5" width="20" height="20"/>
+                                                        <rect key="frame" x="130" y="222" width="20" height="20"/>
                                                     </activityIndicatorView>
                                                 </subviews>
                                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstItem="q8q-zS-Wu7" firstAttribute="centerX" secondItem="TfC-jL-MBM" secondAttribute="centerX" id="D4I-41-4rX"/>
                                                     <constraint firstItem="JWA-lF-zxC" firstAttribute="leading" secondItem="V0m-7o-pqY" secondAttribute="leading" id="ETT-hD-T9D"/>
                                                     <constraint firstItem="JWA-lF-zxC" firstAttribute="top" secondItem="V0m-7o-pqY" secondAttribute="topMargin" constant="8" id="HQ6-CL-HZu"/>
                                                     <constraint firstAttribute="bottomMargin" secondItem="JWA-lF-zxC" secondAttribute="bottom" constant="8" id="WbE-7Z-M7z"/>
+                                                    <constraint firstItem="q8q-zS-Wu7" firstAttribute="centerX" secondItem="JWA-lF-zxC" secondAttribute="centerX" id="bpw-yk-Y7p"/>
                                                     <constraint firstAttribute="width" constant="280" id="hPC-ZN-w7d"/>
-                                                    <constraint firstItem="q8q-zS-Wu7" firstAttribute="centerY" secondItem="TfC-jL-MBM" secondAttribute="centerY" id="jag-v4-kvh"/>
+                                                    <constraint firstItem="q8q-zS-Wu7" firstAttribute="centerY" secondItem="JWA-lF-zxC" secondAttribute="centerY" id="sha-sU-e96"/>
                                                     <constraint firstAttribute="trailing" secondItem="JWA-lF-zxC" secondAttribute="trailing" id="wGR-CZ-ZE6"/>
                                                 </constraints>
                                             </view>
@@ -3066,16 +3061,13 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                 </connections>
                             </scrollView>
                         </subviews>
+                        <color key="backgroundColor" name="Main"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="FgW-T8-BcE" firstAttribute="leading" secondItem="QA2-XW-Kjy" secondAttribute="leading" id="0f6-T4-WWj"/>
-                            <constraint firstItem="FgW-T8-BcE" firstAttribute="top" secondItem="QA2-XW-Kjy" secondAttribute="top" id="CJE-T5-41w"/>
                             <constraint firstItem="33O-7U-Cd0" firstAttribute="top" secondItem="Nxv-Rj-bYN" secondAttribute="top" id="NdH-Sx-xDx"/>
-                            <constraint firstAttribute="bottom" secondItem="FgW-T8-BcE" secondAttribute="bottom" id="UDk-p5-Jsd"/>
                             <constraint firstItem="Nxv-Rj-bYN" firstAttribute="trailing" secondItem="33O-7U-Cd0" secondAttribute="trailing" id="UXw-A5-Tbx"/>
                             <constraint firstItem="33O-7U-Cd0" firstAttribute="leading" secondItem="Nxv-Rj-bYN" secondAttribute="leading" id="e5P-zE-Hge"/>
                             <constraint firstItem="Nxv-Rj-bYN" firstAttribute="bottom" secondItem="33O-7U-Cd0" secondAttribute="bottom" id="ny6-ye-pUV" customClass="KeyboardLayoutConstraint" customModule="Issue_Manager" customModuleProvider="target"/>
-                            <constraint firstAttribute="trailing" secondItem="FgW-T8-BcE" secondAttribute="trailing" id="sFO-Sn-xjZ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Nxv-Rj-bYN"/>
                         <connections>
@@ -3084,14 +3076,13 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="q8q-zS-Wu7" id="bxC-Hb-lPB"/>
-                        <outlet property="backgroundView" destination="FgW-T8-BcE" id="1Bw-Tb-4QQ"/>
                         <outlet property="familyNameField" destination="Joa-of-T6J" id="f7W-7B-1fE"/>
                         <outlet property="givenNameField" destination="zbx-Tk-tfj" id="COL-dV-GZN"/>
                         <outlet property="labelView" destination="iv5-QI-1pP" id="7dd-t9-9B4"/>
                         <outlet property="loginButton" destination="dJv-m8-96G" id="WvN-OD-SSs"/>
                         <outlet property="loginWindowView" destination="V0m-7o-pqY" id="JAK-Qh-4GO"/>
                         <outlet property="passwordLabel" destination="peM-gM-8Uf" id="7RR-nE-ljv"/>
-                        <outlet property="textFieldView" destination="JWA-lF-zxC" id="zqR-rO-Bae"/>
+                        <outlet property="textFieldView" destination="TfC-jL-MBM" id="nd2-hs-ve4"/>
                         <outlet property="usernameLabel" destination="YV1-mR-oKo" id="kEg-fk-eLE"/>
                     </connections>
                 </viewController>
