@@ -2,7 +2,7 @@
 
 import UIKit
 
-class TradeSelectionHandler: SimpleSelectionHandler {
+final class TradeSelectionHandler: SimpleSelectionHandler {
 	typealias Localization = L10n.ViewIssue.SelectTrade
 	typealias Cell = TradeCell
 	typealias EmptyCell = NoTradeCell

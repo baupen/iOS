@@ -2,7 +2,7 @@
 
 import UIKit
 
-class MapListViewController: RefreshingTableViewController, Reusable {
+final class MapListViewController: RefreshingTableViewController, Reusable {
 	typealias Localization = L10n.MapList
 	
 	@IBOutlet var backToSiteListButton: UIBarButtonItem!

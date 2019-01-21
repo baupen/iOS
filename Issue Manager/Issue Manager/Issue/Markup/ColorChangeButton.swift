@@ -3,7 +3,7 @@
 import UIKit
 
 @IBDesignable
-class ColorChangeButton: UIButton {
+final class ColorChangeButton: UIButton {
 	@IBInspectable var isChosen: Bool = false {
 		didSet { updateAppearance() }
 	}

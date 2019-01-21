@@ -2,7 +2,7 @@
 
 import UIKit
 
-class SelectionViewController: UIViewController {
+final class SelectionViewController: UIViewController {
 	@IBOutlet var tableView: UITableView!
 	
 	var handler: AnySelectionHandler! {
@@ -35,7 +35,7 @@ protocol AnySelectionHandler: UITableViewDelegate, UITableViewDataSource {
 	func prepare(_ tableView: UITableView, in controller: UIViewController)
 }
 
-class SelectionHandler<Handler: SimpleSelectionHandler>: NSObject, AnySelectionHandler {
+final class SelectionHandler<Handler: SimpleSelectionHandler>: NSObject, AnySelectionHandler {
 	private var handler: Handler
 	private var viewController: UIViewController!
 	

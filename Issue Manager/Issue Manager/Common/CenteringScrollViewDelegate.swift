@@ -2,7 +2,7 @@
 
 import UIKit
 
-class CenteringScrollViewDelegate: NSObject, UIScrollViewDelegate {
+final class CenteringScrollViewDelegate: NSObject, UIScrollViewDelegate {
 	@IBOutlet weak var viewForZooming: UIView?
 	
 	func viewForZooming(in scrollView: UIScrollView) -> UIView? {

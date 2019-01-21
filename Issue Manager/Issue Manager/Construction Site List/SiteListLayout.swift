@@ -2,7 +2,7 @@
 
 import UIKit
 
-class SiteListLayout: UICollectionViewFlowLayout {
+final class SiteListLayout: UICollectionViewFlowLayout {
 	override func prepare() {
 		super.prepare()
 		

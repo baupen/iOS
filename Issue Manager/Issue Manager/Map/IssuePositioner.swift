@@ -2,7 +2,7 @@
 
 import UIKit
 
-class IssuePositioner: UIView {
+final class IssuePositioner: UIView {
 	@IBOutlet var crosshairView: UIImageView!
 	@IBOutlet var topView: UIView!
 	@IBOutlet var botView: UIView!

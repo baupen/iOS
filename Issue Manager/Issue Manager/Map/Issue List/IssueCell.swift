@@ -2,7 +2,7 @@
 
 import UIKit
 
-class IssueCell: UITableViewCell, Reusable {
+final class IssueCell: UITableViewCell, Reusable {
 	typealias Localization = L10n.Issue
 	
 	@IBOutlet var markButton: UIButton!

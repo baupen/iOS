@@ -2,7 +2,7 @@
 
 import UIKit
 
-class MainViewController: UISplitViewController, Reusable {
+final class MainViewController: UISplitViewController, Reusable {
 	var site: ConstructionSite! {
 		didSet { masterNav.mapList.holder = site }
 	}
@@ -42,7 +42,7 @@ class MainViewController: UISplitViewController, Reusable {
 	}
 }
 
-class MasterNavigationController: UINavigationController {
+final class MasterNavigationController: UINavigationController {
 	var mapList: MapListViewController {
 		return topViewController as! MapListViewController
 	}
@@ -82,7 +82,7 @@ class MasterNavigationController: UINavigationController {
 	}
 }
 
-class DetailNavigationController: UINavigationController, Reusable {
+final class DetailNavigationController: UINavigationController, Reusable {
 	var mapController: MapViewController {
 		return topViewController as! MapViewController
 	}

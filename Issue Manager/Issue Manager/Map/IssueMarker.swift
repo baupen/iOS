@@ -4,7 +4,7 @@ import UIKit
 
 fileprivate let markerSize = CGSize(width: 32, height: 32)
 
-class IssueMarker: UIView {
+final class IssueMarker: UIView {
 	let issue: Issue
 	
 	var zoomScale: CGFloat = 1 {

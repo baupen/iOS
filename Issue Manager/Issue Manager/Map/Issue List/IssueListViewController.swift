@@ -3,7 +3,7 @@
 import UIKit
 import PullToExpand
 
-class IssueListViewController: UIViewController {
+final class IssueListViewController: UIViewController {
 	typealias Localization = L10n.Map.IssueList
 	
 	@IBOutlet var summaryLabel: UILabel!

@@ -2,7 +2,7 @@
 
 import UIKit
 
-class TrialViewController: LoginHandlerViewController {
+final class TrialViewController: LoginHandlerViewController {
 	fileprivate typealias Localization = L10n.Trial
 	
 	@IBOutlet var loginWindowView: UIView!
@@ -170,7 +170,7 @@ extension TrialViewController: UIViewControllerTransitioningDelegate {
 	}
 }
 
-fileprivate class VerticalSlideTransitionAnimator: TransitionAnimator {
+fileprivate final class VerticalSlideTransitionAnimator: TransitionAnimator {
 	let shouldMoveDown: Bool
 	
 	init(shouldMoveDown: Bool) {

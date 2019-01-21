@@ -4,7 +4,7 @@ import UIKit
 
 fileprivate var color = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.25)
 
-class SeparatorLine: UIView {
+final class SeparatorLine: UIView {
 	override var backgroundColor: UIColor? {
 		didSet {
 			if backgroundColor != color {

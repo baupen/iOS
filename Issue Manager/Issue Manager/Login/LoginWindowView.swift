@@ -3,7 +3,7 @@
 import UIKit
 
 @IBDesignable
-class LoginWindowView: UIView {
+final class LoginWindowView: UIView {
 	override func prepareForInterfaceBuilder() {
 		awakeFromNib()
 	}

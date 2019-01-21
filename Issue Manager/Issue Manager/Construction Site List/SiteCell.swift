@@ -6,7 +6,7 @@ fileprivate let shadowOpacity: Float = 0.2
 fileprivate let shadowOffset = CGSize(width: 0, height: 6)
 fileprivate let shadowRadius: CGFloat = 12
 
-class SiteCell: UICollectionViewCell, Reusable {
+final class SiteCell: UICollectionViewCell, Reusable {
 	fileprivate typealias Localization = L10n.SiteList.SiteSummary
 	
 	@IBOutlet var imageView: UIImageView!

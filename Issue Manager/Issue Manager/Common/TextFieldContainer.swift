@@ -2,7 +2,7 @@
 
 import UIKit
 
-class TextFieldContainer: UIView {
+final class TextFieldContainer: UIView {
 	override func awakeFromNib() {
 		super.awakeFromNib()
 		

@@ -3,7 +3,7 @@
 import UIKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
+final class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
 	var window: UIWindow?
 	
 	let reachability = Reachability() <- {

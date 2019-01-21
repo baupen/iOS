@@ -2,7 +2,7 @@
 
 import UIKit
 
-class SiteListViewController: RefreshingTableViewController, Reusable {
+final class SiteListViewController: RefreshingTableViewController, Reusable {
 	fileprivate typealias Localization = L10n.SiteList
 	
 	@IBOutlet var welcomeLabel: UILabel!

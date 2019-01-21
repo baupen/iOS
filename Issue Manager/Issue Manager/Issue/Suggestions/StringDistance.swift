@@ -6,7 +6,7 @@ private func key(_ a: Substring, _ b: Substring) -> String {
 	return "\(a)§\(b)"
 }
 
-private class Levenshtein {
+private final class Levenshtein {
 	private(set) var cache: [String: Int] = [:]
 	
 	func calculateDistance(_ a: Substring, _ b: Substring) -> Int {

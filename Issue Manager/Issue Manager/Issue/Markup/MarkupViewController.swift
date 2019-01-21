@@ -2,13 +2,13 @@
 
 import UIKit
 
-class MarkupNavigationController: UINavigationController {
+final class MarkupNavigationController: UINavigationController {
 	var markupController: MarkupViewController {
 		return topViewController as! MarkupViewController
 	}
 }
 
-class MarkupViewController: UIViewController {
+final class MarkupViewController: UIViewController {
 	@IBOutlet var backgroundView: UIImageView!
 	@IBOutlet var foregroundView: UIImageView!
 	@IBOutlet var wipView: UIImageView!
@@ -241,7 +241,7 @@ class MarkupViewController: UIViewController {
 	}
 }
 
-class ModeChangeButton: UIButton {
+final class ModeChangeButton: UIButton {
 	override var isSelected: Bool {
 		didSet { tintColor = isSelected ? .main : #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.25) }
 	}

@@ -1,6 +1,6 @@
 import UIKit
 
-class Haptics {
+final class Haptics {
 	static let impact = UIImpactFeedbackGenerator()
 	static let select = UISelectionFeedbackGenerator()
 	static let notify = UINotificationFeedbackGenerator()

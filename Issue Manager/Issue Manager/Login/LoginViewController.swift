@@ -2,7 +2,7 @@
 
 import UIKit
 
-class LoginViewController: LoginHandlerViewController {
+final class LoginViewController: LoginHandlerViewController {
 	fileprivate typealias Localization = L10n.Login
 	
 	@IBOutlet var textFieldView: UIView!

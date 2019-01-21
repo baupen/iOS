@@ -2,7 +2,7 @@
 
 import UIKit
 
-class FakePanRecognizer: UIPanGestureRecognizer {
+final class FakePanRecognizer: UIPanGestureRecognizer {
 	var fakeTranslation = CGPoint.zero {
 		didSet {
 			let now = Date()

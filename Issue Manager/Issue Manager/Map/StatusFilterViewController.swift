@@ -2,13 +2,13 @@
 
 import UIKit
 
-class StatusFilterNavigationController: UINavigationController {
+final class StatusFilterNavigationController: UINavigationController {
 	var statusFilterController: StatusFilterViewController {
 		return topViewController as! StatusFilterViewController
 	}
 }
 
-class StatusFilterViewController: UITableViewController {
+final class StatusFilterViewController: UITableViewController {
 	typealias Localization = L10n.Map.StatusFilter
 	typealias Status = Issue.Status.Simplified
 	
@@ -61,7 +61,7 @@ protocol StatusFilterViewControllerDelegate: AnyObject {
 	func statusFilterChanged(to newValue: Set<Issue.Status.Simplified>)
 }
 
-class StatusCell: UITableViewCell, Reusable {
+final class StatusCell: UITableViewCell, Reusable {
 	@IBOutlet var iconView: UIImageView!
 	@IBOutlet var nameLabel: UILabel!
 	
@@ -73,7 +73,7 @@ class StatusCell: UITableViewCell, Reusable {
 	}
 }
 
-class TrilinearImageView: UIImageView {
+final class TrilinearImageView: UIImageView {
 	override func awakeFromNib() {
 		super.awakeFromNib()
 		

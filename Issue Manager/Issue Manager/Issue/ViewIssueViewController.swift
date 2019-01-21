@@ -2,7 +2,7 @@
 
 import UIKit
 
-class ViewIssueViewController: UITableViewController, Reusable {
+final class ViewIssueViewController: UITableViewController, Reusable {
 	typealias Localization = L10n.ViewIssue
 	
 	@IBOutlet var iconView: TrilinearImageView!

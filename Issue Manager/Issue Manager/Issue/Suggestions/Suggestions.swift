@@ -19,7 +19,7 @@ final class Suggestion: Codable {
 	}
 }
 
-class SuggestionStorage {
+final class SuggestionStorage {
 	static let shared = SuggestionStorage()
 	
 	private var storage: [String: [Suggestion]] {

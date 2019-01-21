@@ -3,7 +3,7 @@
 import UIKit
 import Promise
 
-class IssueBadge: UIView {
+final class IssueBadge: UIView {
 	let label = UILabel() <- {
 		$0.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
 		$0.font = .systemFont(ofSize: 17, weight: .semibold)

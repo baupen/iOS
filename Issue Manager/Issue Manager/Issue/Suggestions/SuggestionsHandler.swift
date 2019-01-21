@@ -6,7 +6,7 @@ fileprivate let rowHeight: CGFloat = 37
 
 fileprivate typealias SuggestionMatch = (suggestion: Suggestion, matchingPrefix: String?)
 
-class SuggestionsHandler: NSObject, UITableViewDataSource, UITableViewDelegate {
+final class SuggestionsHandler: NSObject, UITableViewDataSource, UITableViewDelegate {
 	static let intrinsicHeight = CGFloat(suggestionCount) * rowHeight - 1
 	static let suggestionCount = 3
 	
@@ -89,7 +89,7 @@ protocol SuggestionsHandlerDelegate: AnyObject {
 	func use(_ suggestion: Suggestion)
 }
 
-class SuggestionCell: UITableViewCell, Reusable {
+final class SuggestionCell: UITableViewCell, Reusable {
 	@IBOutlet var suggestionLabel: UILabel!
 	
 	fileprivate var match: SuggestionMatch! {
