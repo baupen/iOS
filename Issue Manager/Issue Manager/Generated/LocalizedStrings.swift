@@ -230,7 +230,7 @@ internal enum L10n {
     internal static let backToLogin = L10n.tr("Localizable", "trial.back_to_login")
     /// Probekonto Erstellen
     internal static let createAccount = L10n.tr("Localizable", "trial.create_account")
-    /// Du hast ein Probekonto erstellt. Die Anmeldung erfolgt mit den folgenden Daten, die du auch auf www.mangel.io verwenden kannst.
+    /// Du hast ein Probekonto erstellt. Die Anmeldung erfolgt mit den folgenden Daten, die du auch auf www.app.mangel.io verwenden kannst.
     internal static let existingAccountHint = L10n.tr("Localizable", "trial.existing_account_hint")
     /// Einloggen
     internal static let logIn = L10n.tr("Localizable", "trial.log_in")

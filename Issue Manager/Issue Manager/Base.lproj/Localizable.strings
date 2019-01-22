@@ -209,7 +209,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Trial.existing
 // CONTEXT: Text, der beschreibt, dass man schon ein Probekonto erstellt hat und sich damit auch auf www.mangel.io anmelden kann.
-"trial.existing_account_hint" = "Du hast ein Probekonto erstellt. Die Anmeldung erfolgt mit den folgenden Daten, die du auch auf www.mangel.io verwenden kannst.";
+"trial.existing_account_hint" = "Du hast ein Probekonto erstellt. Die Anmeldung erfolgt mit den folgenden Daten, die du auch auf www.app.mangel.io verwenden kannst.";
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Trial.log
