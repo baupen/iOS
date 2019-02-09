@@ -33,7 +33,7 @@ extension Client {
 					issue: issue,
 					fileURL: issue.image.map(Issue.localURL)
 				)
-			}.flatMap(Client.shared.send)
+			}.flatMap(send)
 		
 		logOutcome(of: result, as: "issue creation")
 	}
@@ -49,7 +49,7 @@ extension Client {
 					issue: issue,
 					fileURL: hasChangedFile ? issue.image.map(Issue.localURL) : nil
 				)
-			}.flatMap(Client.shared.send)
+			}.flatMap(send)
 		
 		logOutcome(of: result, as: "issue update")
 	}

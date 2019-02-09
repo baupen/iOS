@@ -56,7 +56,7 @@ extension Client {
 					issues:            self.storage.issues   .values.map { $0.meta }
 				)
 			}
-			.flatMap(Client.shared.send)
+			.flatMap(send)
 			.ignoringResult()
 	}
 	

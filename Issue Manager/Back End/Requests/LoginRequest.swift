@@ -46,7 +46,7 @@ extension Client {
 			passwordHash: password.sha256()
 		)
 		
-		return Client.shared.send(request).ignoringResult()
+		return send(request).ignoringResult()
 	}
 }
 

@@ -22,7 +22,7 @@ extension Client {
 			proposedGivenName: proposedGivenName,
 			proposedFamilyName: proposedFamilyName
 		)
-		return Client.shared.send(request).map { $0.trialUser }
+		return send(request).map { $0.trialUser }
 	}
 }
 

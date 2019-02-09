@@ -31,6 +31,6 @@ extension Client {
 					requestingFileFor: path,
 					meta: meta
 				)
-			}.flatMap(Client.shared.send)
+			}.flatMap(send)
 	}
 }

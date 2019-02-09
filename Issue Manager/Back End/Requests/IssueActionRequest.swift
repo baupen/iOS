@@ -37,7 +37,7 @@ extension Client {
 					issueID: issue.id,
 					action: action
 				)
-			}.flatMap(Client.shared.send)
+			}.flatMap(send)
 		
 		logOutcome(of: result, as: "issue \(action.rawValue)")
 	}

@@ -29,7 +29,7 @@ extension Client {
 					authenticationToken: user.authenticationToken,
 					issueID: issue.id
 				)
-			}.flatMap(Client.shared.send)
+			}.flatMap(send)
 		
 		logOutcome(of: result, as: "issue deletion")
 	}
