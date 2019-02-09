@@ -29,6 +29,8 @@ class LoginHandlerViewController: UIViewController {
 	func handle(_ error: Error, username: String, password: String) {
 		switch error {
 		case RequestError.apiError(let meta) where meta.error == .unknownUsername:
+			fallthrough
+		case RequestError.invalidUsername:
 			showUnknownUsernameAlert(username: username)
 		case RequestError.apiError(let meta) where meta.error == .wrongPassword:
 			showWrongPasswordAlert(username: username)

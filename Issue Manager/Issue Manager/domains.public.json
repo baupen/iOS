@@ -1,3 +1,14 @@
 {
-	"mangel.io": "https://dev.app.mangel.io"
+	"mangel.io": {
+		"url": "https://app.mangel.io",
+		"domain": "mangel.io"
+	},
+	"dev.mangel.io": {
+		"url": "https://dev.app.mangel.io",
+		"domain": "mangel.io"
+	},
+	"test.dev.app.mangel.io": {
+		"url": "https://dev.app.mangel.io",
+		"domain": "test.dev.app.mangel.io"
+	}
 }

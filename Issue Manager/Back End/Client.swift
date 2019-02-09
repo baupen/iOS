@@ -19,22 +19,11 @@ final class Client {
 		}
 	}
 	
+	/// base URL for the server to contact
+	var serverURL = URL(string: "https://dev.app.mangel.io")!
+	
 	/// current local representation of all the data
 	var storage = Storage()
-	
-	private let domainOverrides: [String: URL] = {
-		let path = Bundle.main.path(forResource: "domains.private", ofType: "json")!
-		do {
-			let raw = try Data(contentsOf: URL(fileURLWithPath: path))
-			return try JSONDecoder().decode(from: raw)
-		} catch {
-			print("Could not load servers!", error.localizedFailureReason)
-			dump(error)
-			return [:]
-		}
-	}()
-	/// used when there's no domain override for the given username
-	private let fallbackDomain = URL(string: "https://dev.app.mangel.io")!
 	
 	private let urlSession = URLSession.shared
 	
@@ -158,9 +147,7 @@ final class Client {
 	}
 	
 	private func apiURL<R: Request>(for request: R) -> URL {
-		let usernameDomain = request.username.components(separatedBy: "@").last
-		let domain = usernameDomain.flatMap { domainOverrides[$0] } ?? fallbackDomain
-		return domain.appendingPathComponent("api/external/\(request.method)")
+		return serverURL.appendingPathComponent("api/external/\(request.method)")
 	}
 	
 	private func send(_ request: URLRequest) -> Future<TaskResult> {
@@ -174,6 +161,8 @@ final class Client {
 
 /// An error that occurs while interfacing with the server.
 enum RequestError: Error {
+	/// That username can't possibly be a valid username, so we can't know which server to interface with.
+	case invalidUsername
 	/// You tried to do something that requires authentication without being authenticated.
 	case notAuthenticated
 	/// An error occurred during communication with the server. Likely causes include an unstable internet connection and the server being down.
@@ -204,6 +193,7 @@ extension Client {
 			localUser = try defaults.decode(forKey: "Client.shared.localUser")
 			storage = try defaults.decode(forKey: "Client.shared.storage") ?? storage
 			backlog = try defaults.decode(forKey: "Client.shared.backlog") ?? backlog
+			serverURL = defaults.url(forKey: "Client.shared.serverURL") ?? serverURL
 			print("Client loaded!")
 		} catch {
 			print("Client could not be loaded!")
@@ -213,11 +203,12 @@ extension Client {
 	}
 	
 	func saveShared() {
-		savingQueue.async { [localUser, storage] in
+		savingQueue.async { [localUser, storage, serverURL] in
 			do {
 				try defaults.encode(localUser, forKey: "Client.shared.localUser")
 				try defaults.encode(storage, forKey: "Client.shared.storage")
 				try self.saveBacklog()
+				defaults.set(serverURL, forKey: "Client.shared.serverURL")
 				print("Client saved!")
 			} catch {
 				print("Client could not be saved!")

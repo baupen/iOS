@@ -27,10 +27,42 @@ struct LoginRequest: JSONJSONRequest {
 
 extension Client {
 	func logIn(as username: String, password: String) -> Future<Void> {
+		guard let separatorIndex = username.lastIndex(of: "@") else {
+			return .rejected(with: RequestError.invalidUsername)
+		}
+		let name = username[..<separatorIndex]
+		let domain = String(username[separatorIndex...].dropFirst())
+		
+		let override = domainOverrides[domain]
+		let newDomain = override?.domain ?? domain
+		
+		guard let serverURL = override?.url ?? URL(string: "https://\(domain)") else {
+			return .rejected(with: RequestError.invalidUsername)
+		}
+		self.serverURL = serverURL
+		
 		let request = LoginRequest(
-			username: username,
+			username: "\(name)@\(newDomain)",
 			passwordHash: password.sha256()
 		)
+		
 		return Client.shared.send(request).ignoringResult()
 	}
 }
+
+struct DomainOverride: Decodable {
+	var url: URL
+	var domain: String
+}
+
+fileprivate let domainOverrides: [String: DomainOverride] = {
+	let path = Bundle.main.path(forResource: "domains.private", ofType: "json")!
+	do {
+		let raw = try Data(contentsOf: URL(fileURLWithPath: path))
+		return try JSONDecoder().decode(from: raw)
+	} catch {
+		print("Could not load domain overrides!", error.localizedFailureReason)
+		dump(error)
+		return [:]
+	}
+}()

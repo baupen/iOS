@@ -32,7 +32,6 @@ final class TrialViewController: LoginHandlerViewController {
 	}
 	
 	// unwind segue
-	// TODO: find out if this successfully overwrites LoginViewController's unwind segue
 	@IBAction func logOut(_ segue: UIStoryboardSegue) {}
 	
 	/// - note: only ever change this from the main queue
