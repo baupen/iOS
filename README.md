@@ -10,8 +10,8 @@
 	<a href="https://travis-ci.org/mangelio/iOS">
 		<img alt="Build Status" src="https://travis-ci.org/mangelio/iOS.svg?branch=master" />
 	</a>
-	<a href="https://app.codacy.com/app/juliand665/iOS?utm_source=github.com&utm_medium=referral&utm_content=mangelio/iOS&utm_campaign=badger">
-		<img alt="Codacy Badge" src="https://api.codacy.com/project/badge/Grade/97ca4bc4209941438ab53b975ce3342f" />
+	<a href="https://codebeat.co/projects/github-com-mangelio-ios-master">
+		<img alt="codebeat badge" src="https://codebeat.co/badges/a651d4d8-5be3-4341-89ff-aff9c78d9d13" />
 	</a>
 </p>
 
