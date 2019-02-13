@@ -5,7 +5,6 @@ before_install:
 install:
   - echo 'placeholder'
 script:
-  - carthage bootstrap --platform iOS
-  - xcodebuild clean build -sdk iphonesimulator -project Issue\ Manager.xcodeproj/ -scheme Issue\ Manager CODE_SIGNING_REQUIRED=NO
+  - carthage bootstrap --platform iOS --verbose && xcodebuild clean build -sdk iphonesimulator -project Issue\ Manager.xcodeproj/ -scheme Issue\ Manager CODE_SIGNING_REQUIRED=NO
 after_failure:
   - find /var -name carthage-xcodebuild.*.log -exec grep SimplePDFKit {} "+" 2>/dev/null
