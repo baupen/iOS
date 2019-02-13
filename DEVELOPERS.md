@@ -2,7 +2,7 @@
 
 ## `Images` Folder
 
-In the `Images` folder, you'll find PDFs of all the graphical assets as well as the `.afdesign` files from the program I created them with, Affinity Designer. We use [Font Awesome](https://fontawesome.com) to ensure a consistent design language across the website and app.
+In the `Images` folder, you'll find PDFs of all the graphical assets as well as the `.afdesign` files from the program we created them with, Affinity Designer. We use [Font Awesome](https://fontawesome.com) to ensure a consistent design language across the website and app.
 
 ## `Issue Manager` Folder
 
