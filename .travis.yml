@@ -1,6 +1,8 @@
 language: swift
 osx_image: xcode10.1
 before_install:
+  - git lfs version
+  - carthage version
   - cd Issue\ Manager
 install:
   - echo 'placeholder'
