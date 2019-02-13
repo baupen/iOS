@@ -8,3 +8,5 @@ script:
   - carthage bootstrap --platform iOS --verbose && xcodebuild clean build -sdk iphonesimulator -project Issue\ Manager.xcodeproj/ -scheme Issue\ Manager CODE_SIGNING_REQUIRED=NO
 after_failure:
   - echo '**** after failure called ****'
+  - md5 Carthage/Checkouts/SimplePDFKit/SimplePDFKit/PDFium/libpdfium.a
+  - lipo -info Carthage/Checkouts/SimplePDFKit/SimplePDFKit/PDFium/libpdfium.a
