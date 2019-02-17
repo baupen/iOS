@@ -10,8 +10,8 @@
 		"userLoginDomain": "mangel.io"
 	},
 	{
-		"userInputDomain": "test.dev.app.mangel.io",
-		"serverURL": "https://dev.app.mangel.io",
-		"userLoginDomain": "test.dev.app.mangel.io"
+		"userInputDomain": "test.mangel.io",
+		"serverURL": "https://app.mangel.io",
+		"userLoginDomain": "test.mangel.io"
 	}
 ]
