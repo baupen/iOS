@@ -70,7 +70,6 @@
 		9597935020F7AC2400AA40C1 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9597934F20F7AC2400AA40C1 /* Resources.swift */; };
 		959E8A1E21EE9A7D00C29503 /* TrialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959E8A1D21EE9A7C00C29503 /* TrialViewController.swift */; };
 		959E8A2021EE9C4A00C29503 /* TrialRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959E8A1F21EE9C4A00C29503 /* TrialRequest.swift */; };
-		95A4E65A210230FC00591EAE /* domains.private.json in Resources */ = {isa = PBXBuildFile; fileRef = 95A4E659210230FC00591EAE /* domains.private.json */; };
 		95A66C7A20F9181D008F10DA /* ViewIssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A66C7920F9181D008F10DA /* ViewIssueViewController.swift */; };
 		95A7B24D20E3FFE200A928D6 /* Backlog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A7B24C20E3FFE200A928D6 /* Backlog.swift */; };
 		95A995CB20FD3BED006A1EE8 /* LightboxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A995CA20FD3BED006A1EE8 /* LightboxViewController.swift */; };
@@ -167,7 +166,6 @@
 		9597934F20F7AC2400AA40C1 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 		959E8A1D21EE9A7C00C29503 /* TrialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrialViewController.swift; sourceTree = "<group>"; };
 		959E8A1F21EE9C4A00C29503 /* TrialRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrialRequest.swift; sourceTree = "<group>"; };
-		95A4E659210230FC00591EAE /* domains.private.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = domains.private.json; sourceTree = "<group>"; };
 		95A66C7920F9181D008F10DA /* ViewIssueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewIssueViewController.swift; sourceTree = "<group>"; };
 		95A7B24C20E3FFE200A928D6 /* Backlog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Backlog.swift; sourceTree = "<group>"; };
 		95A995CA20FD3BED006A1EE8 /* LightboxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightboxViewController.swift; sourceTree = "<group>"; };
@@ -461,7 +459,6 @@
 			isa = PBXGroup;
 			children = (
 				9502843620FAD42300880AD7 /* default_suggestions.json */,
-				95A4E659210230FC00591EAE /* domains.private.json */,
 				95DDA4D621AA47F5009628B0 /* fake_read_response.private.json */,
 				9583C2C720DC748B00452695 /* Assets.xcassets */,
 				95D2C2B320E5C50200D887C8 /* Localizable.strings */,
@@ -544,7 +541,6 @@
 				9583C2C620DC748800452695 /* Main.storyboard in Resources */,
 				9583C2CB20DC748B00452695 /* LaunchScreen.storyboard in Resources */,
 				9502843720FAD42300880AD7 /* default_suggestions.json in Resources */,
-				95A4E65A210230FC00591EAE /* domains.private.json in Resources */,
 				95DDA4D721AA47F5009628B0 /* fake_read_response.private.json in Resources */,
 				9583C2C820DC748B00452695 /* Assets.xcassets in Resources */,
 				95D2C2B120E5C50200D887C8 /* Localizable.strings in Resources */,

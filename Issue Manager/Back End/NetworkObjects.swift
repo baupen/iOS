@@ -63,12 +63,16 @@ struct ObjectMeta<Object: APIObject>: AnyObjectMeta, Codable, Equatable {
 	var rawID: UUID { return id.rawValue }
 }
 
-protocol Response: Decodable {}
+typealias Response = Decodable
 
 /// Conform to one of the more specific protocols rather than this.
 protocol Request {
 	associatedtype ExpectedResponse
 	
+	/// If non-nil, the client uses this as the base URL rather than its default.
+	static var baseURLOverride: URL? { get }
+	/// The http method the request uses.
+	static var httpMethod: String { get }
 	/// Independent requests don't depend on results of other requests and, as such, can be executed at any time.
 	static var isIndependent: Bool { get }
 	
@@ -82,6 +86,9 @@ protocol Request {
 }
 
 extension Request {
+	static var baseURLOverride: URL? { return nil }
+	static var httpMethod: String { return "POST" }
+	
 	func applyToClient(_ response: ExpectedResponse) {}
 	
 	var username: String { return Client.shared.localUser!.username }
@@ -89,6 +96,15 @@ extension Request {
 
 extension Request where Self: BacklogStorable {
 	static var isIndependent: Bool { return false }
+}
+
+/// a request that has no body
+protocol GetRequest: Request, Encodable {}
+
+extension GetRequest {
+	static var httpMethod: String { return "GET" }
+	
+	func encode(using encoder: JSONEncoder, into request: inout URLRequest) throws {}
 }
 
 /// a request that is encoded as simple JSON

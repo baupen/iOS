@@ -25,6 +25,21 @@ struct LoginRequest: JSONJSONRequest {
 	}
 }
 
+struct DomainOverridesRequest: GetRequest {
+	static let baseURLOverride: URL? = URL(string: "https://app.mangel.io")!
+	static let isIndependent = true
+	
+	var method: String { return "config/domain_overrides" }
+	
+	func decode(from data: Data, using decoder: JSONDecoder) throws -> ExpectedResponse {
+		return try decoder.decode(ExpectedResponse.self, from: data)
+	}
+	
+	struct ExpectedResponse: Response {
+		let domainOverrides: [DomainOverride]
+	}
+}
+
 extension Client {
 	func logIn(as username: String, password: String) -> Future<Void> {
 		guard let separatorIndex = username.lastIndex(of: "@") else {
@@ -33,20 +48,22 @@ extension Client {
 		let name = username[..<separatorIndex]
 		let inputDomain = String(username[separatorIndex...].dropFirst())
 		
-		let override = domainOverrides.first { $0.userInputDomain == inputDomain }
-		let loginDomain = override?.userLoginDomain ?? inputDomain
-		
-		guard let serverURL = override?.serverURL ?? URL(string: "https://\(inputDomain)") else {
-			return .rejected(with: RequestError.invalidUsername)
+		return send(DomainOverridesRequest()).flatMap {
+			let override = $0.domainOverrides.first { $0.userInputDomain == inputDomain }
+			let loginDomain = override?.userLoginDomain ?? inputDomain
+			
+			guard let serverURL = override?.serverURL ?? URL(string: "https://\(inputDomain)") else {
+				return .rejected(with: RequestError.invalidUsername)
+			}
+			self.serverURL = serverURL
+			
+			let request = LoginRequest(
+				username: "\(name)@\(loginDomain)",
+				passwordHash: password.sha256()
+			)
+			
+			return self.send(request).ignoringResult()
 		}
-		self.serverURL = serverURL
-		
-		let request = LoginRequest(
-			username: "\(name)@\(loginDomain)",
-			passwordHash: password.sha256()
-		)
-		
-		return send(request).ignoringResult()
 	}
 }
 
@@ -55,15 +72,3 @@ struct DomainOverride: Decodable {
 	var serverURL: URL
 	var userLoginDomain: String
 }
-
-fileprivate let domainOverrides: [DomainOverride] = {
-	let path = Bundle.main.path(forResource: "domains.private", ofType: "json")!
-	do {
-		let raw = try Data(contentsOf: URL(fileURLWithPath: path))
-		return try JSONDecoder().decode(from: raw)
-	} catch {
-		print("Could not load domain overrides!", error.localizedFailureReason)
-		dump(error)
-		return []
-	}
-}()

@@ -102,7 +102,6 @@ final class TrialViewController: LoginHandlerViewController {
 		case RequestError.apiError(let meta) where meta.error == .unknownUsername:
 			fallthrough
 		case RequestError.invalidUsername:
-			// TODO: Should only happen in development, since they wouldn't be reset in regular usage, but not quite sure. If it can happen in regular usage, we definitely need to show an alert.
 			trialUser = nil
 		default:
 			super.handle(error, username: username, password: password)

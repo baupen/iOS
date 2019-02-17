@@ -20,7 +20,7 @@ final class Client {
 	}
 	
 	/// base URL for the server to contact
-	var serverURL = URL(string: "https://dev.app.mangel.io")!
+	var serverURL = URL(string: "https://app.mangel.io")!
 	
 	/// current local representation of all the data
 	var storage = Storage()
@@ -135,24 +135,25 @@ final class Client {
 			let error = try responseDecoder.decode(JSend.Error.self, from: data)
 			throw RequestError.serverError(error)
 		case let code:
-			fatalError("Invalid status code \(code)")
+			print("Invalid status code \(code)")
+			throw RequestError.unknownError(statusCode: code)
 		}
 	} 
 	
 	private func urlRequest<R: Request>(body: R) throws -> URLRequest {
 		return try URLRequest(url: apiURL(for: body)) <- { request in
-			request.httpMethod = "POST"
+			request.httpMethod = R.httpMethod
 			try body.encode(using: requestEncoder, into: &request)
 		}
 	}
 	
 	private func apiURL<R: Request>(for request: R) -> URL {
-		return serverURL.appendingPathComponent("api/external/\(request.method)")
+		return (R.baseURLOverride ?? serverURL).appendingPathComponent("api/external/\(request.method)")
 	}
 	
-	private func send(_ request: URLRequest) -> Future<TaskResult> {
+	func send(_ request: URLRequest) -> Future<TaskResult> {
 		let path = request.url!.relativePath
-		print("\(path): sending \(debugRepresentation(of: request.httpBody!))")
+		print("\(path): sending \(debugRepresentation(of: request.httpBody ?? Data()))")
 		return urlSession.dataTask(with: request)
 			.transformError { _, error in throw RequestError.communicationError(error) }
 			.always { print("\(path): finished") }
@@ -173,6 +174,8 @@ enum RequestError: Error {
 	case serverError(JSend.Error)
 	/// The client is outdated, so we'd rather not risk further communication.
 	case outdatedClient(client: Int, server: Int)
+	/// An unknown error occurred, resulting in a nonstandard status code without a nice JSend response.
+	case unknownError(statusCode: Int)
 }
 
 fileprivate func debugRepresentation(of data: Data, maxLength: Int = 1000) -> String {
