@@ -31,18 +31,18 @@ extension Client {
 			return .rejected(with: RequestError.invalidUsername)
 		}
 		let name = username[..<separatorIndex]
-		let domain = String(username[separatorIndex...].dropFirst())
+		let inputDomain = String(username[separatorIndex...].dropFirst())
 		
-		let override = domainOverrides[domain]
-		let newDomain = override?.domain ?? domain
+		let override = domainOverrides.first { $0.userInputDomain == inputDomain }
+		let loginDomain = override?.userLoginDomain ?? inputDomain
 		
-		guard let serverURL = override?.url ?? URL(string: "https://\(domain)") else {
+		guard let serverURL = override?.serverURL ?? URL(string: "https://\(inputDomain)") else {
 			return .rejected(with: RequestError.invalidUsername)
 		}
 		self.serverURL = serverURL
 		
 		let request = LoginRequest(
-			username: "\(name)@\(newDomain)",
+			username: "\(name)@\(loginDomain)",
 			passwordHash: password.sha256()
 		)
 		
@@ -51,11 +51,12 @@ extension Client {
 }
 
 struct DomainOverride: Decodable {
-	var url: URL
-	var domain: String
+	var userInputDomain: String
+	var serverURL: URL
+	var userLoginDomain: String
 }
 
-fileprivate let domainOverrides: [String: DomainOverride] = {
+fileprivate let domainOverrides: [DomainOverride] = {
 	let path = Bundle.main.path(forResource: "domains.private", ofType: "json")!
 	do {
 		let raw = try Data(contentsOf: URL(fileURLWithPath: path))
@@ -63,6 +64,6 @@ fileprivate let domainOverrides: [String: DomainOverride] = {
 	} catch {
 		print("Could not load domain overrides!", error.localizedFailureReason)
 		dump(error)
-		return [:]
+		return []
 	}
 }()
