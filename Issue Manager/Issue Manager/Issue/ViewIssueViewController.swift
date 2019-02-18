@@ -26,7 +26,7 @@ final class ViewIssueViewController: UITableViewController, Reusable {
 	
 	@IBAction func markIssue() {
 		issue.mark()
-		Haptics.generateFeedback(.strong)
+		Haptics.mediumImpact.impactOccurred()
 		update()
 	}
 	
