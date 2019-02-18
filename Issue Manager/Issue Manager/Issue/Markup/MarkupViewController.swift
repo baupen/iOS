@@ -123,8 +123,8 @@ final class MarkupViewController: UIViewController {
 		aspectRatioConstraint = backgroundView.widthAnchor.constraint(equalTo: backgroundView.heightAnchor, multiplier: image.size.width / image.size.height)
 		aspectRatioConstraint.isActive = true
 		
-		drawingContext = makeContext(size: image.size)
-		wipContext = makeContext(size: image.size)
+		drawingContext = makeContext()
+		wipContext = makeContext()
 		
 		let imageSize = image.cgImage!.width * image.cgImage!.bytesPerRow
 		let allowedSize = 200 << 20 // 200 MB
@@ -133,7 +133,7 @@ final class MarkupViewController: UIViewController {
 		undoBuffer.push(drawingContext.makeImage()!) // empty base state
 	}
 	
-	private func makeContext(size: CGSize) -> CGContext {
+	private func makeContext() -> CGContext {
 		UIGraphicsBeginImageContextWithOptions(image.size, false, 1) // not opaque
 		let context = UIGraphicsGetCurrentContext()!
 		UIGraphicsEndImageContext()

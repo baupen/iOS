@@ -147,12 +147,6 @@ final class TrialViewController: LoginHandlerViewController {
 			)
 		}
 	}
-	
-	func showSiteList(animated: Bool = true) {
-		let controller = storyboard!.instantiate(SiteListViewController.self)!
-		controller.modalTransitionStyle = .flipHorizontal
-		present(controller, animated: animated)
-	}
 }
 
 extension TrialViewController: UITextFieldDelegate {
