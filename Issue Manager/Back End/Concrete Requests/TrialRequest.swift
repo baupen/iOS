@@ -4,6 +4,7 @@ import Foundation
 import Promise
 
 struct CreateTrialAccountRequest: JSONJSONRequest {
+	static let baseURLOverride: URL? = URL(string: "https://app.mangel.io")!
 	static let isIndependent = true
 	
 	var method: String { return "trial/create_account" }
@@ -25,5 +26,3 @@ extension Client {
 		return send(request).map { $0.trialUser }
 	}
 }
-
-

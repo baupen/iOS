@@ -103,7 +103,7 @@ final class CameraView: UIView {
 			return
 		}
 		
-		Haptics.generateFeedback(.weak)
+		Haptics.lightImpact.impactOccurred()
 		isProcessing = true
 		
 		let settings = AVCapturePhotoSettings() // jpeg

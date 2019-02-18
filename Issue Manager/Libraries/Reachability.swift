@@ -231,9 +231,6 @@ fileprivate extension Reachability {
 	var isDirectFlagSet: Bool {
 		return flags.contains(.isDirect)
 	}
-	var isConnectionRequiredAndTransientFlagSet: Bool {
-		return flags.intersection([.connectionRequired, .transientConnection]) == [.connectionRequired, .transientConnection]
-	}
 	
 	var flags: SCNetworkReachabilityFlags {
 		var flags = SCNetworkReachabilityFlags()

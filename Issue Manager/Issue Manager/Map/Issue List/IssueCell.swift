@@ -21,7 +21,7 @@ final class IssueCell: UITableViewCell, Reusable {
 	
 	@IBAction func markPressed() {
 		issue.mark()
-		Haptics.generateFeedback(.strong)
+		Haptics.mediumImpact.impactOccurred()
 		update()
 	}
 	

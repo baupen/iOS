@@ -29,7 +29,7 @@ final class EditIssueViewController: UITableViewController, Reusable {
 	
 	@IBAction func markIssue() {
 		isIssueMarked.toggle()
-		Haptics.generateFeedback(.strong)
+		Haptics.mediumImpact.impactOccurred()
 	}
 	
 	@IBAction func descriptionBeganEditing() {

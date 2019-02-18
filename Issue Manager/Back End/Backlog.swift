@@ -38,10 +38,6 @@ struct Backlog: Codable {
 		return storage.first
 	}
 	
-	var isEmpty: Bool {
-		return storage.isEmpty
-	}
-	
 	init() {}
 	
 	init(from decoder: Decoder) throws {
