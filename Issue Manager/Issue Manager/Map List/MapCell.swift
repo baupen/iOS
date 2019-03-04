@@ -61,7 +61,7 @@ final class MapCell: UITableViewCell, Reusable {
 		issueBadge.shouldUseRecursiveIssues = shouldUseRecursiveIssues
 		issueBadge.holder = map
 		
-		if shouldUseRecursiveIssues, !map.children.isEmpty {
+		if shouldUseRecursiveIssues, map.hasChildren {
 			accessoryView = nil
 			// nil makes it use accessoryType, which is a disclosure indicator
 		} else {

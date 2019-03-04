@@ -31,6 +31,10 @@ extension Map: MapHolder {
 }
 
 extension Map {
+	var hasChildren: Bool {
+		return !children.isEmpty
+	}
+	
 	func allIssues() -> [Issue] {
 		if defaults.isInClientMode {
 			return issues.lazy

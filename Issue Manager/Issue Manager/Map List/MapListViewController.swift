@@ -34,22 +34,21 @@ final class MapListViewController: RefreshingTableViewController, Reusable {
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
-		if let selected = tableView.indexPathForSelectedRow {
-			if !mainController.isCollapsed {
-				// deselect map unless currently shown
-				let mapController = mainController.detailNav.mapController
-				let currentMap = mapController.holder as? Map
-				if map(for: selected).id != currentMap?.id {
-					tableView.deselectRow(at: selected, animated: true)
-				} else if !map(for: selected).children.isEmpty {
-					// must have navigated back from map's sublist
-					showOwnMap()
-				}
-			} else {
-				// compact; always deselect
+		if mainController.isCollapsed {
+			if let selected = tableView.indexPathForSelectedRow {
+				// coming back from selected map's sublist
 				tableView.deselectRow(at: selected, animated: true)
 			}
-		} else if !mainController.isCollapsed {
+		} else if let selected = tableView.indexPathForSelectedRow {
+			// not appearing for the first time
+			if map(for: selected).hasChildren {
+				// coming back from selected map's sublist
+				showOwnMap()
+			} else {
+				// appearing because split view was expanded to show list
+			}
+		} else {
+			// appearing for the first time
 			showOwnMap()
 		}
 		
@@ -202,14 +201,14 @@ final class MapListViewController: RefreshingTableViewController, Reusable {
 				let mapController = mainController.detailNav.mapController
 				mapController.holder = map
 				
-				if !map.children.isEmpty {
+				if map.hasChildren {
 					showListController(for: map)
 				}
 			} else {
-				if map.children.isEmpty {
-					showMapController(for: map)
-				} else {
+				if map.hasChildren {
 					showListController(for: map)
+				} else {
+					showMapController(for: map)
 				}
 			}
 		}
