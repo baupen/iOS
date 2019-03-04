@@ -63,7 +63,7 @@ class LoginHandlerViewController: UIViewController {
 			return
 		}
 		
-		guard username == localUser.username else {
+		guard username == localUser.localUsername else {
 			if showingAlerts {
 				showUnknownUsernameAlert(username: username)
 			}

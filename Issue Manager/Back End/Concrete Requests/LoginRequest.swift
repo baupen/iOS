@@ -8,12 +8,14 @@ struct LoginRequest: JSONJSONRequest {
 	
 	var method: String { return "login" }
 	
+	let localUsername: String
 	let username: String
 	let passwordHash: String
 	
 	func applyToClient(_ response: ExpectedResponse) {
 		Client.shared.localUser = LocalUser(
 			user: response.user,
+			localUsername: localUsername,
 			username: username,
 			passwordHash: passwordHash
 		)
@@ -22,6 +24,11 @@ struct LoginRequest: JSONJSONRequest {
 	
 	struct ExpectedResponse: Response {
 		let user: User
+	}
+	
+	enum CodingKeys: CodingKey {
+		case username
+		case passwordHash
 	}
 }
 
@@ -58,6 +65,7 @@ extension Client {
 			self.serverURL = serverURL
 			
 			let request = LoginRequest(
+				localUsername: username,
 				username: "\(name)@\(loginDomain)",
 				passwordHash: password.sha256()
 			)
