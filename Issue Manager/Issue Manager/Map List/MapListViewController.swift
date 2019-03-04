@@ -62,7 +62,7 @@ final class MapListViewController: RefreshingTableViewController, Reusable {
 		
 		let isValid = handleRefresh()
 		if isValid {
-			if !mainController.isCollapsed {
+			if mainController.isExtended {
 				mainController.detailNav.mapController.holder = holder
 			}
 		} else {
@@ -103,7 +103,7 @@ final class MapListViewController: RefreshingTableViewController, Reusable {
 	
 	func showOwnMap() {
 		// update shown map
-		if !mainController.isCollapsed {
+		if mainController.isExtended {
 			let mapController = mainController.detailNav.mapController
 			if holder is Map {
 				tableView.selectRow(at: [0, 0], animated: false, scrollPosition: .none)
@@ -197,7 +197,7 @@ final class MapListViewController: RefreshingTableViewController, Reusable {
 		} else {
 			let map = maps[indexPath.row]
 			
-			if !mainController.isCollapsed {
+			if mainController.isExtended {
 				let mapController = mainController.detailNav.mapController
 				mapController.holder = map
 				
