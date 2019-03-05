@@ -50,8 +50,8 @@ final class LoginViewController: LoginHandlerViewController {
 		usernameField.delegate = self
 		passwordField.delegate = self
 		
-		if let username = Client.shared.localUser?.username, !username.isEmpty {
-			usernameField.text = Client.shared.localUser?.username
+		if let username = Client.shared.localUser?.localUsername, !username.isEmpty {
+			usernameField.text = username
 			
 			if !defaults.stayLoggedIn {
 				passwordField.becomeFirstResponder()

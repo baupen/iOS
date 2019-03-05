@@ -87,3 +87,10 @@ final class DetailNavigationController: UINavigationController, Reusable {
 		return topViewController as! MapViewController
 	}
 }
+
+extension UISplitViewController {
+	/// whether or not the split view is extended, i.e. not collapsed, so both panes are visible
+	var isExtended: Bool {
+		return !isCollapsed
+	}
+}
