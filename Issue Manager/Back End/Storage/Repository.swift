@@ -102,8 +102,8 @@ final class Repository {
 		saveAll() // can't save lack of issue yet
 	}
 	
-	func edit(_ edit: (inout Storage) throws -> Void) rethrows {
-		try edit(&storage)
+	func edit(_ edit: (Storage) throws -> Void) rethrows {
+		try edit(storage)
 		saveAll()
 	}
 	
