@@ -125,8 +125,7 @@ final class TrialViewController: LoginHandlerViewController {
 		}
 		
 		result.catch { error in
-			print("Trial creation failed!", error.localizedFailureReason)
-			dump(error)
+			error.printDetails(context: "Trial creation failed!")
 			self.showAlert(for: error)
 		}
 	}

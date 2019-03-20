@@ -99,12 +99,10 @@ final class Client {
 			do {
 				try request.send().await()
 			} catch RequestError.communicationError(let error) {
-				print("Communication error whilst clearing request \(request.method) from backlog: \(error.localizedFailureReason)")
-				dump(error)
+				error.printDetails(context: "Communication error whilst clearing request \(request.method) from backlog:")
 				throw RequestError.communicationError(error)
 			} catch {
-				print("Error occurred whilst clearing request \(request.method) from backlog; ignoring: \(error.localizedFailureReason)")
-				dump(error)
+				error.printDetails(context: "Error occurred whilst clearing request \(request.method) from backlog; ignoring:")
 			}
 			backlog.removeFirst()
 		}
@@ -199,9 +197,7 @@ extension Client {
 			serverURL = defaults.url(forKey: "Client.shared.serverURL") ?? serverURL
 			print("Client loaded!")
 		} catch {
-			print("Client could not be loaded!")
-			print(error.localizedFailureReason)
-			print(error)
+			error.printDetails(context: "Client could not be loaded!")
 		}
 	}
 	
@@ -214,9 +210,7 @@ extension Client {
 				defaults.set(serverURL, forKey: "Client.shared.serverURL")
 				print("Client saved!")
 			} catch {
-				print("Client could not be saved!")
-				print(error.localizedFailureReason)
-				print(error)
+				error.printDetails(context: "Could not save client: \(context)")
 			}
 		}
 	}
