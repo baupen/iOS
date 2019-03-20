@@ -207,7 +207,7 @@ private extension Client {
 	
 	func saveServerURL() {
 		save(context: "serverURL") { [serverURL] in
-			try defaults.encode(serverURL, forKey: .serverURLKey)
+			defaults.set(serverURL, forKey: .serverURLKey)
 		}
 	}
 	

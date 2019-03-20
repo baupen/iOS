@@ -10,12 +10,6 @@ final class Storage: Codable {
 	var maps = ObjectDictionary<Map>()
 	var issues = ObjectDictionary<Issue>()
 	
-	private var fileContainers: [AnyFileContainer] {
-		return Array(sites.values) as [AnyFileContainer]
-			+ Array(maps.values)
-			+ Array(issues.values)
-	}
-	
 	init() {}
 	
 	required init(from decoder: Decoder) throws {
@@ -28,6 +22,8 @@ final class Storage: Codable {
 	}
 	
 	func downloadMissingFiles() {
-		fileContainers.forEach { $0.downloadFile() }
+		sites.values.forEach { $0.downloadFile() }
+		maps.values.forEach { $0.downloadFile() }
+		issues.values.forEach { $0.downloadFile() }
 	}
 }

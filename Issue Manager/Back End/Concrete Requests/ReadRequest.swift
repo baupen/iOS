@@ -95,17 +95,10 @@ private extension Repository {
 private extension Dictionary where Value: APIObject, Key == ID<Value> {
 	mutating func update(changing changedEntries: [Value], removing removedIDs: [ID<Value>]) {
 		for changed in changedEntries {
-			let previous = self[changed.id]
-			self[changed.id] = changed
-			if let container = changed as? AnyFileContainer {
-				container.downloadFile(previous: previous as? AnyFileContainer)
-			}
+			Value.update(&self[changed.id], from: changed)
 		}
 		for removed in removedIDs {
-			if let container = self[removed] as? AnyFileContainer {
-				container.deleteFile()
-			}
-			self[removed] = nil
+			Value.update(&self[removed], from: nil)
 		}
 	}
 }

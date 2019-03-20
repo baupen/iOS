@@ -21,6 +21,21 @@ final class Issue: APIObject {
 		self.position = position
 	}
 	
+	static func update(_ instance: inout Issue?, from new: Issue?) {
+		switch (instance, new) {
+		case (let old?, let new?):
+			old.update(from: new)
+		case (let old?, nil):
+			old.deleteFile()
+			instance = nil
+		case (nil, let new?):
+			new.downloadFile()
+			instance = new
+		case (nil, nil):
+			break
+		}
+	}
+	
 	func update(from other: Issue) {
 		assert(id == other.id)
 		

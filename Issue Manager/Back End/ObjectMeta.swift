@@ -42,6 +42,8 @@ protocol AnyAPIObject: Codable {
 protocol APIObject: AnyAPIObject {
 	var meta: ObjectMeta<Self> { get }
 	var id: ID<Self> { get }
+	
+	static func update(_ instance: inout Self?, from new: Self?)
 }
 
 extension APIObject {
@@ -49,6 +51,10 @@ extension APIObject {
 	
 	var rawMeta: AnyObjectMeta { return meta }
 	var rawID: UUID { return id.rawValue }
+	
+	static func update(_ instance: inout Self?, from new: Self?) {
+		instance = new
+	}
 }
 
 protocol AnyObjectMeta {
