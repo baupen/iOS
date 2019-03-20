@@ -16,7 +16,12 @@ struct ReadRequest: JSONJSONRequest {
 	let issues: [ObjectMeta<Issue>]
 	
 	func applyToClient(_ response: ExpectedResponse) {
-		Client.shared.update(from: response)
+		if let newUser = response.changedUser {
+			assert(Client.shared.localUser?.user.id == newUser.id)
+			Client.shared.localUser?.user = newUser
+		}
+		
+		Repository.shared.update(from: response)
 	}
 	
 	func decode(from data: Data, using decoder: JSONDecoder) throws -> ExpectedResponse {
@@ -43,65 +48,73 @@ struct ReadRequest: JSONJSONRequest {
 	}
 }
 
-extension Client {
-	func read() -> Future<Void> {
-		return getUser()
-			.map { user in
-				ReadRequest(
-					authenticationToken: user.authenticationToken,
-					user: user.meta,
-					craftsmen:         self.storage.craftsmen.values.map { $0.meta },
-					constructionSites: self.storage.sites    .values.map { $0.meta },
-					maps:              self.storage.maps     .values.map { $0.meta },
-					issues:            self.storage.issues   .values.map { $0.meta }
-				)
-			}
-			.flatMap(send)
-			.ignoringResult()
+private extension Repository {
+	func makeReadRequest(_ user: User) -> ReadRequest {
+		return ReadRequest(
+			authenticationToken: user.authenticationToken,
+			user: user.meta,
+			craftsmen: craftsmanMetas(),
+			constructionSites: siteMetas(),
+			maps: mapMetas(),
+			issues: issueMetas()
+		)
 	}
 	
-	fileprivate func update(from response: ReadRequest.ExpectedResponse) {
-		updateEntries(in: \.craftsmen, changing: response.changedCraftsmen,         removing: response.removedCraftsmanIDs)
-		updateEntries(in: \.sites,     changing: response.changedConstructionSites, removing: response.removedConstructionSiteIDs)
-		updateEntries(in: \.maps,      changing: response.changedMaps,              removing: response.removedMapIDs)
-		updateEntries(in: \.issues,    changing: response.changedIssues,            removing: response.removedIssueIDs)
-		
-		if let newUser = response.changedUser {
-			assert(localUser?.user.id == newUser.id)
-			localUser?.user = newUser
-		}
-		
-		let removed = Set(response.removedIssueIDs) // for efficient lookup
-		for map in storage.maps.values {
-			map.issues.removeAll(where: { removed.contains($0) })
-		}
-		
-		for issue in response.changedIssues {
-			if let map = storage.maps[issue.map], !map.issues.contains(issue.id) {
-				map.issues.append(issue.id)
+	func update(from response: ReadRequest.ExpectedResponse) {
+		edit { storage in
+			storage.craftsmen.update(
+				changing: response.changedCraftsmen,
+				removing: response.removedCraftsmanIDs
+			)
+			storage.sites.update(
+				changing: response.changedConstructionSites,
+				removing: response.removedConstructionSiteIDs
+			)
+			storage.maps.update(
+				changing: response.changedMaps,
+				removing: response.removedMapIDs
+			)
+			storage.issues.update(
+				changing: response.changedIssues,
+				removing: response.removedIssueIDs
+			)
+			
+			for issue in response.changedIssues {
+				if let map = self.map(issue.map), !map.issues.contains(issue.id) {
+					map.add(issue)
+				}
+			}
+			
+			for issue in response.removedIssueIDs.compactMap(Repository.shared.issue) {
+				map(issue.map)?.remove(issue.id)
 			}
 		}
-		
-		saveShared()
 	}
-	
-	private func updateEntries<T: APIObject>(
-		in path: WritableKeyPath<Storage, [ID<T>: T]>,
-		changing changedEntries: [T],
-		removing removedIDs: [ID<T>])
-	{
+}
+
+private extension Dictionary where Value: APIObject, Key == ID<Value> {
+	mutating func update(changing changedEntries: [Value], removing removedIDs: [ID<Value>]) {
 		for changed in changedEntries {
-			let previous = storage[keyPath: path][changed.id]
-			storage[keyPath: path][changed.id] = changed
+			let previous = self[changed.id]
+			self[changed.id] = changed
 			if let container = changed as? AnyFileContainer {
 				container.downloadFile(previous: previous as? AnyFileContainer)
 			}
 		}
 		for removed in removedIDs {
-			if let container = storage[keyPath: path][removed] as? AnyFileContainer {
+			if let container = self[removed] as? AnyFileContainer {
 				container.deleteFile()
 			}
-			storage[keyPath: path][removed] = nil
+			self[removed] = nil
 		}
+	}
+}
+
+extension Client {
+	func read() -> Future<Void> {
+		return getUser()
+			.map(Repository.shared.makeReadRequest)
+			.flatMap(send)
+			.ignoringResult()
 	}
 }

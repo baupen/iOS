@@ -14,14 +14,14 @@ protocol MapHolder: AnyAPIObject {
 
 extension MapHolder {
 	func childMaps() -> [Map] {
-		return children.compactMap { Client.shared.storage.maps[$0] }
+		return children.compactMap(Repository.shared.map)
 	}
 	
 	func recursiveIssues() -> AnyCollection<Issue> {
 		let recursiveIssues = recursiveChildren()
 			.lazy
 			.flatMap { $0.issues }
-			.compactMap { Client.shared.storage.issues[$0] }
+			.compactMap(Repository.shared.issue)
 		
 		if defaults.isInClientMode {
 			return AnyCollection(recursiveIssues.filter { $0.wasAddedWithClient })

@@ -12,18 +12,18 @@ final class Client {
 	/// the user we're currently logged in as
 	var localUser: LocalUser? {
 		didSet {
+			saveLocalUser()
 			guard let localUser = localUser else { return }
 			if let old = oldValue, localUser.user.id != old.user.id {
-				storage = Storage() // invalidate after switching user
+				Repository.shared.clearStorage()
 			}
 		}
 	}
 	
 	/// base URL for the server to contact
-	var serverURL = URL(string: "https://app.mangel.io")!
-	
-	/// current local representation of all the data
-	var storage = Storage()
+	var serverURL = URL(string: "https://app.mangel.io")! {
+		didSet { saveServerURL() }
+	}
 	
 	private let urlSession = URLSession.shared
 	
@@ -36,7 +36,7 @@ final class Client {
 	
 	/// the backlog of requests that couldn't be sent due to connection issues
 	private var backlog = Backlog() {
-		didSet { try? saveBacklog() }
+		didSet { saveBacklog() }
 	}
 	/// used to automatically attempt to clear the backlog at regular intervals
 	private var backlogClearingTimer: Timer!
@@ -52,6 +52,7 @@ final class Client {
 		backlogClearingTimer = .scheduledTimer(withTimeInterval: 60, repeats: true) { _ in
 			self.tryToClearBacklog()
 		}
+		Repository.shared.downloadMissingFiles()
 	}
 	
 	/// call this e.g. when the device regains its internet connection
@@ -80,10 +81,8 @@ final class Client {
 					try self.clearBacklog()
 					return try self.startTask(for: request).await()
 				} catch RequestError.communicationError(let error) {
-					print("Communication error during request \(request.method): \(error.localizedFailureReason)")
-					dump(error)
+					error.printDetails(context: "Communication error during request \(request.method):")
 					self.backlog.appendIfPossible(request)
-					self.saveShared()
 					throw RequestError.communicationError(error)
 				}
 			}
@@ -188,35 +187,49 @@ fileprivate func debugRepresentation(of data: Data, maxLength: Int = 1000) -> St
 // MARK: -
 // MARK: Saving & Loading
 
-extension Client {
+private extension Client {
 	func loadShared() {
 		do {
-			localUser = try defaults.decode(forKey: "Client.shared.localUser")
-			storage = try defaults.decode(forKey: "Client.shared.storage") ?? storage
-			backlog = try defaults.decode(forKey: "Client.shared.backlog") ?? backlog
-			serverURL = defaults.url(forKey: "Client.shared.serverURL") ?? serverURL
+			localUser = try defaults.decode(forKey: .localUserKey)
+			backlog = try defaults.decode(forKey: .backlogKey) ?? backlog
+			serverURL = defaults.url(forKey: .serverURLKey) ?? serverURL
 			print("Client loaded!")
 		} catch {
 			error.printDetails(context: "Client could not be loaded!")
 		}
 	}
 	
-	func saveShared() {
-		savingQueue.async { [localUser, storage, serverURL] in
+	func saveLocalUser() {
+		save(context: "localUser") { [localUser] in
+			try defaults.encode(localUser, forKey: .localUserKey)
+		}
+	}
+	
+	func saveServerURL() {
+		save(context: "serverURL") { [serverURL] in
+			try defaults.encode(serverURL, forKey: .serverURLKey)
+		}
+	}
+	
+	func saveBacklog() {
+		save(context: "serverURL") { [backlog] in
+			try defaults.encode(backlog, forKey: .backlogKey)
+		}
+	}
+	
+	private func save(context: String, _ block: @escaping () throws -> Void) {
+		savingQueue.async {
 			do {
-				try defaults.encode(localUser, forKey: "Client.shared.localUser")
-				try defaults.encode(storage, forKey: "Client.shared.storage")
-				try self.saveBacklog()
-				defaults.set(serverURL, forKey: "Client.shared.serverURL")
-				print("Client saved!")
+				try block()
 			} catch {
 				error.printDetails(context: "Could not save client: \(context)")
 			}
 		}
 	}
-	
-	// more lightweight variant of saveShared()
-	func saveBacklog() throws {
-		try defaults.encode(backlog, forKey: "Client.shared.backlog")
-	}
+}
+
+private extension String {
+	static let localUserKey = "Client.shared.localUser"
+	static let backlogKey = "Client.shared.backlog"
+	static let serverURLKey = "Client.shared.serverURL"
 }

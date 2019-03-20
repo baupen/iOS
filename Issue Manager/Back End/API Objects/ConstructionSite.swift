@@ -35,7 +35,7 @@ extension ConstructionSite: MapHolder {
 
 extension ConstructionSite {
 	func allCraftsmen() -> [Craftsman] {
-		return craftsmen.compactMap { Client.shared.storage.craftsmen[$0] }
+		return craftsmen.compactMap(Repository.shared.craftsman)
 	}
 	
 	func allTrades() -> Set<String> {

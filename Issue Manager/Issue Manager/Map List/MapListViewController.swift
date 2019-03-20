@@ -81,10 +81,10 @@ final class MapListViewController: RefreshingTableViewController, Reusable {
 	
 	/// - returns: whether or not the holder is still valid
 	@discardableResult private func handleRefresh() -> Bool {
-		if let oldSite = holder as? ConstructionSite, let site = Client.shared.storage.sites[oldSite.id] {
+		if let oldSite = holder as? ConstructionSite, let site = Repository.shared.site(oldSite.id) {
 			holder = site
 			return true
-		} else if let oldMap = holder as? Map, let map = Client.shared.storage.maps[oldMap.id] {
+		} else if let oldMap = holder as? Map, let map = Repository.shared.map(oldMap.id) {
 			holder = map
 			return true
 		} else {

@@ -33,6 +33,8 @@
 		952CB48C20E8429D00E6B664 /* SiteListLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952CB48B20E8429D00E6B664 /* SiteListLayout.swift */; };
 		95339A3020F8445100A01F07 /* SeparatorLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95339A2F20F8445100A01F07 /* SeparatorLine.swift */; };
 		953FFF6021D9BE7C00A917F2 /* Geometry+CoreGraphics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953FFF5F21D9BE7C00A917F2 /* Geometry+CoreGraphics.swift */; };
+		954D38D22242340D008FD3B0 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954D38D12242340D008FD3B0 /* Storage.swift */; };
+		954D38D422423426008FD3B0 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954D38D322423426008FD3B0 /* DataStore.swift */; };
 		9550E0E620F2E70700921387 /* IssueMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9550E0E520F2E70700921387 /* IssueMarker.swift */; };
 		9550E0E820F38D7600921387 /* StatusFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9550E0E720F38D7600921387 /* StatusFilterViewController.swift */; };
 		95512B0820FBEAB300878163 /* FileDownloadRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95512B0720FBEAB200878163 /* FileDownloadRequest.swift */; };
@@ -47,6 +49,7 @@
 		9554235120DC7921009CCCE0 /* String+Hashing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9554235020DC7921009CCCE0 /* String+Hashing.swift */; };
 		956015342100C50500F84600 /* StringDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956015332100C50500F84600 /* StringDistance.swift */; };
 		956015372101302700F84600 /* SmallestN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956015362101302700F84600 /* SmallestN.swift */; };
+		9562F944223C1DBE0014BFB0 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9562F943223C1DBE0014BFB0 /* Repository.swift */; };
 		956868E121F6528C00A0850F /* LoginHandlerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956868E021F6528C00A0850F /* LoginHandlerViewController.swift */; };
 		95758B1321F4223100E5C20F /* TransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95758B1221F4223100E5C20F /* TransitionAnimator.swift */; };
 		957A420A214ECC910059185D /* Promise.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 957A4209214ECC910059185D /* Promise.framework */; };
@@ -77,7 +80,6 @@
 		95AB959320E572C900A0AE8D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AB959220E572C900A0AE8D /* LoginViewController.swift */; };
 		95B2735320DE7AD600D2BD44 /* Multipart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B2735220DE7AD600D2BD44 /* Multipart.swift */; };
 		95B9BA6620DEC7FA00261954 /* RequestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B9BA6520DEC7FA00261954 /* RequestHelpers.swift */; };
-		95B9BA6820DEDF0400261954 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B9BA6720DEDF0400261954 /* Storage.swift */; };
 		95B9BA6A20DEEE8500261954 /* FileContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B9BA6920DEEE8400261954 /* FileContainer.swift */; };
 		95BBF31920F26373006E162E /* FakePanGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BBF31820F26373006E162E /* FakePanGestureRecognizer.swift */; };
 		95BBF32120F26F49006E162E /* IssueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BBF32020F26F49006E162E /* IssueCell.swift */; };
@@ -134,6 +136,8 @@
 		952F69E5214A9F3D00A12CE9 /* PullToExpand.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PullToExpand.framework; path = Carthage/Build/iOS/PullToExpand.framework; sourceTree = SOURCE_ROOT; };
 		95339A2F20F8445100A01F07 /* SeparatorLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeparatorLine.swift; sourceTree = "<group>"; };
 		953FFF5F21D9BE7C00A917F2 /* Geometry+CoreGraphics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Geometry+CoreGraphics.swift"; sourceTree = "<group>"; };
+		954D38D12242340D008FD3B0 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
+		954D38D322423426008FD3B0 /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		9550E0E520F2E70700921387 /* IssueMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueMarker.swift; sourceTree = "<group>"; };
 		9550E0E720F38D7600921387 /* StatusFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusFilterViewController.swift; sourceTree = "<group>"; };
 		95512B0720FBEAB200878163 /* FileDownloadRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDownloadRequest.swift; sourceTree = "<group>"; };
@@ -150,6 +154,7 @@
 		9554235220DC796A009CCCE0 /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
 		956015332100C50500F84600 /* StringDistance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringDistance.swift; sourceTree = "<group>"; };
 		956015362101302700F84600 /* SmallestN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallestN.swift; sourceTree = "<group>"; };
+		9562F943223C1DBE0014BFB0 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		956868E021F6528C00A0850F /* LoginHandlerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginHandlerViewController.swift; sourceTree = "<group>"; };
 		95758B1221F4223100E5C20F /* TransitionAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionAnimator.swift; sourceTree = "<group>"; };
 		957A4209214ECC910059185D /* Promise.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Promise.framework; path = Carthage/Build/iOS/Promise.framework; sourceTree = SOURCE_ROOT; };
@@ -182,7 +187,6 @@
 		95AB959220E572C900A0AE8D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		95B2735220DE7AD600D2BD44 /* Multipart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Multipart.swift; sourceTree = "<group>"; };
 		95B9BA6520DEC7FA00261954 /* RequestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestHelpers.swift; sourceTree = "<group>"; };
-		95B9BA6720DEDF0400261954 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		95B9BA6920DEEE8400261954 /* FileContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileContainer.swift; sourceTree = "<group>"; };
 		95BBF31820F26373006E162E /* FakePanGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakePanGestureRecognizer.swift; sourceTree = "<group>"; };
 		95BBF32020F26F49006E162E /* IssueCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCell.swift; sourceTree = "<group>"; };
@@ -324,6 +328,16 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		9562F942223C1D6A0014BFB0 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				9562F943223C1DBE0014BFB0 /* Repository.swift */,
+				954D38D12242340D008FD3B0 /* Storage.swift */,
+				954D38D322423426008FD3B0 /* DataStore.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
 		9583C2B220DC748800452695 = {
 			isa = PBXGroup;
 			children = (
@@ -368,6 +382,7 @@
 		9583C2D620DC76CE00452695 /* Back End */ = {
 			isa = PBXGroup;
 			children = (
+				9562F942223C1D6A0014BFB0 /* Storage */,
 				9511A0FD20DD378A00101ADE /* Extensions */,
 				9511A12020DD4F6100101ADE /* API Objects */,
 				95D1C9C420FBDF44006A9C19 /* Concrete Requests */,
@@ -377,7 +392,6 @@
 				9511A12120DD509600101ADE /* JSend.swift */,
 				95B2735220DE7AD600D2BD44 /* Multipart.swift */,
 				9511A11E20DD4F5600101ADE /* Client.swift */,
-				95B9BA6720DEDF0400261954 /* Storage.swift */,
 				95A7B24C20E3FFE200A928D6 /* Backlog.swift */,
 				9584F24B20E936BD00A8C884 /* UserDefaults.swift */,
 			);
@@ -686,6 +700,7 @@
 				9550E0E620F2E70700921387 /* IssueMarker.swift in Sources */,
 				9584F24C20E936BD00A8C884 /* UserDefaults.swift in Sources */,
 				95870B2E20E9C05300BB1B39 /* MapListViewController.swift in Sources */,
+				954D38D22242340D008FD3B0 /* Storage.swift in Sources */,
 				95D1C9C820FBE07D006A9C19 /* ReadRequest.swift in Sources */,
 				95D1C9C620FBDFB9006A9C19 /* LoginRequest.swift in Sources */,
 				9511A10620DD3B8E00101ADE /* ConstructionSite.swift in Sources */,
@@ -703,9 +718,9 @@
 				9597935020F7AC2400AA40C1 /* Status+Assets.swift in Sources */,
 				9583C2D520DC757800452695 /* MapViewController.swift in Sources */,
 				95C7341520FB9BBC00924B26 /* SelectionViewController.swift in Sources */,
-				95B9BA6820DEDF0400261954 /* Storage.swift in Sources */,
 				95870B3020E9C06B00BB1B39 /* MapCell.swift in Sources */,
 				9511A14420DD56D700101ADE /* Sequence+Extensions.swift in Sources */,
+				9562F944223C1DBE0014BFB0 /* Repository.swift in Sources */,
 				9529A63D20EECF8600C7E0A0 /* IssueBadge.swift in Sources */,
 				9506A96320EDAAAD00AF6AB7 /* UIColor+Constants.swift in Sources */,
 				9502842D20FAB67A00880AD7 /* EditIssueViewController.swift in Sources */,
@@ -734,6 +749,7 @@
 				959E8A2021EE9C4A00C29503 /* TrialRequest.swift in Sources */,
 				95512B1020FBEAC400878163 /* IssueUpdateRequest.swift in Sources */,
 				9511A10220DD3A2700101ADE /* Geometry.swift in Sources */,
+				954D38D422423426008FD3B0 /* DataStore.swift in Sources */,
 				95E83C17221A52CE000BB75F /* GeometricConstructs.swift in Sources */,
 				956868E121F6528C00A0850F /* LoginHandlerViewController.swift in Sources */,
 				9514FC4D210545C700099EC5 /* MarkupViewController.swift in Sources */,

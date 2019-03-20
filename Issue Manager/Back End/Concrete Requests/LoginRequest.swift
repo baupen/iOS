@@ -19,7 +19,6 @@ struct LoginRequest: JSONJSONRequest {
 			username: username,
 			passwordHash: passwordHash
 		)
-		Client.shared.saveShared()
 	}
 	
 	struct ExpectedResponse: Response {

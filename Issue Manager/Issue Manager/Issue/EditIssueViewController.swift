@@ -196,7 +196,7 @@ final class EditIssueViewController: UITableViewController, Reusable {
 		
 		if isCreating {
 			update(issue)
-			Client.shared.storage.add(issue)
+			Repository.shared.add(issue)
 		} else {
 			issue.change(transform: update)
 		}
@@ -228,7 +228,7 @@ final class EditIssueViewController: UITableViewController, Reusable {
 		case "save":
 			save()
 		case "delete":
-			Client.shared.storage.remove(issue)
+			Repository.shared.remove(issue)
 		case "lightbox":
 			let lightboxController = segue.destination as! LightboxViewController
 			lightboxController.image = image!

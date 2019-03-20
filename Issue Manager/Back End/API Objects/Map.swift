@@ -7,10 +7,20 @@ final class Map: APIObject {
 	let children: [ID<Map>]
 	let sectors: [Sector]
 	let sectorFrame: Rectangle?
-	var issues: [ID<Issue>]
+	private(set) var issues: [ID<Issue>]
 	let file: File?
 	let name: String
 	let constructionSiteID: ID<ConstructionSite>
+	
+	func add(_ issue: Issue) {
+		issues.append(issue.id)
+		Repository.shared.save(self)
+	}
+	
+	func remove(_ id: ID<Issue>) {
+		issues.removeAll { $0 == id }
+		Repository.shared.save(self)
+	}
 	
 	final class Sector: Codable {
 		let name: String
@@ -38,14 +48,14 @@ extension Map {
 	func allIssues() -> [Issue] {
 		if defaults.isInClientMode {
 			return issues.lazy
-				.compactMap { Client.shared.storage.issues[$0] }
+				.compactMap(Repository.shared.issue)
 				.filter { $0.wasAddedWithClient }
 		} else {
-			return issues.compactMap { Client.shared.storage.issues[$0] }
+			return issues.compactMap(Repository.shared.issue)
 		}
 	}
 	
 	func accessSite() -> ConstructionSite {
-		return Client.shared.storage.sites[constructionSiteID]!
+		return Repository.shared.site(constructionSiteID)!
 	}
 }

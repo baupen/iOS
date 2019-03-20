@@ -31,6 +31,7 @@ final class Issue: APIObject {
 		}
 		
 		// this is bad to maintain but super handy in every other way
+		assert(id == other.id)
 		update(\.meta)
 		update(\.number)
 		update(\.isMarked)
@@ -38,9 +39,11 @@ final class Issue: APIObject {
 		update(\.image)
 		update(\.description)
 		update(\.craftsman)
-		update(\.map)
+		assert(map == other.map)
 		update(\.status)
 		update(\.position)
+		
+		Repository.shared.save(self)
 	}
 	
 	struct Position: Codable {
@@ -101,11 +104,11 @@ extension Issue: FileContainer {
 
 extension Issue {
 	func accessCraftsman() -> Craftsman? {
-		return craftsman.flatMap { Client.shared.storage.craftsmen[$0] }
+		return craftsman.flatMap(Repository.shared.craftsman)
 	}
 	
 	func accessMap() -> Map {
-		return Client.shared.storage.maps[map]!
+		return Repository.shared.map(map)!
 	}
 }
 
@@ -136,14 +139,14 @@ extension Issue {
 		try transform(self)
 		Client.shared.issueChanged(self, hasChangedFile: file != oldFile)
 		
-		Client.shared.saveShared()
+		Repository.shared.save(self)
 	}
 	
 	func mark() {
 		isMarked.toggle()
 		Client.shared.performed(.mark, on: self)
 		
-		Client.shared.saveShared()
+		Repository.shared.save(self)
 	}
 	
 	func review() {
@@ -153,7 +156,7 @@ extension Issue {
 		status.review = .init(at: Date(), by: Client.shared.localUser!.user.fullName)
 		Client.shared.performed(.review, on: self)
 		
-		Client.shared.saveShared()
+		Repository.shared.save(self)
 	}
 	
 	func revertReview() {
@@ -162,7 +165,7 @@ extension Issue {
 		status.review = nil
 		Client.shared.performed(.revert, on: self)
 		
-		Client.shared.saveShared()
+		Repository.shared.save(self)
 	}
 	
 	func revertResponse() {
@@ -172,6 +175,6 @@ extension Issue {
 		status.response = nil
 		Client.shared.performed(.revert, on: self)
 		
-		Client.shared.saveShared()
+		Repository.shared.save(self)
 	}
 }
