@@ -49,7 +49,7 @@ final class SiteListViewController: RefreshingTableViewController, Reusable {
 		sites = Array(Client.shared.storage.sites.values)
 	}
 	
-	private var needsRefresh = false
+	var needsRefresh = false
 	override func decodeRestorableState(with coder: NSCoder) {
 		super.decodeRestorableState(with: coder)
 		

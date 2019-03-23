@@ -63,6 +63,14 @@ final class LoginViewController: LoginHandlerViewController {
 		stayLoggedInSwitch.isOn = defaults.stayLoggedIn
 	}
 	
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		
+		if defaults.stayLoggedIn {
+			showSiteList(userInitiated: false)
+		}
+	}
+	
 	func logIn() {
 		logIn(username: usernameField.text!, password: passwordField.text!)
 	}

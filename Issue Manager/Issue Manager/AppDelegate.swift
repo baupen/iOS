@@ -33,7 +33,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControll
 	}
 	
 	func application(_ application: UIApplication, shouldRestoreApplicationState coder: NSCoder) -> Bool {
-		return defaults.stayLoggedIn && Client.shared.localUser != nil
+		return Client.shared.localUser != nil
 	}
 	
 	func applicationWillResignActive(_ application: UIApplication) {
