@@ -87,6 +87,10 @@ final class Repository {
 		saveAll() // no way to specifically save adding a new issue yet
 	}
 	
+	func update(_ new: Issue) {
+		Issue.update(&storage.issues[new.id], from: new)
+	}
+	
 	func remove(_ issue: Issue, notifyingServer: Bool = true) {
 		assert(!issue.isRegistered)
 		

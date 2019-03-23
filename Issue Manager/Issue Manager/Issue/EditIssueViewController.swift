@@ -171,10 +171,10 @@ final class EditIssueViewController: UITableViewController, Reusable {
 	}
 	
 	private func save() {
-		func update(_ issue: Issue) {
-			issue.isMarked = isIssueMarked
-			issue.craftsman = craftsman?.id
-			issue.description = descriptionField.text
+		func update(_ details: inout Issue.Details) {
+			details.isMarked = isIssueMarked
+			details.craftsman = craftsman?.id
+			details.description = descriptionField.text
 			
 			if hasChangedImage {
 				if let image = image {
@@ -183,19 +183,19 @@ final class EditIssueViewController: UITableViewController, Reusable {
 					let url = Issue.localURL(for: file)
 					do {
 						try image.saveJPEG(to: url)
-						issue.image = file
+						details.image = file
 					} catch {
 						showAlert(titled: Localization.CouldNotSaveImage.title, message: error.localizedFailureReason)
-						issue.image = nil
+						details.image = nil
 					}
 				} else {
-					issue.image = nil
+					details.image = nil
 				}
 			}
 		}
 		
 		if isCreating {
-			update(issue)
+			issue.change(notifyingServer: false, transform: update)
 			Repository.shared.add(issue)
 		} else {
 			issue.change(transform: update)

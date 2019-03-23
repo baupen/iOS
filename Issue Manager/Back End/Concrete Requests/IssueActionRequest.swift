@@ -19,7 +19,7 @@ struct IssueActionRequest: JSONJSONRequest, BacklogStorable {
 	let action: IssueAction
 	
 	func applyToClient(_ response: ExpectedResponse) {
-		Repository.shared.issue(response.issue.id)?.update(from: response.issue)
+		Repository.shared.update(response.issue)
 	}
 	
 	struct ExpectedResponse: Response {

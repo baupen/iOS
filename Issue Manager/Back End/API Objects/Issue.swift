@@ -4,16 +4,18 @@ import Foundation
 
 final class Issue: APIObject {
 	// NB: update `update(from:)` when adding/removing stored properties!
-	var meta = ObjectMeta<Issue>()
-	var number: Int?
-	var isMarked = false
-	var wasAddedWithClient: Bool // "abnahmemodus"
-	var image: File?
-	var description: String?
-	var craftsman: ID<Craftsman>?
-	var map: ID<Map> // only really used before registration
-	var status = Status()
-	var position: Position?
+	private(set) var meta = ObjectMeta<Issue>()
+	private(set) var number: Int?
+	private(set) var wasAddedWithClient: Bool // "abnahmemodus"
+	private(set) var map: ID<Map> // only really used before registration
+	private(set) var status = Status()
+	private(set) var position: Position?
+	private(set) var details = Details()
+	
+	var isMarked: Bool { return details.isMarked }
+	var image: File? { return details.image }
+	var description: String? { return details.description }
+	var craftsman: ID<Craftsman>? { return details.craftsman }
 	
 	init(at position: Position? = nil, in map: Map) {
 		self.wasAddedWithClient = defaults.isInClientMode
@@ -36,9 +38,7 @@ final class Issue: APIObject {
 		}
 	}
 	
-	func update(from other: Issue) {
-		assert(id == other.id)
-		
+	private func update(from other: Issue) {
 		other.downloadFile(previous: self)
 		
 		func update<T>(_ keyPath: ReferenceWritableKeyPath<Issue, T>) {
@@ -49,16 +49,20 @@ final class Issue: APIObject {
 		assert(id == other.id)
 		update(\.meta)
 		update(\.number)
-		update(\.isMarked)
 		update(\.wasAddedWithClient)
-		update(\.image)
-		update(\.description)
-		update(\.craftsman)
 		assert(map == other.map)
 		update(\.status)
 		update(\.position)
+		update(\.details)
 		
 		Repository.shared.save(self)
+	}
+	
+	struct Details: Codable {
+		var isMarked = false
+		var image: File?
+		var description: String?
+		var craftsman: ID<Craftsman>?
 	}
 	
 	struct Position: Codable {
@@ -114,7 +118,7 @@ final class Issue: APIObject {
 extension Issue: FileContainer {
 	static let pathPrefix = "issue"
 	static let downloadRequestPath = \FileDownloadRequest.issue
-	var file: File? { return image }
+	var file: File? { return details.image }
 }
 
 extension Issue {
@@ -147,18 +151,18 @@ extension Issue {
 }
 
 extension Issue {
-	func change(transform: (Issue) throws -> Void) rethrows {
+	func change(notifyingServer: Bool = true, transform: (inout Details) throws -> Void) rethrows {
 		assert(!isRegistered)
 		
 		let oldFile = file
-		try transform(self)
+		try transform(&details)
 		Client.shared.issueChanged(self, hasChangedFile: file != oldFile)
 		
 		Repository.shared.save(self)
 	}
 	
 	func mark() {
-		isMarked.toggle()
+		details.isMarked.toggle()
 		Client.shared.performed(.mark, on: self)
 		
 		Repository.shared.save(self)

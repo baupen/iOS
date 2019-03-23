@@ -14,7 +14,7 @@ struct IssueUpdateRequest: MultipartJSONRequest, BacklogStorable {
 	let fileURL: URL?
 	
 	func applyToClient(_ response: ExpectedResponse) {
-		issue.update(from: response.issue)
+		Repository.shared.update(response.issue)
 	}
 	
 	struct ExpectedResponse: Response {
