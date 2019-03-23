@@ -95,8 +95,8 @@ class LoginHandlerViewController: UIViewController {
 	}
 	
 	func showSiteList() {
-		let controller = storyboard!.instantiate(SiteListViewController.self)!
-		controller.modalTransitionStyle = .flipHorizontal
-		present(controller, animated: true)
+		let siteList = storyboard!.instantiate(SiteListViewController.self)!
+		siteList.modalTransitionStyle = .flipHorizontal
+		present(siteList, animated: userInitiated)
 	}
 }
