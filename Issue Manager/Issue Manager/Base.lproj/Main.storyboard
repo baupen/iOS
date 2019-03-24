@@ -1468,14 +1468,10 @@ Maler</string>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Tg9-v9-hne">
                                                     <rect key="frame" x="70" y="11" width="400" height="300"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="400" id="Vlo-zP-OVg"/>
+                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="414" id="O2k-nN-4W3"/>
+                                                        <constraint firstAttribute="width" priority="900" constant="414" id="Vlo-zP-OVg"/>
                                                         <constraint firstAttribute="width" secondItem="Tg9-v9-hne" secondAttribute="height" multiplier="4:3" id="m5Y-I4-aqI"/>
                                                     </constraints>
-                                                    <variation key="widthClass=compact">
-                                                        <mask key="constraints">
-                                                            <exclude reference="Vlo-zP-OVg"/>
-                                                        </mask>
-                                                    </variation>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
@@ -1484,7 +1480,7 @@ Maler</string>
                                                 <constraint firstItem="Tg9-v9-hne" firstAttribute="top" secondItem="p9n-lL-VHw" secondAttribute="topMargin" id="LgI-i1-cRC"/>
                                                 <constraint firstItem="ItY-0n-acO" firstAttribute="centerX" secondItem="p9n-lL-VHw" secondAttribute="centerX" id="MA5-wd-zzo"/>
                                                 <constraint firstAttribute="bottom" secondItem="Tg9-v9-hne" secondAttribute="bottom" priority="999" id="ZYS-JL-fcG"/>
-                                                <constraint firstItem="Tg9-v9-hne" firstAttribute="leading" secondItem="p9n-lL-VHw" secondAttribute="leading" id="gjX-P4-hyJ"/>
+                                                <constraint firstItem="Tg9-v9-hne" firstAttribute="leading" secondItem="p9n-lL-VHw" secondAttribute="leading" priority="950" id="gjX-P4-hyJ"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="Tg9-v9-hne" secondAttribute="bottom" priority="999" id="hd4-FI-43a"/>
                                                 <constraint firstItem="Tg9-v9-hne" firstAttribute="centerX" secondItem="p9n-lL-VHw" secondAttribute="centerX" id="mXP-s3-knk"/>
                                                 <constraint firstItem="ItY-0n-acO" firstAttribute="width" secondItem="Tg9-v9-hne" secondAttribute="width" id="yld-PB-CJq"/>
@@ -1493,7 +1489,6 @@ Maler</string>
                                                 <mask key="constraints">
                                                     <exclude reference="616-0S-ykC"/>
                                                     <exclude reference="ZYS-JL-fcG"/>
-                                                    <exclude reference="gjX-P4-hyJ"/>
                                                 </mask>
                                             </variation>
                                             <variation key="widthClass=compact">
@@ -1501,7 +1496,6 @@ Maler</string>
                                                     <include reference="616-0S-ykC"/>
                                                     <exclude reference="LgI-i1-cRC"/>
                                                     <include reference="ZYS-JL-fcG"/>
-                                                    <include reference="gjX-P4-hyJ"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -3120,7 +3114,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="L64-rs-k1Y"/>
-        <segue reference="OdI-J8-6Ad"/>
+        <segue reference="PB9-0e-xdP"/>
         <segue reference="QK8-t8-g4B"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="Main"/>

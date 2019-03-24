@@ -13,7 +13,7 @@ struct Color: Codable {
 		guard
 			raw.count == 7,
 			raw.hasPrefix("#"),
-			let int = Int(raw.dropFirst(raw.hasPrefix("#") ? 1 : 0), radix: 16)
+			let int = Int(raw.dropFirst(), radix: 16)
 			else { throw DecodingError.dataCorruptedError(in: container, debugDescription: "Expecting hex string #RRGGBB, got '\(raw)'") }
 		
 		red = UInt8(int >> 16 & 0xFF)
