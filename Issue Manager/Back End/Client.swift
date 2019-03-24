@@ -16,6 +16,7 @@ final class Client {
 			if let old = oldValue, localUser.user.id != old.user.id {
 				storage = Storage() // invalidate after switching user
 			}
+			saveShared()
 		}
 	}
 	

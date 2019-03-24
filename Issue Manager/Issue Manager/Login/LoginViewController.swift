@@ -23,6 +23,7 @@ final class LoginViewController: LoginHandlerViewController {
 	// unwind segue
 	@IBAction func logOut(_ segue: UIStoryboardSegue) {
 		passwordField.text = ""
+		Client.shared.localUser?.hasLoggedOut = true
 	}
 	
 	/// - note: only ever change this from the main queue
@@ -50,10 +51,10 @@ final class LoginViewController: LoginHandlerViewController {
 		usernameField.delegate = self
 		passwordField.delegate = self
 		
-		if let username = Client.shared.localUser?.localUsername, !username.isEmpty {
-			usernameField.text = username
+		if let localUser = Client.shared.localUser, !localUser.localUsername.isEmpty {
+			usernameField.text = localUser.localUsername
 			
-			if defaults.stayLoggedIn {
+			if defaults.stayLoggedIn, !localUser.hasLoggedOut {
 				DispatchQueue.main.async {
 					self.showSiteList(userInitiated: false)
 				}

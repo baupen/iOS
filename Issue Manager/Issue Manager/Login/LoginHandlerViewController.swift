@@ -15,7 +15,6 @@ class LoginHandlerViewController: UIViewController {
 		}
 		
 		result.then {
-			print("Logged in as", Client.shared.localUser!.user.authenticationToken)
 			self.showSiteList()
 		}
 		
@@ -95,6 +94,8 @@ class LoginHandlerViewController: UIViewController {
 	}
 	
 	func showSiteList(userInitiated: Bool = true) {
+		Client.shared.localUser?.hasLoggedOut = false
+		
 		let siteList = storyboard!.instantiate(SiteListViewController.self)!
 		siteList.modalTransitionStyle = .flipHorizontal
 		if !userInitiated {
