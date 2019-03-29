@@ -103,6 +103,8 @@ final class SectorView: UIView {
 			}
 		case .failed, .possible:
 			break
+		@unknown default:
+			break
 		}
 	}
 	

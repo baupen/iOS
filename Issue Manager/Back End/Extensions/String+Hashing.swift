@@ -1,16 +1,21 @@
 // Created by Julian Dunskus
 
 import Foundation
+import CommonCrypto
 
 extension Data {
 	func sha256() -> Data {
-		var result = Data(count: Int(CC_SHA256_DIGEST_LENGTH))
-		withUnsafeBytes { input in
-			result.withUnsafeMutableBytes { output in
-				_ = CC_SHA256(input, CC_LONG(count), output)
+		return withUnsafeBytes { input in
+			Data(count: Int(CC_SHA256_DIGEST_LENGTH)) <- { 
+				$0.withUnsafeMutableBytes { output in
+					_ = CC_SHA256(
+						input.baseAddress!.assumingMemoryBound(to: UInt8.self),
+						CC_LONG(input.count),
+						output.baseAddress!.assumingMemoryBound(to: UInt8.self)
+					)
+				}
 			}
 		}
-		return result
 	}
 	
 	func hexEncodedString() -> String {
@@ -22,7 +27,6 @@ extension Data {
 
 extension String {
 	func sha256() -> String {
-		let rawHash = self.data(using: .utf8)!.sha256()
-		return rawHash.hexEncodedString()
+		return data(using: .utf8)!.sha256().hexEncodedString()
 	}
 }

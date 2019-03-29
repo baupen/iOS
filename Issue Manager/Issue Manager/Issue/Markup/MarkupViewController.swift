@@ -221,6 +221,8 @@ final class MarkupViewController: UIViewController {
 			displayLink.remove(from: .main, forMode: .common)
 		case .possible:
 			break
+		@unknown default:
+			break
 		}
 	}
 	

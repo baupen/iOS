@@ -82,6 +82,8 @@ final class LightboxViewController: UIViewController {
 			transition = nil
 		case .possible:
 			break
+		@unknown default:
+			break
 		}
 	}
 }

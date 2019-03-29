@@ -102,6 +102,8 @@ final class IssueListViewController: UIViewController {
 				pullableView.viewPulled(fakePanRecognizer)
 				fakePanRecognizer.state = .possible
 			}
+		@unknown default:
+			break
 		}
 	}
 }

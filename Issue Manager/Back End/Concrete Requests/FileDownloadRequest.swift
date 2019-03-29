@@ -10,11 +10,10 @@ struct FileDownloadRequest: JSONDataRequest {
 	
 	var method: String { return "file/download" }
 	
-	// mutable for keypath stuff
-	private(set) var authenticationToken: String
-	private(set) var constructionSite: ObjectMeta<ConstructionSite>? = nil
-	private(set) var map: ObjectMeta<Map>? = nil
-	private(set) var issue: ObjectMeta<Issue>? = nil
+	var authenticationToken: String
+	var constructionSite: ObjectMeta<ConstructionSite>? = nil
+	var map: ObjectMeta<Map>? = nil
+	var issue: ObjectMeta<Issue>? = nil
 	
 	init<T: APIObject>(authenticationToken: String, requestingFileFor path: DownloadRequestPath<T>, meta: ObjectMeta<T>) {
 		self.authenticationToken = authenticationToken

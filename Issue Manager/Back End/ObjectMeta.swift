@@ -9,8 +9,8 @@ struct ID<Object>: Codable, Hashable, CustomStringConvertible {
 		return rawValue.description
 	}
 	
-	var hashValue: Int {
-		return rawValue.hashValue
+	func hash(into hasher: inout Hasher) {
+		hasher.combine(rawValue)
 	}
 	
 	var stringValue: String {
