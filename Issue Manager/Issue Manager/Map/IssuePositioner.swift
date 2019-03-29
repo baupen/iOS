@@ -59,6 +59,8 @@ final class IssuePositioner: UIView {
 			startOffset = nil
 		case .possible:
 			break
+		@unknown default:
+			break
 		}
 	}
 }

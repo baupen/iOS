@@ -210,6 +210,8 @@ extension AVCaptureVideoOrientation {
 		case .landscapeLeft:
 			self = .landscapeLeft
 		case .unknown:
+			fallthrough
+		@unknown default:
 			print("unknown interface orientation!")
 			self = .portrait
 		}
