@@ -17,7 +17,6 @@ final class Client {
 			if let old = oldValue, localUser.user.id != old.user.id {
 				Repository.shared.clearStorage()
 			}
-			saveShared()
 		}
 	}
 	
