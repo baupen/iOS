@@ -2,7 +2,7 @@
 
 import Foundation
 
-final class ConstructionSite: APIObject {
+struct ConstructionSite {
 	let meta: ObjectMeta<ConstructionSite>
 	let name: String
 	let address: Address
@@ -18,6 +18,8 @@ final class ConstructionSite: APIObject {
 		var country: String?
 	}
 }
+
+extension ConstructionSite: APIObject {}
 
 extension ConstructionSite: FileContainer {
 	static let pathPrefix = "constructionSite"

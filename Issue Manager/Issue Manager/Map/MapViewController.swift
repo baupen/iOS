@@ -325,7 +325,7 @@ extension MapViewController: IssueCellDelegate {
 		pullableView.contract()
 		
 		let pdfController = self.pdfController!
-		let marker = markers.first { $0.issue === issue }!
+		let marker = markers.first { $0.issue.id == issue.id }!
 		let size = pdfController.contentView.bounds.size * CGFloat(position.zoomScale)
 		let centeredRect = CGRect(
 			origin: marker.center - size / 2,

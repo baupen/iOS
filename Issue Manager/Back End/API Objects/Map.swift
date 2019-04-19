@@ -2,7 +2,7 @@
 
 import Foundation
 
-final class Map: APIObject {
+struct Map {
 	let meta: ObjectMeta<Map>
 	let children: [ID<Map>]
 	let sectors: [Sector]
@@ -12,12 +12,17 @@ final class Map: APIObject {
 	let name: String
 	let constructionSiteID: ID<ConstructionSite>
 	
-	func add(_ issue: Issue) {
+	mutating func addIfMissing(_ issue: Issue) {
+		guard !issues.contains(issue.id) else { return }
+		add(issue)
+	}
+	
+	mutating func add(_ issue: Issue) {
 		issues.append(issue.id)
 		Repository.shared.save(self)
 	}
 	
-	func remove(_ id: ID<Issue>) {
+	mutating func remove(_ id: ID<Issue>) {
 		issues.removeAll { $0 == id }
 		Repository.shared.save(self)
 	}
@@ -28,6 +33,8 @@ final class Map: APIObject {
 		let points: [Point]
 	}
 }
+
+extension Map: APIObject {}
 
 extension Map: FileContainer {
 	static let pathPrefix = "map"

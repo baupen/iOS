@@ -80,13 +80,11 @@ private extension Repository {
 			)
 			
 			for issue in response.changedIssues {
-				if let map = self.map(issue.map), !map.issues.contains(issue.id) {
-					map.add(issue)
-				}
+				self[issue.map]?.add(issue)
 			}
 			
 			for issue in response.removedIssueIDs.compactMap(Repository.shared.issue) {
-				map(issue.map)?.remove(issue.id)
+				self[issue.map]?.remove(issue.id)
 			}
 		}
 	}

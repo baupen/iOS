@@ -2,61 +2,20 @@
 
 import Foundation
 
-final class Issue: APIObject {
+struct Issue {
 	// NB: update `update(from:)` when adding/removing stored properties!
-	private(set) var meta = ObjectMeta<Issue>()
-	private(set) var number: Int?
-	private(set) var wasAddedWithClient: Bool // "abnahmemodus"
-	private(set) var map: ID<Map> // only really used before registration
+	let meta: ObjectMeta<Issue>
+	let number: Int?
+	let wasAddedWithClient: Bool // "abnahmemodus"
+	let map: ID<Map> // only really used before registration
+	let position: Position?
 	private(set) var status = Status()
-	private(set) var position: Position?
 	private(set) var details = Details()
 	
 	var isMarked: Bool { return details.isMarked }
 	var image: File? { return details.image }
 	var description: String? { return details.description }
 	var craftsman: ID<Craftsman>? { return details.craftsman }
-	
-	init(at position: Position? = nil, in map: Map) {
-		self.wasAddedWithClient = defaults.isInClientMode
-		self.map = map.id
-		self.position = position
-	}
-	
-	static func update(_ instance: inout Issue?, from new: Issue?) {
-		switch (instance, new) {
-		case (let old?, let new?):
-			old.update(from: new)
-		case (let old?, nil):
-			old.deleteFile()
-			instance = nil
-		case (nil, let new?):
-			new.downloadFile()
-			instance = new
-		case (nil, nil):
-			break
-		}
-	}
-	
-	private func update(from other: Issue) {
-		other.downloadFile(previous: self)
-		
-		func update<T>(_ keyPath: ReferenceWritableKeyPath<Issue, T>) {
-			self[keyPath: keyPath] = other[keyPath: keyPath]
-		}
-		
-		// this is bad to maintain but super handy in every other way
-		assert(id == other.id)
-		update(\.meta)
-		update(\.number)
-		update(\.wasAddedWithClient)
-		assert(map == other.map)
-		update(\.status)
-		update(\.position)
-		update(\.details)
-		
-		Repository.shared.save(self)
-	}
 	
 	struct Details: Codable {
 		var isMarked = false
@@ -115,6 +74,53 @@ final class Issue: APIObject {
 	}
 }
 
+extension Issue {
+	init(at position: Position? = nil, in map: Map) {
+		self.meta = .init()
+		self.number = nil
+		self.wasAddedWithClient = defaults.isInClientMode
+		self.map = map.id
+		self.position = position
+	}
+}
+
+extension Issue: APIObject {
+	init(from decoder: Decoder) throws {
+		let container = try decoder.container(keyedBy: Key.self)
+		
+		try meta = container.decodeValue(forKey: .meta)
+		try number = container.decodeValue(forKey: .number)
+		try wasAddedWithClient = container.decodeValue(forKey: .wasAddedWithClient)
+		try map = container.decodeValue(forKey: .map)
+		try position = container.decodeValue(forKey: .position)
+		try status = container.decodeValue(forKey: .status)
+		
+		try details = Details(from: decoder)
+	}
+	
+	func encode(to encoder: Encoder) throws {
+		var container = encoder.container(keyedBy: Key.self)
+		
+		try container.encode(meta, forKey: .meta)
+		try container.encode(number, forKey: .number)
+		try container.encode(wasAddedWithClient, forKey: .wasAddedWithClient)
+		try container.encode(map, forKey: .map)
+		try container.encode(position, forKey: .position)
+		try container.encode(status, forKey: .status)
+		
+		try details.encode(to: encoder)
+	}
+	
+	enum Key: CodingKey {
+		case meta
+		case number
+		case wasAddedWithClient
+		case map
+		case position
+		case status
+	}
+}
+
 extension Issue: FileContainer {
 	static let pathPrefix = "issue"
 	static let downloadRequestPath = \FileDownloadRequest.issue
@@ -151,7 +157,7 @@ extension Issue {
 }
 
 extension Issue {
-	func change(notifyingServer: Bool = true, transform: (inout Details) throws -> Void) rethrows {
+	mutating func change(notifyingServer: Bool = true, transform: (inout Details) throws -> Void) rethrows {
 		assert(!isRegistered)
 		
 		let oldFile = file
@@ -161,14 +167,14 @@ extension Issue {
 		Repository.shared.save(self)
 	}
 	
-	func mark() {
+	mutating func mark() {
 		details.isMarked.toggle()
 		Client.shared.performed(.mark, on: self)
 		
 		Repository.shared.save(self)
 	}
 	
-	func review() {
+	mutating func review() {
 		assert(isRegistered)
 		assert(!isReviewed)
 		
@@ -178,7 +184,7 @@ extension Issue {
 		Repository.shared.save(self)
 	}
 	
-	func revertReview() {
+	mutating func revertReview() {
 		assert(isReviewed)
 		
 		status.review = nil
@@ -187,7 +193,7 @@ extension Issue {
 		Repository.shared.save(self)
 	}
 	
-	func revertResponse() {
+	mutating func revertResponse() {
 		assert(hasResponse)
 		assert(!isReviewed)
 		

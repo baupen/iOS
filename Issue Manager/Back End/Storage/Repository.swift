@@ -52,12 +52,22 @@ final class Repository {
 		return storage.sites[id]
 	}
 	
+	subscript(_ id: ID<ConstructionSite>) -> ConstructionSite? {
+		get { return storage.sites[id] }
+		set { storage.sites[id] = newValue }
+	}
+	
 	func mapMetas() -> [ObjectMeta<Map>] {
 		return storage.maps.values.map { $0.meta }
 	}
 	
 	func map(_ id: ID<Map>) -> Map? {
 		return storage.maps[id]
+	}
+	
+	subscript(_ id: ID<Map>) -> Map? {
+		get { return storage.maps[id] }
+		set { storage.maps[id] = newValue }
 	}
 	
 	func issueMetas() -> [ObjectMeta<Issue>] {
@@ -68,6 +78,11 @@ final class Repository {
 		return storage.issues[id]
 	}
 	
+	subscript(_ id: ID<Issue>) -> Issue? {
+		get { return storage.issues[id] }
+		set { storage.issues[id] = newValue }
+	}
+	
 	func craftsmanMetas() -> [ObjectMeta<Craftsman>] {
 		return storage.craftsmen.values.map { $0.meta }
 	}
@@ -76,12 +91,16 @@ final class Repository {
 		return storage.craftsmen[id]
 	}
 	
+	subscript(_ id: ID<Craftsman>) -> Craftsman? {
+		get { return storage.craftsmen[id] }
+		set { storage.craftsmen[id] = newValue }
+	}
+	
 	func add(_ issue: Issue) {
-		assert(self.issue(issue.id) == nil)
+		assert(self[issue.id] == nil)
 		
-		let map = self.map(issue.map)!
-		storage.issues[issue.id] = issue
-		map.add(issue)
+		self[issue.id] = issue
+		self[issue.map]!.add(issue)
 		Client.shared.issueCreated(issue)
 		
 		saveAll() // no way to specifically save adding a new issue yet
@@ -94,10 +113,9 @@ final class Repository {
 	func remove(_ issue: Issue, notifyingServer: Bool = true) {
 		assert(!issue.isRegistered)
 		
-		let map = self.map(issue.map)!
 		issue.deleteFile()
 		storage.issues[issue.id] = nil
-		map.remove(issue.id)
+		self[issue.map]!.remove(issue.id)
 		
 		if notifyingServer {
 			Client.shared.issueRemoved(issue)
