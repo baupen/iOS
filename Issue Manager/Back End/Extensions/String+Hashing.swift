@@ -9,7 +9,7 @@ extension Data {
 			Data(count: Int(CC_SHA256_DIGEST_LENGTH)) <- { 
 				$0.withUnsafeMutableBytes { output in
 					_ = CC_SHA256(
-						input.baseAddress!.assumingMemoryBound(to: UInt8.self),
+						input.baseAddress!,
 						CC_LONG(input.count),
 						output.baseAddress!.assumingMemoryBound(to: UInt8.self)
 					)
