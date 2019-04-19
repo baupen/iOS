@@ -53,6 +53,9 @@
 		956868E121F6528C00A0850F /* LoginHandlerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956868E021F6528C00A0850F /* LoginHandlerViewController.swift */; };
 		95758B1321F4223100E5C20F /* TransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95758B1221F4223100E5C20F /* TransitionAnimator.swift */; };
 		957A420A214ECC910059185D /* Promise.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 957A4209214ECC910059185D /* Promise.framework */; };
+		957C714F22692D1000FE3A89 /* DBConstructionSite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957C714E22692D1000FE3A89 /* DBConstructionSite.swift */; };
+		957C715122692D1800FE3A89 /* DBMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957C715022692D1800FE3A89 /* DBMap.swift */; };
+		957C715322692D2200FE3A89 /* DBIssue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957C715222692D2200FE3A89 /* DBIssue.swift */; };
 		957E16AA20E7D81B00F3DEA1 /* SiteListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957E16A920E7D81B00F3DEA1 /* SiteListViewController.swift */; };
 		9583C2BF20DC748800452695 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9583C2BE20DC748800452695 /* AppDelegate.swift */; };
 		9583C2C120DC748800452695 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9583C2C020DC748800452695 /* MainViewController.swift */; };
@@ -103,6 +106,8 @@
 		95F4DB00214AA2B3005C7D6D /* PullToExpand.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 952F69E5214A9F3D00A12CE9 /* PullToExpand.framework */; };
 		95F4DB01214AA2B3005C7D6D /* SimplePDFKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 952F69E4214A9F3D00A12CE9 /* SimplePDFKit.framework */; };
 		95F707BE21AB75B20092E3FC /* SectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F707BD21AB75B20092E3FC /* SectorView.swift */; };
+		95FBE28D2268BCC300ABFA32 /* DBCraftsman.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FBE28C2268BCC300ABFA32 /* DBCraftsman.swift */; };
+		95FBE28F2268BCFA00ABFA32 /* DBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FBE28E2268BCFA00ABFA32 /* DBModel.swift */; };
 		95FC9DC121080BB700044C93 /* RefreshingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FC9DC021080BB700044C93 /* RefreshingTableViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -157,6 +162,9 @@
 		956868E021F6528C00A0850F /* LoginHandlerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginHandlerViewController.swift; sourceTree = "<group>"; };
 		95758B1221F4223100E5C20F /* TransitionAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionAnimator.swift; sourceTree = "<group>"; };
 		957A4209214ECC910059185D /* Promise.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Promise.framework; path = Carthage/Build/iOS/Promise.framework; sourceTree = SOURCE_ROOT; };
+		957C714E22692D1000FE3A89 /* DBConstructionSite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBConstructionSite.swift; sourceTree = "<group>"; };
+		957C715022692D1800FE3A89 /* DBMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBMap.swift; sourceTree = "<group>"; };
+		957C715222692D2200FE3A89 /* DBIssue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBIssue.swift; sourceTree = "<group>"; };
 		957E16A920E7D81B00F3DEA1 /* SiteListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiteListViewController.swift; sourceTree = "<group>"; };
 		9583C2BB20DC748800452695 /* Issue Manager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Issue Manager.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9583C2BE20DC748800452695 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -207,6 +215,8 @@
 		95E83C1A221A537C000BB75F /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		95EE7DFC21060CB100B603EF /* UndoBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoBuffer.swift; sourceTree = "<group>"; };
 		95F707BD21AB75B20092E3FC /* SectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectorView.swift; sourceTree = "<group>"; };
+		95FBE28C2268BCC300ABFA32 /* DBCraftsman.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBCraftsman.swift; sourceTree = "<group>"; };
+		95FBE28E2268BCFA00ABFA32 /* DBModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBModel.swift; sourceTree = "<group>"; };
 		95FC9DC021080BB700044C93 /* RefreshingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshingTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -330,6 +340,7 @@
 		9562F942223C1D6A0014BFB0 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
+				95FBE28B2268BC9E00ABFA32 /* Flattened Models */,
 				9562F943223C1DBE0014BFB0 /* Repository.swift */,
 				954D38D12242340D008FD3B0 /* Storage.swift */,
 				954D38D322423426008FD3B0 /* DataStore.swift */,
@@ -513,6 +524,18 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		95FBE28B2268BC9E00ABFA32 /* Flattened Models */ = {
+			isa = PBXGroup;
+			children = (
+				95FBE28E2268BCFA00ABFA32 /* DBModel.swift */,
+				957C714E22692D1000FE3A89 /* DBConstructionSite.swift */,
+				95FBE28C2268BCC300ABFA32 /* DBCraftsman.swift */,
+				957C715222692D2200FE3A89 /* DBIssue.swift */,
+				957C715022692D1800FE3A89 /* DBMap.swift */,
+			);
+			path = "Flattened Models";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -688,6 +711,7 @@
 				9511A10A20DD3BED00101ADE /* Map.swift in Sources */,
 				9502843920FADAB300880AD7 /* SuggestionsHandler.swift in Sources */,
 				95E83C0B221A45A3000BB75F /* UserDefaults+Codable.swift in Sources */,
+				957C714F22692D1000FE3A89 /* DBConstructionSite.swift in Sources */,
 				9511A10420DD3A7100101ADE /* Reusable.swift in Sources */,
 				952CB48820E830A300E6B664 /* SiteCell.swift in Sources */,
 				95A7B24D20E3FFE200A928D6 /* Backlog.swift in Sources */,
@@ -742,8 +766,11 @@
 				95758B1321F4223100E5C20F /* TransitionAnimator.swift in Sources */,
 				9584F24E20E936ED00A8C884 /* LoginWindowView.swift in Sources */,
 				9553707520F1A5E2005D81C8 /* IssueListViewController.swift in Sources */,
+				95FBE28D2268BCC300ABFA32 /* DBCraftsman.swift in Sources */,
+				957C715122692D1800FE3A89 /* DBMap.swift in Sources */,
 				9511A10820DD3BD100101ADE /* Craftsman.swift in Sources */,
 				95A66C7A20F9181D008F10DA /* ViewIssueViewController.swift in Sources */,
+				95FBE28F2268BCFA00ABFA32 /* DBModel.swift in Sources */,
 				959E8A2021EE9C4A00C29503 /* TrialRequest.swift in Sources */,
 				95512B1020FBEAC400878163 /* IssueUpdateRequest.swift in Sources */,
 				9511A10220DD3A2700101ADE /* Geometry.swift in Sources */,
@@ -756,6 +783,7 @@
 				9583C2D320DC74BA00452695 /* UIViewController+Extensions.swift in Sources */,
 				9503A3FD21A04F7C00C46603 /* Color.swift in Sources */,
 				95512B1220FBEAD800878163 /* IssueDeletionRequest.swift in Sources */,
+				957C715322692D2200FE3A89 /* DBIssue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
