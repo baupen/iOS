@@ -6,8 +6,7 @@ install:
   - brew install git-lfs
   - git lfs install
   - git lfs version
-  - carthage version
 script:
-  - carthage bootstrap --platform iOS --verbose && xcodebuild clean build -sdk iphonesimulator -project Issue\ Manager.xcodeproj/ -scheme Issue\ Manager CODE_SIGNING_REQUIRED=NO
+  - git submodule sync --recursive . && xcodebuild clean build -sdk iphonesimulator -project Issue\ Manager.xcodeproj/ -scheme Issue\ Manager CODE_SIGNING_REQUIRED=NO
 after_script:
   - sleep 10 # give logs time to catch up
