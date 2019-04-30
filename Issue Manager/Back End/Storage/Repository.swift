@@ -3,7 +3,8 @@
 import Foundation
 
 final class Repository {
-	static let shared = Repository(dataStore: UserDefaults.standard)
+	//static let shared = Repository(dataStore: UserDefaults.standard)
+	static let shared = Repository(dataStore: try! DatabaseDataStore(path: "database.sqlite"))
 	
 	private var storage = Storage()
 	private let dataStore: DataStore
