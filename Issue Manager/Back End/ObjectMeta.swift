@@ -1,17 +1,10 @@
 // Created by Julian Dunskus
 
 import Foundation
+import GRDB
 
-struct ID<Object>: Codable, Hashable, CustomStringConvertible {
+struct ID<Object> {
 	var rawValue: UUID
-	
-	var description: String {
-		return rawValue.description
-	}
-	
-	func hash(into hasher: inout Hasher) {
-		hasher.combine(rawValue)
-	}
 	
 	var stringValue: String {
 		return rawValue.uuidString
@@ -24,13 +17,29 @@ struct ID<Object>: Codable, Hashable, CustomStringConvertible {
 	init(_ rawValue: UUID) {
 		self.rawValue = rawValue
 	}
-	
+}
+
+extension ID where Object: DBRecord {
+	func get(in db: Database) throws -> Object? {
+		return try Object.fetchOne(db, key: rawValue)
+	}
+}
+
+extension ID: Codable {
 	init(from decoder: Decoder) throws {
 		rawValue = try UUID(from: decoder)
 	}
 	
 	func encode(to encoder: Encoder) throws {
 		try rawValue.encode(to: encoder)
+	}
+}
+
+extension ID: Hashable {}
+
+extension ID: CustomStringConvertible {
+	var description: String {
+		return rawValue.description
 	}
 }
 

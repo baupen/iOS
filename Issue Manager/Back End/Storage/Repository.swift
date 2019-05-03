@@ -1,136 +1,155 @@
 // Created by Julian Dunskus
 
 import Foundation
+import GRDB
 
 final class Repository {
-	//static let shared = Repository(dataStore: UserDefaults.standard)
-	static let shared = Repository(dataStore: try! DatabaseDataStore(path: "database.sqlite"))
+	static let shared = Repository()
 	
-	private var storage = Storage()
-	private let dataStore: DataStore
+	private var dbPool: DatabasePool { return dataStore.dbPool }
+	private let dataStore: DatabaseDataStore
 	
-	init(dataStore: DataStore) {
-		self.dataStore = dataStore
-		
-		do {
-			storage = try dataStore.loadStorage() ?? storage
-		} catch {
-			error.printDetails(context: "Repository could not be loaded!")
-		}
+	init() {
+		self.dataStore = try! DatabaseDataStore()
 	}
 	
-	private func saveAll() {
-		dataStore.save(storage).catch { error in
-			error.printDetails(context: "Repository could not be saved!")
-		}
+	func clearStorage() {
+		dataStore.clear()
+	}
+	
+	func read<Result>(_ block: (Database) throws -> Result) -> Result {
+		return try! dbPool.read(block)
+	}
+	
+	func write<Result>(_ block: (Database) throws -> Result) -> Result {
+		return try! dbPool.write(block)
 	}
 	
 	/// saves modifications to the given issue
 	func save(_ issue: Issue) {
-		// for now
-		saveAll()
+		try! dbPool.write(issue.save)
 	}
 	
 	/// saves modifications to the given map
 	func save(_ map: Map) {
-		// for now
-		saveAll()
+		try! dbPool.write(map.save)
 	}
 	
-	func clearStorage() {
-		storage = Storage()
-	}
-	
-	func sites() -> [ConstructionSite] {
-		return Array(storage.sites.values)
-	}
-	
-	func siteMetas() -> [ObjectMeta<ConstructionSite>] {
-		return storage.sites.values.map { $0.meta }
-	}
+	// MARK: -
+	// MARK: Access by ID
 	
 	func site(_ id: ID<ConstructionSite>) -> ConstructionSite? {
-		return storage.sites[id]
-	}
-	
-	subscript(_ id: ID<ConstructionSite>) -> ConstructionSite? {
-		get { return storage.sites[id] }
-		set { storage.sites[id] = newValue }
-	}
-	
-	func mapMetas() -> [ObjectMeta<Map>] {
-		return storage.maps.values.map { $0.meta }
+		return try! dbPool.read(id.get)
 	}
 	
 	func map(_ id: ID<Map>) -> Map? {
-		return storage.maps[id]
-	}
-	
-	subscript(_ id: ID<Map>) -> Map? {
-		get { return storage.maps[id] }
-		set { storage.maps[id] = newValue }
-	}
-	
-	func issueMetas() -> [ObjectMeta<Issue>] {
-		return storage.issues.values.map { $0.meta }
+		return try! dbPool.read(id.get)
 	}
 	
 	func issue(_ id: ID<Issue>) -> Issue? {
-		return storage.issues[id]
-	}
-	
-	subscript(_ id: ID<Issue>) -> Issue? {
-		get { return storage.issues[id] }
-		set { storage.issues[id] = newValue }
-	}
-	
-	func craftsmanMetas() -> [ObjectMeta<Craftsman>] {
-		return storage.craftsmen.values.map { $0.meta }
+		return try! dbPool.read(id.get)
 	}
 	
 	func craftsman(_ id: ID<Craftsman>) -> Craftsman? {
-		return storage.craftsmen[id]
+		return try! dbPool.read(id.get)
 	}
 	
-	subscript(_ id: ID<Craftsman>) -> Craftsman? {
-		get { return storage.craftsmen[id] }
-		set { storage.craftsmen[id] = newValue }
+	// MARK: -
+	// MARK: Metas
+	
+	func siteMetas() -> [ObjectMeta<ConstructionSite>] {
+		return try! dbPool.read(ObjectMeta.fetchAll)
 	}
+	
+	func mapMetas() -> [ObjectMeta<Map>] {
+		return try! dbPool.read(ObjectMeta.fetchAll)
+	}
+	
+	func issueMetas() -> [ObjectMeta<Issue>] {
+		return try! dbPool.read(ObjectMeta.fetchAll)
+	}
+	
+	func craftsmanMetas() -> [ObjectMeta<Craftsman>] {
+		return try! dbPool.read(ObjectMeta.fetchAll)
+	}
+	
+	// MARK: -
+	// MARK: Other Accessors
+	
+	func site(for issue: Issue) -> ConstructionSite? {
+		return try! dbPool.read { db in
+			try issue.mapID.get(in: db)!.constructionSiteID.get(in: db)!
+		}
+	}
+	
+	func sites() -> [ConstructionSite] {
+		return try! dbPool.read(ConstructionSite.fetchAll)
+	}
+	
+	func issues(in holder: MapHolder, recursively: Bool) -> AnyCollection<Issue> {
+		return recursively
+			? recursiveIssues(in: holder)
+			: AnyCollection(issues(in: holder as! Map))
+	}
+	
+	func recursiveIssues(in holder: MapHolder) -> AnyCollection<Issue> {
+		return try! dbPool.read(holder.recursiveIssues)
+	}
+	
+	func issues(in map: Map) -> [Issue] {
+		return try! dbPool.read(map.issues.fetchAll)
+	}
+	
+	func children(of holder: MapHolder) -> [Map] {
+		return try! dbPool.read(holder.children.fetchAll)
+	}
+	
+	func hasChildren(for map: Map) -> Bool {
+		return try! dbPool.read(map.children.fetchCount) > 0
+	}
+	
+	func craftsmen(in site: ConstructionSite) -> [Craftsman] {
+		return try! dbPool.read(site.craftsmen.fetchAll)
+	}
+	
+	func craftsman(for issue: Issue) -> Craftsman? {
+		return try! (issue.craftsmanID?.get).flatMap(dbPool.read)
+	}
+	
+	// MARK: -
+	// MARK: Management
 	
 	func add(_ issue: Issue) {
-		assert(self[issue.id] == nil)
+		assert(self.issue(issue.id) == nil)
 		
-		self[issue.id] = issue
-		self[issue.map]!.add(issue)
+		try! dbPool.write(issue.save)
 		Client.shared.issueCreated(issue)
-		
-		saveAll() // no way to specifically save adding a new issue yet
 	}
 	
 	func update(_ new: Issue) {
-		Issue.update(&storage.issues[new.id], from: new)
+		// TODO: remove?
+		save(new)
 	}
 	
 	func remove(_ issue: Issue, notifyingServer: Bool = true) {
 		assert(!issue.isRegistered)
 		
 		issue.deleteFile()
-		storage.issues[issue.id] = nil
-		self[issue.map]!.remove(issue.id)
+		let existed = try! dbPool.write(issue.delete)
+		assert(existed)
 		
 		if notifyingServer {
 			Client.shared.issueRemoved(issue)
 		}
-		
-		saveAll() // can't save lack of issue yet
-	}
-	
-	func edit(_ edit: (Storage) throws -> Void) rethrows {
-		try edit(storage)
-		saveAll()
 	}
 	
 	func downloadMissingFiles() {
-		storage.downloadMissingFiles()
+		#warning("TODO typed files (like IDs)")
+	}
+}
+
+extension QueryInterfaceRequest where T == Issue {
+	var consideringClientMode: QueryInterfaceRequest<Issue> {
+		return defaults.isInClientMode ? filter(Issue.Columns.wasAddedWithClient == true) : self
 	}
 }

@@ -1,21 +1,55 @@
 // Created by Julian Dunskus
 
 import Foundation
+import GRDB
 
 struct ConstructionSite {
 	let meta: ObjectMeta<ConstructionSite>
 	let name: String
 	let address: Address
 	let image: File?
-	let maps: [ID<Map>]
-	let craftsmen: [ID<Craftsman>]
 	
-	struct Address: Codable {
+	struct Address {
 		/// first two address lines (multiline)
 		var streetAddress: String?
 		var postalCode: Int?
 		var locality: String?
 		var country: String?
+	}
+}
+
+extension ConstructionSite.Address: Codable {}
+
+extension ConstructionSite.Address: DBRecord {}
+
+extension ConstructionSite: DBRecord {
+	static let craftsmen = hasMany(Craftsman.self)
+	var craftsmen: QueryInterfaceRequest<Craftsman> { // FIXME: remove prefix
+		return request(for: ConstructionSite.craftsmen)
+	}
+	
+	static let maps = hasMany(Map.self)
+	var maps: QueryInterfaceRequest<Map> { // FIXME: remove prefix
+		return request(for: ConstructionSite.maps)
+	}
+	
+	func encode(to container: inout PersistenceContainer) {
+		meta.encode(to: &container)
+		container[Columns.name] = name
+		address.encode(to: &container)
+		image?.encode(to: &container, path: Columns.image)
+	}
+	
+	init(row: Row) {
+		meta = .init(row: row)
+		name = row[Columns.name]
+		address = .init(row: row)
+		image = .init(row: row, path: Columns.image)
+	}
+	
+	enum Columns: String, ColumnExpression {
+		case name
+		case image
 	}
 }
 
@@ -28,19 +62,19 @@ extension ConstructionSite: FileContainer {
 }
 
 extension ConstructionSite: MapHolder {
-	var children: [ID<Map>] { return maps }
+	var children: QueryInterfaceRequest<Map> { return maps }
 	
-	func recursiveChildren() -> [Map] {
-		return childMaps().flatMap { $0.recursiveChildren() }
+	func recursiveChildren(in db: Database) throws -> [Map] {
+		return try children.fetchAll(db).flatMap { try $0.recursiveChildren(in: db) }
 	}
 }
 
 extension ConstructionSite {
-	func allCraftsmen() -> [Craftsman] {
-		return craftsmen.compactMap(Repository.shared.craftsman)
-	}
-	
 	func allTrades() -> Set<String> {
-		return Set(allCraftsmen().map { $0.trade })
+		return Set(Repository.shared.read(craftsmen
+			.select(Craftsman.Columns.trade, as: String.self)
+			.distinct()
+			.fetchAll
+		))
 	}
 }

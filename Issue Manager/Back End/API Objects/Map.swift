@@ -1,36 +1,38 @@
 // Created by Julian Dunskus
 
 import Foundation
+import GRDB
 
 struct Map {
 	let meta: ObjectMeta<Map>
-	let children: [ID<Map>]
 	let sectors: [Sector]
 	let sectorFrame: Rectangle?
-	private(set) var issues: [ID<Issue>]
 	let file: File?
 	let name: String
 	let constructionSiteID: ID<ConstructionSite>
-	
-	mutating func addIfMissing(_ issue: Issue) {
-		guard !issues.contains(issue.id) else { return }
-		add(issue)
-	}
-	
-	mutating func add(_ issue: Issue) {
-		issues.append(issue.id)
-		Repository.shared.save(self)
-	}
-	
-	mutating func remove(_ id: ID<Issue>) {
-		issues.removeAll { $0 == id }
-		Repository.shared.save(self)
-	}
+	let parentID: ID<MapHolder>
 	
 	final class Sector: Codable {
 		let name: String
 		let color: Color
 		let points: [Point]
+	}
+}
+
+extension Map: DBRecord {
+	static let site = belongsTo(ConstructionSite.self)
+	var site: QueryInterfaceRequest<ConstructionSite> {
+		return request(for: Map.site)
+	}
+	
+	static let issues = hasMany(Issue.self)
+	var issues: QueryInterfaceRequest<Issue> {
+		return request(for: Map.issues).consideringClientMode
+	}
+	
+	static let children = hasMany(Map.self)
+	var children: QueryInterfaceRequest<Map> {
+		return request(for: Map.children)
 	}
 }
 
@@ -42,24 +44,15 @@ extension Map: FileContainer {
 }
 
 extension Map: MapHolder {
-	func recursiveChildren() -> [Map] {
-		return [self] + childMaps().flatMap { $0.recursiveChildren() }
+	// TODO: it'd be great to use a recursive common table expression for this
+	func recursiveChildren(in db: Database) throws -> [Map] {
+		return try [self] + children.fetchAll(db).flatMap { try $0.recursiveChildren(in: db) }
 	}
 }
 
 extension Map {
 	var hasChildren: Bool {
-		return !children.isEmpty
-	}
-	
-	func allIssues() -> [Issue] {
-		if defaults.isInClientMode {
-			return issues.lazy
-				.compactMap(Repository.shared.issue)
-				.filter { $0.wasAddedWithClient }
-		} else {
-			return issues.compactMap(Repository.shared.issue)
-		}
+		return Repository.shared.hasChildren(for: self)
 	}
 	
 	func accessSite() -> ConstructionSite {

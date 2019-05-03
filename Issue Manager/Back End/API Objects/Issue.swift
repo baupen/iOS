@@ -1,13 +1,14 @@
 // Created by Julian Dunskus
 
 import Foundation
+import GRDB
 
 struct Issue {
 	// NB: update `update(from:)` when adding/removing stored properties!
 	let meta: ObjectMeta<Issue>
 	let number: Int?
 	let wasAddedWithClient: Bool // "abnahmemodus"
-	let map: ID<Map> // only really used before registration
+	let mapID: ID<Map> // only really used before registration
 	let position: Position?
 	private(set) var status = Status()
 	private(set) var details = Details()
@@ -15,7 +16,7 @@ struct Issue {
 	var isMarked: Bool { return details.isMarked }
 	var image: File? { return details.image }
 	var description: String? { return details.description }
-	var craftsman: ID<Craftsman>? { return details.craftsman }
+	var craftsmanID: ID<Craftsman>? { return details.craftsman }
 	
 	struct Details: Codable {
 		var isMarked = false
@@ -79,8 +80,24 @@ extension Issue {
 		self.meta = .init()
 		self.number = nil
 		self.wasAddedWithClient = defaults.isInClientMode
-		self.map = map.id
+		self.mapID = map.id
 		self.position = position
+	}
+}
+
+extension Issue: DBRecord {
+	static let map = belongsTo(Map.self)
+	var map: QueryInterfaceRequest<Map> {
+		return request(for: Issue.map)
+	}
+	
+	enum Columns: String, ColumnExpression {
+		case number
+		case wasAddedWithClient
+		case mapID
+		case position
+		case status
+		case details
 	}
 }
 
@@ -91,7 +108,7 @@ extension Issue: APIObject {
 		try meta = container.decodeValue(forKey: .meta)
 		try number = container.decodeValue(forKey: .number)
 		try wasAddedWithClient = container.decodeValue(forKey: .wasAddedWithClient)
-		try map = container.decodeValue(forKey: .map)
+		try mapID = container.decodeValue(forKey: .map)
 		try position = container.decodeValue(forKey: .position)
 		try status = container.decodeValue(forKey: .status)
 		
@@ -104,7 +121,7 @@ extension Issue: APIObject {
 		try container.encode(meta, forKey: .meta)
 		try container.encode(number, forKey: .number)
 		try container.encode(wasAddedWithClient, forKey: .wasAddedWithClient)
-		try container.encode(map, forKey: .map)
+		try container.encode(mapID, forKey: .map)
 		try container.encode(position, forKey: .position)
 		try container.encode(status, forKey: .status)
 		
@@ -125,16 +142,6 @@ extension Issue: FileContainer {
 	static let pathPrefix = "issue"
 	static let downloadRequestPath = \FileDownloadRequest.issue
 	var file: File? { return details.image }
-}
-
-extension Issue {
-	func accessCraftsman() -> Craftsman? {
-		return craftsman.flatMap(Repository.shared.craftsman)
-	}
-	
-	func accessMap() -> Map {
-		return Repository.shared.map(map)!
-	}
 }
 
 extension Issue {

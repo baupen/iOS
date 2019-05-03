@@ -61,7 +61,7 @@ final class SiteCell: UICollectionViewCell, Reusable {
 		let meta = site.meta // capture current site
 		// async because there could be a lot of issues (e.g. if we're calculating it for a whole site)
 		DispatchQueue.global().async {
-			let issues = self.site.recursiveIssues()
+			let issues = Repository.shared.recursiveIssues(in: self.site)
 			let openCount = issues.count { $0.isOpen }
 			let totalCount = issues.count
 			DispatchQueue.main.async {

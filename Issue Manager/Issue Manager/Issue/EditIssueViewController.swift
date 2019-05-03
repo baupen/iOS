@@ -1,6 +1,7 @@
 // Created by Julian Dunskus
 
 import UIKit
+import GRDB
 
 final class EditIssueNavigationController: UINavigationController {
 	var editIssueController: EditIssueViewController {
@@ -147,21 +148,21 @@ final class EditIssueViewController: UITableViewController, Reusable {
 	
 	// only call this when absolutely necessary; overwrites content in text fields
 	private func update() {
-		assert(issue?.isRegistered != true)
+		assert(issue.isRegistered != true)
 		guard isViewLoaded else { return }
 		
-		site = issue.accessMap().accessSite()
+		site = Repository.shared.site(for: issue)
 		
 		navigationItem.title = isCreating ? Localization.titleCreating : Localization.titleEditing
 		
-		isIssueMarked = issue?.isMarked ?? false
+		isIssueMarked = issue.isMarked
 		
-		craftsman = issue?.accessCraftsman()
+		craftsman = Repository.shared.craftsman(for: issue)
 		trade = craftsman?.trade
 		
-		descriptionField.text = issue?.description
+		descriptionField.text = issue.description
 		descriptionChanged()
-		originalDescription = issue?.description
+		originalDescription = issue.description
 		
 		image = issue.image.flatMap {
 			UIImage(contentsOfFile: Issue.cacheURL(for: $0).path)
@@ -178,7 +179,7 @@ final class EditIssueViewController: UITableViewController, Reusable {
 			
 			if hasChangedImage {
 				if let image = image {
-					let file = File(filename: "\(UUID()).jpg", id: .init())
+					let file = File(filename: "\(UUID()).jpg")
 					
 					let url = Issue.localURL(for: file)
 					do {
@@ -207,9 +208,13 @@ final class EditIssueViewController: UITableViewController, Reusable {
 	}
 	
 	func possibleCraftsmen() -> [Craftsman] {
-		return site.allCraftsmen()
-			.filter { trade == nil || $0.trade == trade }
-			.sorted { $0.name < $1.name }
+		let request = site.craftsmen <- {
+			if let trade = trade {
+				$0 = $0.filter(Craftsman.Columns.trade == trade)
+			}
+			$0 = $0.order(Craftsman.Columns.name)
+		}
+		return Repository.shared.read(request.fetchAll)
 	}
 	
 	override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {

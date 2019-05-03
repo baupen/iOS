@@ -41,7 +41,7 @@ final class MapListViewController: RefreshingTableViewController, Reusable {
 			}
 		} else if let selected = tableView.indexPathForSelectedRow {
 			// not appearing for the first time
-			if map(for: selected).hasChildren {
+			if Repository.shared.hasChildren(for: map(for: selected)) {
 				// coming back from selected map's sublist
 				showOwnMap()
 			} else {
@@ -98,7 +98,7 @@ final class MapListViewController: RefreshingTableViewController, Reusable {
 		
 		navigationItem.title = holder.name
 		
-		maps = holder.childMaps().sorted { $0.name < $1.name }
+		maps = Repository.shared.children(of: holder).sorted { $0.name < $1.name }
 	}
 	
 	func showOwnMap() {
@@ -141,7 +141,7 @@ final class MapListViewController: RefreshingTableViewController, Reusable {
 	
 	/// reloads the cell for the given map, if currently visible
 	func reload(_ map: Map) {
-		guard holder.rawID == map.rawID || holder.children.contains(map.id) else { return }
+		guard holder.rawID == map.rawID || holder.rawID == map.parentID.rawValue else { return }
 		for cell in tableView.visibleCells {
 			let mapCell = cell as! MapCell
 			if mapCell.map.id == map.id {

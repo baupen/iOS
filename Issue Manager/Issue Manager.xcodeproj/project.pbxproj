@@ -41,7 +41,6 @@
 		9543CAD02277D41A001482D5 /* Promise.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9543CA8D2277D3D4001482D5 /* Promise.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9543CAD32277D433001482D5 /* GRDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9543CAAC2277D3E2001482D5 /* GRDB.framework */; };
 		9543CAD42277D433001482D5 /* GRDB.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9543CAAC2277D3E2001482D5 /* GRDB.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		954D38D22242340D008FD3B0 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954D38D12242340D008FD3B0 /* Storage.swift */; };
 		954D38D422423426008FD3B0 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954D38D322423426008FD3B0 /* DataStore.swift */; };
 		9550E0E620F2E70700921387 /* IssueMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9550E0E520F2E70700921387 /* IssueMarker.swift */; };
 		9550E0E820F38D7600921387 /* StatusFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9550E0E720F38D7600921387 /* StatusFilterViewController.swift */; };
@@ -282,7 +281,6 @@
 		9543CA762277D3D4001482D5 /* PullToExpand.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PullToExpand.xcodeproj; path = Carthage/Checkouts/PullToExpand/PullToExpand/PullToExpand.xcodeproj; sourceTree = SOURCE_ROOT; };
 		9543CA7C2277D3D4001482D5 /* SimplePDFKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SimplePDFKit.xcodeproj; path = Carthage/Checkouts/SimplePDFKit/SimplePDFKit/SimplePDFKit.xcodeproj; sourceTree = SOURCE_ROOT; };
 		9543CA852277D3D4001482D5 /* Promise.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Promise.xcodeproj; path = Carthage/Checkouts/Promise/Promise.xcodeproj; sourceTree = SOURCE_ROOT; };
-		954D38D12242340D008FD3B0 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		954D38D322423426008FD3B0 /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		9550E0E520F2E70700921387 /* IssueMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueMarker.swift; sourceTree = "<group>"; };
 		9550E0E720F38D7600921387 /* StatusFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusFilterViewController.swift; sourceTree = "<group>"; };
@@ -519,7 +517,6 @@
 			isa = PBXGroup;
 			children = (
 				9562F943223C1DBE0014BFB0 /* Repository.swift */,
-				954D38D12242340D008FD3B0 /* Storage.swift */,
 				954D38D322423426008FD3B0 /* DataStore.swift */,
 			);
 			path = Storage;
@@ -978,7 +975,6 @@
 				9550E0E620F2E70700921387 /* IssueMarker.swift in Sources */,
 				9584F24C20E936BD00A8C884 /* UserDefaults.swift in Sources */,
 				95870B2E20E9C05300BB1B39 /* MapListViewController.swift in Sources */,
-				954D38D22242340D008FD3B0 /* Storage.swift in Sources */,
 				95D1C9C820FBE07D006A9C19 /* ReadRequest.swift in Sources */,
 				95D1C9C620FBDFB9006A9C19 /* LoginRequest.swift in Sources */,
 				9511A10620DD3B8E00101ADE /* ConstructionSite.swift in Sources */,

@@ -61,42 +61,34 @@ private extension Repository {
 	}
 	
 	func update(from response: ReadRequest.ExpectedResponse) {
-		edit { storage in
-			storage.craftsmen.update(
-				changing: response.changedCraftsmen,
-				removing: response.removedCraftsmanIDs
-			)
-			storage.sites.update(
+		write { db in
+			func update<Object>(changing changedEntries: [Object], removing removedIDs: [ID<Object>]) where Object: APIObject & DBRecord {
+				for changed in changedEntries {
+					var object = try! changed.id.get(in: db)
+					Object.update(&object, from: changed)
+					try! object!.save(db)
+				}
+				for removed in removedIDs {
+					_ = try! Object.deleteOne(db, key: removed)
+				}
+			}
+			
+			update(
 				changing: response.changedConstructionSites,
 				removing: response.removedConstructionSiteIDs
 			)
-			storage.maps.update(
+			update(
 				changing: response.changedMaps,
 				removing: response.removedMapIDs
 			)
-			storage.issues.update(
+			update(
 				changing: response.changedIssues,
 				removing: response.removedIssueIDs
 			)
-			
-			for issue in response.changedIssues {
-				self[issue.map]?.add(issue)
-			}
-			
-			for issue in response.removedIssueIDs.compactMap(Repository.shared.issue) {
-				self[issue.map]?.remove(issue.id)
-			}
-		}
-	}
-}
-
-private extension Dictionary where Value: APIObject, Key == ID<Value> {
-	mutating func update(changing changedEntries: [Value], removing removedIDs: [ID<Value>]) {
-		for changed in changedEntries {
-			Value.update(&self[changed.id], from: changed)
-		}
-		for removed in removedIDs {
-			Value.update(&self[removed], from: nil)
+			update(
+				changing: response.changedCraftsmen,
+				removing: response.removedCraftsmanIDs
+			)
 		}
 	}
 }

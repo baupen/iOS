@@ -2,11 +2,13 @@
 
 import Foundation
 
-struct Color: Codable {
+struct Color {
 	var red: UInt8
 	var green: UInt8
 	var blue: UInt8
-	
+}
+
+extension Color: Codable {
 	init(from decoder: Decoder) throws {
 		let container = try decoder.singleValueContainer()
 		let raw = try container.decode(String.self)
