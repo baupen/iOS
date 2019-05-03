@@ -91,6 +91,28 @@ extension Issue: DBRecord {
 		return request(for: Issue.map)
 	}
 	
+	func encode(to container: inout PersistenceContainer) {
+		meta.encode(to: &container)
+		container[Columns.number] = number
+		container[Columns.wasAddedWithClient] = wasAddedWithClient
+		container[Columns.mapID] = mapID
+		if let position = position {
+			try! container.encode(position, forKey: Columns.position)
+		}
+		try! container.encode(status, forKey: Columns.status)
+		try! container.encode(details, forKey: Columns.details)
+	}
+	
+	init(row: Row) {
+		meta = .init(row: row)
+		number = row[Columns.number]
+		wasAddedWithClient = row[Columns.wasAddedWithClient]
+		mapID = row[Columns.mapID]
+		position = try! row.decodeValueIfPresent(forKey: Columns.position)
+		status = try! row.decodeValue(forKey: Columns.status)
+		details = try! row.decodeValue(forKey: Columns.details)
+	}
+	
 	enum Columns: String, ColumnExpression {
 		case number
 		case wasAddedWithClient
@@ -101,42 +123,7 @@ extension Issue: DBRecord {
 	}
 }
 
-extension Issue: APIObject {
-	init(from decoder: Decoder) throws {
-		let container = try decoder.container(keyedBy: Key.self)
-		
-		try meta = container.decodeValue(forKey: .meta)
-		try number = container.decodeValue(forKey: .number)
-		try wasAddedWithClient = container.decodeValue(forKey: .wasAddedWithClient)
-		try mapID = container.decodeValue(forKey: .map)
-		try position = container.decodeValue(forKey: .position)
-		try status = container.decodeValue(forKey: .status)
-		
-		try details = Details(from: decoder)
-	}
-	
-	func encode(to encoder: Encoder) throws {
-		var container = encoder.container(keyedBy: Key.self)
-		
-		try container.encode(meta, forKey: .meta)
-		try container.encode(number, forKey: .number)
-		try container.encode(wasAddedWithClient, forKey: .wasAddedWithClient)
-		try container.encode(mapID, forKey: .map)
-		try container.encode(position, forKey: .position)
-		try container.encode(status, forKey: .status)
-		
-		try details.encode(to: encoder)
-	}
-	
-	enum Key: CodingKey {
-		case meta
-		case number
-		case wasAddedWithClient
-		case map
-		case position
-		case status
-	}
-}
+extension Issue: StoredObject {}
 
 extension Issue: FileContainer {
 	static let pathPrefix = "issue"
@@ -144,6 +131,8 @@ extension Issue: FileContainer {
 	var file: File? { return details.image }
 }
 
+// MARK: -
+// MARK: Status
 extension Issue {
 	var isRegistered: Bool {
 		return status.registration != nil
@@ -163,6 +152,8 @@ extension Issue {
 	}
 }
 
+// MARK: -
+// MARK: Mutation
 extension Issue {
 	mutating func change(notifyingServer: Bool = true, transform: (inout Details) throws -> Void) rethrows {
 		assert(!isRegistered)

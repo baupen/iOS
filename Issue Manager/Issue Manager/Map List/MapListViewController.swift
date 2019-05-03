@@ -141,7 +141,7 @@ final class MapListViewController: RefreshingTableViewController, Reusable {
 	
 	/// reloads the cell for the given map, if currently visible
 	func reload(_ map: Map) {
-		guard holder.rawID == map.rawID || holder.rawID == map.parentID.rawValue else { return }
+		guard holder.rawID == map.rawID || holder.rawID == map.parentHolderID else { return }
 		for cell in tableView.visibleCells {
 			let mapCell = cell as! MapCell
 			if mapCell.map.id == map.id {

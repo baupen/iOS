@@ -43,19 +43,19 @@ extension ID: CustomStringConvertible {
 	}
 }
 
-protocol AnyAPIObject: Codable {
+protocol AnyStoredObject: Codable {
 	var rawMeta: AnyObjectMeta { get }
 	var rawID: UUID { get }
 }
 
-protocol APIObject: AnyAPIObject {
+protocol StoredObject: AnyStoredObject {
 	var meta: ObjectMeta<Self> { get }
 	var id: ID<Self> { get }
 	
 	static func update(_ instance: inout Self?, from new: Self?)
 }
 
-extension APIObject {
+extension StoredObject {
 	var id: ID<Self> { return meta.id }
 	
 	var rawMeta: AnyObjectMeta { return meta }
@@ -71,7 +71,7 @@ protocol AnyObjectMeta {
 	var lastChangeTime: Date { get }
 }
 
-struct ObjectMeta<Object: APIObject>: AnyObjectMeta, Codable, Equatable {
+struct ObjectMeta<Object: StoredObject>: AnyObjectMeta, Codable, Equatable {
 	var id = ID<Object>()
 	var lastChangeTime = Date()
 	

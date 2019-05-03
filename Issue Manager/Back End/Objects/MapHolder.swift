@@ -3,7 +3,7 @@
 import Foundation
 import GRDB
 
-protocol MapHolder: AnyAPIObject {
+protocol MapHolder: AnyStoredObject {
 	var name: String { get }
 	var children: QueryInterfaceRequest<Map> { get }
 	

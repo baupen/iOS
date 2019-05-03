@@ -18,7 +18,7 @@ private let baseLocalURL = try! manager.url(
 	create: true
 )
 
-protocol FileContainer: APIObject {
+protocol FileContainer: StoredObject {
 	static var pathPrefix: String { get }
 	static var downloadRequestPath: DownloadRequestPath<Self> { get }
 	

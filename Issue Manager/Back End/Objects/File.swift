@@ -17,23 +17,6 @@ extension File {
 
 extension File: Codable {}
 
-extension File {
-	init(row: Row, path: ColumnExpression) {
-		id = row[path • Columns.id]
-		filename = row[path • Columns.filename]
-	}
-	
-	func encode(to container: inout PersistenceContainer, path: ColumnExpression) {
-		container[path • Columns.id] = id
-		container[path • Columns.filename] = filename
-	}
-	
-	enum Columns: String, ColumnExpression {
-		case id
-		case filename
-	}
-}
-
 precedencegroup ConcatenationPrecedence {
 	associativity: left
 }

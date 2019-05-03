@@ -10,7 +10,7 @@ struct Craftsman: Equatable {
 	var constructionSiteID: ID<ConstructionSite>
 }
 
-extension Craftsman: APIObject {}
+extension Craftsman: StoredObject {}
 
 extension Craftsman: DBRecord {
 	static let site = belongsTo(ConstructionSite.self)

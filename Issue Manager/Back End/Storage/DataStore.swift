@@ -13,7 +13,14 @@ final class DatabaseDataStore {
 	init() throws {
 		let databaseURL = documentsURL.appendingPathComponent("db/main.sqlite")
 		try FileManager.default.createDirectory(at: databaseURL.deletingLastPathComponent(), withIntermediateDirectories: true)
-		dbPool = try .init(path: databaseURL.absoluteString)
+		let config = Configuration() <- {
+			$0.label = "main database"
+			#if DEBUG
+			// uncomment when needed:
+			//$0.trace = { print("--- executing SQL:", $0) }
+			#endif
+		}
+		dbPool = try .init(path: databaseURL.absoluteString, configuration: config)
 		dbPool.setupMemoryManagement(in: UIApplication.shared)
 		
 		var migrator = DatabaseMigrator()
@@ -25,8 +32,7 @@ final class DatabaseDataStore {
 				$0.column("lastChangeTime", .text).notNull()
 				// contents
 				$0.column("name", .text).notNull()
-				$0.column("image.id", .text).notNull()
-				$0.column("image.filename", .text).notNull()
+				$0.column("image", .blob)
 				// address
 				$0.column("streetAddress", .text)
 				$0.column("postalCode", .integer)
@@ -40,11 +46,17 @@ final class DatabaseDataStore {
 				$0.column("id", .text).notNull()
 				$0.column("lastChangeTime", .text).notNull()
 				// contents
+				$0.column("sectors", .blob).notNull()
+				$0.column("sectorFrame", .blob)
+				$0.column("file", .blob)
 				$0.column("name", .text).notNull()
 				// relations
 				$0.column("constructionSiteID", .text).notNull()
 					.references(ConstructionSite.databaseTableName)
-				$0.column("parentID", .text).notNull()
+					.indexed()
+				$0.column("parentID", .text)
+					.references(Map.databaseTableName, deferred: true)
+					.indexed()
 			}
 			
 			try db.create(table: Issue.databaseTableName) {
@@ -55,12 +67,13 @@ final class DatabaseDataStore {
 				// contents
 				$0.column("number", .integer)
 				$0.column("wasAddedWithClient", .boolean).notNull()
-				$0.column("position", .blob).notNull()
+				$0.column("position", .blob)
 				$0.column("status", .blob).notNull()
 				$0.column("details", .blob).notNull()
 				// relations
 				$0.column("mapID", .text).notNull()
 					.references(Map.databaseTableName)
+					.indexed()
 			}
 			
 			try db.create(table: Craftsman.databaseTableName) {
@@ -74,6 +87,7 @@ final class DatabaseDataStore {
 				// relations
 				$0.column("constructionSiteID", .text).notNull()
 					.references(ConstructionSite.databaseTableName)
+					.indexed()
 			}
 			
 		}

@@ -36,15 +36,31 @@ struct ReadRequest: JSONJSONRequest {
 	}
 	
 	struct ExpectedResponse: Response {
-		let changedCraftsmen: [Craftsman]
+		let changedCraftsmen: [APICraftsman]
 		let removedCraftsmanIDs: [ID<Craftsman>]
-		let changedConstructionSites: [ConstructionSite]
+		let changedConstructionSites: [APIConstructionSite]
 		let removedConstructionSiteIDs: [ID<ConstructionSite>]
-		let changedMaps: [Map]
+		let changedMaps: [APIMap]
 		let removedMapIDs: [ID<Map>]
-		let changedIssues: [Issue]
+		let changedIssues: [APIIssue]
 		let removedIssueIDs: [ID<Issue>]
 		let changedUser: User?
+		
+		var constructionSites: [ConstructionSite] {
+			return changedConstructionSites.map { $0.makeObject() }
+		}
+		
+		var maps: [Map] {
+			return changedMaps.map { $0.makeObject(changedMaps: changedMaps) }
+		}
+		
+		var issues: [Issue] {
+			return changedIssues.map { $0.makeObject() }
+		}
+		
+		var craftsmen: [Craftsman] {
+			return changedCraftsmen.map { $0.makeObject(changedConstructionSites: changedConstructionSites) }
+		}
 	}
 }
 
@@ -62,31 +78,31 @@ private extension Repository {
 	
 	func update(from response: ReadRequest.ExpectedResponse) {
 		write { db in
-			func update<Object>(changing changedEntries: [Object], removing removedIDs: [ID<Object>]) where Object: APIObject & DBRecord {
+			func update<Object>(changing changedEntries: [Object], removing removedIDs: [ID<Object>]) throws where Object: StoredObject & DBRecord {
 				for changed in changedEntries {
-					var object = try! changed.id.get(in: db)
+					var object = try changed.id.get(in: db)
 					Object.update(&object, from: changed)
-					try! object!.save(db)
+					try object!.save(db)
 				}
 				for removed in removedIDs {
-					_ = try! Object.deleteOne(db, key: removed)
+					_ = try Object.deleteOne(db, key: removed)
 				}
 			}
 			
-			update(
-				changing: response.changedConstructionSites,
+			try update(
+				changing: response.constructionSites,
 				removing: response.removedConstructionSiteIDs
 			)
-			update(
-				changing: response.changedMaps,
+			try update(
+				changing: response.maps,
 				removing: response.removedMapIDs
 			)
-			update(
-				changing: response.changedIssues,
+			try update(
+				changing: response.issues,
 				removing: response.removedIssueIDs
 			)
-			update(
-				changing: response.changedCraftsmen,
+			try update(
+				changing: response.craftsmen,
 				removing: response.removedCraftsmanIDs
 			)
 		}

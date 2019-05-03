@@ -22,18 +22,18 @@ struct LocalUser: Codable {
 	}
 }
 
-struct User: APIObject {
+struct User {
 	var meta: ObjectMeta<User>
 	var authenticationToken: String
 	var givenName: String
 	var familyName: String
-}
-
-extension User {
+	
 	var fullName: String {
 		return "\(givenName) \(familyName)"
 	}
 }
+
+extension User: StoredObject {}
 
 struct TrialUser: Codable {
 	var username: String

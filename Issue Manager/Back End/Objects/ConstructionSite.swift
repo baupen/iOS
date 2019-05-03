@@ -37,14 +37,14 @@ extension ConstructionSite: DBRecord {
 		meta.encode(to: &container)
 		container[Columns.name] = name
 		address.encode(to: &container)
-		image?.encode(to: &container, path: Columns.image)
+		image.map { try! container.encode($0, forKey: Columns.image) }
 	}
 	
 	init(row: Row) {
 		meta = .init(row: row)
 		name = row[Columns.name]
 		address = .init(row: row)
-		image = .init(row: row, path: Columns.image)
+		image = try! row.decodeValueIfPresent(forKey: Columns.image)
 	}
 	
 	enum Columns: String, ColumnExpression {
@@ -53,7 +53,7 @@ extension ConstructionSite: DBRecord {
 	}
 }
 
-extension ConstructionSite: APIObject {}
+extension ConstructionSite: StoredObject {}
 
 extension ConstructionSite: FileContainer {
 	static let pathPrefix = "constructionSite"
