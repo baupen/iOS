@@ -49,10 +49,10 @@ final class MapCell: UITableViewCell, Reusable {
 	func update() {
 		nameLabel!.text = map.name
 		
-		let issues = Repository.shared.issues(in: map, recursively: shouldUseRecursiveIssues)
+		let issues = Repository.shared.issues(in: map, recursively: shouldUseRecursiveIssues).openIssues
 		// async because there could be a lot of issues (e.g. if we're calculating it for a high-level map)
 		let openIssueCount = BasicFuture(asyncOn: .global()) {
-			issues.count { $0.isOpen }
+			Repository.shared.read(issues.fetchCount)
 		}
 		openIssueCount.on(.main).then { count in
 			self.openIssuesLabel?.text = Localization.openIssues(String(count))

@@ -83,10 +83,3 @@ extension Map: FileContainer {
 	static let pathPrefix = "map"
 	static let downloadRequestPath = \FileDownloadRequest.map
 }
-
-extension Map: MapHolder {
-	// TODO: it'd be great to use a recursive common table expression for this
-	func recursiveChildren(in db: Database) throws -> [Map] {
-		return try [self] + children.fetchAll(db).flatMap { try $0.recursiveChildren(in: db) }
-	}
-}

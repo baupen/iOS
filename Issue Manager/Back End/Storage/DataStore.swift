@@ -68,8 +68,10 @@ final class DatabaseDataStore {
 				$0.column("number", .integer)
 				$0.column("wasAddedWithClient", .boolean).notNull()
 				$0.column("position", .blob)
-				$0.column("status", .blob).notNull()
 				$0.column("details", .blob).notNull()
+				$0.column("status.registration", .blob)
+				$0.column("status.response", .blob)
+				$0.column("status.review", .blob)
 				// relations
 				$0.column("mapID", .text).notNull()
 					.references(Map.databaseTableName)

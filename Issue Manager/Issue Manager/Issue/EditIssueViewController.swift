@@ -196,8 +196,7 @@ final class EditIssueViewController: UITableViewController, Reusable {
 		}
 		
 		if isCreating {
-			issue.change(notifyingServer: false, transform: update)
-			Repository.shared.add(issue)
+			issue.create(transform: update)
 		} else {
 			issue.change(transform: update)
 		}

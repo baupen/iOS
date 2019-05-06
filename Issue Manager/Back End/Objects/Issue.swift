@@ -10,8 +10,12 @@ struct Issue {
 	let wasAddedWithClient: Bool // "abnahmemodus"
 	let mapID: ID<Map> // only really used before registration
 	let position: Position?
-	private(set) var status = Status()
-	private(set) var details = Details()
+	private(set) var status = Status() {
+		didSet { Repository.shared.save(self) }
+	}
+	private(set) var details = Details() {
+		didSet { Repository.shared.save(self) }
+	}
 	
 	var isMarked: Bool { return details.isMarked }
 	var image: File? { return details.image }
@@ -96,11 +100,11 @@ extension Issue: DBRecord {
 		container[Columns.number] = number
 		container[Columns.wasAddedWithClient] = wasAddedWithClient
 		container[Columns.mapID] = mapID
-		if let position = position {
-			try! container.encode(position, forKey: Columns.position)
-		}
-		try! container.encode(status, forKey: Columns.status)
+		try! container.encodeIfPresent(position, forKey: Columns.position)
 		try! container.encode(details, forKey: Columns.details)
+		try! container.encodeIfPresent(status.registration, forKey: Columns.registration)
+		try! container.encodeIfPresent(status.response, forKey: Columns.response)
+		try! container.encodeIfPresent(status.review, forKey: Columns.review)
 	}
 	
 	init(row: Row) {
@@ -109,8 +113,12 @@ extension Issue: DBRecord {
 		wasAddedWithClient = row[Columns.wasAddedWithClient]
 		mapID = row[Columns.mapID]
 		position = try! row.decodeValueIfPresent(forKey: Columns.position)
-		status = try! row.decodeValue(forKey: Columns.status)
 		details = try! row.decodeValue(forKey: Columns.details)
+		status = .init(
+			registration: try! row.decodeValueIfPresent(forKey: Columns.registration),
+			response: try! row.decodeValueIfPresent(forKey: Columns.response),
+			review: try! row.decodeValueIfPresent(forKey: Columns.review)
+		)
 	}
 	
 	enum Columns: String, ColumnExpression {
@@ -118,8 +126,10 @@ extension Issue: DBRecord {
 		case wasAddedWithClient
 		case mapID
 		case position
-		case status
 		case details
+		case registration = "status.registration"
+		case response = "status.response"
+		case review = "status.review"
 	}
 }
 
@@ -155,21 +165,24 @@ extension Issue {
 // MARK: -
 // MARK: Mutation
 extension Issue {
-	mutating func change(notifyingServer: Bool = true, transform: (inout Details) throws -> Void) rethrows {
+	mutating func create(transform: (inout Details) throws -> Void) rethrows {
+		assert(!isRegistered)
+		
+		try transform(&details)
+		Client.shared.issueCreated(self)
+	}
+	
+	mutating func change(transform: (inout Details) throws -> Void) rethrows {
 		assert(!isRegistered)
 		
 		let oldFile = file
 		try transform(&details)
 		Client.shared.issueChanged(self, hasChangedFile: file != oldFile)
-		
-		Repository.shared.save(self)
 	}
 	
 	mutating func mark() {
 		details.isMarked.toggle()
 		Client.shared.performed(.mark, on: self)
-		
-		Repository.shared.save(self)
 	}
 	
 	mutating func review() {
@@ -178,8 +191,6 @@ extension Issue {
 		
 		status.review = .init(at: Date(), by: Client.shared.localUser!.user.fullName)
 		Client.shared.performed(.review, on: self)
-		
-		Repository.shared.save(self)
 	}
 	
 	mutating func revertReview() {
@@ -187,8 +198,6 @@ extension Issue {
 		
 		status.review = nil
 		Client.shared.performed(.revert, on: self)
-		
-		Repository.shared.save(self)
 	}
 	
 	mutating func revertResponse() {
@@ -197,7 +206,5 @@ extension Issue {
 		
 		status.response = nil
 		Client.shared.performed(.revert, on: self)
-		
-		Repository.shared.save(self)
 	}
 }

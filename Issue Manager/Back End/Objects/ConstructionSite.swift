@@ -61,14 +61,6 @@ extension ConstructionSite: FileContainer {
 	var file: File? { return image }
 }
 
-extension ConstructionSite: MapHolder {
-	var children: QueryInterfaceRequest<Map> { return maps }
-	
-	func recursiveChildren(in db: Database) throws -> [Map] {
-		return try children.fetchAll(db).flatMap { try $0.recursiveChildren(in: db) }
-	}
-}
-
 extension ConstructionSite {
 	func allTrades() -> Set<String> {
 		return Set(Repository.shared.read(craftsmen

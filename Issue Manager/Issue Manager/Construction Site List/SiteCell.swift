@@ -1,6 +1,7 @@
 // Created by Julian Dunskus
 
 import UIKit
+import GRDB
 
 fileprivate let shadowOpacity: Float = 0.2
 fileprivate let shadowOffset = CGSize(width: 0, height: 6)
@@ -59,11 +60,11 @@ final class SiteCell: UICollectionViewCell, Reusable {
 		issueBadge.holder = site
 		
 		let meta = site.meta // capture current site
+		let issues = Repository.shared.issues(in: site, recursively: true)
 		// async because there could be a lot of issues (e.g. if we're calculating it for a whole site)
 		DispatchQueue.global().async {
-			let issues = Repository.shared.recursiveIssues(in: self.site)
-			let openCount = issues.count { $0.isOpen }
-			let totalCount = issues.count
+			let totalCount = Repository.shared.read(issues.fetchCount)
+			let openCount = Repository.shared.read(issues.openIssues.fetchCount)
 			DispatchQueue.main.async {
 				guard self.site.meta == meta else { return }
 				self.totalIssuesLabel.text = Localization.totalIssues(String(totalCount))

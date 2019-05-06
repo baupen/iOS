@@ -85,18 +85,17 @@ final class Repository {
 		return read(ConstructionSite.fetchAll)
 	}
 	
-	func issues(in holder: MapHolder, recursively: Bool) -> AnyCollection<Issue> {
+	func issues(in holder: MapHolder, recursively: Bool) -> QueryInterfaceRequest<Issue> {
 		return recursively
-			? recursiveIssues(in: holder)
-			: AnyCollection(issues(in: holder as! Map))
-	}
-	
-	func recursiveIssues(in holder: MapHolder) -> AnyCollection<Issue> {
-		return read(holder.recursiveIssues)
+			? holder.recursiveIssues
+			: (holder as! Map).issues
 	}
 	
 	func issues(in map: Map) -> [Issue] {
-		return read(map.issues.fetchAll)
+		return read(map.issues
+			.order(Issue.Columns.number.asc, Column("lastChangeTime").desc)
+			.fetchAll
+		)
 	}
 	
 	func children(of holder: MapHolder) -> [Map] {
@@ -117,18 +116,6 @@ final class Repository {
 	
 	// MARK: -
 	// MARK: Management
-	
-	func add(_ issue: Issue) {
-		assert(self.issue(issue.id) == nil)
-		
-		write(issue.save)
-		Client.shared.issueCreated(issue)
-	}
-	
-	func update(_ new: Issue) {
-		// TODO: remove?
-		save(new)
-	}
 	
 	func remove(_ issue: Issue, notifyingServer: Bool = true) {
 		assert(!issue.isRegistered)
