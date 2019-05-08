@@ -25,6 +25,16 @@ extension ID where Object: DBRecord {
 	}
 }
 
+extension ID: DatabaseValueConvertible {
+	static func fromDatabaseValue(_ dbValue: DatabaseValue) -> ID? {
+		return UUID.fromDatabaseValue(dbValue).map(ID.init)
+	}
+	
+	var databaseValue: DatabaseValue {
+		return rawValue.databaseValue
+	}
+}
+
 extension ID: Codable {
 	init(from decoder: Decoder) throws {
 		rawValue = try UUID(from: decoder)
@@ -52,18 +62,18 @@ protocol StoredObject: AnyStoredObject {
 	var meta: ObjectMeta<Self> { get }
 	var id: ID<Self> { get }
 	
-	static func update(_ instance: inout Self?, from new: Self?)
+	static func didChange(from previous: Self?, to new: Self?)
 }
 
 extension StoredObject {
+	typealias Meta = ObjectMeta<Self>
+	
 	var id: ID<Self> { return meta.id }
 	
 	var rawMeta: AnyObjectMeta { return meta }
 	var rawID: UUID { return id.rawValue }
 	
-	static func update(_ instance: inout Self?, from new: Self?) {
-		instance = new
-	}
+	static func didChange(from previous: Self?, to new: Self?) {}
 }
 
 protocol AnyObjectMeta {
@@ -76,4 +86,13 @@ struct ObjectMeta<Object: StoredObject>: AnyObjectMeta, Codable, Equatable {
 	var lastChangeTime = Date()
 	
 	var rawID: UUID { return id.rawValue }
+}
+
+extension ObjectMeta: DBRecord where Object: DBRecord {
+	static var databaseTableName: String { return Object.databaseTableName }
+	
+	enum Columns: String, ColumnExpression {
+		case id
+		case lastChangeTime
+	}
 }

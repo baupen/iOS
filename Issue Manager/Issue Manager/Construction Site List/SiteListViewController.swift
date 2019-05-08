@@ -74,7 +74,7 @@ final class SiteListViewController: RefreshingTableViewController, Reusable {
 	}
 	
 	private func updateContent() {
-		sites = Repository.shared.sites()
+		sites = Repository.read(ConstructionSite.fetchAll) // TODO: order?
 		siteListView.reloadData()
 	}
 	

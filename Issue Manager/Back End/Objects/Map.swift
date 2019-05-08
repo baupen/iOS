@@ -16,14 +16,6 @@ struct Map {
 		return parentID?.rawValue ?? constructionSiteID.rawValue
 	}
 	
-	var hasChildren: Bool {
-		return Repository.shared.hasChildren(for: self)
-	}
-	
-	func accessSite() -> ConstructionSite {
-		return Repository.shared.site(constructionSiteID)!
-	}
-	
 	final class Sector: Codable {
 		let name: String
 		let color: Color
@@ -42,19 +34,17 @@ extension Map: DBRecord {
 		return request(for: Map.issues).consideringClientMode
 	}
 	
+	var sortedIssues: QueryInterfaceRequest<Issue> {
+		return issues.order(Issue.Columns.number.asc, Issue.Meta.Columns.lastChangeTime.desc)
+	}
+	
 	static let children = hasMany(Map.self)
 	var children: QueryInterfaceRequest<Map> {
 		return request(for: Map.children)
 	}
 	
-	func encode(to container: inout PersistenceContainer) {
-		meta.encode(to: &container)
-		try! container.encode(sectors, forKey: Columns.sectors)
-		sectorFrame.map { try! container.encode($0, forKey: Columns.sectorFrame) }
-		file.map { try! container.encode($0, forKey: Columns.file) }
-		container[Columns.name] = name
-		container[Columns.constructionSiteID] = constructionSiteID
-		container[Columns.parentID] = parentID
+	func hasChildren(in db: Database) throws -> Bool {
+		return try children.fetchCount(db) > 0 // TODO: SQL exists() might be nice here
 	}
 	
 	init(row: Row) {
@@ -65,6 +55,16 @@ extension Map: DBRecord {
 		name = row[Columns.name]
 		constructionSiteID = row[Columns.constructionSiteID]
 		parentID = row[Columns.parentID]
+	}
+	
+	func encode(to container: inout PersistenceContainer) {
+		meta.encode(to: &container)
+		try! container.encode(sectors, forKey: Columns.sectors)
+		sectorFrame.map { try! container.encode($0, forKey: Columns.sectorFrame) }
+		file.map { try! container.encode($0, forKey: Columns.file) }
+		container[Columns.name] = name
+		container[Columns.constructionSiteID] = constructionSiteID
+		container[Columns.parentID] = parentID
 	}
 	
 	enum Columns: String, ColumnExpression {

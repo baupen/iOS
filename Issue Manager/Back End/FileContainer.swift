@@ -45,13 +45,12 @@ extension FileContainer {
 		return url
 	}
 	
-	static func update(_ instance: inout Self?, from new: Self?) {
+	static func didChange(from previous: Self?, to new: Self?) {
 		if let new = new {
-			new.downloadFile(previous: instance)
+			new.downloadFile(previous: previous)
 		} else {
-			instance?.deleteFile()
+			previous?.deleteFile()
 		}
-		instance = new
 	}
 	
 	func downloadFile() {

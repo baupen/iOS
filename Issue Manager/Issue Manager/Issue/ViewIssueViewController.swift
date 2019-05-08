@@ -78,7 +78,7 @@ final class ViewIssueViewController: UITableViewController, Reusable {
 			UIImage(contentsOfFile: Issue.cacheURL(for: $0).path)
 		}
 		
-		let craftsman = Repository.shared.craftsman(for: issue)
+		let craftsman = Repository.read(issue.craftsman)
 		craftsmanTradeLabel.setText(to: craftsman?.trade, fallback: L10n.Issue.noCraftsman)
 		craftsmanNameLabel.setText(to: craftsman?.name, fallback: L10n.Issue.noCraftsman)
 		

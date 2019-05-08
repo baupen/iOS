@@ -41,7 +41,7 @@ final class MapListViewController: RefreshingTableViewController, Reusable {
 			}
 		} else if let selected = tableView.indexPathForSelectedRow {
 			// not appearing for the first time
-			if Repository.shared.hasChildren(for: map(for: selected)) {
+			if Repository.read(map(for: selected).hasChildren) {
 				// coming back from selected map's sublist
 				showOwnMap()
 			} else {
@@ -81,10 +81,10 @@ final class MapListViewController: RefreshingTableViewController, Reusable {
 	
 	/// - returns: whether or not the holder is still valid
 	@discardableResult private func handleRefresh() -> Bool {
-		if let oldSite = holder as? ConstructionSite, let site = Repository.shared.site(oldSite.id) {
+		if let oldSite = holder as? ConstructionSite, let site = Repository.object(oldSite.id) {
 			holder = site
 			return true
-		} else if let oldMap = holder as? Map, let map = Repository.shared.map(oldMap.id) {
+		} else if let oldMap = holder as? Map, let map = Repository.object(oldMap.id) {
 			holder = map
 			return true
 		} else {
@@ -98,7 +98,10 @@ final class MapListViewController: RefreshingTableViewController, Reusable {
 		
 		navigationItem.title = holder.name
 		
-		maps = Repository.shared.children(of: holder).sorted { $0.name < $1.name }
+		maps = Repository.read(holder.children
+			.order(Map.Columns.name.asc)
+			.fetchAll
+		)
 	}
 	
 	func showOwnMap() {
@@ -141,7 +144,6 @@ final class MapListViewController: RefreshingTableViewController, Reusable {
 	
 	/// reloads the cell for the given map, if currently visible
 	func reload(_ map: Map) {
-		guard holder.rawID == map.rawID || holder.rawID == map.parentHolderID else { return }
 		for cell in tableView.visibleCells {
 			let mapCell = cell as! MapCell
 			if mapCell.map.id == map.id {
@@ -196,16 +198,17 @@ final class MapListViewController: RefreshingTableViewController, Reusable {
 			showOwnMap()
 		} else {
 			let map = maps[indexPath.row]
+			let mapHasChildren = Repository.read(map.hasChildren)
 			
 			if mainController.isExtended {
 				let mapController = mainController.detailNav.mapController
 				mapController.holder = map
 				
-				if map.hasChildren {
+				if mapHasChildren {
 					showListController(for: map)
 				}
 			} else {
-				if map.hasChildren {
+				if mapHasChildren {
 					showListController(for: map)
 				} else {
 					showMapController(for: map)

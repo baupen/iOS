@@ -1,7 +1,6 @@
 // Created by Julian Dunskus
 
 import Foundation
-import GRDB
 
 struct File: Hashable {
 	let id: ID<File>
@@ -16,13 +15,3 @@ extension File {
 }
 
 extension File: Codable {}
-
-precedencegroup ConcatenationPrecedence {
-	associativity: left
-}
-
-infix operator • : ConcatenationPrecedence
-
-func • (lhs: ColumnExpression, rhs: ColumnExpression) -> Column {
-	return Column("\(lhs.name).\(rhs.name)")
-}

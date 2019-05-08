@@ -151,13 +151,13 @@ final class EditIssueViewController: UITableViewController, Reusable {
 		assert(issue.isRegistered != true)
 		guard isViewLoaded else { return }
 		
-		site = Repository.shared.site(for: issue)
+		site = Repository.read(issue.site.fetchOne)!
 		
 		navigationItem.title = isCreating ? Localization.titleCreating : Localization.titleEditing
 		
 		isIssueMarked = issue.isMarked
 		
-		craftsman = Repository.shared.craftsman(for: issue)
+		craftsman = Repository.read(issue.craftsman)
 		trade = craftsman?.trade
 		
 		descriptionField.text = issue.description
@@ -213,7 +213,7 @@ final class EditIssueViewController: UITableViewController, Reusable {
 			}
 			$0 = $0.order(Craftsman.Columns.name)
 		}
-		return Repository.shared.read(request.fetchAll)
+		return Repository.read(request.fetchAll)
 	}
 	
 	override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {

@@ -62,11 +62,9 @@ extension ConstructionSite: FileContainer {
 }
 
 extension ConstructionSite {
-	func allTrades() -> Set<String> {
-		return Set(Repository.shared.read(craftsmen
+	var trades: QueryInterfaceRequest<String> {
+		return craftsmen
 			.select(Craftsman.Columns.trade, as: String.self)
 			.distinct()
-			.fetchAll
-		))
 	}
 }

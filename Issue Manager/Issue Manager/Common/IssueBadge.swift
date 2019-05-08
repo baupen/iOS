@@ -2,7 +2,6 @@
 
 import UIKit
 import Promise
-import GRDB
 
 final class IssueBadge: UIView {
 	let label = UILabel() <- {
@@ -46,12 +45,12 @@ final class IssueBadge: UIView {
 	}
 	
 	func update() {
-		let issues = Repository.shared.issues(in: holder!, recursively: shouldUseRecursiveIssues)
+		let issues = holder.issues(recursively: shouldUseRecursiveIssues)
 			.issuesWithResponse
 			.openIssues
 		// async because there could be a lot of issues (e.g. if we're calculating it for a whole site)
-		let issueCount = BasicFuture(asyncOn: .global()) {
-			Repository.shared.read(issues.fetchCount)
+		let issueCount = BasicFuture(asyncOn: .global(qos: .userInitiated)) {
+			Repository.read(issues.fetchCount)
 		}
 		
 		issueCount.on(.main).then { count in

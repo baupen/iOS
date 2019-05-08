@@ -1,18 +1,18 @@
 // Created by Julian Dunskus
 
 import UIKit
-import Promise
 import GRDB
-
-/// saving to disk is done on this queue to avoid blocking
-private let savingQueue = DispatchQueue(label: "saving repository")
 
 final class DatabaseDataStore {
 	var dbPool: DatabasePool
 	
 	init() throws {
 		let databaseURL = documentsURL.appendingPathComponent("db/main.sqlite")
-		try FileManager.default.createDirectory(at: databaseURL.deletingLastPathComponent(), withIntermediateDirectories: true)
+		try FileManager.default.createDirectory(
+			at: databaseURL.deletingLastPathComponent(),
+			withIntermediateDirectories: true
+		)
+		
 		let config = Configuration() <- {
 			$0.label = "main database"
 			#if DEBUG
@@ -23,9 +23,20 @@ final class DatabaseDataStore {
 		dbPool = try .init(path: databaseURL.absoluteString, configuration: config)
 		dbPool.setupMemoryManagement(in: UIApplication.shared)
 		
-		var migrator = DatabaseMigrator()
+		let migrator = DatabaseMigrator() <- { migrator in
+			registerMigrations(in: &migrator)
+			
+			#if DEBUG
+			migrator.eraseDatabaseOnSchemaChange = true
+			#endif
+		}
+		
+		try migrator.migrate(dbPool)
+	}
+	
+	private func registerMigrations(in migrator: inout DatabaseMigrator) {
 		migrator.registerMigration("v1") { db in
-			try db.create(table: ConstructionSite.databaseTableName) {
+			try db.create(table: "ConstructionSite") {
 				$0.primaryKey(["id"])
 				// meta
 				$0.column("id", .text).notNull()
@@ -40,7 +51,7 @@ final class DatabaseDataStore {
 				$0.column("country", .text)
 			}
 			
-			try db.create(table: Map.databaseTableName) {
+			try db.create(table: "Map") {
 				$0.primaryKey(["id"])
 				// meta
 				$0.column("id", .text).notNull()
@@ -59,7 +70,7 @@ final class DatabaseDataStore {
 					.indexed()
 			}
 			
-			try db.create(table: Issue.databaseTableName) {
+			try db.create(table: "Issue") {
 				$0.primaryKey(["id"])
 				// meta
 				$0.column("id", .text).notNull()
@@ -78,7 +89,7 @@ final class DatabaseDataStore {
 					.indexed()
 			}
 			
-			try db.create(table: Craftsman.databaseTableName) {
+			try db.create(table: "Craftsman") {
 				$0.primaryKey(["id"])
 				// meta
 				$0.column("id", .text).notNull()
@@ -91,44 +102,11 @@ final class DatabaseDataStore {
 					.references(ConstructionSite.databaseTableName)
 					.indexed()
 			}
-			
-		}
-		
-		#if DEBUG
-		migrator.eraseDatabaseOnSchemaChange = true
-		#endif
-		
-		try migrator.migrate(dbPool)
-	}
-	
-	func clear() {
-		try! dbPool.write { db in
-			try ConstructionSite.deleteAll(db)
-			try Map.deleteAll(db)
-			try Issue.deleteAll(db)
-			try Craftsman.deleteAll(db)
 		}
 	}
 }
 
-// need to explicitly list inherited protocols for conditional conformance
-typealias DBRecord = PersistableRecord & FetchableRecord & TableRecord & EncodableRecord & MutablePersistableRecord
-
-extension ObjectMeta: DBRecord where Object: DBRecord {
-	static var databaseTableName: String { return Object.databaseTableName }
-}
-
-extension ID: DatabaseValueConvertible {
-	static func fromDatabaseValue(_ dbValue: DatabaseValue) -> ID? {
-		return UUID.fromDatabaseValue(dbValue).map(ID.init)
-	}
-	
-	var databaseValue: DatabaseValue {
-		return rawValue.databaseValue
-	}
-}
-
-let documentsURL = try! FileManager.default.url(
+private let documentsURL = try! FileManager.default.url(
 	for: .documentDirectory,
 	in: .userDomainMask,
 	appropriateFor: nil,

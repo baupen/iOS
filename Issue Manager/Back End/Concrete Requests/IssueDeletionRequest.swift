@@ -13,7 +13,7 @@ struct IssueDeletionRequest: JSONJSONRequest, BacklogStorable {
 	let issueID: ID<Issue>
 	
 	func applyToClient(_ response: ExpectedResponse) {
-		if let issue = Repository.shared.issue(issueID) {
+		if let issue = Repository.object(issueID) {
 			Repository.shared.remove(issue, notifyingServer: false)
 		}
 	}

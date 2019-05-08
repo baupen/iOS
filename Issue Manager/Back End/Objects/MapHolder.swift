@@ -7,53 +7,58 @@ protocol MapHolder: AnyStoredObject {
 	var name: String { get }
 	var children: QueryInterfaceRequest<Map> { get }
 	
-	var recursiveChildren: QueryInterfaceRequest<Map> { get }
+	func recursiveChildren<R>(in request: R) -> R where R: DerivableRequest, R.RowDecoder == Map
 	var recursiveIssues: QueryInterfaceRequest<Issue> { get }
+	func issues(recursively: Bool) -> QueryInterfaceRequest<Issue>
 }
 
 extension MapHolder {
 	var recursiveIssues: QueryInterfaceRequest<Issue> {
-		return recursiveChildren
-			.including(required: Map.issues)
-			.select([], as: Issue.self)
+		return Issue
+			.joining(required: Issue.map.recursiveChildren(of: self))
 			.consideringClientMode
 	}
 }
 
-extension Map: MapHolder {
-	var recursiveChildren: QueryInterfaceRequest<Map> {
-		// recursive common table expression, in case you want to google that
-		return Map.filter(
-			sql: """
-			\(Map.databaseTableName).id IN (
-				WITH rec_maps AS (
-					SELECT id
-						FROM \(Map.databaseTableName)
-						WHERE id = x'\(rawID.hexString)'
-					UNION ALL
-					SELECT child.id
-						FROM \(Map.databaseTableName) child
-						JOIN rec_maps parent ON child.parentID = parent.id
-				)
-				SELECT id FROM rec_maps
-			)
-			""" // args aren't replaced for whatever reason, so i'm just putting them straight in
-		)
+extension DerivableRequest where RowDecoder == Map {
+	func recursiveChildren(of holder: MapHolder) -> Self {
+		return holder.recursiveChildren(in: self)
 	}
 }
 
 extension ConstructionSite: MapHolder {
 	var children: QueryInterfaceRequest<Map> { return maps }
 	
-	var recursiveChildren: QueryInterfaceRequest<Map> {
-		return Map.filter(Map.Columns.constructionSiteID == rawID)
+	func recursiveChildren<R>(in request: R) -> R where R: DerivableRequest, R.RowDecoder == Map {
+		return request.filter(Map.Columns.constructionSiteID == rawID)
+	}
+	
+	func issues(recursively: Bool) -> QueryInterfaceRequest<Issue> {
+		precondition(recursively, "construction sites only have recursive issues")
+		return recursiveIssues
 	}
 }
 
-extension UUID {
-	public var hexString: String {
-		return withUnsafeBytes(of: self) {
-			Data(bytes: $0.baseAddress!, count: $0.count).hexEncodedString()
-		}
+extension Map: MapHolder {
+	func recursiveChildren<R>(in request: R) -> R where R: DerivableRequest, R.RowDecoder == Map {
+		// recursive common table expression, in case you want to google that
+		return request.filter(
+			literal: """
+			\(sql: Map.databaseTableName).id IN (
+				WITH rec_maps AS (
+					SELECT \(rawID) AS id
+					UNION ALL
+					SELECT child.id
+						FROM \(sql: Map.databaseTableName) child
+						JOIN rec_maps parent ON child.parentID = parent.id
+				)
+				SELECT id FROM rec_maps
+			)
+			"""
+		)
+	}
+	
+	func issues(recursively: Bool) -> QueryInterfaceRequest<Issue> {
+		return recursively ? recursiveIssues : issues
 	}
 }

@@ -46,19 +46,19 @@ struct ReadRequest: JSONJSONRequest {
 		let removedIssueIDs: [ID<Issue>]
 		let changedUser: User?
 		
-		var constructionSites: [ConstructionSite] {
+		func constructionSites() -> [ConstructionSite] {
 			return changedConstructionSites.map { $0.makeObject() }
 		}
 		
-		var maps: [Map] {
+		func maps() -> [Map] {
 			return changedMaps.map { $0.makeObject(changedMaps: changedMaps) }
 		}
 		
-		var issues: [Issue] {
+		func issues() -> [Issue] {
 			return changedIssues.map { $0.makeObject() }
 		}
 		
-		var craftsmen: [Craftsman] {
+		func craftsmen() -> [Craftsman] {
 			return changedCraftsmen.map { $0.makeObject(changedConstructionSites: changedConstructionSites) }
 		}
 	}
@@ -69,42 +69,33 @@ private extension Repository {
 		return ReadRequest(
 			authenticationToken: user.authenticationToken,
 			user: user.meta,
-			craftsmen: craftsmanMetas(),
-			constructionSites: siteMetas(),
-			maps: mapMetas(),
-			issues: issueMetas()
+			craftsmen: read(ObjectMeta.fetchAll),
+			constructionSites: read(ObjectMeta.fetchAll),
+			maps: read(ObjectMeta.fetchAll),
+			issues: read(ObjectMeta.fetchAll)
 		)
 	}
 	
 	func update(from response: ReadRequest.ExpectedResponse) {
-		write { db in
-			func update<Object>(changing changedEntries: [Object], removing removedIDs: [ID<Object>]) throws where Object: StoredObject & DBRecord {
-				for changed in changedEntries {
-					var object = try changed.id.get(in: db)
-					Object.update(&object, from: changed)
-					try object!.save(db)
-				}
-				for removed in removedIDs {
-					_ = try Object.deleteOne(db, key: removed)
-				}
-			}
-			
+		do {
 			try update(
-				changing: response.constructionSites,
+				changing: response.constructionSites(),
 				removing: response.removedConstructionSiteIDs
 			)
 			try update(
-				changing: response.maps,
+				changing: response.maps(),
 				removing: response.removedMapIDs
 			)
 			try update(
-				changing: response.issues,
+				changing: response.issues(),
 				removing: response.removedIssueIDs
 			)
 			try update(
-				changing: response.craftsmen,
+				changing: response.craftsmen(),
 				removing: response.removedCraftsmanIDs
 			)
+		} catch {
+			error.printDetails(context: "updating from read response")
 		}
 	}
 }

@@ -95,6 +95,16 @@ extension Issue: DBRecord {
 		return request(for: Issue.map)
 	}
 	
+	var site: QueryInterfaceRequest<ConstructionSite> {
+		return map
+			.joining(required: Map.site)
+			.select(as: ConstructionSite.self)
+	}
+	
+	func craftsman(in db: Database) throws -> Craftsman? {
+		return try craftsmanID?.get(in: db)
+	}
+	
 	func encode(to container: inout PersistenceContainer) {
 		meta.encode(to: &container)
 		container[Columns.number] = number
@@ -130,6 +140,20 @@ extension Issue: DBRecord {
 		case registration = "status.registration"
 		case response = "status.response"
 		case review = "status.review"
+	}
+}
+
+extension DerivableRequest where RowDecoder == Issue {
+	var consideringClientMode: Self {
+		return defaults.isInClientMode ? filter(Issue.Columns.wasAddedWithClient) : self
+	}
+	
+	var openIssues: Self {
+		return filter(Issue.Columns.review == nil)
+	}
+	
+	var issuesWithResponse: Self {
+		return filter(Issue.Columns.response != nil)
 	}
 }
 

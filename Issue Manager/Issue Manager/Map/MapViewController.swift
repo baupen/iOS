@@ -31,7 +31,7 @@ final class MapViewController: UIViewController, Reusable {
 		
 		cancelAddingIssue() // done (if started)
 		
-		issues = Repository.shared.issues(in: map)
+		issues = Repository.read(map.sortedIssues.fetchAll)
 		updateMarkers()
 		issueListController.update()
 		
@@ -188,7 +188,7 @@ final class MapViewController: UIViewController, Reusable {
 		
 		addItem.isEnabled = map != nil
 		
-		issues = map.map(Repository.shared.issues) ?? []
+		issues = (map?.sortedIssues.fetchAll).map(Repository.read) ?? []
 		
 		sectorViews.forEach { $0.removeFromSuperview() }
 		sectorViews = map?.sectors.map(SectorView.init) ?? []
