@@ -7,7 +7,7 @@ struct APIIssue {
 	let number: Int?
 	let isMarked: Bool
 	let wasAddedWithClient: Bool
-	let image: File?
+	let image: File<Issue>?
 	let description: String?
 	let craftsman: ID<Craftsman>?
 	let map: ID<Map>

@@ -18,13 +18,13 @@ struct Issue {
 	}
 	
 	var isMarked: Bool { return details.isMarked }
-	var image: File? { return details.image }
+	var image: File<Issue>? { return details.image }
 	var description: String? { return details.description }
 	var craftsmanID: ID<Craftsman>? { return details.craftsman }
 	
 	struct Details: Codable {
 		var isMarked = false
-		var image: File?
+		var image: File<Issue>?
 		var description: String?
 		var craftsman: ID<Craftsman>?
 	}
@@ -32,9 +32,9 @@ struct Issue {
 	struct Position: Codable {
 		var point: Point
 		var zoomScale: Double
-		var mapFileID: ID<File>
+		var mapFileID: ID<File<Map>>
 		
-		init(at point: Point, zoomScale: Double, in file: File) {
+		init(at point: Point, zoomScale: Double, in file: File<Map>) {
 			self.point = point
 			self.zoomScale = zoomScale
 			self.mapFileID = file.id
@@ -162,7 +162,7 @@ extension Issue: StoredObject {}
 extension Issue: FileContainer {
 	static let pathPrefix = "issue"
 	static let downloadRequestPath = \FileDownloadRequest.issue
-	var file: File? { return details.image }
+	var file: File<Issue>? { return details.image }
 }
 
 // MARK: -

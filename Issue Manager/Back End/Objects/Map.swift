@@ -7,7 +7,7 @@ struct Map {
 	let meta: ObjectMeta<Map>
 	let sectors: [Sector]
 	let sectorFrame: Rectangle?
-	let file: File?
+	let file: File<Map>?
 	let name: String
 	let constructionSiteID: ID<ConstructionSite>
 	let parentID: ID<Map>?

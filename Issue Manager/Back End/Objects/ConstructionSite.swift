@@ -7,7 +7,7 @@ struct ConstructionSite {
 	let meta: ObjectMeta<ConstructionSite>
 	let name: String
 	let address: Address
-	let image: File?
+	let image: File<ConstructionSite>?
 	
 	struct Address {
 		/// first two address lines (multiline)
@@ -58,7 +58,7 @@ extension ConstructionSite: StoredObject {}
 extension ConstructionSite: FileContainer {
 	static let pathPrefix = "constructionSite"
 	static let downloadRequestPath = \FileDownloadRequest.constructionSite
-	var file: File? { return image }
+	var file: File<ConstructionSite>? { return image }
 }
 
 extension ConstructionSite {

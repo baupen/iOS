@@ -2,8 +2,8 @@
 
 import Foundation
 
-struct File: Hashable {
-	let id: ID<File>
+struct File<Container>: Hashable where Container: FileContainer {
+	let id: ID<File<Container>>
 	var filename: String
 }
 

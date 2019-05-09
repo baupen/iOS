@@ -179,7 +179,7 @@ final class EditIssueViewController: UITableViewController, Reusable {
 			
 			if hasChangedImage {
 				if let image = image {
-					let file = File(filename: "\(UUID()).jpg")
+					let file = File<Issue>(filename: "\(UUID()).jpg")
 					
 					let url = Issue.localURL(for: file)
 					do {

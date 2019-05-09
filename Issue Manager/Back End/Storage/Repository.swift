@@ -67,7 +67,7 @@ final class Repository {
 	}
 	
 	func downloadMissingFiles() {
-		#warning("TODO typed files (like IDs)")
+		#warning("TODO")
 	}
 	
 	func update<Object>(changing changedEntries: [Object], removing removedIDs: [ID<Object>]) throws where Object: StoredObject & DBRecord {

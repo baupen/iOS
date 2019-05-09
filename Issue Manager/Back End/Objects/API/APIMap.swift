@@ -8,7 +8,7 @@ struct APIMap {
 	let sectors: [Map.Sector]
 	let sectorFrame: Rectangle?
 	let issues: [ID<Issue>]
-	let file: File?
+	let file: File<Map>?
 	let name: String
 	let constructionSiteID: ID<ConstructionSite>
 	

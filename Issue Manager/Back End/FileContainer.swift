@@ -22,10 +22,10 @@ protocol FileContainer: StoredObject {
 	static var pathPrefix: String { get }
 	static var downloadRequestPath: DownloadRequestPath<Self> { get }
 	
-	static func cacheURL(for file: File) -> URL
-	static func localURL(for file: File) -> URL
+	static func cacheURL(for file: File<Self>) -> URL
+	static func localURL(for file: File<Self>) -> URL
 	
-	var file: File? { get }
+	var file: File<Self>? { get }
 	
 	func downloadFile()
 	func downloadFile(previous: Self?)
@@ -33,13 +33,13 @@ protocol FileContainer: StoredObject {
 }
 
 extension FileContainer {
-	static func cacheURL(for file: File) -> URL {
+	static func cacheURL(for file: File<Self>) -> URL {
 		let url = baseCacheURL.appendingPathComponent("files/\(Self.pathPrefix)/\(file.id.stringValue)")
 		try? manager.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true)
 		return url
 	}
 	
-	static func localURL(for file: File) -> URL {
+	static func localURL(for file: File<Self>) -> URL {
 		let url = baseLocalURL.appendingPathComponent("files/\(Self.pathPrefix)/\(file.id.stringValue)")
 		try? manager.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true)
 		return url
