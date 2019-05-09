@@ -6,7 +6,8 @@ install:
   - brew install git-lfs
   - git lfs install
 before_script:
-  - git lfs pull --recursive
+  - git lfs pull
+  - git submodule foreach git lfs pull
 script:
   - xcodebuild clean build -sdk iphonesimulator -project Issue\ Manager.xcodeproj/ -scheme Issue\ Manager CODE_SIGNING_REQUIRED=NO
 after_script:
