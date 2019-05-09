@@ -75,29 +75,6 @@ private extension Repository {
 			issues: read(ObjectMeta.fetchAll)
 		)
 	}
-	
-	func update(from response: ReadRequest.ExpectedResponse) {
-		do {
-			try update(
-				changing: response.constructionSites(),
-				removing: response.removedConstructionSiteIDs
-			)
-			try update(
-				changing: response.maps(),
-				removing: response.removedMapIDs
-			)
-			try update(
-				changing: response.issues(),
-				removing: response.removedIssueIDs
-			)
-			try update(
-				changing: response.craftsmen(),
-				removing: response.removedCraftsmanIDs
-			)
-		} catch {
-			error.printDetails(context: "updating from read response")
-		}
-	}
 }
 
 extension Client {

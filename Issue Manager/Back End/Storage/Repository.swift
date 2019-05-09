@@ -22,10 +22,10 @@ final class Repository {
 	
 	func resetAllData() {
 		try! dataStore.dbPool.write { db in
-			try ConstructionSite.deleteAll(db)
-			try Map.deleteAll(db)
 			try Issue.deleteAll(db)
+			try Map.deleteAll(db)
 			try Craftsman.deleteAll(db)
+			try ConstructionSite.deleteAll(db)
 		}
 	}
 	
@@ -59,7 +59,7 @@ final class Repository {
 		
 		let existed = write(issue.delete)
 		assert(existed)
-		Issue.didChange(from: issue, to: nil)
+		Issue.onChange(from: issue, to: nil)
 		
 		if notifyingServer {
 			Client.shared.issueRemoved(issue)
@@ -67,20 +67,42 @@ final class Repository {
 	}
 	
 	func downloadMissingFiles() {
-		#warning("TODO")
+		func downloadFiles<Object>(for type: Object.Type, qos: DispatchQoS.QoSClass) where Object: FileContainer & DBRecord {
+			DispatchQueue.global(qos: qos).async {
+				self.read(Object.fetchAll).forEach { $0.downloadFile() }
+			}
+		}
+		
+		downloadFiles(for: ConstructionSite.self, qos: .userInitiated)
+		downloadFiles(for: Map.self, qos: .default)
+		downloadFiles(for: Issue.self, qos: .utility)
 	}
 	
-	func update<Object>(changing changedEntries: [Object], removing removedIDs: [ID<Object>]) throws where Object: StoredObject & DBRecord {
-		try dataStore.dbPool.write { db in
-			for new in changedEntries {
-				try new.save(db)
-				Object.didChange(from: try new.id.get(in: db), to: new)
-			}
-			
-			try Object.deleteAll(db, keys: removedIDs)
-			for removedID in removedIDs {
-				Object.didChange(from: try removedID.get(in: db), to: nil)
-			}
+	func update<Object>(in db: Database, changing changedEntries: [Object]) throws where Object: StoredObject & DBRecord {
+		for new in changedEntries {
+			Object.onChange(from: try new.id.get(in: db), to: new)
+			try new.save(db)
+		}
+	}
+	
+	func update<Object>(in db: Database, removing removedIDs: [ID<Object>]) throws where Object: StoredObject & DBRecord {
+		for removedID in removedIDs {
+			Object.onChange(from: try removedID.get(in: db), to: nil)
+			try Object.deleteOne(db, key: removedID)
+		}
+	}
+	
+	func update(from response: ReadRequest.ExpectedResponse) {
+		write { db in
+			// this order makes sure we don't violate foreign key constraints
+			try update(in: db, changing: response.constructionSites())
+			try update(in: db, changing: response.craftsmen())
+			try update(in: db, changing: response.maps())
+			try update(in: db, changing: response.issues())
+			try update(in: db, removing: response.removedIssueIDs)
+			try update(in: db, removing: response.removedMapIDs)
+			try update(in: db, removing: response.removedCraftsmanIDs)
+			try update(in: db, removing: response.removedConstructionSiteIDs)
 		}
 	}
 }

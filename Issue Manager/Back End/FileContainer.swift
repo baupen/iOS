@@ -45,7 +45,7 @@ extension FileContainer {
 		return url
 	}
 	
-	static func didChange(from previous: Self?, to new: Self?) {
+	static func onChange(from previous: Self?, to new: Self?) {
 		if let new = new {
 			new.downloadFile(previous: previous)
 		} else {

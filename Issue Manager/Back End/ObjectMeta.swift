@@ -62,7 +62,7 @@ protocol StoredObject: AnyStoredObject {
 	var meta: ObjectMeta<Self> { get }
 	var id: ID<Self> { get }
 	
-	static func didChange(from previous: Self?, to new: Self?)
+	static func onChange(from previous: Self?, to new: Self?)
 }
 
 extension StoredObject {
@@ -73,7 +73,7 @@ extension StoredObject {
 	var rawMeta: AnyObjectMeta { return meta }
 	var rawID: UUID { return id.rawValue }
 	
-	static func didChange(from previous: Self?, to new: Self?) {}
+	static func onChange(from previous: Self?, to new: Self?) {}
 }
 
 protocol AnyObjectMeta {
