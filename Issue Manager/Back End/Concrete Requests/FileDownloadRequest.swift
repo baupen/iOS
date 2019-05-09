@@ -3,7 +3,7 @@
 import Foundation
 import Promise
 
-typealias DownloadRequestPath<T: APIObject> = WritableKeyPath<FileDownloadRequest, ObjectMeta<T>?>
+typealias DownloadRequestPath<T: StoredObject> = WritableKeyPath<FileDownloadRequest, ObjectMeta<T>?>
 
 struct FileDownloadRequest: JSONDataRequest {
 	static let isIndependent = true
@@ -15,14 +15,14 @@ struct FileDownloadRequest: JSONDataRequest {
 	var map: ObjectMeta<Map>? = nil
 	var issue: ObjectMeta<Issue>? = nil
 	
-	init<T: APIObject>(authenticationToken: String, requestingFileFor path: DownloadRequestPath<T>, meta: ObjectMeta<T>) {
+	init<T: StoredObject>(authenticationToken: String, requestingFileFor path: DownloadRequestPath<T>, meta: ObjectMeta<T>) {
 		self.authenticationToken = authenticationToken
 		self[keyPath: path] = meta
 	}
 }
 
 extension Client {
-	func downloadFile<T: APIObject>(for path: DownloadRequestPath<T>, meta: ObjectMeta<T>) -> Future<Data> {
+	func downloadFile<T: StoredObject>(for path: DownloadRequestPath<T>, meta: ObjectMeta<T>) -> Future<Data> {
 		return getUser()
 			.map { user in
 				FileDownloadRequest(

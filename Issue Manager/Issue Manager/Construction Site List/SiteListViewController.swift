@@ -18,8 +18,7 @@ final class SiteListViewController: RefreshingTableViewController, Reusable {
 	}
 	
 	@IBAction func backToSiteList(_ segue: UIStoryboardSegue) {
-		sites = Array(Client.shared.storage.sites.values)
-		siteListView.reloadData()
+		updateContent()
 	}
 	
 	override var isRefreshing: Bool {
@@ -46,7 +45,7 @@ final class SiteListViewController: RefreshingTableViewController, Reusable {
 		clientModeSwitch.isOn = defaults.isInClientMode
 		updateClientModeAppearance()
 		
-		sites = Array(Client.shared.storage.sites.values)
+		updateContent()
 	}
 	
 	var needsRefresh = false
@@ -71,8 +70,12 @@ final class SiteListViewController: RefreshingTableViewController, Reusable {
 	override func refreshCompleted() {
 		super.refreshCompleted()
 		
-		self.sites = Array(Client.shared.storage.sites.values)
-		self.siteListView.reloadData()
+		updateContent()
+	}
+	
+	private func updateContent() {
+		sites = Repository.read(ConstructionSite.fetchAll) // TODO: order?
+		siteListView.reloadData()
 	}
 	
 	func updateClientModeAppearance() {

@@ -31,7 +31,7 @@ final class MapViewController: UIViewController, Reusable {
 		
 		cancelAddingIssue() // done (if started)
 		
-		issues = map.allIssues()
+		issues = Repository.read(map.sortedIssues.fetchAll)
 		updateMarkers()
 		issueListController.update()
 		
@@ -188,7 +188,7 @@ final class MapViewController: UIViewController, Reusable {
 		
 		addItem.isEnabled = map != nil
 		
-		issues = map?.allIssues() ?? []
+		issues = (map?.sortedIssues.fetchAll).map(Repository.read) ?? []
 		
 		sectorViews.forEach { $0.removeFromSuperview() }
 		sectorViews = map?.sectors.map(SectorView.init) ?? []
@@ -240,8 +240,7 @@ final class MapViewController: UIViewController, Reusable {
 		page.catch { error in
 			guard taskID == self.currentLoadingTaskID else { return }
 			
-			print("Error while loading PDF!", error.localizedFailureReason)
-			dump(error)
+			error.printDetails(context: "Error while loading PDF!")
 			self.activityIndicator.stopAnimating()
 			self.fallbackLabel.text = Localization.couldNotLoad
 		}
@@ -326,7 +325,7 @@ extension MapViewController: IssueCellDelegate {
 		pullableView.contract()
 		
 		let pdfController = self.pdfController!
-		let marker = markers.first { $0.issue === issue }!
+		let marker = markers.first { $0.issue.id == issue.id }!
 		let size = pdfController.contentView.bounds.size * CGFloat(position.zoomScale)
 		let centeredRect = CGRect(
 			origin: marker.center - size / 2,

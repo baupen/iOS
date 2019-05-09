@@ -19,8 +19,7 @@ class LoginHandlerViewController: UIViewController {
 		}
 		
 		result.catch { error in
-			print("Login Failed!", error.localizedFailureReason)
-			dump(error)
+			error.printDetails(context: "Login Failed!")
 			self.handle(error, username: username, password: password)
 		}
 	}

@@ -80,7 +80,7 @@ final class IssueCell: UITableViewCell, Reusable {
 		
 		showInMapButton.isEnabled = issue.position != nil
 		
-		let craftsman = issue.accessCraftsman()
+		let craftsman = Repository.read(issue.craftsman)
 		tradeLabel.setText(to: craftsman?.trade, fallback: Localization.noCraftsman)
 		craftsmanLabel.setText(to: craftsman.map { "\($0.name)\n\($0.trade)" }, fallback: Localization.noCraftsman)
 		

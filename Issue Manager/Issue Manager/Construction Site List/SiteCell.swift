@@ -59,11 +59,11 @@ final class SiteCell: UICollectionViewCell, Reusable {
 		issueBadge.holder = site
 		
 		let meta = site.meta // capture current site
+		let issues = site.issues(recursively: true)
 		// async because there could be a lot of issues (e.g. if we're calculating it for a whole site)
 		DispatchQueue.global().async {
-			let issues = self.site.recursiveIssues()
-			let openCount = issues.count { $0.isOpen }
-			let totalCount = issues.count
+			let totalCount = Repository.read(issues.fetchCount)
+			let openCount = Repository.read(issues.openIssues.fetchCount)
 			DispatchQueue.main.async {
 				guard self.site.meta == meta else { return }
 				self.totalIssuesLabel.text = Localization.totalIssues(String(totalCount))

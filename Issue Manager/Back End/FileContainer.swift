@@ -18,40 +18,46 @@ private let baseLocalURL = try! manager.url(
 	create: true
 )
 
-protocol AnyFileContainer: AnyAPIObject {
-	var file: File? { get }
-	
-	func deleteFile()
-	func downloadFile()
-	func downloadFile(previous: AnyFileContainer?)
-}
-
-protocol FileContainer: AnyFileContainer, APIObject {
+protocol FileContainer: StoredObject {
 	static var pathPrefix: String { get }
 	static var downloadRequestPath: DownloadRequestPath<Self> { get }
 	
-	static func cacheURL(for file: File) -> URL
-	static func localURL(for file: File) -> URL
+	static func cacheURL(for file: File<Self>) -> URL
+	static func localURL(for file: File<Self>) -> URL
+	
+	var file: File<Self>? { get }
+	
+	func downloadFile()
+	func downloadFile(previous: Self?)
+	func deleteFile()
 }
 
 extension FileContainer {
-	static func cacheURL(for file: File) -> URL {
+	static func cacheURL(for file: File<Self>) -> URL {
 		let url = baseCacheURL.appendingPathComponent("files/\(Self.pathPrefix)/\(file.id.stringValue)")
 		try? manager.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true)
 		return url
 	}
 	
-	static func localURL(for file: File) -> URL {
+	static func localURL(for file: File<Self>) -> URL {
 		let url = baseLocalURL.appendingPathComponent("files/\(Self.pathPrefix)/\(file.id.stringValue)")
 		try? manager.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true)
 		return url
+	}
+	
+	static func onChange(from previous: Self?, to new: Self?) {
+		if let new = new {
+			new.downloadFile(previous: previous)
+		} else {
+			previous?.deleteFile()
+		}
 	}
 	
 	func downloadFile() {
 		downloadFile(previous: nil)
 	}
 	
-	func downloadFile(previous: AnyFileContainer?) {
+	func downloadFile(previous: Self?) {
 		if let previous = previous {
 			switch (previous.file, file) {
 			case (nil, nil): // never had file
@@ -86,9 +92,7 @@ extension FileContainer {
 		}
 		
 		result.catch { error in
-			print("Could not download \(file)")
-			print(error.localizedFailureReason)
-			dump(error)
+			error.printDetails(context: "Could not download \(file)")
 			print("container to download file for:")
 			dump(self)
 			print()
