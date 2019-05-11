@@ -51,21 +51,23 @@ final class LoginViewController: LoginHandlerViewController {
 		usernameField.delegate = self
 		passwordField.delegate = self
 		
+		stayLoggedInSwitch.isOn = defaults.stayLoggedIn
+	}
+	
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		
 		if let localUser = Client.shared.localUser, !localUser.localUsername.isEmpty {
 			usernameField.text = localUser.localUsername
 			
 			if defaults.stayLoggedIn, !localUser.hasLoggedOut {
-				DispatchQueue.main.async {
-					self.showSiteList(userInitiated: false)
-				}
+				showSiteList(userInitiated: false)
 			} else {
 				passwordField.becomeFirstResponder()
 			}
 		} else {
 			usernameField.becomeFirstResponder()
 		}
-		
-		stayLoggedInSwitch.isOn = defaults.stayLoggedIn
 	}
 	
 	func logIn() {
