@@ -9,7 +9,7 @@ struct IssueDeletionRequest: JSONJSONRequest, BacklogStorable {
 	
 	var method: String { return "issue/delete" }
 	
-	let authenticationToken: String
+	var authenticationToken: String
 	let issueID: ID<Issue>
 	
 	func applyToClient(_ response: ExpectedResponse) {

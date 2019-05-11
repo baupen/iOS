@@ -96,10 +96,13 @@ final class Client {
 		
 		while let request = backlog.first {
 			do {
-				try request.send().await()
+				let updatedRequest = request <- { $0.authenticationToken = localUser!.user.authenticationToken }
+				try updatedRequest.send().await()
 			} catch RequestError.communicationError(let error) {
 				error.printDetails(context: "Communication error whilst clearing request \(request.method) from backlog:")
 				throw RequestError.communicationError(error)
+			} catch RequestError.apiError(let failure) where failure.error == .invalidToken {
+				return // give us a chance to log in and update the token
 			} catch {
 				error.printDetails(context: "Error occurred whilst clearing request \(request.method) from backlog; ignoring:")
 			}

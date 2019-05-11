@@ -12,6 +12,7 @@ protocol BacklogStorable: Codable {
 	static var storageID: String { get }
 	
 	var method: String { get }
+	var authenticationToken: String { get set }
 	
 	/// You can use this without breaking stuff, but i'd rather you use `Client.shared.send`.
 	func send() -> Future<Void>

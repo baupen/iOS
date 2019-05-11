@@ -9,7 +9,7 @@ struct IssueUpdateRequest: MultipartJSONRequest, BacklogStorable {
 	
 	let method: String
 	
-	let authenticationToken: String
+	var authenticationToken: String
 	let issue: APIIssue
 	let fileURL: URL?
 	
