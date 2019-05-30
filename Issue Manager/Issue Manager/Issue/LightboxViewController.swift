@@ -35,7 +35,9 @@ final class LightboxViewController: UIViewController {
 		didSet { setNeedsStatusBarAppearanceUpdate() }
 	}
 	
-	override var prefersStatusBarHidden: Bool { return isFullyShown }
+	override var prefersStatusBarHidden: Bool {
+		return isFullyShown ? true : super.prefersStatusBarHidden
+	}
 	
 	func update() {
 		guard isViewLoaded, let image = image else { return }
@@ -110,6 +112,7 @@ fileprivate final class PresentAnimator: TransitionAnimator {
 		lightboxController.view.layoutIfNeeded()
 		
 		transitionContext.containerView.insertSubview(lightboxController.view, aboveSubview: fromVC.view)
+		lightboxController.view.frame = transitionContext.finalFrame(for: lightboxController)
 		
 		let offset = lightboxController.view.bounds.height
 		let pulledView = lightboxController.imageView!
@@ -131,6 +134,7 @@ fileprivate final class DismissAnimator: TransitionAnimator {
 		let toVC = transitionContext.viewController(forKey: .to)!
 		
 		transitionContext.containerView.insertSubview(toVC.view, belowSubview: lightboxController.view)
+		toVC.view.frame = transitionContext.finalFrame(for: toVC)
 		
 		let offset = lightboxController.view.bounds.height
 		let pulledView = lightboxController.imageView!
