@@ -187,17 +187,17 @@
                                     <outlet property="topView" destination="bKI-Zh-sqe" id="EFI-hx-63o"/>
                                 </connections>
                             </view>
-                            <view verifyAmbiguity="off" opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Axp-84-gLn" customClass="PullableView" customModule="PullToExpand">
+                            <view verifyAmbiguity="off" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Axp-84-gLn" customClass="PullableView" customModule="PullToExpand">
                                 <rect key="frame" x="0.0" y="512" width="703.5" height="256"/>
                                 <subviews>
                                     <visualEffectView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0fQ-ZQ-GOx">
                                         <rect key="frame" x="0.0" y="0.0" width="703.5" height="1396"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="0Gy-ZS-TQM">
-                                            <rect key="frame" x="0.0" y="0.0" width="703.5" height="1396"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="703" height="1396"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rHo-jf-rQe">
-                                                    <rect key="frame" x="0.0" y="0.0" width="704" height="698"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="703.5" height="698"/>
                                                     <connections>
                                                         <segue destination="XdX-XP-UgZ" kind="embed" identifier="" id="oIu-NA-CAA"/>
                                                     </connections>
@@ -2449,7 +2449,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" maximumZoomScale="4" translatesAutoresizingMaskIntoConstraints="NO" id="IMr-LA-CgM">
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bP3-F6-Phf">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bP3-F6-Phf">
                                         <rect key="frame" x="0.0" y="0.0" width="1024" height="546"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="bP3-F6-Phf" secondAttribute="height" multiplier="15:8" id="fXs-0a-TGf"/>

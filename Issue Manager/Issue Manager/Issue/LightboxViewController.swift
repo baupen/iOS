@@ -7,6 +7,8 @@ final class LightboxViewController: UIViewController {
 	@IBOutlet var imageView: UIImageView!
 	@IBOutlet var aspectRatioConstraint: NSLayoutConstraint!
 	
+	var sourceView: UIView?
+	
 	var image: UIImage! {
 		didSet { update() }
 	}
@@ -63,7 +65,7 @@ final class LightboxViewController: UIViewController {
 	@IBAction func viewDragged(_ panRecognizer: UIPanGestureRecognizer) {
 		let translation = panRecognizer.translation(in: view)
 		let velocity = panRecognizer.velocity(in: view)
-		let progress = translation.y / view.bounds.height
+		let progress = translation.length / view.bounds.size.length
 		
 		switch panRecognizer.state {
 		case .began:
@@ -72,7 +74,7 @@ final class LightboxViewController: UIViewController {
 		case .changed:
 			transition!.update(progress)
 		case .ended:
-			let progressVelocity = velocity.y / view.bounds.height
+			let progressVelocity = velocity.length / view.bounds.size.length
 			if progress + 0.25 * progressVelocity > 0.5 {
 				transition!.finish()
 			} else {
@@ -117,12 +119,19 @@ fileprivate final class PresentAnimator: TransitionAnimator {
 		let offset = lightboxController.view.bounds.height
 		let pulledView = lightboxController.imageView!
 		let finalFrame = pulledView.frame
-		pulledView.frame = pulledView.frame.offsetBy(dx: 0, dy: offset)
+		if let sourceView = lightboxController.sourceView {
+			pulledView.frame = sourceView.convert(sourceView.bounds, to: pulledView.superview!)
+			sourceView.isHidden = true
+		} else {
+			pulledView.frame = pulledView.frame.offsetBy(dx: 0, dy: offset)
+		}
 		lightboxController.view.backgroundColor = .clear
 		
-		animate(using: transitionContext) {
+		animate(using: transitionContext, animations: {
 			pulledView.frame = finalFrame
 			lightboxController.view.backgroundColor = .black
+		}) { wasCancelled in
+			lightboxController.sourceView?.isHidden = false
 		}
 	}
 }
@@ -138,10 +147,11 @@ fileprivate final class DismissAnimator: TransitionAnimator {
 		
 		let offset = lightboxController.view.bounds.height
 		let pulledView = lightboxController.imageView!
-		let finalFrame = pulledView.frame.offsetBy(dx: 0, dy: offset)
+		let finalFrame = pulledView.frame//.offsetBy(dx: 0, dy: offset)
 		
 		animate(using: transitionContext) {
 			pulledView.frame = finalFrame
+			pulledView.transform = pulledView.transform.scaledBy(x: 1e-9, y: 1e-9)
 			lightboxController.view.backgroundColor = .clear
 		}
 	}

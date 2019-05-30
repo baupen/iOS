@@ -119,6 +119,7 @@ final class ViewIssueViewController: UITableViewController, Reusable {
 		case "lightbox":
 			let lightboxController = segue.destination as! LightboxViewController
 			lightboxController.image = image!
+			lightboxController.sourceView = imageView
 		default:
 			break
 		}

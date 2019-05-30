@@ -236,6 +236,7 @@ final class EditIssueViewController: UITableViewController, Reusable {
 		case "lightbox":
 			let lightboxController = segue.destination as! LightboxViewController
 			lightboxController.image = image!
+			lightboxController.sourceView = imageView
 		case "markup":
 			let markupNavController = segue.destination as! MarkupNavigationController
 			markupNavController.markupController.image = image!
