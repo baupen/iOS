@@ -96,9 +96,7 @@ extension Issue: DBRecord {
 	}
 	
 	var site: QueryInterfaceRequest<ConstructionSite> {
-		return map
-			.joining(required: Map.site)
-			.select(as: ConstructionSite.self)
+		return ConstructionSite.joining(required: ConstructionSite.maps.filter(key: mapID))
 	}
 	
 	func craftsman(in db: Database) throws -> Craftsman? {
