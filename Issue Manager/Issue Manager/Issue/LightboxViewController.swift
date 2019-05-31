@@ -145,12 +145,9 @@ fileprivate final class DismissAnimator: TransitionAnimator {
 		transitionContext.containerView.insertSubview(toVC.view, belowSubview: lightboxController.view)
 		toVC.view.frame = transitionContext.finalFrame(for: toVC)
 		
-		let offset = lightboxController.view.bounds.height
 		let pulledView = lightboxController.imageView!
-		let finalFrame = pulledView.frame//.offsetBy(dx: 0, dy: offset)
 		
 		animate(using: transitionContext) {
-			pulledView.frame = finalFrame
 			pulledView.transform = pulledView.transform.scaledBy(x: 1e-9, y: 1e-9)
 			lightboxController.view.backgroundColor = .clear
 		}
