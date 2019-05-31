@@ -836,7 +836,7 @@
 		};
 		9543CA8F2277D3D4001482D5 /* PromiseTests.xctest */ = {
 			isa = PBXReferenceProxy;
-			fileType = file;
+			fileType = wrapper.cfbundle;
 			path = PromiseTests.xctest;
 			remoteRef = 9543CA8E2277D3D4001482D5 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
