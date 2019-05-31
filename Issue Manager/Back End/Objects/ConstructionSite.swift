@@ -24,12 +24,12 @@ extension ConstructionSite.Address: DBRecord {}
 
 extension ConstructionSite: DBRecord {
 	static let craftsmen = hasMany(Craftsman.self)
-	var craftsmen: QueryInterfaceRequest<Craftsman> { // FIXME: remove prefix
+	var craftsmen: QueryInterfaceRequest<Craftsman> {
 		return request(for: ConstructionSite.craftsmen)
 	}
 	
 	static let maps = hasMany(Map.self)
-	var maps: QueryInterfaceRequest<Map> { // FIXME: remove prefix
+	var maps: QueryInterfaceRequest<Map> {
 		return request(for: ConstructionSite.maps)
 	}
 	
