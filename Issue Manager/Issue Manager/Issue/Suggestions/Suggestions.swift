@@ -81,7 +81,7 @@ final class SuggestionStorage {
 		if let prefix = prefix?.nonEmptyOptional?.lowercased() {
 			filtered = AnyCollection(options
 				.lazy
-				.map { $0.filter { $0.text.lowercased().hasPrefix(prefix) } }
+				.map { $0.filter { $0.text.lowercased().hasPrefix(prefix) && !$0.text.isEmpty } }
 			)
 		} else {
 			filtered = AnyCollection(options)
@@ -102,7 +102,7 @@ final class SuggestionStorage {
 	}
 	
 	func used(description: String?, forTrade trade: String?) {
-		guard let description = description else { return }
+		guard let description = description, !description.isEmpty else { return }
 		
 		let tradeKey = trade ?? ""
 		
