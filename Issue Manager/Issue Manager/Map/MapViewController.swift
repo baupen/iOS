@@ -198,9 +198,9 @@ final class MapViewController: UIViewController, Reusable {
 		issueListController.map = map
 		pullableView.isHidden = map == nil
 		
-		if let file = map?.file {
+		if let map = map, let file = map.file {
 			let url = Map.cacheURL(for: file)
-			asyncLoadPDF(at: url)
+			asyncLoadPDF(for: map, at: url)
 		} else {
 			pdfController = nil
 			if let holder = holder {
@@ -212,9 +212,11 @@ final class MapViewController: UIViewController, Reusable {
 	}
 	
 	private var currentLoadingTaskID: UUID!
-	func asyncLoadPDF(at url: URL) {
+	func asyncLoadPDF(for map: Map, at url: URL) {
 		let page = Future
-			.init(asyncOn: .global()) { try PDFDocument(at: url).page(0) }
+			.init(asyncOn: .global(qos: .userInitiated), map.downloadFile) // download explicitly just in case it's not there yet
+			.mapError { _ in .fulfilled } // errors are fine (e.g. bad network)
+			.map { _ in try PDFDocument(at: url).page(0) }
 			.on(.main)
 		
 		pdfController = nil

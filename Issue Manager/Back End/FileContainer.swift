@@ -1,6 +1,7 @@
 // Created by Julian Dunskus
 
 import Foundation
+import Promise
 
 private let manager = FileManager.default
 
@@ -27,8 +28,8 @@ protocol FileContainer: StoredObject {
 	
 	var file: File<Self>? { get }
 	
-	func downloadFile()
-	func downloadFile(previous: Self?)
+	@discardableResult func downloadFile() -> Future<Void>
+	@discardableResult func downloadFile(previous: Self?) -> Future<Void>
 	func deleteFile()
 }
 
@@ -53,15 +54,15 @@ extension FileContainer {
 		}
 	}
 	
-	func downloadFile() {
-		downloadFile(previous: nil)
+	func downloadFile() -> Future<Void> {
+		return downloadFile(previous: nil)
 	}
 	
-	func downloadFile(previous: Self?) {
+	func downloadFile(previous: Self?) -> Future<Void> {
 		if let previous = previous {
 			switch (previous.file, file) {
 			case (nil, nil): // never had file
-				return // nothing to do
+				return .fulfilled // nothing to do
 			case (nil, _?): // newly has file
 				break // nothing to do here; just download file
 			case (_?, nil): // no longer has file
@@ -72,31 +73,32 @@ extension FileContainer {
 					at: Self.localURL(for: prev),
 					to: Self.cacheURL(for: new)
 				)
-				return
+				return .fulfilled
 			case (_?, _?): // different file
 				previous.deleteFile()
 			}
 		}
 		
-		guard let file = file else { return }
+		guard let file = file else { return .fulfilled }
 		let url = Self.cacheURL(for: file)
 		
-		guard !manager.fileExists(atPath: url.path) else { return }
+		guard !manager.fileExists(atPath: url.path) else { return .fulfilled }
 		
 		print("Downloading \(file) for \(Self.pathPrefix)")
 		
-		let result = Client.shared.downloadFile(for: Self.downloadRequestPath, meta: meta)
-		result.then { data in
-			let success = manager.createFile(atPath: url.path, contents: data)
-			print(success ? "Saved file to" : "Could not save file to", url)
-		}
-		
-		result.catch { error in
-			error.printDetails(context: "Could not download \(file)")
-			print("container to download file for:")
-			dump(self)
-			print()
-		}
+		return (Client.shared.downloadFile(for: Self.downloadRequestPath, meta: meta)
+			.then { data in
+				let success = manager.createFile(atPath: url.path, contents: data)
+				print(success ? "Saved file to" : "Could not save file to", url)
+			}
+			.catch { error in
+				error.printDetails(context: "Could not download \(file)")
+				print("container to download file for:")
+				dump(self)
+				print()
+			}
+			.ignoringValue()
+		)
 	}
 	
 	func deleteFile() {
