@@ -63,10 +63,10 @@ final class DatabaseDataStore {
 				$0.column("name", .text).notNull()
 				// relations
 				$0.column("constructionSiteID", .text).notNull()
-					.references(ConstructionSite.databaseTableName)
+					.references("ConstructionSite", onDelete: .cascade, onUpdate: .cascade)
 					.indexed()
 				$0.column("parentID", .text)
-					.references(Map.databaseTableName, deferred: true)
+					.references("Map", onDelete: .cascade, onUpdate: .cascade, deferred: true)
 					.indexed()
 			}
 			
@@ -85,7 +85,7 @@ final class DatabaseDataStore {
 				$0.column("status.review", .blob)
 				// relations
 				$0.column("mapID", .text).notNull()
-					.references(Map.databaseTableName)
+					.references("Map", onDelete: .cascade, onUpdate: .cascade)
 					.indexed()
 			}
 			
@@ -99,7 +99,7 @@ final class DatabaseDataStore {
 				$0.column("trade", .text).notNull()
 				// relations
 				$0.column("constructionSiteID", .text).notNull()
-					.references(ConstructionSite.databaseTableName)
+					.references("ConstructionSite", onDelete: .cascade, onUpdate: .cascade)
 					.indexed()
 			}
 		}
