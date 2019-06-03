@@ -187,17 +187,17 @@
                                     <outlet property="topView" destination="bKI-Zh-sqe" id="EFI-hx-63o"/>
                                 </connections>
                             </view>
-                            <view verifyAmbiguity="off" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Axp-84-gLn" customClass="PullableView" customModule="PullToExpand">
+                            <view verifyAmbiguity="off" opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Axp-84-gLn" customClass="PullableView" customModule="PullToExpand">
                                 <rect key="frame" x="0.0" y="512" width="703.5" height="256"/>
                                 <subviews>
                                     <visualEffectView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0fQ-ZQ-GOx">
                                         <rect key="frame" x="0.0" y="0.0" width="703.5" height="1396"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="0Gy-ZS-TQM">
-                                            <rect key="frame" x="0.0" y="0.0" width="703" height="1396"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="703.5" height="1396"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rHo-jf-rQe">
-                                                    <rect key="frame" x="0.0" y="0.0" width="703.5" height="698"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="703" height="698"/>
                                                     <connections>
                                                         <segue destination="XdX-XP-UgZ" kind="embed" identifier="" id="oIu-NA-CAA"/>
                                                     </connections>
@@ -343,7 +343,7 @@
                                                             <rect key="frame" x="911" y="6" width="73" height="30"/>
                                                             <state key="normal" title="Ausloggen"/>
                                                             <connections>
-                                                                <segue destination="Gox-Jy-bEL" kind="unwind" unwindAction="logOut:" id="pbP-VW-To5"/>
+                                                                <segue destination="Gox-Jy-bEL" kind="unwind" identifier="" unwindAction="logOut:" id="pbP-VW-To5"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
@@ -574,6 +574,7 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                         <outlet property="refreshHintLabel" destination="6qc-QJ-bLk" id="1bA-kw-03d"/>
                         <outlet property="siteListView" destination="Zp8-gD-E9i" id="tdM-Zf-QAY"/>
                         <outlet property="welcomeLabel" destination="RLH-2h-ViC" id="eZ0-1q-ylv"/>
+                        <segue destination="Gox-Jy-bEL" kind="unwind" identifier="log out" unwindAction="logOut:" id="gxJ-uK-fAC"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fgW-Y6-0I8" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -671,6 +672,7 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                     </navigationItem>
                     <connections>
                         <outlet property="backToSiteListButton" destination="hYA-WQ-Bwf" id="XBL-MZ-bEA"/>
+                        <segue destination="856-u4-AOv" kind="unwind" identifier="log out" unwindAction="logOut:" id="lKt-bn-kdq"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rux-fX-hf1" sceneMemberID="firstResponder"/>
