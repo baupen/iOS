@@ -15,7 +15,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Alert.invalid
 // CONTEXT: Nachricht für den Alert, dass der Token, der bei der Anmeldung erhalten wurde, nicht mehr gültig ist, z.B. wenn auf der Website das Passwort geändert wurde.
-"alert.invalid_session.message" = "Bitte loggen sie sich wieder neu ein.";
+"alert.invalid_session.message" = "Bitte log dich wieder neu ein.";
 // CONTEXT: Titel für den Alert, dass der Token, der bei der Anmeldung erhalten wurde, nicht mehr gültig ist, z.B. wenn auf der Website das Passwort geändert wurde.
 "alert.invalid_session.title" = "Ungültige Sitzung!";
 // CONTEXT: "OK" Knopf in einem Alert

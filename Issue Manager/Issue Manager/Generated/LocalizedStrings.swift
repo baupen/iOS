@@ -24,7 +24,7 @@ internal enum L10n {
       internal static let title = L10n.tr("Localizable", "alert.connection_issues.title")
     }
     internal enum InvalidSession {
-      /// Bitte loggen sie sich wieder neu ein.
+      /// Bitte log dich wieder neu ein.
       internal static let message = L10n.tr("Localizable", "alert.invalid_session.message")
       /// Ungültige Sitzung!
       internal static let title = L10n.tr("Localizable", "alert.invalid_session.title")
