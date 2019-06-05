@@ -17,7 +17,14 @@ final class DatabaseDataStore {
 			$0.label = "main database"
 			#if DEBUG
 			// uncomment when needed:
-			//$0.trace = { print("--- executing SQL:", $0) }
+			func debugRepresentation(of string: String, maxLength: Int = 500) -> String {
+				if string.count < maxLength {
+					return string
+				} else {
+					return "\(string.prefix(maxLength))… <\(string.count - maxLength)/\(string.count) more>"
+				}
+			}
+			//$0.trace = { print("--- executing SQL:", debugRepresentation(of: $0)) }
 			#endif
 		}
 		dbPool = try .init(path: databaseURL.absoluteString, configuration: config)
