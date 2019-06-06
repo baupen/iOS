@@ -27,7 +27,7 @@ extension DerivableRequest where RowDecoder == Map {
 }
 
 extension ConstructionSite: MapHolder {
-	var children: QueryInterfaceRequest<Map> { return maps }
+	var children: QueryInterfaceRequest<Map> { return maps.filter(Map.Columns.parentID == nil) }
 	
 	func recursiveChildren<R>(in request: R) -> R where R: DerivableRequest, R.RowDecoder == Map {
 		return request.filter(Map.Columns.constructionSiteID == rawID)
