@@ -197,7 +197,7 @@
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rHo-jf-rQe">
-                                                    <rect key="frame" x="0.0" y="0.0" width="703" height="698"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="704" height="698"/>
                                                     <connections>
                                                         <segue destination="XdX-XP-UgZ" kind="embed" identifier="" id="oIu-NA-CAA"/>
                                                     </connections>
@@ -403,9 +403,29 @@
                                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="JGn-F7-Qxe">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
                                                                                 <subviews>
-                                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="200" verticalHuggingPriority="200" horizontalCompressionResistancePriority="200" verticalCompressionResistancePriority="200" translatesAutoresizingMaskIntoConstraints="NO" id="dOZ-qu-KIz">
+                                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fqg-kc-CoM">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="320" height="94.5"/>
-                                                                                    </imageView>
+                                                                                        <subviews>
+                                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="200" verticalHuggingPriority="200" horizontalCompressionResistancePriority="200" verticalCompressionResistancePriority="200" image="site_image_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="OnC-rl-dJ7">
+                                                                                                <rect key="frame" x="0.0" y="0.0" width="320" height="94.5"/>
+                                                                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                            </imageView>
+                                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="200" verticalHuggingPriority="200" horizontalCompressionResistancePriority="200" verticalCompressionResistancePriority="200" translatesAutoresizingMaskIntoConstraints="NO" id="dOZ-qu-KIz">
+                                                                                                <rect key="frame" x="0.0" y="0.0" width="320" height="94.5"/>
+                                                                                            </imageView>
+                                                                                        </subviews>
+                                                                                        <color key="backgroundColor" name="Main"/>
+                                                                                        <constraints>
+                                                                                            <constraint firstAttribute="trailing" secondItem="OnC-rl-dJ7" secondAttribute="trailing" id="4pP-ra-Rg4"/>
+                                                                                            <constraint firstItem="dOZ-qu-KIz" firstAttribute="top" secondItem="fqg-kc-CoM" secondAttribute="top" id="P9G-gb-bKl"/>
+                                                                                            <constraint firstItem="dOZ-qu-KIz" firstAttribute="leading" secondItem="fqg-kc-CoM" secondAttribute="leading" id="Yrk-XQ-M3g"/>
+                                                                                            <constraint firstAttribute="bottom" secondItem="OnC-rl-dJ7" secondAttribute="bottom" id="dud-g5-1Y8"/>
+                                                                                            <constraint firstAttribute="bottom" secondItem="dOZ-qu-KIz" secondAttribute="bottom" id="nmC-nk-Zh3"/>
+                                                                                            <constraint firstItem="OnC-rl-dJ7" firstAttribute="top" secondItem="fqg-kc-CoM" secondAttribute="top" id="vxe-jQ-Ef9"/>
+                                                                                            <constraint firstAttribute="trailing" secondItem="dOZ-qu-KIz" secondAttribute="trailing" id="ynD-Uf-38G"/>
+                                                                                            <constraint firstItem="OnC-rl-dJ7" firstAttribute="leading" secondItem="fqg-kc-CoM" secondAttribute="leading" id="zLd-va-zcO"/>
+                                                                                        </constraints>
+                                                                                    </view>
                                                                                     <view opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="200" verticalHuggingPriority="800" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="800" translatesAutoresizingMaskIntoConstraints="NO" id="fPz-3b-gSZ" userLabel="Text Container">
                                                                                         <rect key="frame" x="0.0" y="94.5" width="320" height="85.5"/>
                                                                                         <subviews>
@@ -3106,6 +3126,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
         <image name="markup_redo" width="30" height="30"/>
         <image name="markup_square" width="32" height="32"/>
         <image name="markup_undo" width="30" height="30"/>
+        <image name="site_image_placeholder" width="512" height="512"/>
         <image name="trash" width="32" height="32"/>
         <namedColor name="Attention">
             <color red="0.99199998378753662" green="0.49399998784065247" blue="0.078000001609325409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
