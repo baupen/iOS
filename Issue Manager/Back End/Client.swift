@@ -193,6 +193,9 @@ fileprivate func debugRepresentation(of data: Data, maxLength: Int = 1000) -> St
 private extension Client {
 	func loadShared() {
 		do {
+			// TODO: remove once most users have migrated to database
+			defaults.removeObject(forKey: "Client.shared.storage")
+			
 			localUser = try defaults.decode(forKey: .localUserKey)
 			backlog = try defaults.decode(forKey: .backlogKey) ?? backlog
 			serverURL = defaults.url(forKey: .serverURLKey) ?? serverURL
