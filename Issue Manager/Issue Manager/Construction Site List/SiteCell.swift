@@ -84,6 +84,8 @@ final class SiteCell: UICollectionViewCell, Reusable {
 					self.updateImage()
 				}
 			}
+		} else {
+			imageView.image = nil
 		}
 	}
 }
