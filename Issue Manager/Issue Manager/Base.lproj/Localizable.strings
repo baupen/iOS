@@ -35,7 +35,7 @@
 // CONTEXT: Titel für den Alert, dass beim aktualisieren ein unbekannter Fehler aufgetreten ist.
 "alert.unknown_sync_error.title" = "Unbekannter Fehler!";
 // CONTEXT: Überschrift für den Handwerker.
-"issue.craftsman" = "Handwerker";
+"issue.craftsman" = "Unternehmer";
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Issue.craftsman
@@ -56,7 +56,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Issue.no
 // CONTEXT: Wird anstelle der Funktion angezeigt, wenn kein Handwerker gesetzt ist.
-"issue.no_craftsman" = "Kein Handwerker";
+"issue.no_craftsman" = "Kein Unternehmer";
 // CONTEXT: Wird anstelle der Beschreibung angezeigt, wenn sie nicht gesetzt ist.
 "issue.no_description" = "Keine Beschreibung";
 // CONTEXT: Überschrift für den Status.
@@ -71,12 +71,12 @@
 // CONTEXT: Beschreibt genauer, wie die Pendenz registriert wurde. %s wird durch den Namen des Registrierers ersetzt.
 "issue.status.registered_by" = "Registriert von %@";
 // CONTEXT: Status einer Pendenz, die vom Handwerker beantwortet wurde.
-"issue.status.responded" = "Beantwortet";
+"issue.status.responded" = "Erledigt";
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Issue.status.responded
 // CONTEXT: Beschreibt genauer, wie die Pendenz beantwortet wurde. %s wird durch den Namen des Beantworters ersetzt.
-"issue.status.responded_by" = "Beantwortet von %@";
+"issue.status.responded_by" = "Erledigt von %@";
 // CONTEXT: Status einer Pendenz, die abgeschlossen ist.
 "issue.status.reviewed" = "Abgeschlossen";
 
@@ -119,14 +119,14 @@
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Map.could
 // CONTEXT: Wird angezeigt, wenn das PDF nicht geladen werden konnte.
-"map.could_not_load" = "Der Grundriss konnte nicht geladen werden!";
+"map.could_not_load" = "Der Bauplan konnte nicht geladen werden!";
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Map.issue
 // CONTEXT: Knopf, um die Details einer Pendenz anzuzeigen.
 "map.issue_list.show_details" = "Details Anzeigen";
 // CONTEXT: Knopf, um die in der liste ausgewählte Pendenz auf dem Grundriss anzuzeigen.
-"map.issue_list.show_in_map" = "Auf Grundriss Anzeigen";
+"map.issue_list.show_in_map" = "Auf Bauplan Anzeigen";
 // CONTEXT: Fasst kurz zusammen, was für Pendenzen in einem Bereich sind. Das erste %s wird durch die Anzahl offener Pendenzen ersetzt, das zweite durch die Anzahl insgesamt (innerhalb des Bereichs).
 "map.issue_list.summary" = "%@ Pendenzen offen; %@ insgesamt";
 // CONTEXT: Wird statt map.issue_list.summary angezeigt, wenn ein Filter aktiv ist. das erste %s wird durch die Anzahl Pendenzen ersetzt, die dem Filter entsprechen und somit angezeigt werden; das Zweite wird weiterhin durch die Gesamtzahl ersetzt.
@@ -140,14 +140,14 @@
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Map.no
 // CONTEXT: Wird angezeigt, wenn kein Bereich ausgewählt ist.
-"map.no_map_selected" = "Wähle links einen Bereich aus, um hier den zugehörigen Grundriss zu sehen.";
+"map.no_map_selected" = "Wähle links einen Bereich aus, um hier den zugehörigen Bauplan zu sehen.";
 // CONTEXT: Wird angezeigt, wenn ein Bereich ausgewählt wurde, für den es keinen Grundriss/kein PDF gibt. %s wird durch den Namen des Bereichs ersetzt.
-"map.no_pdf" = "Der Bereich \"%@\" hat keinen zugehörigen Grundriss.";
+"map.no_pdf" = "Der Bereich \"%@\" hat keinen zugehörigen Bauplan.";
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Map.pdf
 // CONTEXT: Wird angezeigt, während der Grundriss geladen wird.
-"map.pdf_loading" = "Grundriss wird geladen…";
+"map.pdf_loading" = "Bauplan wird geladen…";
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Map.status
@@ -160,7 +160,7 @@
 // CONTEXT: Titel für das Popup, womit die Pendenzen gefiltert werden können.
 "map.status_filter.title" = "Filter nach Status";
 // CONTEXT: Titel für die Grundrissansicht. (Wird angezeigt, wenn kein Grundriss ausgewählt ist.)
-"map.title" = "Grundriss";
+"map.title" = "Bauplan";
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Map
@@ -229,7 +229,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: View
 // CONTEXT: Knopf, um die Antwort vom Handwerker anzunehmen und somit die Pendenz als abgeschlossen zu markieren.
-"view_issue.accept_response" = "Annehmen";
+"view_issue.accept_response" = "Bestätigen";
 // CONTEXT: Überschrift für die Aktionen, die auf eine Pendenz ausgeführt werden können.
 "view_issue.actions" = "Aktionen";
 // CONTEXT: Wird angezeigt, wenn der Nutzer noch nie ein Foto gemacht hat. Soll ihm sagen, dass er einfach durch Tippen irgendwo auf die Kameraansicht ein Foto machen kann.
@@ -245,7 +245,7 @@
 // CONTEXT: Titel des Alerts für wenn kein Foto gemacht werden konnte.
 "view_issue.could_not_take_picture.title" = "Fotoaufnahme fehlgeschlagen!";
 // CONTEXT: Überschrift für die Details des zugewiesenen Handwerkers.
-"view_issue.craftsman" = "Handwerker";
+"view_issue.craftsman" = "Unternehmer";
 // CONTEXT: Überschrift für die Beschreibung.
 "view_issue.description" = "Beschreibung";
 // CONTEXT: Überschrift für die Details einer Pendenz.
@@ -273,17 +273,17 @@
 // CONTEXT: Knopf, um erneut zu versuchen, die Kamera aufzustarten, nachdem es fehlgeschlagen ist.
 "view_issue.retry_camera" = "Erneut Versuchen";
 // CONTEXT: Knopf, um keinen Handwerker auszuwählen.
-"view_issue.select_craftsman.none" = "Kein Handwerker";
+"view_issue.select_craftsman.none" = "Kein Unternehmer";
 // CONTEXT: Titel für die Ansicht zum auswählen des Namens.
-"view_issue.select_craftsman.title" = "Handwerker";
+"view_issue.select_craftsman.title" = "Unternehmer";
 // CONTEXT: Knopf, um keine Funktion auszuwählen.
 "view_issue.select_trade.none" = "Keine Funktion";
 // CONTEXT: Titel für die Ansicht zum auswählen der Funktion.
 "view_issue.select_trade.title" = "Funktionen";
 // CONTEXT: Wird über den Aktionen angezeigt, wenn die Pendenz vom Handwerker beantwortet wurde.
-"view_issue.summary.has_response" = "Diese Pendenz wurde vom Handwerker beantwortet.\nDu kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) oder ablehnen (und sie somit rückgängig machen).";
+"view_issue.summary.has_response" = "Diese Pendenz wurde vom Unternehmer erledigt.\nDu kannst diese Antwort entweder bestätigen (die Pendenz abschliessen) oder ablehnen (rückgängig machen).";
 // CONTEXT: Wird über den Aktionen angezeigt, wenn die Pendenz vom Handwerker noch keine Antwort erhalten hat.
-"view_issue.summary.no_response" = "Diese Pendenz wurde noch nicht vom Handwerker beantwortet.\nDu kannst sie trotzdem bestätigen und somit als abgeschlossen markieren.";
+"view_issue.summary.no_response" = "Diese Pendenz wurde noch nicht vom Unternehmer erledigt.\nDu kannst sie trotzdem bestätigen und somit als abgeschlossen markieren.";
 // CONTEXT: Wird über den Aktionen angezeigt, wenn die Pendenz bereits abgeschlossen wurde.
 "view_issue.summary.reviewed" = "Diese Pendenz wurde bereits abgeschlossen.\nDu kannst die Bestätigung rückgangig machen, um sie wieder zu eröffnen.";
 // CONTEXT: Titel für das "Pendenz Bearbeiten"-Popup, wenn die Pendenz erstellt wird.
