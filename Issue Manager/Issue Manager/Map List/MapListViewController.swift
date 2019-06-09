@@ -5,7 +5,7 @@ import UIKit
 final class MapListViewController: RefreshingTableViewController, Reusable {
 	typealias Localization = L10n.MapList
 	
-	@IBOutlet var backToSiteListButton: UIBarButtonItem!
+	@IBOutlet private var backToSiteListButton: UIBarButtonItem!
 	
 	var holder: MapHolder! {
 		didSet { update() }

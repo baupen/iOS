@@ -9,11 +9,11 @@ fileprivate let shadowRadius: CGFloat = 12
 final class SiteCell: UICollectionViewCell, Reusable {
 	fileprivate typealias Localization = L10n.SiteList.SiteSummary
 	
-	@IBOutlet var imageView: UIImageView!
-	@IBOutlet var nameLabel: UILabel!
-	@IBOutlet var openIssuesLabel: UILabel!
-	@IBOutlet var totalIssuesLabel: UILabel!
-	@IBOutlet var issueBadge: IssueBadge!
+	@IBOutlet private var imageView: UIImageView!
+	@IBOutlet private var nameLabel: UILabel!
+	@IBOutlet private var openIssuesLabel: UILabel!
+	@IBOutlet private var totalIssuesLabel: UILabel!
+	@IBOutlet private var issueBadge: IssueBadge!
 	
 	override var isHighlighted: Bool {
 		didSet { updateAppearance() }

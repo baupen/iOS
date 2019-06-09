@@ -5,19 +5,19 @@ import UIKit
 final class IssueCell: UITableViewCell, Reusable {
 	typealias Localization = L10n.Issue
 	
-	@IBOutlet var markButton: UIButton!
-	@IBOutlet var numberLabel: UILabel!
-	@IBOutlet var descriptionLabel: UILabel!
-	@IBOutlet var tradeLabel: UILabel!
-	@IBOutlet var iconView: UIImageView!
+	@IBOutlet private var markButton: UIButton!
+	@IBOutlet private var numberLabel: UILabel!
+	@IBOutlet private var descriptionLabel: UILabel!
+	@IBOutlet private var tradeLabel: UILabel!
+	@IBOutlet private var iconView: UIImageView!
 	
-	@IBOutlet var expandedView: UIView!
-	@IBOutlet var showInMapButton: UIButton!
-	@IBOutlet var expandedDescriptionLabel: UILabel!
-	@IBOutlet var craftsmanLabel: UILabel!
-	@IBOutlet var clientModeLabel: UILabel!
-	@IBOutlet var statusLabel: UILabel!
-	@IBOutlet var actionsView: UIStackView!
+	@IBOutlet private var expandedView: UIView!
+	@IBOutlet private var showInMapButton: UIButton!
+	@IBOutlet private var expandedDescriptionLabel: UILabel!
+	@IBOutlet private var craftsmanLabel: UILabel!
+	@IBOutlet private var clientModeLabel: UILabel!
+	@IBOutlet private var statusLabel: UILabel!
+	@IBOutlet private var actionsView: UIStackView!
 	
 	@IBAction func markPressed() {
 		issue.mark()

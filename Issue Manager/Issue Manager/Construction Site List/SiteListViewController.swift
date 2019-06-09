@@ -5,11 +5,11 @@ import UIKit
 final class SiteListViewController: RefreshingTableViewController, Reusable {
 	fileprivate typealias Localization = L10n.SiteList
 	
-	@IBOutlet var welcomeLabel: UILabel!
-	@IBOutlet var clientModeSwitch: UISwitch!
-	@IBOutlet var clientModeCell: UITableViewCell!
-	@IBOutlet var siteListView: UICollectionView!
-	@IBOutlet var refreshHintLabel: UILabel!
+	@IBOutlet private var welcomeLabel: UILabel!
+	@IBOutlet private var clientModeSwitch: UISwitch!
+	@IBOutlet private var clientModeCell: UITableViewCell!
+	@IBOutlet private var siteListView: UICollectionView!
+	@IBOutlet private var refreshHintLabel: UILabel!
 	
 	@IBAction func clientModeSwitched() {
 		defaults.isInClientMode = clientModeSwitch.isOn

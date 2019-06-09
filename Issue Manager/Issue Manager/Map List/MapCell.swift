@@ -6,9 +6,9 @@ import Promise
 final class MapCell: UITableViewCell, Reusable {
 	typealias Localization = L10n.MapList.MapSummary
 	
-	@IBOutlet weak var nameLabel: UILabel!
-	@IBOutlet var openIssuesLabel: UILabel!
-	@IBOutlet var issueBadge: IssueBadge!
+	@IBOutlet private weak var nameLabel: UILabel!
+	@IBOutlet private var openIssuesLabel: UILabel!
+	@IBOutlet private var issueBadge: IssueBadge!
 	
 	var isRefreshing = false {
 		didSet {

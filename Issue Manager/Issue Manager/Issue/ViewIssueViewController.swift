@@ -5,24 +5,24 @@ import UIKit
 final class ViewIssueViewController: UITableViewController, Reusable {
 	typealias Localization = L10n.ViewIssue
 	
-	@IBOutlet var iconView: TrilinearImageView!
-	@IBOutlet var numberLabel: UILabel!
-	@IBOutlet var markButton: UIButton!
-	@IBOutlet var clientModeLabel: UILabel!
+	@IBOutlet private var iconView: TrilinearImageView!
+	@IBOutlet private var numberLabel: UILabel!
+	@IBOutlet private var markButton: UIButton!
+	@IBOutlet private var clientModeLabel: UILabel!
 	
-	@IBOutlet var imageView: UIImageView!
+	@IBOutlet private var imageView: UIImageView!
 	
-	@IBOutlet var craftsmanTradeLabel: UILabel!
-	@IBOutlet var craftsmanNameLabel: UILabel!
+	@IBOutlet private var craftsmanTradeLabel: UILabel!
+	@IBOutlet private var craftsmanNameLabel: UILabel!
 	
-	@IBOutlet var descriptionLabel: UILabel!
-	@IBOutlet var statusLabel: UILabel!
+	@IBOutlet private var descriptionLabel: UILabel!
+	@IBOutlet private var statusLabel: UILabel!
 	
-	@IBOutlet var summaryLabel: UILabel!
-	@IBOutlet var completeButton: UIButton!
-	@IBOutlet var rejectButton: UIButton!
-	@IBOutlet var acceptButton: UIButton!
-	@IBOutlet var reopenButton: UIButton!
+	@IBOutlet private var summaryLabel: UILabel!
+	@IBOutlet private var completeButton: UIButton!
+	@IBOutlet private var rejectButton: UIButton!
+	@IBOutlet private var acceptButton: UIButton!
+	@IBOutlet private var reopenButton: UIButton!
 	
 	@IBAction func markIssue() {
 		issue.mark()

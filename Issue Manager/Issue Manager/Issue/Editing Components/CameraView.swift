@@ -4,7 +4,7 @@ import UIKit
 import AVFoundation
 
 final class CameraContainerView: UIView {
-	@IBOutlet var cameraView: CameraView!
+	@IBOutlet private var cameraView: CameraView!
 }
 
 final class CameraView: UIView {

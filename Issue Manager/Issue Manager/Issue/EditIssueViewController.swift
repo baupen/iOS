@@ -12,21 +12,21 @@ final class EditIssueNavigationController: UINavigationController {
 final class EditIssueViewController: UITableViewController, Reusable {
 	typealias Localization = L10n.ViewIssue
 	
-	@IBOutlet var markButton: UIButton!
+	@IBOutlet private var markButton: UIButton!
 	
-	@IBOutlet var imageView: UIImageView!
-	@IBOutlet var cameraContainerView: CameraContainerView!
-	@IBOutlet var cameraView: CameraView!
-	@IBOutlet var markupButton: UIButton!
-	@IBOutlet var cameraControlHintView: UIView!
+	@IBOutlet private var imageView: UIImageView!
+	@IBOutlet private var cameraContainerView: CameraContainerView!
+	@IBOutlet private var cameraView: CameraView!
+	@IBOutlet private var markupButton: UIButton!
+	@IBOutlet private var cameraControlHintView: UIView!
 	
-	@IBOutlet var craftsmanTradeLabel: UILabel!
-	@IBOutlet var craftsmanNameLabel: UILabel!
+	@IBOutlet private var craftsmanTradeLabel: UILabel!
+	@IBOutlet private var craftsmanNameLabel: UILabel!
 	
-	@IBOutlet var descriptionCell: UITableViewCell!
-	@IBOutlet var descriptionField: UITextField!
-	@IBOutlet var suggestionsHeight: NSLayoutConstraint!
-	@IBOutlet var suggestionsTableView: UITableView!
+	@IBOutlet private var descriptionCell: UITableViewCell!
+	@IBOutlet private var descriptionField: UITextField!
+	@IBOutlet private var suggestionsHeight: NSLayoutConstraint!
+	@IBOutlet private var suggestionsTableView: UITableView!
 	
 	@IBAction func markIssue() {
 		isIssueMarked.toggle()

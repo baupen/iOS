@@ -3,9 +3,9 @@
 import UIKit
 
 final class LightboxViewController: UIViewController {
-	@IBOutlet var scrollView: UIScrollView!
-	@IBOutlet var imageView: UIImageView!
-	@IBOutlet var aspectRatioConstraint: NSLayoutConstraint!
+	@IBOutlet private var scrollView: UIScrollView!
+	@IBOutlet fileprivate var imageView: UIImageView!
+	@IBOutlet private var aspectRatioConstraint: NSLayoutConstraint!
 	
 	var sourceView: UIView?
 	

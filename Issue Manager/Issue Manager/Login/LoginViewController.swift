@@ -5,11 +5,11 @@ import UIKit
 final class LoginViewController: LoginHandlerViewController {
 	fileprivate typealias Localization = L10n.Login
 	
-	@IBOutlet var textFieldView: UIView!
-	@IBOutlet var usernameField: UITextField!
-	@IBOutlet var passwordField: UITextField!
-	@IBOutlet var activityIndicator: UIActivityIndicatorView!
-	@IBOutlet var stayLoggedInSwitch: UISwitch!
+	@IBOutlet private var textFieldView: UIView!
+	@IBOutlet private var usernameField: UITextField!
+	@IBOutlet private var passwordField: UITextField!
+	@IBOutlet private var activityIndicator: UIActivityIndicatorView!
+	@IBOutlet private var stayLoggedInSwitch: UISwitch!
 	
 	@IBAction func backgroundTapped(_ sender: UITapGestureRecognizer) {
 		usernameField.resignFirstResponder()

@@ -8,14 +8,14 @@ import Promise
 final class MapViewController: UIViewController, Reusable {
 	typealias Localization = L10n.Map
 	
-	@IBOutlet var filterItem: UIBarButtonItem!
-	@IBOutlet var addItem: UIBarButtonItem!
+	@IBOutlet private var filterItem: UIBarButtonItem!
+	@IBOutlet private var addItem: UIBarButtonItem!
 	
-	@IBOutlet var fallbackLabel: UILabel!
-	@IBOutlet var pdfContainerView: UIView!
-	@IBOutlet var activityIndicator: UIActivityIndicatorView!
-	@IBOutlet var pullableView: PullableView!
-	@IBOutlet var issuePositioner: IssuePositioner!
+	@IBOutlet private var fallbackLabel: UILabel!
+	@IBOutlet private var pdfContainerView: UIView!
+	@IBOutlet private var activityIndicator: UIActivityIndicatorView!
+	@IBOutlet private var pullableView: PullableView!
+	@IBOutlet private var issuePositioner: IssuePositioner!
 	
 	// the filter popover's done button and the add marker popover's cancel button link to this
 	@IBAction func backToMap(_ segue: UIStoryboardSegue) {

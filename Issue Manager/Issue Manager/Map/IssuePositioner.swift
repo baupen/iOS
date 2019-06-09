@@ -3,9 +3,9 @@
 import UIKit
 
 final class IssuePositioner: UIView {
-	@IBOutlet var crosshairView: UIImageView!
-	@IBOutlet var topView: UIView!
-	@IBOutlet var botView: UIView!
+	@IBOutlet private var crosshairView: UIImageView!
+	@IBOutlet private var topView: UIView!
+	@IBOutlet private var botView: UIView!
 	
 	override var center: CGPoint {
 		didSet {

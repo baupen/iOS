@@ -3,7 +3,7 @@
 import UIKit
 
 final class SelectionViewController: UIViewController {
-	@IBOutlet var tableView: UITableView!
+	@IBOutlet private var tableView: UITableView!
 	
 	var handler: AnySelectionHandler! {
 		didSet { update() }
