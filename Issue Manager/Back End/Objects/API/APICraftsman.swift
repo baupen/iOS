@@ -12,7 +12,8 @@ struct APICraftsman {
 			meta: meta,
 			name: name,
 			trade: trade,
-			constructionSiteID: changedConstructionSites.first { $0.craftsmen.contains(id) }!.id
+			constructionSiteID: changedConstructionSites.first { $0.craftsmen.contains(id) }?.id
+				?? Repository.shared.object(id)!.constructionSiteID
 		)
 	}
 }
