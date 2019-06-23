@@ -11,6 +11,7 @@ struct APIMap {
 	let file: File<Map>?
 	let name: String
 	let constructionSiteID: ID<ConstructionSite>
+	let parentID: ID<Map>?
 	
 	func makeObject(changedMaps: [APIMap]) -> Map {
 		return Map(
@@ -20,7 +21,7 @@ struct APIMap {
 			file: file,
 			name: name,
 			constructionSiteID: constructionSiteID,
-			parentID: changedMaps.first { $0.children.contains(id) }?.id
+			parentID: parentID
 		)
 	}
 }
