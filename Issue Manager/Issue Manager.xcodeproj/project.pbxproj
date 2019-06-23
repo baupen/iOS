@@ -736,6 +736,7 @@
 				9583C2B720DC748800452695 /* Sources */,
 				9583C2B820DC748800452695 /* Frameworks */,
 				95A4E6572102302400591EAE /* Generate Private Files (if necessary) */,
+				95C589B722BFA8E900FB9A10 /* Increment Build Number */,
 				9583C2B920DC748800452695 /* Resources */,
 				9543CA652277D2D8001482D5 /* Embed Frameworks */,
 			);
@@ -964,6 +965,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "find . -name '*.public.*' -exec ./generate_private.sh {} +\nexit 0\n";
+		};
+		95C589B722BFA8E900FB9A10 /* Increment Build Number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Increment Build Number";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
