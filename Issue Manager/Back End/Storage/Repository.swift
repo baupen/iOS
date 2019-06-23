@@ -81,10 +81,11 @@ final class Repository {
 	func update<Object>(in db: Database, changing changedEntries: [Object]) throws where Object: StoredObject & DBRecord {
 		// this may seem overcomplicated, but it's actually a significant (>2x) performance improvement over the naive version and massively reduces database operations thanks to `updateChanges`
 		
-		var previous = try Object.fetchAll(db, keys: changedEntries.map { $0.id })
+		let previous = Dictionary(uniqueKeysWithValues:
+			try Object.fetchAll(db, keys: changedEntries.map { $0.id }).map { ($0.id, $0) }
+		)
 		for object in changedEntries {
-			if let old = previous.first, old.id == object.id {
-				previous.removeFirst() // swift is smart and makes this O(1) here
+			if let old = previous[object.id] {
 				Object.onChange(from: old, to: object)
 				try object.updateChanges(db, from: old)
 			} else {
