@@ -44,7 +44,7 @@ struct Issue {
 	struct Status: Codable {
 		/// registration in issue collection
 		var registration: Event?
-		/// response from craftsman
+		/// response from craftsman; might be nil even if reviewed
 		var response: Event?
 		/// review by supervisor
 		var review: Event?
@@ -108,11 +108,11 @@ extension Issue: DBRecord {
 		container[Columns.number] = number
 		container[Columns.wasAddedWithClient] = wasAddedWithClient
 		container[Columns.mapID] = mapID
-		try! container.encodeIfPresent(position, forKey: Columns.position)
+		try! container.encode(position, forKey: Columns.position)
 		try! container.encode(details, forKey: Columns.details)
-		try! container.encodeIfPresent(status.registration, forKey: Columns.registration)
-		try! container.encodeIfPresent(status.response, forKey: Columns.response)
-		try! container.encodeIfPresent(status.review, forKey: Columns.review)
+		try! container.encode(status.registration, forKey: Columns.registration)
+		try! container.encode(status.response, forKey: Columns.response)
+		try! container.encode(status.review, forKey: Columns.review)
 	}
 	
 	init(row: Row) {

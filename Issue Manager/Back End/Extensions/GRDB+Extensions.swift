@@ -37,12 +37,11 @@ extension PersistenceContainer {
 		self[key] = try encoder.encode(value)
 	}
 	
-	mutating func encodeIfPresent<Column, Value>(
+	mutating func encode<Column, Value>(
 		_ value: Value?,
 		forKey key: Column,
 		using encoder: JSONEncoder = PersistenceContainer.encoder
 	) throws where Column: ColumnExpression, Value: Encodable {
-		guard let value = value else { return }
-		self[key] = try encoder.encode(value)
+		self[key] = try value.map(encoder.encode)
 	}
 }
