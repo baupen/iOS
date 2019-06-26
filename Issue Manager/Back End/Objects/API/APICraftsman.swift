@@ -8,7 +8,7 @@ struct APICraftsman {
 	let trade: String
 	let constructionSiteID: ID<ConstructionSite>
 	
-	func makeObject(changedConstructionSites: [APIConstructionSite]) -> Craftsman {
+	func makeObject() -> Craftsman {
 		return Craftsman(
 			meta: meta,
 			name: name,

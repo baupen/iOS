@@ -51,7 +51,7 @@ struct ReadRequest: JSONJSONRequest {
 		}
 		
 		func maps() -> [Map] {
-			return changedMaps.map { $0.makeObject(changedMaps: changedMaps) }
+			return changedMaps.map { $0.makeObject() }
 		}
 		
 		func issues() -> [Issue] {
@@ -59,7 +59,7 @@ struct ReadRequest: JSONJSONRequest {
 		}
 		
 		func craftsmen() -> [Craftsman] {
-			return changedCraftsmen.map { $0.makeObject(changedConstructionSites: changedConstructionSites) }
+			return changedCraftsmen.map { $0.makeObject() }
 		}
 	}
 }

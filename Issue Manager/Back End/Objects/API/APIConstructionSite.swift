@@ -7,8 +7,6 @@ struct APIConstructionSite {
 	let name: String
 	let address: ConstructionSite.Address
 	let image: File<ConstructionSite>?
-	let maps: [ID<Map>]
-	let craftsmen: [ID<Craftsman>]
 	
 	func makeObject() -> ConstructionSite {
 		return ConstructionSite(
