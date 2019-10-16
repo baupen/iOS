@@ -1,0 +1,34 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "GRDB",
+        "repositoryURL": "git@github.com:groue/GRDB.swift.git",
+        "state": {
+          "branch": null,
+          "revision": "89bc509170f91e8f593ed1b96cc2ba2c0a236760",
+          "version": "4.5.0"
+        }
+      },
+      {
+        "package": "Promise",
+        "repositoryURL": "git@github.com:timvermeulen/Promise.git",
+        "state": {
+          "branch": null,
+          "revision": "5152cf895afe696193c881af6bfc5c3caa876db4",
+          "version": "1.14.0"
+        }
+      },
+      {
+        "package": "PullToExpand",
+        "repositoryURL": "git@github.com:juliand665/PullToExpand.git",
+        "state": {
+          "branch": null,
+          "revision": "0e7d27acc686fe3d7a65ffa25407e9479cec1047",
+          "version": "1.3.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
