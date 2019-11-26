@@ -138,6 +138,10 @@ final class EditIssueViewController: UITableViewController, Reusable {
 		cameraControlHintView.isHidden = defaults.hasTakenPhoto
 		
 		update()
+		
+		if #available(iOS 13.0, *) {
+			isModalInPresentation = true // don't just dismiss
+		}
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
