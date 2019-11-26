@@ -55,6 +55,8 @@
 		956015342100C50500F84600 /* StringDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956015332100C50500F84600 /* StringDistance.swift */; };
 		956015372101302700F84600 /* SmallestN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956015362101302700F84600 /* SmallestN.swift */; };
 		9562F944223C1DBE0014BFB0 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9562F943223C1DBE0014BFB0 /* Repository.swift */; };
+		9564186323578E80002BAD7B /* SimplePDFKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9573A05F2357766D00DE5AC1 /* SimplePDFKit.framework */; };
+		9564186423578E80002BAD7B /* SimplePDFKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9573A05F2357766D00DE5AC1 /* SimplePDFKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		956868E121F6528C00A0850F /* LoginHandlerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956868E021F6528C00A0850F /* LoginHandlerViewController.swift */; };
 		9573A05223576AF200DE5AC1 /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 9573A05123576AF200DE5AC1 /* GRDB */; };
 		9573A05523576BD900DE5AC1 /* Promise in Frameworks */ = {isa = PBXBuildFile; productRef = 9573A05423576BD900DE5AC1 /* Promise */; };
@@ -135,6 +137,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				9564186423578E80002BAD7B /* SimplePDFKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -255,6 +258,7 @@
 			files = (
 				9573A05823576C4700DE5AC1 /* PullToExpand in Frameworks */,
 				9573A05523576BD900DE5AC1 /* Promise in Frameworks */,
+				9564186323578E80002BAD7B /* SimplePDFKit.framework in Frameworks */,
 				9573A05223576AF200DE5AC1 /* GRDB in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
