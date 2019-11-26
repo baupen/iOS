@@ -1,0 +1,3 @@
+[submodule "SimplePDFKit"]
+	path = Issue Manager/Libraries/SimplePDFKit
+	url = git@github.com:mangelio/SimplePDFKit.git
