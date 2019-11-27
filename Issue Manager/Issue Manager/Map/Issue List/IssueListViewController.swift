@@ -9,7 +9,6 @@ final class IssueListViewController: UIViewController {
 	@IBOutlet private var summaryLabel: UILabel!
 	@IBOutlet private var separatorView: UIView!
 	@IBOutlet private var issueTableView: UITableView!
-	@IBOutlet private var separatorHeightConstraint: NSLayoutConstraint!
 	
 	/// - note: set this _before_ the list loads its data
 	weak var issueCellDelegate: IssueCellDelegate?
@@ -36,7 +35,6 @@ final class IssueListViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		separatorHeightConstraint.constant = 1 / UIScreen.main.scale // 1px
 		separatorView.backgroundColor = issueTableView.separatorColor
 		
 		issueTableView.panGestureRecognizer.addTarget(self, action: #selector(listPanned))
@@ -123,7 +121,7 @@ extension IssueListViewController: UITableViewDataSource {
 
 extension IssueListViewController: UITableViewDelegate {
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		if indexPath == tableView.indexPathForSelectedRow || tableView.cellForRow(at: indexPath)?.isSelected == true {
+		if indexPath == tableView.indexPathForSelectedRow {
 			return UITableView.automaticDimension
 		} else {
 			return 44 // bit of a magic number but eh. also it's the recommended minimum tap target size so ¯\_(ツ)_/¯
@@ -134,13 +132,16 @@ extension IssueListViewController: UITableViewDelegate {
 	
 	func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
 		let currentSelection = tableView.indexPathForSelectedRow
+
+		// instantly select the cell so `indexPathForSelectedRow` matches up for the height calculations
+		tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+		// we don't need to deselect it later because it would be selected anyway, so we're not breaking anything
 		
 		tableView.performBatchUpdates({
 			if let previous = currentSelection {
 				tableView.deselectRow(at: previous, animated: true)
 			}
 			
-			//tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none) // using this instantly unhighlights the cell and then animates the rehighlighting during selection, which looks weird, so instead we call it in didSelect
 			tableView.cellForRow(at: indexPath)?.isSelected = true
 		}, completion: nil)
 		
@@ -149,7 +150,7 @@ extension IssueListViewController: UITableViewDelegate {
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		// scrolling works correctly at this point because the table now knows the cell's actual height
-		tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
+		tableView.scrollToRow(at: indexPath, at: .none, animated: true)
 	}
 	
 	func tableView(_ tableView: UITableView, willDeselectRowAt indexPath: IndexPath) -> IndexPath? {
