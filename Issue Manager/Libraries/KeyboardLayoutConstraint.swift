@@ -81,7 +81,6 @@ public class KeyboardLayoutConstraint: NSLayoutConstraint {
 			return
 		}
 		
-		print("animating to", visibleKeyboardHeight)
 		UIView.animate(
 			withDuration: duration,
 			delay: 0,
