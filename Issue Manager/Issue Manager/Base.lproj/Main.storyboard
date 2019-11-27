@@ -783,7 +783,7 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                                                                 <attributedString key="userComments">
                                                                                     <fragment content="placeholder for username field">
                                                                                         <attributes>
-                                                                                            <font key="NSFont" metaFont="controlContent" size="11"/>
+                                                                                            <font key="NSFont" metaFont="message" size="11"/>
                                                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                                         </attributes>
                                                                                     </fragment>
@@ -2447,16 +2447,16 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
         <!--Lightbox-->
         <scene sceneID="SyO-2W-hGA">
             <objects>
-                <viewController id="L56-qw-CXN" userLabel="Lightbox" customClass="LightboxViewController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="L56-qw-CXN" userLabel="Lightbox" customClass="LightboxViewController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="noV-d0-89B">
-                        <rect key="frame" x="0.0" y="0.0" width="712" height="984"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" maximumZoomScale="4" translatesAutoresizingMaskIntoConstraints="NO" id="IMr-LA-CgM">
-                                <rect key="frame" x="0.0" y="0.0" width="712" height="984"/>
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bP3-F6-Phf">
-                                        <rect key="frame" x="0.0" y="0.0" width="712" height="379.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="768" height="409.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="bP3-F6-Phf" secondAttribute="height" multiplier="15:8" id="fXs-0a-TGf"/>
                                         </constraints>
@@ -2520,7 +2520,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
         <!--Markup-->
         <scene sceneID="mDm-og-bQU">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="5NQ-5a-rcK" userLabel="Markup" customClass="MarkupViewController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="5NQ-5a-rcK" userLabel="Markup" customClass="MarkupViewController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="H2p-7s-DUQ">
                         <rect key="frame" x="0.0" y="0.0" width="712" height="984"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2881,7 +2881,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                                                 <attributedString key="userComments">
                                                                                     <fragment content="placeholder for username field">
                                                                                         <attributes>
-                                                                                            <font key="NSFont" metaFont="controlContent" size="11"/>
+                                                                                            <font key="NSFont" metaFont="message" size="11"/>
                                                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                                         </attributes>
                                                                                     </fragment>
