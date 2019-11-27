@@ -160,9 +160,9 @@ final class MapViewController: UIViewController, Reusable {
 					zoomScale: pdfController!.scrollView.zoomScale / pdfController!.scrollView.minimumZoomScale,
 					in: map.file!
 				)
-				editController.issue = Issue(at: isPlacingIssue ? position : nil, in: map)
+				editController.present(Issue(at: isPlacingIssue ? position : nil, in: map))
 			} else {
-				editController.issue = Issue(in: holder as! Map)
+				editController.present(Issue(in: holder as! Map))
 			}
 		default:
 			fatalError("unrecognized segue to \(segue.destination)")
@@ -292,7 +292,7 @@ final class MapViewController: UIViewController, Reusable {
 	func showDetails(for issue: Issue) {
 		let viewController = issue.isRegistered
 			? storyboard!.instantiate(ViewIssueViewController.self)! <- { $0.issue = issue }
-			: storyboard!.instantiate(EditIssueViewController.self)! <- { $0.issue = issue }
+			: storyboard!.instantiate(EditIssueViewController.self)! <- { $0.present(issue) }
 		
 		let navController = UINavigationController(rootViewController: viewController)
 			<- { $0.modalPresentationStyle = .formSheet }

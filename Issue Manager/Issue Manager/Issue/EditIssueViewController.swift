@@ -72,11 +72,11 @@ final class EditIssueViewController: UITableViewController, Reusable {
 	// the markup editor's buttons link to this
 	@IBAction func backToIssueEditor(_ segue: UIStoryboardSegue) {}
 	
-	var issue: Issue! {
-		didSet { update() }
-	}
-	
 	var isCreating = false
+	
+	private var issue: Issue!
+	private var original: Issue?
+	private var site: ConstructionSite!
 	
 	private var isIssueMarked = false {
 		didSet {
@@ -114,17 +114,13 @@ final class EditIssueViewController: UITableViewController, Reusable {
 	
 	var image: UIImage? {
 		didSet {
-			hasChangedImage = true
 			imageView.image = image
 			cameraContainerView.isHidden = image != nil
 			markupButton.isEnabled = image != nil
 		}
 	}
-	private var hasChangedImage = false
 	
-	private var site: ConstructionSite!
 	private var suggestionsHandler = SuggestionsHandler()
-	private var originalDescription: String?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -150,6 +146,12 @@ final class EditIssueViewController: UITableViewController, Reusable {
 		tableView.reloadData()
 	}
 	
+	func present(_ issue: Issue) {
+		self.issue = issue
+		original = issue
+		update()
+	}
+	
 	// only call this when absolutely necessary; overwrites content in text fields
 	private func update() {
 		assert(issue.isRegistered != true)
@@ -166,16 +168,16 @@ final class EditIssueViewController: UITableViewController, Reusable {
 		
 		descriptionField.text = issue.description
 		descriptionChanged()
-		originalDescription = issue.description
 		
 		image = issue.image.flatMap {
 			UIImage(contentsOfFile: Issue.cacheURL(for: $0).path)
 				?? UIImage(contentsOfFile: Issue.localURL(for: $0).path)
 		}
-		hasChangedImage = false
 	}
 	
 	private func save() {
+		let hasChangedImage = issue.image != original?.image
+		
 		func update(_ details: inout Issue.Details) {
 			details.isMarked = isIssueMarked
 			details.craftsman = craftsman?.id
@@ -205,8 +207,16 @@ final class EditIssueViewController: UITableViewController, Reusable {
 			issue.change(transform: update)
 		}
 		
-		if issue.description != originalDescription {
-			SuggestionStorage.shared.used(description: issue.description, forTrade: trade)
+		let originalTrade = (original?.craftsman).flatMap(Repository.shared.read)?.trade
+		if trade != originalTrade || issue.description != original?.description {
+			SuggestionStorage.shared.decrementSuggestion(
+				description: original?.description,
+				forTrade: originalTrade
+			)
+			SuggestionStorage.shared.used(
+				description: issue.description,
+				forTrade: trade
+			)
 		}
 	}
 	
