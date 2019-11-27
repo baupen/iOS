@@ -82,6 +82,10 @@ final class MarkupViewController: UIViewController {
 		updateUndoButtons()
 		
 		displayLink = CADisplayLink(target: self, selector: #selector(updateImage))
+		
+		if #available(iOS 13.0, *) {
+			isModalInPresentation = true // don't just dismiss
+		}
 	}
 	
 	override func viewDidDisappear(_ animated: Bool) {
