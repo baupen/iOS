@@ -108,7 +108,7 @@ extension LightboxViewController: UIViewControllerTransitioningDelegate {
 
 /// slides up and fades in black background
 fileprivate final class PresentAnimator: TransitionAnimator {
-	override func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+	override func animateTransition(using transitionContext: Context) {
 		let fromVC = transitionContext.viewController(forKey: .from)!
 		let lightboxController = transitionContext.viewController(forKey: .to) as! LightboxViewController
 		lightboxController.view.layoutIfNeeded()
@@ -138,7 +138,7 @@ fileprivate final class PresentAnimator: TransitionAnimator {
 
 /// slides down and fades out black background
 fileprivate final class DismissAnimator: TransitionAnimator {
-	override func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+	override func animateTransition(using transitionContext: Context) {
 		let lightboxController = transitionContext.viewController(forKey: .from) as! LightboxViewController
 		let toVC = transitionContext.viewController(forKey: .to)!
 		

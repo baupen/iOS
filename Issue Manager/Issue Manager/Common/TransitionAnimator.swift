@@ -3,18 +3,20 @@
 import UIKit
 
 class TransitionAnimator: NSObject, UIViewControllerAnimatedTransitioning {
-	func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+	typealias Context = UIViewControllerContextTransitioning
+	
+	func transitionDuration(using transitionContext: Context?) -> TimeInterval {
 		return 0.25
 	}
 	
-	func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {}
+	func animateTransition(using transitionContext: Context) {}
 	
 	// need this explicitly so you can use trailing closures for it.
-	func animate(using transitionContext: UIViewControllerContextTransitioning, animations: @escaping () -> Void) {
+	func animate(using transitionContext: Context, animations: @escaping () -> Void) {
 		animate(using: transitionContext, animations: animations, completion: nil)
 	}
 	
-	func animate(using transitionContext: UIViewControllerContextTransitioning, animations: @escaping () -> Void, completion: ((_ cancelled: Bool) -> Void)?) {
+	func animate(using transitionContext: Context, animations: @escaping () -> Void, completion: ((_ cancelled: Bool) -> Void)?) {
 		UIView.animate(
 			withDuration: transitionDuration(using: transitionContext),
 			delay: 0,

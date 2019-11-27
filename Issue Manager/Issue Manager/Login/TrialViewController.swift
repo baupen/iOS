@@ -182,7 +182,7 @@ fileprivate final class VerticalSlideTransitionAnimator: TransitionAnimator {
 		super.init()
 	}
 	
-	override func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+	override func animateTransition(using transitionContext: Context) {
 		let fromView = transitionContext.viewController(forKey: .from)!.view!
 		let toView = transitionContext.viewController(forKey: .to)!.view!
 		
