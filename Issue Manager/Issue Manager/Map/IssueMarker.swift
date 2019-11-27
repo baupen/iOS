@@ -1,6 +1,7 @@
 // Created by Julian Dunskus
 
 import UIKit
+import CGeometry
 
 fileprivate let markerSize = CGSize(width: 32, height: 32)
 

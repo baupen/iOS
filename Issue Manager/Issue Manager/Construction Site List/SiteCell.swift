@@ -1,6 +1,7 @@
 // Created by Julian Dunskus
 
 import UIKit
+import CGeometry
 
 fileprivate let shadowOpacity: Float = 0.2
 fileprivate let shadowOffset = CGSize(width: 0, height: 6)

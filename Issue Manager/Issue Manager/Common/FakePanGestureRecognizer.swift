@@ -1,6 +1,7 @@
 // Created by Julian Dunskus
 
 import UIKit
+import CGeometry
 
 final class FakePanRecognizer: UIPanGestureRecognizer {
 	var fakeTranslation = CGPoint.zero {
@@ -8,7 +9,7 @@ final class FakePanRecognizer: UIPanGestureRecognizer {
 			let now = Date()
 			if let previousTime = lastUpdateTime {
 				let difference = now.timeIntervalSince(previousTime)
-				fakeVelocity = (fakeTranslation - oldValue) / CGFloat(difference)
+				fakeVelocity = CGPoint((fakeTranslation - oldValue) / CGFloat(difference))
 			}
 			lastUpdateTime = now
 		}

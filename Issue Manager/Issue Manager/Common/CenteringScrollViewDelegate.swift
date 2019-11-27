@@ -1,6 +1,7 @@
 // Created by Julian Dunskus
 
 import UIKit
+import CGeometry
 
 final class CenteringScrollViewDelegate: NSObject, UIScrollViewDelegate {
 	@IBOutlet private weak var viewForZooming: UIView?
@@ -33,6 +34,11 @@ final class CenteringScrollViewDelegate: NSObject, UIScrollViewDelegate {
 		}
 		
 		let offset = 0.5 * (scrollView.bounds.size - scrollView.contentSize).map { max(0, $0) }
-		scrollView.contentInset = UIEdgeInsets(top: offset.y, left: offset.x, bottom: 0, right: 0)
+		scrollView.contentInset = UIEdgeInsets(
+			top: offset.height,
+			left: offset.width,
+			bottom: 0,
+			right: 0
+		)
 	}
 }

@@ -1,6 +1,7 @@
 // Created by Julian Dunskus
 
 import UIKit
+import CGeometry
 
 final class LightboxViewController: UIViewController {
 	@IBOutlet private var scrollView: UIScrollView!
@@ -63,9 +64,11 @@ final class LightboxViewController: UIViewController {
 	
 	private var transition: UIPercentDrivenInteractiveTransition?
 	@IBAction func viewDragged(_ panRecognizer: UIPanGestureRecognizer) {
-		let translation = panRecognizer.translation(in: view)
-		let velocity = panRecognizer.velocity(in: view)
-		let progress = translation.length / view.bounds.size.length
+		let translation = CGVector(panRecognizer.translation(in: view))
+		let velocity = CGVector(panRecognizer.velocity(in: view))
+		
+		let viewDiagonal = CGVector(view.bounds.size).length
+		let progress = translation.length / viewDiagonal
 		
 		switch panRecognizer.state {
 		case .began:
@@ -74,7 +77,7 @@ final class LightboxViewController: UIViewController {
 		case .changed:
 			transition!.update(progress)
 		case .ended:
-			let progressVelocity = velocity.length / view.bounds.size.length
+			let progressVelocity = velocity.length / viewDiagonal
 			if progress + 0.25 * progressVelocity > 0.5 {
 				transition!.finish()
 			} else {

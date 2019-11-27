@@ -1,6 +1,7 @@
 // Created by Julian Dunskus
 
 import UIKit
+import CGeometry
 
 final class IssuePositioner: UIView {
 	@IBOutlet private var crosshairView: UIImageView!
@@ -47,7 +48,7 @@ final class IssuePositioner: UIView {
 	
 	var startOffset: CGPoint!
 	@objc func viewPanned(_ recognizer: UIPanGestureRecognizer) {
-		let translation = recognizer.translation(in: self)
+		let translation = CGVector(recognizer.translation(in: self))
 		
 		switch recognizer.state {
 		case .began:

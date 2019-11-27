@@ -2,6 +2,7 @@
 
 import UIKit
 import AVFoundation
+import CGeometry
 
 final class CameraContainerView: UIView {
 	@IBOutlet private var cameraView: CameraView!
@@ -14,7 +15,7 @@ final class CameraView: UIView {
 	
 	lazy var activityIndicator = UIActivityIndicatorView() <- {
 		$0.autoresizingMask = .flexibleMargins
-		$0.center = (bounds.size / 2).asPoint
+		$0.center = CGPoint(bounds.size / 2)
 		$0.hidesWhenStopped = true
 	}
 	

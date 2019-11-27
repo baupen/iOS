@@ -1,6 +1,7 @@
 // Created by Julian Dunskus
 
 import UIKit
+import CGeometry
 
 final class MarkupNavigationController: UINavigationController {
 	var markupController: MarkupViewController {
@@ -189,16 +190,16 @@ final class MarkupViewController: UIViewController {
 				wipContext.strokePath()
 			case .rectangle:
 				wipContext.clear(fullRect)
-				wipContext.stroke(CGRect(origin: startPosition, size: offset.asSize))
+				wipContext.stroke(CGRect(origin: startPosition, size: CGSize(offset)))
 			case .circle:
 				wipContext.clear(fullRect)
-				wipContext.strokeEllipse(in: CGRect(origin: startPosition - offset, size: 2 * offset.asSize))
+				wipContext.strokeEllipse(in: CGRect(origin: startPosition - offset, size: 2 * CGSize(offset)))
 			case .arrow:
 				guard offset.length > 0 else { return } // pls no NaN
 				wipContext.clear(fullRect)
 				wipContext.move(to: startPosition)
 				wipContext.addLine(to: position)
-				let perpendicular = CGVector(dx: -offset.y, dy: offset.x)
+				let perpendicular = CGVector(dx: -offset.dy, dy: offset.dx)
 				let tipLength = imageUnit * 5
 				wipContext.move(to: position - (offset + perpendicular).withLength(tipLength))
 				wipContext.addLine(to: position)
@@ -261,8 +262,8 @@ final class ModeChangeButton: UIButton {
 	}
 }
 
-extension Vector2 {
+fileprivate extension CGVector {
 	func withLength(_ length: CGFloat) -> Self {
-		return self * length / self.length
+		self * length / self.length
 	}
 }

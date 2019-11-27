@@ -344,7 +344,7 @@ final class ImageControlButton: UIButton {
 		
 		layer.shadowColor = UIColor.main.cgColor
 		layer.shadowOpacity = 0.75
-		layer.shadowOffset = CGSize(x: 0, y: 1)
+		layer.shadowOffset = CGSize(width: 0, height: 1)
 		layer.shadowRadius = 4
 	}
 }

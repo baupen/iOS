@@ -1,9 +1,11 @@
 // Created by Julian Dunskus
 
+// import ALL the things!
 import UIKit
 import SimplePDFKit
 import PullToExpand
 import Promise
+import CGeometry
 
 final class MapViewController: UIViewController, Reusable {
 	typealias Localization = L10n.Map
@@ -252,9 +254,10 @@ final class MapViewController: UIViewController, Reusable {
 	private func updateSectors() {
 		let pdfController = self.pdfController!
 		pdfController.view.layoutIfNeeded()
-		if let sectorFrame = map?.sectorFrame {
+		if let sectorFrame = map?.sectorFrame.map(CGRect.init) {
 			pdfController.overlayView.addSubview(sectorView)
-			sectorView.frame = CGRect(sectorFrame) * pdfController.overlayView.bounds.size
+			sectorView.frame.origin = sectorFrame.origin * pdfController.overlayView.bounds.size
+			sectorView.frame.size = sectorFrame.size * pdfController.overlayView.bounds.size
 		} else {
 			sectorView.removeFromSuperview()
 		}
@@ -331,7 +334,7 @@ extension MapViewController: IssueCellDelegate {
 		let marker = markers.first { $0.issue.id == issue.id }!
 		let size = pdfController.contentView.bounds.size * CGFloat(position.zoomScale)
 		let centeredRect = CGRect(
-			origin: marker.center - size / 2,
+			origin: marker.center - CGVector(size) / 2,
 			size: size
 		)
 		pdfController.scrollView.zoom(to: centeredRect, animated: true)
