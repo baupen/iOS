@@ -1,6 +1,7 @@
 // Created by Julian Dunskus
 
 import UIKit
+import GRDB
 
 final class EditIssueNavigationController: UINavigationController {
 	var editIssueController: EditIssueViewController {
@@ -11,21 +12,21 @@ final class EditIssueNavigationController: UINavigationController {
 final class EditIssueViewController: UITableViewController, Reusable {
 	typealias Localization = L10n.ViewIssue
 	
-	@IBOutlet var markButton: UIButton!
+	@IBOutlet private var markButton: UIButton!
 	
-	@IBOutlet var imageView: UIImageView!
-	@IBOutlet var cameraContainerView: CameraContainerView!
-	@IBOutlet var cameraView: CameraView!
-	@IBOutlet var markupButton: UIButton!
-	@IBOutlet var cameraControlHintView: UIView!
+	@IBOutlet private var imageView: UIImageView!
+	@IBOutlet private var cameraContainerView: CameraContainerView!
+	@IBOutlet private var cameraView: CameraView!
+	@IBOutlet private var markupButton: UIButton!
+	@IBOutlet private var cameraControlHintView: UIView!
 	
-	@IBOutlet var craftsmanTradeLabel: UILabel!
-	@IBOutlet var craftsmanNameLabel: UILabel!
+	@IBOutlet private var craftsmanTradeLabel: UILabel!
+	@IBOutlet private var craftsmanNameLabel: UILabel!
 	
-	@IBOutlet var descriptionCell: UITableViewCell!
-	@IBOutlet var descriptionField: UITextField!
-	@IBOutlet var suggestionsHeight: NSLayoutConstraint!
-	@IBOutlet var suggestionsTableView: UITableView!
+	@IBOutlet private var descriptionCell: UITableViewCell!
+	@IBOutlet private var descriptionField: UITextField!
+	@IBOutlet private var suggestionsHeight: NSLayoutConstraint!
+	@IBOutlet private var suggestionsTableView: UITableView!
 	
 	@IBAction func markIssue() {
 		isIssueMarked.toggle()
@@ -147,21 +148,21 @@ final class EditIssueViewController: UITableViewController, Reusable {
 	
 	// only call this when absolutely necessary; overwrites content in text fields
 	private func update() {
-		assert(issue?.isRegistered != true)
+		assert(issue.isRegistered != true)
 		guard isViewLoaded else { return }
 		
-		site = issue.accessMap().accessSite()
+		site = Repository.read(issue.site.fetchOne)!
 		
 		navigationItem.title = isCreating ? Localization.titleCreating : Localization.titleEditing
 		
-		isIssueMarked = issue?.isMarked ?? false
+		isIssueMarked = issue.isMarked
 		
-		craftsman = issue?.accessCraftsman()
+		craftsman = Repository.read(issue.craftsman)
 		trade = craftsman?.trade
 		
-		descriptionField.text = issue?.description
+		descriptionField.text = issue.description
 		descriptionChanged()
-		originalDescription = issue?.description
+		originalDescription = issue.description
 		
 		image = issue.image.flatMap {
 			UIImage(contentsOfFile: Issue.cacheURL(for: $0).path)
@@ -171,32 +172,31 @@ final class EditIssueViewController: UITableViewController, Reusable {
 	}
 	
 	private func save() {
-		func update(_ issue: Issue) {
-			issue.isMarked = isIssueMarked
-			issue.craftsman = craftsman?.id
-			issue.description = descriptionField.text
+		func update(_ details: inout Issue.Details) {
+			details.isMarked = isIssueMarked
+			details.craftsman = craftsman?.id
+			details.description = descriptionField.text
 			
 			if hasChangedImage {
 				if let image = image {
-					let file = File(filename: "\(UUID()).jpg", id: .init())
+					let file = File<Issue>(filename: "\(UUID()).jpg")
 					
 					let url = Issue.localURL(for: file)
 					do {
 						try image.saveJPEG(to: url)
-						issue.image = file
+						details.image = file
 					} catch {
 						showAlert(titled: Localization.CouldNotSaveImage.title, message: error.localizedFailureReason)
-						issue.image = nil
+						details.image = nil
 					}
 				} else {
-					issue.image = nil
+					details.image = nil
 				}
 			}
 		}
 		
 		if isCreating {
-			update(issue)
-			Client.shared.storage.add(issue)
+			issue.create(transform: update)
 		} else {
 			issue.change(transform: update)
 		}
@@ -207,9 +207,13 @@ final class EditIssueViewController: UITableViewController, Reusable {
 	}
 	
 	func possibleCraftsmen() -> [Craftsman] {
-		return site.allCraftsmen()
-			.filter { trade == nil || $0.trade == trade }
-			.sorted { $0.name < $1.name }
+		let request = site.craftsmen <- {
+			if let trade = trade {
+				$0 = $0.filter(Craftsman.Columns.trade == trade)
+			}
+			$0 = $0.order(Craftsman.Columns.name)
+		}
+		return Repository.read(request.fetchAll)
 	}
 	
 	override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
@@ -228,10 +232,11 @@ final class EditIssueViewController: UITableViewController, Reusable {
 		case "save":
 			save()
 		case "delete":
-			Client.shared.storage.remove(issue)
+			Repository.shared.remove(issue)
 		case "lightbox":
 			let lightboxController = segue.destination as! LightboxViewController
 			lightboxController.image = image!
+			lightboxController.sourceView = imageView
 		case "markup":
 			let markupNavController = segue.destination as! MarkupNavigationController
 			markupNavController.markupController.image = image!

@@ -9,11 +9,11 @@ fileprivate let shadowRadius: CGFloat = 12
 final class SiteCell: UICollectionViewCell, Reusable {
 	fileprivate typealias Localization = L10n.SiteList.SiteSummary
 	
-	@IBOutlet var imageView: UIImageView!
-	@IBOutlet var nameLabel: UILabel!
-	@IBOutlet var openIssuesLabel: UILabel!
-	@IBOutlet var totalIssuesLabel: UILabel!
-	@IBOutlet var issueBadge: IssueBadge!
+	@IBOutlet private var imageView: UIImageView!
+	@IBOutlet private var nameLabel: UILabel!
+	@IBOutlet private var openIssuesLabel: UILabel!
+	@IBOutlet private var totalIssuesLabel: UILabel!
+	@IBOutlet private var issueBadge: IssueBadge!
 	
 	override var isHighlighted: Bool {
 		didSet { updateAppearance() }
@@ -59,11 +59,11 @@ final class SiteCell: UICollectionViewCell, Reusable {
 		issueBadge.holder = site
 		
 		let meta = site.meta // capture current site
+		let issues = site.issues(recursively: true)
 		// async because there could be a lot of issues (e.g. if we're calculating it for a whole site)
 		DispatchQueue.global().async {
-			let issues = self.site.recursiveIssues()
-			let openCount = issues.count { $0.isOpen }
-			let totalCount = issues.count
+			let totalCount = Repository.read(issues.fetchCount)
+			let openCount = Repository.read(issues.openIssues.fetchCount)
 			DispatchQueue.main.async {
 				guard self.site.meta == meta else { return }
 				self.totalIssuesLabel.text = Localization.totalIssues(String(totalCount))
@@ -84,6 +84,8 @@ final class SiteCell: UICollectionViewCell, Reusable {
 					self.updateImage()
 				}
 			}
+		} else {
+			imageView.image = nil
 		}
 	}
 }

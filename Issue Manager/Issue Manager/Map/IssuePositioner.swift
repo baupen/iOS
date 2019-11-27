@@ -3,9 +3,9 @@
 import UIKit
 
 final class IssuePositioner: UIView {
-	@IBOutlet var crosshairView: UIImageView!
-	@IBOutlet var topView: UIView!
-	@IBOutlet var botView: UIView!
+	@IBOutlet private var crosshairView: UIImageView!
+	@IBOutlet private var topView: UIView!
+	@IBOutlet private var botView: UIView!
 	
 	override var center: CGPoint {
 		didSet {
@@ -59,6 +59,8 @@ final class IssuePositioner: UIView {
 			startOffset = nil
 		case .possible:
 			break
+		@unknown default:
+			break
 		}
 	}
 }
@@ -70,7 +72,7 @@ extension IssuePositioner: UIGestureRecognizerDelegate {
 }
 
 extension Issue.Position {
-	init(at point: CGPoint, zoomScale: CGFloat, in file: File) {
+	init(at point: CGPoint, zoomScale: CGFloat, in file: File<Map>) {
 		self.init(
 			at: Point(point),
 			zoomScale: Double(1 / zoomScale),

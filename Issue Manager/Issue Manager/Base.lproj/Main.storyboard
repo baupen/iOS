@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Unm-RN-TtL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Unm-RN-TtL">
     <device id="ipad9_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
@@ -197,7 +197,7 @@
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rHo-jf-rQe">
-                                                    <rect key="frame" x="0.0" y="0.0" width="703" height="698"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="704" height="698"/>
                                                     <connections>
                                                         <segue destination="XdX-XP-UgZ" kind="embed" identifier="" id="oIu-NA-CAA"/>
                                                     </connections>
@@ -343,7 +343,7 @@
                                                             <rect key="frame" x="911" y="6" width="73" height="30"/>
                                                             <state key="normal" title="Ausloggen"/>
                                                             <connections>
-                                                                <segue destination="Gox-Jy-bEL" kind="unwind" unwindAction="logOut:" id="pbP-VW-To5"/>
+                                                                <segue destination="Gox-Jy-bEL" kind="unwind" identifier="" unwindAction="logOut:" id="pbP-VW-To5"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
@@ -403,9 +403,29 @@
                                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="JGn-F7-Qxe">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
                                                                                 <subviews>
-                                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="200" verticalHuggingPriority="200" horizontalCompressionResistancePriority="200" verticalCompressionResistancePriority="200" translatesAutoresizingMaskIntoConstraints="NO" id="dOZ-qu-KIz">
+                                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fqg-kc-CoM">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="320" height="94.5"/>
-                                                                                    </imageView>
+                                                                                        <subviews>
+                                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="200" verticalHuggingPriority="200" horizontalCompressionResistancePriority="200" verticalCompressionResistancePriority="200" image="site_image_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="OnC-rl-dJ7">
+                                                                                                <rect key="frame" x="0.0" y="0.0" width="320" height="94.5"/>
+                                                                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                            </imageView>
+                                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="200" verticalHuggingPriority="200" horizontalCompressionResistancePriority="200" verticalCompressionResistancePriority="200" translatesAutoresizingMaskIntoConstraints="NO" id="dOZ-qu-KIz">
+                                                                                                <rect key="frame" x="0.0" y="0.0" width="320" height="94.5"/>
+                                                                                            </imageView>
+                                                                                        </subviews>
+                                                                                        <color key="backgroundColor" name="Main"/>
+                                                                                        <constraints>
+                                                                                            <constraint firstAttribute="trailing" secondItem="OnC-rl-dJ7" secondAttribute="trailing" id="4pP-ra-Rg4"/>
+                                                                                            <constraint firstItem="dOZ-qu-KIz" firstAttribute="top" secondItem="fqg-kc-CoM" secondAttribute="top" id="P9G-gb-bKl"/>
+                                                                                            <constraint firstItem="dOZ-qu-KIz" firstAttribute="leading" secondItem="fqg-kc-CoM" secondAttribute="leading" id="Yrk-XQ-M3g"/>
+                                                                                            <constraint firstAttribute="bottom" secondItem="OnC-rl-dJ7" secondAttribute="bottom" id="dud-g5-1Y8"/>
+                                                                                            <constraint firstAttribute="bottom" secondItem="dOZ-qu-KIz" secondAttribute="bottom" id="nmC-nk-Zh3"/>
+                                                                                            <constraint firstItem="OnC-rl-dJ7" firstAttribute="top" secondItem="fqg-kc-CoM" secondAttribute="top" id="vxe-jQ-Ef9"/>
+                                                                                            <constraint firstAttribute="trailing" secondItem="dOZ-qu-KIz" secondAttribute="trailing" id="ynD-Uf-38G"/>
+                                                                                            <constraint firstItem="OnC-rl-dJ7" firstAttribute="leading" secondItem="fqg-kc-CoM" secondAttribute="leading" id="zLd-va-zcO"/>
+                                                                                        </constraints>
+                                                                                    </view>
                                                                                     <view opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="200" verticalHuggingPriority="800" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="800" translatesAutoresizingMaskIntoConstraints="NO" id="fPz-3b-gSZ" userLabel="Text Container">
                                                                                         <rect key="frame" x="0.0" y="94.5" width="320" height="85.5"/>
                                                                                         <subviews>
@@ -574,6 +594,7 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                         <outlet property="refreshHintLabel" destination="6qc-QJ-bLk" id="1bA-kw-03d"/>
                         <outlet property="siteListView" destination="Zp8-gD-E9i" id="tdM-Zf-QAY"/>
                         <outlet property="welcomeLabel" destination="RLH-2h-ViC" id="eZ0-1q-ylv"/>
+                        <segue destination="Gox-Jy-bEL" kind="unwind" identifier="log out" unwindAction="logOut:" id="gxJ-uK-fAC"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fgW-Y6-0I8" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -671,6 +692,7 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                     </navigationItem>
                     <connections>
                         <outlet property="backToSiteListButton" destination="hYA-WQ-Bwf" id="XBL-MZ-bEA"/>
+                        <segue destination="856-u4-AOv" kind="unwind" identifier="log out" unwindAction="logOut:" id="lKt-bn-kdq"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rux-fX-hf1" sceneMemberID="firstResponder"/>
@@ -2449,7 +2471,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" maximumZoomScale="4" translatesAutoresizingMaskIntoConstraints="NO" id="IMr-LA-CgM">
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bP3-F6-Phf">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bP3-F6-Phf">
                                         <rect key="frame" x="0.0" y="0.0" width="1024" height="546"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="bP3-F6-Phf" secondAttribute="height" multiplier="15:8" id="fXs-0a-TGf"/>
@@ -3104,6 +3126,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
         <image name="markup_redo" width="30" height="30"/>
         <image name="markup_square" width="32" height="32"/>
         <image name="markup_undo" width="30" height="30"/>
+        <image name="site_image_placeholder" width="512" height="512"/>
         <image name="trash" width="32" height="32"/>
         <namedColor name="Attention">
             <color red="0.99199998378753662" green="0.49399998784065247" blue="0.078000001609325409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

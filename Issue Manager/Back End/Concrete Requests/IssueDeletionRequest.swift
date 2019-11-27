@@ -9,13 +9,13 @@ struct IssueDeletionRequest: JSONJSONRequest, BacklogStorable {
 	
 	var method: String { return "issue/delete" }
 	
-	let authenticationToken: String
+	var authenticationToken: String
 	let issueID: ID<Issue>
 	
 	func applyToClient(_ response: ExpectedResponse) {
-		Client.shared.storage.issues[issueID]?.deleteFile()
-		Client.shared.storage.issues[issueID] = nil
-		Client.shared.saveShared()
+		if let issue = Repository.object(issueID) {
+			Repository.shared.remove(issue, notifyingServer: false)
+		}
 	}
 	
 	struct ExpectedResponse: Response {}

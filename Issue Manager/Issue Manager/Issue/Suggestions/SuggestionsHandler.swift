@@ -90,7 +90,7 @@ protocol SuggestionsHandlerDelegate: AnyObject {
 }
 
 final class SuggestionCell: UITableViewCell, Reusable {
-	@IBOutlet var suggestionLabel: UILabel!
+	@IBOutlet private var suggestionLabel: UILabel!
 	
 	fileprivate var match: SuggestionMatch! {
 		didSet {

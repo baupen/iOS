@@ -9,13 +9,21 @@ class TransitionAnimator: NSObject, UIViewControllerAnimatedTransitioning {
 	
 	func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {}
 	
-	func animate(using transitionContext: UIViewControllerContextTransitioning, _ animations: @escaping () -> Void) {
+	// need this explicitly so you can use trailing closures for it.
+	func animate(using transitionContext: UIViewControllerContextTransitioning, animations: @escaping () -> Void) {
+		animate(using: transitionContext, animations: animations, completion: nil)
+	}
+	
+	func animate(using transitionContext: UIViewControllerContextTransitioning, animations: @escaping () -> Void, completion: ((_ cancelled: Bool) -> Void)?) {
 		UIView.animate(
 			withDuration: transitionDuration(using: transitionContext),
 			delay: 0,
 			options: transitionContext.isInteractive ? .curveLinear : .curveEaseInOut,
 			animations: animations,
-			completion: { _ in transitionContext.completeTransition(!transitionContext.transitionWasCancelled) }
+			completion: { _ in
+				completion?(transitionContext.transitionWasCancelled)
+				transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+			}
 		)
 	}
 }

@@ -62,8 +62,8 @@ protocol StatusFilterViewControllerDelegate: AnyObject {
 }
 
 final class StatusCell: UITableViewCell, Reusable {
-	@IBOutlet var iconView: UIImageView!
-	@IBOutlet var nameLabel: UILabel!
+	@IBOutlet private var iconView: UIImageView!
+	@IBOutlet private var nameLabel: UILabel!
 	
 	var status: Issue.Status.Simplified! {
 		didSet {

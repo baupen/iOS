@@ -8,14 +8,14 @@ import Promise
 final class MapViewController: UIViewController, Reusable {
 	typealias Localization = L10n.Map
 	
-	@IBOutlet var filterItem: UIBarButtonItem!
-	@IBOutlet var addItem: UIBarButtonItem!
+	@IBOutlet private var filterItem: UIBarButtonItem!
+	@IBOutlet private var addItem: UIBarButtonItem!
 	
-	@IBOutlet var fallbackLabel: UILabel!
-	@IBOutlet var pdfContainerView: UIView!
-	@IBOutlet var activityIndicator: UIActivityIndicatorView!
-	@IBOutlet var pullableView: PullableView!
-	@IBOutlet var issuePositioner: IssuePositioner!
+	@IBOutlet private var fallbackLabel: UILabel!
+	@IBOutlet private var pdfContainerView: UIView!
+	@IBOutlet private var activityIndicator: UIActivityIndicatorView!
+	@IBOutlet private var pullableView: PullableView!
+	@IBOutlet private var issuePositioner: IssuePositioner!
 	
 	// the filter popover's done button and the add marker popover's cancel button link to this
 	@IBAction func backToMap(_ segue: UIStoryboardSegue) {
@@ -31,7 +31,7 @@ final class MapViewController: UIViewController, Reusable {
 		
 		cancelAddingIssue() // done (if started)
 		
-		issues = map.allIssues()
+		issues = Repository.read(map.sortedIssues.fetchAll)
 		updateMarkers()
 		issueListController.update()
 		
@@ -188,7 +188,7 @@ final class MapViewController: UIViewController, Reusable {
 		
 		addItem.isEnabled = map != nil
 		
-		issues = map?.allIssues() ?? []
+		issues = (map?.sortedIssues.fetchAll).map(Repository.read) ?? []
 		
 		sectorViews.forEach { $0.removeFromSuperview() }
 		sectorViews = map?.sectors.map(SectorView.init) ?? []
@@ -198,9 +198,9 @@ final class MapViewController: UIViewController, Reusable {
 		issueListController.map = map
 		pullableView.isHidden = map == nil
 		
-		if let file = map?.file {
+		if let map = map, let file = map.file {
 			let url = Map.cacheURL(for: file)
-			asyncLoadPDF(at: url)
+			asyncLoadPDF(for: map, at: url)
 		} else {
 			pdfController = nil
 			if let holder = holder {
@@ -212,9 +212,11 @@ final class MapViewController: UIViewController, Reusable {
 	}
 	
 	private var currentLoadingTaskID: UUID!
-	func asyncLoadPDF(at url: URL) {
+	func asyncLoadPDF(for map: Map, at url: URL) {
 		let page = Future
-			.init(asyncOn: .global()) { try PDFDocument(at: url).page(0) }
+			.init(asyncOn: .global(qos: .userInitiated), map.downloadFile) // download explicitly just in case it's not there yet
+			.mapError { _ in .fulfilled } // errors are fine (e.g. bad network)
+			.map { _ in try PDFDocument(at: url).page(0) }
 			.on(.main)
 		
 		pdfController = nil
@@ -240,8 +242,7 @@ final class MapViewController: UIViewController, Reusable {
 		page.catch { error in
 			guard taskID == self.currentLoadingTaskID else { return }
 			
-			print("Error while loading PDF!", error.localizedFailureReason)
-			dump(error)
+			error.printDetails(context: "Error while loading PDF!")
 			self.activityIndicator.stopAnimating()
 			self.fallbackLabel.text = Localization.couldNotLoad
 		}
@@ -326,7 +327,7 @@ extension MapViewController: IssueCellDelegate {
 		pullableView.contract()
 		
 		let pdfController = self.pdfController!
-		let marker = markers.first { $0.issue === issue }!
+		let marker = markers.first { $0.issue.id == issue.id }!
 		let size = pdfController.contentView.bounds.size * CGFloat(position.zoomScale)
 		let centeredRect = CGRect(
 			origin: marker.center - size / 2,

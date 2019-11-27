@@ -5,11 +5,11 @@ import UIKit
 final class SiteListViewController: RefreshingTableViewController, Reusable {
 	fileprivate typealias Localization = L10n.SiteList
 	
-	@IBOutlet var welcomeLabel: UILabel!
-	@IBOutlet var clientModeSwitch: UISwitch!
-	@IBOutlet var clientModeCell: UITableViewCell!
-	@IBOutlet var siteListView: UICollectionView!
-	@IBOutlet var refreshHintLabel: UILabel!
+	@IBOutlet private var welcomeLabel: UILabel!
+	@IBOutlet private var clientModeSwitch: UISwitch!
+	@IBOutlet private var clientModeCell: UITableViewCell!
+	@IBOutlet private var siteListView: UICollectionView!
+	@IBOutlet private var refreshHintLabel: UILabel!
 	
 	@IBAction func clientModeSwitched() {
 		defaults.isInClientMode = clientModeSwitch.isOn
@@ -18,8 +18,7 @@ final class SiteListViewController: RefreshingTableViewController, Reusable {
 	}
 	
 	@IBAction func backToSiteList(_ segue: UIStoryboardSegue) {
-		sites = Array(Client.shared.storage.sites.values)
-		siteListView.reloadData()
+		updateContent()
 	}
 	
 	override var isRefreshing: Bool {
@@ -46,7 +45,7 @@ final class SiteListViewController: RefreshingTableViewController, Reusable {
 		clientModeSwitch.isOn = defaults.isInClientMode
 		updateClientModeAppearance()
 		
-		sites = Array(Client.shared.storage.sites.values)
+		updateContent()
 	}
 	
 	var needsRefresh = false
@@ -61,9 +60,9 @@ final class SiteListViewController: RefreshingTableViewController, Reusable {
 		
 		// have to wait because we're not presenting anything yet
 		DispatchQueue.main.async {
-			if self.needsRefresh, self.presentedViewController == nil {
-				self.refreshManually()
+			if self.needsRefresh {
 				self.needsRefresh = false
+				self.refreshManually()
 			}
 		}
 	}
@@ -71,8 +70,12 @@ final class SiteListViewController: RefreshingTableViewController, Reusable {
 	override func refreshCompleted() {
 		super.refreshCompleted()
 		
-		self.sites = Array(Client.shared.storage.sites.values)
-		self.siteListView.reloadData()
+		updateContent()
+	}
+	
+	private func updateContent() {
+		sites = Repository.read(ConstructionSite.fetchAll) // TODO: order?
+		siteListView.reloadData()
 	}
 	
 	func updateClientModeAppearance() {

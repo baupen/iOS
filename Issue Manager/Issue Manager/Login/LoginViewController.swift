@@ -5,11 +5,11 @@ import UIKit
 final class LoginViewController: LoginHandlerViewController {
 	fileprivate typealias Localization = L10n.Login
 	
-	@IBOutlet var textFieldView: UIView!
-	@IBOutlet var usernameField: UITextField!
-	@IBOutlet var passwordField: UITextField!
-	@IBOutlet var activityIndicator: UIActivityIndicatorView!
-	@IBOutlet var stayLoggedInSwitch: UISwitch!
+	@IBOutlet private var textFieldView: UIView!
+	@IBOutlet private var usernameField: UITextField!
+	@IBOutlet private var passwordField: UITextField!
+	@IBOutlet private var activityIndicator: UIActivityIndicatorView!
+	@IBOutlet private var stayLoggedInSwitch: UISwitch!
 	
 	@IBAction func backgroundTapped(_ sender: UITapGestureRecognizer) {
 		usernameField.resignFirstResponder()
@@ -51,21 +51,23 @@ final class LoginViewController: LoginHandlerViewController {
 		usernameField.delegate = self
 		passwordField.delegate = self
 		
+		stayLoggedInSwitch.isOn = defaults.stayLoggedIn
+	}
+	
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		
 		if let localUser = Client.shared.localUser, !localUser.localUsername.isEmpty {
 			usernameField.text = localUser.localUsername
 			
 			if defaults.stayLoggedIn, !localUser.hasLoggedOut {
-				DispatchQueue.main.async {
-					self.showSiteList(userInitiated: false)
-				}
+				showSiteList(userInitiated: false)
 			} else {
 				passwordField.becomeFirstResponder()
 			}
 		} else {
 			usernameField.becomeFirstResponder()
 		}
-		
-		stayLoggedInSwitch.isOn = defaults.stayLoggedIn
 	}
 	
 	func logIn() {

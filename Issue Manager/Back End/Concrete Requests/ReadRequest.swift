@@ -16,7 +16,12 @@ struct ReadRequest: JSONJSONRequest {
 	let issues: [ObjectMeta<Issue>]
 	
 	func applyToClient(_ response: ExpectedResponse) {
-		Client.shared.update(from: response)
+		if let newUser = response.changedUser {
+			assert(Client.shared.localUser?.user.id == newUser.id)
+			Client.shared.localUser?.user = newUser
+		}
+		
+		Repository.shared.update(from: response)
 	}
 	
 	func decode(from data: Data, using decoder: JSONDecoder) throws -> ExpectedResponse {
@@ -31,77 +36,52 @@ struct ReadRequest: JSONJSONRequest {
 	}
 	
 	struct ExpectedResponse: Response {
-		let changedCraftsmen: [Craftsman]
+		let changedCraftsmen: [APICraftsman]
 		let removedCraftsmanIDs: [ID<Craftsman>]
-		let changedConstructionSites: [ConstructionSite]
+		let changedConstructionSites: [APIConstructionSite]
 		let removedConstructionSiteIDs: [ID<ConstructionSite>]
-		let changedMaps: [Map]
+		let changedMaps: [APIMap]
 		let removedMapIDs: [ID<Map>]
-		let changedIssues: [Issue]
+		let changedIssues: [APIIssue]
 		let removedIssueIDs: [ID<Issue>]
 		let changedUser: User?
+		
+		func constructionSites() -> [ConstructionSite] {
+			return changedConstructionSites.map { $0.makeObject() }
+		}
+		
+		func maps() -> [Map] {
+			return changedMaps.map { $0.makeObject() }
+		}
+		
+		func issues() -> [Issue] {
+			return changedIssues.map { $0.makeObject() }
+		}
+		
+		func craftsmen() -> [Craftsman] {
+			return changedCraftsmen.map { $0.makeObject() }
+		}
+	}
+}
+
+private extension Repository {
+	func makeReadRequest(_ user: User) -> ReadRequest {
+		return ReadRequest(
+			authenticationToken: user.authenticationToken,
+			user: user.meta,
+			craftsmen: read(ObjectMeta.fetchAll),
+			constructionSites: read(ObjectMeta.fetchAll),
+			maps: read(ObjectMeta.fetchAll),
+			issues: read(ObjectMeta.fetchAll)
+		)
 	}
 }
 
 extension Client {
 	func read() -> Future<Void> {
 		return getUser()
-			.map { user in
-				ReadRequest(
-					authenticationToken: user.authenticationToken,
-					user: user.meta,
-					craftsmen:         self.storage.craftsmen.values.map { $0.meta },
-					constructionSites: self.storage.sites    .values.map { $0.meta },
-					maps:              self.storage.maps     .values.map { $0.meta },
-					issues:            self.storage.issues   .values.map { $0.meta }
-				)
-			}
+			.map(Repository.shared.makeReadRequest)
 			.flatMap(send)
 			.ignoringResult()
-	}
-	
-	fileprivate func update(from response: ReadRequest.ExpectedResponse) {
-		updateEntries(in: \.craftsmen, changing: response.changedCraftsmen,         removing: response.removedCraftsmanIDs)
-		updateEntries(in: \.sites,     changing: response.changedConstructionSites, removing: response.removedConstructionSiteIDs)
-		updateEntries(in: \.maps,      changing: response.changedMaps,              removing: response.removedMapIDs)
-		updateEntries(in: \.issues,    changing: response.changedIssues,            removing: response.removedIssueIDs)
-		
-		if let newUser = response.changedUser {
-			assert(localUser?.user.id == newUser.id)
-			localUser?.user = newUser
-		}
-		
-		let removed = Set(response.removedIssueIDs) // for efficient lookup
-		for map in storage.maps.values {
-			map.issues.removeAll(where: { removed.contains($0) })
-		}
-		
-		for issue in response.changedIssues {
-			if let map = storage.maps[issue.map], !map.issues.contains(issue.id) {
-				map.issues.append(issue.id)
-			}
-		}
-		
-		saveShared()
-	}
-	
-	private func updateEntries<T: APIObject>(
-		in path: WritableKeyPath<Storage, [ID<T>: T]>,
-		changing changedEntries: [T],
-		removing removedIDs: [ID<T>])
-	{
-		for changed in changedEntries {
-			let previous = storage[keyPath: path][changed.id]
-			storage[keyPath: path][changed.id] = changed
-			if let container = changed as? AnyFileContainer {
-				container.downloadFile(previous: previous as? AnyFileContainer)
-			}
-		}
-		for removed in removedIDs {
-			if let container = storage[keyPath: path][removed] as? AnyFileContainer {
-				container.deleteFile()
-			}
-			storage[keyPath: path][removed] = nil
-		}
 	}
 }

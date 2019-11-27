@@ -4,7 +4,7 @@ import UIKit
 import AVFoundation
 
 final class CameraContainerView: UIView {
-	@IBOutlet var cameraView: CameraView!
+	@IBOutlet private var cameraView: CameraView!
 }
 
 final class CameraView: UIView {
@@ -210,6 +210,8 @@ extension AVCaptureVideoOrientation {
 		case .landscapeLeft:
 			self = .landscapeLeft
 		case .unknown:
+			fallthrough
+		@unknown default:
 			print("unknown interface orientation!")
 			self = .portrait
 		}

@@ -6,10 +6,10 @@ import PullToExpand
 final class IssueListViewController: UIViewController {
 	typealias Localization = L10n.Map.IssueList
 	
-	@IBOutlet var summaryLabel: UILabel!
-	@IBOutlet var separatorView: UIView!
-	@IBOutlet var issueTableView: UITableView!
-	@IBOutlet var separatorHeightConstraint: NSLayoutConstraint!
+	@IBOutlet private var summaryLabel: UILabel!
+	@IBOutlet private var separatorView: UIView!
+	@IBOutlet private var issueTableView: UITableView!
+	@IBOutlet private var separatorHeightConstraint: NSLayoutConstraint!
 	
 	/// - note: set this _before_ the list loads its data
 	weak var issueCellDelegate: IssueCellDelegate?
@@ -47,7 +47,7 @@ final class IssueListViewController: UIViewController {
 	func update() {
 		guard isViewLoaded, let map = map else { return }
 		
-		let allIssues = map.allIssues()
+		let allIssues = Repository.read(map.sortedIssues.fetchAll)
 		issues = allIssues.filter {
 			visibleStatuses.contains($0.status.simplified)
 		}
@@ -102,6 +102,8 @@ final class IssueListViewController: UIViewController {
 				pullableView.viewPulled(fakePanRecognizer)
 				fakePanRecognizer.state = .possible
 			}
+		@unknown default:
+			break
 		}
 	}
 }

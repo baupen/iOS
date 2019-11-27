@@ -5,18 +5,18 @@ import UIKit
 final class TrialViewController: LoginHandlerViewController {
 	fileprivate typealias Localization = L10n.Trial
 	
-	@IBOutlet var loginWindowView: UIView!
+	@IBOutlet private var loginWindowView: UIView!
 	
-	@IBOutlet var textFieldView: UIView!
-	@IBOutlet var givenNameField: UITextField!
-	@IBOutlet var familyNameField: UITextField!
-	@IBOutlet var activityIndicator: UIActivityIndicatorView!
+	@IBOutlet private var textFieldView: UIView!
+	@IBOutlet private var givenNameField: UITextField!
+	@IBOutlet private var familyNameField: UITextField!
+	@IBOutlet private var activityIndicator: UIActivityIndicatorView!
 	
-	@IBOutlet var labelView: UIView!
-	@IBOutlet var usernameLabel: UILabel!
-	@IBOutlet var passwordLabel: UILabel!
+	@IBOutlet private var labelView: UIView!
+	@IBOutlet private var usernameLabel: UILabel!
+	@IBOutlet private var passwordLabel: UILabel!
 	
-	@IBOutlet var loginButton: UIButton!
+	@IBOutlet private var loginButton: UIButton!
 	
 	@IBAction func backgroundTapped(_ sender: UITapGestureRecognizer) {
 		givenNameField.resignFirstResponder()
@@ -125,8 +125,7 @@ final class TrialViewController: LoginHandlerViewController {
 		}
 		
 		result.catch { error in
-			print("Trial creation failed!", error.localizedFailureReason)
-			dump(error)
+			error.printDetails(context: "Trial creation failed!")
 			self.showAlert(for: error)
 		}
 	}

@@ -9,16 +9,16 @@ final class MarkupNavigationController: UINavigationController {
 }
 
 final class MarkupViewController: UIViewController {
-	@IBOutlet var backgroundView: UIImageView!
-	@IBOutlet var foregroundView: UIImageView!
-	@IBOutlet var wipView: UIImageView!
+	@IBOutlet private var backgroundView: UIImageView!
+	@IBOutlet private var foregroundView: UIImageView!
+	@IBOutlet private var wipView: UIImageView!
 	
-	@IBOutlet var aspectRatioConstraint: NSLayoutConstraint!
-	@IBOutlet var colorChangeButtons: [ColorChangeButton]!
-	@IBOutlet var modeButtons: [UIButton]!
+	@IBOutlet private var aspectRatioConstraint: NSLayoutConstraint!
+	@IBOutlet private var colorChangeButtons: [ColorChangeButton]!
+	@IBOutlet private var modeButtons: [UIButton]!
 	
-	@IBOutlet var undoButton: UIButton!
-	@IBOutlet var redoButton: UIButton!
+	@IBOutlet private var undoButton: UIButton!
+	@IBOutlet private var redoButton: UIButton!
 	
 	@IBAction func changeColor(_ sender: ColorChangeButton) {
 		guard isSelectingColor else {
@@ -220,6 +220,8 @@ final class MarkupViewController: UIViewController {
 			
 			displayLink.remove(from: .main, forMode: .common)
 		case .possible:
+			break
+		@unknown default:
 			break
 		}
 	}

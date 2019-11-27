@@ -8,10 +8,11 @@ In the `Images` folder, you'll find PDFs of all the graphical assets as well as 
 
 The `Issue Manager` folder contains the Xcode project and all its associated files.
 
-- Dependencies are managed using Carthage; you can run `carthage bootstrap` in order to fetch the versions the last commit used.
+- Dependencies are managed using Git submodules (contained within the `Carthage` folder because they were initially checked out with Carthage), some of which require Git LFS.
 - The `Libraries` folder contains tiny libraries that are so small we decided to just copy them over and manage them ourselves, as well as adjusting some of the code.
 - The `Back End` folder contains the (platform-agnostic) back-end code which the front end is built around.
-	- `API Objects` contains all the objects defined in the API, encoded/decoded in communicating with the server.
+	- `Objects` contains all the objects used for local storage and/or defined in the API, encoded/decoded in communicating with the server.
+	- `Storage` contains the repository object, which manages the local data store.
 	- `Concrete Requests` contains the concrete representations of the API endpoints, as well as exposing mechanisms to use them.
 	- `Extensions` contains extensions of existing types to simplify code using them elsewhere.
 - The `Issue Manager` folder contains the (iOS-specific) front-end code, along with the assets and storyboards. The code is grouped by scene, so e.g. you'll find all code for the construction site list scene in the `Construction Site List` folder.

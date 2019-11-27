@@ -24,7 +24,7 @@ internal enum L10n {
       internal static let title = L10n.tr("Localizable", "alert.connection_issues.title")
     }
     internal enum InvalidSession {
-      /// Bitte loggen sie sich wieder neu ein.
+      /// Bitte log dich wieder neu ein.
       internal static let message = L10n.tr("Localizable", "alert.invalid_session.message")
       /// Ungültige Sitzung!
       internal static let title = L10n.tr("Localizable", "alert.invalid_session.title")
@@ -46,7 +46,7 @@ internal enum L10n {
   }
 
   internal enum Issue {
-    /// Handwerker
+    /// Unternehmer
     internal static let craftsman = L10n.tr("Localizable", "issue.craftsman")
     /// Name
     internal static let craftsmanName = L10n.tr("Localizable", "issue.craftsman_name")
@@ -54,7 +54,7 @@ internal enum L10n {
     internal static let description = L10n.tr("Localizable", "issue.description")
     /// Abnahmemodus
     internal static let isClientMode = L10n.tr("Localizable", "issue.is_client_mode")
-    /// Kein Handwerker
+    /// Kein Unternehmer
     internal static let noCraftsman = L10n.tr("Localizable", "issue.no_craftsman")
     /// Keine Beschreibung
     internal static let noDescription = L10n.tr("Localizable", "issue.no_description")
@@ -79,9 +79,9 @@ internal enum L10n {
       internal static func registeredBy(_ p1: String) -> String {
         return L10n.tr("Localizable", "issue.status.registered_by", p1)
       }
-      /// Beantwortet
+      /// Erledigt
       internal static let responded = L10n.tr("Localizable", "issue.status.responded")
-      /// Beantwortet von %@
+      /// Erledigt von %@
       internal static func respondedBy(_ p1: String) -> String {
         return L10n.tr("Localizable", "issue.status.responded_by", p1)
       }
@@ -130,24 +130,24 @@ internal enum L10n {
   }
 
   internal enum Map {
-    /// Der Grundriss konnte nicht geladen werden!
+    /// Der Bauplan konnte nicht geladen werden!
     internal static let couldNotLoad = L10n.tr("Localizable", "map.could_not_load")
     /// Bereichweite Pendenz Erfassen
     internal static let newUnpositionedIssue = L10n.tr("Localizable", "map.new_unpositioned_issue")
-    /// Wähle links einen Bereich aus, um hier den zugehörigen Grundriss zu sehen.
+    /// Wähle links einen Bereich aus, um hier den zugehörigen Bauplan zu sehen.
     internal static let noMapSelected = L10n.tr("Localizable", "map.no_map_selected")
-    /// Der Bereich "%@" hat keinen zugehörigen Grundriss.
+    /// Der Bereich "%@" hat keinen zugehörigen Bauplan.
     internal static func noPdf(_ p1: String) -> String {
       return L10n.tr("Localizable", "map.no_pdf", p1)
     }
-    /// Grundriss lädt…
+    /// Bauplan wird geladen…
     internal static let pdfLoading = L10n.tr("Localizable", "map.pdf_loading")
-    /// Grundriss
+    /// Bauplan
     internal static let title = L10n.tr("Localizable", "map.title")
     internal enum IssueList {
       /// Details Anzeigen
       internal static let showDetails = L10n.tr("Localizable", "map.issue_list.show_details")
-      /// Auf Grundriss Anzeigen
+      /// Auf Bauplan Anzeigen
       internal static let showInMap = L10n.tr("Localizable", "map.issue_list.show_in_map")
       /// %@ Pendenzen offen; %@ insgesamt
       internal static func summary(_ p1: String, _ p2: String) -> String {
@@ -243,7 +243,7 @@ internal enum L10n {
   }
 
   internal enum ViewIssue {
-    /// Annehmen
+    /// Bestätigen
     internal static let acceptResponse = L10n.tr("Localizable", "view_issue.accept_response")
     /// Aktionen
     internal static let actions = L10n.tr("Localizable", "view_issue.actions")
@@ -251,7 +251,7 @@ internal enum L10n {
     internal static let cameraControlHint = L10n.tr("Localizable", "view_issue.camera_control_hint")
     /// Die Kamera konnte nicht aktiviert werden!
     internal static let couldNotActivateCamera = L10n.tr("Localizable", "view_issue.could_not_activate_camera")
-    /// Handwerker
+    /// Unternehmer
     internal static let craftsman = L10n.tr("Localizable", "view_issue.craftsman")
     /// Beschreibung
     internal static let description = L10n.tr("Localizable", "view_issue.description")
@@ -304,9 +304,9 @@ internal enum L10n {
       internal static let `true` = L10n.tr("Localizable", "view_issue.is_client_mode.true")
     }
     internal enum SelectCraftsman {
-      /// Kein Handwerker
+      /// Kein Unternehmer
       internal static let `none` = L10n.tr("Localizable", "view_issue.select_craftsman.none")
-      /// Handwerker
+      /// Unternehmer
       internal static let title = L10n.tr("Localizable", "view_issue.select_craftsman.title")
     }
     internal enum SelectTrade {
@@ -316,9 +316,9 @@ internal enum L10n {
       internal static let title = L10n.tr("Localizable", "view_issue.select_trade.title")
     }
     internal enum Summary {
-      /// Diese Pendenz wurde vom Handwerker beantwortet.\nDu kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) oder ablehnen (und sie somit rückgängig machen).
+      /// Diese Pendenz wurde vom Unternehmer erledigt.\nDu kannst diese Antwort entweder bestätigen (die Pendenz abschliessen) oder ablehnen (rückgängig machen).
       internal static let hasResponse = L10n.tr("Localizable", "view_issue.summary.has_response")
-      /// Diese Pendenz wurde noch nicht vom Handwerker beantwortet.\nDu kannst sie trotzdem bestätigen und somit als abgeschlossen markieren.
+      /// Diese Pendenz wurde noch nicht vom Unternehmer erledigt.\nDu kannst sie trotzdem bestätigen und somit als abgeschlossen markieren.
       internal static let noResponse = L10n.tr("Localizable", "view_issue.summary.no_response")
       /// Diese Pendenz wurde bereits abgeschlossen.\nDu kannst die Bestätigung rückgangig machen, um sie wieder zu eröffnen.
       internal static let reviewed = L10n.tr("Localizable", "view_issue.summary.reviewed")

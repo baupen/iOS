@@ -5,7 +5,7 @@ import UIKit
 final class MapListViewController: RefreshingTableViewController, Reusable {
 	typealias Localization = L10n.MapList
 	
-	@IBOutlet var backToSiteListButton: UIBarButtonItem!
+	@IBOutlet private var backToSiteListButton: UIBarButtonItem!
 	
 	var holder: MapHolder! {
 		didSet { update() }
@@ -41,7 +41,7 @@ final class MapListViewController: RefreshingTableViewController, Reusable {
 			}
 		} else if let selected = tableView.indexPathForSelectedRow {
 			// not appearing for the first time
-			if map(for: selected).hasChildren {
+			if Repository.read(map(for: selected).hasChildren) {
 				// coming back from selected map's sublist
 				showOwnMap()
 			} else {
@@ -81,10 +81,10 @@ final class MapListViewController: RefreshingTableViewController, Reusable {
 	
 	/// - returns: whether or not the holder is still valid
 	@discardableResult private func handleRefresh() -> Bool {
-		if let oldSite = holder as? ConstructionSite, let site = Client.shared.storage.sites[oldSite.id] {
+		if let oldSite = holder as? ConstructionSite, let site = Repository.object(oldSite.id) {
 			holder = site
 			return true
-		} else if let oldMap = holder as? Map, let map = Client.shared.storage.maps[oldMap.id] {
+		} else if let oldMap = holder as? Map, let map = Repository.object(oldMap.id) {
 			holder = map
 			return true
 		} else {
@@ -98,7 +98,10 @@ final class MapListViewController: RefreshingTableViewController, Reusable {
 		
 		navigationItem.title = holder.name
 		
-		maps = holder.childMaps().sorted { $0.name < $1.name }
+		maps = Repository.read(holder.children
+			.order(Map.Columns.name.asc)
+			.fetchAll
+		)
 	}
 	
 	func showOwnMap() {
@@ -141,7 +144,6 @@ final class MapListViewController: RefreshingTableViewController, Reusable {
 	
 	/// reloads the cell for the given map, if currently visible
 	func reload(_ map: Map) {
-		guard holder.rawID == map.rawID || holder.children.contains(map.id) else { return }
 		for cell in tableView.visibleCells {
 			let mapCell = cell as! MapCell
 			if mapCell.map.id == map.id {
@@ -196,16 +198,17 @@ final class MapListViewController: RefreshingTableViewController, Reusable {
 			showOwnMap()
 		} else {
 			let map = maps[indexPath.row]
+			let mapHasChildren = Repository.read(map.hasChildren)
 			
 			if mainController.isExtended {
 				let mapController = mainController.detailNav.mapController
 				mapController.holder = map
 				
-				if map.hasChildren {
+				if mapHasChildren {
 					showListController(for: map)
 				}
 			} else {
-				if map.hasChildren {
+				if mapHasChildren {
 					showListController(for: map)
 				} else {
 					showMapController(for: map)

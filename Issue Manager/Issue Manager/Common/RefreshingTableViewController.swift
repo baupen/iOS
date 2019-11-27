@@ -33,7 +33,7 @@ class RefreshingTableViewController: UITableViewController {
 				titled: Alert.InvalidSession.title,
 				message: Alert.InvalidSession.message
 			) {
-				self.dismiss(animated: true)
+				self.performSegue(withIdentifier: "log out", sender: self)
 			}
 		case RequestError.outdatedClient:
 			self.showAlert(

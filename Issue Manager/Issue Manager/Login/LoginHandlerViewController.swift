@@ -19,8 +19,7 @@ class LoginHandlerViewController: UIViewController {
 		}
 		
 		result.catch { error in
-			print("Login Failed!", error.localizedFailureReason)
-			dump(error)
+			error.printDetails(context: "Login Failed!")
 			self.handle(error, username: username, password: password)
 		}
 	}
@@ -34,7 +33,13 @@ class LoginHandlerViewController: UIViewController {
 		case RequestError.apiError(let meta) where meta.error == .wrongPassword:
 			showWrongPasswordAlert(username: username)
 		case RequestError.communicationError: // likely connection failure
-			attemptLocalLogin(username: username, password: password, showingAlerts: true)
+			let wasAttemptValid = attemptLocalLogin(username: username, password: password)
+			if !wasAttemptValid {
+				showAlert(
+					titled: L10n.Alert.ConnectionIssues.title,
+					message: L10n.Alert.ConnectionIssues.message
+				)
+			}
 		case RequestError.outdatedClient(let client, let server):
 			print("Outdated client! client: \(client), server: \(server)")
 			showAlert(
@@ -46,37 +51,26 @@ class LoginHandlerViewController: UIViewController {
 				titled: Localization.Alert.LoginError.title,
 				message: Localization.Alert.LoginError.message
 			) {
-				self.attemptLocalLogin(username: username, password: password, showingAlerts: false)
+				self.attemptLocalLogin(username: username, password: password)
 			}
 		}
 	}
 	
-	func attemptLocalLogin(username: String, password: String, showingAlerts: Bool) {
-		guard let localUser = Client.shared.localUser else {
-			if showingAlerts {
-				showAlert(
-					titled: L10n.Alert.ConnectionIssues.title,
-					message: L10n.Alert.ConnectionIssues.message
-				)
-			}
-			return
-		}
+	/// - returns: whether or not the attempt was valid—if `false`, the user shouldn't know any attempt occurred.
+	@discardableResult func attemptLocalLogin(username: String, password: String) -> Bool {
+		guard
+			let localUser = Client.shared.localUser,
+			username == localUser.localUsername
+			else { return false }
 		
-		guard username == localUser.localUsername else {
-			if showingAlerts {
-				showUnknownUsernameAlert(username: username)
-			}
-			return
-		}
 		guard password.sha256() == localUser.passwordHash else {
-			if showingAlerts {
-				showWrongPasswordAlert(username: username)
-			}
-			return
+			showWrongPasswordAlert(username: username)
+			return true
 		}
 		
 		print("Logged in locally!")
 		showSiteList()
+		return true
 	}
 	
 	func showUnknownUsernameAlert(username: String) {

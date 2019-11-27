@@ -3,7 +3,7 @@
 import UIKit
 
 final class SelectionViewController: UIViewController {
-	@IBOutlet var tableView: UITableView!
+	@IBOutlet private var tableView: UITableView!
 	
 	var handler: AnySelectionHandler! {
 		didSet { update() }
@@ -49,7 +49,7 @@ final class SelectionHandler<Handler: SimpleSelectionHandler>: NSObject, AnySele
 	
 	func prepare(_ tableView: UITableView, in controller: UIViewController) {
 		self.viewController = controller
-		if let current = handler.currentItem, let index = handler.items.index(of: current) {
+		if let current = handler.currentItem, let index = handler.items.firstIndex(of: current) {
 			tableView.selectRow(at: [1, index], animated: true, scrollPosition: .middle)
 		} else {
 			tableView.selectRow(at: [0, 0], animated: true, scrollPosition: .none)

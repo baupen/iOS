@@ -45,12 +45,12 @@ final class IssueBadge: UIView {
 	}
 	
 	func update() {
-		let issues = shouldUseRecursiveIssues
-			? holder.recursiveIssues()
-			: AnyCollection((holder as! Map).allIssues())
+		let issues = holder.issues(recursively: shouldUseRecursiveIssues)
+			.issuesWithResponse
+			.openIssues
 		// async because there could be a lot of issues (e.g. if we're calculating it for a whole site)
-		let issueCount = BasicFuture(asyncOn: .global()) {
-			issues.count { $0.hasResponse && $0.isOpen }
+		let issueCount = BasicFuture(asyncOn: .global(qos: .userInitiated)) {
+			Repository.read(issues.fetchCount)
 		}
 		
 		issueCount.on(.main).then { count in
