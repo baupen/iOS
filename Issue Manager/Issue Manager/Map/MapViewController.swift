@@ -16,6 +16,7 @@ final class MapViewController: UIViewController, Reusable {
 	@IBOutlet private var fallbackLabel: UILabel!
 	@IBOutlet private var pdfContainerView: UIView!
 	@IBOutlet private var activityIndicator: UIActivityIndicatorView!
+	@IBOutlet private var pullableContainer: UIView!
 	@IBOutlet private var pullableView: PullableView!
 	@IBOutlet private var issuePositioner: IssuePositioner!
 	
@@ -125,11 +126,10 @@ final class MapViewController: UIViewController, Reusable {
 		updateBarButtonItem()
 	}
 	
-	override func viewWillLayoutSubviews() {
-		super.viewWillLayoutSubviews()
+	override func viewDidLayoutSubviews() {
+		super.viewDidLayoutSubviews()
 		
-		let safeArea = view.bounds.inset(by: view.safeAreaInsets)
-		pullableView.maxHeight = safeArea.height
+		pullableView.maxHeight = pullableContainer.frame.height
 	}
 	
 	// not called at all in initial instantiation for some reason (hence the additional call in viewWillAppear)
