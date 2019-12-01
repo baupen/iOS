@@ -320,7 +320,7 @@
         <!--Site List-->
         <scene sceneID="cN8-uD-Xw3">
             <objects>
-                <tableViewController storyboardIdentifier="SiteListViewController" modalTransitionStyle="flipHorizontal" modalPresentationStyle="fullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Bne-PF-7lo" userLabel="Site List" customClass="SiteListViewController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SiteListViewController" modalTransitionStyle="flipHorizontal" modalPresentationStyle="currentContext" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Bne-PF-7lo" userLabel="Site List" customClass="SiteListViewController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" delaysContentTouches="NO" dataMode="static" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="IMy-is-gSU">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -618,7 +618,7 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
         <!--Main-->
         <scene sceneID="Nki-YV-4Qg">
             <objects>
-                <splitViewController storyboardIdentifier="MainViewController" modalPresentationStyle="fullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="H1p-Uh-vWS" userLabel="Main" customClass="MainViewController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
+                <splitViewController storyboardIdentifier="MainViewController" modalPresentationStyle="currentContext" useStoryboardIdentifierAsRestorationIdentifier="YES" id="H1p-Uh-vWS" userLabel="Main" customClass="MainViewController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <connections>
                         <segue destination="RMx-3f-FxP" kind="relationship" relationship="masterViewController" id="BlO-5A-QYV"/>
