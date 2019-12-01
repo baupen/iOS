@@ -120,21 +120,10 @@ final class MapViewController: UIViewController, Reusable {
 		update()
 	}
 	
-	override func viewWillAppear(_ animated: Bool) {
-		super.viewWillAppear(animated)
-		
-		updateBarButtonItem()
-	}
-	
 	override func viewDidLayoutSubviews() {
 		super.viewDidLayoutSubviews()
 		
 		pullableView.maxHeight = pullableContainer.frame.height
-	}
-	
-	// not called at all in initial instantiation for some reason (hence the additional call in viewWillAppear)
-	override func didMove(toParent parent: UIViewController?) {
-		super.didMove(toParent: parent)
 		
 		updateBarButtonItem()
 	}
@@ -233,7 +222,7 @@ final class MapViewController: UIViewController, Reusable {
 			
 			self.pdfController = SimplePDFViewController() <- {
 				$0.delegate = self
-				$0.backgroundColor = .mapBackground // some maps have a transparent background and black elements, so they need a white background
+				$0.backgroundColor = .mapBackground // some maps have a transparent background and black elements, so they need a bright background
 				$0.page = page // should be set after the background color (technically a race condition otherwise)
 				$0.overlayView.alpha = self.markerAlpha
 				$0.additionalSafeAreaInsets.bottom += self.pullableView.minHeight
