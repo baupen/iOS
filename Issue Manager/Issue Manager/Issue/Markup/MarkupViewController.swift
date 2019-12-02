@@ -109,7 +109,7 @@ final class MarkupViewController: UIViewController {
 			let newImage = UIImage(cgImage: wipContext.makeImage()!)
 			
 			let editIssueController = segue.destination as! EditIssueViewController
-			editIssueController.image = newImage
+			editIssueController.store(newImage)
 		case "cancel":
 			break
 		default:

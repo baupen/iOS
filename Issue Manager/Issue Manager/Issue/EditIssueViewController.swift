@@ -47,7 +47,7 @@ final class EditIssueViewController: UITableViewController, Reusable {
 	}
 	
 	@IBAction func removeImage() {
-		image = nil
+		imageFile = nil
 	}
 	
 	@IBAction func openImagePicker(_ sender: UIView) {
@@ -112,11 +112,21 @@ final class EditIssueViewController: UITableViewController, Reusable {
 		}
 	}
 	
-	var image: UIImage? {
+	private var imageFile: File<Issue>? {
 		didSet {
-			imageView.image = image
-			cameraContainerView.isHidden = image != nil
-			markupLabel.isEnabled = image != nil
+			loadedImage = imageFile.flatMap {
+				nil
+					?? UIImage(contentsOfFile: Issue.cacheURL(for: $0).path)
+					?? UIImage(contentsOfFile: Issue.localURL(for: $0).path)
+			}
+		}
+	}
+	
+	private var loadedImage: UIImage? {
+		didSet {
+			imageView.image = loadedImage
+			cameraContainerView.isHidden = loadedImage != nil
+			markupLabel.isEnabled = loadedImage != nil
 		}
 	}
 	
@@ -152,6 +162,19 @@ final class EditIssueViewController: UITableViewController, Reusable {
 		update()
 	}
 	
+	func store(_ image: UIImage) {
+		let file = File<Issue>(filename: "\(UUID()).jpg")
+		
+		let url = Issue.localURL(for: file)
+		do {
+			try image.saveJPEG(to: url)
+			imageFile = file
+		} catch {
+			showAlert(titled: Localization.CouldNotSaveImage.title, message: error.localizedFailureReason)
+			imageFile = nil
+		}
+	}
+	
 	// only call this when absolutely necessary; overwrites content in text fields
 	private func update() {
 		assert(issue.isRegistered != true)
@@ -169,36 +192,15 @@ final class EditIssueViewController: UITableViewController, Reusable {
 		descriptionField.text = issue.description
 		descriptionChanged()
 		
-		image = issue.image.flatMap {
-			UIImage(contentsOfFile: Issue.cacheURL(for: $0).path)
-				?? UIImage(contentsOfFile: Issue.localURL(for: $0).path)
-		}
+		imageFile = issue.image
 	}
 	
 	private func save() {
-		let hasChangedImage = issue.image != original?.image
-		
 		func update(_ details: inout Issue.Details) {
 			details.isMarked = isIssueMarked
 			details.craftsman = craftsman?.id
 			details.description = descriptionField.text
-			
-			if hasChangedImage {
-				if let image = image {
-					let file = File<Issue>(filename: "\(UUID()).jpg")
-					
-					let url = Issue.localURL(for: file)
-					do {
-						try image.saveJPEG(to: url)
-						details.image = file
-					} catch {
-						showAlert(titled: Localization.CouldNotSaveImage.title, message: error.localizedFailureReason)
-						details.image = nil
-					}
-				} else {
-					details.image = nil
-				}
-			}
+			details.image = imageFile
 		}
 		
 		if isCreating {
@@ -232,8 +234,8 @@ final class EditIssueViewController: UITableViewController, Reusable {
 	
 	override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
 		switch identifier {
-		case "lightbox":
-			return image != nil
+		case "lightbox", "markup":
+			return loadedImage != nil
 		default:
 			return true
 		}
@@ -249,11 +251,11 @@ final class EditIssueViewController: UITableViewController, Reusable {
 			Repository.shared.remove(issue)
 		case "lightbox":
 			let lightboxController = segue.destination as! LightboxViewController
-			lightboxController.image = image!
+			lightboxController.image = loadedImage!
 			lightboxController.sourceView = imageView
 		case "markup":
 			let markupNavController = segue.destination as! MarkupNavigationController
-			markupNavController.markupController.image = image!
+			markupNavController.markupController.image = loadedImage!
 		case "select trade":
 			let selectionController = segue.destination as! SelectionViewController
 			selectionController.handler = TradeSelectionHandler(
@@ -316,13 +318,13 @@ extension EditIssueViewController: CameraViewDelegate {
 	}
 	
 	func pictureTaken(_ image: UIImage) {
-		self.image = image
 		defaults.hasTakenPhoto = true
 		cameraControlHintView.isHidden = true
+		store(image)
 	}
 	
 	func pictureSelected(_ image: UIImage) {
-		self.image = image
+		store(image)
 	}
 }
 
