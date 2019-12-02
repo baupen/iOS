@@ -810,7 +810,7 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                                                                 <attributedString key="userComments">
                                                                                     <fragment content="placeholder for username field">
                                                                                         <attributes>
-                                                                                            <font key="NSFont" metaFont="label" size="11"/>
+                                                                                            <font key="NSFont" metaFont="toolTip"/>
                                                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                                         </attributes>
                                                                                     </fragment>
@@ -3037,7 +3037,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                                                 <attributedString key="userComments">
                                                                                     <fragment content="placeholder for username field">
                                                                                         <attributes>
-                                                                                            <font key="NSFont" metaFont="label" size="11"/>
+                                                                                            <font key="NSFont" metaFont="toolTip"/>
                                                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                                         </attributes>
                                                                                     </fragment>
@@ -3276,7 +3276,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="L64-rs-k1Y"/>
-        <segue reference="OdI-J8-6Ad"/>
+        <segue reference="PB9-0e-xdP"/>
         <segue reference="QK8-t8-g4B"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="Main"/>

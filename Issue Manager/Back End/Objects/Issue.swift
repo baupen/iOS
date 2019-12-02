@@ -4,7 +4,6 @@ import Foundation
 import GRDB
 
 struct Issue {
-	// NB: update `update(from:)` when adding/removing stored properties!
 	let meta: ObjectMeta<Issue>
 	let number: Int?
 	let wasAddedWithClient: Bool // "abnahmemodus"
@@ -186,6 +185,7 @@ extension Issue {
 
 // MARK: -
 // MARK: Mutation
+// TODO: At some point, change this stuff so you can mutate any issue as much as you want, but you just can't save it (without accessing the repository directly) without these kinds of methods. Would make the editor nicer; you could have an old and a new copy and bind to the new one (whenever SwiftUI becomes viable).
 extension Issue {
 	mutating func create(transform: (inout Details) throws -> Void) rethrows {
 		assert(!isRegistered)
