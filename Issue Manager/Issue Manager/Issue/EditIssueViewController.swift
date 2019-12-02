@@ -17,7 +17,7 @@ final class EditIssueViewController: UITableViewController, Reusable {
 	@IBOutlet private var imageView: UIImageView!
 	@IBOutlet private var cameraContainerView: CameraContainerView!
 	@IBOutlet private var cameraView: CameraView!
-	@IBOutlet private var markupButton: UIButton!
+	@IBOutlet private var markupLabel: UILabel!
 	@IBOutlet private var cameraControlHintView: UIView!
 	
 	@IBOutlet private var craftsmanTradeLabel: UILabel!
@@ -116,7 +116,7 @@ final class EditIssueViewController: UITableViewController, Reusable {
 		didSet {
 			imageView.image = image
 			cameraContainerView.isHidden = image != nil
-			markupButton.isEnabled = image != nil
+			markupLabel.isEnabled = image != nil
 		}
 	}
 	
