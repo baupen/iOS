@@ -83,10 +83,14 @@ final class MarkupViewController: UIViewController {
 		updateUndoButtons()
 		
 		displayLink = CADisplayLink(target: self, selector: #selector(updateImage))
+	}
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
 		
-		if #available(iOS 13.0, *) {
-			isModalInPresentation = true // don't just dismiss
-		}
+		// workaround for the navigation bar being laid out incorrectly in iOS 13
+		// TODO: remove once apple fix this issue
+		navigationController?.navigationBar.setNeedsLayout()
 	}
 	
 	override func viewDidDisappear(_ animated: Bool) {
@@ -213,6 +217,10 @@ final class MarkupViewController: UIViewController {
 			foregroundView.image = UIImage(cgImage: snapshot)
 			undoBuffer.push(snapshot)
 			updateUndoButtons()
+			
+			if #available(iOS 13.0, *) {
+				isModalInPresentation = true // we've made changes; don't just dismiss
+			}
 			
 			fallthrough
 		case .cancelled, .failed:
