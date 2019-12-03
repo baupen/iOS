@@ -134,21 +134,19 @@ final class MarkupViewController: UIViewController {
 		let imageSize = image.cgImage!.width * image.cgImage!.bytesPerRow
 		let allowedSize = 200 << 20 // 200 MB
 		undoBuffer = UndoBuffer(size: allowedSize / imageSize)
-		print(undoBuffer.size)
 		undoBuffer.push(drawingContext.makeImage()!) // empty base state
 	}
 	
 	private func makeContext() -> CGContext {
 		UIGraphicsBeginImageContextWithOptions(image.size, false, 1) // not opaque
-		let context = UIGraphicsGetCurrentContext()!
-		UIGraphicsEndImageContext()
+		defer { UIGraphicsEndImageContext() }
 		
-		context.setLineWidth(imageUnit)
-		context.setStrokeColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
-		context.setLineCap(.round)
-		context.setLineJoin(.round)
-		
-		return context
+		return UIGraphicsGetCurrentContext()! <- {
+			$0.setLineWidth(imageUnit)
+			$0.setStrokeColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
+			$0.setLineCap(.round)
+			$0.setLineJoin(.round)
+		}
 	}
 	
 	@objc func updateImage() {

@@ -810,7 +810,7 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                                                                 <attributedString key="userComments">
                                                                                     <fragment content="placeholder for username field">
                                                                                         <attributes>
-                                                                                            <font key="NSFont" metaFont="toolTip"/>
+                                                                                            <font key="NSFont" metaFont="message" size="11"/>
                                                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                                         </attributes>
                                                                                     </fragment>
@@ -958,21 +958,21 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
             <objects>
                 <viewController id="XdX-XP-UgZ" customClass="IssueListViewController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" opaque="NO" contentMode="scaleToFill" id="eaQ-Dp-CWK">
-                        <rect key="frame" x="0.0" y="0.0" width="512" height="512"/>
+                        <rect key="frame" x="0.0" y="0.0" width="420" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dBv-R5-jXy" userLabel="IB Background Preview">
-                                <rect key="frame" x="0.0" y="0.0" width="512" height="512"/>
+                                <rect key="frame" x="0.0" y="0.0" width="420" height="600"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7Ad-BC-5Kd">
-                                <rect key="frame" x="0.0" y="0.0" width="512" height="478"/>
+                                <rect key="frame" x="0.0" y="0.0" width="420" height="566"/>
                                 <subviews>
                                     <view opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="500" verticalHuggingPriority="500" horizontalCompressionResistancePriority="900" verticalCompressionResistancePriority="700" translatesAutoresizingMaskIntoConstraints="NO" id="8RX-4M-Ilf">
-                                        <rect key="frame" x="0.0" y="0.0" width="512" height="64"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="420" height="64"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZbN-Ox-zZ9" userLabel="Indicator">
-                                                <rect key="frame" x="238" y="4" width="36" height="5"/>
+                                                <rect key="frame" x="192" y="4" width="36" height="5"/>
                                                 <color key="backgroundColor" systemColor="separatorColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="5" id="9X6-ow-dzM"/>
@@ -985,7 +985,7 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="42 Pendenzen offen; 69 insgesamt" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5mB-PJ-gr9">
-                                                <rect key="frame" x="119" y="0.0" width="274" height="64"/>
+                                                <rect key="frame" x="73" y="0.0" width="274" height="64"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="64" id="R72-5R-0g7"/>
                                                 </constraints>
@@ -1003,23 +1003,23 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                         <viewLayoutGuide key="safeArea" id="apj-CG-thG"/>
                                     </view>
                                     <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="kSJ-C9-VR1" userLabel="Top Separator" customClass="SeparatorLine" customModule="Issue_Manager" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="64" width="512" height="1"/>
+                                        <rect key="frame" x="0.0" y="64" width="420" height="1"/>
                                         <color key="backgroundColor" systemColor="separatorColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
-                                    <tableView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="100" verticalCompressionResistancePriority="300" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" sectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="eSQ-Ii-ycc">
-                                        <rect key="frame" x="0.0" y="65" width="512" height="362"/>
+                                    <tableView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="100" verticalHuggingPriority="100" horizontalCompressionResistancePriority="100" verticalCompressionResistancePriority="100" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" sectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="eSQ-Ii-ycc">
+                                        <rect key="frame" x="0.0" y="65" width="420" height="459"/>
                                         <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="IssueCell" rowHeight="320" id="X3S-og-f79" customClass="IssueCell" customModule="Issue_Manager" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="512" height="320"/>
+                                                <rect key="frame" x="0.0" y="28" width="420" height="320"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="X3S-og-f79" id="dE6-pX-HX1">
-                                                    <rect key="frame" x="0.0" y="0.0" width="512" height="320"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="420" height="320"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7j7-fo-OC8">
-                                                            <rect key="frame" x="458" y="0.0" width="44" height="44"/>
+                                                            <rect key="frame" x="366" y="0.0" width="44" height="44"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="7j7-fo-OC8" secondAttribute="height" multiplier="1:1" id="3eI-Vs-Sdj"/>
                                                             </constraints>
@@ -1030,10 +1030,10 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                                             </connections>
                                                         </button>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="lBw-YZ-MlN">
-                                                            <rect key="frame" x="20" y="0.0" width="472" height="309"/>
+                                                            <rect key="frame" x="20" y="0.0" width="380" height="309"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="LUO-ML-7li">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="472" height="44"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="380" height="44"/>
                                                                     <subviews>
                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" image="flat_issue_new" translatesAutoresizingMaskIntoConstraints="NO" id="fog-AI-NCl" customClass="TrilinearImageView" customModule="Issue_Manager" customModuleProvider="target">
                                                                             <rect key="frame" x="0.0" y="10" width="24" height="24"/>
@@ -1058,16 +1058,16 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <view opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="100" horizontalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="ted-VG-Feb" userLabel="Spacer (for expanded state)">
-                                                                            <rect key="frame" x="246" y="0.0" width="129" height="44"/>
+                                                                            <rect key="frame" x="246" y="0.0" width="37" height="44"/>
                                                                         </view>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="500" verticalHuggingPriority="251" horizontalCompressionResistancePriority="800" text="Maler" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="em9-qY-Md6">
-                                                                            <rect key="frame" x="390" y="11.999999999999998" width="43" height="20.333333333333329"/>
+                                                                            <rect key="frame" x="298" y="11.999999999999998" width="43" height="20.333333333333329"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <view contentMode="scaleToFill" horizontalHuggingPriority="400" verticalHuggingPriority="400" horizontalCompressionResistancePriority="400" verticalCompressionResistancePriority="400" translatesAutoresizingMaskIntoConstraints="NO" id="VEG-Qh-x96" userLabel="Mark Button Placeholder">
-                                                                            <rect key="frame" x="448" y="10" width="24" height="24"/>
+                                                                            <rect key="frame" x="356" y="10" width="24" height="24"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" secondItem="VEG-Qh-x96" secondAttribute="height" multiplier="1:1" id="lrp-zV-n7w"/>
                                                                             </constraints>
@@ -1079,17 +1079,17 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                                                     </constraints>
                                                                 </stackView>
                                                                 <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FSe-gy-7WF" userLabel="Expanded View">
-                                                                    <rect key="frame" x="0.0" y="44" width="472" height="265"/>
+                                                                    <rect key="frame" x="0.0" y="44" width="380" height="265"/>
                                                                     <subviews>
                                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="0xf-f8-sLf">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="472" height="265"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="380" height="265"/>
                                                                             <subviews>
                                                                                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="azY-zF-HrC" userLabel="Separator" customClass="SeparatorLine" customModule="Issue_Manager" customModuleProvider="target">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="472" height="1"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="380" height="1"/>
                                                                                     <color key="backgroundColor" systemColor="separatorColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 </view>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="800" verticalHuggingPriority="300" verticalCompressionResistancePriority="800" alignment="firstBaseline" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="sZ7-dJ-tWE" userLabel="Description">
-                                                                                    <rect key="frame" x="0.0" y="22.333333333333329" width="472" height="20.333333333333329"/>
+                                                                                    <rect key="frame" x="0.0" y="22.333333333333329" width="380" height="20.333333333333329"/>
                                                                                     <subviews>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="900" verticalCompressionResistancePriority="900" text="Beschreibung:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kn0-17-wq6">
                                                                                             <rect key="frame" x="0.0" y="0.0" width="130" height="20.333333333333332"/>
@@ -1101,7 +1101,7 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                                                                             </userDefinedRuntimeAttributes>
                                                                                         </label>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="200" verticalHuggingPriority="300" horizontalCompressionResistancePriority="200" verticalCompressionResistancePriority="800" text="Etwas ist falsch!" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MGR-UU-vfh">
-                                                                                            <rect key="frame" x="138" y="0.0" width="334" height="20.333333333333332"/>
+                                                                                            <rect key="frame" x="138" y="0.0" width="242" height="20.333333333333332"/>
                                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                             <nil key="textColor"/>
                                                                                             <nil key="highlightedColor"/>
@@ -1109,7 +1109,7 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                                                                     </subviews>
                                                                                 </stackView>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="801" verticalCompressionResistancePriority="801" alignment="firstBaseline" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="LRM-vN-RA2" userLabel="Craftsman">
-                                                                                    <rect key="frame" x="0.0" y="64" width="472" height="41"/>
+                                                                                    <rect key="frame" x="0.0" y="64" width="380" height="41"/>
                                                                                     <subviews>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="900" verticalCompressionResistancePriority="900" text="Handwerker:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KzX-dL-fRc">
                                                                                             <rect key="frame" x="0.0" y="0.0" width="130" height="20.333333333333332"/>
@@ -1121,7 +1121,7 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                                                                             </userDefinedRuntimeAttributes>
                                                                                         </label>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="301" verticalCompressionResistancePriority="801" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Shy-g3-Y7T">
-                                                                                            <rect key="frame" x="138" y="0.3333333333333286" width="334" height="40.666666666666664"/>
+                                                                                            <rect key="frame" x="138" y="0.3333333333333286" width="242" height="40.666666666666664"/>
                                                                                             <string key="text">Malerfirma GmbH
 Maler</string>
                                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -1131,7 +1131,7 @@ Maler</string>
                                                                                     </subviews>
                                                                                 </stackView>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="303" verticalCompressionResistancePriority="803" alignment="firstBaseline" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="htu-bp-Qww" userLabel="Client Mode">
-                                                                                    <rect key="frame" x="0.0" y="126.33333333333333" width="472" height="20.333333333333329"/>
+                                                                                    <rect key="frame" x="0.0" y="126.33333333333333" width="380" height="20.333333333333329"/>
                                                                                     <subviews>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="900" verticalCompressionResistancePriority="900" text="Abnahmemodus:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YyI-ws-4EP">
                                                                                             <rect key="frame" x="0.0" y="0.0" width="130" height="20.333333333333332"/>
@@ -1143,7 +1143,7 @@ Maler</string>
                                                                                             </userDefinedRuntimeAttributes>
                                                                                         </label>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="200" verticalHuggingPriority="303" horizontalCompressionResistancePriority="200" verticalCompressionResistancePriority="803" text="Ja" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oqu-tl-KrD">
-                                                                                            <rect key="frame" x="138" y="0.0" width="334" height="20.333333333333332"/>
+                                                                                            <rect key="frame" x="138" y="0.0" width="242" height="20.333333333333332"/>
                                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                             <nil key="textColor"/>
                                                                                             <nil key="highlightedColor"/>
@@ -1151,7 +1151,7 @@ Maler</string>
                                                                                     </subviews>
                                                                                 </stackView>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="302" verticalCompressionResistancePriority="802" alignment="firstBaseline" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="t9n-Ih-HNp" userLabel="Status">
-                                                                                    <rect key="frame" x="0.0" y="168" width="472" height="20.333333333333343"/>
+                                                                                    <rect key="frame" x="0.0" y="168" width="380" height="20.333333333333343"/>
                                                                                     <subviews>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="900" verticalCompressionResistancePriority="900" text="Status:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p7f-t6-5ei" userLabel="Status:">
                                                                                             <rect key="frame" x="0.0" y="0.0" width="130" height="20.333333333333332"/>
@@ -1163,7 +1163,7 @@ Maler</string>
                                                                                             </userDefinedRuntimeAttributes>
                                                                                         </label>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="200" verticalHuggingPriority="302" horizontalCompressionResistancePriority="200" verticalCompressionResistancePriority="802" text="Registriert von Julian" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OXl-vS-TbP">
-                                                                                            <rect key="frame" x="138" y="0.0" width="334" height="20.333333333333332"/>
+                                                                                            <rect key="frame" x="138" y="0.0" width="242" height="20.333333333333332"/>
                                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                             <nil key="textColor"/>
                                                                                             <nil key="highlightedColor"/>
@@ -1171,14 +1171,14 @@ Maler</string>
                                                                                     </subviews>
                                                                                 </stackView>
                                                                                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="SjD-Ox-Qrb" userLabel="Separator" customClass="SeparatorLine" customModule="Issue_Manager" customModuleProvider="target">
-                                                                                    <rect key="frame" x="0.0" y="209.66666666666666" width="472" height="1"/>
+                                                                                    <rect key="frame" x="0.0" y="209.66666666666666" width="380" height="1"/>
                                                                                     <color key="backgroundColor" systemColor="separatorColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 </view>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="900" verticalCompressionResistancePriority="900" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="3bx-QB-Czz">
-                                                                                    <rect key="frame" x="0.0" y="232" width="472" height="33"/>
+                                                                                    <rect key="frame" x="0.0" y="232" width="380" height="33"/>
                                                                                     <subviews>
                                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UNM-ch-LeV">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="236" height="33"/>
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="190" height="33"/>
                                                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                                                             <state key="normal" title="Auf Grundriss Anzeigen"/>
                                                                                             <userDefinedRuntimeAttributes>
@@ -1189,7 +1189,7 @@ Maler</string>
                                                                                             </connections>
                                                                                         </button>
                                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g7l-jr-fb1">
-                                                                                            <rect key="frame" x="236" y="0.0" width="236" height="33"/>
+                                                                                            <rect key="frame" x="190" y="0.0" width="190" height="33"/>
                                                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                                                             <state key="normal" title="Details Anzeigen"/>
                                                                                             <userDefinedRuntimeAttributes>
@@ -1252,14 +1252,14 @@ Maler</string>
                                         </connections>
                                     </tableView>
                                     <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="8Y2-LF-7rN" customClass="SeparatorLine" customModule="Issue_Manager" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="427" width="512" height="1"/>
+                                        <rect key="frame" x="0.0" y="524" width="420" height="1"/>
                                         <color key="backgroundColor" systemColor="separatorColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="400" verticalHuggingPriority="400" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="700" translatesAutoresizingMaskIntoConstraints="NO" id="Gd7-UM-IME">
-                                        <rect key="frame" x="0.0" y="428" width="512" height="50"/>
+                                        <rect key="frame" x="0.0" y="525" width="420" height="41"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fFY-qh-e9R">
-                                                <rect key="frame" x="0.0" y="4" width="512" height="42"/>
+                                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="998" verticalCompressionResistancePriority="999" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fFY-qh-e9R">
+                                                <rect key="frame" x="0.0" y="4" width="420" height="33"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <state key="normal" title="Bereichweite Pendenz Erfassen"/>
                                                 <userDefinedRuntimeAttributes>
@@ -1272,7 +1272,7 @@ Maler</string>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="fFY-qh-e9R" firstAttribute="leading" secondItem="Gd7-UM-IME" secondAttribute="leading" id="1VU-Kx-QFJ"/>
-                                            <constraint firstItem="fFY-qh-e9R" firstAttribute="top" secondItem="Gd7-UM-IME" secondAttribute="top" priority="650" constant="4" id="FV7-pw-Lyb"/>
+                                            <constraint firstItem="fFY-qh-e9R" firstAttribute="top" secondItem="Gd7-UM-IME" secondAttribute="top" priority="950" constant="4" id="FV7-pw-Lyb"/>
                                             <constraint firstAttribute="bottom" secondItem="fFY-qh-e9R" secondAttribute="bottom" constant="4" id="VLx-DG-9kV"/>
                                             <constraint firstAttribute="trailing" secondItem="fFY-qh-e9R" secondAttribute="trailing" id="ZiP-Is-MFu"/>
                                         </constraints>
@@ -1292,7 +1292,7 @@ Maler</string>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6P1-UZ-1aU"/>
                     </view>
-                    <size key="freeformSize" width="512" height="512"/>
+                    <size key="freeformSize" width="420" height="600"/>
                     <connections>
                         <outlet property="issueTableView" destination="eSQ-Ii-ycc" id="BBf-ez-6TU"/>
                         <outlet property="separatorView" destination="kSJ-C9-VR1" id="r8q-Mb-xrZ"/>
@@ -1301,7 +1301,7 @@ Maler</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="61v-Hv-iZJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="708" y="1026"/>
+            <point key="canvasLocation" x="707" y="895"/>
         </scene>
         <!--Filter nach Status-->
         <scene sceneID="Cng-52-hy9">
@@ -1848,7 +1848,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sp3-Cv-Lzj" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="czw-vx-eOq" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2202" y="895"/>
+            <point key="canvasLocation" x="2201" y="129"/>
         </scene>
         <!--Pendenz Bearbeiten-->
         <scene sceneID="098-5R-0wN">
@@ -2406,7 +2406,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1ZO-ac-qZO" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Uxf-G5-Ofn" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2202" y="129"/>
+            <point key="canvasLocation" x="2201" y="895"/>
         </scene>
         <!--Selection-->
         <scene sceneID="iVi-3j-O2i">
@@ -2598,7 +2598,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nuB-Rn-5m8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2926" y="129"/>
+            <point key="canvasLocation" x="3322" y="895"/>
         </scene>
         <!--Lightbox-->
         <scene sceneID="SyO-2W-hGA">
@@ -2671,7 +2671,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                     </connections>
                 </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2926" y="895"/>
+            <point key="canvasLocation" x="3322" y="129"/>
         </scene>
         <!--Markup-->
         <scene sceneID="mDm-og-bQU">
@@ -2954,7 +2954,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                     </connections>
                 </pongPressGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="3649.8046874999995" y="1687.5"/>
+            <point key="canvasLocation" x="4046" y="1688"/>
         </scene>
         <!--Edit Issue Navigation Controller-->
         <scene sceneID="70h-iN-VE7">
@@ -2973,12 +2973,12 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rj1-kL-gn2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1478" y="129"/>
+            <point key="canvasLocation" x="1477" y="895"/>
         </scene>
         <!--Markup Navigation Controller-->
         <scene sceneID="XfJ-Px-S3T">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rzf-7h-4Vf" customClass="MarkupNavigationController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="formSheet" id="rzf-7h-4Vf" customClass="MarkupNavigationController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ff1-dD-wgL">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
@@ -2991,7 +2991,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5fc-Hy-Itl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2925.5859375" y="1687.5"/>
+            <point key="canvasLocation" x="3322" y="1688"/>
         </scene>
         <!--Trial-->
         <scene sceneID="f7G-mC-Nig">
@@ -3037,7 +3037,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                                                 <attributedString key="userComments">
                                                                                     <fragment content="placeholder for username field">
                                                                                         <attributes>
-                                                                                            <font key="NSFont" metaFont="toolTip"/>
+                                                                                            <font key="NSFont" metaFont="message" size="11"/>
                                                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                                         </attributes>
                                                                                     </fragment>
@@ -3275,8 +3275,8 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="L64-rs-k1Y"/>
-        <segue reference="PB9-0e-xdP"/>
+        <segue reference="iOy-9i-ghB"/>
+        <segue reference="OdI-J8-6Ad"/>
         <segue reference="QK8-t8-g4B"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="Main"/>
