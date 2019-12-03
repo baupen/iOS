@@ -810,7 +810,7 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                                                                 <attributedString key="userComments">
                                                                                     <fragment content="placeholder for username field">
                                                                                         <attributes>
-                                                                                            <font key="NSFont" metaFont="menu" size="11"/>
+                                                                                            <font key="NSFont" metaFont="message" size="11"/>
                                                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                                         </attributes>
                                                                                     </fragment>
@@ -2978,7 +2978,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
         <!--Markup Navigation Controller-->
         <scene sceneID="XfJ-Px-S3T">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="formSheet" id="rzf-7h-4Vf" customClass="MarkupNavigationController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rzf-7h-4Vf" customClass="MarkupNavigationController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ff1-dD-wgL">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
@@ -3037,7 +3037,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                                                 <attributedString key="userComments">
                                                                                     <fragment content="placeholder for username field">
                                                                                         <attributes>
-                                                                                            <font key="NSFont" metaFont="menu" size="11"/>
+                                                                                            <font key="NSFont" metaFont="message" size="11"/>
                                                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                                         </attributes>
                                                                                     </fragment>
