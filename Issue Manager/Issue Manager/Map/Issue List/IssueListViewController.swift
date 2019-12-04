@@ -67,42 +67,59 @@ final class IssueListViewController: UIViewController {
 	// MARK: PullableView-UIScrollView interaction 
 	// close pullable view when scrollview is dragged down while at top
 	
-	private var fakePanRecognizer = FakePanRecognizer()
-	private var scrollOffset: CGFloat = 0
+	private var pullRecognizer: FakePanRecognizer?
+	private var pullDistance: CGFloat = 0
 	
-	@objc func listPanned(_ recognizer: UIPanGestureRecognizer) {
+	@objc private func listPanned(_ recognizer: UIPanGestureRecognizer) {
 		switch recognizer.state {
 		case .possible:
 			break
-		case .began, .changed:
-			if scrollOffset + issueTableView.contentOffset.y < 0 {
-				if fakePanRecognizer.state == .possible {
-					scrollOffset = 0
-					fakePanRecognizer.fakeTranslation = .zero
-					fakePanRecognizer.state = .began
-				}
-				scrollOffset += issueTableView.contentOffset.y
-				issueTableView.contentOffset.y = 0
-				
-				fakePanRecognizer.fakeTranslation.y = -scrollOffset
-				pullableView.viewPulled(fakePanRecognizer)
-				fakePanRecognizer.state = .changed
-			} else if fakePanRecognizer.state != .possible {
-				scrollOffset = 0
-				fakePanRecognizer.state = .failed
-				pullableView.viewPulled(fakePanRecognizer)
-				fakePanRecognizer.state = .possible
-			}
+		case .began:
+			pullRecognizer = nil
+			pullDistance = 0
+			fallthrough
+		case .changed:
+			handleScrolling()
 		case .ended, .cancelled, .failed:
-			if fakePanRecognizer.state != .possible {
-				scrollOffset = 0
-				fakePanRecognizer.state = .ended
-				pullableView.viewPulled(fakePanRecognizer)
-				fakePanRecognizer.state = .possible
+			handleScrolling()
+			if let pullRecognizer = pullRecognizer {
+				pullRecognizer.state = recognizer.state // transfer cancelled-/failedness
+				// don't love this, but it helps stuff feel smoother without having to implement good logic for velocity calculations
+				pullRecognizer.fakeVelocity = recognizer.velocity(in: pullableView.superview!)
+				pullableView.viewPulled(pullRecognizer)
 			}
 		@unknown default:
 			break
 		}
+	}
+	
+	private func handleScrolling() {
+		var contentOffset: CGFloat {
+			get { issueTableView.contentOffset.y }
+			set { issueTableView.contentOffset.y = newValue }
+		}
+		
+		let minOffset: CGFloat = -20 // if the list is overscrolled past this point, we won't let the user pull it down because it would become jumpy (believe me, i've tried all kinds of approaches)
+		// adjust pull offset
+		if pullRecognizer == nil, (minOffset..<0).contains(contentOffset) {
+			// start pulling pullable view
+			pullRecognizer = FakePanRecognizer() <- {
+				$0.state = .began
+				pullableView.viewPulled($0)
+				$0.state = .changed
+			}
+		}
+		guard let pullRecognizer = pullRecognizer else { return } // not currently pulling down the view
+		
+		pullDistance -= contentOffset
+		if pullDistance > 0 {
+			contentOffset = 0
+		} else {
+			pullDistance = 0
+		}
+		
+		pullRecognizer.fakeTranslation.y = pullDistance
+		pullableView.viewPulled(pullRecognizer)
 	}
 }
 
