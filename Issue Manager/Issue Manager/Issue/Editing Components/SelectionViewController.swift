@@ -40,7 +40,7 @@ final class SelectionHandler<Handler: SimpleSelectionHandler>: NSObject, AnySele
 	private var viewController: UIViewController!
 	
 	var title: String {
-		return handler.title
+		handler.title
 	}
 	
 	init(wrapping handler: Handler) {
@@ -57,11 +57,11 @@ final class SelectionHandler<Handler: SimpleSelectionHandler>: NSObject, AnySele
 	}
 	
 	func numberOfSections(in tableView: UITableView) -> Int {
-		return 2
+		2
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return section == 0 ? 1 : handler.items.count
+		section == 0 ? 1 : handler.items.count
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -78,7 +78,7 @@ final class SelectionHandler<Handler: SimpleSelectionHandler>: NSObject, AnySele
 	}
 	
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		return UITableView.automaticDimension
+		UITableView.automaticDimension
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -106,6 +106,6 @@ protocol SimpleSelectionHandler: AnyObject {
 
 extension SimpleSelectionHandler {
 	func wrapped() -> AnySelectionHandler {
-		return SelectionHandler(wrapping: self)
+		SelectionHandler(wrapping: self)
 	}
 }

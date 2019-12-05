@@ -79,7 +79,7 @@ final class TrialViewController: LoginHandlerViewController {
 	}
 	
 	override var preferredStatusBarStyle: UIStatusBarStyle {
-		return .lightContent
+		.lightContent
 	}
 	
 	override func awakeFromNib() {

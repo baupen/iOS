@@ -48,7 +48,7 @@ extension NonEmptyMaxHeap {
 	}
 	
 	var root: Element {
-		return elements.first!
+		elements.first!
 	}
 	
 	mutating func replaceRoot(with element: Element) {

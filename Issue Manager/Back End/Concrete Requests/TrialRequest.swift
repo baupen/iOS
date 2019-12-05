@@ -7,7 +7,7 @@ struct CreateTrialAccountRequest: JSONJSONRequest {
 	static let baseURLOverride: URL? = URL(string: "https://app.mangel.io")!
 	static let isIndependent = true
 	
-	var method: String { return "trial/create_account" }
+	var method: String { "trial/create_account" }
 	
 	let proposedGivenName: String?
 	let proposedFamilyName: String?

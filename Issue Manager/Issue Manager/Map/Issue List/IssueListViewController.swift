@@ -125,11 +125,11 @@ final class IssueListViewController: UIViewController {
 
 extension IssueListViewController: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return issues.count
+		issues.count
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		return tableView.dequeue(IssueCell.self, for: indexPath)! <- {
+		tableView.dequeue(IssueCell.self, for: indexPath)! <- {
 			$0.delegate = issueCellDelegate
 			$0.issue = issues[indexPath.row]
 		}

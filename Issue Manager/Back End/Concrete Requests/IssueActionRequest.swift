@@ -12,7 +12,7 @@ struct IssueActionRequest: JSONJSONRequest, BacklogStorable {
 	static let storageID = "issue action"
 	static let isIndependent = false
 	
-	var method: String { return "issue/\(action.rawValue)" }
+	var method: String { "issue/\(action.rawValue)" }
 	
 	var authenticationToken: String
 	let issueID: ID<Issue>

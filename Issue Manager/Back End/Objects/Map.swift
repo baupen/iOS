@@ -13,7 +13,7 @@ struct Map {
 	let parentID: ID<Map>?
 	
 	var parentHolderID: UUID {
-		return parentID?.rawValue ?? constructionSiteID.rawValue
+		parentID?.rawValue ?? constructionSiteID.rawValue
 	}
 	
 	final class Sector: Codable {
@@ -44,7 +44,7 @@ extension Map: DBRecord {
 	}
 	
 	func hasChildren(in db: Database) throws -> Bool {
-		return try children.fetchCount(db) > 0 // TODO: SQL exists() might be nice here
+		try children.fetchCount(db) > 0 // TODO: SQL exists() might be nice here
 	}
 	
 	init(row: Row) {

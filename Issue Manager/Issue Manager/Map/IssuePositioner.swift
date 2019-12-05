@@ -41,7 +41,7 @@ final class IssuePositioner: UIView {
 	}
 	
 	override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
-		return crosshairView.frame.contains(point)
+		crosshairView.frame.contains(point)
 			|| !topView.isHidden && topView.point(inside: topView.convert(point, from: self), with: event)
 			|| !botView.isHidden && botView.point(inside: botView.convert(point, from: self), with: event)
 	}
@@ -68,7 +68,7 @@ final class IssuePositioner: UIView {
 
 extension IssuePositioner: UIGestureRecognizerDelegate {
 	func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-		return touch.view == crosshairView
+		touch.view == crosshairView
 	}
 }
 

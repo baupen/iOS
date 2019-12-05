@@ -24,7 +24,7 @@ struct APIIssue {
 	}
 	
 	func makeObject() -> Issue {
-		return Issue(
+		Issue(
 			meta: meta,
 			number: number,
 			wasAddedWithClient: wasAddedWithClient,
@@ -40,7 +40,7 @@ extension APIIssue: APIModel {}
 
 extension Issue {
 	func makeModel() -> APIIssue {
-		return APIIssue(
+		APIIssue(
 			meta: meta,
 			number: number,
 			isMarked: isMarked,

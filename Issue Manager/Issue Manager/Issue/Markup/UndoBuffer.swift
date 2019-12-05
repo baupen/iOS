@@ -9,11 +9,11 @@ final class UndoBuffer<Content> {
 	private var position = -1
 	
 	var canUndo: Bool {
-		return position > 0
+		position > 0
 	}
 	
 	var canRedo: Bool {
-		return position + 1 < buffer.count
+		position + 1 < buffer.count
 	}
 	
 	init(size: Int) {

@@ -44,7 +44,7 @@ final class IssueCell: UITableViewCell, Reusable {
 	}
 	
 	private var isCompact: Bool {
-		return frame.width < 500
+		frame.width < 500
 	}
 	
 	override func awakeFromNib() {

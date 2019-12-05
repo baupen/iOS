@@ -8,7 +8,7 @@ typealias DownloadRequestPath<T: StoredObject> = WritableKeyPath<FileDownloadReq
 struct FileDownloadRequest: JSONDataRequest {
 	static let isIndependent = true
 	
-	var method: String { return "file/download" }
+	var method: String { "file/download" }
 	
 	var authenticationToken: String
 	var constructionSite: ObjectMeta<ConstructionSite>? = nil

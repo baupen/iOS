@@ -22,7 +22,7 @@ extension MapHolder {
 
 extension DerivableRequest where RowDecoder == Map {
 	func recursiveChildren(of holder: MapHolder) -> Self {
-		return holder.recursiveChildren(in: self)
+		holder.recursiveChildren(in: self)
 	}
 }
 

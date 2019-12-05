@@ -6,7 +6,7 @@ import Promise
 struct LoginRequest: JSONJSONRequest {
 	static let isIndependent = true
 	
-	var method: String { return "login" }
+	var method: String { "login" }
 	
 	let localUsername: String
 	let username: String
@@ -35,10 +35,10 @@ struct DomainOverridesRequest: GetRequest {
 	static let baseURLOverride: URL? = URL(string: "https://app.mangel.io")!
 	static let isIndependent = true
 	
-	var method: String { return "config/domain_overrides" }
+	var method: String { "config/domain_overrides" }
 	
 	func decode(from data: Data, using decoder: JSONDecoder) throws -> ExpectedResponse {
-		return try decoder.decode(ExpectedResponse.self, from: data)
+		try decoder.decode(ExpectedResponse.self, from: data)
 	}
 	
 	struct ExpectedResponse: Response {

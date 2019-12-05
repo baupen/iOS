@@ -17,7 +17,7 @@ struct Rectangle: Codable, Hashable {
 	var height: Double
 	
 	var origin: Point {
-		return Point(x: x, y: y)
+		Point(x: x, y: y)
 	}
 	
 	enum CodingKeys: String, CodingKey {

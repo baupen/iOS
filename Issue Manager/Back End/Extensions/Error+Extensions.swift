@@ -4,7 +4,7 @@ import Foundation
 
 extension Error {
 	var localizedFailureReason: String {
-		return (self as NSError).localizedFailureReason ?? localizedDescription
+		(self as NSError).localizedFailureReason ?? localizedDescription
 	}
 	
 	func printDetails(context: String) {

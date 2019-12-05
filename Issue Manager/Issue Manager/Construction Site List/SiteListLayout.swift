@@ -30,6 +30,6 @@ final class SiteListLayout: UICollectionViewFlowLayout {
 	}
 	
 	override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
-		return true
+		true
 	}
 }

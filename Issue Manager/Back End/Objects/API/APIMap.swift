@@ -12,7 +12,7 @@ struct APIMap {
 	let parentID: ID<Map>?
 	
 	func makeObject() -> Map {
-		return Map(
+		Map(
 			meta: meta,
 			sectors: sectors,
 			sectorFrame: sectorFrame,

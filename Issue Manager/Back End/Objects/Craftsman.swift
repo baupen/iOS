@@ -15,7 +15,7 @@ extension Craftsman: StoredObject {}
 extension Craftsman: DBRecord {
 	static let site = belongsTo(ConstructionSite.self)
 	var site: QueryInterfaceRequest<ConstructionSite> {
-		return request(for: Craftsman.site)
+		request(for: Craftsman.site)
 	}
 	
 	init(row: Row) {

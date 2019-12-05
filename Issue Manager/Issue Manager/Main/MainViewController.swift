@@ -48,7 +48,7 @@ final class MainViewController: UISplitViewController, Reusable {
 
 final class MasterNavigationController: UINavigationController {
 	var mapList: MapListViewController {
-		return topViewController as! MapListViewController
+		topViewController as! MapListViewController
 	}
 	
 	override var title: String? {
@@ -88,13 +88,13 @@ final class MasterNavigationController: UINavigationController {
 
 final class DetailNavigationController: UINavigationController, Reusable {
 	var mapController: MapViewController {
-		return topViewController as! MapViewController
+		topViewController as! MapViewController
 	}
 }
 
 extension UISplitViewController {
 	/// whether or not the split view is extended, i.e. not collapsed, so both panes are visible
 	var isExtended: Bool {
-		return !isCollapsed
+		!isCollapsed
 	}
 }

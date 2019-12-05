@@ -5,7 +5,7 @@ import CGeometry
 
 final class MarkupNavigationController: UINavigationController {
 	var markupController: MarkupViewController {
-		return topViewController as! MarkupViewController
+		topViewController as! MarkupViewController
 	}
 }
 
@@ -59,7 +59,7 @@ final class MarkupViewController: UIViewController {
 	
 	private var displayLink: CADisplayLink!
 	private var fullRect: CGRect {
-		return CGRect(origin: .zero, size: image.size)
+		CGRect(origin: .zero, size: image.size)
 	}
 	private var undoBuffer: UndoBuffer<CGImage>!
 	

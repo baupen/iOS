@@ -16,10 +16,10 @@ struct Issue {
 		didSet { Repository.shared.save(self) }
 	}
 	
-	var isMarked: Bool { return details.isMarked }
-	var image: File<Issue>? { return details.image }
-	var description: String? { return details.description }
-	var craftsmanID: ID<Craftsman>? { return details.craftsman }
+	var isMarked: Bool { details.isMarked }
+	var image: File<Issue>? { details.image }
+	var description: String? { details.description }
+	var craftsmanID: ID<Craftsman>? { details.craftsman }
 	
 	struct Details: Codable {
 		var isMarked = false
@@ -91,15 +91,15 @@ extension Issue {
 extension Issue: DBRecord {
 	static let map = belongsTo(Map.self)
 	var map: QueryInterfaceRequest<Map> {
-		return request(for: Issue.map)
+		request(for: Issue.map)
 	}
 	
 	var site: QueryInterfaceRequest<ConstructionSite> {
-		return ConstructionSite.joining(required: ConstructionSite.maps.filter(key: mapID))
+		ConstructionSite.joining(required: ConstructionSite.maps.filter(key: mapID))
 	}
 	
 	func craftsman(in db: Database) throws -> Craftsman? {
-		return try craftsmanID?.get(in: db)
+		try craftsmanID?.get(in: db)
 	}
 	
 	func encode(to container: inout PersistenceContainer) {
@@ -142,15 +142,15 @@ extension Issue: DBRecord {
 
 extension DerivableRequest where RowDecoder == Issue {
 	var consideringClientMode: Self {
-		return defaults.isInClientMode ? filter(Issue.Columns.wasAddedWithClient) : self
+		defaults.isInClientMode ? filter(Issue.Columns.wasAddedWithClient) : self
 	}
 	
 	var openIssues: Self {
-		return filter(Issue.Columns.review == nil)
+		filter(Issue.Columns.review == nil)
 	}
 	
 	var issuesWithResponse: Self {
-		return filter(Issue.Columns.response != nil)
+		filter(Issue.Columns.response != nil)
 	}
 }
 
@@ -159,27 +159,27 @@ extension Issue: StoredObject {}
 extension Issue: FileContainer {
 	static let pathPrefix = "issue"
 	static let downloadRequestPath = \FileDownloadRequest.issue
-	var file: File<Issue>? { return details.image }
+	var file: File<Issue>? { details.image }
 }
 
 // MARK: -
 // MARK: Status
 extension Issue {
 	var isRegistered: Bool {
-		return status.registration != nil
+		status.registration != nil
 	}
 	
 	var hasResponse: Bool {
-		return status.response != nil
+		status.response != nil
 	}
 	
 	/// - note: does _not_ imply `hasResponse`!
 	var isReviewed: Bool {
-		return status.review != nil
+		status.review != nil
 	}
 	
 	var isOpen: Bool {
-		return status.review == nil
+		status.review == nil
 	}
 }
 

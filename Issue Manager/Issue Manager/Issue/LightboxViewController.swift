@@ -39,7 +39,7 @@ final class LightboxViewController: UIViewController {
 	}
 	
 	override var prefersStatusBarHidden: Bool {
-		return isFullyShown ? true : super.prefersStatusBarHidden
+		isFullyShown ? true : super.prefersStatusBarHidden
 	}
 	
 	func update() {

@@ -44,7 +44,7 @@ final class CraftsmanSelectionHandler: SimpleSelectionHandler {
 	var trade: String?
 	
 	var title: String {
-		return trade ?? Localization.title
+		trade ?? Localization.title
 	}
 	
 	init(options: [Craftsman], trade: String?, current: Craftsman?, callback: @escaping SelectionCallback) {

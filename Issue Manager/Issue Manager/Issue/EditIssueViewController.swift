@@ -5,7 +5,7 @@ import GRDB
 
 final class EditIssueNavigationController: UINavigationController {
 	var editIssueController: EditIssueViewController {
-		return topViewController as! EditIssueViewController
+		topViewController as! EditIssueViewController
 	}
 }
 
@@ -275,7 +275,7 @@ final class EditIssueViewController: UITableViewController, Reusable {
 	}
 	
 	override func numberOfSections(in tableView: UITableView) -> Int {
-		return isCreating ? 4 : 5 // can't delete issue when creating
+		isCreating ? 4 : 5 // can't delete issue when creating
 	}
 	
 	override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -291,7 +291,7 @@ final class EditIssueViewController: UITableViewController, Reusable {
 	}
 	
 	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		return UITableView.automaticDimension
+		UITableView.automaticDimension
 	}
 }
 

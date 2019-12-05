@@ -6,7 +6,7 @@ import Promise
 struct ReadRequest: JSONJSONRequest {
 	static let isIndependent = false
 	
-	var method: String { return "read" }
+	var method: String { "read" }
 	
 	let authenticationToken: String
 	let user: ObjectMeta<User>
@@ -66,7 +66,7 @@ struct ReadRequest: JSONJSONRequest {
 
 private extension Repository {
 	func makeReadRequest(_ user: User) -> ReadRequest {
-		return ReadRequest(
+		ReadRequest(
 			authenticationToken: user.authenticationToken,
 			user: user.meta,
 			craftsmen: read(ObjectMeta.fetchAll),

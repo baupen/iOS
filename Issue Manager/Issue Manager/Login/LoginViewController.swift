@@ -42,7 +42,7 @@ final class LoginViewController: LoginHandlerViewController {
 	}
 	
 	override var preferredStatusBarStyle: UIStatusBarStyle {
-		return .lightContent
+		.lightContent
 	}
 	
 	override func viewDidLoad() {

@@ -3,7 +3,7 @@
 import Foundation
 
 private func key(_ a: Substring, _ b: Substring) -> String {
-	return "\(a)§\(b)"
+	"\(a)§\(b)"
 }
 
 private final class Levenshtein {
@@ -33,6 +33,6 @@ private final class Levenshtein {
 
 extension String {
 	func distance(to other: String) -> Int {
-		return Levenshtein().calculateDistance(Substring(self), Substring(other))
+		Levenshtein().calculateDistance(Substring(self), Substring(other))
 	}
 }

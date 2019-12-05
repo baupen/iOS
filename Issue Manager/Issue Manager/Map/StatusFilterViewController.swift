@@ -4,7 +4,7 @@ import UIKit
 
 final class StatusFilterNavigationController: UINavigationController {
 	var statusFilterController: StatusFilterViewController {
-		return topViewController as! StatusFilterViewController
+		topViewController as! StatusFilterViewController
 	}
 }
 
@@ -18,11 +18,11 @@ final class StatusFilterViewController: UITableViewController {
 	// MARK: - Table view data source
 	
 	override func numberOfSections(in tableView: UITableView) -> Int {
-		return 1
+		1
 	}
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return Status.allCases.count
+		Status.allCases.count
 	}
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

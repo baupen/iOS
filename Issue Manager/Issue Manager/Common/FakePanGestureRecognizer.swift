@@ -24,10 +24,10 @@ final class FakePanRecognizer: UIPanGestureRecognizer {
 	}
 	
 	override func translation(in view: UIView?) -> CGPoint {
-		return fakeTranslation
+		fakeTranslation
 	}
 	
 	override func velocity(in view: UIView?) -> CGPoint {
-		return fakeVelocity
+		fakeVelocity
 	}
 }

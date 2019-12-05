@@ -13,16 +13,16 @@ extension Row {
 		_: Value.Type = Value.self,
 		forKey key: Column,
 		using decoder: JSONDecoder = Row.decoder
-		) throws -> Value where Column: ColumnExpression, Value: Decodable {
-		return try decoder.decode(from: self[key])
+	) throws -> Value where Column: ColumnExpression, Value: Decodable {
+		try decoder.decode(from: self[key])
 	}
 	
 	func decodeValueIfPresent<Column, Value>(
 		_: Value.Type = Value.self,
 		forKey key: Column,
 		using decoder: JSONDecoder = Row.decoder
-		) throws -> Value? where Column: ColumnExpression, Value: Decodable {
-		return try self[key].map(decoder.decode)
+	) throws -> Value? where Column: ColumnExpression, Value: Decodable {
+		try self[key].map(decoder.decode)
 	}
 }
 
