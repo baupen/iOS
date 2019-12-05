@@ -264,8 +264,7 @@ final class MapViewController: UIViewController, Reusable {
 		pdfController.view.layoutIfNeeded()
 		if let sectorFrame = map?.sectorFrame.map(CGRect.init) {
 			pdfController.overlayView.addSubview(sectorView)
-			sectorView.frame.origin = sectorFrame.origin * pdfController.overlayView.bounds.size
-			sectorView.frame.size = sectorFrame.size * pdfController.overlayView.bounds.size
+			sectorView.frame = sectorFrame * pdfController.overlayView.bounds.size
 		} else {
 			sectorView.removeFromSuperview()
 		}
