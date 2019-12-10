@@ -55,7 +55,7 @@ extension FileContainer {
 	}
 	
 	func downloadFile() -> Future<Void> {
-		return downloadFile(previous: nil)
+		downloadFile(previous: nil)
 	}
 	
 	func downloadFile(previous: Self?) -> Future<Void> {

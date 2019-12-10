@@ -165,11 +165,11 @@ extension TrialViewController: UITextFieldDelegate {
 
 extension TrialViewController: UIViewControllerTransitioningDelegate {
 	func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-		return VerticalSlideTransitionAnimator(shouldMoveDown: false)
+		VerticalSlideTransitionAnimator(shouldMoveDown: false)
 	}
 	
 	func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-		return VerticalSlideTransitionAnimator(shouldMoveDown: true)
+		VerticalSlideTransitionAnimator(shouldMoveDown: true)
 	}
 }
 

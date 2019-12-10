@@ -23,7 +23,7 @@ struct FileDownloadRequest: JSONDataRequest {
 
 extension Client {
 	func downloadFile<T: StoredObject>(for path: DownloadRequestPath<T>, meta: ObjectMeta<T>) -> Future<Data> {
-		return getUser()
+		getUser()
 			.map { user in
 				FileDownloadRequest(
 					authenticationToken: user.authenticationToken,

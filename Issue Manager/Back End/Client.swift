@@ -63,7 +63,7 @@ final class Client {
 	}
 	
 	func send<R: Request>(_ request: R) -> Future<R.ExpectedResponse> {
-		return dispatch(request)
+		dispatch(request)
 			.map { taskResult in try self.extractData(from: taskResult, for: request) }
 			.map { response in // map instead of then, to avoid data races
 				assert(OperationQueue.current!.underlyingQueue == DispatchQueue.main)
@@ -111,7 +111,7 @@ final class Client {
 	}
 	
 	private func startTask<R: Request>(for request: R) -> Future<TaskResult> {
-		return Future { try urlRequest(body: request) }
+		Future { try urlRequest(body: request) }
 			.flatMap(send)
 	}
 	

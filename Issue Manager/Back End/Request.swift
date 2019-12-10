@@ -24,7 +24,7 @@ protocol Request {
 }
 
 extension Request {
-	static var baseURLOverride: URL? { return nil }
+	static var baseURLOverride: URL? { nil }
 	static var httpMethod: String { "POST" }
 	
 	func applyToClient(_ response: ExpectedResponse) {}

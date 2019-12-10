@@ -77,16 +77,16 @@ extension Collection {
 	}
 	
 	func max(_ n: Int, by areInIncreasingOrder: (Element, Element) -> Bool) -> [Element] {
-		return min(n, by: { !areInIncreasingOrder($0, $1) })
+		min(n, by: { !areInIncreasingOrder($0, $1) })
 	}
 }
 
 extension Collection where Element: Comparable {
 	func min(_ n: Int) -> [Element] {
-		return min(n, by: <)
+		min(n, by: <)
 	}
 	
 	func max(_ n: Int) -> [Element] {
-		return max(n, by: <)
+		max(n, by: <)
 	}
 }

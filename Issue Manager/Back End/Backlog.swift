@@ -20,7 +20,7 @@ protocol BacklogStorable: Codable {
 
 extension BacklogStorable where Self: Request {
 	func send() -> Future<Void> {
-		return Client.shared.send(self).ignoringResult()
+		Client.shared.send(self).ignoringResult()
 	}
 }
 
@@ -36,7 +36,7 @@ struct Backlog: Codable {
 	private var storage: [BacklogStorable] = []
 	
 	var first: BacklogStorable? {
-		return storage.first
+		storage.first
 	}
 	
 	init() {}

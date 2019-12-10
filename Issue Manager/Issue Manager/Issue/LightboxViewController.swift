@@ -97,15 +97,15 @@ final class LightboxViewController: UIViewController {
 
 extension LightboxViewController: UIViewControllerTransitioningDelegate {
 	func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-		return PresentAnimator()
+		PresentAnimator()
 	}
 	
 	func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-		return DismissAnimator()
+		DismissAnimator()
 	}
 	
 	func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-		return transition
+		transition
 	}
 }
 

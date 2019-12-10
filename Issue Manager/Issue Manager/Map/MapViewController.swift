@@ -100,7 +100,7 @@ final class MapViewController: UIViewController, Reusable {
 	var holder: MapHolder? {
 		didSet { update() }
 	}
-	var map: Map? { return holder as? Map }
+	var map: Map? { holder as? Map }
 	
 	var issues: [Issue] = []
 	

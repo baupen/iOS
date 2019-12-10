@@ -15,7 +15,7 @@ struct APIIssue {
 	let position: Issue.Position?
 	
 	var details: Issue.Details {
-		return .init(
+		.init(
 			isMarked: isMarked,
 			image: image,
 			description: description,
