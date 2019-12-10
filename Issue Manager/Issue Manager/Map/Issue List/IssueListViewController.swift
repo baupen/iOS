@@ -14,9 +14,7 @@ final class IssueListViewController: UIViewController {
 	weak var issueCellDelegate: IssueCellDelegate?
 	
 	var pullableView: PullableView! {
-		didSet {
-			pullableView.tapRecognizer.delegate = self
-		}
+		didSet { pullableView.tapRecognizer.delegate = self }
 	}
 	
 	/// set this before setting `map` initially or before loading the view to avoid calculating stuff twice
@@ -40,6 +38,8 @@ final class IssueListViewController: UIViewController {
 		issueTableView.panGestureRecognizer.addTarget(self, action: #selector(listPanned))
 		
 		update()
+		
+		scrollViewDidScroll(issueTableView)
 	}
 	
 	func update() {
@@ -101,7 +101,7 @@ final class IssueListViewController: UIViewController {
 		
 		let minOffset: CGFloat = -20 // if the list is overscrolled past this point, we won't let the user pull it down because it would become jumpy (believe me, i've tried all kinds of approaches)
 		// adjust pull offset
-		if pullRecognizer == nil, (minOffset..<0).contains(contentOffset) {
+		if pullRecognizer == nil, (minOffset...1).contains(contentOffset) {
 			// start pulling pullable view
 			pullRecognizer = FakePanRecognizer() <- {
 				$0.state = .began
@@ -177,13 +177,25 @@ extension IssueListViewController: UITableViewDelegate {
 		
 		return indexPath
 	}
+	
+	func scrollViewDidScroll(_ scrollView: UIScrollView) {
+		if scrollView.contentOffset.y == 0 {
+			// block iOS from collapsing the view controller by pretending we're not actually at the top
+			scrollView.contentOffset.y = 1
+		}
+	}
 }
 
 extension IssueListViewController: UIGestureRecognizerDelegate {
-	func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-		if let view = touch.view, view.isDescendant(of: issueTableView) {
-			return false // don't interfere with taps in table
-		} else {
+	func gestureRecognizer(_ recognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+		switch recognizer {
+		case pullableView.tapRecognizer:
+			if let view = touch.view, view.isDescendant(of: issueTableView) {
+				return false // don't interfere with taps in table
+			} else {
+				return true
+			}
+		default:
 			return true
 		}
 	}
