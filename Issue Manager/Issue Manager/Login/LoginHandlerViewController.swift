@@ -91,7 +91,6 @@ class LoginHandlerViewController: UIViewController {
 		Client.shared.localUser?.hasLoggedOut = false
 		
 		let siteList = storyboard!.instantiate(SiteListViewController.self)!
-		siteList.modalTransitionStyle = .flipHorizontal
 		if !userInitiated {
 			siteList.needsRefresh = true
 		}

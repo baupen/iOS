@@ -55,6 +55,10 @@ final class MapListViewController: RefreshingTableViewController, Reusable {
 		navigationItem.leftBarButtonItem = holder is ConstructionSite ? backToSiteListButton : nil
 		
 		super.viewWillAppear(animated)
+		
+		// workaround for the navigation bar being laid out incorrectly in iOS 13
+		// TODO: remove once apple fix this issue
+		navigationController?.navigationBar.setNeedsLayout()
 	}
 	
 	override func refreshCompleted() {

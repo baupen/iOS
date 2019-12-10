@@ -17,10 +17,6 @@ final class MainViewController: UISplitViewController, Reusable {
 		
 		masterNav = (viewControllers.first as! MasterNavigationController)
 		detailNav = (viewControllers.last as! DetailNavigationController)
-		
-		if #available(iOS 13, *) {
-			modalPresentationStyle = .currentContext
-		}
 	}
 	
 	override func encodeRestorableState(with coder: NSCoder) {
