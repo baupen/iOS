@@ -122,6 +122,12 @@ final class MapViewController: UIViewController, Reusable {
 		updateNavigationBarAppearance()
 	}
 	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		updateBarButtonItem()
+	}
+	
 	override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
 		coordinator.animate(alongsideTransition: { context in
 			self.updateNavigationBarAppearance()
@@ -143,8 +149,14 @@ final class MapViewController: UIViewController, Reusable {
 		super.viewDidLayoutSubviews()
 		
 		pullableView.maxHeight = pullableContainer.frame.height
+	}
+	
+	override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+		super.viewWillTransition(to: size, with: coordinator)
 		
-		updateBarButtonItem()
+		coordinator.animate(alongsideTransition: { context in
+			self.updateBarButtonItem()
+		})
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -178,14 +190,13 @@ final class MapViewController: UIViewController, Reusable {
 	}
 	
 	private func updateBarButtonItem() {
-		guard parent != nil else { return }
-		
-		if parent is MasterNavigationController {
+		switch parent {
+		case is MasterNavigationController:
 			navigationItem.leftBarButtonItem = nil
-		} else if parent is DetailNavigationController {
+		case is DetailNavigationController:
 			navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
-		} else {
-			fatalError()
+		default:
+			break // ignore
 		}
 	}
 	
