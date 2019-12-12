@@ -257,6 +257,7 @@ final class MapViewController: UIViewController, Reusable {
 				$0.overlayView.alpha = self.markerAlpha
 				$0.overlayView.backgroundColor = .darkOverlay
 				$0.additionalSafeAreaInsets.bottom += self.pullableView.minHeight
+					+ 8 // for symmetry
 			}
 			self.updateSectors()
 			self.updateMarkers()
