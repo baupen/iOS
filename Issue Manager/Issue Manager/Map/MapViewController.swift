@@ -118,31 +118,12 @@ final class MapViewController: UIViewController, Reusable {
 		
 		visibleStatuses = Issue.allStatuses.subtracting(defaults.hiddenStatuses)
 		update()
-		
-		updateNavigationBarAppearance()
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
 		updateBarButtonItem()
-	}
-	
-	override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
-		coordinator.animate(alongsideTransition: { context in
-			self.updateNavigationBarAppearance()
-		})
-	}
-	
-	private func updateNavigationBarAppearance() {
-		if #available(iOS 13.0, *) {
-			let shouldIncreaseContrast = traitCollection.userInterfaceStyle == .dark
-			let highContrastAppearance = UINavigationBarAppearance() <- {
-				// improve contrast of items in dark menu bar on the light background we have here
-				$0.backgroundEffect = UIBlurEffect(style: .systemThickMaterial)
-			}
-			navigationItem.standardAppearance = shouldIncreaseContrast ? highContrastAppearance : nil
-		}
 	}
 	
 	override func viewDidLayoutSubviews() {
