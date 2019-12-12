@@ -252,9 +252,10 @@ final class MapViewController: UIViewController, Reusable {
 			
 			self.pdfController = SimplePDFViewController() <- {
 				$0.delegate = self
-				$0.backgroundColor = .mapBackground // some maps have a transparent background and black elements, so they need a bright background
+				$0.backgroundColor = .white // some maps have a transparent background and black elements, so they need a bright background
 				$0.page = page // should be set after the background color (technically a race condition otherwise)
 				$0.overlayView.alpha = self.markerAlpha
+				$0.overlayView.backgroundColor = .darkOverlay
 				$0.additionalSafeAreaInsets.bottom += self.pullableView.minHeight
 			}
 			self.updateSectors()
