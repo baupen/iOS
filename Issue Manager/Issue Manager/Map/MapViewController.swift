@@ -27,21 +27,7 @@ final class MapViewController: UIViewController, Reusable {
 	
 	// the issue popovers' done buttons link to this
 	@IBAction func backToMapWithUpdates(_ segue: UIStoryboardSegue) {
-		guard let map = holder as? Map else {
-			assertionFailure("trying to update map controller without map")
-			return
-		}
-		
-		cancelAddingIssue() // done (if started)
-		
-		issues = Repository.read(map.sortedIssues.fetchAll)
-		updateMarkers()
-		issueListController.update()
-		
-		let mainController = splitViewController as! MainViewController
-		for viewController in mainController.masterNav.viewControllers {
-			(viewController as? MapListViewController)?.reload(map)
-		}
+		didReturnFromModal()
 	}
 	
 	@IBAction func beginAddingIssue() {
@@ -151,6 +137,7 @@ final class MapViewController: UIViewController, Reusable {
 			let filterController = statusFilterNav.statusFilterController
 			filterController.selected = visibleStatuses
 			filterController.delegate = self
+			segue.destination.presentationController?.delegate = self
 		case let editIssueNav as EditIssueNavigationController:
 			let editController = editIssueNav.editIssueController
 			editController.isCreating = true // otherwise we wouldn't be using a segue
@@ -165,6 +152,7 @@ final class MapViewController: UIViewController, Reusable {
 			} else {
 				editController.present(Issue(in: holder as! Map))
 			}
+			segue.destination.presentationController?.delegate = self
 		default:
 			fatalError("unrecognized segue to \(segue.destination)")
 		}
@@ -299,6 +287,7 @@ final class MapViewController: UIViewController, Reusable {
 			<- { $0.modalPresentationStyle = .formSheet }
 		
 		present(navController, animated: true)
+		navController.presentationController?.delegate = self
 	}
 }
 
@@ -359,6 +348,27 @@ extension MapViewController: SectorViewDelegate {
 		
 		let rect = pdfController.overlayView.convert(sectorView.bounds, from: sectorView)
 		pdfController.scrollView.zoom(to: rect, animated: true)
+	}
+}
+
+extension MapViewController: UIAdaptivePresentationControllerDelegate {
+	func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+		didReturnFromModal()
+	}
+	
+	func didReturnFromModal() {
+		guard let map = holder as? Map else { return }
+		
+		cancelAddingIssue() // done (if started)
+		
+		issues = Repository.read(map.sortedIssues.fetchAll)
+		updateMarkers()
+		issueListController.update()
+		
+		let mainController = splitViewController as! MainViewController
+		for viewController in mainController.masterNav.viewControllers {
+			(viewController as? MapListViewController)?.reload(map)
+		}
 	}
 }
 
