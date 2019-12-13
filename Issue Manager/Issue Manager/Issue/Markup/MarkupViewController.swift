@@ -80,6 +80,11 @@ final class MarkupViewController: UIViewController {
 		
 		mode = .freeDraw
 		colorChangeButtons.forEach { $0.isShown = $0.isChosen }
+		wipContext.setStrokeColor(
+			colorChangeButtons
+				.first { $0.isChosen }!
+				.color.cgColor
+		)
 		updateUndoButtons()
 		
 		displayLink = CADisplayLink(target: self, selector: #selector(updateImage))
@@ -147,7 +152,6 @@ final class MarkupViewController: UIViewController {
 		
 		return UIGraphicsGetCurrentContext()! <- {
 			$0.setLineWidth(imageUnit)
-			$0.setStrokeColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
 			$0.setLineCap(.round)
 			$0.setLineJoin(.round)
 		}

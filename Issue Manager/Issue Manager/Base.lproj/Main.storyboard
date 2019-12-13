@@ -815,7 +815,7 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                                                                 <attributedString key="userComments">
                                                                                     <fragment content="placeholder for username field">
                                                                                         <attributes>
-                                                                                            <font key="NSFont" metaFont="controlContent" size="11"/>
+                                                                                            <font key="NSFont" metaFont="message" size="11"/>
                                                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                                         </attributes>
                                                                                     </fragment>
@@ -2756,9 +2756,6 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="blL-O7-7Tu" secondAttribute="height" multiplier="1:1" id="O2w-If-jFQ"/>
                                                                 </constraints>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isChosen" value="YES"/>
-                                                                </userDefinedRuntimeAttributes>
                                                                 <connections>
                                                                     <action selector="changeColor:" destination="5NQ-5a-rcK" eventType="touchUpInside" id="Svx-ah-0lu"/>
                                                                 </connections>
@@ -2799,6 +2796,9 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="bkf-35-Wrc" secondAttribute="height" multiplier="1:1" id="PC4-gV-6Xk"/>
                                                                 </constraints>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isChosen" value="YES"/>
+                                                                </userDefinedRuntimeAttributes>
                                                                 <connections>
                                                                     <action selector="changeColor:" destination="5NQ-5a-rcK" eventType="touchUpInside" id="LYU-XL-GM6"/>
                                                                 </connections>
@@ -3067,7 +3067,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                                                 <attributedString key="userComments">
                                                                                     <fragment content="placeholder for username field">
                                                                                         <attributes>
-                                                                                            <font key="NSFont" metaFont="controlContent" size="11"/>
+                                                                                            <font key="NSFont" metaFont="message" size="11"/>
                                                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                                         </attributes>
                                                                                     </fragment>
