@@ -75,13 +75,16 @@ public class KeyboardLayoutConstraint: NSLayoutConstraint {
 		guard
 			let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval,
 			let options = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt,
-			let window = UIApplication.shared.keyWindow
-			else { return }
+			let window = UIApplication.shared.keyWindow else
+		{
+			print("could not get info on keyboard changes!")
+			return
+		}
 		
 		UIView.animate(
 			withDuration: duration,
 			delay: 0,
-			options: UIView.AnimationOptions(rawValue: options),
+			options: .init(rawValue: options),
 			animations: window.layoutIfNeeded
 		)
 	}

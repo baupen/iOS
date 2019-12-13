@@ -1,12 +1,3 @@
-[submodule "Carthage/Checkouts/Promise"]
-	path = Issue Manager/Carthage/Checkouts/Promise
-	url = https://github.com/timvermeulen/Promise.git
-[submodule "Carthage/Checkouts/PullToExpand"]
-	path = Issue Manager/Carthage/Checkouts/PullToExpand
-	url = https://github.com/juliand665/PullToExpand.git
-[submodule "Carthage/Checkouts/SimplePDFKit"]
-	path = Issue Manager/Carthage/Checkouts/SimplePDFKit
+[submodule "SimplePDFKit"]
+	path = Issue Manager/Libraries/SimplePDFKit
 	url = https://github.com/mangelio/SimplePDFKit.git
-[submodule "Carthage/Checkouts/GRDB.swift"]
-	path = Issue Manager/Carthage/Checkouts/GRDB.swift
-	url = https://github.com/mangelio/GRDB.swift.git

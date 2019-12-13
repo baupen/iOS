@@ -1,9 +1,11 @@
 // Created by Julian Dunskus
 
+// import ALL the things!
 import UIKit
 import SimplePDFKit
 import PullToExpand
 import Promise
+import CGeometry
 
 final class MapViewController: UIViewController, Reusable {
 	typealias Localization = L10n.Map
@@ -14,6 +16,7 @@ final class MapViewController: UIViewController, Reusable {
 	@IBOutlet private var fallbackLabel: UILabel!
 	@IBOutlet private var pdfContainerView: UIView!
 	@IBOutlet private var activityIndicator: UIActivityIndicatorView!
+	@IBOutlet private var pullableContainer: UIView!
 	@IBOutlet private var pullableView: PullableView!
 	@IBOutlet private var issuePositioner: IssuePositioner!
 	
@@ -24,21 +27,7 @@ final class MapViewController: UIViewController, Reusable {
 	
 	// the issue popovers' done buttons link to this
 	@IBAction func backToMapWithUpdates(_ segue: UIStoryboardSegue) {
-		guard let map = holder as? Map else {
-			assertionFailure("trying to update map controller without map")
-			return
-		}
-		
-		cancelAddingIssue() // done (if started)
-		
-		issues = Repository.read(map.sortedIssues.fetchAll)
-		updateMarkers()
-		issueListController.update()
-		
-		let mainController = splitViewController as! MainViewController
-		for viewController in mainController.masterNav.viewControllers {
-			(viewController as? MapListViewController)?.reload(map)
-		}
+		didReturnFromModal()
 	}
 	
 	@IBAction func beginAddingIssue() {
@@ -97,7 +86,7 @@ final class MapViewController: UIViewController, Reusable {
 	var holder: MapHolder? {
 		didSet { update() }
 	}
-	var map: Map? { return holder as? Map }
+	var map: Map? { holder as? Map }
 	
 	var issues: [Issue] = []
 	
@@ -123,18 +112,18 @@ final class MapViewController: UIViewController, Reusable {
 		updateBarButtonItem()
 	}
 	
-	override func viewWillLayoutSubviews() {
-		super.viewWillLayoutSubviews()
+	override func viewDidLayoutSubviews() {
+		super.viewDidLayoutSubviews()
 		
-		let safeArea = view.bounds.inset(by: view.safeAreaInsets)
-		pullableView.maxHeight = safeArea.height
+		pullableView.maxHeight = pullableContainer.frame.height
 	}
 	
-	// not called at all in initial instantiation for some reason (hence the additional call in viewWillAppear)
-	override func didMove(toParent parent: UIViewController?) {
-		super.didMove(toParent: parent)
+	override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+		super.viewWillTransition(to: size, with: coordinator)
 		
-		updateBarButtonItem()
+		coordinator.animate(alongsideTransition: { context in
+			self.updateBarButtonItem()
+		})
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -148,6 +137,7 @@ final class MapViewController: UIViewController, Reusable {
 			let filterController = statusFilterNav.statusFilterController
 			filterController.selected = visibleStatuses
 			filterController.delegate = self
+			segue.destination.presentationController?.delegate = self
 		case let editIssueNav as EditIssueNavigationController:
 			let editController = editIssueNav.editIssueController
 			editController.isCreating = true // otherwise we wouldn't be using a segue
@@ -158,24 +148,24 @@ final class MapViewController: UIViewController, Reusable {
 					zoomScale: pdfController!.scrollView.zoomScale / pdfController!.scrollView.minimumZoomScale,
 					in: map.file!
 				)
-				editController.issue = Issue(at: isPlacingIssue ? position : nil, in: map)
+				editController.present(Issue(at: isPlacingIssue ? position : nil, in: map))
 			} else {
-				editController.issue = Issue(in: holder as! Map)
+				editController.present(Issue(in: holder as! Map))
 			}
+			segue.destination.presentationController?.delegate = self
 		default:
 			fatalError("unrecognized segue to \(segue.destination)")
 		}
 	}
 	
 	private func updateBarButtonItem() {
-		guard parent != nil else { return }
-		
-		if parent is MasterNavigationController {
+		switch parent {
+		case is MasterNavigationController:
 			navigationItem.leftBarButtonItem = nil
-		} else if parent is DetailNavigationController {
+		case is DetailNavigationController:
 			navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
-		} else {
-			fatalError()
+		default:
+			break // ignore
 		}
 	}
 	
@@ -231,9 +221,12 @@ final class MapViewController: UIViewController, Reusable {
 			
 			self.pdfController = SimplePDFViewController() <- {
 				$0.delegate = self
-				$0.page = page
+				$0.backgroundColor = .white // some maps have a transparent background and black elements, so they need a bright background
+				$0.page = page // should be set after the background color (technically a race condition otherwise)
 				$0.overlayView.alpha = self.markerAlpha
+				$0.overlayView.backgroundColor = .darkOverlay
 				$0.additionalSafeAreaInsets.bottom += self.pullableView.minHeight
+					+ 8 // for symmetry
 			}
 			self.updateSectors()
 			self.updateMarkers()
@@ -251,9 +244,9 @@ final class MapViewController: UIViewController, Reusable {
 	private func updateSectors() {
 		let pdfController = self.pdfController!
 		pdfController.view.layoutIfNeeded()
-		if let sectorFrame = map?.sectorFrame {
+		if let sectorFrame = map?.sectorFrame.map(CGRect.init) {
 			pdfController.overlayView.addSubview(sectorView)
-			sectorView.frame = CGRect(sectorFrame) * pdfController.overlayView.bounds.size
+			sectorView.frame = sectorFrame * pdfController.overlayView.bounds.size
 		} else {
 			sectorView.removeFromSuperview()
 		}
@@ -288,12 +281,13 @@ final class MapViewController: UIViewController, Reusable {
 	func showDetails(for issue: Issue) {
 		let viewController = issue.isRegistered
 			? storyboard!.instantiate(ViewIssueViewController.self)! <- { $0.issue = issue }
-			: storyboard!.instantiate(EditIssueViewController.self)! <- { $0.issue = issue }
+			: storyboard!.instantiate(EditIssueViewController.self)! <- { $0.present(issue) }
 		
 		let navController = UINavigationController(rootViewController: viewController)
 			<- { $0.modalPresentationStyle = .formSheet }
 		
 		present(navController, animated: true)
+		navController.presentationController?.delegate = self
 	}
 }
 
@@ -330,7 +324,7 @@ extension MapViewController: IssueCellDelegate {
 		let marker = markers.first { $0.issue.id == issue.id }!
 		let size = pdfController.contentView.bounds.size * CGFloat(position.zoomScale)
 		let centeredRect = CGRect(
-			origin: marker.center - size / 2,
+			origin: marker.center - CGVector(size) / 2,
 			size: size
 		)
 		pdfController.scrollView.zoom(to: centeredRect, animated: true)
@@ -354,6 +348,27 @@ extension MapViewController: SectorViewDelegate {
 		
 		let rect = pdfController.overlayView.convert(sectorView.bounds, from: sectorView)
 		pdfController.scrollView.zoom(to: rect, animated: true)
+	}
+}
+
+extension MapViewController: UIAdaptivePresentationControllerDelegate {
+	func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+		didReturnFromModal()
+	}
+	
+	func didReturnFromModal() {
+		guard let map = holder as? Map else { return }
+		
+		cancelAddingIssue() // done (if started)
+		
+		issues = Repository.read(map.sortedIssues.fetchAll)
+		updateMarkers()
+		issueListController.update()
+		
+		let mainController = splitViewController as! MainViewController
+		for viewController in mainController.masterNav.viewControllers {
+			(viewController as? MapListViewController)?.reload(map)
+		}
 	}
 }
 

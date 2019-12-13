@@ -8,7 +8,7 @@ typealias DownloadRequestPath<T: StoredObject> = WritableKeyPath<FileDownloadReq
 struct FileDownloadRequest: JSONDataRequest {
 	static let isIndependent = true
 	
-	var method: String { return "file/download" }
+	var method: String { "file/download" }
 	
 	var authenticationToken: String
 	var constructionSite: ObjectMeta<ConstructionSite>? = nil
@@ -23,7 +23,7 @@ struct FileDownloadRequest: JSONDataRequest {
 
 extension Client {
 	func downloadFile<T: StoredObject>(for path: DownloadRequestPath<T>, meta: ObjectMeta<T>) -> Future<Data> {
-		return getUser()
+		getUser()
 			.map { user in
 				FileDownloadRequest(
 					authenticationToken: user.authenticationToken,

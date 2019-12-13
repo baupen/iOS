@@ -5,13 +5,13 @@ import Promise
 
 extension Client {
 	func getUser() -> Future<User> {
-		return Future { try localUser?.user ??? RequestError.notAuthenticated }
+		Future { try localUser?.user ??? RequestError.notAuthenticated }
 	}
 }
 
 extension Future {
 	func ignoringResult() -> Future<Void> {
-		return self.map { _ in }
+		self.map { _ in }
 	}
 }
 

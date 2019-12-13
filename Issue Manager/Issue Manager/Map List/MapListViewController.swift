@@ -16,7 +16,7 @@ final class MapListViewController: RefreshingTableViewController, Reusable {
 	}
 	
 	private var mainController: MainViewController {
-		return splitViewController as! MainViewController
+		splitViewController as! MainViewController
 	}
 	
 	override var isRefreshing: Bool {
@@ -55,6 +55,10 @@ final class MapListViewController: RefreshingTableViewController, Reusable {
 		navigationItem.leftBarButtonItem = holder is ConstructionSite ? backToSiteListButton : nil
 		
 		super.viewWillAppear(animated)
+		
+		// workaround for the navigation bar being laid out incorrectly in iOS 13
+		// TODO: remove once apple fix this issue
+		navigationController?.navigationBar.setNeedsLayout()
 	}
 	
 	override func refreshCompleted() {
@@ -155,7 +159,7 @@ final class MapListViewController: RefreshingTableViewController, Reusable {
 	// MARK: - Table View
 	
 	override func numberOfSections(in tableView: UITableView) -> Int {
-		return holder is Map ? 2 : 1
+		holder is Map ? 2 : 1
 	}
 	
 	override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -175,7 +179,7 @@ final class MapListViewController: RefreshingTableViewController, Reusable {
 	}
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		return tableView.dequeue(MapCell.self, for: indexPath)! <- {
+		tableView.dequeue(MapCell.self, for: indexPath)! <- {
 			if indexPath.section == 0, holder is Map {
 				$0.shouldUseRecursiveIssues = false
 			}

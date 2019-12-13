@@ -9,7 +9,7 @@ struct APICraftsman {
 	let constructionSiteID: ID<ConstructionSite>
 	
 	func makeObject() -> Craftsman {
-		return Craftsman(
+		Craftsman(
 			meta: meta,
 			name: name,
 			trade: trade,

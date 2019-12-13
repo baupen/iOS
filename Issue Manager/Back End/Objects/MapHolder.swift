@@ -14,7 +14,7 @@ protocol MapHolder: AnyStoredObject {
 
 extension MapHolder {
 	var recursiveIssues: QueryInterfaceRequest<Issue> {
-		return Issue
+		Issue
 			.joining(required: Issue.map.recursiveChildren(of: self))
 			.consideringClientMode
 	}
@@ -22,15 +22,15 @@ extension MapHolder {
 
 extension DerivableRequest where RowDecoder == Map {
 	func recursiveChildren(of holder: MapHolder) -> Self {
-		return holder.recursiveChildren(in: self)
+		holder.recursiveChildren(in: self)
 	}
 }
 
 extension ConstructionSite: MapHolder {
-	var children: QueryInterfaceRequest<Map> { return maps.filter(Map.Columns.parentID == nil) }
+	var children: QueryInterfaceRequest<Map> { maps.filter(Map.Columns.parentID == nil) }
 	
 	func recursiveChildren<R>(in request: R) -> R where R: DerivableRequest, R.RowDecoder == Map {
-		return request.filter(Map.Columns.constructionSiteID == rawID)
+		request.filter(Map.Columns.constructionSiteID == rawID)
 	}
 	
 	func issues(recursively: Bool) -> QueryInterfaceRequest<Issue> {
@@ -59,6 +59,6 @@ extension Map: MapHolder {
 	}
 	
 	func issues(recursively: Bool) -> QueryInterfaceRequest<Issue> {
-		return recursively ? recursiveIssues : issues
+		recursively ? recursiveIssues : issues
 	}
 }

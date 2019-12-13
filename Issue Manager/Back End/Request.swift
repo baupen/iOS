@@ -24,21 +24,21 @@ protocol Request {
 }
 
 extension Request {
-	static var baseURLOverride: URL? { return nil }
-	static var httpMethod: String { return "POST" }
+	static var baseURLOverride: URL? { nil }
+	static var httpMethod: String { "POST" }
 	
 	func applyToClient(_ response: ExpectedResponse) {}
 }
 
 extension Request where Self: BacklogStorable {
-	static var isIndependent: Bool { return false }
+	static var isIndependent: Bool { false }
 }
 
 /// a request that has no body
 protocol GetRequest: Request, Encodable {}
 
 extension GetRequest {
-	static var httpMethod: String { return "GET" }
+	static var httpMethod: String { "GET" }
 	
 	func encode(using encoder: JSONEncoder, into request: inout URLRequest) throws {}
 }
@@ -71,7 +71,7 @@ protocol JSONDecodingRequest: Request where ExpectedResponse: Response {}
 
 extension JSONDecodingRequest {
 	func decode(from data: Data, using decoder: JSONDecoder) throws -> ExpectedResponse {
-		return try decoder.decode(JSend.Success<ExpectedResponse>.self, from: data).data
+		try decoder.decode(JSend.Success<ExpectedResponse>.self, from: data).data
 	}
 }
 
@@ -80,7 +80,7 @@ protocol DataDecodingRequest: Request where ExpectedResponse == Data {}
 
 extension DataDecodingRequest {
 	func decode(from data: Data, using decoder: JSONDecoder) throws -> Data {
-		return data
+		data
 	}
 }
 

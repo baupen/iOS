@@ -6,7 +6,7 @@ import Promise
 struct ReadRequest: JSONJSONRequest {
 	static let isIndependent = false
 	
-	var method: String { return "read" }
+	var method: String { "read" }
 	
 	let authenticationToken: String
 	let user: ObjectMeta<User>
@@ -47,26 +47,26 @@ struct ReadRequest: JSONJSONRequest {
 		let changedUser: User?
 		
 		func constructionSites() -> [ConstructionSite] {
-			return changedConstructionSites.map { $0.makeObject() }
+			changedConstructionSites.map { $0.makeObject() }
 		}
 		
 		func maps() -> [Map] {
-			return changedMaps.map { $0.makeObject() }
+			changedMaps.map { $0.makeObject() }
 		}
 		
 		func issues() -> [Issue] {
-			return changedIssues.map { $0.makeObject() }
+			changedIssues.map { $0.makeObject() }
 		}
 		
 		func craftsmen() -> [Craftsman] {
-			return changedCraftsmen.map { $0.makeObject() }
+			changedCraftsmen.map { $0.makeObject() }
 		}
 	}
 }
 
 private extension Repository {
 	func makeReadRequest(_ user: User) -> ReadRequest {
-		return ReadRequest(
+		ReadRequest(
 			authenticationToken: user.authenticationToken,
 			user: user.meta,
 			craftsmen: read(ObjectMeta.fetchAll),
@@ -79,7 +79,7 @@ private extension Repository {
 
 extension Client {
 	func read() -> Future<Void> {
-		return getUser()
+		getUser()
 			.map(Repository.shared.makeReadRequest)
 			.flatMap(send)
 			.ignoringResult()

@@ -1,10 +1,11 @@
 // Created by Julian Dunskus
 
 import UIKit
+import CGeometry
 
 final class MarkupNavigationController: UINavigationController {
 	var markupController: MarkupViewController {
-		return topViewController as! MarkupViewController
+		topViewController as! MarkupViewController
 	}
 }
 
@@ -58,7 +59,7 @@ final class MarkupViewController: UIViewController {
 	
 	private var displayLink: CADisplayLink!
 	private var fullRect: CGRect {
-		return CGRect(origin: .zero, size: image.size)
+		CGRect(origin: .zero, size: image.size)
 	}
 	private var undoBuffer: UndoBuffer<CGImage>!
 	
@@ -84,6 +85,14 @@ final class MarkupViewController: UIViewController {
 		displayLink = CADisplayLink(target: self, selector: #selector(updateImage))
 	}
 	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		// workaround for the navigation bar being laid out incorrectly in iOS 13
+		// TODO: remove once apple fix this issue
+		navigationController?.navigationBar.setNeedsLayout()
+	}
+	
 	override func viewDidDisappear(_ animated: Bool) {
 		super.viewDidDisappear(animated)
 		
@@ -104,7 +113,7 @@ final class MarkupViewController: UIViewController {
 			let newImage = UIImage(cgImage: wipContext.makeImage()!)
 			
 			let editIssueController = segue.destination as! EditIssueViewController
-			editIssueController.image = newImage
+			editIssueController.store(newImage)
 		case "cancel":
 			break
 		default:
@@ -129,21 +138,19 @@ final class MarkupViewController: UIViewController {
 		let imageSize = image.cgImage!.width * image.cgImage!.bytesPerRow
 		let allowedSize = 200 << 20 // 200 MB
 		undoBuffer = UndoBuffer(size: allowedSize / imageSize)
-		print(undoBuffer.size)
 		undoBuffer.push(drawingContext.makeImage()!) // empty base state
 	}
 	
 	private func makeContext() -> CGContext {
 		UIGraphicsBeginImageContextWithOptions(image.size, false, 1) // not opaque
-		let context = UIGraphicsGetCurrentContext()!
-		UIGraphicsEndImageContext()
+		defer { UIGraphicsEndImageContext() }
 		
-		context.setLineWidth(imageUnit)
-		context.setStrokeColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
-		context.setLineCap(.round)
-		context.setLineJoin(.round)
-		
-		return context
+		return UIGraphicsGetCurrentContext()! <- {
+			$0.setLineWidth(imageUnit)
+			$0.setStrokeColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
+			$0.setLineCap(.round)
+			$0.setLineJoin(.round)
+		}
 	}
 	
 	@objc func updateImage() {
@@ -185,16 +192,16 @@ final class MarkupViewController: UIViewController {
 				wipContext.strokePath()
 			case .rectangle:
 				wipContext.clear(fullRect)
-				wipContext.stroke(CGRect(origin: startPosition, size: offset.asSize))
+				wipContext.stroke(CGRect(origin: startPosition, size: CGSize(offset)))
 			case .circle:
 				wipContext.clear(fullRect)
-				wipContext.strokeEllipse(in: CGRect(origin: startPosition - offset, size: 2 * offset.asSize))
+				wipContext.strokeEllipse(in: CGRect(origin: startPosition - offset, size: 2 * CGSize(offset)))
 			case .arrow:
 				guard offset.length > 0 else { return } // pls no NaN
 				wipContext.clear(fullRect)
 				wipContext.move(to: startPosition)
 				wipContext.addLine(to: position)
-				let perpendicular = CGVector(dx: -offset.y, dy: offset.x)
+				let perpendicular = CGVector(dx: -offset.dy, dy: offset.dx)
 				let tipLength = imageUnit * 5
 				wipContext.move(to: position - (offset + perpendicular).withLength(tipLength))
 				wipContext.addLine(to: position)
@@ -210,6 +217,10 @@ final class MarkupViewController: UIViewController {
 			foregroundView.image = UIImage(cgImage: snapshot)
 			undoBuffer.push(snapshot)
 			updateUndoButtons()
+			
+			if #available(iOS 13.0, *) {
+				isModalInPresentation = true // we've made changes; don't just dismiss
+			}
 			
 			fallthrough
 		case .cancelled, .failed:
@@ -245,12 +256,20 @@ final class MarkupViewController: UIViewController {
 
 final class ModeChangeButton: UIButton {
 	override var isSelected: Bool {
-		didSet { tintColor = isSelected ? .main : #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.25) }
+		didSet {
+			tintColor = isSelected ? .main : {
+				if #available(iOS 13.0, *) {
+					return .secondaryLabel
+				} else {
+					return #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.25)
+				}
+			}()
+		}
 	}
 }
 
-extension Vector2 {
+fileprivate extension CGVector {
 	func withLength(_ length: CGFloat) -> Self {
-		return self * length / self.length
+		self * length / self.length
 	}
 }

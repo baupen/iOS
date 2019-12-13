@@ -5,7 +5,7 @@ import GRDB
 
 final class EditIssueNavigationController: UINavigationController {
 	var editIssueController: EditIssueViewController {
-		return topViewController as! EditIssueViewController
+		topViewController as! EditIssueViewController
 	}
 }
 
@@ -17,7 +17,7 @@ final class EditIssueViewController: UITableViewController, Reusable {
 	@IBOutlet private var imageView: UIImageView!
 	@IBOutlet private var cameraContainerView: CameraContainerView!
 	@IBOutlet private var cameraView: CameraView!
-	@IBOutlet private var markupButton: UIButton!
+	@IBOutlet private var markupLabel: UILabel!
 	@IBOutlet private var cameraControlHintView: UIView!
 	
 	@IBOutlet private var craftsmanTradeLabel: UILabel!
@@ -47,7 +47,7 @@ final class EditIssueViewController: UITableViewController, Reusable {
 	}
 	
 	@IBAction func removeImage() {
-		image = nil
+		imageFile = nil
 	}
 	
 	@IBAction func openImagePicker(_ sender: UIView) {
@@ -72,11 +72,11 @@ final class EditIssueViewController: UITableViewController, Reusable {
 	// the markup editor's buttons link to this
 	@IBAction func backToIssueEditor(_ segue: UIStoryboardSegue) {}
 	
-	var issue: Issue! {
-		didSet { update() }
-	}
-	
 	var isCreating = false
+	
+	private var issue: Issue!
+	private var original: Issue?
+	private var site: ConstructionSite!
 	
 	private var isIssueMarked = false {
 		didSet {
@@ -112,19 +112,25 @@ final class EditIssueViewController: UITableViewController, Reusable {
 		}
 	}
 	
-	var image: UIImage? {
+	private var imageFile: File<Issue>? {
 		didSet {
-			hasChangedImage = true
-			imageView.image = image
-			cameraContainerView.isHidden = image != nil
-			markupButton.isEnabled = image != nil
+			loadedImage = imageFile.flatMap {
+				nil
+					?? UIImage(contentsOfFile: Issue.cacheURL(for: $0).path)
+					?? UIImage(contentsOfFile: Issue.localURL(for: $0).path)
+			}
 		}
 	}
-	private var hasChangedImage = false
 	
-	private var site: ConstructionSite!
+	private var loadedImage: UIImage? {
+		didSet {
+			imageView.image = loadedImage
+			cameraContainerView.isHidden = loadedImage != nil
+			markupLabel.isEnabled = loadedImage != nil
+		}
+	}
+	
 	private var suggestionsHandler = SuggestionsHandler()
-	private var originalDescription: String?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -138,12 +144,35 @@ final class EditIssueViewController: UITableViewController, Reusable {
 		cameraControlHintView.isHidden = defaults.hasTakenPhoto
 		
 		update()
+		
+		if #available(iOS 13.0, *) {
+			isModalInPresentation = true // don't just dismiss
+		}
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
 		tableView.reloadData()
+	}
+	
+	func present(_ issue: Issue) {
+		self.issue = issue
+		original = issue
+		update()
+	}
+	
+	func store(_ image: UIImage) {
+		let file = File<Issue>(filename: "\(UUID()).jpg")
+		
+		let url = Issue.localURL(for: file)
+		do {
+			try image.saveJPEG(to: url)
+			imageFile = file
+		} catch {
+			showAlert(titled: Localization.CouldNotSaveImage.title, message: error.localizedFailureReason)
+			imageFile = nil
+		}
 	}
 	
 	// only call this when absolutely necessary; overwrites content in text fields
@@ -162,13 +191,8 @@ final class EditIssueViewController: UITableViewController, Reusable {
 		
 		descriptionField.text = issue.description
 		descriptionChanged()
-		originalDescription = issue.description
 		
-		image = issue.image.flatMap {
-			UIImage(contentsOfFile: Issue.cacheURL(for: $0).path)
-				?? UIImage(contentsOfFile: Issue.localURL(for: $0).path)
-		}
-		hasChangedImage = false
+		imageFile = issue.image
 	}
 	
 	private func save() {
@@ -176,23 +200,7 @@ final class EditIssueViewController: UITableViewController, Reusable {
 			details.isMarked = isIssueMarked
 			details.craftsman = craftsman?.id
 			details.description = descriptionField.text
-			
-			if hasChangedImage {
-				if let image = image {
-					let file = File<Issue>(filename: "\(UUID()).jpg")
-					
-					let url = Issue.localURL(for: file)
-					do {
-						try image.saveJPEG(to: url)
-						details.image = file
-					} catch {
-						showAlert(titled: Localization.CouldNotSaveImage.title, message: error.localizedFailureReason)
-						details.image = nil
-					}
-				} else {
-					details.image = nil
-				}
-			}
+			details.image = imageFile
 		}
 		
 		if isCreating {
@@ -201,8 +209,16 @@ final class EditIssueViewController: UITableViewController, Reusable {
 			issue.change(transform: update)
 		}
 		
-		if issue.description != originalDescription {
-			SuggestionStorage.shared.used(description: issue.description, forTrade: trade)
+		let originalTrade = (original?.craftsman).flatMap(Repository.shared.read)?.trade
+		if trade != originalTrade || issue.description != original?.description {
+			SuggestionStorage.shared.decrementSuggestion(
+				description: original?.description,
+				forTrade: originalTrade
+			)
+			SuggestionStorage.shared.used(
+				description: issue.description,
+				forTrade: trade
+			)
 		}
 	}
 	
@@ -218,8 +234,8 @@ final class EditIssueViewController: UITableViewController, Reusable {
 	
 	override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
 		switch identifier {
-		case "lightbox":
-			return image != nil
+		case "lightbox", "markup":
+			return loadedImage != nil
 		default:
 			return true
 		}
@@ -235,11 +251,11 @@ final class EditIssueViewController: UITableViewController, Reusable {
 			Repository.shared.remove(issue)
 		case "lightbox":
 			let lightboxController = segue.destination as! LightboxViewController
-			lightboxController.image = image!
+			lightboxController.image = loadedImage!
 			lightboxController.sourceView = imageView
 		case "markup":
 			let markupNavController = segue.destination as! MarkupNavigationController
-			markupNavController.markupController.image = image!
+			markupNavController.markupController.image = loadedImage!
 		case "select trade":
 			let selectionController = segue.destination as! SelectionViewController
 			selectionController.handler = TradeSelectionHandler(
@@ -259,7 +275,7 @@ final class EditIssueViewController: UITableViewController, Reusable {
 	}
 	
 	override func numberOfSections(in tableView: UITableView) -> Int {
-		return isCreating ? 4 : 5 // can't delete issue when creating
+		isCreating ? 4 : 5 // can't delete issue when creating
 	}
 	
 	override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -275,7 +291,7 @@ final class EditIssueViewController: UITableViewController, Reusable {
 	}
 	
 	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		return UITableView.automaticDimension
+		UITableView.automaticDimension
 	}
 }
 
@@ -302,13 +318,13 @@ extension EditIssueViewController: CameraViewDelegate {
 	}
 	
 	func pictureTaken(_ image: UIImage) {
-		self.image = image
 		defaults.hasTakenPhoto = true
 		cameraControlHintView.isHidden = true
+		store(image)
 	}
 	
 	func pictureSelected(_ image: UIImage) {
-		self.image = image
+		store(image)
 	}
 }
 
@@ -340,7 +356,7 @@ final class ImageControlButton: UIButton {
 		
 		layer.shadowColor = UIColor.main.cgColor
 		layer.shadowOpacity = 0.75
-		layer.shadowOffset = CGSize(x: 0, y: 1)
+		layer.shadowOffset = CGSize(width: 0, height: 1)
 		layer.shadowRadius = 4
 	}
 }

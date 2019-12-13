@@ -7,11 +7,11 @@ final class Repository {
 	static let shared = Repository()
 	
 	static func read<Result>(_ block: (Database) throws -> Result) -> Result {
-		return shared.read(block)
+		shared.read(block)
 	}
 	
 	static func object<Object>(_ id: ID<Object>) -> Object? where Object: DBRecord {
-		return shared.object(id)
+		shared.object(id)
 	}
 	
 	private let dataStore: DatabaseDataStore
@@ -30,15 +30,15 @@ final class Repository {
 	}
 	
 	func read<Result>(_ block: (Database) throws -> Result) -> Result {
-		return try! dataStore.dbPool.read(block)
+		try! dataStore.dbPool.read(block)
 	}
 	
 	private func write<Result>(_ block: (Database) throws -> Result) -> Result {
-		return try! dataStore.dbPool.write(block)
+		try! dataStore.dbPool.write(block)
 	}
 	
 	func object<Object>(_ id: ID<Object>) -> Object? where Object: DBRecord {
-		return read(id.get)
+		read(id.get)
 	}
 	
 	/// saves modifications to the given issue

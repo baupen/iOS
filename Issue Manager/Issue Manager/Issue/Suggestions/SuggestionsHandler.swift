@@ -65,17 +65,17 @@ final class SuggestionsHandler: NSObject, UITableViewDataSource, UITableViewDele
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return min(SuggestionsHandler.suggestionCount, matches.count)
+		min(SuggestionsHandler.suggestionCount, matches.count)
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		return tableView.dequeue(SuggestionCell.self, for: indexPath)! <- {
+		tableView.dequeue(SuggestionCell.self, for: indexPath)! <- {
 			$0.match = matches[indexPath.row]
 		}
 	}
 	
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		return rowHeight
+		rowHeight
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

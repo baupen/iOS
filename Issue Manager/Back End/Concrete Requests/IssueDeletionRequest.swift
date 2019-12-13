@@ -7,7 +7,7 @@ struct IssueDeletionRequest: JSONJSONRequest, BacklogStorable {
 	
 	static let isIndependent = false
 	
-	var method: String { return "issue/delete" }
+	var method: String { "issue/delete" }
 	
 	var authenticationToken: String
 	let issueID: ID<Issue>

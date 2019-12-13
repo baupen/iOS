@@ -9,13 +9,17 @@ final class Suggestion: Codable {
 	
 	init(text: String) {
 		self.text = text
-		self.occurrences = 1
+		self.occurrences = 0
 		self.lastUseTime = Date()
 	}
 	
 	func use() {
 		occurrences += 1
 		lastUseTime = Date()
+	}
+	
+	func decrement() {
+		occurrences -= 1
 	}
 }
 
@@ -61,7 +65,7 @@ final class SuggestionStorage {
 		}
 	}
 	
-	/// - returns: up to `count` suggestions matching the given prefix, sorted by similarity of the `trade` parameter to their trade and by occurrence count (descendingly) within a trade
+	/// - returns: up to `count` suggestions matching the given prefix, sorted by similarity of the `trade` param​eter to their trade and by occurrence count (descendingly) within a trade
 	func suggestions(forTrade trade: String?, matching prefix: String?, count: Int) -> [Suggestion] {
 		// sort trades by similarity to given trade, if applicable
 		let options: [[Suggestion]]
@@ -102,17 +106,21 @@ final class SuggestionStorage {
 	}
 	
 	func used(description: String?, forTrade trade: String?) {
-		guard let description = description, !description.isEmpty else { return }
+		transformSuggestion(description: description, forTrade: trade) { $0.use() }
+	}
+	
+	func decrementSuggestion(description: String?, forTrade trade: String?) {
+		transformSuggestion(description: description, forTrade: trade) { $0.decrement() }
+	}
+	
+	private func transformSuggestion(description: String?, forTrade trade: String?, transform: (Suggestion) -> Void) {
+		guard let description = description?.nonEmptyOptional else { return }
 		
 		let tradeKey = trade ?? ""
 		
-		let previous = storage[tradeKey]?.first { $0.text.lowercased() == description.lowercased() }
-		if let previous = previous {
-			previous.occurrences += 1
-			previous.lastUseTime = Date()
-		} else {
-			storage[tradeKey, default: []].append(Suggestion(text: description))
-		}
+		let suggestion = storage[tradeKey]?.first { $0.text.lowercased() == description.lowercased() }
+			?? (Suggestion(text: description) <- { storage[tradeKey, default: []].append($0) })
+		transform(suggestion)
 		
 		save()
 	}

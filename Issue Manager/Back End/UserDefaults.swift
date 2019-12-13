@@ -54,7 +54,7 @@ extension UserDefaults {
 	
 	/// used to fake sector data before they're added to the API; specified in the Xcode scheme's argument overrides
 	var useFakeReadResponse: Bool {
-		return bool(forKey: useFakeReadResponseKey)
+		bool(forKey: useFakeReadResponseKey)
 	}
 	
 	var hasTakenPhoto: Bool {
