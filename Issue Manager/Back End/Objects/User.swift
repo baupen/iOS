@@ -29,7 +29,7 @@ struct User {
 	var familyName: String
 	
 	var fullName: String {
-		return "\(givenName) \(familyName)"
+		"\(givenName) \(familyName)"
 	}
 }
 

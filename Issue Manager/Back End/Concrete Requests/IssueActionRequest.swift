@@ -12,18 +12,18 @@ struct IssueActionRequest: JSONJSONRequest, BacklogStorable {
 	static let storageID = "issue action"
 	static let isIndependent = false
 	
-	var method: String { return "issue/\(action.rawValue)" }
+	var method: String { "issue/\(action.rawValue)" }
 	
 	var authenticationToken: String
 	let issueID: ID<Issue>
 	let action: IssueAction
 	
 	func applyToClient(_ response: ExpectedResponse) {
-		Repository.shared.save(response.issue)
+		Repository.shared.save(response.issue.makeObject())
 	}
 	
 	struct ExpectedResponse: Response {
-		let issue: Issue
+		let issue: APIIssue
 	}
 }
 

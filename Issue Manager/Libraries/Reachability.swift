@@ -202,34 +202,34 @@ fileprivate extension Reachability {
 	}
 	
 	var isOnWWANFlagSet: Bool {
-		return flags.contains(.isWWAN)
+		flags.contains(.isWWAN)
 	}
 	var isReachableFlagSet: Bool {
-		return flags.contains(.reachable)
+		flags.contains(.reachable)
 	}
 	var isConnectionRequiredFlagSet: Bool {
-		return flags.contains(.connectionRequired)
+		flags.contains(.connectionRequired)
 	}
 	var isInterventionRequiredFlagSet: Bool {
-		return flags.contains(.interventionRequired)
+		flags.contains(.interventionRequired)
 	}
 	var isConnectionOnTrafficFlagSet: Bool {
-		return flags.contains(.connectionOnTraffic)
+		flags.contains(.connectionOnTraffic)
 	}
 	var isConnectionOnDemandFlagSet: Bool {
-		return flags.contains(.connectionOnDemand)
+		flags.contains(.connectionOnDemand)
 	}
 	var isConnectionOnTrafficOrDemandFlagSet: Bool {
-		return !flags.intersection([.connectionOnTraffic, .connectionOnDemand]).isEmpty
+		!flags.intersection([.connectionOnTraffic, .connectionOnDemand]).isEmpty
 	}
 	var isTransientConnectionFlagSet: Bool {
-		return flags.contains(.transientConnection)
+		flags.contains(.transientConnection)
 	}
 	var isLocalAddressFlagSet: Bool {
-		return flags.contains(.isLocalAddress)
+		flags.contains(.isLocalAddress)
 	}
 	var isDirectFlagSet: Bool {
-		return flags.contains(.isDirect)
+		flags.contains(.isDirect)
 	}
 	
 	var flags: SCNetworkReachabilityFlags {

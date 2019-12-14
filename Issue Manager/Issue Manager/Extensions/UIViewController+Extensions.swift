@@ -3,6 +3,16 @@
 import UIKit
 
 extension UIViewController {
+	@IBInspectable
+	var forceModalInPresentation: Bool {
+		get { false } // dummy
+		set {
+			if #available(iOS 13, *), newValue {
+				isModalInPresentation = true
+			}
+		}
+	}
+	
 	func showAlert(
 		titled title: String?,
 		message: String?,

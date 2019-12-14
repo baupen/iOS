@@ -9,7 +9,7 @@ final class ColorChangeButton: UIButton {
 	}
 	
 	var color: UIColor {
-		return backgroundColor!
+		backgroundColor!
 	}
 	
 	override func awakeFromNib() {

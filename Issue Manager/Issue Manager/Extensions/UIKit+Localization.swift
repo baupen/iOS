@@ -3,7 +3,7 @@
 import UIKit
 
 fileprivate func localizedString(_ key: String) -> String {
-	return NSLocalizedString(key, comment: "")
+	NSLocalizedString(key, comment: "")
 }
 
 extension UILabel {

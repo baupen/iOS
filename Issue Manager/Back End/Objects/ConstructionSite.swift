@@ -25,12 +25,12 @@ extension ConstructionSite.Address: DBRecord {}
 extension ConstructionSite: DBRecord {
 	static let craftsmen = hasMany(Craftsman.self)
 	var craftsmen: QueryInterfaceRequest<Craftsman> {
-		return request(for: ConstructionSite.craftsmen)
+		request(for: ConstructionSite.craftsmen)
 	}
 	
 	static let maps = hasMany(Map.self)
 	var maps: QueryInterfaceRequest<Map> {
-		return request(for: ConstructionSite.maps)
+		request(for: ConstructionSite.maps)
 	}
 	
 	func encode(to container: inout PersistenceContainer) {
@@ -58,12 +58,12 @@ extension ConstructionSite: StoredObject {}
 extension ConstructionSite: FileContainer {
 	static let pathPrefix = "constructionSite"
 	static let downloadRequestPath = \FileDownloadRequest.constructionSite
-	var file: File<ConstructionSite>? { return image }
+	var file: File<ConstructionSite>? { image }
 }
 
 extension ConstructionSite {
 	var trades: QueryInterfaceRequest<String> {
-		return craftsmen
+		craftsmen
 			.select(Craftsman.Columns.trade, as: String.self)
 			.distinct()
 	}

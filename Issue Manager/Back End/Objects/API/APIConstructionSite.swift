@@ -9,7 +9,7 @@ struct APIConstructionSite {
 	let image: File<ConstructionSite>?
 	
 	func makeObject() -> ConstructionSite {
-		return ConstructionSite(
+		ConstructionSite(
 			meta: meta,
 			name: name,
 			address: address,

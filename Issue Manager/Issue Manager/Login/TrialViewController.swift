@@ -79,7 +79,7 @@ final class TrialViewController: LoginHandlerViewController {
 	}
 	
 	override var preferredStatusBarStyle: UIStatusBarStyle {
-		return .lightContent
+		.lightContent
 	}
 	
 	override func awakeFromNib() {
@@ -165,11 +165,11 @@ extension TrialViewController: UITextFieldDelegate {
 
 extension TrialViewController: UIViewControllerTransitioningDelegate {
 	func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-		return VerticalSlideTransitionAnimator(shouldMoveDown: false)
+		VerticalSlideTransitionAnimator(shouldMoveDown: false)
 	}
 	
 	func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-		return VerticalSlideTransitionAnimator(shouldMoveDown: true)
+		VerticalSlideTransitionAnimator(shouldMoveDown: true)
 	}
 }
 
@@ -182,7 +182,7 @@ fileprivate final class VerticalSlideTransitionAnimator: TransitionAnimator {
 		super.init()
 	}
 	
-	override func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+	override func animateTransition(using transitionContext: Context) {
 		let fromView = transitionContext.viewController(forKey: .from)!.view!
 		let toView = transitionContext.viewController(forKey: .to)!.view!
 		

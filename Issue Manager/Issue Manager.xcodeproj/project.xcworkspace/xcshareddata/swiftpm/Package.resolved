@@ -1,0 +1,43 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "CGeometry",
+        "repositoryURL": "https://github.com/juliand665/CGeometry",
+        "state": {
+          "branch": null,
+          "revision": "ac52d6473d585836108a51a5f940464795efdc26",
+          "version": "0.3.0"
+        }
+      },
+      {
+        "package": "GRDB",
+        "repositoryURL": "https://github.com/groue/GRDB.swift.git",
+        "state": {
+          "branch": null,
+          "revision": "a67070dd9a08dad455e9f2895a0c40921d31fa1c",
+          "version": "4.6.2"
+        }
+      },
+      {
+        "package": "Promise",
+        "repositoryURL": "https://github.com/timvermeulen/Promise.git",
+        "state": {
+          "branch": null,
+          "revision": "5152cf895afe696193c881af6bfc5c3caa876db4",
+          "version": "1.14.0"
+        }
+      },
+      {
+        "package": "PullToExpand",
+        "repositoryURL": "https://github.com/juliand665/PullToExpand.git",
+        "state": {
+          "branch": null,
+          "revision": "0e7d27acc686fe3d7a65ffa25407e9479cec1047",
+          "version": "1.3.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

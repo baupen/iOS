@@ -13,7 +13,7 @@ struct Map {
 	let parentID: ID<Map>?
 	
 	var parentHolderID: UUID {
-		return parentID?.rawValue ?? constructionSiteID.rawValue
+		parentID?.rawValue ?? constructionSiteID.rawValue
 	}
 	
 	final class Sector: Codable {
@@ -26,25 +26,25 @@ struct Map {
 extension Map: DBRecord {
 	static let site = belongsTo(ConstructionSite.self)
 	var site: QueryInterfaceRequest<ConstructionSite> {
-		return request(for: Map.site)
+		request(for: Map.site)
 	}
 	
 	static let issues = hasMany(Issue.self)
 	var issues: QueryInterfaceRequest<Issue> {
-		return request(for: Map.issues).consideringClientMode
+		request(for: Map.issues).consideringClientMode
 	}
 	
 	var sortedIssues: QueryInterfaceRequest<Issue> {
-		return issues.order(Issue.Columns.number.asc, Issue.Meta.Columns.lastChangeTime.desc)
+		issues.order(Issue.Columns.number.asc, Issue.Meta.Columns.lastChangeTime.desc)
 	}
 	
 	static let children = hasMany(Map.self)
 	var children: QueryInterfaceRequest<Map> {
-		return request(for: Map.children)
+		request(for: Map.children)
 	}
 	
 	func hasChildren(in db: Database) throws -> Bool {
-		return try children.fetchCount(db) > 0 // TODO: SQL exists() might be nice here
+		try children.fetchCount(db) > 0 // TODO: SQL exists() might be nice here
 	}
 	
 	init(row: Row) {

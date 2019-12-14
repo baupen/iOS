@@ -5,7 +5,7 @@ import CommonCrypto
 
 extension Data {
 	func sha256() -> Data {
-		return withUnsafeBytes { input in
+		withUnsafeBytes { input in
 			Data(count: Int(CC_SHA256_DIGEST_LENGTH)) <- { 
 				$0.withUnsafeMutableBytes { output in
 					_ = CC_SHA256(
@@ -19,7 +19,7 @@ extension Data {
 	}
 	
 	func hexEncodedString() -> String {
-		return self
+		self
 			.map { String(format: "%02x", $0) } // best way to get 0-padded hex string
 			.joined()
 	}
@@ -27,6 +27,6 @@ extension Data {
 
 extension String {
 	func sha256() -> String {
-		return data(using: .utf8)!.sha256().hexEncodedString()
+		data(using: .utf8)!.sha256().hexEncodedString()
 	}
 }

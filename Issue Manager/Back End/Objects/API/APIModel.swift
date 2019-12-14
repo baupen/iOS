@@ -11,5 +11,5 @@ protocol APIModel: Codable {
 }
 
 extension APIModel {
-	var id: ID<Object> { return meta.id }
+	var id: ID<Object> { meta.id }
 }

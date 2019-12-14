@@ -1,6 +1,7 @@
 // Created by Julian Dunskus
 
 import UIKit
+import CGeometry
 
 final class LightboxViewController: UIViewController {
 	@IBOutlet private var scrollView: UIScrollView!
@@ -38,7 +39,7 @@ final class LightboxViewController: UIViewController {
 	}
 	
 	override var prefersStatusBarHidden: Bool {
-		return isFullyShown ? true : super.prefersStatusBarHidden
+		isFullyShown ? true : super.prefersStatusBarHidden
 	}
 	
 	func update() {
@@ -63,9 +64,11 @@ final class LightboxViewController: UIViewController {
 	
 	private var transition: UIPercentDrivenInteractiveTransition?
 	@IBAction func viewDragged(_ panRecognizer: UIPanGestureRecognizer) {
-		let translation = panRecognizer.translation(in: view)
-		let velocity = panRecognizer.velocity(in: view)
-		let progress = translation.length / view.bounds.size.length
+		let translation = CGVector(panRecognizer.translation(in: view))
+		let velocity = CGVector(panRecognizer.velocity(in: view))
+		
+		let viewDiagonal = CGVector(view.bounds.size).length
+		let progress = translation.length / viewDiagonal
 		
 		switch panRecognizer.state {
 		case .began:
@@ -74,7 +77,7 @@ final class LightboxViewController: UIViewController {
 		case .changed:
 			transition!.update(progress)
 		case .ended:
-			let progressVelocity = velocity.length / view.bounds.size.length
+			let progressVelocity = velocity.length / viewDiagonal
 			if progress + 0.25 * progressVelocity > 0.5 {
 				transition!.finish()
 			} else {
@@ -94,21 +97,21 @@ final class LightboxViewController: UIViewController {
 
 extension LightboxViewController: UIViewControllerTransitioningDelegate {
 	func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-		return PresentAnimator()
+		PresentAnimator()
 	}
 	
 	func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-		return DismissAnimator()
+		DismissAnimator()
 	}
 	
 	func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-		return transition
+		transition
 	}
 }
 
 /// slides up and fades in black background
 fileprivate final class PresentAnimator: TransitionAnimator {
-	override func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+	override func animateTransition(using transitionContext: Context) {
 		let fromVC = transitionContext.viewController(forKey: .from)!
 		let lightboxController = transitionContext.viewController(forKey: .to) as! LightboxViewController
 		lightboxController.view.layoutIfNeeded()
@@ -138,12 +141,14 @@ fileprivate final class PresentAnimator: TransitionAnimator {
 
 /// slides down and fades out black background
 fileprivate final class DismissAnimator: TransitionAnimator {
-	override func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+	override func animateTransition(using transitionContext: Context) {
 		let lightboxController = transitionContext.viewController(forKey: .from) as! LightboxViewController
 		let toVC = transitionContext.viewController(forKey: .to)!
 		
-		transitionContext.containerView.insertSubview(toVC.view, belowSubview: lightboxController.view)
-		toVC.view.frame = transitionContext.finalFrame(for: toVC)
+		if #available(iOS 13, *) {} else { // this seems to be done for us on iOS 13
+			transitionContext.containerView.insertSubview(toVC.view, belowSubview: lightboxController.view)
+			toVC.view.frame = transitionContext.finalFrame(for: toVC)
+		}
 		
 		let pulledView = lightboxController.imageView!
 		

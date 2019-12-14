@@ -7,7 +7,7 @@ struct ID<Object> {
 	var rawValue: UUID
 	
 	var stringValue: String {
-		return rawValue.uuidString
+		rawValue.uuidString
 	}
 	
 	init() {
@@ -21,17 +21,17 @@ struct ID<Object> {
 
 extension ID where Object: DBRecord {
 	func get(in db: Database) throws -> Object? {
-		return try Object.fetchOne(db, key: rawValue)
+		try Object.fetchOne(db, key: rawValue)
 	}
 }
 
 extension ID: DatabaseValueConvertible {
 	static func fromDatabaseValue(_ dbValue: DatabaseValue) -> ID? {
-		return UUID.fromDatabaseValue(dbValue).map(ID.init)
+		UUID.fromDatabaseValue(dbValue).map(ID.init)
 	}
 	
 	var databaseValue: DatabaseValue {
-		return rawValue.databaseValue
+		rawValue.databaseValue
 	}
 }
 
@@ -49,7 +49,7 @@ extension ID: Hashable {}
 
 extension ID: CustomStringConvertible {
 	var description: String {
-		return rawValue.description
+		rawValue.description
 	}
 }
 
@@ -68,10 +68,10 @@ protocol StoredObject: AnyStoredObject {
 extension StoredObject {
 	typealias Meta = ObjectMeta<Self>
 	
-	var id: ID<Self> { return meta.id }
+	var id: ID<Self> { meta.id }
 	
-	var rawMeta: AnyObjectMeta { return meta }
-	var rawID: UUID { return id.rawValue }
+	var rawMeta: AnyObjectMeta { meta }
+	var rawID: UUID { id.rawValue }
 	
 	static func onChange(from previous: Self?, to new: Self?) {}
 }
@@ -85,11 +85,11 @@ struct ObjectMeta<Object: StoredObject>: AnyObjectMeta, Codable, Equatable {
 	var id = ID<Object>()
 	var lastChangeTime = Date()
 	
-	var rawID: UUID { return id.rawValue }
+	var rawID: UUID { id.rawValue }
 }
 
 extension ObjectMeta: DBRecord where Object: DBRecord {
-	static var databaseTableName: String { return Object.databaseTableName }
+	static var databaseTableName: String { Object.databaseTableName }
 	
 	enum Columns: String, ColumnExpression {
 		case id

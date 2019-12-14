@@ -1,6 +1,7 @@
 // Created by Julian Dunskus
 
 import UIKit
+import CGeometry
 
 final class IssuePositioner: UIView {
 	@IBOutlet private var crosshairView: UIImageView!
@@ -40,14 +41,14 @@ final class IssuePositioner: UIView {
 	}
 	
 	override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
-		return crosshairView.frame.contains(point)
+		crosshairView.frame.contains(point)
 			|| !topView.isHidden && topView.point(inside: topView.convert(point, from: self), with: event)
 			|| !botView.isHidden && botView.point(inside: botView.convert(point, from: self), with: event)
 	}
 	
 	var startOffset: CGPoint!
 	@objc func viewPanned(_ recognizer: UIPanGestureRecognizer) {
-		let translation = recognizer.translation(in: self)
+		let translation = CGVector(recognizer.translation(in: self))
 		
 		switch recognizer.state {
 		case .began:
@@ -67,7 +68,7 @@ final class IssuePositioner: UIView {
 
 extension IssuePositioner: UIGestureRecognizerDelegate {
 	func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-		return touch.view == crosshairView
+		touch.view == crosshairView
 	}
 }
 

@@ -1,6 +1,7 @@
 // Created by Julian Dunskus
 
 import UIKit
+import CGeometry
 
 final class SectorView: UIView {
 	let sector: Map.Sector
@@ -70,7 +71,7 @@ final class SectorView: UIView {
 	override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
 		guard super.point(inside: point, with: event) else { return false }
 		
-		return path.contains(point + frame.origin)
+		return path.contains(point + CGVector(frame.origin))
 	}
 	
 	@objc func handleTap(_ recognizer: UITapGestureRecognizer) {
@@ -113,7 +114,7 @@ final class SectorView: UIView {
 		let context = UIGraphicsGetCurrentContext()!
 		context.translateBy(x: -frame.origin.x, y: -frame.origin.y)
 		
-		context.setLineWidth(0.005 * superview!.bounds.size.length)
+		context.setLineWidth(0.005 * CGVector(superview!.bounds.size).length)
 		
 		context.setFillColor(color.withAlphaComponent(0.25).cgColor)
 		context.setStrokeColor(color.cgColor)

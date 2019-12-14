@@ -1,14 +1,8 @@
 language: swift
-osx_image: xcode10.2
+osx_image: xcode11.2
 before_install:
   - cd Issue\ Manager
-install:
-  - brew install git-lfs
-  - git lfs install
-before_script:
-  - git lfs pull
-  - git submodule foreach git lfs pull
 script:
-  - xcodebuild clean build -sdk iphonesimulator -project Issue\ Manager.xcodeproj/ -scheme Issue\ Manager CODE_SIGNING_REQUIRED=NO
+  - xcodebuild clean build -quiet -sdk iphonesimulator -project Issue\ Manager.xcodeproj/ -scheme Issue\ Manager CODE_SIGNING_REQUIRED=NO
 after_script:
   - sleep 10 # give logs time to catch up

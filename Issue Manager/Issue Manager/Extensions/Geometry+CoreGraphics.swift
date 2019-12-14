@@ -55,7 +55,7 @@ extension UIColor {
 
 extension CGPath {
 	static func polygon(corners: [CGPoint]) -> CGPath {
-		return CGMutablePath() <- {
+		CGMutablePath() <- {
 			$0.addLines(between: corners)
 			$0.closeSubpath()
 		}
