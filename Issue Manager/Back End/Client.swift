@@ -52,7 +52,12 @@ final class Client {
 		backlogClearingTimer = .scheduledTimer(withTimeInterval: 60, repeats: true) { _ in
 			self.tryToClearBacklog()
 		}
-		Repository.shared.downloadMissingFiles()
+		linearQueue.async {
+			do {
+				try self.clearBacklog()
+				Repository.shared.downloadMissingFiles()
+			} catch {}
+		}
 	}
 	
 	/// call this e.g. when the device regains its internet connection
