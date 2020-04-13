@@ -98,6 +98,7 @@ final class Client {
 	private func clearBacklog() throws {
 		isClearingBacklog = true
 		defer { isClearingBacklog = false }
+		print("clearing backlog!")
 		
 		while let request = backlog.first {
 			do {
