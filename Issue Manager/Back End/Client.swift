@@ -155,7 +155,7 @@ final class Client {
 	}
 	
 	private func apiURL<R: Request>(for request: R) -> URL {
-		(R.baseURLOverride ?? serverURL).appendingPathComponent("api/external/\(request.method)")
+		(request.baseURLOverride ?? serverURL).appendingPathComponent("api/external/\(request.method)")
 	}
 	
 	func send(_ request: URLRequest) -> Future<TaskResult> {

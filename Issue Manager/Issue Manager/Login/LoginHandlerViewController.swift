@@ -7,9 +7,9 @@ class LoginHandlerViewController: UIViewController {
 	
 	var isLoggingIn = false
 	
-	func logIn(username: String, password: String) {
+	func logIn(to serverURL: URL, as username: String, password: String) {
 		isLoggingIn = true
-		let result = Client.shared.logIn(as: username, password: password).on(.main)
+		let result = Client.shared.logIn(to: serverURL, as: username, password: password).on(.main)
 		result.always {
 			self.isLoggingIn = false
 		}
@@ -60,7 +60,7 @@ class LoginHandlerViewController: UIViewController {
 	@discardableResult func attemptLocalLogin(username: String, password: String) -> Bool {
 		guard
 			let localUser = Client.shared.localUser,
-			username == localUser.localUsername
+			username == localUser.username
 			else { return false }
 		
 		guard password.sha256() == localUser.passwordHash else {
