@@ -58,13 +58,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControll
 		}
 	}
 	
-	// FIXME: deprecated in iOS 13
-	func application(_ app: UIApplication, shouldSaveApplicationState coder: NSCoder) -> Bool {
-		true
-	}
+	func application(_ application: UIApplication, shouldSaveSecureApplicationState coder: NSCoder) -> Bool { true }
 	
-	// FIXME: deprecated in iOS 13
-	func application(_ app: UIApplication, shouldRestoreApplicationState coder: NSCoder) -> Bool {
+	func application(_ app: UIApplication, shouldRestoreSecureApplicationState coder: NSCoder) -> Bool {
 		Client.shared.localUser != nil && !defaults.isInClientMode
 	}
 }
