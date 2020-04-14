@@ -20,7 +20,7 @@ struct Rectangle: Codable, Hashable {
 		Point(x: x, y: y)
 	}
 	
-	enum CodingKeys: String, CodingKey {
+	private enum CodingKeys: String, CodingKey {
 		case x = "startX"
 		case y = "startY"
 		case width, height

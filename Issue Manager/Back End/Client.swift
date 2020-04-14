@@ -177,7 +177,7 @@ enum RequestError: Error {
 	case communicationError(Error)
 	/// The server didn't fulfill the request because something was wrong with it.
 	case apiError(JSend.Failure)
-	/// The server encountered an error whilst fulfilling the request.
+	/// The server encountered an internal error whilst fulfilling the request.
 	case serverError(JSend.Error)
 	/// The client is outdated, so we'd rather not risk further communication.
 	case outdatedClient(client: Int, server: Int)
@@ -225,7 +225,7 @@ private extension Client {
 	}
 	
 	func saveBacklog() {
-		save(context: "serverURL") { [backlog] in
+		save(context: "backlog") { [backlog] in
 			try defaults.encode(backlog, forKey: .backlogKey)
 		}
 	}

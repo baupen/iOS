@@ -70,7 +70,7 @@ struct Backlog: Codable {
 		storage.removeFirst()
 	}
 	
-	enum CodingKeys: CodingKey {
+	private enum CodingKeys: CodingKey {
 		case storage
 	}
 }
@@ -99,7 +99,7 @@ fileprivate struct StorageHelper: Codable {
 		try request.encode(to: encoder)
 	}
 	
-	enum CodingKeys: CodingKey {
+	private enum CodingKeys: CodingKey {
 		case _storageID
 	}
 }

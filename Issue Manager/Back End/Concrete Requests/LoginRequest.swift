@@ -27,7 +27,7 @@ struct LoginRequest: JSONJSONRequest {
 		let user: User
 	}
 	
-	enum CodingKeys: CodingKey {
+	private enum CodingKeys: CodingKey {
 		case username
 		case passwordHash
 	}
@@ -46,6 +46,8 @@ struct DomainOverridesRequest: GetRequest {
 	struct ExpectedResponse: Response {
 		let domainOverrides: [DomainOverride]
 	}
+	
+	private enum CodingKeys: CodingKey {}
 }
 
 extension Client {
