@@ -114,7 +114,6 @@
 		B937766B2394BEA6009CB22D /* NSLayoutConstraint+Legacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B937766A2394BEA6009CB22D /* NSLayoutConstraint+Legacy.swift */; };
 		B9C04D4D24453FF5008EDDEE /* UserDefault in Frameworks */ = {isa = PBXBuildFile; productRef = B9C04D4C24453FF5008EDDEE /* UserDefault */; };
 		B9D9B36323917FC400947CE5 /* PassThroughView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D9B36223917FC400947CE5 /* PassThroughView.swift */; };
-		B9E3ABC7238E22D50029CE16 /* CGeometry in Frameworks */ = {isa = PBXBuildFile; productRef = B9E3ABC6238E22D50029CE16 /* CGeometry */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -263,7 +262,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9573A05823576C4700DE5AC1 /* PullToExpand in Frameworks */,
-				B9E3ABC7238E22D50029CE16 /* CGeometry in Frameworks */,
 				9573A05523576BD900DE5AC1 /* Promise in Frameworks */,
 				9564186323578E80002BAD7B /* SimplePDFKit.framework in Frameworks */,
 				9573A05223576AF200DE5AC1 /* GRDB in Frameworks */,
@@ -609,7 +607,6 @@
 				9573A05123576AF200DE5AC1 /* GRDB */,
 				9573A05423576BD900DE5AC1 /* Promise */,
 				9573A05723576C4700DE5AC1 /* PullToExpand */,
-				B9E3ABC6238E22D50029CE16 /* CGeometry */,
 				B9C04D4C24453FF5008EDDEE /* UserDefault */,
 			);
 			productName = "Issue Manager";
@@ -1017,7 +1014,6 @@
 				CURRENT_PROJECT_VERSION = 34;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 382Y6UV3L5;
-				DISABLE_DIAMOND_PROBLEM_DIAGNOSTIC = YES;
 				INFOPLIST_FILE = "Issue Manager/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1042,7 +1038,6 @@
 				CURRENT_PROJECT_VERSION = 34;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 382Y6UV3L5;
-				DISABLE_DIAMOND_PROBLEM_DIAGNOSTIC = YES;
 				INFOPLIST_FILE = "Issue Manager/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1143,11 +1138,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B9C04D4B24453FF4008EDDEE /* XCRemoteSwiftPackageReference "UserDefault" */;
 			productName = UserDefault;
-		};
-		B9E3ABC6238E22D50029CE16 /* CGeometry */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B9E3ABC5238E22D50029CE16 /* XCRemoteSwiftPackageReference "CGeometry" */;
-			productName = CGeometry;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
