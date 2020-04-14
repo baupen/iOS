@@ -82,7 +82,9 @@ final class LoginViewController: LoginHandlerViewController {
 			usernameField.text = localUser.username
 			
 			if defaults.stayLoggedIn, !localUser.hasLoggedOut {
-				showSiteList(userInitiated: false)
+				if presentedViewController == nil {
+					showSiteList(userInitiated: false)
+				}
 			} else {
 				passwordField.becomeFirstResponder()
 			}
