@@ -43,6 +43,8 @@ final class LoginViewController: LoginHandlerViewController {
 	@UserDefault("login.lastFilledServerURL")
 	private var lastFilledServerURL: URL?
 	
+	private var shouldRestoreState = true
+	
 	/// - note: only ever change this from the main queue
 	override var isLoggingIn: Bool {
 		didSet {
@@ -72,6 +74,9 @@ final class LoginViewController: LoginHandlerViewController {
 	
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
+		
+		guard shouldRestoreState else { return }
+		shouldRestoreState = false
 		
 		if let localUser = Client.shared.localUser, !localUser.username.isEmpty {
 			usernameField.text = localUser.username
@@ -127,6 +132,21 @@ final class LoginViewController: LoginHandlerViewController {
 			as: usernameField.text!,
 			password: passwordField.text!
 		)
+	}
+	
+	func deepLink(username: String, domain: String) {
+		shouldRestoreState = false
+		
+		dismiss(animated: false) // don't have to animate since we're not visible until done anyway
+		
+		usernameField.text = username
+		
+		websiteField.text = domain
+		lastFilledServerURL = .prependingHTTPSIfMissing(to: domain)
+		websiteFieldContainer.isHidden = false
+		
+		passwordField.text = ""
+		passwordField.becomeFirstResponder()
 	}
 }
 
