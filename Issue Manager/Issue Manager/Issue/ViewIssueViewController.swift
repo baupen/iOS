@@ -129,12 +129,15 @@ final class ViewIssueViewController: UITableViewController, Reusable {
 		// can't localize from storyboard
 		switch section {
 		case 0: return nil
-		case 1: return Localization.image
-		case 2: return Localization.craftsman
-		case 3: return Localization.details
-		case 4: return Localization.actions
+		case 1: return Localization.craftsman
+		case 2: return Localization.details
+		case 3: return Localization.actions
 		default: fatalError("unrecognized section \(section)!")
 		}
+	}
+	
+	override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+		section == 0 ? .leastNormalMagnitude : UITableView.automaticDimension
 	}
 	
 	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
