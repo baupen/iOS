@@ -11,7 +11,8 @@ struct IssueUpdateRequest: MultipartJSONRequest, BacklogStorable {
 	
 	var authenticationToken: String
 	let issue: APIIssue
-	let fileURL: URL?
+	let file: File<Issue>?
+	var fileURL: URL? { file.map(Issue.localURL) }
 	
 	func applyToClient(_ response: ExpectedResponse) {
 		Repository.shared.save(response.issue.makeObject())
@@ -30,7 +31,7 @@ extension Client {
 					method: "issue/create",
 					authenticationToken: user.authenticationToken,
 					issue: issue.makeModel(),
-					fileURL: issue.image.map(Issue.localURL)
+					file: issue.image
 				)
 			}.flatMap(send)
 		
@@ -46,7 +47,7 @@ extension Client {
 					method: "issue/update",
 					authenticationToken: user.authenticationToken,
 					issue: issue.makeModel(),
-					fileURL: hasChangedFile ? issue.image.map(Issue.localURL) : nil
+					file: hasChangedFile ? issue.image : nil
 				)
 			}.flatMap(send)
 		

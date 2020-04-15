@@ -40,8 +40,6 @@ final class Client {
 	}
 	/// used to automatically attempt to clear the backlog at regular intervals
 	private var backlogClearingTimer: Timer!
-	/// while this is true, all requests will be dispatched directly and on the global queue to avoid deadlocks
-	private var isClearingBacklog = false
 	/// any dependent requests are executed on this queue, so as to avoid bad interleavings and races and such
 	private let linearQueue = DispatchQueue(label: "dependent request execution")
 	/// saving to disk is done on this queue to avoid clogging up other queues
@@ -52,7 +50,12 @@ final class Client {
 		backlogClearingTimer = .scheduledTimer(withTimeInterval: 60, repeats: true) { _ in
 			self.tryToClearBacklog()
 		}
-		Repository.shared.downloadMissingFiles()
+		linearQueue.async {
+			do {
+				try self.clearBacklog()
+				Repository.shared.downloadMissingFiles()
+			} catch {}
+		}
 	}
 	
 	/// call this e.g. when the device regains its internet connection
@@ -62,8 +65,13 @@ final class Client {
 		}
 	}
 	
+	// separate overload for pointfree references
 	func send<R: Request>(_ request: R) -> Future<R.ExpectedResponse> {
-		dispatch(request)
+		self.send(request, circumventBacklog: false)
+	}
+		
+	func send<R: Request>(_ request: R, circumventBacklog: Bool = false) -> Future<R.ExpectedResponse> {
+		dispatch(request, circumventBacklog: circumventBacklog)
 			.map { taskResult in try self.extractData(from: taskResult, for: request) }
 			.map { response in // map instead of then, to avoid data races
 				assert(OperationQueue.current!.underlyingQueue == DispatchQueue.main)
@@ -72,8 +80,8 @@ final class Client {
 		}
 	}
 	
-	private func dispatch<R: Request>(_ request: R) -> Future<TaskResult> {
-		if R.isIndependent || isClearingBacklog {
+	private func dispatch<R: Request>(_ request: R, circumventBacklog: Bool) -> Future<TaskResult> {
+		if R.isIndependent || circumventBacklog {
 			return startTask(for: request)
 		} else {
 			return Future(asyncOn: linearQueue) {
@@ -91,8 +99,7 @@ final class Client {
 	
 	/// only ever run this on linearQueue
 	private func clearBacklog() throws {
-		isClearingBacklog = true
-		defer { isClearingBacklog = false }
+		print("clearing backlog!")
 		
 		while let request = backlog.first {
 			do {
@@ -148,7 +155,7 @@ final class Client {
 	}
 	
 	private func apiURL<R: Request>(for request: R) -> URL {
-		(R.baseURLOverride ?? serverURL).appendingPathComponent("api/external/\(request.method)")
+		(request.baseURLOverride ?? serverURL).appendingPathComponent("api/external/\(request.method)")
 	}
 	
 	func send(_ request: URLRequest) -> Future<TaskResult> {
@@ -170,7 +177,7 @@ enum RequestError: Error {
 	case communicationError(Error)
 	/// The server didn't fulfill the request because something was wrong with it.
 	case apiError(JSend.Failure)
-	/// The server encountered an error whilst fulfilling the request.
+	/// The server encountered an internal error whilst fulfilling the request.
 	case serverError(JSend.Error)
 	/// The client is outdated, so we'd rather not risk further communication.
 	case outdatedClient(client: Int, server: Int)
@@ -218,7 +225,7 @@ private extension Client {
 	}
 	
 	func saveBacklog() {
-		save(context: "serverURL") { [backlog] in
+		save(context: "backlog") { [backlog] in
 			try defaults.encode(backlog, forKey: .backlogKey)
 		}
 	}

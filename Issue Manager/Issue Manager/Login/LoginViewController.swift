@@ -1,6 +1,7 @@
 // Created by Julian Dunskus
 
 import UIKit
+import UserDefault
 
 final class LoginViewController: LoginHandlerViewController {
 	fileprivate typealias Localization = L10n.Login
@@ -8,10 +9,19 @@ final class LoginViewController: LoginHandlerViewController {
 	@IBOutlet private var textFieldView: UIView!
 	@IBOutlet private var usernameField: UITextField!
 	@IBOutlet private var passwordField: UITextField!
+	@IBOutlet private var websiteField: UITextField!
+	@IBOutlet private var websiteFieldContainer: TextFieldContainer!
 	@IBOutlet private var activityIndicator: UIActivityIndicatorView!
 	@IBOutlet private var stayLoggedInSwitch: UISwitch!
 	
-	@IBAction func backgroundTapped(_ sender: UITapGestureRecognizer) {
+	@IBAction func usernameConfirmed() {
+		UIView.animate(withDuration: 0.25) {
+			self.websiteFieldContainer.isHidden = false
+		}
+		updateWebsite()
+	}
+	
+	@IBAction func backgroundTapped() {
 		usernameField.resignFirstResponder()
 		passwordField.resignFirstResponder()
 	}
@@ -25,6 +35,15 @@ final class LoginViewController: LoginHandlerViewController {
 		passwordField.text = ""
 		Client.shared.localUser?.hasLoggedOut = true
 	}
+	
+	private var domainOverrides: [DomainOverride]? {
+		didSet { updateWebsite() }
+	}
+	
+	@UserDefault("login.lastFilledServerURL")
+	private var lastFilledServerURL: URL?
+	
+	private var shouldRestoreState = true
 	
 	/// - note: only ever change this from the main queue
 	override var isLoggingIn: Bool {
@@ -41,15 +60,14 @@ final class LoginViewController: LoginHandlerViewController {
 		}
 	}
 	
-	override var preferredStatusBarStyle: UIStatusBarStyle {
-		.lightContent
-	}
+	override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		usernameField.delegate = self
 		passwordField.delegate = self
+		websiteField.delegate = self
 		
 		stayLoggedInSwitch.isOn = defaults.stayLoggedIn
 	}
@@ -57,21 +75,94 @@ final class LoginViewController: LoginHandlerViewController {
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 		
-		if let localUser = Client.shared.localUser, !localUser.localUsername.isEmpty {
-			usernameField.text = localUser.localUsername
+		guard shouldRestoreState else { return }
+		shouldRestoreState = false
+		
+		if let localUser = Client.shared.localUser, !localUser.username.isEmpty {
+			usernameField.text = localUser.username
 			
 			if defaults.stayLoggedIn, !localUser.hasLoggedOut {
-				showSiteList(userInitiated: false)
+				if presentedViewController == nil {
+					showSiteList(userInitiated: false)
+				}
 			} else {
 				passwordField.becomeFirstResponder()
 			}
+			
+			websiteField.text = Client.shared.serverURL.trimmingHTTPS()
 		} else {
 			usernameField.becomeFirstResponder()
 		}
+		
+		websiteFieldContainer.isHidden = usernameField.text?.isEmpty != false
+		
+		Client.shared.getDomainOverrides()
+			.on(.main)
+			.then { self.domainOverrides = $0 }
+	}
+	
+	func updateWebsite() {
+		guard
+			let domainOverrides = domainOverrides,
+			let input = Username(usernameField.text!)
+			else { return }
+		
+		let override = domainOverrides.firstMatch(for: input)
+		
+		guard
+			let serverURL = override?.serverURL
+				?? .prependingHTTPSIfMissing(to: input.domain),
+			serverURL != lastFilledServerURL
+			else { return }
+		
+		lastFilledServerURL = serverURL
+		websiteField.text = serverURL.trimmingHTTPS()
+		usernameField.text = (override?.username ?? input).raw
 	}
 	
 	func logIn() {
-		logIn(username: usernameField.text!, password: passwordField.text!)
+		guard let serverURL = URL.prependingHTTPSIfMissing(to: websiteField.text!) else {
+			showAlert(
+				titled: Localization.Alert.InvalidWebsite.title,
+				message: Localization.Alert.InvalidWebsite.message
+			)
+			return
+		}
+		
+		logIn(
+			to: serverURL,
+			as: usernameField.text!,
+			password: passwordField.text!
+		)
+	}
+	
+	func deepLink(username: String, domain: String) {
+		shouldRestoreState = false
+		
+		dismiss(animated: false) // don't have to animate since we're not visible until done anyway
+		
+		usernameField.text = username
+		
+		websiteField.text = domain
+		lastFilledServerURL = .prependingHTTPSIfMissing(to: domain)
+		websiteFieldContainer.isHidden = false
+		
+		passwordField.text = ""
+		passwordField.becomeFirstResponder()
+	}
+}
+
+private let https = "https://"
+private extension URL {
+	func trimmingHTTPS() -> String {
+		let string = absoluteString
+		return string.hasPrefix(https)
+			? String(string.dropFirst(https.count))
+			: string
+	}
+	
+	static func prependingHTTPSIfMissing(to raw: String) -> URL? {
+		URL(string: URLComponents(string: raw)?.scheme != nil ? raw : https + raw)
 	}
 }
 
@@ -81,7 +172,9 @@ extension LoginViewController: UITextFieldDelegate {
 		case usernameField:
 			passwordField.becomeFirstResponder()
 		case passwordField:
-			passwordField.resignFirstResponder()
+			websiteField.becomeFirstResponder()
+		case websiteField:
+			websiteField.resignFirstResponder()
 			logIn()
 		default:
 			return true // default handling
@@ -89,3 +182,5 @@ extension LoginViewController: UITextFieldDelegate {
 		return false // custom handling
 	}
 }
+
+extension URL: DefaultsValueConvertible {}

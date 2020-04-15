@@ -90,6 +90,13 @@
 "issue.unregistered" = "neu";
 
 ////////////////////////////////////////////////////////////////////////////////
+// MARK: Login.alert.invalid
+// CONTEXT: Nachricht für den Alert, dass man eine ungültige Website-Adresse eingegeben hat.
+"login.alert.invalid_website.message" = "Die eingegebene Adresse für die Website ist ungültig. Hier sollte die Adresse stehen, die auch im Browser steht, wenn du dort die Pendenzen verwaltest, z.B. app.mangel.io";
+// CONTEXT: Titel für den Alert, dass man eine ungültige Website-Adresse eingegeben hat.
+"login.alert.invalid_website.title" = "Ungültige Website";
+
+////////////////////////////////////////////////////////////////////////////////
 // MARK: Login.alert.login
 // CONTEXT: Nachricht für den Alert, dass man sich aus einem unbekannten Grund nicht einloggen kann.
 "login.alert.login_error.message" = "Beim einloggen ist ein Fehler aufgetreten! Du wirst falls möglich lokal eingeloggt.";
@@ -110,6 +117,8 @@
 "login.placeholder.password" = "Passwort";
 // CONTEXT: Platzhalter für den Benutzernamen im Login-Screen
 "login.placeholder.username" = "Benutzername";
+// CONTEXT: Platzhalter für die Website, an die die App sich anbinden wird, im Login-Screen
+"login.placeholder.website" = "Website";
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Login.stay

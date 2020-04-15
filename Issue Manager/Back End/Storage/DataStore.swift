@@ -28,7 +28,6 @@ final class DatabaseDataStore {
 			#endif
 		}
 		dbPool = try .init(path: databaseURL.absoluteString, configuration: config)
-		dbPool.setupMemoryManagement(in: UIApplication.shared)
 		
 		let migrator = DatabaseMigrator() <- { migrator in
 			registerMigrations(in: &migrator)

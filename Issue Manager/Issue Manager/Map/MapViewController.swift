@@ -31,6 +31,11 @@ final class MapViewController: UIViewController, Reusable {
 	}
 	
 	@IBAction func beginAddingIssue() {
+		guard map?.file != nil else {
+			performSegue(withIdentifier: "create issue", sender: nil)
+			return
+		}
+		
 		if !pullableView.isCompact {
 			pullableView.contract()
 		}

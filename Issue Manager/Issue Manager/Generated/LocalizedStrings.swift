@@ -98,6 +98,12 @@ internal enum L10n {
     /// Eingeloggt Bleiben
     internal static let stayLoggedIn = L10n.tr("Localizable", "login.stay_logged_in")
     internal enum Alert {
+      internal enum InvalidWebsite {
+        /// Die eingegebene Adresse für die Website ist ungültig. Hier sollte die Adresse stehen, die auch im Browser steht, wenn du dort die Pendenzen verwaltest, z.B. app.mangel.io
+        internal static let message = L10n.tr("Localizable", "login.alert.invalid_website.message")
+        /// Ungültige Website
+        internal static let title = L10n.tr("Localizable", "login.alert.invalid_website.title")
+      }
       internal enum LoginError {
         /// Beim einloggen ist ein Fehler aufgetreten! Du wirst falls möglich lokal eingeloggt.
         internal static let message = L10n.tr("Localizable", "login.alert.login_error.message")
@@ -126,6 +132,8 @@ internal enum L10n {
       internal static let password = L10n.tr("Localizable", "login.placeholder.password")
       /// Benutzername
       internal static let username = L10n.tr("Localizable", "login.placeholder.username")
+      /// Website
+      internal static let website = L10n.tr("Localizable", "login.placeholder.website")
     }
   }
 

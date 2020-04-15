@@ -14,13 +14,13 @@ protocol BacklogStorable: Codable {
 	var method: String { get }
 	var authenticationToken: String { get set }
 	
-	/// You can use this without breaking stuff, but i'd rather you use `Client.shared.send`.
+	/// Sends the request through `Client.shared`, circumventing the backlog mechanism in the process (for internal use).
 	func send() -> Future<Void>
 }
 
 extension BacklogStorable where Self: Request {
 	func send() -> Future<Void> {
-		Client.shared.send(self).ignoringResult()
+		Client.shared.send(self, circumventBacklog: true).ignoringResult()
 	}
 }
 
@@ -70,7 +70,7 @@ struct Backlog: Codable {
 		storage.removeFirst()
 	}
 	
-	enum CodingKeys: CodingKey {
+	private enum CodingKeys: CodingKey {
 		case storage
 	}
 }
@@ -99,7 +99,7 @@ fileprivate struct StorageHelper: Codable {
 		try request.encode(to: encoder)
 	}
 	
-	enum CodingKeys: CodingKey {
+	private enum CodingKeys: CodingKey {
 		case _storageID
 	}
 }

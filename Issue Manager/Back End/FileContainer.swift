@@ -102,7 +102,8 @@ extension FileContainer {
 	}
 	
 	func deleteFile() {
-		try? file.map(Self.cacheURL).map(manager.removeItem)
-		try? file.map(Self.localURL).map(manager.removeItem)
+		guard let file = file else { return }
+		try? manager.removeItem(at: Self.cacheURL(for: file))
+		try? manager.removeItem(at: Self.localURL(for: file))
 	}
 }

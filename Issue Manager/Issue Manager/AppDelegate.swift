@@ -13,7 +13,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControll
 		}
 	}
 	
-	func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+	func application(
+		_ app: UIApplication,
+		willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
+	) -> Bool {
 		registerDefaults()
 		
 		window!.tintColor = .main
@@ -24,12 +27,40 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControll
 		return true
 	}
 	
-	func application(_ application: UIApplication, shouldSaveApplicationState coder: NSCoder) -> Bool {
-		true
+	func application(
+		_ app: UIApplication,
+		open url: URL,
+		options: [UIApplication.OpenURLOptionsKey: Any] = [:]
+	) -> Bool {
+		guard
+			let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
+			components.scheme == "mangel.io"
+			else { return false }
+		
+		switch components.host {
+		case "login":
+			guard
+				let queryItems = components.queryItems,
+				let username = queryItems.first(where: { $0.name == "username" })?.value,
+				let domain = queryItems.first(where: { $0.name == "domain" })?.value
+				else {
+					print("malformed custom url: \(url)")
+					return false
+			}
+			
+			let loginController = window!.rootViewController as! LoginViewController
+			loginController.deepLink(username: username, domain: domain)
+			
+			return true
+		default:
+			print("unrecognized custom url host in \(url)")
+			return false
+		}
 	}
 	
-	// FIXME: deprecated in iOS 13
-	func application(_ application: UIApplication, shouldRestoreApplicationState coder: NSCoder) -> Bool {
+	func application(_ application: UIApplication, shouldSaveSecureApplicationState coder: NSCoder) -> Bool { true }
+	
+	func application(_ app: UIApplication, shouldRestoreSecureApplicationState coder: NSCoder) -> Bool {
 		Client.shared.localUser != nil && !defaults.isInClientMode
 	}
 }

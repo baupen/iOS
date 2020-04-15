@@ -154,6 +154,10 @@ final class EditIssueViewController: UITableViewController, Reusable {
 		super.viewWillAppear(animated)
 		
 		tableView.reloadData()
+		
+		// workaround for the navigation bar being laid out incorrectly in iOS 13
+		// TODO: remove once apple fix this issue
+		navigationController?.navigationBar.setNeedsLayout()
 	}
 	
 	func present(_ issue: Issue) {

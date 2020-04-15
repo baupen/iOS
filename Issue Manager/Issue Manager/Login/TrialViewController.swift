@@ -25,7 +25,12 @@ final class TrialViewController: LoginHandlerViewController {
 	
 	@IBAction func confirm() {
 		if let trialUser = trialUser {
-			logIn(username: trialUser.username, password: trialUser.password)
+			// TODO: see if we'd prefer to just hardcode this
+			Client.shared.getDomainOverrides().then { domainOverrides in
+				let input = Username(trialUser.username)!
+				let (serverURL, username) = domainOverrides.firstMatch(for: input)!
+				self.logIn(to: serverURL, as: username.raw, password: trialUser.password)
+			}
 		} else {
 			requestTrial()
 		}

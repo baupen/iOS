@@ -8,14 +8,14 @@ typealias Response = Decodable
 protocol Request {
 	associatedtype ExpectedResponse
 	
-	/// If non-nil, the client uses this as the base URL rather than its default.
-	static var baseURLOverride: URL? { get }
 	/// The http method the request uses.
 	static var httpMethod: String { get }
 	/// Independent requests don't depend on results of other requests and, as such, can be executed at any time.
 	static var isIndependent: Bool { get }
 	
 	var method: String { get }
+	/// If non-nil, the client uses this as the base URL rather than its default.
+	var baseURLOverride: URL? { get }
 	
 	func applyToClient(_ response: ExpectedResponse)
 	
@@ -24,8 +24,9 @@ protocol Request {
 }
 
 extension Request {
-	static var baseURLOverride: URL? { nil }
 	static var httpMethod: String { "POST" }
+	
+	var baseURLOverride: URL? { nil }
 	
 	func applyToClient(_ response: ExpectedResponse) {}
 }
