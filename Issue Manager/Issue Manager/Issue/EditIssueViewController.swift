@@ -279,19 +279,22 @@ final class EditIssueViewController: UITableViewController, Reusable {
 	}
 	
 	override func numberOfSections(in tableView: UITableView) -> Int {
-		isCreating ? 4 : 5 // can't delete issue when creating
+		isCreating ? 3 : 4 // can't delete issue when creating
 	}
 	
 	override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 		// can't localize from storyboard
 		switch section {
 		case 0: return nil
-		case 1: return Localization.image
-		case 2: return Localization.craftsman
-		case 3: return Localization.description
-		case 4: return Localization.actions
+		case 1: return Localization.craftsman
+		case 2: return Localization.description
+		case 3: return Localization.actions
 		default: fatalError("unrecognized section \(section)!")
 		}
+	}
+	
+	override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+		section == 0 ? .leastNormalMagnitude : UITableView.automaticDimension
 	}
 	
 	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
