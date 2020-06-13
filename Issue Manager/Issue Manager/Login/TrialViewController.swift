@@ -102,14 +102,14 @@ final class TrialViewController: LoginHandlerViewController {
 		trialUser = defaults.trialUser
 	}
 	
-	override func handle(_ error: Error, username: String, password: String) {
+	override func handle(_ error: Error, username: String, password: String, serverURL: URL) {
 		switch error {
 		case RequestError.apiError(let meta) where meta.error == .unknownUsername:
 			fallthrough
 		case RequestError.invalidUsername:
 			trialUser = nil
 		default:
-			super.handle(error, username: username, password: password)
+			super.handle(error, username: username, password: password, serverURL: serverURL)
 		}
 	}
 	
