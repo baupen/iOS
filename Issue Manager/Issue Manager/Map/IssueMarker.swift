@@ -52,7 +52,13 @@ final class IssueMarker: UIView {
 	
 	private func resize() {
 		// for some reason the size is rounded to nearest integer values anyway, but the view is off-center if that happens, so it's best to manually round it here.
-		bounds.size = markerSize.map { max(round($0 / zoomScale), 1) }
+		let idealSize = markerSize.map { $0 / zoomScale }
+		let roundedSize = idealSize.map { max(round($0), 1) }
+		bounds.size = roundedSize
+		transform = CGAffineTransform.identity.scaledBy(
+			x: idealSize.width / roundedSize.width,
+			y: idealSize.height / roundedSize.height
+		)
 	}
 	
 	private func reposition() {

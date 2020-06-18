@@ -20,11 +20,11 @@ class LoginHandlerViewController: UIViewController {
 		
 		result.catch { error in
 			error.printDetails(context: "Login Failed!")
-			self.handle(error, username: username, password: password)
+			self.handle(error, username: username, password: password, serverURL: serverURL)
 		}
 	}
 	
-	func handle(_ error: Error, username: String, password: String) {
+	func handle(_ error: Error, username: String, password: String, serverURL: URL) {
 		switch error {
 		case RequestError.apiError(let meta) where meta.error == .unknownUsername:
 			fallthrough
@@ -33,7 +33,8 @@ class LoginHandlerViewController: UIViewController {
 		case RequestError.apiError(let meta) where meta.error == .wrongPassword:
 			showWrongPasswordAlert(username: username)
 		case RequestError.communicationError: // likely connection failure
-			let wasAttemptValid = attemptLocalLogin(username: username, password: password)
+			let wasAttemptValid = serverURL == Client.shared.serverURL
+				&& attemptLocalLogin(username: username, password: password)
 			if !wasAttemptValid {
 				showAlert(
 					titled: L10n.Alert.ConnectionIssues.title,
