@@ -15,8 +15,9 @@ final class MapListViewController: RefreshingTableViewController, Reusable {
 		didSet { tableView.reloadData() }
 	}
 	
-	private var mainController: MainViewController {
-		splitViewController as! MainViewController
+	/// - note: only safe to unwrap when currently part of the controller hierarchy
+	private var mainController: MainViewController? {
+		splitViewController.map { $0 as! MainViewController } // if non-nil, always that type
 	}
 	
 	override var isRefreshing: Bool {
@@ -34,6 +35,7 @@ final class MapListViewController: RefreshingTableViewController, Reusable {
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
+		let mainController = self.mainController!
 		if mainController.isCollapsed {
 			if let selected = tableView.indexPathForSelectedRow {
 				// coming back from selected map's sublist
@@ -43,13 +45,13 @@ final class MapListViewController: RefreshingTableViewController, Reusable {
 			// not appearing for the first time
 			if Repository.read(map(for: selected).hasChildren) {
 				// coming back from selected map's sublist
-				showOwnMap()
+				showOwnMap(in: mainController)
 			} else {
 				// appearing because split view was expanded to show list
 			}
 		} else {
 			// appearing for the first time
-			showOwnMap()
+			showOwnMap(in: mainController)
 		}
 		
 		navigationItem.leftBarButtonItem = holder is ConstructionSite ? backToSiteListButton : nil
@@ -62,6 +64,8 @@ final class MapListViewController: RefreshingTableViewController, Reusable {
 	}
 	
 	override func refreshCompleted() {
+		guard let mainController = mainController else { return } // dismissed in the meantime
+		
 		super.refreshCompleted()
 		
 		let isValid = handleRefresh()
@@ -108,7 +112,7 @@ final class MapListViewController: RefreshingTableViewController, Reusable {
 		)
 	}
 	
-	func showOwnMap() {
+	private func showOwnMap(in mainController: MainViewController) {
 		// update shown map
 		if mainController.isExtended {
 			let mapController = mainController.detailNav.mapController
@@ -198,8 +202,9 @@ final class MapListViewController: RefreshingTableViewController, Reusable {
 	}
 	
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		let mainController = self.mainController!
 		if indexPath.section == 0, holder is Map {
-			showOwnMap()
+			showOwnMap(in: mainController)
 		} else {
 			let map = maps[indexPath.row]
 			let mapHasChildren = Repository.read(map.hasChildren)
