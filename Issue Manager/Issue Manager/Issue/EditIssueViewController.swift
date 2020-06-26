@@ -35,7 +35,8 @@ final class EditIssueViewController: UITableViewController, Reusable {
 	
 	@IBAction func descriptionBeganEditing() {
 		// make suggestions visible
-		let indexPath = tableView.indexPath(for: descriptionCell)!
+		guard let indexPath = tableView.indexPath(for: descriptionCell)
+			else { return } // description cell not visible; not sure how this could happen but we shouldn't rely on it
 		// after the table view scrolls by itself
 		DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) { [tableView] in
 			tableView!.scrollToRow(at: indexPath, at: .top, animated: true)
