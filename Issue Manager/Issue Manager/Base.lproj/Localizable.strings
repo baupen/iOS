@@ -144,7 +144,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Map.new
 // CONTEXT: Knopf, um eine neue Pendenz ohne Position zu erfassen.
-"map.new_unpositioned_issue" = "Bereichweite Pendenz Erfassen";
+"map.new_unpositioned_issue" = "Pendenz ohne Platzierung Erfassen";
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Map.no

@@ -1300,7 +1300,7 @@ Maler</string>
                                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="998" verticalCompressionResistancePriority="999" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fFY-qh-e9R">
                                                 <rect key="frame" x="0.0" y="4" width="420" height="33"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <state key="normal" title="Bereichweite Pendenz Erfassen"/>
+                                                <state key="normal" title="Pendenz ohne Platzierung Erfassen"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="map.new_unpositioned_issue"/>
                                                 </userDefinedRuntimeAttributes>
