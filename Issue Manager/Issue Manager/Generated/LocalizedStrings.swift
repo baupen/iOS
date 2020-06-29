@@ -140,7 +140,7 @@ internal enum L10n {
   internal enum Map {
     /// Der Bauplan konnte nicht geladen werden!
     internal static let couldNotLoad = L10n.tr("Localizable", "map.could_not_load")
-    /// Bereichweite Pendenz Erfassen
+    /// Pendenz ohne Platzierung Erfassen
     internal static let newUnpositionedIssue = L10n.tr("Localizable", "map.new_unpositioned_issue")
     /// Wähle links einen Bereich aus, um hier den zugehörigen Bauplan zu sehen.
     internal static let noMapSelected = L10n.tr("Localizable", "map.no_map_selected")
