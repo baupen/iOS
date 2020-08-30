@@ -71,12 +71,12 @@
 // CONTEXT: Beschreibt genauer, wie die Pendenz registriert wurde. %s wird durch den Namen des Registrierers ersetzt.
 "issue.status.registered_by" = "Registriert von %@";
 // CONTEXT: Status einer Pendenz, die vom Handwerker beantwortet wurde.
-"issue.status.responded" = "Erledigt";
+"issue.status.responded" = "Umgesetzt";
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Issue.status.responded
 // CONTEXT: Beschreibt genauer, wie die Pendenz beantwortet wurde. %s wird durch den Namen des Beantworters ersetzt.
-"issue.status.responded_by" = "Erledigt von %@";
+"issue.status.responded_by" = "Umgesetzt von %@";
 // CONTEXT: Status einer Pendenz, die abgeschlossen ist.
 "issue.status.reviewed" = "Abgeschlossen";
 
@@ -290,9 +290,9 @@
 // CONTEXT: Titel für die Ansicht zum auswählen der Funktion.
 "view_issue.select_trade.title" = "Funktionen";
 // CONTEXT: Wird über den Aktionen angezeigt, wenn die Pendenz vom Handwerker beantwortet wurde.
-"view_issue.summary.has_response" = "Diese Pendenz wurde vom Unternehmer erledigt.\nDu kannst diese Antwort entweder bestätigen (die Pendenz abschliessen) oder ablehnen (rückgängig machen).";
+"view_issue.summary.has_response" = "Diese Pendenz wurde vom Unternehmer umgesetzt.\nDu kannst diese Antwort entweder bestätigen (die Pendenz abschliessen) oder ablehnen (rückgängig machen).";
 // CONTEXT: Wird über den Aktionen angezeigt, wenn die Pendenz vom Handwerker noch keine Antwort erhalten hat.
-"view_issue.summary.no_response" = "Diese Pendenz wurde noch nicht vom Unternehmer erledigt.\nDu kannst sie trotzdem bestätigen und somit als abgeschlossen markieren.";
+"view_issue.summary.no_response" = "Diese Pendenz wurde noch nicht vom Unternehmer umgesetzt.\nDu kannst sie trotzdem bestätigen und somit als abgeschlossen markieren.";
 // CONTEXT: Wird über den Aktionen angezeigt, wenn die Pendenz bereits abgeschlossen wurde.
 "view_issue.summary.reviewed" = "Diese Pendenz wurde bereits abgeschlossen.\nDu kannst die Bestätigung rückgangig machen, um sie wieder zu eröffnen.";
 // CONTEXT: Titel für das "Pendenz Bearbeiten"-Popup, wenn die Pendenz erstellt wird.

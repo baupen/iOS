@@ -79,9 +79,9 @@ internal enum L10n {
       internal static func registeredBy(_ p1: String) -> String {
         return L10n.tr("Localizable", "issue.status.registered_by", p1)
       }
-      /// Erledigt
+      /// Umgesetzt
       internal static let responded = L10n.tr("Localizable", "issue.status.responded")
-      /// Erledigt von %@
+      /// Umgesetzt von %@
       internal static func respondedBy(_ p1: String) -> String {
         return L10n.tr("Localizable", "issue.status.responded_by", p1)
       }
@@ -324,9 +324,9 @@ internal enum L10n {
       internal static let title = L10n.tr("Localizable", "view_issue.select_trade.title")
     }
     internal enum Summary {
-      /// Diese Pendenz wurde vom Unternehmer erledigt.\nDu kannst diese Antwort entweder bestätigen (die Pendenz abschliessen) oder ablehnen (rückgängig machen).
+      /// Diese Pendenz wurde vom Unternehmer umgesetzt.\nDu kannst diese Antwort entweder bestätigen (die Pendenz abschliessen) oder ablehnen (rückgängig machen).
       internal static let hasResponse = L10n.tr("Localizable", "view_issue.summary.has_response")
-      /// Diese Pendenz wurde noch nicht vom Unternehmer erledigt.\nDu kannst sie trotzdem bestätigen und somit als abgeschlossen markieren.
+      /// Diese Pendenz wurde noch nicht vom Unternehmer umgesetzt.\nDu kannst sie trotzdem bestätigen und somit als abgeschlossen markieren.
       internal static let noResponse = L10n.tr("Localizable", "view_issue.summary.no_response")
       /// Diese Pendenz wurde bereits abgeschlossen.\nDu kannst die Bestätigung rückgangig machen, um sie wieder zu eröffnen.
       internal static let reviewed = L10n.tr("Localizable", "view_issue.summary.reviewed")
