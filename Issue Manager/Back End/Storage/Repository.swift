@@ -101,6 +101,23 @@ final class Repository {
 		try Object.deleteAll(db, keys: removedIDs)
 	}
 	
+	// TODO: this is just a shim until we revise the backlog system
+	func updateIssues(in db: Database, removing removedIDs: [ID<Issue>]) throws {
+		let toRemove = try Issue.fetchAll(db, keys: removedIDs)
+		
+		// don't remove issues that haven't been uploaded yet
+		for issue in toRemove {
+			if issue.wasUploaded {
+				Issue.onChange(from: issue, to: nil)
+				try issue.delete(db)
+			} else {
+				// server must have not gotten this somehow; try to send it again
+				print("saving issue \(issue)")
+				Client.shared.issueCreated(issue)
+			}
+		}
+	}
+	
 	func update(from response: ReadRequest.ExpectedResponse) {
 		write { db in
 			// this order makes sure we don't violate foreign key constraints
@@ -108,7 +125,7 @@ final class Repository {
 			try update(in: db, changing: response.craftsmen())
 			try update(in: db, changing: response.maps())
 			try update(in: db, changing: response.issues())
-			try update(in: db, removing: response.removedIssueIDs)
+			try updateIssues(in: db, removing: response.removedIssueIDs)
 			try update(in: db, removing: response.removedMapIDs)
 			try update(in: db, removing: response.removedCraftsmanIDs)
 			try update(in: db, removing: response.removedConstructionSiteIDs)

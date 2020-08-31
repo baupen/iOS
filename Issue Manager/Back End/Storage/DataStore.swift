@@ -33,7 +33,7 @@ final class DatabaseDataStore {
 			registerMigrations(in: &migrator)
 			
 			#if DEBUG
-			migrator.eraseDatabaseOnSchemaChange = true
+			//migrator.eraseDatabaseOnSchemaChange = true
 			#endif
 		}
 		
@@ -107,6 +107,12 @@ final class DatabaseDataStore {
 				$0.column("constructionSiteID", .text).notNull()
 					.references("ConstructionSite", onDelete: .cascade, onUpdate: .cascade)
 					.indexed()
+			}
+		}
+		
+		migrator.registerMigration("v1.1") { db in
+			try db.alter(table: "Issue") {
+				$0.add(column: "wasUploaded", .boolean).defaults(to: true)
 			}
 		}
 	}
