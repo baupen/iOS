@@ -266,14 +266,14 @@ final class EditIssueViewController: UITableViewController, Reusable {
 			selectionController.handler = TradeSelectionHandler(
 				in: site,
 				currentTrade: trade
-			) { self.trade = $0 }.wrapped()
+			) { [unowned self] in self.trade = $0 }.wrapped()
 		case "select craftsman":
 			let selectionController = segue.destination as! SelectionViewController
 			selectionController.handler = CraftsmanSelectionHandler(
 				options: possibleCraftsmen(),
 				trade: trade,
 				current: craftsman
-			) { self.craftsman = $0 }.wrapped()
+			) { [unowned self] in self.craftsman = $0 }.wrapped()
 		default:
 			fatalError("unrecognized segue named \(segue.identifier ?? "<no identifier>")")
 		}
