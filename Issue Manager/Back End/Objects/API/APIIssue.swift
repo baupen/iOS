@@ -31,7 +31,8 @@ struct APIIssue {
 			mapID: map,
 			position: position,
 			status: status,
-			details: details
+			details: details,
+			wasUploaded: true
 		)
 	}
 }

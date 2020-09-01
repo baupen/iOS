@@ -37,7 +37,7 @@ protocol AnySelectionHandler: UITableViewDelegate, UITableViewDataSource {
 
 final class SelectionHandler<Handler: SimpleSelectionHandler>: NSObject, AnySelectionHandler {
 	private var handler: Handler
-	private var viewController: UIViewController!
+	private unowned var viewController: UIViewController!
 	
 	var title: String {
 		handler.title

@@ -15,6 +15,7 @@ struct Issue {
 	private(set) var details = Details() {
 		didSet { Repository.shared.save(self) }
 	}
+	private(set) var wasUploaded: Bool
 	
 	var isMarked: Bool { details.isMarked }
 	var image: File<Issue>? { details.image }
@@ -85,6 +86,7 @@ extension Issue {
 		self.wasAddedWithClient = defaults.isInClientMode
 		self.mapID = map.id
 		self.position = position
+		self.wasUploaded = false
 	}
 }
 
@@ -104,11 +106,15 @@ extension Issue: DBRecord {
 	
 	func encode(to container: inout PersistenceContainer) {
 		meta.encode(to: &container)
+		
 		container[Columns.number] = number
 		container[Columns.wasAddedWithClient] = wasAddedWithClient
 		container[Columns.mapID] = mapID
+		container[Columns.wasUploaded] = wasUploaded
+		
 		try! container.encode(position, forKey: Columns.position)
 		try! container.encode(details, forKey: Columns.details)
+		
 		try! container.encode(status.registration, forKey: Columns.registration)
 		try! container.encode(status.response, forKey: Columns.response)
 		try! container.encode(status.review, forKey: Columns.review)
@@ -116,11 +122,15 @@ extension Issue: DBRecord {
 	
 	init(row: Row) {
 		meta = .init(row: row)
+		
 		number = row[Columns.number]
 		wasAddedWithClient = row[Columns.wasAddedWithClient]
 		mapID = row[Columns.mapID]
+		wasUploaded = row[Columns.wasUploaded]
+		
 		position = try! row.decodeValueIfPresent(forKey: Columns.position)
 		details = try! row.decodeValue(forKey: Columns.details)
+		
 		status = .init(
 			registration: try! row.decodeValueIfPresent(forKey: Columns.registration),
 			response: try! row.decodeValueIfPresent(forKey: Columns.response),
@@ -137,6 +147,7 @@ extension Issue: DBRecord {
 		case registration = "status.registration"
 		case response = "status.response"
 		case review = "status.review"
+		case wasUploaded
 	}
 }
 
