@@ -108,7 +108,10 @@ final class CameraView: UIView {
 		isProcessing = true
 		
 		let settings = AVCapturePhotoSettings() // jpeg
+		#if !targetEnvironment(simulator)
+		// work around this symbol being missing in xcode 12
 		settings.flashMode = photoOutput.supportedFlashModes.contains(.auto) ? .auto : .off
+		#endif
 		photoOutput.capturePhoto(with: settings, delegate: self)
 	}
 	
