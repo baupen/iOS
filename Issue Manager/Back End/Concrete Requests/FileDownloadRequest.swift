@@ -22,7 +22,32 @@ struct FileDownloadRequest: JSONDataRequest {
 }
 
 extension Client {
+	// max concurrent file downloads
+	// (otherwise we start getting overrun with timeouts and overburderning the server)
+	private static let downloadLimiter = DispatchSemaphore(value: 32)
+	private static let waitQueue = DispatchQueue(label: "file download wait", qos: .userInitiated)
+	
 	func downloadFile<T: StoredObject>(for path: DownloadRequestPath<T>, meta: ObjectMeta<T>) -> Future<Data> {
+		let quickResult = Self.downloadLimiter.wait(timeout: DispatchTime.now() + 0.01)
+		switch quickResult {
+		case .success:
+			return downloadFileNow(for: path, meta: meta).always {
+				Self.downloadLimiter.signal()
+			}
+		case .timedOut:
+			return Future(asyncOn: Self.waitQueue) { promise in
+				Self.downloadLimiter.wait()
+				self.downloadFileNow(for: path, meta: meta)
+					.always {
+						Self.downloadLimiter.signal()
+					}
+					.then(promise.fulfill(with:))
+					.catch(promise.reject(with:))
+			}
+		}
+	}
+	
+	private func downloadFileNow<T: StoredObject>(for path: DownloadRequestPath<T>, meta: ObjectMeta<T>) -> Future<Data> {
 		getUser()
 			.map { user in
 				FileDownloadRequest(

@@ -3,13 +3,12 @@
 
 import Foundation
 
-// swiftlint:disable superfluous_disable_command
-// swiftlint:disable file_length
+// swiftlint:disable superfluous_disable_command file_length implicit_return
 
 // MARK: - Strings
 
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
-// swiftlint:disable nesting type_body_length type_name
+// swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum L10n {
 
   internal enum Alert {
@@ -37,8 +36,8 @@ internal enum L10n {
     }
     internal enum UnknownSyncError {
       /// Beim Aktualisieren ist ein unbekannter Fehler aufgetreten. Bitte versuch es später nochmal.\n\nFalls der Fehler bestehen bleibt, könnte der folgende Text dem Support behilflich sein:\n%@
-      internal static func message(_ p1: String) -> String {
-        return L10n.tr("Localizable", "alert.unknown_sync_error.message", p1)
+      internal static func message(_ p1: Any) -> String {
+        return L10n.tr("Localizable", "alert.unknown_sync_error.message", String(describing: p1))
       }
       /// Unbekannter Fehler!
       internal static let title = L10n.tr("Localizable", "alert.unknown_sync_error.title")
@@ -76,20 +75,20 @@ internal enum L10n {
       /// Im Verzeichnis
       internal static let registered = L10n.tr("Localizable", "issue.status.registered")
       /// Registriert von %@
-      internal static func registeredBy(_ p1: String) -> String {
-        return L10n.tr("Localizable", "issue.status.registered_by", p1)
+      internal static func registeredBy(_ p1: Any) -> String {
+        return L10n.tr("Localizable", "issue.status.registered_by", String(describing: p1))
       }
       /// Umgesetzt
       internal static let responded = L10n.tr("Localizable", "issue.status.responded")
       /// Umgesetzt von %@
-      internal static func respondedBy(_ p1: String) -> String {
-        return L10n.tr("Localizable", "issue.status.responded_by", p1)
+      internal static func respondedBy(_ p1: Any) -> String {
+        return L10n.tr("Localizable", "issue.status.responded_by", String(describing: p1))
       }
       /// Abgeschlossen
       internal static let reviewed = L10n.tr("Localizable", "issue.status.reviewed")
       /// Bestätigt von %@
-      internal static func reviewedBy(_ p1: String) -> String {
-        return L10n.tr("Localizable", "issue.status.reviewed_by", p1)
+      internal static func reviewedBy(_ p1: Any) -> String {
+        return L10n.tr("Localizable", "issue.status.reviewed_by", String(describing: p1))
       }
     }
   }
@@ -112,16 +111,16 @@ internal enum L10n {
       }
       internal enum WrongPassword {
         /// Das ist nicht das richtige Passwort für den Benutzer %@.
-        internal static func message(_ p1: String) -> String {
-          return L10n.tr("Localizable", "login.alert.wrong_password.message", p1)
+        internal static func message(_ p1: Any) -> String {
+          return L10n.tr("Localizable", "login.alert.wrong_password.message", String(describing: p1))
         }
         /// Falsches Passwort!
         internal static let title = L10n.tr("Localizable", "login.alert.wrong_password.title")
       }
       internal enum WrongUsername {
         /// Es gibt keinen Benutzer namens %@.
-        internal static func message(_ p1: String) -> String {
-          return L10n.tr("Localizable", "login.alert.wrong_username.message", p1)
+        internal static func message(_ p1: Any) -> String {
+          return L10n.tr("Localizable", "login.alert.wrong_username.message", String(describing: p1))
         }
         /// Falscher Benutzername!
         internal static let title = L10n.tr("Localizable", "login.alert.wrong_username.title")
@@ -145,8 +144,8 @@ internal enum L10n {
     /// Wähle links einen Bereich aus, um hier den zugehörigen Bauplan zu sehen.
     internal static let noMapSelected = L10n.tr("Localizable", "map.no_map_selected")
     /// Der Bereich "%@" hat keinen zugehörigen Bauplan.
-    internal static func noPdf(_ p1: String) -> String {
-      return L10n.tr("Localizable", "map.no_pdf", p1)
+    internal static func noPdf(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "map.no_pdf", String(describing: p1))
     }
     /// Bauplan wird geladen…
     internal static let pdfLoading = L10n.tr("Localizable", "map.pdf_loading")
@@ -158,12 +157,12 @@ internal enum L10n {
       /// Auf Bauplan Anzeigen
       internal static let showInMap = L10n.tr("Localizable", "map.issue_list.show_in_map")
       /// %@ Pendenzen offen; %@ insgesamt
-      internal static func summary(_ p1: String, _ p2: String) -> String {
-        return L10n.tr("Localizable", "map.issue_list.summary", p1, p2)
+      internal static func summary(_ p1: Any, _ p2: Any) -> String {
+        return L10n.tr("Localizable", "map.issue_list.summary", String(describing: p1), String(describing: p2))
       }
       /// Filter aktiv: %@/%@ Pendenzen angezeigt
-      internal static func summaryFiltered(_ p1: String, _ p2: String) -> String {
-        return L10n.tr("Localizable", "map.issue_list.summary_filtered", p1, p2)
+      internal static func summaryFiltered(_ p1: Any, _ p2: Any) -> String {
+        return L10n.tr("Localizable", "map.issue_list.summary_filtered", String(describing: p1), String(describing: p2))
       }
     }
     internal enum StatusFilter {
@@ -187,8 +186,8 @@ internal enum L10n {
     }
     internal enum MapSummary {
       /// %@ offene Pendenzen
-      internal static func openIssues(_ p1: String) -> String {
-        return L10n.tr("Localizable", "map_list.map_summary.open_issues", p1)
+      internal static func openIssues(_ p1: Any) -> String {
+        return L10n.tr("Localizable", "map_list.map_summary.open_issues", String(describing: p1))
       }
     }
     internal enum Section {
@@ -212,8 +211,8 @@ internal enum L10n {
     /// Baustellen
     internal static let title = L10n.tr("Localizable", "site_list.title")
     /// Willkommen, %@
-    internal static func welcome(_ p1: String) -> String {
-      return L10n.tr("Localizable", "site_list.welcome", p1)
+    internal static func welcome(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "site_list.welcome", String(describing: p1))
     }
     internal enum ClientMode {
       /// Im Abnahmemodus werden nur die Pendenzen angezeigt, die auch im Abnahmemodus erfasst wurden.
@@ -223,12 +222,12 @@ internal enum L10n {
     }
     internal enum SiteSummary {
       /// %@ offene Pendenzen
-      internal static func openIssues(_ p1: String) -> String {
-        return L10n.tr("Localizable", "site_list.site_summary.open_issues", p1)
+      internal static func openIssues(_ p1: Any) -> String {
+        return L10n.tr("Localizable", "site_list.site_summary.open_issues", String(describing: p1))
       }
       /// %@ insgesamt
-      internal static func totalIssues(_ p1: String) -> String {
-        return L10n.tr("Localizable", "site_list.site_summary.total_issues", p1)
+      internal static func totalIssues(_ p1: Any) -> String {
+        return L10n.tr("Localizable", "site_list.site_summary.total_issues", String(describing: p1))
       }
     }
   }
@@ -334,16 +333,19 @@ internal enum L10n {
   }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
-// swiftlint:enable nesting type_body_length type_name
+// swiftlint:enable nesting type_body_length type_name vertical_whitespace_opening_braces
 
 // MARK: - Implementation Details
 
 extension L10n {
   private static func tr(_ table: String, _ key: String, _ args: CVarArg...) -> String {
-    // swiftlint:disable:next nslocalizedstring_key
-    let format = NSLocalizedString(key, tableName: table, bundle: Bundle(for: BundleToken.self), comment: "")
+    let format = BundleToken.bundle.localizedString(forKey: key, value: nil, table: table)
     return String(format: format, locale: Locale.current, arguments: args)
   }
 }
 
-private final class BundleToken {}
+// swiftlint:disable convenience_type
+private final class BundleToken {
+  static let bundle = Bundle(for: BundleToken.self)
+}
+// swiftlint:enable convenience_type
