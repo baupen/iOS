@@ -145,7 +145,7 @@ final class Client {
 			print("Invalid status code \(code)")
 			throw RequestError.unknownError(statusCode: code)
 		}
-	} 
+	}
 	
 	private func urlRequest<R: Request>(body: R) throws -> URLRequest {
 		try URLRequest(url: apiURL(for: body)) <- { request in
