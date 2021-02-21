@@ -10,7 +10,7 @@ final class Repository {
 		shared.read(block)
 	}
 	
-	static func object<Object>(_ id: ID<Object>) -> Object? where Object: DBRecord {
+	static func object<Object>(_ id: Object.ID) -> Object? where Object: StoredObject {
 		shared.object(id)
 	}
 	
@@ -37,7 +37,7 @@ final class Repository {
 		try! dataStore.dbPool.write(block)
 	}
 	
-	func object<Object>(_ id: ID<Object>) -> Object? where Object: DBRecord {
+	func object<Object>(_ id: Object.ID) -> Object? where Object: StoredObject {
 		read(id.get)
 	}
 	
@@ -54,81 +54,39 @@ final class Repository {
 	// MARK: -
 	// MARK: Management
 	
-	func remove(_ issue: Issue, notifyingServer: Bool = true) {
-		assert(!issue.isRegistered)
-		
-		let existed = write(issue.delete)
-		assert(existed)
-		Issue.onChange(from: issue, to: nil)
-		
-		if notifyingServer {
-			Client.shared.issueRemoved(issue)
-		}
-	}
-	
+	private static let fileDownloadQueue = DispatchQueue(label: "missing file downloads")
 	func downloadMissingFiles() {
-		func downloadFiles<Object>(for type: Object.Type, qos: DispatchQoS.QoSClass) where Object: FileContainer & DBRecord {
-			DispatchQueue.global(qos: qos).async {
-				self.read(Object.fetchAll).forEach { $0.downloadFile() }
-			}
+		func downloadFiles<Object>(for type: Object.Type) where Object: FileContainer {
+			// TODO: There's definitely a faster way to do this than to just fetch everything.
+			// On the other hand, the performance impact would be negligible compared to the time it takes to execute those requests…
+			self.read(Object.fetchAll).forEach { $0.downloadFile() }
 		}
 		
-		downloadFiles(for: ConstructionSite.self, qos: .userInitiated)
-		downloadFiles(for: Map.self, qos: .default)
-		downloadFiles(for: Issue.self, qos: .utility)
-	}
-	
-	func update<Object>(in db: Database, changing changedEntries: [Object]) throws where Object: StoredObject & DBRecord {
-		// this may seem overcomplicated, but it's actually a significant (>2x) performance improvement over the naive version and massively reduces database operations thanks to `updateChanges`
-		
-		let previous = Dictionary(uniqueKeysWithValues:
-			try Object.fetchAll(db, keys: changedEntries.map { $0.id }).map { ($0.id, $0) }
-		)
-		for object in changedEntries {
-			if let old = previous[object.id] {
-				Object.onChange(from: old, to: object)
-				try object.updateChanges(db, from: old)
-			} else {
-				Object.onChange(from: nil, to: object)
-				try object.insert(db)
-			}
+		Self.fileDownloadQueue.async {
+			downloadFiles(for: ConstructionSite.self)
+			downloadFiles(for: Map.self)
+			downloadFiles(for: Issue.self)
 		}
 	}
 	
-	func update<Object>(in db: Database, removing removedIDs: [ID<Object>]) throws where Object: StoredObject & DBRecord {
-		let removed = try Object.fetchAll(db, keys: removedIDs)
-		removed.forEach { Object.onChange(from: $0, to: nil) }
-		try Object.deleteAll(db, keys: removedIDs)
-	}
-	
-	// TODO: this is just a shim until we revise the backlog system
-	func updateIssues(in db: Database, removing removedIDs: [ID<Issue>]) throws {
-		let toRemove = try Issue.fetchAll(db, keys: removedIDs)
-		
-		// don't remove issues that haven't been uploaded yet
-		for issue in toRemove {
-			if issue.wasUploaded {
-				Issue.onChange(from: issue, to: nil)
-				try issue.delete(db)
-			} else {
-				// server must have not gotten this somehow; try to send it again
-				print("saving issue \(issue)")
-				Client.shared.issueCreated(issue)
-			}
-		}
-	}
-	
-	func update(from response: ReadRequest.ExpectedResponse) {
+	func update<Object>(changing changedEntries: [Object]) where Object: StoredObject {
 		write { db in
-			// this order makes sure we don't violate foreign key constraints
-			try update(in: db, changing: response.constructionSites())
-			try update(in: db, changing: response.craftsmen())
-			try update(in: db, changing: response.maps())
-			try update(in: db, changing: response.issues())
-			try updateIssues(in: db, removing: response.removedIssueIDs)
-			try update(in: db, removing: response.removedMapIDs)
-			try update(in: db, removing: response.removedCraftsmanIDs)
-			try update(in: db, removing: response.removedConstructionSiteIDs)
+			// this may seem overcomplicated, but it's actually a significant (>2x) performance improvement over the naive version and massively reduces database operations thanks to `updateChanges`
+			
+			let previous = Dictionary(
+				uniqueKeysWithValues: try Object
+					.fetchAll(db, keys: changedEntries.map { $0.id })
+					.map { ($0.id, $0) }
+			)
+			for object in changedEntries {
+				if let old = previous[object.id] {
+					Object.onChange(from: old, to: object)
+					try object.updateChanges(db, from: old)
+				} else {
+					Object.onChange(from: nil, to: object)
+					try object.insert(db)
+				}
+			}
 		}
 	}
 }

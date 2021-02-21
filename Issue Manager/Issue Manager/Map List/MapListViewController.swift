@@ -1,6 +1,7 @@
 // Created by Julian Dunskus
 
 import UIKit
+import Promise
 
 final class MapListViewController: RefreshingTableViewController, Reusable {
 	typealias Localization = L10n.MapList
@@ -63,6 +64,10 @@ final class MapListViewController: RefreshingTableViewController, Reusable {
 		navigationController?.navigationBar.setNeedsLayout()
 	}
 	
+	override func doRefresh() -> Future<Void> {
+		Client.shared.pullRemoteChanges(for: holder.constructionSiteID)
+	}
+	
 	override func refreshCompleted() {
 		guard let mainController = mainController else { return } // dismissed in the meantime
 		
@@ -106,9 +111,11 @@ final class MapListViewController: RefreshingTableViewController, Reusable {
 		
 		navigationItem.title = holder.name
 		
-		maps = Repository.read(holder.children
-			.order(Map.Columns.name.asc)
-			.fetchAll
+		maps = Repository.read(
+			holder.children
+				.withoutDeleted
+				.order(Map.Columns.name.asc)
+				.fetchAll
 		)
 	}
 	

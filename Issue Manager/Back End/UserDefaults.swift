@@ -4,6 +4,8 @@ import Foundation
 
 let defaults = UserDefaults.standard
 
+// TODO: use @UserDefault instead of this mess
+
 fileprivate let isInClientModeKey = "isInClientMode"
 fileprivate let stayLoggedInKey = "stayLoggedIn"
 fileprivate let hiddenStatusesKey = "hiddenStatuses"
@@ -11,6 +13,7 @@ fileprivate let suggestionsKey = "suggestions"
 fileprivate let useFakeReadResponseKey = "useFakeReadResponse"
 fileprivate let hasTakenPhotoKey = "hasTakenPhoto"
 fileprivate let trialUserKey = "trialUser"
+fileprivate let lastWipeVersionKey = "lastWipeVersion"
 
 func registerDefaults() {
 	defaults.register(
@@ -24,14 +27,19 @@ func registerDefaults() {
 }
 
 extension UserDefaults {
+	var lastWipeVersion: Int {
+		get { integer(forKey: lastWipeVersionKey) }
+		set { set(newValue, forKey: lastWipeVersionKey) }
+	}
+	
 	/// issues recorded in client mode are marked as such; other issues should not be displayed whilst in client mode
 	var isInClientMode: Bool {
-		get { return bool(forKey: isInClientModeKey) }
+		get { bool(forKey: isInClientModeKey) }
 		set { set(newValue, forKey: isInClientModeKey) }
 	}
 	
 	var stayLoggedIn: Bool {
-		get { return bool(forKey: stayLoggedInKey) }
+		get { bool(forKey: stayLoggedInKey) }
 		set { set(newValue, forKey: stayLoggedInKey) }
 	}
 	
@@ -48,7 +56,7 @@ extension UserDefaults {
 	}
 	
 	var rawSuggestions: Data? {
-		get { return data(forKey: suggestionsKey) }
+		get { data(forKey: suggestionsKey) }
 		set { set(newValue, forKey: suggestionsKey) }
 	}
 	
@@ -58,13 +66,13 @@ extension UserDefaults {
 	}
 	
 	var hasTakenPhoto: Bool {
-		get { return bool(forKey: hasTakenPhotoKey) }
+		get { bool(forKey: hasTakenPhotoKey) }
 		set { set(newValue, forKey: hasTakenPhotoKey) }
 	}
 	
 	var trialUser: TrialUser? {
 		get {
-			return data(forKey: trialUserKey).map { try! JSONDecoder().decode(from: $0) }
+			data(forKey: trialUserKey).map { try! JSONDecoder().decode(from: $0) }
 		}
 		set {
 			set(try! JSONEncoder().encode(newValue), forKey: trialUserKey)

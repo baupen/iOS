@@ -48,21 +48,24 @@ extension Issue.Status.Simplified {
 extension Issue.Status {
 	typealias Localization = L10n.Issue.Status
 	
-	var localizedMultilineDescription: String {
-		guard let registration = registration else {
+	func makeLocalizedMultilineDescription() -> String {
+		guard let registeredBy = registeredBy else {
 			return Localization.new
 		}
 		
-		var description = Localization.registeredBy(registration.author)
+		let name = Repository.shared.object(registeredBy)!.fullName
+		var description = Localization.registeredBy(name)
 		
-		if let response = response {
+		if let resolvedBy = resolvedBy {
+			let name = Repository.shared.object(resolvedBy)!.company
 			description += "\n"
-			description += Localization.respondedBy(response.author)
+			description += Localization.respondedBy(name)
 		}
 		
-		if let review = review {
+		if let closedBy = closedBy {
+			let name = Repository.shared.object(closedBy)!.fullName
 			description += "\n"
-			description += Localization.reviewedBy(review.author)
+			description += Localization.reviewedBy(name)
 		}
 		
 		return description

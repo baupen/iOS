@@ -4,60 +4,58 @@ import Foundation
 import GRDB
 
 struct ConstructionSite {
-	let meta: ObjectMeta<ConstructionSite>
-	let name: String
-	let address: Address
-	let image: File<ConstructionSite>?
+	let meta: Meta
 	
-	struct Address {
-		/// first two address lines (multiline)
-		var streetAddress: String?
-		var postalCode: Int?
-		var locality: String?
-		var country: String?
-	}
+	let name: String
+	let creationTime: Date
+	let image: File<ConstructionSite>?
 }
-
-extension ConstructionSite.Address: Codable {}
-
-extension ConstructionSite.Address: DBRecord {}
 
 extension ConstructionSite: DBRecord {
 	static let craftsmen = hasMany(Craftsman.self)
 	var craftsmen: QueryInterfaceRequest<Craftsman> {
-		request(for: ConstructionSite.craftsmen)
+		request(for: Self.craftsmen).withoutDeleted
 	}
 	
 	static let maps = hasMany(Map.self)
 	var maps: QueryInterfaceRequest<Map> {
-		request(for: ConstructionSite.maps)
+		request(for: Self.maps).withoutDeleted
+	}
+	
+	static let issues = hasMany(Issue.self)
+	var issues: QueryInterfaceRequest<Issue> {
+		request(for: Self.issues).withoutDeleted
 	}
 	
 	func encode(to container: inout PersistenceContainer) {
 		meta.encode(to: &container)
+		
 		container[Columns.name] = name
-		address.encode(to: &container)
-		image.map { try! container.encode($0, forKey: Columns.image) }
+		container[Columns.creationTime] = creationTime
+		container[Columns.image] = image
 	}
 	
 	init(row: Row) {
 		meta = .init(row: row)
+		
 		name = row[Columns.name]
-		address = .init(row: row)
-		image = try! row.decodeValueIfPresent(forKey: Columns.image)
+		creationTime = row[Columns.creationTime]
+		image = row[Columns.image]
 	}
 	
 	enum Columns: String, ColumnExpression {
 		case name
+		case creationTime
 		case image
 	}
 }
 
-extension ConstructionSite: StoredObject {}
+extension ConstructionSite: StoredObject {
+	static let apiType = "construction_sites"
+}
 
 extension ConstructionSite: FileContainer {
 	static let pathPrefix = "constructionSite"
-	static let downloadRequestPath = \FileDownloadRequest.constructionSite
 	var file: File<ConstructionSite>? { image }
 }
 

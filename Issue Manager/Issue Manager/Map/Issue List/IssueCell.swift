@@ -20,7 +20,8 @@ final class IssueCell: UITableViewCell, Reusable {
 	@IBOutlet private var actionsView: UIStackView!
 	
 	@IBAction func markPressed() {
-		issue.mark()
+		issue.isMarked.toggle()
+		issue.saveAndSync()
 		Haptics.mediumImpact.impactOccurred()
 		update()
 	}
@@ -81,12 +82,18 @@ final class IssueCell: UITableViewCell, Reusable {
 		showInMapButton.isEnabled = issue.position != nil
 		
 		let craftsman = Repository.read(issue.craftsman)
-		tradeLabel.setText(to: craftsman?.trade, fallback: Localization.noCraftsman)
-		craftsmanLabel.setText(to: craftsman.map { "\($0.name)\n\($0.trade)" }, fallback: Localization.noCraftsman)
+		tradeLabel.setText(
+			to: craftsman?.trade,
+			fallback: Localization.noCraftsman
+		)
+		craftsmanLabel.setText(
+			to: craftsman.map { "\($0.company)\n(\($0.contactName))\n\($0.trade)" },
+			fallback: Localization.noCraftsman
+		)
 		
 		clientModeLabel.text = issue.wasAddedWithClient ? Localization.IsClientMode.true : Localization.IsClientMode.false
 		
-		statusLabel.text = issue.status.localizedMultilineDescription
+		statusLabel.text = issue.status.makeLocalizedMultilineDescription()
 	}
 }
 

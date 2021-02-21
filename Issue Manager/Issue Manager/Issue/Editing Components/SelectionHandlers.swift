@@ -55,7 +55,7 @@ final class CraftsmanSelectionHandler: SimpleSelectionHandler {
 	}
 	
 	func configure(_ cell: Cell, for craftsman: Craftsman) {
-		cell.nameLabel.text = craftsman.name
+		cell.nameLabel.text = craftsman.companyAndContact
 		cell.tradeLabel.text = craftsman.trade
 		cell.tradeLabel.isHidden = trade != nil // all the same trade anyway
 	}

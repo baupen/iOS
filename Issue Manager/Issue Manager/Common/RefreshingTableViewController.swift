@@ -1,6 +1,7 @@
 // Created by Julian Dunskus
 
 import UIKit
+import Promise
 
 class RefreshingTableViewController: UITableViewController {
 	var isRefreshing = false
@@ -8,7 +9,7 @@ class RefreshingTableViewController: UITableViewController {
 	@objc final func refresh(_ refresher: UIRefreshControl) {
 		isRefreshing = true
 		
-		let result = Client.shared.read().on(.main)
+		let result = doRefresh().on(.main)
 		
 		result.always {
 			refresher.endRefreshing()
@@ -20,6 +21,10 @@ class RefreshingTableViewController: UITableViewController {
 		result.catch(showAlert)
 	}
 	
+	func doRefresh() -> Future<Void> {
+		Client.shared.pullRemoteChanges()
+	}
+	
 	private func showAlert(for error: Error) {
 		typealias Alert = L10n.Alert
 		switch error {
@@ -28,13 +33,6 @@ class RefreshingTableViewController: UITableViewController {
 				titled: Alert.ConnectionIssues.title,
 				message: Alert.ConnectionIssues.message
 			)
-		case RequestError.apiError(let failure) where failure.error == .invalidToken:
-			self.showAlert(
-				titled: Alert.InvalidSession.title,
-				message: Alert.InvalidSession.message
-			) {
-				self.performSegue(withIdentifier: "log out", sender: self)
-			}
 		case RequestError.outdatedClient:
 			self.showAlert(
 				titled: L10n.Alert.OutdatedClient.title,

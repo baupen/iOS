@@ -9,6 +9,9 @@ class LoginHandlerViewController: UIViewController {
 	
 	func logIn(to serverURL: URL, as username: String, password: String) {
 		isLoggingIn = true
+		#warning("TODO: login logic")
+		fatalError()
+		/*
 		let result = Client.shared.logIn(to: serverURL, as: username, password: password).on(.main)
 		result.always {
 			self.isLoggingIn = false
@@ -22,9 +25,13 @@ class LoginHandlerViewController: UIViewController {
 			error.printDetails(context: "Login Failed!")
 			self.handle(error, username: username, password: password, serverURL: serverURL)
 		}
+		*/
 	}
 	
 	func handle(_ error: Error, username: String, password: String, serverURL: URL) {
+		#warning("TODO: login logic")
+		fatalError()
+		/*
 		switch error {
 		case RequestError.apiError(let meta) where meta.error == .unknownUsername:
 			fallthrough
@@ -55,6 +62,7 @@ class LoginHandlerViewController: UIViewController {
 				self.attemptLocalLogin(username: username, password: password)
 			}
 		}
+		*/
 	}
 	
 	/// - returns: whether or not the attempt was valid—if `false`, the user shouldn't know any attempt occurred.

@@ -28,7 +28,7 @@ final class MainViewController: UISplitViewController, Reusable {
 	override func decodeRestorableState(with coder: NSCoder) {
 		super.decodeRestorableState(with: coder)
 		
-		let siteID = ID<ConstructionSite>(coder.decodeObject(of: NSUUID.self, forKey: "siteID")! as UUID)
+		let siteID = ConstructionSite.ID(coder.decodeObject(of: NSUUID.self, forKey: "siteID")! as UUID)
 		if let site = Repository.object(siteID) {
 			self.site = site
 			masterNav.mapList.refreshManually()

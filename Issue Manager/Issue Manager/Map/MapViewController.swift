@@ -60,11 +60,6 @@ final class MapViewController: UIViewController, Reusable {
 		didSet { pdfController?.overlayView.alpha = markerAlpha }
 	}
 	
-	let sectorView = UIView(frame: CGRect(origin: .zero, size: .one)) <- {
-		$0.autoresizingMask = .flexibleSize
-	}
-	var sectorViews: [SectorView] = []
-	
 	var isPlacingIssue = false {
 		didSet {
 			markerAlpha = isPlacingIssue ? 0.25 : 1
@@ -150,8 +145,7 @@ final class MapViewController: UIViewController, Reusable {
 				let map = holder as! Map
 				let position = Issue.Position(
 					at: issuePositioner.relativePosition(in: pdfController!.overlayView),
-					zoomScale: pdfController!.scrollView.zoomScale / pdfController!.scrollView.minimumZoomScale,
-					in: map.file!
+					zoomScale: pdfController!.scrollView.zoomScale / pdfController!.scrollView.minimumZoomScale
 				)
 				editController.present(Issue(at: isPlacingIssue ? position : nil, in: map))
 			} else {
@@ -184,11 +178,6 @@ final class MapViewController: UIViewController, Reusable {
 		addItem.isEnabled = map != nil
 		
 		issues = (map?.sortedIssues.fetchAll).map(Repository.read) ?? []
-		
-		sectorViews.forEach { $0.removeFromSuperview() }
-		sectorViews = map?.sectors.map(SectorView.init) ?? []
-		sectorViews.forEach { $0.delegate = self }
-		sectorViews.forEach(sectorView.addSubview)
 		
 		issueListController.map = map
 		pullableView.isHidden = map == nil
@@ -233,7 +222,6 @@ final class MapViewController: UIViewController, Reusable {
 				$0.additionalSafeAreaInsets.bottom += self.pullableView.minHeight
 					+ 8 // for symmetry
 			}
-			self.updateSectors()
 			self.updateMarkers()
 		}
 		
@@ -243,17 +231,6 @@ final class MapViewController: UIViewController, Reusable {
 			error.printDetails(context: "Error while loading PDF!")
 			self.activityIndicator.stopAnimating()
 			self.fallbackLabel.text = Localization.couldNotLoad
-		}
-	}
-	
-	private func updateSectors() {
-		let pdfController = self.pdfController!
-		pdfController.view.layoutIfNeeded()
-		if let sectorFrame = map?.sectorFrame.map(CGRect.init) {
-			pdfController.overlayView.addSubview(sectorView)
-			sectorView.frame = sectorFrame * pdfController.overlayView.bounds.size
-		} else {
-			sectorView.removeFromSuperview()
 		}
 	}
 	
@@ -299,7 +276,6 @@ final class MapViewController: UIViewController, Reusable {
 extension MapViewController: SimplePDFViewControllerDelegate {
 	func pdfZoomed(to scale: CGFloat) {
 		markers.forEach { $0.zoomScale = scale }
-		sectorViews.forEach { $0.zoomScale = scale }
 	}
 	
 	func pdfFinishedLoading() {
@@ -344,15 +320,6 @@ extension MapViewController: IssueCellDelegate {
 				marker.transform = originalTransform
 			}
 		})
-	}
-}
-
-extension MapViewController: SectorViewDelegate {
-	func zoomMap(to sectorView: SectorView) {
-		let pdfController = self.pdfController!
-		
-		let rect = pdfController.overlayView.convert(sectorView.bounds, from: sectorView)
-		pdfController.scrollView.zoom(to: rect, animated: true)
 	}
 }
 

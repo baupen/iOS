@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Unm-RN-TtL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Unm-RN-TtL">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -43,7 +44,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wähle links einen Bereich aus, um hier den zugehörigen Grundriss zu sehen." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Cf-dE-GqE" userLabel="Fallback Label">
                                 <rect key="frame" x="41.5" y="454.5" width="331" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" systemColor="secondaryLabelColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xk5-hI-15Z" customClass="IssuePositioner" customModule="Issue_Manager" customModuleProvider="target">
@@ -64,7 +65,7 @@
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="-4" translatesAutoresizingMaskIntoConstraints="NO" id="fW3-iF-60F">
                                                                     <rect key="frame" x="8" y="0.0" width="85" height="68"/>
                                                                     <subviews>
-                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2fs-qS-QD3">
+                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2fs-qS-QD3">
                                                                             <rect key="frame" x="0.0" y="0.0" width="85" height="33"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                             <state key="normal" title="Abbrechen"/>
@@ -72,7 +73,7 @@
                                                                                 <action selector="cancelAddingIssue" destination="JEX-9P-axG" eventType="touchUpInside" id="dX0-2H-iLZ"/>
                                                                             </connections>
                                                                         </button>
-                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jSy-0r-Z5r">
+                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jSy-0r-Z5r">
                                                                             <rect key="frame" x="0.0" y="29" width="85" height="39"/>
                                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                                             <state key="normal" title="Weiter"/>
@@ -124,7 +125,7 @@
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="-4" translatesAutoresizingMaskIntoConstraints="NO" id="uHu-8a-q8q">
                                                                     <rect key="frame" x="8" y="0.0" width="85" height="68"/>
                                                                     <subviews>
-                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Tc-QE-56Z">
+                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Tc-QE-56Z">
                                                                             <rect key="frame" x="0.0" y="0.0" width="85" height="33"/>
                                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                                             <state key="normal" title="Weiter"/>
@@ -132,7 +133,7 @@
                                                                                 <segue destination="zCk-9X-XNY" kind="presentation" id="O8y-cm-e0k"/>
                                                                             </connections>
                                                                         </button>
-                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vyM-0H-yrg">
+                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vyM-0H-yrg">
                                                                             <rect key="frame" x="0.0" y="29" width="85" height="39"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                             <state key="normal" title="Abbrechen"/>
@@ -263,7 +264,8 @@
                                 <directionalEdgeInsets key="directionalLayoutMargins" top="0.0" leading="0.0" bottom="0.0" trailing="0.0"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <viewLayoutGuide key="safeArea" id="VUw-jc-0yf"/>
+                        <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="9Cf-dE-GqE" firstAttribute="top" secondItem="elz-u4-mxA" secondAttribute="bottom" constant="8" id="4b1-zA-RHd"/>
                             <constraint firstItem="elz-u4-mxA" firstAttribute="centerX" secondItem="VUw-jc-0yf" secondAttribute="centerX" id="9Hx-o9-olH"/>
@@ -283,7 +285,6 @@
                             <constraint firstItem="f5e-Yf-zj2" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leading" constant="8" id="wwH-HM-8jA"/>
                             <constraint firstItem="9Cf-dE-GqE" firstAttribute="centerX" secondItem="VUw-jc-0yf" secondAttribute="centerX" id="zEK-Nr-tUp"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="VUw-jc-0yf"/>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Detail" id="mOI-FS-AaM">
@@ -353,7 +354,7 @@
                                                                 <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="site_list.welcome"/>
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pie-53-hts">
+                                                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pie-53-hts">
                                                             <rect key="frame" x="301" y="0.0" width="73" height="30"/>
                                                             <state key="normal" title="Ausloggen"/>
                                                             <connections>
@@ -392,7 +393,7 @@
                                                 </label>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Zp8-gD-E9i">
                                                     <rect key="frame" x="0.0" y="91" width="414" height="309"/>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" priority="999" constant="320" id="uvM-uk-rSL"/>
                                                     </constraints>
@@ -428,7 +429,7 @@
                                                                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="175"/>
                                                                                             </imageView>
                                                                                         </subviews>
-                                                                                        <color key="backgroundColor" systemColor="placeholderTextColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                        <color key="backgroundColor" systemColor="placeholderTextColor"/>
                                                                                         <constraints>
                                                                                             <constraint firstAttribute="trailing" secondItem="OnC-rl-dJ7" secondAttribute="trailing" id="4pP-ra-Rg4"/>
                                                                                             <constraint firstItem="dOZ-qu-KIz" firstAttribute="top" secondItem="fqg-kc-CoM" secondAttribute="top" id="P9G-gb-bKl"/>
@@ -495,7 +496,7 @@
                                                                     </view>
                                                                 </subviews>
                                                             </view>
-                                                            <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                                             <constraints>
                                                                 <constraint firstItem="eoD-Lf-DZl" firstAttribute="leading" secondItem="p1v-wS-Ay0" secondAttribute="leading" id="dBd-M8-dFn"/>
                                                                 <constraint firstItem="eoD-Lf-DZl" firstAttribute="top" secondItem="p1v-wS-Ay0" secondAttribute="top" id="g5u-Tr-9af"/>
@@ -642,7 +643,7 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="r7i-6Z-zg0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MapCell" id="WCw-Qf-5nD" customClass="MapCell" customModule="Issue_Manager" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="55.5" width="414" height="71.5"/>
@@ -658,14 +659,14 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                                     <rect key="frame" x="0.0" y="0.5" width="307" height="49"/>
                                                     <subviews>
                                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Grundrissname" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1BU-29-Vu6">
-                                                            <rect key="frame" x="0.0" y="0.0" width="120" height="20.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="119.5" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="x offene Pendenzen" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3fO-u1-NhG">
-                                                            <rect key="frame" x="0.0" y="28.5" width="152" height="20.5"/>
+                                                            <rect key="frame" x="0.0" y="28.5" width="151" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="textColor" systemColor="secondaryLabelColor"/>
                                                             <color key="highlightedColor" white="1" alpha="0.5" colorSpace="calibratedWhite"/>
                                                         </label>
                                                     </subviews>
@@ -696,7 +697,7 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                         </constraint>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="tableCellGroupedBackgroundColor"/>
                                 <connections>
                                     <outlet property="issueBadge" destination="wMd-MR-BMQ" id="wYy-mM-d6x"/>
                                     <outlet property="nameLabel" destination="1BU-29-Vu6" id="FJL-2T-Sz3"/>
@@ -784,7 +785,7 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                                                                 <nil key="textColor"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
-                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RAA-y0-dI4">
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RAA-y0-dI4">
                                                                                 <rect key="frame" x="0.0" y="34" width="264" height="33"/>
                                                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                                                 <state key="normal" title="Gratis Ausprobieren"/>
@@ -795,7 +796,7 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                                                         </subviews>
                                                                     </stackView>
                                                                 </subviews>
-                                                                <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                                                                 <constraints>
                                                                     <constraint firstItem="RFt-9w-Bog" firstAttribute="leading" secondItem="UNs-RA-A1P" secondAttribute="leadingMargin" id="4EY-Cn-L7j"/>
                                                                     <constraint firstItem="RFt-9w-Bog" firstAttribute="top" secondItem="UNs-RA-A1P" secondAttribute="topMargin" id="6fq-fI-mjm"/>
@@ -829,7 +830,7 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                                                                 </connections>
                                                                             </textField>
                                                                         </subviews>
-                                                                        <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="trailingMargin" secondItem="Hes-xd-LxL" secondAttribute="trailing" constant="8" id="5bB-WA-3Eo"/>
                                                                             <constraint firstItem="Hes-xd-LxL" firstAttribute="top" secondItem="iQm-Hr-5dg" secondAttribute="topMargin" constant="4" id="LGL-ph-NTq"/>
@@ -849,7 +850,7 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                                                                 </userDefinedRuntimeAttributes>
                                                                             </textField>
                                                                         </subviews>
-                                                                        <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                                                                         <constraints>
                                                                             <constraint firstItem="dgS-7y-cOu" firstAttribute="top" secondItem="tng-55-YbS" secondAttribute="topMargin" constant="4" id="02W-9y-Npd"/>
                                                                             <constraint firstItem="dgS-7y-cOu" firstAttribute="leading" secondItem="tng-55-YbS" secondAttribute="leadingMargin" constant="8" id="BuJ-CU-JGj"/>
@@ -877,7 +878,7 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                                                                 </userDefinedRuntimeAttributes>
                                                                             </textField>
                                                                         </subviews>
-                                                                        <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                                                                         <constraints>
                                                                             <constraint firstItem="0wI-um-Uv7" firstAttribute="top" secondItem="TdB-LI-hSJ" secondAttribute="topMargin" constant="4" id="Qnd-Fk-Xo8"/>
                                                                             <constraint firstAttribute="bottomMargin" secondItem="0wI-um-Uv7" secondAttribute="bottom" constant="4" id="RQf-OD-hDv"/>
@@ -925,7 +926,7 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                                         <rect key="frame" x="130" y="248" width="20" height="20"/>
                                                     </activityIndicatorView>
                                                 </subviews>
-                                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstItem="KOf-D4-E4v" firstAttribute="centerX" secondItem="GUV-MR-X1N" secondAttribute="centerX" id="XyW-mJ-IVb"/>
                                                     <constraint firstAttribute="width" constant="280" id="cXN-rD-SEo"/>
@@ -957,6 +958,7 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                 </connections>
                             </scrollView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="zsI-rA-z83"/>
                         <color key="backgroundColor" name="Splash Background"/>
                         <gestureRecognizers/>
                         <constraints>
@@ -967,7 +969,6 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                             <constraint firstItem="zsI-rA-z83" firstAttribute="trailing" secondItem="bDK-pb-GOQ" secondAttribute="trailing" id="c8f-au-xT6"/>
                             <constraint firstItem="bDK-pb-GOQ" firstAttribute="leading" secondItem="zsI-rA-z83" secondAttribute="leading" id="iJv-Bo-RKh"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="zsI-rA-z83"/>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="MzR-wF-5R4" appends="YES" id="yDz-nx-vAi"/>
                         </connections>
@@ -1002,7 +1003,7 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                         <subviews>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dBv-R5-jXy" userLabel="IB Background Preview">
                                 <rect key="frame" x="0.0" y="0.0" width="420" height="600"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7Ad-BC-5Kd">
                                 <rect key="frame" x="0.0" y="0.0" width="420" height="566"/>
@@ -1012,7 +1013,7 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZbN-Ox-zZ9" userLabel="Indicator">
                                                 <rect key="frame" x="192" y="4" width="36" height="5"/>
-                                                <color key="backgroundColor" systemColor="separatorColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" systemColor="separatorColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="5" id="9X6-ow-dzM"/>
                                                     <constraint firstAttribute="width" constant="36" id="ueM-WA-DZK"/>
@@ -1024,7 +1025,7 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="42 Pendenzen offen; 69 insgesamt" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5mB-PJ-gr9">
-                                                <rect key="frame" x="73" y="0.0" width="274" height="64"/>
+                                                <rect key="frame" x="74" y="0.0" width="272.5" height="64"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="64" id="R72-5R-0g7"/>
                                                 </constraints>
@@ -1032,6 +1033,7 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
+                                        <viewLayoutGuide key="safeArea" id="apj-CG-thG"/>
                                         <constraints>
                                             <constraint firstItem="ZbN-Ox-zZ9" firstAttribute="top" secondItem="8RX-4M-Ilf" secondAttribute="top" constant="4" id="E75-X4-hhH"/>
                                             <constraint firstItem="5mB-PJ-gr9" firstAttribute="centerX" secondItem="8RX-4M-Ilf" secondAttribute="centerX" id="Re0-q2-2Q8"/>
@@ -1039,11 +1041,10 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                             <constraint firstAttribute="height" priority="999" constant="64" id="gMh-yw-Rp2"/>
                                             <constraint firstItem="ZbN-Ox-zZ9" firstAttribute="centerX" secondItem="8RX-4M-Ilf" secondAttribute="centerX" id="nnP-LX-ioa"/>
                                         </constraints>
-                                        <viewLayoutGuide key="safeArea" id="apj-CG-thG"/>
                                     </view>
                                     <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="kSJ-C9-VR1" userLabel="Top Separator" customClass="SeparatorLine" customModule="Issue_Manager" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="64" width="420" height="1"/>
-                                        <color key="backgroundColor" systemColor="separatorColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" systemColor="separatorColor"/>
                                     </view>
                                     <tableView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="100" verticalHuggingPriority="100" horizontalCompressionResistancePriority="100" verticalCompressionResistancePriority="100" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" sectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="eSQ-Ii-ycc">
                                         <rect key="frame" x="0.0" y="65" width="420" height="459"/>
@@ -1080,13 +1081,13 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" text="Etwas ist falsch!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="67y-Qi-4Yk">
-                                                                            <rect key="frame" x="108" y="12" width="123" height="20.5"/>
+                                                                            <rect key="frame" x="108" y="12" width="122.5" height="20.5"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <view opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="100" horizontalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="ted-VG-Feb" userLabel="Spacer (for expanded state)">
-                                                                            <rect key="frame" x="246" y="0.0" width="37" height="44"/>
+                                                                            <rect key="frame" x="245.5" y="0.0" width="37.5" height="44"/>
                                                                         </view>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="500" verticalHuggingPriority="251" horizontalCompressionResistancePriority="800" text="Maler" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="em9-qY-Md6">
                                                                             <rect key="frame" x="298" y="12" width="43" height="20.5"/>
@@ -1114,22 +1115,22 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                                                             <subviews>
                                                                                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="azY-zF-HrC" userLabel="Separator" customClass="SeparatorLine" customModule="Issue_Manager" customModuleProvider="target">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="380" height="1"/>
-                                                                                    <color key="backgroundColor" systemColor="separatorColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                    <color key="backgroundColor" systemColor="separatorColor"/>
                                                                                 </view>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="800" verticalHuggingPriority="300" verticalCompressionResistancePriority="800" alignment="firstBaseline" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="sZ7-dJ-tWE" userLabel="Description">
                                                                                     <rect key="frame" x="0.0" y="22.5" width="380" height="20.5"/>
                                                                                     <subviews>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="900" verticalCompressionResistancePriority="900" text="Beschreibung:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kn0-17-wq6">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="130" height="20.5"/>
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="129.5" height="20.5"/>
                                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                                            <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                            <color key="textColor" systemColor="secondaryLabelColor"/>
                                                                                             <nil key="highlightedColor"/>
                                                                                             <userDefinedRuntimeAttributes>
                                                                                                 <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="issue.description:"/>
                                                                                             </userDefinedRuntimeAttributes>
                                                                                         </label>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="200" verticalHuggingPriority="300" horizontalCompressionResistancePriority="200" verticalCompressionResistancePriority="800" text="Etwas ist falsch!" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MGR-UU-vfh">
-                                                                                            <rect key="frame" x="138" y="0.0" width="242" height="20.5"/>
+                                                                                            <rect key="frame" x="137.5" y="0.0" width="242.5" height="20.5"/>
                                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                             <nil key="textColor"/>
                                                                                             <nil key="highlightedColor"/>
@@ -1140,16 +1141,16 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                                                                     <rect key="frame" x="0.0" y="64" width="380" height="41"/>
                                                                                     <subviews>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="900" verticalCompressionResistancePriority="900" text="Handwerker:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KzX-dL-fRc">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="130" height="20.5"/>
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="129.5" height="20.5"/>
                                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                                            <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                            <color key="textColor" systemColor="secondaryLabelColor"/>
                                                                                             <nil key="highlightedColor"/>
                                                                                             <userDefinedRuntimeAttributes>
                                                                                                 <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="issue.craftsman:"/>
                                                                                             </userDefinedRuntimeAttributes>
                                                                                         </label>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="301" verticalCompressionResistancePriority="801" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Shy-g3-Y7T">
-                                                                                            <rect key="frame" x="138" y="0.0" width="242" height="41"/>
+                                                                                            <rect key="frame" x="137.5" y="0.0" width="242.5" height="41"/>
                                                                                             <string key="text">Malerfirma GmbH
 Maler</string>
                                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -1162,16 +1163,16 @@ Maler</string>
                                                                                     <rect key="frame" x="0.0" y="126.5" width="380" height="20.5"/>
                                                                                     <subviews>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="900" verticalCompressionResistancePriority="900" text="Abnahmemodus:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YyI-ws-4EP">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="130" height="20.5"/>
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="129.5" height="20.5"/>
                                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                                            <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                            <color key="textColor" systemColor="secondaryLabelColor"/>
                                                                                             <nil key="highlightedColor"/>
                                                                                             <userDefinedRuntimeAttributes>
                                                                                                 <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="issue.is_client_mode:"/>
                                                                                             </userDefinedRuntimeAttributes>
                                                                                         </label>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="200" verticalHuggingPriority="303" horizontalCompressionResistancePriority="200" verticalCompressionResistancePriority="803" text="Ja" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oqu-tl-KrD">
-                                                                                            <rect key="frame" x="138" y="0.0" width="242" height="20.5"/>
+                                                                                            <rect key="frame" x="137.5" y="0.0" width="242.5" height="20.5"/>
                                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                             <nil key="textColor"/>
                                                                                             <nil key="highlightedColor"/>
@@ -1182,16 +1183,16 @@ Maler</string>
                                                                                     <rect key="frame" x="0.0" y="168" width="380" height="20.5"/>
                                                                                     <subviews>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="900" verticalCompressionResistancePriority="900" text="Status:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p7f-t6-5ei" userLabel="Status:">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="130" height="20.5"/>
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="129.5" height="20.5"/>
                                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                                            <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                            <color key="textColor" systemColor="secondaryLabelColor"/>
                                                                                             <nil key="highlightedColor"/>
                                                                                             <userDefinedRuntimeAttributes>
                                                                                                 <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="issue.status:"/>
                                                                                             </userDefinedRuntimeAttributes>
                                                                                         </label>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="200" verticalHuggingPriority="302" horizontalCompressionResistancePriority="200" verticalCompressionResistancePriority="802" text="Registriert von Julian" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OXl-vS-TbP">
-                                                                                            <rect key="frame" x="138" y="0.0" width="242" height="20.5"/>
+                                                                                            <rect key="frame" x="137.5" y="0.0" width="242.5" height="20.5"/>
                                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                             <nil key="textColor"/>
                                                                                             <nil key="highlightedColor"/>
@@ -1200,12 +1201,12 @@ Maler</string>
                                                                                 </stackView>
                                                                                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="SjD-Ox-Qrb" userLabel="Separator" customClass="SeparatorLine" customModule="Issue_Manager" customModuleProvider="target">
                                                                                     <rect key="frame" x="0.0" y="210" width="380" height="1"/>
-                                                                                    <color key="backgroundColor" systemColor="separatorColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                    <color key="backgroundColor" systemColor="separatorColor"/>
                                                                                 </view>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="900" verticalCompressionResistancePriority="900" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="3bx-QB-Czz">
                                                                                     <rect key="frame" x="0.0" y="232" width="380" height="33"/>
                                                                                     <subviews>
-                                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UNM-ch-LeV">
+                                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UNM-ch-LeV">
                                                                                             <rect key="frame" x="0.0" y="0.0" width="190" height="33"/>
                                                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                                                             <state key="normal" title="Auf Grundriss Anzeigen"/>
@@ -1216,7 +1217,7 @@ Maler</string>
                                                                                                 <action selector="showInMap" destination="X3S-og-f79" eventType="touchUpInside" id="Dom-7f-cjb"/>
                                                                                             </connections>
                                                                                         </button>
-                                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g7l-jr-fb1">
+                                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g7l-jr-fb1">
                                                                                             <rect key="frame" x="190" y="0.0" width="190" height="33"/>
                                                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                                                             <state key="normal" title="Details Anzeigen"/>
@@ -1292,12 +1293,12 @@ Maler</string>
                                     </tableView>
                                     <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="8Y2-LF-7rN" customClass="SeparatorLine" customModule="Issue_Manager" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="524" width="420" height="1"/>
-                                        <color key="backgroundColor" systemColor="separatorColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" systemColor="separatorColor"/>
                                     </view>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="400" verticalHuggingPriority="400" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="700" translatesAutoresizingMaskIntoConstraints="NO" id="Gd7-UM-IME">
                                         <rect key="frame" x="0.0" y="525" width="420" height="41"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="998" verticalCompressionResistancePriority="999" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fFY-qh-e9R">
+                                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="998" verticalCompressionResistancePriority="999" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fFY-qh-e9R">
                                                 <rect key="frame" x="0.0" y="4" width="420" height="33"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <state key="normal" title="Pendenz ohne Platzierung Erfassen"/>
@@ -1319,6 +1320,7 @@ Maler</string>
                                 </subviews>
                             </stackView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="6P1-UZ-1aU"/>
                         <constraints>
                             <constraint firstItem="6P1-UZ-1aU" firstAttribute="bottom" secondItem="7Ad-BC-5Kd" secondAttribute="bottom" id="B8c-en-gXr"/>
                             <constraint firstItem="dBv-R5-jXy" firstAttribute="top" secondItem="eaQ-Dp-CWK" secondAttribute="top" id="LBa-z0-4Kv"/>
@@ -1329,7 +1331,6 @@ Maler</string>
                             <constraint firstItem="7Ad-BC-5Kd" firstAttribute="top" secondItem="eaQ-Dp-CWK" secondAttribute="top" id="kVz-vr-GUm"/>
                             <constraint firstAttribute="bottom" secondItem="dBv-R5-jXy" secondAttribute="bottom" id="wye-Uf-UyB"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="6P1-UZ-1aU"/>
                     </view>
                     <size key="freeformSize" width="420" height="600"/>
                     <connections>
@@ -1347,9 +1348,9 @@ Maler</string>
             <objects>
                 <tableViewController storyboardIdentifier="StatusFilterViewController" id="Bfc-S7-GGm" customClass="StatusFilterViewController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="AGp-gF-W33">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="StatusCell" id="iNe-H1-nc3" customClass="StatusCell" customModule="Issue_Manager" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="55.5" width="414" height="44"/>
@@ -1447,7 +1448,7 @@ Maler</string>
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="18" id="Fx9-K1-UdM">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                         <sections>
                             <tableViewSection id="kip-Uo-ZXV" userLabel="Image">
                                 <cells>
@@ -1461,7 +1462,7 @@ Maler</string>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kein Foto gesetzt." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ItY-0n-acO">
                                                     <rect key="frame" x="0.0" y="151" width="414" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="textColor" systemColor="secondaryLabelColor"/>
                                                     <nil key="highlightedColor"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="view_issue.image_placeholder"/>
@@ -1516,16 +1517,16 @@ Maler</string>
                                                     <rect key="frame" x="20" y="14" width="374" height="15.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="800" verticalHuggingPriority="251" horizontalCompressionResistancePriority="800" text="Beschreibung" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iVW-Kb-EGR">
-                                                            <rect key="frame" x="0.0" y="0.0" width="105.5" height="15.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="105" height="15.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="textColor" systemColor="secondaryLabelColor"/>
                                                             <nil key="highlightedColor"/>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="issue.description"/>
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Etwas ist falsch!" textAlignment="right" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BjK-D6-ajw">
-                                                            <rect key="frame" x="113.5" y="0.0" width="260.5" height="15.5"/>
+                                                            <rect key="frame" x="113" y="0.0" width="261" height="15.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -1556,16 +1557,16 @@ Maler</string>
                                                     <rect key="frame" x="20" y="14" width="374" height="15.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="800" verticalHuggingPriority="251" horizontalCompressionResistancePriority="800" text="Funktion" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JCx-TR-e3d">
-                                                            <rect key="frame" x="0.0" y="0.0" width="66.5" height="15.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="66" height="15.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="textColor" systemColor="secondaryLabelColor"/>
                                                             <nil key="highlightedColor"/>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="issue.trade"/>
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Maler" textAlignment="right" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W1b-dy-atz">
-                                                            <rect key="frame" x="74.5" y="0.0" width="299.5" height="15.5"/>
+                                                            <rect key="frame" x="74" y="0.0" width="300" height="15.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -1594,7 +1595,7 @@ Maler</string>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="800" verticalHuggingPriority="251" horizontalCompressionResistancePriority="800" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JSd-wl-Ov3">
                                                             <rect key="frame" x="0.0" y="0.0" width="45" height="15.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="textColor" systemColor="secondaryLabelColor"/>
                                                             <nil key="highlightedColor"/>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="issue.craftsman_name"/>
@@ -1639,7 +1640,7 @@ Maler</string>
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="799" verticalHuggingPriority="251" horizontalCompressionResistancePriority="800" text="#123" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ehn-Tg-B2f">
-                                                            <rect key="frame" x="168" y="11.5" width="38.5" height="20.5"/>
+                                                            <rect key="frame" x="168" y="11.5" width="38" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -1687,9 +1688,9 @@ Maler</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" text="Im Abnahmemodus aufgenommen" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qv5-fH-HbG">
-                                                    <rect key="frame" x="20" y="14" width="263" height="16"/>
+                                                    <rect key="frame" x="20" y="14" width="262" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="textColor" systemColor="secondaryLabelColor"/>
                                                     <nil key="highlightedColor"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="view_issue.is_client_mode"/>
@@ -1724,16 +1725,16 @@ Maler</string>
                                                     <rect key="frame" x="20" y="14" width="374" height="52"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="800" verticalHuggingPriority="251" horizontalCompressionResistancePriority="800" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iVT-WN-J5d">
-                                                            <rect key="frame" x="0.0" y="0.0" width="49.5" height="52"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="49" height="52"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="textColor" systemColor="secondaryLabelColor"/>
                                                             <nil key="highlightedColor"/>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="issue.status"/>
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="right" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jbi-eP-6Ca">
-                                                            <rect key="frame" x="57.5" y="0.0" width="316.5" height="52"/>
+                                                            <rect key="frame" x="57" y="0.0" width="317" height="52"/>
                                                             <string key="text">Registriert von Julian
 Beantwortet von Malerfirma GmbH</string>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -1788,7 +1789,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="cfH-zC-hO6">
                                                     <rect key="frame" x="8" y="11" width="398" height="21.5"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vR3-G2-DlT">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vR3-G2-DlT">
                                                             <rect key="frame" x="0.0" y="0.0" width="93.5" height="21.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <state key="normal" title="Als Abgeschlossen Markieren"/>
@@ -1796,10 +1797,10 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                                 <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="view_issue.mark_as_completed"/>
                                                             </userDefinedRuntimeAttributes>
                                                             <connections>
-                                                                <action selector="reviewIssue" destination="eHl-SE-8vo" eventType="touchUpInside" id="rIW-g7-Fla"/>
+                                                                <action selector="closeIssue" destination="eHl-SE-8vo" eventType="touchUpInside" id="rIW-g7-Fla"/>
                                                             </connections>
                                                         </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eWz-ll-UIT">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eWz-ll-UIT">
                                                             <rect key="frame" x="101.5" y="0.0" width="93.5" height="21.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <state key="normal" title="Ablehnen"/>
@@ -1807,10 +1808,10 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                                 <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="view_issue.reject_response"/>
                                                             </userDefinedRuntimeAttributes>
                                                             <connections>
-                                                                <action selector="revertResponse" destination="eHl-SE-8vo" eventType="touchUpInside" id="4cY-DF-fBj"/>
+                                                                <action selector="revertResolution" destination="eHl-SE-8vo" eventType="touchUpInside" id="4cY-DF-fBj"/>
                                                             </connections>
                                                         </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zvb-pR-KSI">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zvb-pR-KSI">
                                                             <rect key="frame" x="203" y="0.0" width="93.5" height="21.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <state key="normal" title="Annehmen"/>
@@ -1818,10 +1819,10 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                                 <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="view_issue.accept_response"/>
                                                             </userDefinedRuntimeAttributes>
                                                             <connections>
-                                                                <action selector="reviewIssue" destination="eHl-SE-8vo" eventType="touchUpInside" id="eIL-2S-k5K"/>
+                                                                <action selector="closeIssue" destination="eHl-SE-8vo" eventType="touchUpInside" id="eIL-2S-k5K"/>
                                                             </connections>
                                                         </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mdV-Nf-etQ">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mdV-Nf-etQ">
                                                             <rect key="frame" x="304.5" y="0.0" width="93.5" height="21.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <state key="normal" title="Wieder Eröffnen"/>
@@ -1829,7 +1830,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                                 <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="view_issue.undo_review"/>
                                                             </userDefinedRuntimeAttributes>
                                                             <connections>
-                                                                <action selector="revertReview" destination="eHl-SE-8vo" eventType="touchUpInside" id="d8C-8O-r3D"/>
+                                                                <action selector="reopenIssue" destination="eHl-SE-8vo" eventType="touchUpInside" id="d8C-8O-r3D"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
@@ -1890,9 +1891,9 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
             <objects>
                 <tableViewController storyboardIdentifier="EditIssueViewController" modalPresentationStyle="formSheet" id="Hkg-Cj-0r5" customClass="EditIssueViewController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="18" id="a62-Gy-FYR">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                         <sections>
                             <tableViewSection id="oG0-cn-SUS" userLabel="Image">
                                 <cells>
@@ -1939,7 +1940,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                             <rect key="frame" x="8" y="119" width="398" height="72.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Die Kamera konnte nicht aktiviert werden!" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kDq-dP-GwV">
-                                                                    <rect key="frame" x="39.5" y="0.0" width="319" height="20.5"/>
+                                                                    <rect key="frame" x="40.5" y="0.0" width="317" height="20.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <color key="textColor" white="1" alpha="0.75" colorSpace="calibratedWhite"/>
                                                                     <nil key="highlightedColor"/>
@@ -1947,8 +1948,8 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                                         <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="view_issue.could_not_activate_camera"/>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TiN-bL-448" userLabel="Retry Camera Button">
-                                                                    <rect key="frame" x="131" y="39.5" width="136" height="33"/>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TiN-bL-448" userLabel="Retry Camera Button">
+                                                                    <rect key="frame" x="131.5" y="39.5" width="135" height="33"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <state key="normal" title="Erneut Versuchen"/>
@@ -2112,7 +2113,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="799" verticalHuggingPriority="251" horizontalCompressionResistancePriority="800" text="neu" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pg3-uF-Bk7">
                                                             <rect key="frame" x="173" y="11.5" width="28.5" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="textColor" systemColor="secondaryLabelColor"/>
                                                             <nil key="highlightedColor"/>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="issue.unregistered"/>
@@ -2168,16 +2169,16 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                     <rect key="frame" x="20" y="11" width="355" height="21.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="800" verticalHuggingPriority="251" horizontalCompressionResistancePriority="800" text="Funktion" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gQk-DP-SbV">
-                                                            <rect key="frame" x="0.0" y="0.0" width="66.5" height="21.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="66" height="21.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="textColor" systemColor="secondaryLabelColor"/>
                                                             <nil key="highlightedColor"/>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="issue.trade"/>
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Maler" textAlignment="right" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sYl-fi-2Ln">
-                                                            <rect key="frame" x="74.5" y="0.0" width="280.5" height="21.5"/>
+                                                            <rect key="frame" x="74" y="0.0" width="281" height="21.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -2221,7 +2222,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="800" verticalHuggingPriority="251" horizontalCompressionResistancePriority="800" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BUD-Og-8Ox">
                                                             <rect key="frame" x="0.0" y="0.0" width="45" height="21.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="textColor" systemColor="secondaryLabelColor"/>
                                                             <nil key="highlightedColor"/>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="issue.craftsman_name"/>
@@ -2314,7 +2315,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Keine passenden Vorschläge" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S4e-A4-RkI">
                                                     <rect key="frame" x="28" y="90" width="358" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="textColor" systemColor="secondaryLabelColor"/>
                                                     <nil key="highlightedColor"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="view_issue.no_suggestions"/>
@@ -2322,7 +2323,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                 </label>
                                                 <tableView clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="37" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lxE-n3-M6o">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
-                                                    <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                                    <color key="backgroundColor" systemColor="tableCellGroupedBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" priority="999" constant="200" id="x8o-8x-9Zq"/>
                                                     </constraints>
@@ -2457,12 +2458,12 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
             <objects>
                 <viewController modalPresentationStyle="formSheet" id="v7T-jr-5gP" userLabel="Selection" customClass="SelectionViewController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="C5q-4m-Lnh">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="skY-0c-hX2">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NoTradeCell" id="M4s-FH-Plf" customClass="NoTradeCell" customModule="Issue_Manager" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.5" width="414" height="43"/>
@@ -2594,7 +2595,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="800" verticalCompressionResistancePriority="800" text="Maler" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xCX-RW-AkQ">
                                                             <rect key="frame" x="0.0" y="29" width="374" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="textColor" systemColor="secondaryLabelColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
@@ -2627,13 +2628,13 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                 </prototypes>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="VBJ-hI-E8b"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="skY-0c-hX2" secondAttribute="trailing" id="nFz-0O-GsF"/>
                             <constraint firstItem="skY-0c-hX2" firstAttribute="top" secondItem="C5q-4m-Lnh" secondAttribute="top" id="zCS-Os-wd7"/>
                             <constraint firstAttribute="bottom" secondItem="skY-0c-hX2" secondAttribute="bottom" id="zPs-h1-Obb"/>
                             <constraint firstItem="skY-0c-hX2" firstAttribute="leading" secondItem="C5q-4m-Lnh" secondAttribute="leading" id="zbb-dW-47q"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="VBJ-hI-E8b"/>
                     </view>
                     <navigationItem key="navigationItem" title="Handwerker" id="bqc-Oy-pal"/>
                     <connections>
@@ -2679,6 +2680,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                 </connections>
                             </scrollView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="RxO-O2-oIB"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
                         <constraints>
@@ -2687,7 +2689,6 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                             <constraint firstItem="IMr-LA-CgM" firstAttribute="leading" secondItem="noV-d0-89B" secondAttribute="leading" id="kck-Hg-QSV"/>
                             <constraint firstAttribute="bottom" secondItem="IMr-LA-CgM" secondAttribute="bottom" id="wjz-8t-xPw"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="RxO-O2-oIB"/>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="myN-Bn-v5R" appends="YES" id="ddv-NR-Pnr"/>
                         </connections>
@@ -2722,20 +2723,20 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
             <objects>
                 <viewController id="5NQ-5a-rcK" userLabel="Markup" customClass="MarkupViewController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="H2p-7s-DUQ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="agi-OW-mwF" userLabel="Main Stack">
-                                <rect key="frame" x="0.0" y="0.0" width="712" height="842"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="842"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dvP-6n-GD2" userLabel="Image Part">
-                                        <rect key="frame" x="0.0" y="0.0" width="712" height="761"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="533"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" horizontalHuggingPriority="100" verticalHuggingPriority="100" horizontalCompressionResistancePriority="200" verticalCompressionResistancePriority="200" translatesAutoresizingMaskIntoConstraints="NO" id="m6a-TN-TfK" userLabel="Image Centering">
-                                                <rect key="frame" x="0.0" y="56" width="712" height="705"/>
+                                                <rect key="frame" x="0.0" y="56" width="600" height="477"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="100" verticalHuggingPriority="100" horizontalCompressionResistancePriority="100" verticalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="vec-af-Kp1">
-                                                        <rect key="frame" x="0.0" y="85.5" width="712" height="534"/>
+                                                        <rect key="frame" x="0.0" y="13.5" width="600" height="450"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="vec-af-Kp1" secondAttribute="height" multiplier="4:3" id="6av-Uv-0Fl"/>
                                                         </constraints>
@@ -2751,7 +2752,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                 </constraints>
                                             </view>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="bottomMargin" secondItem="m6a-TN-TfK" secondAttribute="bottom" id="7vM-ci-GiZ"/>
                                             <constraint firstItem="m6a-TN-TfK" firstAttribute="top" secondItem="dvP-6n-GD2" secondAttribute="topMargin" id="dIy-vz-4PM"/>
@@ -2761,23 +2762,23 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                         <directionalEdgeInsets key="directionalLayoutMargins" top="0.0" leading="0.0" bottom="0.0" trailing="0.0"/>
                                     </view>
                                     <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="fqP-mt-zQV" userLabel="Separator">
-                                        <rect key="frame" x="0.0" y="761" width="712" height="1"/>
-                                        <color key="backgroundColor" systemColor="separatorColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <rect key="frame" x="0.0" y="533" width="600" height="229"/>
+                                        <color key="backgroundColor" systemColor="separatorColor"/>
                                         <constraints>
                                             <constraint firstAttribute="width" priority="500" constant="1" id="kNd-hc-TA6"/>
                                             <constraint firstAttribute="height" priority="500" constant="1" id="ucW-rp-GQC"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" translatesAutoresizingMaskIntoConstraints="NO" id="1ud-LI-XdE" userLabel="Toolbox">
-                                        <rect key="frame" x="0.0" y="762" width="712" height="80"/>
+                                        <rect key="frame" x="0.0" y="762" width="600" height="80"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="900" verticalHuggingPriority="900" horizontalCompressionResistancePriority="900" verticalCompressionResistancePriority="900" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Z2a-wb-ccp" userLabel="Tools Stack">
-                                                <rect key="frame" x="8" y="8" width="696" height="30"/>
+                                                <rect key="frame" x="8" y="8" width="584" height="30"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="900" verticalHuggingPriority="900" horizontalCompressionResistancePriority="900" verticalCompressionResistancePriority="900" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="IxQ-m0-bYc" userLabel="Colors">
                                                         <rect key="frame" x="0.0" y="0.0" width="220" height="30"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="blL-O7-7Tu" userLabel="Black" customClass="ColorChangeButton" customModule="Issue_Manager" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="blL-O7-7Tu" userLabel="Black" customClass="ColorChangeButton" customModule="Issue_Manager" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <constraints>
@@ -2787,7 +2788,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                                     <action selector="changeColor:" destination="5NQ-5a-rcK" eventType="touchUpInside" id="Svx-ah-0lu"/>
                                                                 </connections>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8WO-aH-1dB" userLabel="White" customClass="ColorChangeButton" customModule="Issue_Manager" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8WO-aH-1dB" userLabel="White" customClass="ColorChangeButton" customModule="Issue_Manager" customModuleProvider="target">
                                                                 <rect key="frame" x="38" y="0.0" width="30" height="30"/>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
@@ -2797,7 +2798,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                                     <action selector="changeColor:" destination="5NQ-5a-rcK" eventType="touchUpInside" id="Dht-R6-67o"/>
                                                                 </connections>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zw0-FN-oC5" userLabel="Green" customClass="ColorChangeButton" customModule="Issue_Manager" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zw0-FN-oC5" userLabel="Green" customClass="ColorChangeButton" customModule="Issue_Manager" customModuleProvider="target">
                                                                 <rect key="frame" x="76" y="0.0" width="30" height="30"/>
                                                                 <color key="backgroundColor" red="0.55634254220000001" green="0.97934550050000002" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <constraints>
@@ -2807,7 +2808,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                                     <action selector="changeColor:" destination="5NQ-5a-rcK" eventType="touchUpInside" id="VxM-Jh-jQJ"/>
                                                                 </connections>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GaE-A7-wCN" userLabel="Yellow" customClass="ColorChangeButton" customModule="Issue_Manager" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GaE-A7-wCN" userLabel="Yellow" customClass="ColorChangeButton" customModule="Issue_Manager" customModuleProvider="target">
                                                                 <rect key="frame" x="114" y="0.0" width="30" height="30"/>
                                                                 <color key="backgroundColor" red="0.99942404029999998" green="0.88335834440000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <constraints>
@@ -2817,7 +2818,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                                     <action selector="changeColor:" destination="5NQ-5a-rcK" eventType="touchUpInside" id="pe8-bS-U85"/>
                                                                 </connections>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bkf-35-Wrc" userLabel="Red" customClass="ColorChangeButton" customModule="Issue_Manager" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bkf-35-Wrc" userLabel="Red" customClass="ColorChangeButton" customModule="Issue_Manager" customModuleProvider="target">
                                                                 <rect key="frame" x="152" y="0.0" width="30" height="30"/>
                                                                 <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <constraints>
@@ -2830,7 +2831,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                                     <action selector="changeColor:" destination="5NQ-5a-rcK" eventType="touchUpInside" id="LYU-XL-GM6"/>
                                                                 </connections>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f5D-fN-htB" userLabel="Blue" customClass="ColorChangeButton" customModule="Issue_Manager" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f5D-fN-htB" userLabel="Blue" customClass="ColorChangeButton" customModule="Issue_Manager" customModuleProvider="target">
                                                                 <rect key="frame" x="190" y="0.0" width="30" height="30"/>
                                                                 <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <constraints>
@@ -2850,11 +2851,11 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                         <variation key="heightClass=compact" axis="vertical"/>
                                                     </stackView>
                                                     <view contentMode="scaleToFill" horizontalHuggingPriority="100" verticalHuggingPriority="100" horizontalCompressionResistancePriority="100" verticalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="X2s-xl-TJ8" userLabel="Spacer">
-                                                        <rect key="frame" x="228" y="0.0" width="116" height="30"/>
+                                                        <rect key="frame" x="228" y="0.0" width="60" height="30"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </view>
                                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7cS-qv-4o4" userLabel="Free Draw" customClass="ModeChangeButton" customModule="Issue_Manager" customModuleProvider="target">
-                                                        <rect key="frame" x="352" y="0.0" width="30" height="30"/>
+                                                        <rect key="frame" x="296" y="0.0" width="30" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="7cS-qv-4o4" secondAttribute="height" multiplier="1:1" id="f3E-yb-XBG"/>
                                                             <constraint firstAttribute="width" constant="30" id="vgn-tt-TeE"/>
@@ -2865,7 +2866,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="1" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ECB-c3-zVQ" userLabel="Rectangle" customClass="ModeChangeButton" customModule="Issue_Manager" customModuleProvider="target">
-                                                        <rect key="frame" x="390" y="0.0" width="30" height="30"/>
+                                                        <rect key="frame" x="334" y="0.0" width="30" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="ECB-c3-zVQ" secondAttribute="height" multiplier="1:1" id="5Iy-xh-cGW"/>
                                                         </constraints>
@@ -2875,7 +2876,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="2" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F9h-KL-le9" userLabel="Circle" customClass="ModeChangeButton" customModule="Issue_Manager" customModuleProvider="target">
-                                                        <rect key="frame" x="428" y="0.0" width="30" height="30"/>
+                                                        <rect key="frame" x="372" y="0.0" width="30" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="F9h-KL-le9" secondAttribute="height" multiplier="1:1" id="Bpg-rd-lNb"/>
                                                         </constraints>
@@ -2885,7 +2886,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="3" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hu1-HF-U8a" userLabel="Arrow" customClass="ModeChangeButton" customModule="Issue_Manager" customModuleProvider="target">
-                                                        <rect key="frame" x="466" y="0.0" width="30" height="30"/>
+                                                        <rect key="frame" x="410" y="0.0" width="30" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="Hu1-HF-U8a" secondAttribute="height" multiplier="1:1" id="HE3-Zd-sfk"/>
                                                         </constraints>
@@ -2895,11 +2896,11 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                         </connections>
                                                     </button>
                                                     <view contentMode="scaleToFill" horizontalHuggingPriority="100" verticalHuggingPriority="100" horizontalCompressionResistancePriority="100" verticalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="pg3-cu-YyP" userLabel="Spacer">
-                                                        <rect key="frame" x="504" y="0.0" width="116" height="30"/>
+                                                        <rect key="frame" x="448" y="0.0" width="60" height="30"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </view>
                                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Koe-cw-9yt" userLabel="Undo">
-                                                        <rect key="frame" x="628" y="0.0" width="30" height="30"/>
+                                                        <rect key="frame" x="516" y="0.0" width="30" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="Koe-cw-9yt" secondAttribute="height" multiplier="1:1" id="1Xt-iJ-3zK"/>
                                                         </constraints>
@@ -2909,7 +2910,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hkf-5K-KNv" userLabel="Redo">
-                                                        <rect key="frame" x="666" y="0.0" width="30" height="30"/>
+                                                        <rect key="frame" x="554" y="0.0" width="30" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="hkf-5K-KNv" secondAttribute="height" multiplier="1:1" id="04R-iI-4JZ"/>
                                                         </constraints>
@@ -2941,18 +2942,19 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                 <variation key="heightClass=compact" axis="horizontal"/>
                             </stackView>
                             <imageView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3I5-Fm-wBz">
-                                <rect key="frame" x="0.0" y="141.5" width="712" height="534"/>
+                                <rect key="frame" x="0.0" y="69.5" width="600" height="450"/>
                                 <gestureRecognizers/>
                             </imageView>
                             <imageView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NCw-Ug-8cn" userLabel="WIP View">
-                                <rect key="frame" x="0.0" y="141.5" width="712" height="534"/>
+                                <rect key="frame" x="0.0" y="69.5" width="600" height="450"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="2B1-Ly-Y0s" appends="YES" id="5rh-Zd-D2n"/>
                                 </connections>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="88Z-Nc-3VW"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="NCw-Ug-8cn" firstAttribute="height" secondItem="3I5-Fm-wBz" secondAttribute="height" id="9kU-my-yxu"/>
                             <constraint firstItem="3I5-Fm-wBz" firstAttribute="centerX" secondItem="vec-af-Kp1" secondAttribute="centerX" id="I7P-TD-6aI"/>
@@ -2967,7 +2969,6 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                             <constraint firstAttribute="bottom" secondItem="agi-OW-mwF" secondAttribute="bottom" id="iF8-80-A72"/>
                             <constraint firstItem="3I5-Fm-wBz" firstAttribute="width" secondItem="vec-af-Kp1" secondAttribute="width" id="ryw-SU-2ki"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="88Z-Nc-3VW"/>
                     </view>
                     <navigationItem key="navigationItem" title="Zeichnen" id="G4d-NX-QKT">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="ocD-Aj-PDR">
@@ -3070,7 +3071,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="JWA-lF-zxC" userLabel="Main Stack">
                                                         <rect key="frame" x="0.0" y="16" width="280" height="433.5"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pxX-yd-YWs">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pxX-yd-YWs">
                                                                 <rect key="frame" x="0.0" y="0.0" width="280" height="33"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                                 <state key="normal" title="Zurück zum Login"/>
@@ -3104,7 +3105,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                                                 </userDefinedRuntimeAttributes>
                                                                             </textField>
                                                                         </subviews>
-                                                                        <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="bottomMargin" secondItem="zbx-Tk-tfj" secondAttribute="bottom" constant="4" id="4lY-Vz-3hn"/>
                                                                             <constraint firstItem="zbx-Tk-tfj" firstAttribute="leading" secondItem="18C-DQ-5AO" secondAttribute="leadingMargin" constant="8" id="KuX-oJ-x31"/>
@@ -3124,7 +3125,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                                                 </userDefinedRuntimeAttributes>
                                                                             </textField>
                                                                         </subviews>
-                                                                        <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="bottomMargin" secondItem="Joa-of-T6J" secondAttribute="bottom" constant="4" id="QpI-FO-kWA"/>
                                                                             <constraint firstItem="Joa-of-T6J" firstAttribute="leading" secondItem="K5Q-DL-sAA" secondAttribute="leadingMargin" constant="8" id="aE0-HT-lV1"/>
@@ -3150,7 +3151,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                                                 </userDefinedRuntimeAttributes>
                                                                             </label>
                                                                         </subviews>
-                                                                        <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                                                                         <constraints>
                                                                             <constraint firstItem="Q6D-cm-Lt7" firstAttribute="leading" secondItem="KRv-iI-Bsg" secondAttribute="leadingMargin" id="4Ab-tg-V2R"/>
                                                                             <constraint firstAttribute="bottomMargin" secondItem="Q6D-cm-Lt7" secondAttribute="bottom" id="JbH-5f-V2e"/>
@@ -3167,7 +3168,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Benutzername:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RtY-QH-xhG">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="128" height="34"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                                        <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                        <color key="textColor" systemColor="secondaryLabelColor"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                         <userDefinedRuntimeAttributes>
                                                                                             <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="login.placeholder.username:"/>
@@ -3182,7 +3183,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                                                 </subviews>
                                                                             </stackView>
                                                                         </subviews>
-                                                                        <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                                                                         <constraints>
                                                                             <constraint firstItem="Jok-c9-3hB" firstAttribute="top" secondItem="ePm-tS-WOz" secondAttribute="topMargin" id="4AV-h1-v38"/>
                                                                             <constraint firstAttribute="bottomMargin" secondItem="Jok-c9-3hB" secondAttribute="bottom" id="AT5-yS-Gaf"/>
@@ -3199,7 +3200,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Passwort:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mgm-I3-r3I">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="128" height="41"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                                        <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                        <color key="textColor" systemColor="secondaryLabelColor"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                         <userDefinedRuntimeAttributes>
                                                                                             <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="login.placeholder.password:"/>
@@ -3214,7 +3215,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                                                 </subviews>
                                                                             </stackView>
                                                                         </subviews>
-                                                                        <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                                                                         <constraints>
                                                                             <constraint firstItem="KF1-Go-V32" firstAttribute="leading" secondItem="Y5e-oZ-bpV" secondAttribute="leadingMargin" id="DmS-3I-gEk"/>
                                                                             <constraint firstItem="KF1-Go-V32" firstAttribute="top" secondItem="Y5e-oZ-bpV" secondAttribute="topMargin" id="Nkq-LM-Rix"/>
@@ -3224,7 +3225,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                                     </view>
                                                                 </subviews>
                                                             </stackView>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dJv-m8-96G">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dJv-m8-96G">
                                                                 <rect key="frame" x="0.0" y="400.5" width="280" height="33"/>
                                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                                 <state key="normal" title="Erstellen/Einloggen"/>
@@ -3238,7 +3239,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                         <rect key="frame" x="130" y="223" width="20" height="20"/>
                                                     </activityIndicatorView>
                                                 </subviews>
-                                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstItem="JWA-lF-zxC" firstAttribute="leading" secondItem="V0m-7o-pqY" secondAttribute="leading" id="ETT-hD-T9D"/>
                                                     <constraint firstItem="JWA-lF-zxC" firstAttribute="top" secondItem="V0m-7o-pqY" secondAttribute="topMargin" constant="8" id="HQ6-CL-HZu"/>
@@ -3270,6 +3271,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                 </connections>
                             </scrollView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="Nxv-Rj-bYN"/>
                         <color key="backgroundColor" name="Splash Background"/>
                         <gestureRecognizers/>
                         <constraints>
@@ -3278,7 +3280,6 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                             <constraint firstItem="33O-7U-Cd0" firstAttribute="leading" secondItem="Nxv-Rj-bYN" secondAttribute="leading" id="e5P-zE-Hge"/>
                             <constraint firstItem="Nxv-Rj-bYN" firstAttribute="bottom" secondItem="33O-7U-Cd0" secondAttribute="bottom" id="ny6-ye-pUV" customClass="KeyboardLayoutConstraint" customModule="Issue_Manager" customModuleProvider="target"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="Nxv-Rj-bYN"/>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="mrZ-22-2iQ" appends="YES" id="WGz-Pq-cmm"/>
                         </connections>
@@ -3307,6 +3308,47 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
             <point key="canvasLocation" x="-2440" y="471"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="1Gz-5I-dcz">
+            <size key="intrinsicContentSize" width="32" height="32"/>
+        </designable>
+        <designable name="7mN-iH-wXi">
+            <size key="intrinsicContentSize" width="32" height="32"/>
+        </designable>
+        <designable name="8WO-aH-1dB">
+            <size key="intrinsicContentSize" width="30" height="30"/>
+        </designable>
+        <designable name="8Y2-LF-7rN">
+            <size key="intrinsicContentSize" width="-1" height="1"/>
+        </designable>
+        <designable name="Axp-84-gLn">
+            <size key="intrinsicContentSize" width="-1" height="128"/>
+        </designable>
+        <designable name="GaE-A7-wCN">
+            <size key="intrinsicContentSize" width="30" height="30"/>
+        </designable>
+        <designable name="SjD-Ox-Qrb">
+            <size key="intrinsicContentSize" width="-1" height="1"/>
+        </designable>
+        <designable name="azY-zF-HrC">
+            <size key="intrinsicContentSize" width="-1" height="1"/>
+        </designable>
+        <designable name="bkf-35-Wrc">
+            <size key="intrinsicContentSize" width="30" height="30"/>
+        </designable>
+        <designable name="blL-O7-7Tu">
+            <size key="intrinsicContentSize" width="30" height="30"/>
+        </designable>
+        <designable name="f5D-fN-htB">
+            <size key="intrinsicContentSize" width="30" height="30"/>
+        </designable>
+        <designable name="kSJ-C9-VR1">
+            <size key="intrinsicContentSize" width="-1" height="1"/>
+        </designable>
+        <designable name="zw0-FN-oC5">
+            <size key="intrinsicContentSize" width="30" height="30"/>
+        </designable>
+    </designables>
     <inferredMetricsTieBreakers>
         <segue reference="L64-rs-k1Y"/>
         <segue reference="OdI-J8-6Ad"/>
@@ -3336,5 +3378,29 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
         <namedColor name="Splash Background">
             <color red="0.20399999618530273" green="0.20399999618530273" blue="0.46700000762939453" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="groupTableViewBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="placeholderTextColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="secondarySystemBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="separatorColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="tableCellGroupedBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="tertiarySystemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

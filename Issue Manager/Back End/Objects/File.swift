@@ -1,17 +1,32 @@
 // Created by Julian Dunskus
 
 import Foundation
+import GRDB
 
-struct File<Container>: Hashable where Container: FileContainer {
-	let id: ID<File<Container>>
-	var filename: String
+protocol AnyFile {
+	var urlPath: String { get }
 }
 
-extension File {
-	init(filename: String) {
-		self.id = .init()
-		self.filename = filename
+struct File<Container>: AnyFile, Hashable where Container: FileContainer {
+	let urlPath: String
+}
+
+extension File: DatabaseValueConvertible {
+	static func fromDatabaseValue(_ dbValue: DatabaseValue) -> Self? {
+		String.fromDatabaseValue(dbValue).map(Self.init)
+	}
+	
+	var databaseValue: DatabaseValue {
+		urlPath.databaseValue
 	}
 }
 
-extension File: Codable {}
+extension File: Codable {
+	init(from decoder: Decoder) throws {
+		urlPath = try String(from: decoder)
+	}
+	
+	func encode(to encoder: Encoder) throws {
+		try urlPath.encode(to: encoder)
+	}
+}

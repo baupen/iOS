@@ -4,8 +4,8 @@ import Foundation
 import Promise
 
 extension Client {
-	func getUser() -> Future<User> {
-		Future { try localUser?.user ??? RequestError.notAuthenticated }
+	func getUser() -> Future<ConstructionManager> {
+		Future { try localUser?.manager ??? RequestError.notAuthenticated }
 	}
 }
 

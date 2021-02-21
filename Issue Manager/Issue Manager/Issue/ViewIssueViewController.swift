@@ -25,23 +25,24 @@ final class ViewIssueViewController: UITableViewController, Reusable {
 	@IBOutlet private var reopenButton: UIButton!
 	
 	@IBAction func markIssue() {
-		issue.mark()
+		issue.isMarked.toggle()
+		issue.saveAndSync()
 		Haptics.mediumImpact.impactOccurred()
 		update()
 	}
 	
-	@IBAction func revertResponse() {
-		issue.revertResponse()
+	@IBAction func revertResolution() {
+		issue.revertResolution()
 		update()
 	}
 	
-	@IBAction func reviewIssue() {
-		issue.review()
+	@IBAction func closeIssue() {
+		issue.close()
 		update()
 	}
 	
-	@IBAction func revertReview() {
-		issue.revertReview()
+	@IBAction func reopenIssue() {
+		issue.reopen()
 		update()
 	}
 	
@@ -80,10 +81,10 @@ final class ViewIssueViewController: UITableViewController, Reusable {
 		
 		let craftsman = Repository.read(issue.craftsman)
 		craftsmanTradeLabel.setText(to: craftsman?.trade, fallback: L10n.Issue.noCraftsman)
-		craftsmanNameLabel.setText(to: craftsman?.name, fallback: L10n.Issue.noCraftsman)
+		craftsmanNameLabel.setText(to: craftsman?.companyAndContact, fallback: L10n.Issue.noCraftsman)
 		
 		descriptionLabel.setText(to: issue.description?.nonEmptyOptional, fallback: L10n.Issue.noDescription)
-		statusLabel.text = issue.status.localizedMultilineDescription
+		statusLabel.text = issue.status.makeLocalizedMultilineDescription()
 		
 		let status = issue.status.simplified
 		completeButton.isShown = status == .registered

@@ -19,9 +19,15 @@ private let baseLocalURL = try! manager.url(
 	create: true
 )
 
+func wipeDownloadedFiles() {
+	[baseCacheURL, baseLocalURL]
+		.compactMap { try? manager.contentsOfDirectory(at: $0, includingPropertiesForKeys: nil) }
+		.joined()
+		.forEach { try? manager.removeItem(at: $0) }
+}
+
 protocol FileContainer: StoredObject {
 	static var pathPrefix: String { get }
-	static var downloadRequestPath: DownloadRequestPath<Self> { get }
 	
 	static func cacheURL(for file: File<Self>) -> URL
 	static func localURL(for file: File<Self>) -> URL
@@ -33,17 +39,22 @@ protocol FileContainer: StoredObject {
 	func deleteFile()
 }
 
+// TODO: make sure to delete existing caches on first launch of new version
+
+private extension File {
+	var subpath: String {
+		let sanitized = urlPath.replacingOccurrences(of: "/", with: "#")
+		return "files/\(Container.pathPrefix)/\(sanitized)"
+	}
+}
+
 extension FileContainer {
 	static func cacheURL(for file: File<Self>) -> URL {
-		let url = baseCacheURL.appendingPathComponent("files/\(Self.pathPrefix)/\(file.id.stringValue)")
-		try? manager.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true)
-		return url
+		baseCacheURL.appendingPathComponent(file.subpath, isDirectory: false)
 	}
 	
 	static func localURL(for file: File<Self>) -> URL {
-		let url = baseLocalURL.appendingPathComponent("files/\(Self.pathPrefix)/\(file.id.stringValue)")
-		try? manager.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true)
-		return url
+		baseLocalURL.appendingPathComponent(file.subpath, isDirectory: false)
 	}
 	
 	static func onChange(from previous: Self?, to new: Self?) {
@@ -86,8 +97,9 @@ extension FileContainer {
 		
 		print("Downloading \(file) for \(Self.pathPrefix)")
 		
-		return (Client.shared.downloadFile(for: Self.downloadRequestPath, meta: meta)
+		return (Client.shared.download(file)
 			.then { data in
+				try? manager.createDirectory(at: url, withIntermediateDirectories: true)
 				let success = manager.createFile(atPath: url.path, contents: data)
 				print(success ? "Saved file to" : "Could not save file to", url)
 			}

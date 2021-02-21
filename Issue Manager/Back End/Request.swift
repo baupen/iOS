@@ -2,25 +2,22 @@
 
 import Foundation
 
-typealias Response = Decodable
-
 /// Conform to one of the more specific protocols rather than this.
 protocol Request {
-	associatedtype ExpectedResponse
+	associatedtype Response
 	
 	/// The http method the request uses.
 	static var httpMethod: String { get }
-	/// Independent requests don't depend on results of other requests and, as such, can be executed at any time.
-	static var isIndependent: Bool { get }
 	
-	var method: String { get }
+	var path: String { get }
 	/// If non-nil, the client uses this as the base URL rather than its default.
 	var baseURLOverride: URL? { get }
 	
-	func applyToClient(_ response: ExpectedResponse)
+	@ArrayBuilder<(String, Any)>
+	func collectURLQueryItems() -> [(String, Any)]
 	
 	func encode(using encoder: JSONEncoder, into request: inout URLRequest) throws
-	func decode(from data: Data, using decoder: JSONDecoder) throws -> ExpectedResponse
+	func decode(from data: Data, using decoder: JSONDecoder) throws -> Response
 }
 
 extension Request {
@@ -28,15 +25,11 @@ extension Request {
 	
 	var baseURLOverride: URL? { nil }
 	
-	func applyToClient(_ response: ExpectedResponse) {}
-}
-
-extension Request where Self: BacklogStorable {
-	static var isIndependent: Bool { false }
+	func collectURLQueryItems() -> [(String, Any)] { [] }
 }
 
 /// a request that has no body
-protocol GetRequest: Request, Encodable {}
+protocol GetRequest: Request {}
 
 extension GetRequest {
 	static var httpMethod: String { "GET" }
@@ -45,11 +38,19 @@ extension GetRequest {
 }
 
 /// a request that is encoded as simple JSON
-protocol JSONEncodingRequest: Request, Encodable {}
+protocol JSONEncodingRequest: Request {
+	associatedtype Body: Encodable
+	
+	var body: Body { get }
+}
+
+extension JSONEncodingRequest where Body == Self, Self: Encodable {
+	var body: Self { self }
+}
 
 extension JSONEncodingRequest {
 	func encode(using encoder: JSONEncoder, into request: inout URLRequest) throws {
-		request.httpBody = try encoder.encode(self)
+		request.httpBody = try encoder.encode(body)
 	}
 }
 
@@ -68,16 +69,16 @@ extension MultipartEncodingRequest {
 }
 
 /// a request that expects a JSON-decodable response
-protocol JSONDecodingRequest: Request where ExpectedResponse: Response {}
+protocol JSONDecodingRequest: Request where Response: Decodable {}
 
 extension JSONDecodingRequest {
-	func decode(from data: Data, using decoder: JSONDecoder) throws -> ExpectedResponse {
-		try decoder.decode(JSend.Success<ExpectedResponse>.self, from: data).data
+	func decode(from data: Data, using decoder: JSONDecoder) throws -> Response {
+		try decoder.decode(from: data)
 	}
 }
 
 /// a request that expects a binary data response
-protocol DataDecodingRequest: Request where ExpectedResponse == Data {}
+protocol DataDecodingRequest: Request where Response == Data {}
 
 extension DataDecodingRequest {
 	func decode(from data: Data, using decoder: JSONDecoder) throws -> Data {

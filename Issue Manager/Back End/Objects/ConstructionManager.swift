@@ -3,7 +3,8 @@
 import Foundation
 
 struct LocalUser: Codable {
-	var user: User
+	var manager: ConstructionManager
+	var id: ConstructionManager.ID { manager.id }
 	
 	/// the username sent to the server, with domain overrides applied
 	var username: String
@@ -13,9 +14,9 @@ struct LocalUser: Codable {
 	var hasLoggedOut = false
 }
 
-struct User {
-	var meta: ObjectMeta<User>
-	var authenticationToken: String
+struct ConstructionManager: Codable {
+	var meta: Meta
+	var authenticationToken: String?
 	var givenName: String
 	var familyName: String
 	
@@ -24,7 +25,9 @@ struct User {
 	}
 }
 
-extension User: StoredObject {}
+extension ConstructionManager: StoredObject {
+	static let apiType = "construction_managers"
+}
 
 struct TrialUser: Codable {
 	var username: String

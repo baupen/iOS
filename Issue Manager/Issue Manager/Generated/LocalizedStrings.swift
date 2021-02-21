@@ -42,6 +42,14 @@ internal enum L10n {
       /// Unbekannter Fehler!
       internal static let title = L10n.tr("Localizable", "alert.unknown_sync_error.title")
     }
+    internal enum Wiped {
+      /// Alle lokalen Daten wurden entfernt. Bitte starte die App nun neu und melde dich erneut an, um wieder zu synchronisieren.
+      internal static let message = L10n.tr("Localizable", "alert.wiped.message")
+      /// App Schliessen
+      internal static let quit = L10n.tr("Localizable", "alert.wiped.quit")
+      /// Lokale Daten Gelöscht!
+      internal static let title = L10n.tr("Localizable", "alert.wiped.title")
+    }
   }
 
   internal enum Issue {

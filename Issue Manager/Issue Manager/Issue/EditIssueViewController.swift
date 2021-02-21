@@ -29,7 +29,7 @@ final class EditIssueViewController: UITableViewController, Reusable {
 	@IBOutlet private var suggestionsTableView: UITableView!
 	
 	@IBAction func markIssue() {
-		isIssueMarked.toggle()
+		issue.isMarked.toggle()
 		Haptics.mediumImpact.impactOccurred()
 	}
 	
@@ -45,10 +45,11 @@ final class EditIssueViewController: UITableViewController, Reusable {
 	
 	@IBAction func descriptionChanged() {
 		suggestionsHandler.currentDescription = descriptionField.text
+		issue.description = descriptionField.text
 	}
 	
 	@IBAction func removeImage() {
-		imageFile = nil
+		issue.image = nil
 	}
 	
 	@IBAction func openImagePicker(_ sender: UIView) {
@@ -75,17 +76,13 @@ final class EditIssueViewController: UITableViewController, Reusable {
 	
 	var isCreating = false
 	
-	private var issue: Issue!
-	private var original: Issue?
-	private var site: ConstructionSite!
-	
-	private var isIssueMarked = false {
+	private var issue: Issue! {
 		didSet {
-			guard isViewLoaded else { return }
-			
-			markButton.setImage(isIssueMarked ? #imageLiteral(resourceName: "mark_marked.pdf") : #imageLiteral(resourceName: "mark_unmarked.pdf"), for: .normal)
+			update()
 		}
 	}
+	private var original: Issue?
+	private var site: ConstructionSite!
 	
 	private var trade: String? {
 		didSet {
@@ -105,20 +102,11 @@ final class EditIssueViewController: UITableViewController, Reusable {
 	
 	private var craftsman: Craftsman? {
 		didSet {
-			craftsmanNameLabel.setText(to: craftsman?.name, fallback: L10n.Issue.noCraftsman)
+			issue.craftsmanID = craftsman?.id
+			craftsmanNameLabel.setText(to: craftsman?.companyAndContact, fallback: L10n.Issue.noCraftsman)
 			
 			if let craftsman = craftsman, craftsman.trade != trade {
 				trade = craftsman.trade
-			}
-		}
-	}
-	
-	private var imageFile: File<Issue>? {
-		didSet {
-			loadedImage = imageFile.flatMap {
-				nil
-					?? UIImage(contentsOfFile: Issue.cacheURL(for: $0).path)
-					?? UIImage(contentsOfFile: Issue.localURL(for: $0).path)
 			}
 		}
 	}
@@ -168,15 +156,15 @@ final class EditIssueViewController: UITableViewController, Reusable {
 	}
 	
 	func store(_ image: UIImage) {
-		let file = File<Issue>(filename: "\(UUID()).jpg")
+		let file = File<Issue>(urlPath: "/local/\(UUID()).jpg")
 		
 		let url = Issue.localURL(for: file)
 		do {
 			try image.saveJPEG(to: url)
-			imageFile = file
+			issue.image = file
 		} catch {
 			showAlert(titled: Localization.CouldNotSaveImage.title, message: error.localizedFailureReason)
-			imageFile = nil
+			issue.image = nil
 		}
 	}
 	
@@ -189,7 +177,7 @@ final class EditIssueViewController: UITableViewController, Reusable {
 		
 		navigationItem.title = isCreating ? Localization.titleCreating : Localization.titleEditing
 		
-		isIssueMarked = issue.isMarked
+		markButton.setImage(issue.isMarked ? #imageLiteral(resourceName: "mark_marked.pdf") : #imageLiteral(resourceName: "mark_unmarked.pdf"), for: .normal)
 		
 		craftsman = Repository.read(issue.craftsman)
 		trade = craftsman?.trade
@@ -197,23 +185,13 @@ final class EditIssueViewController: UITableViewController, Reusable {
 		descriptionField.text = issue.description
 		descriptionChanged()
 		
-		imageFile = issue.image
+		loadedImage = issue.image.flatMap { nil
+			?? UIImage(contentsOfFile: Issue.cacheURL(for: $0).path)
+			?? UIImage(contentsOfFile: Issue.localURL(for: $0).path)
+		}
 	}
 	
 	private func save() {
-		func update(_ details: inout Issue.Details) {
-			details.isMarked = isIssueMarked
-			details.craftsman = craftsman?.id
-			details.description = descriptionField.text
-			details.image = imageFile
-		}
-		
-		if isCreating {
-			issue.create(transform: update)
-		} else {
-			issue.change(transform: update)
-		}
-		
 		let originalTrade = (original?.craftsman).flatMap(Repository.shared.read)?.trade
 		if trade != originalTrade || issue.description != original?.description {
 			SuggestionStorage.shared.decrementSuggestion(
@@ -225,6 +203,8 @@ final class EditIssueViewController: UITableViewController, Reusable {
 				forTrade: trade
 			)
 		}
+		
+		issue.saveAndSync()
 	}
 	
 	func possibleCraftsmen() -> [Craftsman] {
@@ -232,7 +212,7 @@ final class EditIssueViewController: UITableViewController, Reusable {
 			if let trade = trade {
 				$0 = $0.filter(Craftsman.Columns.trade == trade)
 			}
-			$0 = $0.order(Craftsman.Columns.name)
+			$0 = $0.order(Craftsman.Columns.company)
 		}
 		return Repository.read(request.fetchAll)
 	}
@@ -253,7 +233,8 @@ final class EditIssueViewController: UITableViewController, Reusable {
 		case "save":
 			save()
 		case "delete":
-			Repository.shared.remove(issue)
+			issue.delete()
+			issue.saveAndSync()
 		case "lightbox":
 			let lightboxController = segue.destination as! LightboxViewController
 			lightboxController.image = loadedImage!
@@ -312,7 +293,7 @@ extension EditIssueViewController: UITextFieldDelegate {
 
 extension EditIssueViewController: SuggestionsHandlerDelegate {
 	func use(_ suggestion: Suggestion) {
-		descriptionField.text = suggestion.text
+		issue.description = suggestion.text
 	}
 }
 
@@ -342,6 +323,10 @@ extension UIImage {
 			throw ImageSavingError.couldNotGenerateRepresentation
 		}
 		print("Saving file to", url)
+		try? FileManager.default.createDirectory(
+			at: url.deletingLastPathComponent(),
+			withIntermediateDirectories: true
+		)
 		try jpg.write(to: url)
 	}
 }

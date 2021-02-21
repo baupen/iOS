@@ -18,7 +18,6 @@ final class LoginViewController: LoginHandlerViewController {
 		UIView.animate(withDuration: 0.25) {
 			self.websiteFieldContainer.isHidden = false
 		}
-		updateWebsite()
 	}
 	
 	@IBAction func backgroundTapped() {
@@ -34,10 +33,6 @@ final class LoginViewController: LoginHandlerViewController {
 	@IBAction func logOut(_ segue: UIStoryboardSegue) {
 		passwordField.text = ""
 		Client.shared.localUser?.hasLoggedOut = true
-	}
-	
-	private var domainOverrides: [DomainOverride]? {
-		didSet { updateWebsite() }
 	}
 	
 	@UserDefault("login.lastFilledServerURL")
@@ -95,29 +90,6 @@ final class LoginViewController: LoginHandlerViewController {
 		}
 		
 		websiteFieldContainer.isHidden = usernameField.text?.isEmpty != false
-		
-		Client.shared.getDomainOverrides()
-			.on(.main)
-			.then { self.domainOverrides = $0 }
-	}
-	
-	func updateWebsite() {
-		guard
-			let domainOverrides = domainOverrides,
-			let input = Username(usernameField.text!)
-			else { return }
-		
-		let override = domainOverrides.firstMatch(for: input)
-		
-		guard
-			let serverURL = override?.serverURL
-				?? .prependingHTTPSIfMissing(to: input.domain),
-			serverURL != lastFilledServerURL
-			else { return }
-		
-		lastFilledServerURL = serverURL
-		websiteField.text = serverURL.trimmingHTTPS()
-		usernameField.text = (override?.username ?? input).raw
 	}
 	
 	func logIn() {

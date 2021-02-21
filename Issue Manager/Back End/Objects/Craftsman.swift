@@ -4,37 +4,51 @@ import Foundation
 import GRDB
 
 struct Craftsman: Equatable {
-	var meta: ObjectMeta<Craftsman>
-	var name: String
+	var meta: Meta
+	var constructionSiteID: ConstructionSite.ID
+	
+	var contactName: String
+	var company: String
 	var trade: String
-	var constructionSiteID: ID<ConstructionSite>
+	
+	var companyAndContact: String {
+		"\(company) (\(contactName))"
+	}
 }
 
-extension Craftsman: StoredObject {}
+extension Craftsman: StoredObject {
+	static let apiType = "craftsmen"
+}
 
 extension Craftsman: DBRecord {
 	static let site = belongsTo(ConstructionSite.self)
 	var site: QueryInterfaceRequest<ConstructionSite> {
-		request(for: Craftsman.site)
+		request(for: Self.site)
 	}
 	
 	init(row: Row) {
 		meta = ObjectMeta(row: row)
-		name = row[Columns.name]
+		constructionSiteID = row[Columns.constructionSiteID]
+		
+		contactName = row[Columns.contactName]
+		company = row[Columns.company]
 		trade = row[Columns.trade]
-		constructionSiteID = .init(row[Columns.constructionSiteID])
 	}
 	
 	func encode(to container: inout PersistenceContainer) {
 		meta.encode(to: &container)
-		container[Columns.name] = name
+		container[Columns.constructionSiteID] = constructionSiteID
+		
+		container[Columns.contactName] = contactName
+		container[Columns.company] = company
 		container[Columns.trade] = trade
-		container[Columns.constructionSiteID] = constructionSiteID.rawValue
 	}
 	
 	enum Columns: String, CodingKey, ColumnExpression {
-		case name
-		case trade
 		case constructionSiteID
+		
+		case contactName
+		case company
+		case trade
 	}
 }

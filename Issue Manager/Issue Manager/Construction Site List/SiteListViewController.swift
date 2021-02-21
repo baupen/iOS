@@ -39,7 +39,7 @@ final class SiteListViewController: RefreshingTableViewController, Reusable {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		let user = Client.shared.localUser!.user
+		let user = Client.shared.localUser!.manager
 		welcomeLabel.text = Localization.welcome(user.givenName)
 		
 		clientModeSwitch.isOn = defaults.isInClientMode
@@ -74,7 +74,7 @@ final class SiteListViewController: RefreshingTableViewController, Reusable {
 	}
 	
 	private func updateContent() {
-		sites = Repository.read(ConstructionSite.fetchAll) // TODO: order?
+		sites = Repository.read(ConstructionSite.all().withoutDeleted.fetchAll) // TODO: order?
 		siteListView.reloadData()
 	}
 	
