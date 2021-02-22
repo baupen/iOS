@@ -64,27 +64,25 @@ final class CameraView: UIView {
 	
 	private func tryToConfigureSession() {
 		do {
-			let session = AVCaptureSession()
-			
-			let device = try AVCaptureDevice.default(for: .video) ??? CameraViewError.noCameraAvailable
-			let input = try AVCaptureDeviceInput(device: device)
-			session.addInput(input)
-			
-			let photoOutput = AVCapturePhotoOutput()
-			self.photoOutput = photoOutput
-			session.sessionPreset = .photo
-			session.addOutput(photoOutput)
-			
-			let previewLayer = AVCaptureVideoPreviewLayer(session: session)
-			self.previewLayer = previewLayer
-			previewLayer.videoGravity = .resizeAspectFill
-			
-			captureSession = session
-			
-			DispatchQueue.main.async {
-				self.layer.addSublayer(previewLayer)
-				self.updateOrientation()
-				self.isHidden = false
+			captureSession = try AVCaptureSession() <- { session in
+				let device = try AVCaptureDevice.default(for: .video) ??? CameraViewError.noCameraAvailable
+				let input = try AVCaptureDeviceInput(device: device)
+				session.addInput(input)
+				
+				self.photoOutput = AVCapturePhotoOutput() <- {
+					session.sessionPreset = .photo
+					session.addOutput($0)
+				}
+				
+				self.previewLayer = AVCaptureVideoPreviewLayer(session: session) <- { preview in
+					preview.videoGravity = .resizeAspectFill
+					
+					DispatchQueue.main.async { [preview] in
+						self.layer.addSublayer(preview)
+						self.updateOrientation()
+						self.isHidden = false
+					}
+				}
 			}
 		} catch {
 			print("Could not set up camera!")
@@ -117,10 +115,10 @@ final class CameraView: UIView {
 	
 	func prepareImagePicker(for source: UIImagePickerController.SourceType) -> UIImagePickerController? {
 		guard UIImagePickerController.isSourceTypeAvailable(source) else { return nil }
-		let picker = UIImagePickerController()
-		picker.delegate = self
-		picker.sourceType = source
-		return picker
+		return UIImagePickerController() <- {
+			$0.delegate = self
+			$0.sourceType = source
+		}
 	}
 	
 	override func layoutSubviews() {
@@ -201,8 +199,8 @@ extension UIImage {
 	}
 }
 
-extension AVCaptureVideoOrientation {
-	fileprivate init(representing orientation: UIInterfaceOrientation) {
+private extension AVCaptureVideoOrientation {
+	init(representing orientation: UIInterfaceOrientation) {
 		// no, this is not a nop
 		switch orientation {
 		case .portrait:

@@ -45,12 +45,17 @@ final class Client {
 	private init() {}
 	
 	func send<R: Request>(_ request: R) -> Future<R.Response> {
-		dispatch(request)
-			.map { taskResult in try self.extractData(from: taskResult, for: request) }
-	}
-	
-	private func dispatch<R: Request>(_ request: R) -> Future<TaskResult> {
-		startTask(for: request)
+		Future { try urlRequest(for: request) }
+			.flatMap { rawRequest in
+				let bodyDesc = rawRequest.httpBody
+					.map { "\"\(debugRepresentation(of: $0))\"" }
+					?? "request without body"
+				print("\(request.path): sending \(bodyDesc) to \(rawRequest.url!)")
+				
+				return self.send(rawRequest)
+					.catch { _ in print("\(request.path): failed!") }
+			}
+			.map { try self.extractData(from: $0, for: request) }
 	}
 	
 	func pushChangesThen<T>(perform task: @escaping () throws -> T) -> Future<T> {
@@ -58,11 +63,6 @@ final class Client {
 			try self.synchronouslyPushLocalChanges()
 			return try task()
 		}
-	}
-	
-	private func startTask<R: Request>(for request: R) -> Future<TaskResult> {
-		Future { try urlRequest(body: request) }
-			.flatMap(send)
 	}
 	
 	private func extractData<R: Request>(from taskResult: TaskResult, for request: R) throws -> R.Response {
@@ -87,12 +87,12 @@ final class Client {
 		}
 	}
 	
-	private func urlRequest<R: Request>(body: R) throws -> URLRequest {
-		try URLRequest(url: apiURL(for: body)) <- { request in
-			request.httpMethod = R.httpMethod
-			try body.encode(using: requestEncoder, into: &request)
+	private func urlRequest<R: Request>(for request: R) throws -> URLRequest {
+		try URLRequest(url: apiURL(for: request)) <- { rawRequest in
+			rawRequest.httpMethod = R.httpMethod
+			try request.encode(using: requestEncoder, into: &rawRequest)
 			if let token = loginInfo?.token {
-				request.setValue(token, forHTTPHeaderField: "X-Authentication")
+				rawRequest.setValue(token, forHTTPHeaderField: "X-Authentication")
 			}
 		}
 	}
@@ -109,12 +109,9 @@ final class Client {
 		}).url!
 	}
 	
-	func send(_ request: URLRequest) -> Future<TaskResult> {
-		let path = request.url!.relativePath
-		print("\(path): sending \(debugRepresentation(of: request.httpBody ?? Data())) to \(request.url!)")
-		return urlSession.dataTask(with: request)
+	private func send(_ request: URLRequest) -> Future<TaskResult> {
+		urlSession.dataTask(with: request)
 			.transformError { _, error in throw RequestError.communicationError(error) }
-			.always { print("\(path): finished") }
 	}
 }
 

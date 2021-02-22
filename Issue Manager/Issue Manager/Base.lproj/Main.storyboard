@@ -819,15 +819,20 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BCn-Vp-fnj">
                                                                                 <rect key="frame" x="0.0" y="80" width="264" height="33"/>
                                                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
-                                                                                <state key="normal" title="Mit Website Verbinden"/>
+                                                                                <state key="normal" title="Aktivierungscode Scannen"/>
                                                                                 <userDefinedRuntimeAttributes>
                                                                                     <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="login.connect_to_website"/>
                                                                                 </userDefinedRuntimeAttributes>
+                                                                                <connections>
+                                                                                    <segue destination="cKg-oY-Z1U" kind="popoverPresentation" identifier="scan" popoverAnchorView="BCn-Vp-fnj" id="EOg-36-OMz">
+                                                                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                                                                    </segue>
+                                                                                </connections>
                                                                             </button>
                                                                         </subviews>
                                                                     </stackView>
                                                                 </subviews>
-                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="trailingMargin" secondItem="jZ0-SN-jzo" secondAttribute="trailing" id="HVY-xN-pT7"/>
                                                                     <constraint firstAttribute="bottomMargin" secondItem="jZ0-SN-jzo" secondAttribute="bottom" id="UGX-kE-kuk"/>
@@ -3204,6 +3209,139 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-2440" y="471"/>
+        </scene>
+        <!--Scanner View Controller-->
+        <scene sceneID="1m7-Qh-Zm5">
+            <objects>
+                <viewController id="cKg-oY-Z1U" customClass="QRScannerViewController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dvC-nv-uXf">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PU3-no-Mhp" userLabel="Camera Container" customClass="CameraContainerView" customModule="Issue_Manager" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vpd-km-ILj" customClass="QRScannerView" customModule="Issue_Manager" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                    <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F3p-Tv-M9G">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="57"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="3f9-61-Vcj">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="57"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6rA-X8-g2i">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="57"/>
+                                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="NqT-QW-FiC">
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="57"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="200" verticalHuggingPriority="500" text="Finde den Aktivierungscode unter &quot;Mit App verbinden&quot; oben auf der Baustellenauswahl." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fzX-on-qww">
+                                                                <rect key="frame" x="8" y="8" width="398" height="41"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <nil key="highlightedColor"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="login.scan.instructions"/>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </label>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstAttribute="bottomMargin" secondItem="fzX-on-qww" secondAttribute="bottom" id="FqX-Uk-cfg"/>
+                                                            <constraint firstItem="fzX-on-qww" firstAttribute="top" secondItem="NqT-QW-FiC" secondAttribute="topMargin" id="V7o-bS-goP"/>
+                                                            <constraint firstAttribute="trailingMargin" secondItem="fzX-on-qww" secondAttribute="trailing" id="jfu-SI-O4f"/>
+                                                            <constraint firstItem="fzX-on-qww" firstAttribute="leading" secondItem="NqT-QW-FiC" secondAttribute="leadingMargin" id="q4R-bd-tUr"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <vibrancyEffect>
+                                                        <blurEffect style="dark"/>
+                                                    </vibrancyEffect>
+                                                </visualEffectView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="6rA-X8-g2i" firstAttribute="top" secondItem="3f9-61-Vcj" secondAttribute="top" id="NGL-XI-gc9"/>
+                                                <constraint firstAttribute="trailing" secondItem="6rA-X8-g2i" secondAttribute="trailing" id="qIA-4T-g6k"/>
+                                                <constraint firstItem="6rA-X8-g2i" firstAttribute="leading" secondItem="3f9-61-Vcj" secondAttribute="leading" id="rM4-dj-XCI"/>
+                                                <constraint firstAttribute="bottom" secondItem="6rA-X8-g2i" secondAttribute="bottom" id="sSF-fN-6aU"/>
+                                            </constraints>
+                                        </view>
+                                        <blurEffect style="dark"/>
+                                    </visualEffectView>
+                                    <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dQX-Ib-Thb">
+                                        <rect key="frame" x="0.0" y="762" width="414" height="46"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="8HC-BU-i15">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="46"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pvc-vE-6wI">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="46"/>
+                                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="cqd-Dt-Md2">
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="46"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jjl-td-gOU">
+                                                                <rect key="frame" x="8" y="8" width="398" height="30"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                                                <state key="normal" title="Abbrechen"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="login.scan.cancel"/>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <segue destination="Ur9-zz-Cri" kind="unwind" unwindAction="backToLogin:" id="O9P-Rm-oQc"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstItem="jjl-td-gOU" firstAttribute="top" secondItem="cqd-Dt-Md2" secondAttribute="topMargin" id="2ok-BH-GyC"/>
+                                                            <constraint firstItem="jjl-td-gOU" firstAttribute="leading" secondItem="cqd-Dt-Md2" secondAttribute="leadingMargin" id="UyX-ID-eDx"/>
+                                                            <constraint firstAttribute="trailingMargin" secondItem="jjl-td-gOU" secondAttribute="trailing" id="dS0-Md-vV6"/>
+                                                            <constraint firstAttribute="bottomMargin" secondItem="jjl-td-gOU" secondAttribute="bottom" id="hxa-9x-RTp"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <vibrancyEffect>
+                                                        <blurEffect style="dark"/>
+                                                    </vibrancyEffect>
+                                                </visualEffectView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="Pvc-vE-6wI" secondAttribute="trailing" id="BUf-AZ-ZIw"/>
+                                                <constraint firstAttribute="bottom" secondItem="Pvc-vE-6wI" secondAttribute="bottom" id="L1e-p7-dGf"/>
+                                                <constraint firstItem="Pvc-vE-6wI" firstAttribute="top" secondItem="8HC-BU-i15" secondAttribute="top" id="aH4-U0-aw9"/>
+                                                <constraint firstItem="Pvc-vE-6wI" firstAttribute="leading" secondItem="8HC-BU-i15" secondAttribute="leading" id="rUG-N8-KJr"/>
+                                            </constraints>
+                                        </view>
+                                        <blurEffect style="dark"/>
+                                    </visualEffectView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="F3p-Tv-M9G" secondAttribute="trailing" id="a3O-lJ-DOG"/>
+                                    <constraint firstAttribute="bottom" secondItem="dQX-Ib-Thb" secondAttribute="bottom" id="hca-Cc-sOe"/>
+                                    <constraint firstItem="F3p-Tv-M9G" firstAttribute="leading" secondItem="PU3-no-Mhp" secondAttribute="leading" id="ikk-Ci-pHw"/>
+                                    <constraint firstItem="F3p-Tv-M9G" firstAttribute="top" secondItem="PU3-no-Mhp" secondAttribute="top" id="ozp-g8-aXB"/>
+                                    <constraint firstAttribute="trailing" secondItem="dQX-Ib-Thb" secondAttribute="trailing" id="qJO-g2-pqp"/>
+                                    <constraint firstItem="dQX-Ib-Thb" firstAttribute="leading" secondItem="PU3-no-Mhp" secondAttribute="leading" id="vvd-ou-iuM"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="NrW-b6-CmU"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="PU3-no-Mhp" firstAttribute="leading" secondItem="NrW-b6-CmU" secondAttribute="leading" id="9DT-Ue-lG5"/>
+                            <constraint firstItem="NrW-b6-CmU" firstAttribute="bottom" secondItem="PU3-no-Mhp" secondAttribute="bottom" id="ELz-Nx-dnP"/>
+                            <constraint firstItem="PU3-no-Mhp" firstAttribute="trailing" secondItem="NrW-b6-CmU" secondAttribute="trailing" id="bt5-rM-xUm"/>
+                            <constraint firstItem="PU3-no-Mhp" firstAttribute="top" secondItem="NrW-b6-CmU" secondAttribute="top" id="dCv-7G-Eeh"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="scannerView" destination="vpd-km-ILj" id="jNK-yt-7cy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="A4C-Z1-nlq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="Ur9-zz-Cri" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="-2442.0289855072465" y="-1098.2142857142856"/>
         </scene>
     </scenes>
     <designables>

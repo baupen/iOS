@@ -13,6 +13,9 @@ final class LoginViewController: UIViewController {
 		Client.shared.localUser = nil
 	}
 	
+	// unwind segue
+	@IBAction func backToLogin(_ segue: UIStoryboardSegue) {}
+	
 	private var shouldRestoreState = true
 	
 	override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
@@ -26,6 +29,15 @@ final class LoginViewController: UIViewController {
 		guard Client.shared.isLoggedIn, presentedViewController == nil else { return }
 		
 		showSiteList(userInitiated: false)
+	}
+	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		switch segue.destination {
+		case let qrScanner as QRScannerViewController:
+			qrScanner.delegate = self
+		default:
+			fatalError("unrecognized segue to \(segue.destination)")
+		}
 	}
 	
 	func logIn(with info: LoginInfo) {
@@ -50,13 +62,10 @@ final class LoginViewController: UIViewController {
 		default:
 			print("login error!")
 			dump(error)
-			let errorDesc = "" <- {
-				dump(error, to: &$0)
-			}
 			showAlert(
 				titled: Localization.Alert.LoginError.title,
 				message: Localization.Alert.LoginError.message
-					+ "\n\n" + errorDesc
+					+ "\n\n" + error.dumpedDescription()
 			)
 		}
 	}
@@ -70,16 +79,37 @@ final class LoginViewController: UIViewController {
 	}
 }
 
-private let https = "https://"
-private extension URL {
-	func trimmingHTTPS() -> String {
-		let string = absoluteString
-		return string.hasPrefix(https)
-			? String(string.dropFirst(https.count))
-			: string
+extension LoginViewController: QRScannerViewDelegate {
+	func cameraFailed(with error: Error) {
+		switch error {
+		case QRScannerViewError.noCameraAvailable:
+			break // just ignore
+		case let error:
+			print("camera error!")
+			dump(error)
+			dismiss(animated: true)
+			showAlert(
+				titled: "Kamera konnte nicht aktiviert werden!",
+				message: error.localizedFailureReason
+			)
+		}
 	}
 	
-	static func prependingHTTPSIfMissing(to raw: String) -> URL? {
-		URL(string: URLComponents(string: raw)?.scheme != nil ? raw : https + raw)
+	func qrsFound(by scanner: QRScannerView, with contents: [String]) {
+		let decoder = JSONDecoder()
+		let infos = contents.compactMap {
+			try? decoder.decode(LoginInfo.self, from: $0.data(using: .utf8)!)
+		}
+		guard let info = infos.first else { return }
+		scanner.isProcessing = true
+		// dismiss presented qr scanner
+		dismiss(animated: true)
+		logIn(with: info)
+	}
+}
+
+private extension Error {
+	func dumpedDescription() -> String {
+		"" <- { dump(self, to: &$0) }
 	}
 }

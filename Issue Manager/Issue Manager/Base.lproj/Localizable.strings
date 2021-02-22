@@ -123,13 +123,17 @@
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Login.connect
 // CONTEXT: Knopf, um den QR-Scanner aufzubringen und sich mit der Website zu verbinden
-"login.connect_to_website" = "Mit Website Verbinden";
+"login.connect_to_website" = "Aktivierungscode Scannen";
 // CONTEXT: Platzhalter für das Passwort im Login-Screen
 "login.placeholder.password" = "Passwort";
 // CONTEXT: Platzhalter für den Benutzernamen im Login-Screen
 "login.placeholder.username" = "Benutzername";
 // CONTEXT: Platzhalter für die Website, an die die App sich anbinden wird, im Login-Screen
 "login.placeholder.website" = "Website";
+// CONTEXT: Knopf, um das Scannen des Aktivierungscodes abzubrechen.
+"login.scan.cancel" = "Abbrechen";
+// CONTEXT: Anleitung in der Ansicht zum Aktivierungscode (QR) scannen.
+"login.scan.instructions" = "Finde den Aktivierungscode unter \"Mit App verbinden\" oben auf der Baustellenauswahl.";
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Login.stay

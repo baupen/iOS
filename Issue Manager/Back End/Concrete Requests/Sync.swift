@@ -88,10 +88,19 @@ extension Client {
 		.flatMap { self.doPullChangedIssues(for: site) }
 	}
 	
-	private func doPullChangedIssues(for site: ConstructionSite) -> Future<Void> {
-		send(GetPagedObjectsRequest<APIIssue>(
+	private func doPullChangedIssues(
+		for site: ConstructionSite,
+		itemsPerPage: Int = 100,
+		prevLastChangeTime: Date? = nil
+	) -> Future<Void> {
+		// detect loops (making the same request multiple times) and respond by asking for larger pages
+		let lastChangeTime = site.issues.maxLastChangeTime()
+		let itemsPerPage = lastChangeTime != prevLastChangeTime ? itemsPerPage : itemsPerPage * 2
+		
+		return send(GetPagedObjectsRequest<APIIssue>(
 			constructionSite: site.id,
-			minLastChangeTime: site.issues.maxLastChangeTime()
+			minLastChangeTime: lastChangeTime,
+			itemsPerPage: itemsPerPage
 		))
 		.flatMap { collection in
 			let issues = collection.members.map { $0.makeObject(context: site.id) }
@@ -99,7 +108,7 @@ extension Client {
 			
 			return collection.view.nextPage == nil
 				? .fulfilled
-				: self.doPullChangedIssues(for: site)
+				: self.doPullChangedIssues(for: site, itemsPerPage: itemsPerPage, prevLastChangeTime: lastChangeTime)
 		}
 	}
 }

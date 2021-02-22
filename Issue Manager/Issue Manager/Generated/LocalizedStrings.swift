@@ -102,7 +102,7 @@ internal enum L10n {
   }
 
   internal enum Login {
-    /// Mit Website Verbinden
+    /// Aktivierungscode Scannen
     internal static let connectToWebsite = L10n.tr("Localizable", "login.connect_to_website")
     /// Eingeloggt Bleiben
     internal static let stayLoggedIn = L10n.tr("Localizable", "login.stay_logged_in")
@@ -143,6 +143,12 @@ internal enum L10n {
       internal static let username = L10n.tr("Localizable", "login.placeholder.username")
       /// Website
       internal static let website = L10n.tr("Localizable", "login.placeholder.website")
+    }
+    internal enum Scan {
+      /// Abbrechen
+      internal static let cancel = L10n.tr("Localizable", "login.scan.cancel")
+      /// Finde den Aktivierungscode unter "Mit App verbinden" oben auf der Baustellenauswahl.
+      internal static let instructions = L10n.tr("Localizable", "login.scan.instructions")
     }
   }
 

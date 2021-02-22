@@ -99,7 +99,10 @@ extension FileContainer {
 		
 		return Client.shared.download(file)
 			.map { data in
-				try? manager.createDirectory(at: url, withIntermediateDirectories: true)
+				try? manager.createDirectory(
+					at: url.deletingLastPathComponent(),
+					withIntermediateDirectories: true
+				)
 				let success = manager.createFile(atPath: url.path, contents: data)
 				print(success ? "Saved file to" : "Could not save file to", url)
 			}

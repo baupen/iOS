@@ -16,11 +16,14 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControll
 	}
 	
 	private func wipeAllData() {
+		print("wiping all data!")
+		
 		defaults.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
 		defaults.lastWipeVersion = Self.wipeVersion
 		wipeDownloadedFiles()
 		DatabaseDataStore.wipeData()
 		
+		window?.rootViewController?.dismiss(animated: true)
 		window?.rootViewController?.showAlert(
 			titled: L10n.Alert.Wiped.title,
 			message: L10n.Alert.Wiped.message,
@@ -71,6 +74,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControll
 			let loginController = window!.rootViewController as! LoginViewController
 			loginController.logIn(with: loginInfo)
 			
+			return true
+		// TODO: remove?
+		case "wipe":
+			wipeAllData()
 			return true
 		default:
 			print("unrecognized custom url host in \(url)")

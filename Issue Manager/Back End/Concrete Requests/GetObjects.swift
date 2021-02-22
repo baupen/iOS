@@ -39,7 +39,7 @@ struct GetPagedObjectsRequest<Model: APIModel>: GetJSONRequest {
 	var constructionSite: ConstructionSite.ID?
 	var minLastChangeTime: Date
 	var page = 1
-	var itemsPerPage = 250 // TODO: increase! just testing here
+	var itemsPerPage = 1000
 	
 	func collectURLQueryItems() -> [(String, Any)] {
 		if let constructionSite = constructionSite {

@@ -102,6 +102,7 @@
 		95E83C1B221A537C000BB75F /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E83C1A221A537C000BB75F /* Request.swift */; };
 		95EE7DFD21060CB100B603EF /* UndoBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EE7DFC21060CB100B603EF /* UndoBuffer.swift */; };
 		95FC9DC121080BB700044C93 /* RefreshingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FC9DC021080BB700044C93 /* RefreshingTableViewController.swift */; };
+		B9028E2025E3FFF100D0FCEC /* QRScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9028E1F25E3FFF100D0FCEC /* QRScannerView.swift */; };
 		B90A4ED325DE155300EB56C4 /* Hydra.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90A4ED225DE155300EB56C4 /* Hydra.swift */; };
 		B937766B2394BEA6009CB22D /* NSLayoutConstraint+Legacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B937766A2394BEA6009CB22D /* NSLayoutConstraint+Legacy.swift */; };
 		B9C04D4D24453FF5008EDDEE /* UserDefault in Frameworks */ = {isa = PBXBuildFile; productRef = B9C04D4C24453FF5008EDDEE /* UserDefault */; };
@@ -244,6 +245,7 @@
 		95E83C1A221A537C000BB75F /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		95EE7DFC21060CB100B603EF /* UndoBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoBuffer.swift; sourceTree = "<group>"; };
 		95FC9DC021080BB700044C93 /* RefreshingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshingTableViewController.swift; sourceTree = "<group>"; };
+		B9028E1F25E3FFF100D0FCEC /* QRScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerView.swift; sourceTree = "<group>"; };
 		B90A4ED225DE155300EB56C4 /* Hydra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hydra.swift; sourceTree = "<group>"; };
 		B937766A2394BEA6009CB22D /* NSLayoutConstraint+Legacy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Legacy.swift"; sourceTree = "<group>"; };
 		B9D9B36223917FC400947CE5 /* PassThroughView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassThroughView.swift; sourceTree = "<group>"; };
@@ -375,6 +377,7 @@
 				95AB959220E572C900A0AE8D /* LoginViewController.swift */,
 				9584F24D20E936ED00A8C884 /* LoginWindowView.swift */,
 				959E8A1D21EE9A7C00C29503 /* TrialViewController.swift */,
+				B9028E1F25E3FFF100D0FCEC /* QRScannerView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -777,6 +780,7 @@
 				958AE1B221AE2E40008EBD95 /* DrawingView.swift in Sources */,
 				B9D9B36323917FC400947CE5 /* PassThroughView.swift in Sources */,
 				9511A10C20DD3C0500101ADE /* Issue.swift in Sources */,
+				B9028E2025E3FFF100D0FCEC /* QRScannerView.swift in Sources */,
 				951FDD4B20E59AA200268BEB /* KeyboardLayoutConstraint.swift in Sources */,
 				9554235120DC7921009CCCE0 /* String+Hashing.swift in Sources */,
 				95D2C2AE20E5C3E700D887C8 /* UIKit+Localization.swift in Sources */,

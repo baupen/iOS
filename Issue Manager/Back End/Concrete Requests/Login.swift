@@ -21,10 +21,11 @@ extension Client {
 	func logIn(with loginInfo: LoginInfo) -> Future<Void> {
 		self.loginInfo = loginInfo
 		return send(SelfRequest(token: loginInfo.token))
-			.always { print("step 1") }
 			.map { GetObjectRequest(for: $0.constructionManagerIri.makeID()) }
 			.flatMap(send)
-			.always { print("step 2") }
-			.map { self.localUser = $0.makeObject() }
+			.map {
+				self.loginInfo = loginInfo // set again in case something else changed it since
+				self.localUser = $0.makeObject()
+			}
 	}
 }
