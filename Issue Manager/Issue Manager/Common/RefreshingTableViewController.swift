@@ -33,11 +33,6 @@ class RefreshingTableViewController: UITableViewController {
 				titled: Alert.ConnectionIssues.title,
 				message: Alert.ConnectionIssues.message
 			)
-		case RequestError.outdatedClient:
-			self.showAlert(
-				titled: L10n.Alert.OutdatedClient.title,
-				message: L10n.Alert.OutdatedClient.message
-			)
 		default:
 			print("refresh error!")
 			dump(error)

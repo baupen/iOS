@@ -2,18 +2,21 @@
 
 import Foundation
 import Promise
+import UserDefault
 
 typealias TaskResult = (data: Data, response: HTTPURLResponse)
 
 final class Client {
 	static let shared = Client()
-	static let apiVersion = 1
 	static let dateFormatter = ISO8601DateFormatter()
 	
+	private static let baseServerURL = URL(string: "https://app.mangel.io")!
+	
+	@UserDefault("client.loginInfo") var loginInfo: LoginInfo?
+	
 	/// the user we're currently logged in as
-	var localUser: LocalUser? {
+	@UserDefault("client.localUser") var localUser: ConstructionManager? {
 		didSet {
-			saveLocalUser()
 			guard let localUser = localUser else { return }
 			if let old = oldValue, localUser.id != old.id {
 				Repository.shared.resetAllData()
@@ -21,10 +24,7 @@ final class Client {
 		}
 	}
 	
-	/// base URL for the server to contact
-	var serverURL = URL(string: "https://app.mangel.io")! {
-		didSet { saveServerURL() }
-	}
+	var isLoggedIn: Bool { loginInfo != nil && localUser != nil }
 	
 	private let urlSession = URLSession.shared
 	
@@ -38,13 +38,11 @@ final class Client {
 	/// any dependent requests are executed on this queue, so as to avoid bad interleavings and races and such
 	private let linearQueue = DispatchQueue(label: "dependent request execution")
 	
-	var isOnLinearQueue: Bool {
-		OperationQueue.current!.underlyingQueue == linearQueue
+	func assertOnLinearQueue() {
+		dispatchPrecondition(condition: .onQueue(linearQueue))
 	}
 	
-	private init() {
-		loadShared()
-	}
+	private init() {}
 	
 	func send<R: Request>(_ request: R) -> Future<R.Response> {
 		dispatch(request)
@@ -93,20 +91,27 @@ final class Client {
 		try URLRequest(url: apiURL(for: body)) <- { request in
 			request.httpMethod = R.httpMethod
 			try body.encode(using: requestEncoder, into: &request)
+			if let token = loginInfo?.token {
+				request.setValue(token, forHTTPHeaderField: "X-Authentication")
+			}
 		}
 	}
 	
 	private func apiURL<R: Request>(for request: R) -> URL {
-		(URLComponents(url: request.baseURLOverride ?? serverURL, resolvingAgainstBaseURL: false)! <- {
+		(URLComponents(
+			url: request.baseURLOverride ?? loginInfo?.origin ?? Self.baseServerURL,
+			resolvingAgainstBaseURL: false
+		)! <- {
 			$0.path += request.path
 			$0.queryItems = request.collectURLQueryItems()
 				.map { URLQueryItem(name: $0, value: "\($1)") }
+				.nonEmptyOptional
 		}).url!
 	}
 	
 	func send(_ request: URLRequest) -> Future<TaskResult> {
 		let path = request.url!.relativePath
-		print("\(path): sending \(debugRepresentation(of: request.httpBody ?? Data()))")
+		print("\(path): sending \(debugRepresentation(of: request.httpBody ?? Data())) to \(request.url!)")
 		return urlSession.dataTask(with: request)
 			.transformError { _, error in throw RequestError.communicationError(error) }
 			.always { print("\(path): finished") }
@@ -128,7 +133,7 @@ enum RequestError: Error {
 	/// There was an error fulfilling the request.
 	case apiError(HydraError? = nil, statusCode: Int)
 	/// The client is outdated, so we'd rather not risk further communication.
-	case outdatedClient(client: Int, server: Int) // TODO: reimplement
+	// TODO: reimplement outdated client logic
 }
 
 fileprivate func debugRepresentation(of data: Data, maxLength: Int = 1000) -> String {
@@ -140,45 +145,5 @@ fileprivate func debugRepresentation(of data: Data, maxLength: Int = 1000) -> St
 		?? "<\(data.count) bytes not UTF-8 decodable data>"
 }
 
-// MARK: -
-// MARK: Saving & Loading
-
-private extension Client {
-	func loadShared() {
-		do {
-			// TODO: remove once most users have migrated to database
-			defaults.removeObject(forKey: "Client.shared.storage")
-			
-			localUser = try defaults.decode(forKey: .localUserKey)
-			serverURL = defaults.url(forKey: .serverURLKey) ?? serverURL
-			print("Client loaded!")
-		} catch {
-			error.printDetails(context: "Client could not be loaded!")
-		}
-	}
-	
-	func saveLocalUser() {
-		save(context: "localUser") { [localUser] in
-			try defaults.encode(localUser, forKey: .localUserKey)
-		}
-	}
-	
-	func saveServerURL() {
-		save(context: "serverURL") { [serverURL] in
-			defaults.set(serverURL, forKey: .serverURLKey)
-		}
-	}
-	
-	private func save(context: String, _ block: @escaping () throws -> Void) {
-		do {
-			try block()
-		} catch {
-			error.printDetails(context: "Could not save client: \(context)")
-		}
-	}
-}
-
-private extension String {
-	static let localUserKey = "Client.shared.localUser"
-	static let serverURLKey = "Client.shared.serverURL"
-}
+extension LoginInfo: DefaultsValueConvertible {}
+extension ConstructionManager: DefaultsValueConvertible {}

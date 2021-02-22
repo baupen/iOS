@@ -3,69 +3,19 @@
 import UIKit
 import UserDefault
 
-final class LoginViewController: LoginHandlerViewController {
-	fileprivate typealias Localization = L10n.Login
+final class LoginViewController: UIViewController {
+	private typealias Localization = L10n.Login
 	
-	@IBOutlet private var textFieldView: UIView!
-	@IBOutlet private var usernameField: UITextField!
-	@IBOutlet private var passwordField: UITextField!
-	@IBOutlet private var websiteField: UITextField!
-	@IBOutlet private var websiteFieldContainer: TextFieldContainer!
-	@IBOutlet private var activityIndicator: UIActivityIndicatorView!
-	@IBOutlet private var stayLoggedInSwitch: UISwitch!
-	
-	@IBAction func usernameConfirmed() {
-		UIView.animate(withDuration: 0.25) {
-			self.websiteFieldContainer.isHidden = false
-		}
-	}
-	
-	@IBAction func backgroundTapped() {
-		usernameField.resignFirstResponder()
-		passwordField.resignFirstResponder()
-	}
-	
-	@IBAction func stayLoggedInSwitched() {
-		defaults.stayLoggedIn = stayLoggedInSwitch.isOn
-	}
+	var isLoggingIn = false
 	
 	// unwind segue
 	@IBAction func logOut(_ segue: UIStoryboardSegue) {
-		passwordField.text = ""
-		Client.shared.localUser?.hasLoggedOut = true
+		Client.shared.localUser = nil
 	}
-	
-	@UserDefault("login.lastFilledServerURL")
-	private var lastFilledServerURL: URL?
 	
 	private var shouldRestoreState = true
 	
-	/// - note: only ever change this from the main queue
-	override var isLoggingIn: Bool {
-		didSet {
-			usernameField.isEnabled = !isLoggingIn
-			passwordField.isEnabled = !isLoggingIn
-			textFieldView.alpha = isLoggingIn ? 0.5 : 1
-			
-			if isLoggingIn {
-				activityIndicator.startAnimating()
-			} else {
-				activityIndicator.stopAnimating()
-			}
-		}
-	}
-	
 	override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
-	
-	override func viewDidLoad() {
-		super.viewDidLoad()
-		
-		usernameField.delegate = self
-		passwordField.delegate = self
-		websiteField.delegate = self
-		
-		stayLoggedInSwitch.isOn = defaults.stayLoggedIn
-	}
 	
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
@@ -73,54 +23,50 @@ final class LoginViewController: LoginHandlerViewController {
 		guard shouldRestoreState else { return }
 		shouldRestoreState = false
 		
-		if let localUser = Client.shared.localUser, !localUser.username.isEmpty {
-			usernameField.text = localUser.username
-			
-			if defaults.stayLoggedIn, !localUser.hasLoggedOut {
-				if presentedViewController == nil {
-					showSiteList(userInitiated: false)
-				}
-			} else {
-				passwordField.becomeFirstResponder()
-			}
-			
-			websiteField.text = Client.shared.serverURL.trimmingHTTPS()
-		} else {
-			usernameField.becomeFirstResponder()
-		}
+		guard Client.shared.isLoggedIn, presentedViewController == nil else { return }
 		
-		websiteFieldContainer.isHidden = usernameField.text?.isEmpty != false
+		showSiteList(userInitiated: false)
 	}
 	
-	func logIn() {
-		guard let serverURL = URL.prependingHTTPSIfMissing(to: websiteField.text!) else {
-			showAlert(
-				titled: Localization.Alert.InvalidWebsite.title,
-				message: Localization.Alert.InvalidWebsite.message
-			)
-			return
-		}
-		
-		logIn(
-			to: serverURL,
-			as: usernameField.text!,
-			password: passwordField.text!
-		)
-	}
-	
-	func deepLink(username: String, domain: String) {
+	func logIn(with info: LoginInfo) {
 		shouldRestoreState = false
 		
+		// dismiss any presented view controllers
 		dismiss(animated: false) // don't have to animate since we're not visible until done anyway
 		
-		usernameField.text = username
-		
-		websiteField.text = domain
-		lastFilledServerURL = .prependingHTTPSIfMissing(to: domain)
-		websiteFieldContainer.isHidden = false
-		
-		passwordField.text = ""
-		passwordField.becomeFirstResponder()
+		Client.shared.logIn(with: info)
+			.on(.main)
+			.catch(showAlert(for:))
+			.then { self.showSiteList() }
+	}
+	
+	func showAlert(for error: Error) {
+		switch error {
+		case RequestError.communicationError: // likely connection failure
+			showAlert(
+				titled: L10n.Alert.ConnectionIssues.title,
+				message: L10n.Alert.ConnectionIssues.message
+			)
+		default:
+			print("login error!")
+			dump(error)
+			let errorDesc = "" <- {
+				dump(error, to: &$0)
+			}
+			showAlert(
+				titled: Localization.Alert.LoginError.title,
+				message: Localization.Alert.LoginError.message
+					+ "\n\n" + errorDesc
+			)
+		}
+	}
+	
+	func showSiteList(userInitiated: Bool = true) {
+		let siteList = storyboard!.instantiate(SiteListViewController.self)!
+		if !userInitiated {
+			siteList.needsRefresh = true
+		}
+		present(siteList, animated: userInitiated)
 	}
 }
 
@@ -137,22 +83,3 @@ private extension URL {
 		URL(string: URLComponents(string: raw)?.scheme != nil ? raw : https + raw)
 	}
 }
-
-extension LoginViewController: UITextFieldDelegate {
-	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-		switch textField {
-		case usernameField:
-			passwordField.becomeFirstResponder()
-		case passwordField:
-			websiteField.becomeFirstResponder()
-		case websiteField:
-			websiteField.resignFirstResponder()
-			logIn()
-		default:
-			return true // default handling
-		}
-		return false // custom handling
-	}
-}
-
-extension URL: DefaultsValueConvertible {}

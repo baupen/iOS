@@ -5,7 +5,7 @@ import GRDB
 
 struct ObjectMeta<Object: StoredObject>: AnyObjectMeta, Codable, Equatable {
 	var id = Object.ID()
-	var lastChangeTime = Date()
+	var lastChangeTime = Date.distantPast // intentionally wrong to not throw off most recent lastChangeTime for sync
 	var isDeleted = false
 	
 	var rawID: UUID { id.rawValue }

@@ -86,6 +86,6 @@ extension DataDecodingRequest {
 	}
 }
 
+typealias GetJSONRequest = GetRequest & JSONDecodingRequest
+typealias GetDataRequest = GetRequest & DataDecodingRequest
 typealias JSONJSONRequest = JSONEncodingRequest & JSONDecodingRequest
-typealias JSONDataRequest = JSONEncodingRequest & DataDecodingRequest
-typealias MultipartJSONRequest = MultipartEncodingRequest & JSONDecodingRequest

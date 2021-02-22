@@ -68,6 +68,7 @@ extension Map: DBRecord {
 }
 
 extension Map: StoredObject {
+	typealias Model = APIMap
 	static let apiType = "maps"
 }
 

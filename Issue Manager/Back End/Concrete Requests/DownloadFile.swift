@@ -3,7 +3,7 @@
 import Foundation
 import Promise
 
-private struct FileDownloadRequest: Encodable, JSONDataRequest {
+private struct FileDownloadRequest: GetDataRequest {
 	var path: String
 	
 	init(file: AnyFile) {

@@ -22,8 +22,9 @@ struct PagedHydraCollection<Object>: Decodable where Object: Decodable {
 	}
 	
 	struct View: Decodable {
-		var firstPage: String
-		var lastPage: String
+		// even first and last can be nil for empty collections or when full collection is visible
+		var firstPage: String?
+		var lastPage: String?
 		var previousPage: String?
 		var nextPage: String?
 		

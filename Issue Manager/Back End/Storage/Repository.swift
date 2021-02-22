@@ -26,6 +26,7 @@ final class Repository {
 			try Map.deleteAll(db)
 			try Craftsman.deleteAll(db)
 			try ConstructionSite.deleteAll(db)
+			try ConstructionManager.deleteAll(db)
 		}
 	}
 	

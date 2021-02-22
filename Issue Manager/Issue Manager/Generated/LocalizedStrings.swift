@@ -102,6 +102,8 @@ internal enum L10n {
   }
 
   internal enum Login {
+    /// Mit Website Verbinden
+    internal static let connectToWebsite = L10n.tr("Localizable", "login.connect_to_website")
     /// Eingeloggt Bleiben
     internal static let stayLoggedIn = L10n.tr("Localizable", "login.stay_logged_in")
     internal enum Alert {

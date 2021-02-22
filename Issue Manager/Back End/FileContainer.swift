@@ -97,20 +97,18 @@ extension FileContainer {
 		
 		print("Downloading \(file) for \(Self.pathPrefix)")
 		
-		return (Client.shared.download(file)
-			.then { data in
+		return Client.shared.download(file)
+			.map { data in
 				try? manager.createDirectory(at: url, withIntermediateDirectories: true)
 				let success = manager.createFile(atPath: url.path, contents: data)
 				print(success ? "Saved file to" : "Could not save file to", url)
 			}
 			.catch { error in
 				error.printDetails(context: "Could not download \(file)")
-				print("container to download file for:")
-				dump(self)
-				print()
+				//print("container to download file for:")
+				//dump(self)
+				//print()
 			}
-			.ignoringValue()
-		)
 	}
 	
 	func deleteFile() {

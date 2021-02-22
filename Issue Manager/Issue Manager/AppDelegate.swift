@@ -53,22 +53,23 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControll
 	) -> Bool {
 		guard
 			let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
-			components.scheme == "mangel.io"
+			components.scheme == "mangelio"
 			else { return false }
 		
 		switch components.host {
 		case "login":
 			guard
 				let queryItems = components.queryItems,
-				let username = queryItems.first(where: { $0.name == "username" })?.value,
-				let domain = queryItems.first(where: { $0.name == "domain" })?.value
-				else {
-					print("malformed custom url: \(url)")
-					return false
+				let payload = queryItems.first(where: { $0.name == "payload" })?.value,
+				let rawPayload = Data(base64Encoded: payload),
+				let loginInfo = try? JSONDecoder().decode(LoginInfo.self, from: rawPayload)
+			else {
+				print("malformed custom url: \(url)")
+				return false
 			}
 			
 			let loginController = window!.rootViewController as! LoginViewController
-			loginController.deepLink(username: username, domain: domain)
+			loginController.logIn(with: loginInfo)
 			
 			return true
 		default:

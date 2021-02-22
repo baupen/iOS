@@ -9,28 +9,28 @@ struct APIIssue {
 	let description: String?
 	let deadline: Date?
 	
-	let craftsman: Craftsman.ID?
-	let map: Map.ID?
+	let craftsman: APICraftsman.ID?
+	let map: APIMap.ID?
 	
 	let positionX: Double?
 	let positionY: Double?
 	let positionZoomScale: Double?
 	
 	let createdAt: Date
-	let createdBy: ConstructionManager.ID
+	let createdBy: APIConstructionManager.ID
 	let registeredAt: Date?
-	let registeredBy: ConstructionManager.ID?
+	let registeredBy: APIConstructionManager.ID?
 	let resolvedAt: Date?
-	let resolvedBy: Craftsman.ID?
+	let resolvedBy: APICraftsman.ID?
 	let closedAt: Date?
-	let closedBy: ConstructionManager.ID?
+	let closedBy: APIConstructionManager.ID?
 	
 	let imageUrl: File<Issue>?
 	
 	func makeObject(meta: Issue.Meta, context: ConstructionSite.ID) -> Issue {
 		Issue(
 			meta: meta, constructionSiteID: context,
-			mapID: map,
+			mapID: map?.makeID(),
 			number: number,
 			wasAddedWithClient: wasAddedWithClient,
 			deadline: deadline,
@@ -38,16 +38,16 @@ struct APIIssue {
 				: .init(at: Point(x: positionX!, y: positionY!), zoomScale: positionZoomScale!),
 			isMarked: isMarked,
 			description: description,
-			craftsmanID: craftsman,
+			craftsmanID: craftsman?.makeID(),
 			status: .init(
 				createdAt: createdAt,
-				createdBy: createdBy,
+				createdBy: createdBy.makeID(),
 				registeredAt: registeredAt,
-				registeredBy: registeredBy,
+				registeredBy: registeredBy?.makeID(),
 				resolvedAt: resolvedAt,
-				resolvedBy: resolvedBy,
+				resolvedBy: resolvedBy?.makeID(),
 				closedAt: closedAt,
-				closedBy: closedBy
+				closedBy: closedBy?.makeID()
 			),
 			image: imageUrl,
 			wasUploaded: true

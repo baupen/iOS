@@ -7,6 +7,8 @@ protocol StoredObject: AnyStoredObject {
 	typealias ID = ObjectID<Self>
 	typealias Meta = ObjectMeta<Self>
 	
+	associatedtype Model: APIModel where Model.Object == Self
+	
 	static var apiType: String { get }
 	static var apiPath: String { get }
 	var apiPath: String { get }
@@ -20,9 +22,7 @@ protocol StoredObject: AnyStoredObject {
 
 extension StoredObject {
 	static var apiPath: String { "/api/\(apiType)" }
-	var apiPath: String {
-		"\(Self.apiPath)/\(id.rawValue.uuidString.lowercased())"
-	}
+	var apiPath: String { id.apiPath }
 	
 	var id: ID { meta.id }
 	

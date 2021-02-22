@@ -6,6 +6,14 @@ import GRDB
 struct ObjectID<Object>: Hashable where Object: StoredObject {
 	var rawValue: UUID
 	
+	var apiPath: String {
+		"\(Object.apiPath)/\(apiString)"
+	}
+	
+	var apiString: String {
+		rawValue.uuidString.lowercased()
+	}
+	
 	init() {
 		self.rawValue = UUID()
 	}

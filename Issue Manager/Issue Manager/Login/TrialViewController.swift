@@ -2,7 +2,7 @@
 
 import UIKit
 
-final class TrialViewController: LoginHandlerViewController {
+final class TrialViewController: UIViewController {
 	fileprivate typealias Localization = L10n.Trial
 	
 	@IBOutlet private var loginWindowView: UIView!
@@ -60,7 +60,7 @@ final class TrialViewController: LoginHandlerViewController {
 	}
 	
 	/// - note: only ever change this from the main queue
-	override var isLoggingIn: Bool {
+	var isLoggingIn = false {
 		didSet {
 			labelView.alpha = isLoggingIn ? 0.5 : 1
 			
@@ -129,20 +129,11 @@ final class TrialViewController: LoginHandlerViewController {
 	}
 	
 	func showAlert(for error: Error) {
-		switch error {
-		case RequestError.outdatedClient(let client, let server):
-			print("Outdated client! client: \(client), server: \(server)")
-			showAlert(
-				titled: L10n.Alert.OutdatedClient.title,
-				message: L10n.Alert.OutdatedClient.message
-			)
-		default:
-			// FIXME: change messages
-			showAlert(
-				titled: L10n.Login.Alert.LoginError.title,
-				message: L10n.Login.Alert.LoginError.message
-			)
-		}
+		// FIXME: change messages
+		showAlert(
+			titled: L10n.Login.Alert.LoginError.title,
+			message: L10n.Login.Alert.LoginError.message
+		)
 	}
 }
 

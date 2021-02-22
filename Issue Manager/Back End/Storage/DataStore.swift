@@ -71,6 +71,22 @@ final class DatabaseDataStore {
 				$0.column("image", .text)
 			}
 			
+			try db.create(table: "Craftsman") {
+				$0.primaryKey(["id"])
+				// meta
+				$0.column("id", .text).notNull()
+				$0.column("lastChangeTime", .datetime).notNull()
+				$0.column("isDeleted", .boolean).notNull()
+				// contents
+				$0.column("contactName", .text).notNull()
+				$0.column("company", .text).notNull()
+				$0.column("trade", .text).notNull()
+				// relations
+				$0.column("constructionSiteID", .text).notNull()
+					.references("ConstructionSite", onDelete: .cascade, onUpdate: .cascade)
+					.indexed()
+			}
+			
 			try db.create(table: "Map") {
 				$0.primaryKey(["id"])
 				// meta
@@ -130,22 +146,6 @@ final class DatabaseDataStore {
 				$0.column("closedAt", .datetime)
 				$0.column("closedBy", .text)
 					.references("ConstructionManager")
-			}
-			
-			try db.create(table: "Craftsman") {
-				$0.primaryKey(["id"])
-				// meta
-				$0.column("id", .text).notNull()
-				$0.column("lastChangeTime", .datetime).notNull()
-				$0.column("isDeleted", .boolean).notNull()
-				// contents
-				$0.column("contactName", .text).notNull()
-				$0.column("company", .text).notNull()
-				$0.column("trade", .text).notNull()
-				// relations
-				$0.column("constructionSiteID", .text).notNull()
-					.references("ConstructionSite", onDelete: .cascade, onUpdate: .cascade)
-					.indexed()
 			}
 		}
 	}

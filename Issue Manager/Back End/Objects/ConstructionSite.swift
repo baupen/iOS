@@ -51,6 +51,7 @@ extension ConstructionSite: DBRecord {
 }
 
 extension ConstructionSite: StoredObject {
+	typealias Model = APIConstructionSite
 	static let apiType = "construction_sites"
 }
 

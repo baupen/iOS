@@ -2,9 +2,11 @@
 
 import Foundation
 
-protocol APIModel: Codable {
+protocol APIModel: Decodable {
 	associatedtype Object: StoredObject
 	associatedtype Context
+	
+	typealias ID = APIObjectMeta<Self>.ID
 	
 	func makeObject(meta: Object.Meta, context: Context) -> Object
 }
@@ -35,13 +37,13 @@ struct APIObjectMeta<Model>: Decodable where Model: APIModel {
 	
 	var id: ID
 	var lastChangeTime: Date
-	var isDeleted: Bool
+	var isDeleted: Bool? // construction managers don't get deleted
 	
 	func makeObjectMeta() -> Object.Meta {
 		.init(
-			id: .init(id.rawValue),
+			id: id.makeID(),
 			lastChangeTime: lastChangeTime,
-			isDeleted: isDeleted
+			isDeleted: isDeleted ?? false
 		)
 	}
 	
@@ -58,7 +60,7 @@ struct APIObjectMeta<Model>: Decodable where Model: APIModel {
 			let container = try decoder.singleValueContainer()
 			let raw = try container.decode(String.self)
 			
-			let prefix = Object.apiPath
+			let prefix = Object.apiPath + "/"
 			guard raw.hasPrefix(prefix) else {
 				throw DecodingError.dataCorruptedError(
 					in: container,
@@ -73,5 +75,7 @@ struct APIObjectMeta<Model>: Decodable where Model: APIModel {
 					debugDescription: "encountered invalid UUID string (\"\(uuidString)\") while decoding an ID"
 				)
 		}
+		
+		func makeID() -> Object.ID { .init(self.rawValue) }
 	}
 }

@@ -81,6 +81,16 @@ struct Issue {
 	}
 }
 
+extension Issue: StoredObject {
+	typealias Model = APIIssue
+	static let apiType = "issues"
+}
+
+extension Issue: FileContainer {
+	static let pathPrefix = "issue"
+	var file: File<Issue>? { image }
+}
+
 extension Issue {
 	init(at position: Position? = nil, in map: Map) {
 		self.meta = .init()
@@ -192,15 +202,6 @@ extension DerivableRequest where RowDecoder == Issue {
 	}
 }
 
-extension Issue: StoredObject {
-	static let apiType = "issues"
-}
-
-extension Issue: FileContainer {
-	static let pathPrefix = "issue"
-	var file: File<Issue>? { image }
-}
-
 // MARK: -
 // MARK: Status
 extension Issue {
@@ -223,7 +224,7 @@ extension Issue {
 }
 
 // MARK: -
-// MARK: Mutation Convenience
+// MARK: Mutation
 extension Issue {
 	mutating func close() {
 		assert(isRegistered)

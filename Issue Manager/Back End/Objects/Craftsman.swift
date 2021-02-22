@@ -17,6 +17,7 @@ struct Craftsman: Equatable {
 }
 
 extension Craftsman: StoredObject {
+	typealias Model = APICraftsman
 	static let apiType = "craftsmen"
 }
 

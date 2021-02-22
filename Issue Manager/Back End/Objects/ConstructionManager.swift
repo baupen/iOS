@@ -1,18 +1,7 @@
 // Created by Julian Dunskus
 
 import Foundation
-
-struct LocalUser: Codable {
-	var manager: ConstructionManager
-	var id: ConstructionManager.ID { manager.id }
-	
-	/// the username sent to the server, with domain overrides applied
-	var username: String
-	var passwordHash: String
-	
-	/// whether or not the user has explicitly logged out
-	var hasLoggedOut = false
-}
+import GRDB
 
 struct ConstructionManager: Codable {
 	var meta: Meta
@@ -25,10 +14,36 @@ struct ConstructionManager: Codable {
 	}
 }
 
+extension ConstructionManager: DBRecord {
+	func encode(to container: inout PersistenceContainer) {
+		meta.encode(to: &container)
+		
+		container[Columns.authenticationToken] = authenticationToken
+		container[Columns.givenName] = givenName
+		container[Columns.familyName] = familyName
+	}
+	
+	init(row: Row) {
+		meta = .init(row: row)
+		
+		authenticationToken = row[Columns.authenticationToken]
+		givenName = row[Columns.givenName]
+		familyName = row[Columns.familyName]
+	}
+	
+	enum Columns: String, ColumnExpression {
+		case authenticationToken
+		case givenName
+		case familyName
+	}
+}
+
 extension ConstructionManager: StoredObject {
+	typealias Model = APIConstructionManager
 	static let apiType = "construction_managers"
 }
 
+// TODO: remove
 struct TrialUser: Codable {
 	var username: String
 	var password: String	
