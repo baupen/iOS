@@ -32,7 +32,7 @@ extension APIObject where Model.Context == Void {
 	}
 }
 
-struct APIObjectMeta<Model>: Decodable where Model: APIModel {
+struct APIObjectMeta<Model>: Equatable, Decodable where Model: APIModel {
 	typealias Object = Model.Object
 	
 	var id: ID
@@ -53,29 +53,42 @@ struct APIObjectMeta<Model>: Decodable where Model: APIModel {
 		case isDeleted
 	}
 	
-	struct ID: Decodable {
+	struct ID: Equatable {
 		var rawValue: UUID
 		
-		init(from decoder: Decoder) throws {
-			let container = try decoder.singleValueContainer()
-			let raw = try container.decode(String.self)
-			
-			let prefix = Object.apiPath + "/"
-			guard raw.hasPrefix(prefix) else {
-				throw DecodingError.dataCorruptedError(
-					in: container,
-					debugDescription: "encountered invalid IRI string (\"\(raw)\") while decoding an ID starting with \(prefix)"
-				)
-			}
-			let uuidString = String(raw.dropFirst(prefix.count))
-			
-			self.rawValue = try UUID(uuidString: String(uuidString))
-				??? DecodingError.dataCorruptedError(
-					in: container,
-					debugDescription: "encountered invalid UUID string (\"\(uuidString)\") while decoding an ID"
-				)
-		}
-		
 		func makeID() -> Object.ID { .init(self.rawValue) }
+	}
+}
+
+extension APIObjectMeta.ID: Codable {
+	init(from decoder: Decoder) throws {
+		let container = try decoder.singleValueContainer()
+		let raw = try container.decode(String.self)
+		
+		let prefix = Model.Object.apiPath + "/"
+		guard raw.hasPrefix(prefix) else {
+			throw DecodingError.dataCorruptedError(
+				in: container,
+				debugDescription: "encountered invalid IRI string (\"\(raw)\") while decoding an ID starting with \(prefix)"
+			)
+		}
+		let uuidString = String(raw.dropFirst(prefix.count))
+		
+		self.rawValue = try UUID(uuidString: String(uuidString))
+			??? DecodingError.dataCorruptedError(
+				in: container,
+				debugDescription: "encountered invalid UUID string (\"\(uuidString)\") while decoding an ID"
+			)
+	}
+	
+	func encode(to encoder: Encoder) throws {
+		var container = encoder.singleValueContainer()
+		try container.encode("\(Model.Object.apiPath)/\(rawValue.uuidString.lowercased())")
+	}
+}
+
+extension ObjectID {
+	func makeModelID() -> Object.Model.ID {
+		.init(rawValue: rawValue)
 	}
 }

@@ -3,7 +3,7 @@
 import Foundation
 import GRDB
 
-struct Issue {
+struct Issue: Equatable {
 	private(set) var meta: Meta
 	let constructionSiteID: ConstructionSite.ID
 	let mapID: Map.ID?
@@ -14,19 +14,31 @@ struct Issue {
 	
 	let position: Position?
 	var isMarked = false {
-		didSet { patch.isMarked = .some(isMarked) }
+		didSet {
+			guard isMarked != oldValue else { return }
+			patch.isMarked = .some(isMarked)
+		}
 	}
 	var description: String? {
-		didSet { patch.description = .some(description) }
+		didSet {
+			guard description != oldValue else { return }
+			patch.description = .some(description)
+		}
 	}
 	var craftsmanID: Craftsman.ID? {
-		didSet { patch.craftsman = .some(craftsmanID) }
+		didSet {
+			guard craftsmanID != oldValue else { return }
+			patch.craftsman = .some(craftsmanID?.makeModelID())
+		}
 	}
 	
 	private(set) var status: Status
 	
 	var image: File<Issue>? {
-		didSet { didChangeImage = true }
+		didSet {
+			guard image != oldValue else { return }
+			didChangeImage = true
+		}
 	}
 	
 	private(set) var wasUploaded: Bool
@@ -37,7 +49,7 @@ struct Issue {
 		set { patchIfChanged = newValue }
 	}
 	
-	struct Position: Codable, DBRecord {
+	struct Position: Equatable, Codable, DBRecord {
 		var point: Point
 		var zoomScale: Double
 		
@@ -47,7 +59,7 @@ struct Issue {
 		}
 	}
 	
-	struct Status: Codable, DBRecord {
+	struct Status: Equatable, Codable, DBRecord {
 		var createdAt = Date()
 		var createdBy: ConstructionManager.ID
 		var registeredAt: Date?
@@ -136,6 +148,8 @@ extension Issue: DBRecord {
 		container[Columns.isMarked] = isMarked
 		container[Columns.description] = description
 		container[Columns.craftsmanID] = craftsmanID
+		
+		container[Columns.image] = image
 		
 		container[Columns.wasUploaded] = wasUploaded
 		container[Columns.didChangeImage] = didChangeImage
@@ -235,7 +249,7 @@ extension Issue {
 		status.closedAt = now
 		status.closedBy = author
 		patch.closedAt = .some(now)
-		patch.closedBy = .some(author)
+		patch.closedBy = .some(author.makeModelID())
 	}
 	
 	mutating func reopen() {
@@ -266,4 +280,9 @@ extension Issue {
 		Repository.shared.save(self)
 		_ = Client.shared.pushLocalChanges()
 	}
+}
+
+struct Point: Equatable, Codable {
+	var x: Double
+	var y: Double
 }

@@ -78,6 +78,7 @@ final class EditIssueViewController: UITableViewController, Reusable {
 	
 	private var issue: Issue! {
 		didSet {
+			guard issue != oldValue else { return }
 			update()
 		}
 	}
@@ -92,24 +93,15 @@ final class EditIssueViewController: UITableViewController, Reusable {
 			if trade != craftsman?.trade {
 				let options = possibleCraftsmen()
 				if trade != nil, options.count == 1 {
-					craftsman = options.first
+					issue.craftsmanID = options.first!.id
 				} else {
-					craftsman = nil
+					issue.craftsmanID = nil
 				}
 			}
 		}
 	}
 	
-	private var craftsman: Craftsman? {
-		didSet {
-			issue.craftsmanID = craftsman?.id
-			craftsmanNameLabel.setText(to: craftsman?.companyAndContact, fallback: L10n.Issue.noCraftsman)
-			
-			if let craftsman = craftsman, craftsman.trade != trade {
-				trade = craftsman.trade
-			}
-		}
-	}
+	private var craftsman: Craftsman?
 	
 	private var loadedImage: UIImage? {
 		didSet {
@@ -180,6 +172,7 @@ final class EditIssueViewController: UITableViewController, Reusable {
 		markButton.setImage(issue.isMarked ? #imageLiteral(resourceName: "mark_marked.pdf") : #imageLiteral(resourceName: "mark_unmarked.pdf"), for: .normal)
 		
 		craftsman = Repository.read(issue.craftsman)
+		craftsmanNameLabel.setText(to: craftsman?.companyAndContact, fallback: L10n.Issue.noCraftsman)
 		trade = craftsman?.trade
 		
 		descriptionField.text = issue.description
@@ -254,7 +247,7 @@ final class EditIssueViewController: UITableViewController, Reusable {
 				options: possibleCraftsmen(),
 				trade: trade,
 				current: craftsman
-			) { [unowned self] in self.craftsman = $0 }.wrapped()
+			) { [unowned self] in self.issue.craftsmanID = $0?.id }.wrapped()
 		default:
 			fatalError("unrecognized segue named \(segue.identifier ?? "<no identifier>")")
 		}

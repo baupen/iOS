@@ -7,6 +7,7 @@ import GRDB
 private struct IssuePatchRequest: JSONJSONRequest {
 	typealias Response = APIObject<APIIssue>
 	static let httpMethod = "PATCH"
+	static let contentType: String? = "application/merge-patch+json"
 	
 	var path: String
 	let body: IssuePatch
@@ -23,12 +24,11 @@ extension Client {
 		assertOnLinearQueue()
 		let changesQuery = Issue.filter(Issue.Columns.patchIfChanged != nil)
 		try Repository.shared.read(changesQuery.fetchAll)
-			.map { IssuePatchRequest(path: $0.apiPath, body: $0.patchIfChanged!) }
-			.traverse { request in
+			.traverse { issue in
 				// TODO: I'm 99% sure this handles things concurrently, but I should check
 				Self.issuePatchLimiter
-					.dispatch { self.send(request) }
-					.ignoringValue()
+					.dispatch { self.send(IssuePatchRequest(path: issue.apiPath, body: issue.patchIfChanged!)) }
+					.map { Repository.shared.save($0.makeObject(context: issue.constructionSiteID)) }
 			}
 			.await()
 	}

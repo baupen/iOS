@@ -75,7 +75,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControll
 			loginController.logIn(with: loginInfo)
 			
 			return true
-		// TODO: remove?
 		case "wipe":
 			wipeAllData()
 			return true

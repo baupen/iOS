@@ -97,7 +97,6 @@
 		95E83C11221A4C2A000BB75F /* UILayout+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E83C10221A4C2A000BB75F /* UILayout+Extensions.swift */; };
 		95E83C13221A4C63000BB75F /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E83C12221A4C63000BB75F /* UIView+Extensions.swift */; };
 		95E83C15221A4CE7000BB75F /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E83C14221A4CE7000BB75F /* UILabel+Extensions.swift */; };
-		95E83C17221A52CE000BB75F /* GeometricConstructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E83C16221A52CE000BB75F /* GeometricConstructs.swift */; };
 		95E83C19221A52F4000BB75F /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E83C18221A52F4000BB75F /* File.swift */; };
 		95E83C1B221A537C000BB75F /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E83C1A221A537C000BB75F /* Request.swift */; };
 		95EE7DFD21060CB100B603EF /* UndoBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EE7DFC21060CB100B603EF /* UndoBuffer.swift */; };
@@ -240,7 +239,6 @@
 		95E83C10221A4C2A000BB75F /* UILayout+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILayout+Extensions.swift"; sourceTree = "<group>"; };
 		95E83C12221A4C63000BB75F /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		95E83C14221A4CE7000BB75F /* UILabel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
-		95E83C16221A52CE000BB75F /* GeometricConstructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometricConstructs.swift; sourceTree = "<group>"; };
 		95E83C18221A52F4000BB75F /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		95E83C1A221A537C000BB75F /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		95EE7DFC21060CB100B603EF /* UndoBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoBuffer.swift; sourceTree = "<group>"; };
@@ -320,7 +318,6 @@
 				9511A10520DD3B8E00101ADE /* ConstructionSite.swift */,
 				9511A10720DD3BD100101ADE /* Craftsman.swift */,
 				95E83C18221A52F4000BB75F /* File.swift */,
-				95E83C16221A52CE000BB75F /* GeometricConstructs.swift */,
 				9511A10B20DD3C0500101ADE /* Issue.swift */,
 				9511A10920DD3BED00101ADE /* Map.swift */,
 				95AA606820EEFA700067A656 /* MapHolder.swift */,
@@ -854,7 +851,6 @@
 				95A66C7A20F9181D008F10DA /* ViewIssueViewController.swift in Sources */,
 				959E8A2021EE9C4A00C29503 /* TrialRequest.swift in Sources */,
 				954D38D422423426008FD3B0 /* DataStore.swift in Sources */,
-				95E83C17221A52CE000BB75F /* GeometricConstructs.swift in Sources */,
 				9514FC4D210545C700099EC5 /* MarkupViewController.swift in Sources */,
 				B9F9E5FE25E2F6ED0059A93C /* Login.swift in Sources */,
 				95E83C11221A4C2A000BB75F /* UILayout+Extensions.swift in Sources */,

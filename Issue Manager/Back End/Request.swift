@@ -8,6 +8,8 @@ protocol Request {
 	
 	/// The http method the request uses.
 	static var httpMethod: String { get }
+	/// The content type of the request's body
+	static var contentType: String? { get }
 	
 	var path: String { get }
 	/// If non-nil, the client uses this as the base URL rather than its default.
@@ -33,6 +35,7 @@ protocol GetRequest: Request {}
 
 extension GetRequest {
 	static var httpMethod: String { "GET" }
+	static var contentType: String? { nil }
 	
 	func encode(using encoder: JSONEncoder, into request: inout URLRequest) throws {}
 }
@@ -49,22 +52,10 @@ extension JSONEncodingRequest where Body == Self, Self: Encodable {
 }
 
 extension JSONEncodingRequest {
+	static var contentType: String? { "application/json" }
+	
 	func encode(using encoder: JSONEncoder, into request: inout URLRequest) throws {
 		request.httpBody = try encoder.encode(body)
-	}
-}
-
-/// a request that is encoded as a multipart form
-protocol MultipartEncodingRequest: Request, Encodable {
-	var fileURL: URL? { get }
-}
-
-extension MultipartEncodingRequest {
-	func encode(using encoder: JSONEncoder, into request: inout URLRequest) throws {
-		let encoded = try encoder.encode(self)
-		let parts = [MultipartPart(name: "message", content: .json(encoded))]
-			+ (fileURL.map { [MultipartPart(name: "image", content: .jpeg(at: $0))] } ?? [])
-		try encodeMultipartRequest(containing: parts, into: &request)
 	}
 }
 

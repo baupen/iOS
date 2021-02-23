@@ -94,6 +94,9 @@ final class Client {
 			if let token = loginInfo?.token {
 				rawRequest.setValue(token, forHTTPHeaderField: "X-Authentication")
 			}
+			if let contentType = R.contentType {
+				rawRequest.setValue(contentType, forHTTPHeaderField: "Content-Type")
+			}
 		}
 	}
 	
