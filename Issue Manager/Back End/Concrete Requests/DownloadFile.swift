@@ -6,7 +6,7 @@ import Promise
 private struct FileDownloadRequest: GetDataRequest {
 	var path: String
 	
-	var size: String? = "preview"
+	var size: String? = "full"
 	
 	init(file: AnyFile) {
 		path = file.urlPath
