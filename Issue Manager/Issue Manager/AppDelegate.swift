@@ -23,12 +23,14 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControll
 		wipeDownloadedFiles()
 		DatabaseDataStore.wipeData()
 		
-		window?.rootViewController?.dismiss(animated: true)
-		window?.rootViewController?.showAlert(
-			titled: L10n.Alert.Wiped.title,
-			message: L10n.Alert.Wiped.message,
-			okMessage: L10n.Alert.Wiped.quit
-		) { exit(0) }
+		let loginController = window!.rootViewController!
+		loginController.dismiss(animated: true) {
+			loginController.showAlert(
+				titled: L10n.Alert.Wiped.title,
+				message: L10n.Alert.Wiped.message,
+				okMessage: L10n.Alert.Wiped.quit
+			) { exit(0) }
+		}
 	}
 
 	func application(

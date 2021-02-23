@@ -26,7 +26,9 @@ final class ViewIssueViewController: UITableViewController, Reusable {
 	
 	@IBAction func markIssue() {
 		issue.isMarked.toggle()
-		issue.saveAndSync()
+		issue.saveAndSync().then { [parent] in
+			(parent as? MapViewController)?.updateFromRepository()
+		}
 		Haptics.mediumImpact.impactOccurred()
 		update()
 	}
@@ -103,7 +105,9 @@ final class ViewIssueViewController: UITableViewController, Reusable {
 			summaryLabel.text = Localization.Summary.reviewed
 		}
 		
-		tableView.performBatchUpdates(nil) // invalidate previously calculated row heights
+		DispatchQueue.main.async {
+			self.tableView.performBatchUpdates(nil) // invalidate previously calculated row heights
+		}
 	}
 	
 	override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {

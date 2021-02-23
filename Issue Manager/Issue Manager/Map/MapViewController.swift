@@ -27,7 +27,7 @@ final class MapViewController: UIViewController, Reusable {
 	
 	// the issue popovers' done buttons link to this
 	@IBAction func backToMapWithUpdates(_ segue: UIStoryboardSegue) {
-		didReturnFromModal()
+		updateFromRepository()
 	}
 	
 	@IBAction func beginAddingIssue() {
@@ -261,6 +261,8 @@ final class MapViewController: UIViewController, Reusable {
 	}
 	
 	func showDetails(for issue: Issue) {
+		let issue = Repository.shared.read(issue.id.get)!
+		
 		let viewController = issue.isRegistered
 			? storyboard!.instantiate(ViewIssueViewController.self)! <- { $0.issue = issue }
 			: storyboard!.instantiate(EditIssueViewController.self)! <- { $0.present(issue) }
@@ -325,10 +327,10 @@ extension MapViewController: IssueCellDelegate {
 
 extension MapViewController: UIAdaptivePresentationControllerDelegate {
 	func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
-		didReturnFromModal()
+		updateFromRepository()
 	}
 	
-	func didReturnFromModal() {
+	func updateFromRepository() {
 		guard let map = holder as? Map else { return }
 		
 		cancelAddingIssue() // done (if started)
@@ -337,9 +339,11 @@ extension MapViewController: UIAdaptivePresentationControllerDelegate {
 		updateMarkers()
 		issueListController.update()
 		
-		let mainController = splitViewController as! MainViewController
-		for viewController in mainController.masterNav.viewControllers {
-			(viewController as? MapListViewController)?.reload(map)
+		DispatchQueue.main.async {
+			let mainController = self.splitViewController as! MainViewController
+			for viewController in mainController.masterNav.viewControllers {
+				(viewController as? MapListViewController)?.reload(map)
+			}
 		}
 	}
 }

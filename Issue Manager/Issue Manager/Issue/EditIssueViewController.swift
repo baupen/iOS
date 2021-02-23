@@ -2,6 +2,7 @@
 
 import UIKit
 import GRDB
+import Promise
 
 final class EditIssueNavigationController: UINavigationController {
 	var editIssueController: EditIssueViewController {
@@ -184,7 +185,7 @@ final class EditIssueViewController: UITableViewController, Reusable {
 		}
 	}
 	
-	private func save() {
+	private func onSave() {
 		let originalTrade = (original?.craftsman).flatMap(Repository.shared.read)?.trade
 		if trade != originalTrade || issue.description != original?.description {
 			SuggestionStorage.shared.decrementSuggestion(
@@ -196,8 +197,6 @@ final class EditIssueViewController: UITableViewController, Reusable {
 				forTrade: trade
 			)
 		}
-		
-		issue.saveAndSync()
 	}
 	
 	func possibleCraftsmen() -> [Craftsman] {
@@ -224,10 +223,13 @@ final class EditIssueViewController: UITableViewController, Reusable {
 		case "cancel":
 			break
 		case "save":
-			save()
+			onSave()
+			let mapController = segue.destination as! MapViewController
+			issue.saveAndSync().then(mapController.updateFromRepository)
 		case "delete":
 			issue.delete()
-			issue.saveAndSync()
+			let mapController = segue.destination as! MapViewController
+			issue.saveAndSync().then(mapController.updateFromRepository)
 		case "lightbox":
 			let lightboxController = segue.destination as! LightboxViewController
 			lightboxController.image = loadedImage!

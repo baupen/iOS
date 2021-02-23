@@ -60,7 +60,7 @@ final class SiteListViewController: RefreshingTableViewController, Reusable {
 		
 		// have to wait because we're not presenting anything yet
 		DispatchQueue.main.async {
-			if self.needsRefresh {
+			if self.needsRefresh, self.presentedViewController == nil {
 				self.needsRefresh = false
 				self.refreshManually()
 			}
