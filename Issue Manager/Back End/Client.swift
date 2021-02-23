@@ -50,7 +50,7 @@ final class Client {
 				let bodyDesc = rawRequest.httpBody
 					.map { "\"\(debugRepresentation(of: $0))\"" }
 					?? "request without body"
-				print("\(request.path): sending \(bodyDesc) to \(rawRequest.url!)")
+				print("\(request.path): \(rawRequest.httpMethod!)ing \(bodyDesc) to \(rawRequest.url!)")
 				
 				return self.send(rawRequest)
 					.catch { _ in print("\(request.path): failed!") }

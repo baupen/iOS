@@ -2,6 +2,7 @@
 
 import Foundation
 import GRDB
+import Promise
 
 struct Issue: Equatable {
 	private(set) var meta: Meta
@@ -41,8 +42,10 @@ struct Issue: Equatable {
 		}
 	}
 	
+	// unsync change tracking
 	private(set) var wasUploaded: Bool
-	private(set) var didChangeImage = false
+	var didChangeImage = false
+	var didDelete = false
 	private(set) var patchIfChanged: IssuePatch?
 	private var patch: IssuePatch {
 		get { patchIfChanged ?? .init() }
@@ -117,6 +120,16 @@ extension Issue {
 		self.wasUploaded = false
 		
 		self.status = .init(createdBy: Client.shared.localUser!.id)
+		
+		patch.createdAt = status.createdAt
+		patch.createdBy = status.createdBy.makeModelID()
+		
+		patch.constructionSite = constructionSiteID.makeModelID()
+		patch.map = mapID?.makeModelID()
+		
+		patch.positionX = position?.point.x
+		patch.positionY = position?.point.y
+		patch.positionZoomScale = position?.zoomScale
 	}
 }
 
@@ -153,6 +166,7 @@ extension Issue: DBRecord {
 		
 		container[Columns.wasUploaded] = wasUploaded
 		container[Columns.didChangeImage] = didChangeImage
+		container[Columns.didDelete] = didDelete
 		try! container.encode(patchIfChanged, forKey: Columns.patchIfChanged)
 		
 		status.encode(to: &container)
@@ -176,6 +190,7 @@ extension Issue: DBRecord {
 		
 		wasUploaded = row[Columns.wasUploaded]
 		didChangeImage = row[Columns.didChangeImage]
+		didDelete = row[Columns.didDelete]
 		patchIfChanged = try! row.decodeValueIfPresent(forKey: Columns.patchIfChanged)
 		
 		status = .init(row: row)
@@ -198,6 +213,7 @@ extension Issue: DBRecord {
 		
 		case wasUploaded
 		case didChangeImage
+		case didDelete
 		case patchIfChanged
 	}
 }
@@ -274,11 +290,18 @@ extension Issue {
 	
 	mutating func delete() {
 		meta.isDeleted = true
+		didDelete = true
 	}
 	
-	func saveAndSync() {
+	func saveAndSync() -> Future<Void> {
+		let shouldDeleteLocally = isDeleted && !wasUploaded
+		guard !shouldDeleteLocally else {
+			Repository.shared.remove(self)
+			return .fulfilled
+		}
+		
 		Repository.shared.save(self)
-		_ = Client.shared.pushLocalChanges()
+		return Client.shared.pushLocalChanges()
 	}
 }
 

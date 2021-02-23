@@ -9,7 +9,7 @@ struct IssuePatch: Equatable, Codable {
 	var description: String??
 	
 	var craftsman: APICraftsman.ID??
-	var map: Map.ID??
+	var map: APIMap.ID??
 	var constructionSite: APIConstructionSite.ID??
 	
 	var positionX: Double??

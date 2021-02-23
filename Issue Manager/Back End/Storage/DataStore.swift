@@ -131,6 +131,7 @@ final class DatabaseDataStore {
 				
 				$0.column("wasUploaded", .boolean).notNull()
 				$0.column("didChangeImage", .boolean).notNull()
+				$0.column("didDelete", .boolean).notNull()
 				$0.column("patchIfChanged", .blob)
 				
 				// status

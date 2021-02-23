@@ -23,12 +23,14 @@ protocol Request {
 }
 
 extension Request {
-	static var httpMethod: String { "POST" }
-	
 	var baseURLOverride: URL? { nil }
 	
 	func collectURLQueryItems() -> [(String, Any)] { [] }
 }
+
+typealias GetJSONRequest = GetRequest & JSONDecodingRequest
+typealias GetDataRequest = GetRequest & DataDecodingRequest
+typealias JSONJSONRequest = JSONEncodingRequest & JSONDecodingRequest
 
 /// a request that has no body
 protocol GetRequest: Request {}
@@ -52,11 +54,18 @@ extension JSONEncodingRequest where Body == Self, Self: Encodable {
 }
 
 extension JSONEncodingRequest {
+	static var httpMethod: String { "POST" }
 	static var contentType: String? { "application/json" }
 	
 	func encode(using encoder: JSONEncoder, into request: inout URLRequest) throws {
 		request.httpBody = try encoder.encode(body)
 	}
+}
+
+protocol StatusCodeRequest: Request where Response == Void {}
+
+extension StatusCodeRequest {
+	func decode(from data: Data, using decoder: JSONDecoder) throws -> Response {}
 }
 
 /// a request that expects a JSON-decodable response
@@ -72,11 +81,5 @@ extension JSONDecodingRequest {
 protocol DataDecodingRequest: Request where Response == Data {}
 
 extension DataDecodingRequest {
-	func decode(from data: Data, using decoder: JSONDecoder) throws -> Data {
-		data
-	}
+	func decode(from data: Data, using decoder: JSONDecoder) throws -> Data { data }
 }
-
-typealias GetJSONRequest = GetRequest & JSONDecodingRequest
-typealias GetDataRequest = GetRequest & DataDecodingRequest
-typealias JSONJSONRequest = JSONEncodingRequest & JSONDecodingRequest

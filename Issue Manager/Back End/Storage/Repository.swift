@@ -42,12 +42,22 @@ final class Repository {
 		read(id.get)
 	}
 	
-	/// saves modifications to the given issue
+	/// saves modifications to an issue
 	func save(_ issue: Issue) {
 		write(issue.save)
 	}
 	
-	/// saves modifications to the given map
+	/// saves modifications to some columns of an issue
+	func save(_ columns: [Issue.Columns], of issue: Issue) {
+		write { try issue.update($0, columns: columns) }
+	}
+	
+	func remove(_ issue: Issue) {
+		let wasDeleted = write(issue.delete)
+		assert(wasDeleted)
+	}
+	
+	/// saves modifications to a map
 	func save(_ map: Map) {
 		write(map.save)
 	}

@@ -13,6 +13,43 @@ private struct IssuePatchRequest: JSONJSONRequest {
 	let body: IssuePatch
 }
 
+private struct IssueCreationRequest: JSONJSONRequest {
+	typealias Response = APIObject<APIIssue>
+	static let contentType: String? = "application/json"
+	
+	let path = Issue.apiPath
+	let body: IssuePatch
+}
+
+private struct ImageUploadRequest: MultipartEncodingRequest, StatusCodeRequest {
+	var path: String
+	
+	var fileURL: URL
+	
+	var parts: [MultipartPart] {
+		MultipartPart(name: "image", content: .jpeg(at: fileURL))
+	}
+	
+	init(issue: Issue, fileURL: URL) {
+		self.path = "\(issue.apiPath)/image"
+		self.fileURL = fileURL
+	}
+}
+
+private struct DeletionRequest: GetRequest, StatusCodeRequest {
+	static var httpMethod: String { "DELETE" }
+	
+	var path: String
+	
+	init(for issue: Issue) {
+		path = issue.apiPath
+	}
+	
+	init(forImageOf issue: Issue) {
+		path = "\(issue.apiPath)/image"
+	}
+}
+
 extension Client {
 	private static let issuePatchLimiter = ConcurrencyLimiter(label: "issue patch", maxConcurrency: 16)
 	
@@ -22,21 +59,65 @@ extension Client {
 	
 	func synchronouslyPushLocalChanges() throws {
 		assertOnLinearQueue()
-		let changesQuery = Issue.filter(Issue.Columns.patchIfChanged != nil)
-		try Repository.shared.read(changesQuery.fetchAll)
+		
+		try syncChanges(for: Issue.filter(Issue.Columns.patchIfChanged != nil)) { issue in
+			let result = issue.wasUploaded
+				? self.send(IssuePatchRequest(path: issue.apiPath, body: issue.patchIfChanged!))
+				: self.send(IssueCreationRequest(body: issue.patchIfChanged!))
+			return result.map {
+				Repository.shared.remove(issue) // remove non-canonical copy
+				Repository.shared.save($0.makeObject(context: issue.constructionSiteID) <- {
+					$0.image = issue.image // keep local changes to image to sync next
+				})
+			}
+		}
+		
+		try syncChanges(for: Issue.filter(Issue.Columns.didChangeImage)) { issue in
+			let result = issue.image
+				.map { self.send(ImageUploadRequest(issue: issue, fileURL: Issue.localURL(for: $0))) }
+				?? self.send(DeletionRequest(forImageOf: issue))
+			return result.map {
+				let newState = issue <- { $0.didChangeImage = false }
+				   Repository.shared.save([.didChangeImage], of: newState)
+			}
+		}
+		
+		try syncChanges(for: Issue.filter(Issue.Columns.didDelete)) { issue in
+			self.send(DeletionRequest(for: issue)).map {
+				let newState = issue <- { $0.didDelete = false }
+				   Repository.shared.save([.didDelete], of: newState)
+			}
+		}
+	}
+	
+	private func syncChanges(for query: QueryInterfaceRequest<Issue>, performing upload: @escaping (Issue) -> Future<Void>) throws {
+		// TODO: I'm 99% sure this handles things concurrently, but I should check
+		try Repository.shared.read(query.fetchAll)
 			.traverse { issue in
-				// TODO: I'm 99% sure this handles things concurrently, but I should check
-				Self.issuePatchLimiter
-					.dispatch { self.send(IssuePatchRequest(path: issue.apiPath, body: issue.patchIfChanged!)) }
-					.map { Repository.shared.save($0.makeObject(context: issue.constructionSiteID)) }
+				Self.issuePatchLimiter.dispatch { upload(issue) }
 			}
 			.await()
 	}
-	
+}
+
+extension Client {
 	/// ensures local changes are pushed first
 	func pullRemoteChanges() -> Future<Void> {
 		pushChangesThen {
 			try self.doPullRemoteChanges().await()
+			Repository.shared.downloadMissingFiles()
+		}
+	}
+	
+	/// ensures local changes are pushed first
+	func pullRemoteChanges(for siteID: ConstructionSite.ID) -> Future<Void> {
+		pullRemoteChanges(for: Repository.shared.read(siteID.get)!)
+	}
+	
+	/// ensures local changes are pushed first
+	func pullRemoteChanges(for site: ConstructionSite) -> Future<Void> {
+		pushChangesThen {
+			try self.doPullRemoteChanges(for: site).await()
 			Repository.shared.downloadMissingFiles()
 		}
 	}
@@ -62,19 +143,6 @@ extension Client {
 		))
 		.map { $0.members.map { $0.makeObject(context: context) } }
 		.map { $0 <- { Repository.shared.update(changing: $0) } }
-	}
-	
-	/// ensures local changes are pushed first
-	func pullRemoteChanges(for siteID: ConstructionSite.ID) -> Future<Void> {
-		pullRemoteChanges(for: Repository.shared.read(siteID.get)!)
-	}
-	
-	/// ensures local changes are pushed first
-	func pullRemoteChanges(for site: ConstructionSite) -> Future<Void> {
-		pushChangesThen {
-			try self.doPullRemoteChanges(for: site).await()
-			Repository.shared.downloadMissingFiles()
-		}
 	}
 	
 	private func doPullRemoteChanges(for site: ConstructionSite) -> Future<Void> {
