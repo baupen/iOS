@@ -6,8 +6,16 @@ import Promise
 private struct FileDownloadRequest: GetDataRequest {
 	var path: String
 	
+	var size: String? = "preview"
+	
 	init(file: AnyFile) {
 		path = file.urlPath
+	}
+	
+	func collectURLQueryItems() -> [(String, Any)] {
+		if let size = size {
+			("size", size)
+		}
 	}
 }
 
