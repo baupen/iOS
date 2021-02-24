@@ -35,6 +35,8 @@ final class LoginViewController: UIViewController {
 		switch segue.destination {
 		case let qrScanner as QRScannerViewController:
 			qrScanner.delegate = self
+		case is RegisterViewController:
+			break
 		default:
 			fatalError("unrecognized segue to \(segue.destination)")
 		}
@@ -105,11 +107,5 @@ extension LoginViewController: QRScannerViewDelegate {
 		// dismiss presented qr scanner
 		dismiss(animated: true)
 		logIn(with: info)
-	}
-}
-
-private extension Error {
-	func dumpedDescription() -> String {
-		"" <- { dump(self, to: &$0) }
 	}
 }

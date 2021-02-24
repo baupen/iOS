@@ -784,13 +784,19 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                 <nil key="textColor"/>
                                                                                 <nil key="highlightedColor"/>
+                                                                                <userDefinedRuntimeAttributes>
+                                                                                    <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="login.register.header"/>
+                                                                                </userDefinedRuntimeAttributes>
                                                                             </label>
                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RAA-y0-dI4">
                                                                                 <rect key="frame" x="0.0" y="34" width="264" height="33"/>
                                                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
-                                                                                <state key="normal" title="Gratis Ausprobieren"/>
+                                                                                <state key="normal" title="Jetzt Registrieren"/>
+                                                                                <userDefinedRuntimeAttributes>
+                                                                                    <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="login.register"/>
+                                                                                </userDefinedRuntimeAttributes>
                                                                                 <connections>
-                                                                                    <segue destination="Tq3-HM-EmX" kind="presentation" id="MGX-1y-m8k"/>
+                                                                                    <segue destination="Tq3-HM-EmX" kind="presentation" id="JAW-42-IB2"/>
                                                                                 </connections>
                                                                             </button>
                                                                         </subviews>
@@ -2957,10 +2963,10 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
             </objects>
             <point key="canvasLocation" x="3322" y="1688"/>
         </scene>
-        <!--Trial-->
+        <!--Register-->
         <scene sceneID="f7G-mC-Nig">
             <objects>
-                <viewController storyboardIdentifier="TrialViewController" modalPresentationStyle="currentContext" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Tq3-HM-EmX" userLabel="Trial" customClass="TrialViewController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TrialViewController" modalPresentationStyle="currentContext" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Tq3-HM-EmX" userLabel="Register" customClass="RegisterViewController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QA2-XW-Kjy">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2969,35 +2975,35 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hvr-9T-h5N">
-                                        <rect key="frame" x="0.0" y="0.0" width="296" height="481.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="296" height="305"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V0m-7o-pqY" userLabel="Login Window" customClass="LoginWindowView" customModule="Issue_Manager" customModuleProvider="target">
-                                                <rect key="frame" x="8" y="8" width="280" height="465.5"/>
+                                                <rect key="frame" x="8" y="8" width="280" height="289"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="JWA-lF-zxC" userLabel="Main Stack">
-                                                        <rect key="frame" x="0.0" y="16" width="280" height="433.5"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="JWA-lF-zxC" userLabel="Main Stack">
+                                                        <rect key="frame" x="0.0" y="16" width="280" height="257"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pxX-yd-YWs">
                                                                 <rect key="frame" x="0.0" y="0.0" width="280" height="33"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                                 <state key="normal" title="Zurück zum Login"/>
                                                                 <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="trial.back_to_login"/>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="register.back_to_login"/>
                                                                 </userDefinedRuntimeAttributes>
                                                                 <connections>
                                                                     <segue destination="QbR-sA-uha" kind="unwind" unwindAction="logOut:" id="pW8-KM-Rai"/>
                                                                 </connections>
                                                             </button>
-                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="TfC-jL-MBM" userLabel="Fields">
-                                                                <rect key="frame" x="0.0" y="49" width="280" height="93"/>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="zTB-hF-o73" userLabel="Fields">
+                                                                <rect key="frame" x="0.0" y="49" width="280" height="159"/>
                                                                 <subviews>
-                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="18C-DQ-5AO" userLabel="Username Wrapper" customClass="TextFieldContainer" customModule="Issue_Manager" customModuleProvider="target">
+                                                                    <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="18C-DQ-5AO" userLabel="Email Wrapper" customClass="TextFieldContainer" customModule="Issue_Manager" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="0.0" width="280" height="46"/>
                                                                         <subviews>
-                                                                            <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Vorname" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="zbx-Tk-tfj" userLabel="Username Field">
+                                                                            <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="E-Mail" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="zbx-Tk-tfj" userLabel="Username Field">
                                                                                 <rect key="frame" x="16" y="12" width="248" height="22"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next" textContentType="given-name"/>
+                                                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardType="emailAddress" returnKeyType="next" textContentType="given-name"/>
                                                                                 <attributedString key="userComments">
                                                                                     <fragment content="placeholder for username field">
                                                                                         <attributes>
@@ -3007,154 +3013,131 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                                                     </fragment>
                                                                                 </attributedString>
                                                                                 <userDefinedRuntimeAttributes>
-                                                                                    <userDefinedRuntimeAttribute type="string" keyPath="localizedPlaceholder" value="trial.placeholder.given_name"/>
+                                                                                    <userDefinedRuntimeAttribute type="string" keyPath="localizedPlaceholder" value="register.placeholder.email"/>
                                                                                 </userDefinedRuntimeAttributes>
+                                                                                <connections>
+                                                                                    <outlet property="delegate" destination="Tq3-HM-EmX" id="MOF-Zq-TdO"/>
+                                                                                </connections>
                                                                             </textField>
                                                                         </subviews>
                                                                         <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="bottomMargin" secondItem="zbx-Tk-tfj" secondAttribute="bottom" constant="4" id="4lY-Vz-3hn"/>
-                                                                            <constraint firstItem="zbx-Tk-tfj" firstAttribute="leading" secondItem="18C-DQ-5AO" secondAttribute="leadingMargin" constant="8" id="KuX-oJ-x31"/>
-                                                                            <constraint firstAttribute="trailingMargin" secondItem="zbx-Tk-tfj" secondAttribute="trailing" constant="8" id="klc-Si-4tP"/>
-                                                                            <constraint firstItem="zbx-Tk-tfj" firstAttribute="top" secondItem="18C-DQ-5AO" secondAttribute="topMargin" constant="4" id="orZ-xl-EDZ"/>
+                                                                            <constraint firstAttribute="bottomMargin" secondItem="zbx-Tk-tfj" secondAttribute="bottom" id="4lY-Vz-3hn"/>
+                                                                            <constraint firstItem="zbx-Tk-tfj" firstAttribute="leading" secondItem="18C-DQ-5AO" secondAttribute="leadingMargin" id="KuX-oJ-x31"/>
+                                                                            <constraint firstAttribute="trailingMargin" secondItem="zbx-Tk-tfj" secondAttribute="trailing" id="klc-Si-4tP"/>
+                                                                            <constraint firstItem="zbx-Tk-tfj" firstAttribute="top" secondItem="18C-DQ-5AO" secondAttribute="topMargin" id="orZ-xl-EDZ"/>
                                                                         </constraints>
+                                                                        <directionalEdgeInsets key="directionalLayoutMargins" top="12" leading="8" bottom="12" trailing="8"/>
                                                                     </view>
-                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K5Q-DL-sAA" userLabel="Password Wrapper" customClass="TextFieldContainer" customModule="Issue_Manager" customModuleProvider="target">
+                                                                    <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vf5-at-7iu" userLabel="Website Wrapper" customClass="TextFieldContainer" customModule="Issue_Manager" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="47" width="280" height="46"/>
                                                                         <subviews>
-                                                                            <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nachname" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Joa-of-T6J">
+                                                                            <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="app.mangel.io" placeholder="Website" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="6nE-qh-UuP">
                                                                                 <rect key="frame" x="16" y="12" width="248" height="22"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="go" textContentType="family-name"/>
+                                                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardType="URL" returnKeyType="go" textContentType="family-name"/>
                                                                                 <userDefinedRuntimeAttributes>
-                                                                                    <userDefinedRuntimeAttribute type="string" keyPath="localizedPlaceholder" value="trial.placeholder.family_name"/>
+                                                                                    <userDefinedRuntimeAttribute type="string" keyPath="localizedPlaceholder" value="register.placeholder.website"/>
                                                                                 </userDefinedRuntimeAttributes>
+                                                                                <connections>
+                                                                                    <outlet property="delegate" destination="Tq3-HM-EmX" id="31n-pg-Wws"/>
+                                                                                </connections>
                                                                             </textField>
                                                                         </subviews>
                                                                         <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="bottomMargin" secondItem="Joa-of-T6J" secondAttribute="bottom" constant="4" id="QpI-FO-kWA"/>
-                                                                            <constraint firstItem="Joa-of-T6J" firstAttribute="leading" secondItem="K5Q-DL-sAA" secondAttribute="leadingMargin" constant="8" id="aE0-HT-lV1"/>
-                                                                            <constraint firstItem="Joa-of-T6J" firstAttribute="top" secondItem="K5Q-DL-sAA" secondAttribute="topMargin" constant="4" id="guf-Yg-HLT"/>
-                                                                            <constraint firstAttribute="trailingMargin" secondItem="Joa-of-T6J" secondAttribute="trailing" constant="8" id="zAI-Dt-C5H"/>
+                                                                            <constraint firstItem="6nE-qh-UuP" firstAttribute="leading" secondItem="vf5-at-7iu" secondAttribute="leadingMargin" id="6b6-vd-HsK"/>
+                                                                            <constraint firstAttribute="trailingMargin" secondItem="6nE-qh-UuP" secondAttribute="trailing" id="WFj-3g-db4"/>
+                                                                            <constraint firstItem="6nE-qh-UuP" firstAttribute="top" secondItem="vf5-at-7iu" secondAttribute="topMargin" id="WHX-0E-Z7g"/>
+                                                                            <constraint firstAttribute="bottomMargin" secondItem="6nE-qh-UuP" secondAttribute="bottom" id="hLb-8k-bra"/>
                                                                         </constraints>
+                                                                        <directionalEdgeInsets key="directionalLayoutMargins" top="12" leading="8" bottom="12" trailing="8"/>
                                                                     </view>
-                                                                </subviews>
-                                                            </stackView>
-                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="iv5-QI-1pP">
-                                                                <rect key="frame" x="0.0" y="158" width="280" height="226.5"/>
-                                                                <subviews>
-                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KRv-iI-Bsg">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="280" height="117.5"/>
+                                                                    <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rHJ-b8-6TZ" userLabel="Switch Container">
+                                                                        <rect key="frame" x="0.0" y="94" width="280" height="65"/>
                                                                         <subviews>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Du hast ein Probekonto erstellt. Die Anmeldung erfolgt mit den folgenden Daten, die du auch auf www.mangel.io verwenden kannst." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q6D-cm-Lt7">
-                                                                                <rect key="frame" x="8" y="8" width="264" height="101.5"/>
-                                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                                <nil key="textColor"/>
-                                                                                <nil key="highlightedColor"/>
-                                                                                <userDefinedRuntimeAttributes>
-                                                                                    <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="trial.existing_account_hint"/>
-                                                                                </userDefinedRuntimeAttributes>
-                                                                            </label>
-                                                                        </subviews>
-                                                                        <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
-                                                                        <constraints>
-                                                                            <constraint firstItem="Q6D-cm-Lt7" firstAttribute="leading" secondItem="KRv-iI-Bsg" secondAttribute="leadingMargin" id="4Ab-tg-V2R"/>
-                                                                            <constraint firstAttribute="bottomMargin" secondItem="Q6D-cm-Lt7" secondAttribute="bottom" id="JbH-5f-V2e"/>
-                                                                            <constraint firstItem="Q6D-cm-Lt7" firstAttribute="top" secondItem="KRv-iI-Bsg" secondAttribute="topMargin" id="WPl-wP-c0h"/>
-                                                                            <constraint firstAttribute="trailingMargin" secondItem="Q6D-cm-Lt7" secondAttribute="trailing" id="hde-89-C2Y"/>
-                                                                        </constraints>
-                                                                    </view>
-                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ePm-tS-WOz">
-                                                                        <rect key="frame" x="0.0" y="118.5" width="280" height="50"/>
-                                                                        <subviews>
-                                                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Jok-c9-3hB">
-                                                                                <rect key="frame" x="8" y="8" width="264" height="34"/>
+                                                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Fuv-fy-wmh">
+                                                                                <rect key="frame" x="16" y="12" width="248" height="41"/>
                                                                                 <subviews>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Benutzername:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RtY-QH-xhG">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="128" height="34"/>
-                                                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                                        <color key="textColor" systemColor="secondaryLabelColor"/>
-                                                                                        <nil key="highlightedColor"/>
-                                                                                        <userDefinedRuntimeAttributes>
-                                                                                            <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="login.placeholder.username:"/>
-                                                                                        </userDefinedRuntimeAttributes>
-                                                                                    </label>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="user@mangel.io" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YV1-mR-oKo">
-                                                                                        <rect key="frame" x="136" y="0.0" width="128" height="34"/>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="200" verticalHuggingPriority="251" horizontalCompressionResistancePriority="300" text="Auf anderer Website registrieren" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J3L-kf-JUe">
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="199" height="41"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                         <nil key="textColor"/>
                                                                                         <nil key="highlightedColor"/>
+                                                                                        <userDefinedRuntimeAttributes>
+                                                                                            <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="register.customize_website"/>
+                                                                                        </userDefinedRuntimeAttributes>
                                                                                     </label>
+                                                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="66j-JI-5fM">
+                                                                                        <rect key="frame" x="199" y="5" width="51" height="31"/>
+                                                                                        <connections>
+                                                                                            <action selector="useOtherWebsiteToggled" destination="Tq3-HM-EmX" eventType="valueChanged" id="Lfo-aY-J3Z"/>
+                                                                                        </connections>
+                                                                                    </switch>
                                                                                 </subviews>
                                                                             </stackView>
                                                                         </subviews>
                                                                         <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                                                                         <constraints>
-                                                                            <constraint firstItem="Jok-c9-3hB" firstAttribute="top" secondItem="ePm-tS-WOz" secondAttribute="topMargin" id="4AV-h1-v38"/>
-                                                                            <constraint firstAttribute="bottomMargin" secondItem="Jok-c9-3hB" secondAttribute="bottom" id="AT5-yS-Gaf"/>
-                                                                            <constraint firstAttribute="trailingMargin" secondItem="Jok-c9-3hB" secondAttribute="trailing" id="lJs-Eb-MUh"/>
-                                                                            <constraint firstItem="Jok-c9-3hB" firstAttribute="leading" secondItem="ePm-tS-WOz" secondAttribute="leadingMargin" id="qs1-Pz-Gec"/>
+                                                                            <constraint firstItem="Fuv-fy-wmh" firstAttribute="top" secondItem="rHJ-b8-6TZ" secondAttribute="topMargin" id="M2O-af-bKK"/>
+                                                                            <constraint firstItem="Fuv-fy-wmh" firstAttribute="trailing" secondItem="rHJ-b8-6TZ" secondAttribute="trailingMargin" id="Qaq-1r-nwV"/>
+                                                                            <constraint firstItem="Fuv-fy-wmh" firstAttribute="leading" secondItem="rHJ-b8-6TZ" secondAttribute="leadingMargin" id="lTb-Jc-I3E"/>
+                                                                            <constraint firstAttribute="bottomMargin" secondItem="Fuv-fy-wmh" secondAttribute="bottom" id="qA2-jL-8lO"/>
                                                                         </constraints>
-                                                                    </view>
-                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y5e-oZ-bpV">
-                                                                        <rect key="frame" x="0.0" y="169.5" width="280" height="57"/>
-                                                                        <subviews>
-                                                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="KF1-Go-V32">
-                                                                                <rect key="frame" x="8" y="8" width="264" height="41"/>
-                                                                                <subviews>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Passwort:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mgm-I3-r3I">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="128" height="41"/>
-                                                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                                        <color key="textColor" systemColor="secondaryLabelColor"/>
-                                                                                        <nil key="highlightedColor"/>
-                                                                                        <userDefinedRuntimeAttributes>
-                                                                                            <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="login.placeholder.password:"/>
-                                                                                        </userDefinedRuntimeAttributes>
-                                                                                    </label>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="correct horse battery staple" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="peM-gM-8Uf">
-                                                                                        <rect key="frame" x="136" y="0.0" width="128" height="41"/>
-                                                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                                        <nil key="textColor"/>
-                                                                                        <nil key="highlightedColor"/>
-                                                                                    </label>
-                                                                                </subviews>
-                                                                            </stackView>
-                                                                        </subviews>
-                                                                        <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
-                                                                        <constraints>
-                                                                            <constraint firstItem="KF1-Go-V32" firstAttribute="leading" secondItem="Y5e-oZ-bpV" secondAttribute="leadingMargin" id="DmS-3I-gEk"/>
-                                                                            <constraint firstItem="KF1-Go-V32" firstAttribute="top" secondItem="Y5e-oZ-bpV" secondAttribute="topMargin" id="Nkq-LM-Rix"/>
-                                                                            <constraint firstAttribute="bottomMargin" secondItem="KF1-Go-V32" secondAttribute="bottom" id="Q9o-4Q-wnF"/>
-                                                                            <constraint firstAttribute="trailingMargin" secondItem="KF1-Go-V32" secondAttribute="trailing" id="VMS-mI-2dg"/>
-                                                                        </constraints>
+                                                                        <directionalEdgeInsets key="directionalLayoutMargins" top="12" leading="8" bottom="12" trailing="8"/>
                                                                     </view>
                                                                 </subviews>
                                                             </stackView>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dJv-m8-96G">
-                                                                <rect key="frame" x="0.0" y="400.5" width="280" height="33"/>
+                                                                <rect key="frame" x="0.0" y="224" width="280" height="33"/>
                                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                                <state key="normal" title="Erstellen/Einloggen"/>
+                                                                <state key="normal" title="Registrieren"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="register.create_account"/>
+                                                                </userDefinedRuntimeAttributes>
                                                                 <connections>
-                                                                    <action selector="confirm" destination="Tq3-HM-EmX" eventType="touchUpInside" id="zpa-bV-23k"/>
+                                                                    <action selector="register" destination="Tq3-HM-EmX" eventType="touchUpInside" id="zpa-bV-23k"/>
                                                                 </connections>
                                                             </button>
+                                                            <view hidden="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KRv-iI-Bsg" userLabel="Email Explanation">
+                                                                <rect key="frame" x="0.0" y="257" width="280" height="24"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Du bekommst jetzt eine E-Mail, über die du deinen Account fertig erstellen kannst." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q6D-cm-Lt7">
+                                                                        <rect key="frame" x="16" y="12" width="248" height="0.0"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                        <userDefinedRuntimeAttributes>
+                                                                            <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="register.email_explanation"/>
+                                                                        </userDefinedRuntimeAttributes>
+                                                                    </label>
+                                                                </subviews>
+                                                                <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
+                                                                <constraints>
+                                                                    <constraint firstItem="Q6D-cm-Lt7" firstAttribute="leading" secondItem="KRv-iI-Bsg" secondAttribute="leadingMargin" id="4Ab-tg-V2R"/>
+                                                                    <constraint firstAttribute="bottomMargin" secondItem="Q6D-cm-Lt7" secondAttribute="bottom" id="JbH-5f-V2e"/>
+                                                                    <constraint firstItem="Q6D-cm-Lt7" firstAttribute="top" secondItem="KRv-iI-Bsg" secondAttribute="topMargin" id="WPl-wP-c0h"/>
+                                                                    <constraint firstAttribute="trailingMargin" secondItem="Q6D-cm-Lt7" secondAttribute="trailing" id="hde-89-C2Y"/>
+                                                                </constraints>
+                                                                <directionalEdgeInsets key="directionalLayoutMargins" top="12" leading="8" bottom="12" trailing="8"/>
+                                                            </view>
                                                         </subviews>
                                                     </stackView>
                                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="q8q-zS-Wu7">
-                                                        <rect key="frame" x="130" y="223" width="20" height="20"/>
+                                                        <rect key="frame" x="130" y="134.5" width="20" height="20"/>
                                                     </activityIndicatorView>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstItem="JWA-lF-zxC" firstAttribute="leading" secondItem="V0m-7o-pqY" secondAttribute="leading" id="ETT-hD-T9D"/>
-                                                    <constraint firstItem="JWA-lF-zxC" firstAttribute="top" secondItem="V0m-7o-pqY" secondAttribute="topMargin" constant="8" id="HQ6-CL-HZu"/>
-                                                    <constraint firstAttribute="bottomMargin" secondItem="JWA-lF-zxC" secondAttribute="bottom" constant="8" id="WbE-7Z-M7z"/>
+                                                    <constraint firstItem="JWA-lF-zxC" firstAttribute="top" secondItem="V0m-7o-pqY" secondAttribute="topMargin" id="HQ6-CL-HZu"/>
+                                                    <constraint firstAttribute="bottomMargin" secondItem="JWA-lF-zxC" secondAttribute="bottom" id="WbE-7Z-M7z"/>
                                                     <constraint firstItem="q8q-zS-Wu7" firstAttribute="centerX" secondItem="JWA-lF-zxC" secondAttribute="centerX" id="bpw-yk-Y7p"/>
                                                     <constraint firstAttribute="width" constant="280" id="hPC-ZN-w7d"/>
                                                     <constraint firstItem="q8q-zS-Wu7" firstAttribute="centerY" secondItem="JWA-lF-zxC" secondAttribute="centerY" id="sha-sU-e96"/>
                                                     <constraint firstAttribute="trailing" secondItem="JWA-lF-zxC" secondAttribute="trailing" id="wGR-CZ-ZE6"/>
                                                 </constraints>
+                                                <directionalEdgeInsets key="directionalLayoutMargins" top="16" leading="16" bottom="16" trailing="16"/>
                                             </view>
                                         </subviews>
                                         <constraints>
@@ -3192,14 +3175,13 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="q8q-zS-Wu7" id="bxC-Hb-lPB"/>
-                        <outlet property="familyNameField" destination="Joa-of-T6J" id="f7W-7B-1fE"/>
-                        <outlet property="givenNameField" destination="zbx-Tk-tfj" id="COL-dV-GZN"/>
-                        <outlet property="labelView" destination="iv5-QI-1pP" id="7dd-t9-9B4"/>
-                        <outlet property="loginButton" destination="dJv-m8-96G" id="WvN-OD-SSs"/>
-                        <outlet property="loginWindowView" destination="V0m-7o-pqY" id="JAK-Qh-4GO"/>
-                        <outlet property="passwordLabel" destination="peM-gM-8Uf" id="7RR-nE-ljv"/>
-                        <outlet property="textFieldView" destination="TfC-jL-MBM" id="nd2-hs-ve4"/>
-                        <outlet property="usernameLabel" destination="YV1-mR-oKo" id="kEg-fk-eLE"/>
+                        <outlet property="emailExplanation" destination="KRv-iI-Bsg" id="Feo-Hv-FVL"/>
+                        <outlet property="emailField" destination="zbx-Tk-tfj" id="Kci-Tw-eDx"/>
+                        <outlet property="formView" destination="JWA-lF-zxC" id="H5U-0A-ccb"/>
+                        <outlet property="registerButton" destination="dJv-m8-96G" id="IQT-ur-nVH"/>
+                        <outlet property="useOtherWebsiteSwitch" destination="66j-JI-5fM" id="T3D-xl-tdJ"/>
+                        <outlet property="websiteField" destination="6nE-qh-UuP" id="UlQ-8d-f9y"/>
+                        <outlet property="windowView" destination="V0m-7o-pqY" id="Hcq-8p-bng"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qPw-e0-cLz" userLabel="First Responder" sceneMemberID="firstResponder"/>

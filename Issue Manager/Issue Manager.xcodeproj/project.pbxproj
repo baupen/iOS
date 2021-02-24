@@ -74,8 +74,7 @@
 		95890A5D21B2E4D600510E44 /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95890A5C21B2E4D600510E44 /* Haptics.swift */; };
 		958AE1B221AE2E40008EBD95 /* DrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958AE1B121AE2E40008EBD95 /* DrawingView.swift */; };
 		9597935020F7AC2400AA40C1 /* Status+Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9597934F20F7AC2400AA40C1 /* Status+Assets.swift */; };
-		959E8A1E21EE9A7D00C29503 /* TrialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959E8A1D21EE9A7C00C29503 /* TrialViewController.swift */; };
-		959E8A2021EE9C4A00C29503 /* TrialRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959E8A1F21EE9C4A00C29503 /* TrialRequest.swift */; };
+		959E8A1E21EE9A7D00C29503 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959E8A1D21EE9A7C00C29503 /* RegisterViewController.swift */; };
 		95A66C7A20F9181D008F10DA /* ViewIssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A66C7920F9181D008F10DA /* ViewIssueViewController.swift */; };
 		95A995CB20FD3BED006A1EE8 /* LightboxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A995CA20FD3BED006A1EE8 /* LightboxViewController.swift */; };
 		95AA606920EEFA700067A656 /* MapHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AA606820EEFA700067A656 /* MapHolder.swift */; };
@@ -103,6 +102,7 @@
 		95FC9DC121080BB700044C93 /* RefreshingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FC9DC021080BB700044C93 /* RefreshingTableViewController.swift */; };
 		B9028E2025E3FFF100D0FCEC /* QRScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9028E1F25E3FFF100D0FCEC /* QRScannerView.swift */; };
 		B90A4ED325DE155300EB56C4 /* Hydra.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90A4ED225DE155300EB56C4 /* Hydra.swift */; };
+		B9124DC825E6EE2800F4D41D /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9124DC725E6EE2800F4D41D /* Register.swift */; };
 		B937766B2394BEA6009CB22D /* NSLayoutConstraint+Legacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B937766A2394BEA6009CB22D /* NSLayoutConstraint+Legacy.swift */; };
 		B9C04D4D24453FF5008EDDEE /* UserDefault in Frameworks */ = {isa = PBXBuildFile; productRef = B9C04D4C24453FF5008EDDEE /* UserDefault */; };
 		B9D9B36323917FC400947CE5 /* PassThroughView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D9B36223917FC400947CE5 /* PassThroughView.swift */; };
@@ -216,8 +216,7 @@
 		95890A5C21B2E4D600510E44 /* Haptics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
 		958AE1B121AE2E40008EBD95 /* DrawingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingView.swift; sourceTree = "<group>"; };
 		9597934F20F7AC2400AA40C1 /* Status+Assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Status+Assets.swift"; sourceTree = "<group>"; };
-		959E8A1D21EE9A7C00C29503 /* TrialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrialViewController.swift; sourceTree = "<group>"; };
-		959E8A1F21EE9C4A00C29503 /* TrialRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrialRequest.swift; sourceTree = "<group>"; };
+		959E8A1D21EE9A7C00C29503 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		95A66C7920F9181D008F10DA /* ViewIssueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewIssueViewController.swift; sourceTree = "<group>"; };
 		95A995CA20FD3BED006A1EE8 /* LightboxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightboxViewController.swift; sourceTree = "<group>"; };
 		95AA606820EEFA700067A656 /* MapHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapHolder.swift; sourceTree = "<group>"; };
@@ -245,6 +244,7 @@
 		95FC9DC021080BB700044C93 /* RefreshingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshingTableViewController.swift; sourceTree = "<group>"; };
 		B9028E1F25E3FFF100D0FCEC /* QRScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerView.swift; sourceTree = "<group>"; };
 		B90A4ED225DE155300EB56C4 /* Hydra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hydra.swift; sourceTree = "<group>"; };
+		B9124DC725E6EE2800F4D41D /* Register.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };
 		B937766A2394BEA6009CB22D /* NSLayoutConstraint+Legacy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Legacy.swift"; sourceTree = "<group>"; };
 		B9D9B36223917FC400947CE5 /* PassThroughView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassThroughView.swift; sourceTree = "<group>"; };
 		B9DF853F25E187A800408CA3 /* ObjectID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectID.swift; sourceTree = "<group>"; };
@@ -373,7 +373,7 @@
 			children = (
 				95AB959220E572C900A0AE8D /* LoginViewController.swift */,
 				9584F24D20E936ED00A8C884 /* LoginWindowView.swift */,
-				959E8A1D21EE9A7C00C29503 /* TrialViewController.swift */,
+				959E8A1D21EE9A7C00C29503 /* RegisterViewController.swift */,
 				B9028E1F25E3FFF100D0FCEC /* QRScannerView.swift */,
 			);
 			path = Login;
@@ -516,11 +516,11 @@
 			isa = PBXGroup;
 			children = (
 				95B9BA6520DEC7FA00261954 /* RequestHelpers.swift */,
-				959E8A1F21EE9C4A00C29503 /* TrialRequest.swift */,
 				95D1C9C720FBE07D006A9C19 /* Sync.swift */,
 				95512B0720FBEAB200878163 /* DownloadFile.swift */,
 				B9F9E5FD25E2F6ED0059A93C /* Login.swift */,
 				B9F9E5FF25E2F9B40059A93C /* GetObjects.swift */,
+				B9124DC725E6EE2800F4D41D /* Register.swift */,
 			);
 			path = "Concrete Requests";
 			sourceTree = "<group>";
@@ -829,7 +829,7 @@
 				9502842D20FAB67A00880AD7 /* EditIssueViewController.swift in Sources */,
 				B9E3071725E012C50019CFE0 /* ArrayBuilder.swift in Sources */,
 				95AA606920EEFA700067A656 /* MapHolder.swift in Sources */,
-				959E8A1E21EE9A7D00C29503 /* TrialViewController.swift in Sources */,
+				959E8A1E21EE9A7D00C29503 /* RegisterViewController.swift in Sources */,
 				95AB959320E572C900A0AE8D /* LoginViewController.swift in Sources */,
 				957E16AA20E7D81B00F3DEA1 /* SiteListViewController.swift in Sources */,
 				9502843520FACDD800880AD7 /* Suggestions.swift in Sources */,
@@ -840,6 +840,7 @@
 				9550E0E820F38D7600921387 /* StatusFilterViewController.swift in Sources */,
 				95BBF32120F26F49006E162E /* IssueCell.swift in Sources */,
 				B937766B2394BEA6009CB22D /* NSLayoutConstraint+Legacy.swift in Sources */,
+				B9124DC825E6EE2800F4D41D /* Register.swift in Sources */,
 				95EE7DFD21060CB100B603EF /* UndoBuffer.swift in Sources */,
 				950283A820E70C46001A5083 /* LocalizedStrings.swift in Sources */,
 				95512B1620FBFDE500878163 /* IssuePositioner.swift in Sources */,
@@ -849,7 +850,6 @@
 				9553707520F1A5E2005D81C8 /* IssueListViewController.swift in Sources */,
 				9511A10820DD3BD100101ADE /* Craftsman.swift in Sources */,
 				95A66C7A20F9181D008F10DA /* ViewIssueViewController.swift in Sources */,
-				959E8A2021EE9C4A00C29503 /* TrialRequest.swift in Sources */,
 				954D38D422423426008FD3B0 /* DataStore.swift in Sources */,
 				9514FC4D210545C700099EC5 /* MarkupViewController.swift in Sources */,
 				B9F9E5FE25E2F6ED0059A93C /* Login.swift in Sources */,
@@ -1025,7 +1025,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 45;
+				CURRENT_PROJECT_VERSION = 46;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 382Y6UV3L5;
 				INFOPLIST_FILE = "Issue Manager/Info.plist";
@@ -1049,7 +1049,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 45;
+				CURRENT_PROJECT_VERSION = 46;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 382Y6UV3L5;
 				INFOPLIST_FILE = "Issue Manager/Info.plist";

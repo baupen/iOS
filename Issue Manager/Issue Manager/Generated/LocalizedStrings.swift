@@ -104,6 +104,8 @@ internal enum L10n {
   internal enum Login {
     /// Aktivierungscode Scannen
     internal static let connectToWebsite = L10n.tr("Localizable", "login.connect_to_website")
+    /// Jetzt Registrieren
+    internal static let register = L10n.tr("Localizable", "login.register")
     /// Eingeloggt Bleiben
     internal static let stayLoggedIn = L10n.tr("Localizable", "login.stay_logged_in")
     internal enum Alert {
@@ -143,6 +145,10 @@ internal enum L10n {
       internal static let username = L10n.tr("Localizable", "login.placeholder.username")
       /// Website
       internal static let website = L10n.tr("Localizable", "login.placeholder.website")
+    }
+    internal enum Register {
+      /// Noch nicht registriert?
+      internal static let header = L10n.tr("Localizable", "login.register.header")
     }
     internal enum Scan {
       /// Abbrechen
@@ -219,6 +225,49 @@ internal enum L10n {
     internal static let title = L10n.tr("Localizable", "markup.title")
   }
 
+  internal enum Register {
+    /// Zurück zum Login
+    internal static let backToLogin = L10n.tr("Localizable", "register.back_to_login")
+    /// Registrieren
+    internal static let createAccount = L10n.tr("Localizable", "register.create_account")
+    /// Auf anderer Website registrieren
+    internal static let customizeWebsite = L10n.tr("Localizable", "register.customize_website")
+    /// Du bekommst jetzt eine E-Mail, über die du deinen Account fertig erstellen kannst.
+    internal static let emailExplanation = L10n.tr("Localizable", "register.email_explanation")
+    internal enum Alert {
+      internal enum InvalidEmail {
+        /// '%@' ist keine gültige E-Mail-Adresse. Hast du dich vertippt?
+        internal static func message(_ p1: Any) -> String {
+          return L10n.tr("Localizable", "register.alert.invalid_email.message", String(describing: p1))
+        }
+        /// Ungültige E-Mail!
+        internal static let title = L10n.tr("Localizable", "register.alert.invalid_email.title")
+      }
+      internal enum InvalidWebsite {
+        /// '%@' ist keine gültige Web-Adresse. Hast du dich vertippt?
+        internal static func message(_ p1: Any) -> String {
+          return L10n.tr("Localizable", "register.alert.invalid_website.message", String(describing: p1))
+        }
+        /// Ungültige Website!
+        internal static let title = L10n.tr("Localizable", "register.alert.invalid_website.title")
+      }
+      internal enum UnknownError {
+        /// Es ist beim Kommunizieren mit der Website ein unbekannter Fehler aufgetreten.\n\nFalls der Fehler bestehen bleibt, könnte der folgende Text dem Support behilflich sein:\n%@
+        internal static func message(_ p1: Any) -> String {
+          return L10n.tr("Localizable", "register.alert.unknown_error.message", String(describing: p1))
+        }
+        /// Fehler beim Registrieren!
+        internal static let title = L10n.tr("Localizable", "register.alert.unknown_error.title")
+      }
+    }
+    internal enum Placeholder {
+      /// E-Mail
+      internal static let email = L10n.tr("Localizable", "register.placeholder.email")
+      /// Website
+      internal static let website = L10n.tr("Localizable", "register.placeholder.website")
+    }
+  }
+
   internal enum SiteList {
     /// Ausloggen
     internal static let logOut = L10n.tr("Localizable", "site_list.log_out")
@@ -245,23 +294,6 @@ internal enum L10n {
       internal static func totalIssues(_ p1: Any) -> String {
         return L10n.tr("Localizable", "site_list.site_summary.total_issues", String(describing: p1))
       }
-    }
-  }
-
-  internal enum Trial {
-    /// Zurück zum Login
-    internal static let backToLogin = L10n.tr("Localizable", "trial.back_to_login")
-    /// Probekonto Erstellen
-    internal static let createAccount = L10n.tr("Localizable", "trial.create_account")
-    /// Du hast ein Probekonto erstellt. Die Anmeldung erfolgt mit den folgenden Daten, die du auch auf www.app.mangel.io verwenden kannst.
-    internal static let existingAccountHint = L10n.tr("Localizable", "trial.existing_account_hint")
-    /// Einloggen
-    internal static let logIn = L10n.tr("Localizable", "trial.log_in")
-    internal enum Placeholder {
-      /// Nachname
-      internal static let familyName = L10n.tr("Localizable", "trial.placeholder.family_name")
-      /// Vorname
-      internal static let givenName = L10n.tr("Localizable", "trial.placeholder.given_name")
     }
   }
 

@@ -130,6 +130,10 @@
 "login.placeholder.username" = "Benutzername";
 // CONTEXT: Platzhalter für die Website, an die die App sich anbinden wird, im Login-Screen
 "login.placeholder.website" = "Website";
+// CONTEXT: Knopf, um auf die Ansicht zu kommen, wo man sich registrieren kann.
+"login.register" = "Jetzt Registrieren";
+// CONTEXT: Überschrift für den Registrierungsknopf
+"login.register.header" = "Noch nicht registriert?";
 // CONTEXT: Knopf, um das Scannen des Aktivierungscodes abzubrechen.
 "login.scan.cancel" = "Abbrechen";
 // CONTEXT: Anleitung in der Ansicht zum Aktivierungscode (QR) scannen.
@@ -202,6 +206,48 @@
 "markup.title" = "Zeichnen";
 
 ////////////////////////////////////////////////////////////////////////////////
+// MARK: Register.alert.invalid
+// CONTEXT: Nachricht für den Alert, dass die Nutzer-eingegebene E-Mail ungültig ist.
+"register.alert.invalid_email.message" = "'%@' ist keine gültige E-Mail-Adresse. Hast du dich vertippt?";
+// CONTEXT: Titel für den Alert, dass die Nutzer-eingegebene E-Mail ungültig ist.
+"register.alert.invalid_email.title" = "Ungültige E-Mail!";
+// CONTEXT: Nachricht für den Alert, dass die Nutzer-eingegebene Website ungültig ist.
+"register.alert.invalid_website.message" = "'%@' ist keine gültige Web-Adresse. Hast du dich vertippt?";
+// CONTEXT: Titel für den Alert, dass die Nutzer-eingegebene Website ungültig ist.
+"register.alert.invalid_website.title" = "Ungültige Website!";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Register.alert.unknown
+// CONTEXT: Nachricht für den Alert, dass beim Registrieren ein unbekannter Fehler aufgetreten ist.
+"register.alert.unknown_error.message" = "Es ist beim Kommunizieren mit der Website ein unbekannter Fehler aufgetreten.\n\nFalls der Fehler bestehen bleibt, könnte der folgende Text dem Support behilflich sein:\n%@";
+// CONTEXT: Titel für den Alert, dass beim Registrieren ein unbekannter Fehler aufgetreten ist.
+"register.alert.unknown_error.title" = "Fehler beim Registrieren!";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Register.back
+// CONTEXT: Knopf, um wieder zurück zum Login-Screen zu kommen.
+"register.back_to_login" = "Zurück zum Login";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Register.create
+// CONTEXT: Knopf, um ein neues Probekonto (zum ausprobieren) zu erstellen.
+"register.create_account" = "Registrieren";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Register.customize
+// CONTEXT: Beschriftung für den Schalter, um sich bei einer anderen Website als app.mangel.io zu registrieren.
+"register.customize_website" = "Auf anderer Website registrieren";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Register.email
+// CONTEXT: Erklärung für die weiteren Schritte nach dem Registrieren in der App.
+"register.email_explanation" = "Du bekommst jetzt eine E-Mail, über die du deinen Account fertig erstellen kannst.";
+// CONTEXT: Platzhalter für das Textfeld, wo man beim Registrieren seine E-Mail eingibt.
+"register.placeholder.email" = "E-Mail";
+// CONTEXT: Platzhalter für das Textfeld, wo man beim Registrieren die Website angibt, bei der man sich registrieren will.
+"register.placeholder.website" = "Website";
+
+////////////////////////////////////////////////////////////////////////////////
 // MARK: Site
 // CONTEXT: Beschreibung für den Abnahmemodus
 "site_list.client_mode.description" = "Im Abnahmemodus werden nur die Pendenzen angezeigt, die auch im Abnahmemodus erfasst wurden.";
@@ -219,36 +265,6 @@
 "site_list.title" = "Baustellen";
 // CONTEXT: Der Willkommenstext oben. %s wird mit dem Vornamen ersetzt.
 "site_list.welcome" = "Willkommen, %@";
-
-////////////////////////////////////////////////////////////////////////////////
-// MARK: Trial.back
-// CONTEXT: Knopf, um wieder zurück zum Login-Screen zu kommen.
-"trial.back_to_login" = "Zurück zum Login";
-
-////////////////////////////////////////////////////////////////////////////////
-// MARK: Trial.create
-// CONTEXT: Knopf, um ein neues Probekonto (zum ausprobieren) zu erstellen.
-"trial.create_account" = "Probekonto Erstellen";
-
-////////////////////////////////////////////////////////////////////////////////
-// MARK: Trial.existing
-// CONTEXT: Text, der beschreibt, dass man schon ein Probekonto erstellt hat und sich damit auch auf www.mangel.io anmelden kann.
-"trial.existing_account_hint" = "Du hast ein Probekonto erstellt. Die Anmeldung erfolgt mit den folgenden Daten, die du auch auf www.app.mangel.io verwenden kannst.";
-
-////////////////////////////////////////////////////////////////////////////////
-// MARK: Trial.log
-// CONTEXT: Knopf, um sich in ein bestehendes Probekonto einzuloggen.
-"trial.log_in" = "Einloggen";
-
-////////////////////////////////////////////////////////////////////////////////
-// MARK: Trial.placeholder.family
-// CONTEXT: Platzhalter für den Nachnamen im Trial-Screen
-"trial.placeholder.family_name" = "Nachname";
-
-////////////////////////////////////////////////////////////////////////////////
-// MARK: Trial.placeholder.given
-// CONTEXT: Platzhalter für den Vornamen im Trial-Screen
-"trial.placeholder.given_name" = "Vorname";
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: View
