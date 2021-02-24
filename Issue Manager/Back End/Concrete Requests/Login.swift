@@ -27,5 +27,8 @@ extension Client {
 				self.loginInfo = loginInfo // set again in case something else changed it since
 				self.localUser = $0.makeObject()
 			}
+			.catch { _ in
+				self.loginInfo = nil
+			}
 	}
 }
