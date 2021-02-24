@@ -127,9 +127,14 @@ extension Client {
 			doPullChangedObjects(existing: ConstructionManager.all(), context: ())
 				.ignoringValue()
 				.map { self.localUser = Repository.shared.object(self.localUser!.id) },
-			doPullChangedObjects(existing: ConstructionSite.all(), context: ())
+			doPullChangedObjects(existing: ConstructionSite.none(), context: ())
 				.flatMap { $0.traverse(self.doPullRemoteChanges(for:)) }
 		].sequence()
+	}
+	
+	private func doPullChangedSites() -> Future<[ConstructionSite]> {
+		send(GetObjectsRequest<ConstructionSite>())
+			.map { $0.members.map { $0.makeObject() } }
 	}
 	
 	private func doPullChangedObjects<Object: StoredObject>(
@@ -146,7 +151,12 @@ extension Client {
 	}
 	
 	private func doPullRemoteChanges(for site: ConstructionSite) -> Future<Void> {
-		[
+		guard site.managers.contains(localUser!.id) else {
+			Repository.shared.ensureNotPresent(site)
+			return .fulfilled
+		}
+		
+		return [
 			doPullChangedObjects(for: site, existing: site.maps, context: site.id)
 				.ignoringValue(),
 			doPullChangedObjects(for: site, existing: site.craftsmen, context: site.id)

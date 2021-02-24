@@ -57,6 +57,11 @@ final class Repository {
 		assert(wasDeleted)
 	}
 	
+	@discardableResult
+	func ensureNotPresent(_ site: ConstructionSite) -> Bool {
+		write(site.delete)
+	}
+	
 	/// saves modifications to a map
 	func save(_ map: Map) {
 		write(map.save)

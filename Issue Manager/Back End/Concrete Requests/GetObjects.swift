@@ -20,14 +20,16 @@ struct GetObjectsRequest<Object: StoredObject>: GetJSONRequest {
 	var path: String { Object.apiPath }
 	
 	var constructionSite: ConstructionSite.ID?
-	var minLastChangeTime: Date
+	var minLastChangeTime: Date?
 	
 	func collectURLQueryItems() -> [(String, Any)] {
 		if let constructionSite = constructionSite {
 			("constructionSite", constructionSite.apiString)
 		}
 		
-		("lastChangedAt[after]", Client.dateFormatter.string(from: minLastChangeTime))
+		if let minLastChangeTime = minLastChangeTime {
+			("lastChangedAt[after]", Client.dateFormatter.string(from: minLastChangeTime))
+		}
 	}
 }
 

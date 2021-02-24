@@ -69,6 +69,7 @@ final class DatabaseDataStore {
 				$0.column("name", .text).notNull()
 				$0.column("creationTime", .datetime).notNull()
 				$0.column("image", .text)
+				$0.column("managers", .blob).notNull()
 			}
 			
 			try db.create(table: "Craftsman") {
