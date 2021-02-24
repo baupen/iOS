@@ -26,25 +26,26 @@ final class ViewIssueViewController: UITableViewController, Reusable {
 	
 	@IBAction func markIssue() {
 		issue.isMarked.toggle()
-		issue.saveAndSync().then { [parent] in
-			(parent as? MapViewController)?.updateFromRepository()
-		}
+		saveChanges()
 		Haptics.mediumImpact.impactOccurred()
 		update()
 	}
 	
 	@IBAction func revertResolution() {
 		issue.revertResolution()
+		saveChanges()
 		update()
 	}
 	
 	@IBAction func closeIssue() {
 		issue.close()
+		saveChanges()
 		update()
 	}
 	
 	@IBAction func reopenIssue() {
 		issue.reopen()
+		saveChanges()
 		update()
 	}
 	
@@ -107,6 +108,12 @@ final class ViewIssueViewController: UITableViewController, Reusable {
 		
 		DispatchQueue.main.async {
 			self.tableView.performBatchUpdates(nil) // invalidate previously calculated row heights
+		}
+	}
+	
+	private func saveChanges() {
+		issue.saveAndSync().then { [parent] in
+			(parent as? MapViewController)?.updateFromRepository()
 		}
 	}
 	
