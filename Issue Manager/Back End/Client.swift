@@ -15,14 +15,7 @@ final class Client {
 	@UserDefault("client.loginInfo") var loginInfo: LoginInfo?
 	
 	/// the user we're currently logged in as
-	@UserDefault("client.localUser") var localUser: ConstructionManager? {
-		didSet {
-			guard let localUser = localUser else { return }
-			if let old = oldValue, localUser.id != old.id {
-				Repository.shared.resetAllData()
-			}
-		}
-	}
+	@UserDefault("client.localUser") var localUser: ConstructionManager?
 	
 	var isLoggedIn: Bool { loginInfo != nil && localUser != nil }
 	

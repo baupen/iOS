@@ -2,6 +2,7 @@
 
 import Foundation
 import GRDB
+import UserDefault
 
 final class Repository {
 	static let shared = Repository()
@@ -14,10 +15,18 @@ final class Repository {
 		shared.object(id)
 	}
 	
+	@UserDefault("repository.userID") private var userID: ConstructionManager.ID?
+	
 	private let dataStore: DatabaseDataStore
 	
 	init() {
 		self.dataStore = try! DatabaseDataStore()
+	}
+	
+	func signedIn(as manager: ConstructionManager) {
+		guard manager.id != userID else { return } // nothing changed
+		resetAllData()
+		userID = manager.id
 	}
 	
 	func resetAllData() {
@@ -106,3 +115,5 @@ final class Repository {
 		}
 	}
 }
+
+extension ObjectID: DefaultsValueConvertible {}

@@ -6,12 +6,6 @@ import Promise
 private struct SelfRequest: GetJSONRequest {
 	let path = "/api/me"
 	
-	let token: String
-	
-	func encode(using encoder: JSONEncoder, into request: inout URLRequest) throws {
-		request.setValue(token, forHTTPHeaderField: "X-Authentication")
-	}
-	
 	struct Response: Decodable {
 		var constructionManagerIri: APIObjectMeta<APIConstructionManager>.ID
 	}
@@ -20,12 +14,14 @@ private struct SelfRequest: GetJSONRequest {
 extension Client {
 	func logIn(with loginInfo: LoginInfo) -> Future<Void> {
 		self.loginInfo = loginInfo
-		return send(SelfRequest(token: loginInfo.token))
+		return send(SelfRequest())
 			.map { GetObjectRequest(for: $0.constructionManagerIri.makeID()) }
 			.flatMap(send)
 			.map {
 				self.loginInfo = loginInfo // set again in case something else changed it since
-				self.localUser = $0.makeObject()
+				let user = $0.makeObject()
+				self.localUser = user
+				Repository.shared.signedIn(as: user)
 			}
 			.catch { _ in
 				self.loginInfo = nil
