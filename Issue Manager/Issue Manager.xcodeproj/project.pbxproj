@@ -67,7 +67,6 @@
 		9583C2D820DC76F200452695 /* ConstructionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9583C2D720DC76F200452695 /* ConstructionManager.swift */; };
 		9584F24820E92DB800A8C884 /* TextFieldContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9584F24720E92DB800A8C884 /* TextFieldContainer.swift */; };
 		9584F24A20E92F8E00A8C884 /* CenteringScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9584F24920E92F8E00A8C884 /* CenteringScrollViewDelegate.swift */; };
-		9584F24C20E936BD00A8C884 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9584F24B20E936BD00A8C884 /* UserDefaults.swift */; };
 		9584F24E20E936ED00A8C884 /* LoginWindowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9584F24D20E936ED00A8C884 /* LoginWindowView.swift */; };
 		95870B2E20E9C05300BB1B39 /* MapListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95870B2D20E9C05300BB1B39 /* MapListViewController.swift */; };
 		95870B3020E9C06B00BB1B39 /* MapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95870B2F20E9C06B00BB1B39 /* MapCell.swift */; };
@@ -209,7 +208,6 @@
 		9583C2D720DC76F200452695 /* ConstructionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstructionManager.swift; sourceTree = "<group>"; };
 		9584F24720E92DB800A8C884 /* TextFieldContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldContainer.swift; sourceTree = "<group>"; };
 		9584F24920E92F8E00A8C884 /* CenteringScrollViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenteringScrollViewDelegate.swift; sourceTree = "<group>"; };
-		9584F24B20E936BD00A8C884 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		9584F24D20E936ED00A8C884 /* LoginWindowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWindowView.swift; sourceTree = "<group>"; };
 		95870B2D20E9C05300BB1B39 /* MapListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapListViewController.swift; sourceTree = "<group>"; };
 		95870B2F20E9C06B00BB1B39 /* MapCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCell.swift; sourceTree = "<group>"; };
@@ -465,7 +463,6 @@
 				95B2735220DE7AD600D2BD44 /* Multipart.swift */,
 				9511A11E20DD4F5600101ADE /* Client.swift */,
 				B9E3071225DF6C440019CFE0 /* ConcurrencyLimiter.swift */,
-				9584F24B20E936BD00A8C884 /* UserDefaults.swift */,
 			);
 			path = "Back End";
 			sourceTree = "<group>";
@@ -797,7 +794,6 @@
 				95512B1820FC22D200878163 /* CameraView.swift in Sources */,
 				953AAD1D227C514100359D9B /* APIModel.swift in Sources */,
 				9550E0E620F2E70700921387 /* IssueMarker.swift in Sources */,
-				9584F24C20E936BD00A8C884 /* UserDefaults.swift in Sources */,
 				95870B2E20E9C05300BB1B39 /* MapListViewController.swift in Sources */,
 				B9F9E60225E2F9F50059A93C /* IssuePatch.swift in Sources */,
 				95D1C9C820FBE07D006A9C19 /* Sync.swift in Sources */,

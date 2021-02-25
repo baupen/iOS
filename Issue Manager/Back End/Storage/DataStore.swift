@@ -6,6 +6,10 @@ import GRDB
 final class DatabaseDataStore {
 	private static let databaseURL = documentsURL.appendingPathComponent("db/main.sqlite")
 	
+	static func databaseFileExists() -> Bool {
+		FileManager.default.fileExists(atPath: databaseURL.path)
+	}
+	
 	static func wipeData() {
 		try? FileManager.default.removeItem(at: databaseURL)
 	}

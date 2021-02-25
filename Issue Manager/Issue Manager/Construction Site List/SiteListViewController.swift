@@ -12,7 +12,7 @@ final class SiteListViewController: RefreshingTableViewController, Reusable {
 	@IBOutlet private var refreshHintLabel: UILabel!
 	
 	@IBAction func clientModeSwitched() {
-		defaults.isInClientMode = clientModeSwitch.isOn
+		Issue.isInClientMode = clientModeSwitch.isOn
 		updateClientModeAppearance()
 		siteListView.reloadData()
 	}
@@ -42,7 +42,7 @@ final class SiteListViewController: RefreshingTableViewController, Reusable {
 		let user = Client.shared.localUser!
 		welcomeLabel.text = Localization.welcome(user.givenName)
 		
-		clientModeSwitch.isOn = defaults.isInClientMode
+		clientModeSwitch.isOn = Issue.isInClientMode
 		updateClientModeAppearance()
 		
 		updateContent()
@@ -79,7 +79,7 @@ final class SiteListViewController: RefreshingTableViewController, Reusable {
 	}
 	
 	func updateClientModeAppearance() {
-		let color = defaults.isInClientMode ? UIColor.clientMode : nil
+		let color = Issue.isInClientMode ? UIColor.clientMode : nil
 		UIView.animate(withDuration: 0.1) {
 			self.clientModeCell.backgroundColor = color
 		}

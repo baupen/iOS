@@ -6,6 +6,7 @@ import SimplePDFKit
 import PullToExpand
 import Promise
 import CGeometry
+import UserDefault
 
 final class MapViewController: UIViewController, Reusable {
 	typealias Localization = L10n.Map
@@ -95,14 +96,16 @@ final class MapViewController: UIViewController, Reusable {
 			updateMarkerAppearance()
 			filterItem.image = visibleStatuses == Issue.allStatuses ? #imageLiteral(resourceName: "filter_disabled.pdf") : #imageLiteral(resourceName: "filter_enabled.pdf")
 			issueListController.visibleStatuses = visibleStatuses
-			defaults.hiddenStatuses = Array(Issue.allStatuses.subtracting(visibleStatuses))
+			hiddenStatuses = Array(Issue.allStatuses.subtracting(visibleStatuses))
 		}
 	}
+	
+	@UserDefault("hiddenStatuses") var hiddenStatuses: [Issue.Status.Simplified] = []
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		visibleStatuses = Issue.allStatuses.subtracting(defaults.hiddenStatuses)
+		visibleStatuses = Issue.allStatuses.subtracting(hiddenStatuses)
 		update()
 	}
 	
@@ -351,3 +354,5 @@ extension MapViewController: UIAdaptivePresentationControllerDelegate {
 extension Issue {
 	static let allStatuses = Set(Issue.Status.Simplified.allCases)
 }
+
+extension Issue.Status.Simplified: DefaultsValueConvertible {}

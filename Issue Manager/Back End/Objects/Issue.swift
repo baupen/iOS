@@ -3,8 +3,11 @@
 import Foundation
 import GRDB
 import Promise
+import UserDefault
 
 struct Issue: Equatable {
+	@UserDefault("isInClientMode") static var isInClientMode = false
+	
 	private(set) var meta: Meta
 	let constructionSiteID: ConstructionSite.ID
 	let mapID: Map.ID?
@@ -114,7 +117,7 @@ extension Issue {
 		
 		self.position = position
 		self.number = nil
-		self.wasAddedWithClient = defaults.isInClientMode
+		self.wasAddedWithClient = Self.isInClientMode
 		self.deadline = nil
 		
 		self.wasUploaded = false
@@ -220,7 +223,7 @@ extension Issue: DBRecord {
 
 extension DerivableRequest where RowDecoder == Issue {
 	var consideringClientMode: Self {
-		defaults.isInClientMode ? filter(Issue.Columns.wasAddedWithClient) : self
+		Issue.isInClientMode ? filter(Issue.Columns.wasAddedWithClient) : self
 	}
 	
 	var openIssues: Self {

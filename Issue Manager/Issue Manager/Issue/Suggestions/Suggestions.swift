@@ -1,6 +1,7 @@
 // Created by Julian Dunskus
 
 import Foundation
+import UserDefault
 
 final class Suggestion: Codable {
 	var text: String
@@ -26,6 +27,9 @@ final class Suggestion: Codable {
 final class SuggestionStorage {
 	static let shared = SuggestionStorage()
 	
+	@UserDefault("suggestions")
+	private static var rawSuggestions: Data?
+	
 	private var storage: [String: [Suggestion]] {
 		didSet { save() }
 	}
@@ -36,7 +40,7 @@ final class SuggestionStorage {
 	init() {
 		do {
 			let raw: Data
-			if let data = defaults.rawSuggestions {
+			if let data = Self.rawSuggestions {
 				raw = data
 			} else {
 				print("Loading default suggestions…")
@@ -57,7 +61,7 @@ final class SuggestionStorage {
 		savingQueue.async { [storage] in
 			do {
 				let raw = try self.encoder.encode(storage)
-				defaults.rawSuggestions = raw
+				Self.rawSuggestions = raw
 				print("Suggestions saved!")
 			} catch {
 				error.printDetails(context: "Could not save suggestions!")

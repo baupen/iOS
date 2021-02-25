@@ -3,6 +3,7 @@
 import UIKit
 import GRDB
 import Promise
+import UserDefault
 
 final class EditIssueNavigationController: UINavigationController {
 	var editIssueController: EditIssueViewController {
@@ -114,6 +115,8 @@ final class EditIssueViewController: UITableViewController, Reusable {
 	
 	private var suggestionsHandler = SuggestionsHandler()
 	
+	@UserDefault("hasTakenPhoto") private var hasTakenPhoto = false
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -123,7 +126,7 @@ final class EditIssueViewController: UITableViewController, Reusable {
 		
 		cameraView.delegate = self
 		
-		cameraControlHintView.isHidden = defaults.hasTakenPhoto
+		cameraControlHintView.isHidden = hasTakenPhoto
 		
 		update()
 		
@@ -302,7 +305,7 @@ extension EditIssueViewController: CameraViewDelegate {
 	}
 	
 	func pictureTaken(_ image: UIImage) {
-		defaults.hasTakenPhoto = true
+		hasTakenPhoto = true
 		cameraControlHintView.isHidden = true
 		store(image)
 	}
