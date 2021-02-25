@@ -91,18 +91,18 @@ final class ViewIssueViewController: UITableViewController, Reusable {
 		
 		let status = issue.status.simplified
 		completeButton.isShown = status == .registered
-		rejectButton.isShown = status == .responded
-		acceptButton.isShown = status == .responded
-		reopenButton.isShown = status == .reviewed
+		rejectButton.isShown = status == .resolved
+		acceptButton.isShown = status == .resolved
+		reopenButton.isShown = status == .closed
 		
 		switch status {
 		case .new:
 			break // shouldn't happen anyway after adding edit view
 		case .registered:
 			summaryLabel.text = Localization.Summary.noResponse
-		case .responded:
+		case .resolved:
 			summaryLabel.text = Localization.Summary.hasResponse
-		case .reviewed:
+		case .closed:
 			summaryLabel.text = Localization.Summary.reviewed
 		}
 		

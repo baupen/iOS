@@ -77,9 +77,9 @@ struct Issue: Equatable {
 		
 		var simplified: Simplified {
 			if closedAt != nil {
-				return .reviewed
+				return .closed
 			} else if resolvedAt != nil {
-				return .responded
+				return .resolved
 			} else if registeredAt != nil {
 				return .registered
 			} else {
@@ -89,7 +89,7 @@ struct Issue: Equatable {
 		
 		/// a simplified representation of the status
 		enum Simplified: Int, Codable, CaseIterable {
-			case new, registered, responded, reviewed
+			case new, registered, resolved, closed
 		}
 		
 		enum Columns {

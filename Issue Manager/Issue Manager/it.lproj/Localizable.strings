@@ -54,6 +54,13 @@
 "issue.no_description" = "Nessuna descrizione";
 // CONTEXT: Überschrift für den Status.
 "issue.status" = "Stato";
+// CONTEXT: Status einer Pendenz, die abgeschlossen ist.
+"issue.status.closed" = "Terminata";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Issue.status.closed
+// CONTEXT: Beschreibt genauer, wie die Pendenz bestätigt wurde. %s wird durch den Namen des Bestätigers ersetzt.
+"issue.status.closed_by" = "Confermata da %@";
 // CONTEXT: Status einer Pendenz, die noch nicht im Verzeichnis (also noch editierbar) ist.
 "issue.status.new" = "Nuova";
 // CONTEXT: Status einer Pendenz, die ins Verzeichnis aufgenommen wurde, aber sonst noch nichts.
@@ -64,19 +71,12 @@
 // CONTEXT: Beschreibt genauer, wie die Pendenz registriert wurde. %s wird durch den Namen des Registrierers ersetzt.
 "issue.status.registered_by" = "Registrata da %@";
 // CONTEXT: Status einer Pendenz, die vom Handwerker beantwortet wurde.
-"issue.status.responded" = "Pendenza risposta";
+"issue.status.resolved" = "Pendenza risposta";
 
 ////////////////////////////////////////////////////////////////////////////////
-// MARK: Issue.status.responded
+// MARK: Issue.status.resolved
 // CONTEXT: Beschreibt genauer, wie die Pendenz beantwortet wurde. %s wird durch den Namen des Beantworters ersetzt.
-"issue.status.responded_by" = "Pendenza risposta da %@";
-// CONTEXT: Status einer Pendenz, die abgeschlossen ist.
-"issue.status.reviewed" = "Terminata";
-
-////////////////////////////////////////////////////////////////////////////////
-// MARK: Issue.status.reviewed
-// CONTEXT: Beschreibt genauer, wie die Pendenz bestätigt wurde. %s wird durch den Namen des Bestätigers ersetzt.
-"issue.status.reviewed_by" = "Confermata da %@";
+"issue.status.resolved_by" = "Pendenza risposta da %@";
 // CONTEXT: Überschrift für die Funktion des verantwortlichen Handwerkers.
 "issue.trade" = "Funzione";
 // CONTEXT: Wird anstelle der Nummer (z.B. #123) angezeigt, wenn eine Pendenz noch nicht registriert ist.

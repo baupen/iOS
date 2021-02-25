@@ -78,6 +78,12 @@ internal enum L10n {
       internal static let `true` = L10n.tr("Localizable", "issue.is_client_mode.true")
     }
     internal enum Status {
+      /// Abgeschlossen
+      internal static let closed = L10n.tr("Localizable", "issue.status.closed")
+      /// Abgeschlossen von %@
+      internal static func closedBy(_ p1: Any) -> String {
+        return L10n.tr("Localizable", "issue.status.closed_by", String(describing: p1))
+      }
       /// Neu
       internal static let new = L10n.tr("Localizable", "issue.status.new")
       /// Im Verzeichnis
@@ -87,16 +93,10 @@ internal enum L10n {
         return L10n.tr("Localizable", "issue.status.registered_by", String(describing: p1))
       }
       /// Umgesetzt
-      internal static let responded = L10n.tr("Localizable", "issue.status.responded")
+      internal static let resolved = L10n.tr("Localizable", "issue.status.resolved")
       /// Umgesetzt von %@
-      internal static func respondedBy(_ p1: Any) -> String {
-        return L10n.tr("Localizable", "issue.status.responded_by", String(describing: p1))
-      }
-      /// Abgeschlossen
-      internal static let reviewed = L10n.tr("Localizable", "issue.status.reviewed")
-      /// Bestätigt von %@
-      internal static func reviewedBy(_ p1: Any) -> String {
-        return L10n.tr("Localizable", "issue.status.reviewed_by", String(describing: p1))
+      internal static func resolvedBy(_ p1: Any) -> String {
+        return L10n.tr("Localizable", "issue.status.resolved_by", String(describing: p1))
       }
     }
   }
