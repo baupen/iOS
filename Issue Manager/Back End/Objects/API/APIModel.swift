@@ -88,7 +88,7 @@ extension APIObjectMeta.ID: Codable {
 }
 
 extension ObjectID {
-	func makeModelID() -> Object.Model.ID {
+	var modelID: Object.Model.ID {
 		.init(rawValue: rawValue)
 	}
 }

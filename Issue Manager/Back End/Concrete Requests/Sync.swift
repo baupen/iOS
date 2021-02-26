@@ -10,7 +10,7 @@ private struct IssuePatchRequest: JSONJSONRequest {
 	static let contentType: String? = "application/merge-patch+json"
 	
 	var path: String
-	let body: IssuePatch
+	let body: APIIssuePatch
 }
 
 private struct IssueCreationRequest: JSONJSONRequest {
@@ -18,7 +18,7 @@ private struct IssueCreationRequest: JSONJSONRequest {
 	static let contentType: String? = "application/json"
 	
 	let path = Issue.apiPath
-	let body: IssuePatch
+	let body: APIIssuePatch
 }
 
 private struct ImageUploadRequest: MultipartEncodingRequest, StatusCodeRequest {
@@ -62,8 +62,8 @@ extension Client {
 		
 		try syncChanges(for: Issue.filter(Issue.Columns.patchIfChanged != nil)) { issue in
 			let result = issue.wasUploaded
-				? self.send(IssuePatchRequest(path: issue.apiPath, body: issue.patchIfChanged!))
-				: self.send(IssueCreationRequest(body: issue.patchIfChanged!))
+				? self.send(IssuePatchRequest(path: issue.apiPath, body: issue.patchIfChanged!.makeModel()))
+				: self.send(IssueCreationRequest(body: issue.patchIfChanged!.makeModel()))
 			return result.map {
 				Repository.shared.remove(issue) // remove non-canonical copy
 				Repository.shared.save($0.makeObject(context: issue.constructionSiteID) <- {

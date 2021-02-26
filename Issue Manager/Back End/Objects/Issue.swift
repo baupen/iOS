@@ -20,19 +20,19 @@ struct Issue: Equatable {
 	var isMarked = false {
 		didSet {
 			guard isMarked != oldValue else { return }
-			patch.isMarked = .some(isMarked)
+			patch.isMarked = isMarked
 		}
 	}
 	var description: String? {
 		didSet {
 			guard description != oldValue else { return }
-			patch.description = .some(description)
+			patch.description = description
 		}
 	}
 	var craftsmanID: Craftsman.ID? {
 		didSet {
 			guard craftsmanID != oldValue else { return }
-			patch.craftsman = .some(craftsmanID?.makeModelID())
+			patch.craftsmanID = craftsmanID
 		}
 	}
 	
@@ -58,6 +58,9 @@ struct Issue: Equatable {
 	struct Position: Equatable, Codable, DBRecord {
 		var point: Point
 		var zoomScale: Double
+		
+		var x: Double { point.x }
+		var y: Double { point.y }
 		
 		init(at point: Point, zoomScale: Double) {
 			self.point = point
@@ -127,14 +130,12 @@ extension Issue {
 		patch.wasAddedWithClient = wasAddedWithClient
 		
 		patch.createdAt = status.createdAt
-		patch.createdBy = status.createdBy.makeModelID()
+		patch.createdBy = status.createdBy
 		
-		patch.constructionSite = constructionSiteID.makeModelID()
-		patch.map = mapID?.makeModelID()
+		patch.constructionSiteID = constructionSiteID
+		patch.mapID = mapID
 		
-		patch.positionX = position?.point.x
-		patch.positionY = position?.point.y
-		patch.positionZoomScale = position?.zoomScale
+		patch.position = position
 	}
 }
 
@@ -269,8 +270,8 @@ extension Issue {
 		let author = Client.shared.localUser!.id
 		status.closedAt = now
 		status.closedBy = author
-		patch.closedAt = .some(now)
-		patch.closedBy = .some(author.makeModelID())
+		patch.closedAt = now
+		patch.closedBy = author
 	}
 	
 	mutating func reopen() {
@@ -279,18 +280,19 @@ extension Issue {
 		
 		status.closedAt = nil
 		status.closedBy = nil
-		patch.closedAt = .some(nil)
-		patch.closedBy = .some(nil)
+		patch.closedAt = nil
+		patch.closedBy = nil
 	}
 	
 	mutating func revertResolution() {
 		assert(isResolved)
 		assert(isOpen)
 		
+		
 		status.resolvedAt = nil
 		status.resolvedBy = nil
-		patch.resolvedAt = .some(nil)
-		patch.resolvedBy = .some(nil)
+		patch.resolvedAt = nil
+		patch.resolvedBy = nil
 	}
 	
 	mutating func delete() {
