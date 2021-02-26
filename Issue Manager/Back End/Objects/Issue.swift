@@ -124,6 +124,8 @@ extension Issue {
 		
 		self.status = .init(createdBy: Client.shared.localUser!.id)
 		
+		patch.wasAddedWithClient = wasAddedWithClient
+		
 		patch.createdAt = status.createdAt
 		patch.createdBy = status.createdBy.makeModelID()
 		
