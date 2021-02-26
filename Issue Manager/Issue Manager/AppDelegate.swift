@@ -36,7 +36,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControll
 		guard
 			let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
 			components.scheme == "mangelio"
-			else { return false }
+		else { return false }
 		
 		switch components.host {
 		case "login":
@@ -56,6 +56,14 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControll
 			return true
 		case "wipe":
 			wipeAllData()
+			
+			dismissThenPerform {
+				$0.showAlert(
+					titled: L10n.Alert.Wiped.title,
+					message: L10n.Alert.Wiped.message,
+					okMessage: L10n.Alert.Wiped.quit
+				) { exit(0) }
+			}
 			return true
 		default:
 			print("unrecognized custom url host in \(url)")
@@ -82,9 +90,23 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControll
 		}
 		
 		if let lastWipe = lastWipeVersion, lastWipe < Self.wipeVersion {
-			print("last wipe version (\(lastWipe)) is older than current wipe version (\(Self.wipeVersion).")
+			print("last wipe version (\(lastWipe)) is older than current wipe version (\(Self.wipeVersion)).")
 			wipeAllData()
 			lastWipeVersion = Self.wipeVersion
+			
+			dismissThenPerform {
+				$0.showAlert(
+					titled: L10n.Alert.UpgradeWiped.title,
+					message: L10n.Alert.UpgradeWiped.message
+				)
+			}
+		}
+	}
+	
+	private func dismissThenPerform(_ block: @escaping (UIViewController) -> Void) {
+		let loginController = window!.rootViewController!
+		loginController.dismiss(animated: true) {
+			block(loginController)
 		}
 	}
 	
@@ -93,14 +115,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControll
 		
 		wipeDownloadedFiles()
 		DatabaseDataStore.wipeData()
-		
-		let loginController = window!.rootViewController!
-		loginController.dismiss(animated: true) {
-			loginController.showAlert(
-				titled: L10n.Alert.Wiped.title,
-				message: L10n.Alert.Wiped.message,
-				okMessage: L10n.Alert.Wiped.quit
-			) { exit(0) }
-		}
+		Client.shared.loginInfo = nil
+		Client.shared.localUser = nil
 	}
 }
