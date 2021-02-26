@@ -117,6 +117,7 @@ final class ViewIssueViewController: UITableViewController, Reusable {
 	
 	private func saveChanges() {
 		issue.saveAndSync().then { [parent] in
+			self.issue = Repository.shared.object(self.issue.id)
 			(parent as? MapViewController)?.updateFromRepository()
 		}
 	}
