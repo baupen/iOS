@@ -1786,6 +1786,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                         <outlet property="iconView" destination="feG-nE-CCe" id="CGN-18-pcq"/>
                         <outlet property="imageView" destination="Tg9-v9-hne" id="8KI-ru-68t"/>
                         <outlet property="markButton" destination="xP0-0T-cF7" id="gjA-nf-0Ag"/>
+                        <outlet property="noImageLabel" destination="ItY-0n-acO" id="hrf-4N-mDz"/>
                         <outlet property="numberLabel" destination="ehn-Tg-B2f" id="A2Z-va-aIG"/>
                         <outlet property="rejectButton" destination="eWz-ll-UIT" id="vor-51-j5Z"/>
                         <outlet property="reopenButton" destination="mdV-Nf-etQ" id="bjx-gb-p3h"/>
@@ -2022,14 +2023,11 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                                                                 <constraint firstAttribute="width" constant="24" id="YxR-Br-R3S"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="799" verticalHuggingPriority="251" horizontalCompressionResistancePriority="800" text="neu" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pg3-uF-Bk7">
-                                                            <rect key="frame" x="173" y="11.5" width="28.5" height="20.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="799" verticalHuggingPriority="251" horizontalCompressionResistancePriority="800" text="#123" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Imq-yG-r5L">
+                                                            <rect key="frame" x="168" y="11.5" width="38" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                            <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
-                                                            <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="issue.unregistered"/>
-                                                            </userDefinedRuntimeAttributes>
                                                         </label>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ued-Lu-Vqv" userLabel="Mark Button Placeholder">
                                                             <rect key="frame" x="350" y="10" width="24" height="24"/>
@@ -2356,6 +2354,8 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                         <outlet property="imageView" destination="uMf-Vv-Gg9" id="EXB-xj-MDz"/>
                         <outlet property="markButton" destination="xrz-80-JfA" id="ndc-LE-oYa"/>
                         <outlet property="markupLabel" destination="tL6-m9-Qjq" id="KGL-Ot-f7M"/>
+                        <outlet property="noImageLabel" destination="xzO-NC-90a" id="OM4-4j-Wt0"/>
+                        <outlet property="numberLabel" destination="Imq-yG-r5L" id="His-fs-tYT"/>
                         <outlet property="suggestionsHeight" destination="x8o-8x-9Zq" id="wBJ-GF-Oks"/>
                         <outlet property="suggestionsTableView" destination="lxE-n3-M6o" id="eDl-q0-Ha0"/>
                     </connections>

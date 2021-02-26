@@ -11,6 +11,7 @@ final class ViewIssueViewController: UITableViewController, Reusable {
 	@IBOutlet private var clientModeLabel: UILabel!
 	
 	@IBOutlet private var imageView: UIImageView!
+	@IBOutlet private var noImageLabel: UILabel!
 	
 	@IBOutlet private var craftsmanTradeLabel: UILabel!
 	@IBOutlet private var craftsmanNameLabel: UILabel!
@@ -54,7 +55,10 @@ final class ViewIssueViewController: UITableViewController, Reusable {
 	}
 	
 	private var image: UIImage? {
-		didSet { imageView.image = image }
+		didSet {
+			imageView.image = image
+			noImageLabel.isHidden = image != nil
+		}
 	}
 	
 	override func viewDidLoad() {

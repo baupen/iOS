@@ -14,8 +14,10 @@ final class EditIssueNavigationController: UINavigationController {
 final class EditIssueViewController: UITableViewController, Reusable {
 	typealias Localization = L10n.ViewIssue
 	
+	@IBOutlet private var numberLabel: UILabel!
 	@IBOutlet private var markButton: UIButton!
 	
+	@IBOutlet private var noImageLabel: UILabel!
 	@IBOutlet private var imageView: UIImageView!
 	@IBOutlet private var cameraContainerView: CameraContainerView!
 	@IBOutlet private var cameraView: CameraView!
@@ -108,6 +110,7 @@ final class EditIssueViewController: UITableViewController, Reusable {
 	private var loadedImage: UIImage? {
 		didSet {
 			imageView.image = loadedImage
+			noImageLabel.isHidden = loadedImage != nil
 			cameraContainerView.isHidden = loadedImage != nil
 			markupLabel.isEnabled = loadedImage != nil
 		}
@@ -173,6 +176,7 @@ final class EditIssueViewController: UITableViewController, Reusable {
 		
 		navigationItem.title = isCreating ? Localization.titleCreating : Localization.titleEditing
 		
+		numberLabel.setText(to: issue.number.map { "#\($0)" }, fallback: L10n.Issue.unregistered)
 		markButton.setImage(issue.isMarked ? #imageLiteral(resourceName: "mark_marked.pdf") : #imageLiteral(resourceName: "mark_unmarked.pdf"), for: .normal)
 		
 		craftsman = Repository.read(issue.craftsman)
