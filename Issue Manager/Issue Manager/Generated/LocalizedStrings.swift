@@ -80,7 +80,7 @@ internal enum L10n {
     internal enum Status {
       /// Abgeschlossen
       internal static let closed = L10n.tr("Localizable", "issue.status.closed")
-      /// Abgeschlossen von %@
+      /// Geschlossen von %@
       internal static func closedBy(_ p1: Any) -> String {
         return L10n.tr("Localizable", "issue.status.closed_by", String(describing: p1))
       }
@@ -92,7 +92,7 @@ internal enum L10n {
       internal static func registeredBy(_ p1: Any) -> String {
         return L10n.tr("Localizable", "issue.status.registered_by", String(describing: p1))
       }
-      /// Umgesetzt
+      /// Zur Inspektion
       internal static let resolved = L10n.tr("Localizable", "issue.status.resolved")
       /// Umgesetzt von %@
       internal static func resolvedBy(_ p1: Any) -> String {
