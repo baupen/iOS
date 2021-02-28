@@ -64,8 +64,24 @@ final class MapListViewController: RefreshingTableViewController, Reusable {
 		navigationController?.navigationBar.setNeedsLayout()
 	}
 	
+	/// set to true when encountering a site we've been removed from during refresh to avoid multiple alerts
+	private var isAlreadyReturning = false
 	override func doRefresh() -> Future<Void> {
 		Client.shared.pullRemoteChanges(for: holder.constructionSiteID)
+			.flatMapError { error in
+				if case SyncError.siteAccessRemoved = error {
+					self.isAlreadyReturning = true
+					self.showAlert(
+						titled: Localization.RemovedFromMap.title,
+						message: Localization.RemovedFromMap.message,
+						okMessage: Localization.RemovedFromMap.dismiss,
+						okHandler: self.returnToSiteList
+					)
+					return .fulfilled
+				} else {
+					return .rejected(with: error)
+				}
+			}
 	}
 	
 	override func refreshCompleted() {
@@ -73,36 +89,29 @@ final class MapListViewController: RefreshingTableViewController, Reusable {
 		
 		super.refreshCompleted()
 		
-		if
-			let site = Repository.shared.object(holder.constructionSiteID),
-			!site.managers.contains(Client.shared.localUser!.id)
-		{
-			showAlert(
-				titled: Localization.RemovedFromMap.title,
-				message: Localization.RemovedFromMap.message,
-				okMessage: Localization.RemovedFromMap.dismiss
-			)
-		}
-		 
-		
 		let isValid = handleRefresh()
 		if isValid {
 			if mainController.isExtended {
 				mainController.detailNav.mapController.holder = holder
 			}
 		} else {
-			showAlert(
-				titled: Localization.MapRemoved.title,
-				message: Localization.MapRemoved.message,
-				okMessage: Localization.MapRemoved.dismiss
-			) {
-				self.performSegue(withIdentifier: "back to site list", sender: self)
+			if !isAlreadyReturning {
+				showAlert(
+					titled: Localization.MapRemoved.title,
+					message: Localization.MapRemoved.message,
+					okMessage: Localization.MapRemoved.dismiss,
+					okHandler: returnToSiteList
+				)
 			}
 		}
 		
 		for viewController in navigationController!.viewControllers where viewController !== self {
 			(viewController as? MapListViewController)?.handleRefresh()
 		}
+	}
+	
+	private func returnToSiteList() {
+		self.performSegue(withIdentifier: "back to site list", sender: self)
 	}
 	
 	/// - returns: whether or not the holder is still valid

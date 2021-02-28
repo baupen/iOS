@@ -112,12 +112,9 @@ extension Client {
 	
 	/// ensures local changes are pushed first
 	func pullRemoteChanges(for siteID: ConstructionSite.ID) -> Future<Void> {
-		pullRemoteChanges(for: Repository.shared.read(siteID.get)!)
-	}
-	
-	/// ensures local changes are pushed first
-	func pullRemoteChanges(for site: ConstructionSite) -> Future<Void> {
 		sync {
+			guard let site = Repository.shared.read(siteID.get)
+			else { throw SyncError.siteAccessRemoved }
 			try self.doPullRemoteChanges(for: site).await()
 		}
 	}
@@ -136,7 +133,11 @@ extension Client {
 				.ignoringValue()
 				.map { self.localUser = Repository.shared.object(self.localUser!.id) },
 			doPullChangedObjects(existing: ConstructionSite.none(), context: ())
-				.ignoringValue()
+				// remove sites we don't have access to
+				.map { $0
+					.filter { !$0.managers.contains(self.localUser!.id) }
+					.forEach { Repository.shared.ensureNotPresent($0) }
+				}
 		].sequence()
 	}
 	
@@ -154,12 +155,7 @@ extension Client {
 	}
 	
 	private func doPullRemoteChanges(for site: ConstructionSite) -> Future<Void> {
-		guard site.managers.contains(localUser!.id) else {
-			Repository.shared.ensureNotPresent(site)
-			return .fulfilled
-		}
-		
-		return [
+		[
 			doPullChangedObjects(for: site, existing: site.maps, context: site.id)
 				.ignoringValue(),
 			doPullChangedObjects(for: site, existing: site.craftsmen, context: site.id)
@@ -192,6 +188,10 @@ extension Client {
 				: self.doPullChangedIssues(for: site, itemsPerPage: itemsPerPage, prevLastChangeTime: lastChangeTime)
 		}
 	}
+}
+
+enum SyncError: Error {
+	case siteAccessRemoved
 }
 
 private extension QueryInterfaceRequest where RowDecoder: StoredObject {
