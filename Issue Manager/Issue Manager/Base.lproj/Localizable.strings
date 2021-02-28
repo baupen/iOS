@@ -46,7 +46,7 @@
 // CONTEXT: Knopf für den Alert, dass alle lokalen Daten gelöscht wurden – dieser Knopf schliesst die App.
 "alert.wiped.quit" = "App schliessen";
 // CONTEXT: Titel für den Alert, dass alle lokalen Daten gelöscht wurden.
-"alert.wiped.title" = "App zurückgesetzt";
+"alert.wiped.title" = "App zurückgesetzt!";
 // CONTEXT: Überschrift für den Handwerker.
 "issue.craftsman" = "Unternehmer";
 
@@ -108,11 +108,11 @@
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Login.connect
 // CONTEXT: Knopf, um den QR-Scanner aufzubringen und sich mit der Website zu verbinden
-"login.connect_to_website" = "Aktivierungscode Scannen";
+"login.connect_to_website" = "Aktivierungscode scannen";
 // CONTEXT: Platzhalter für die Website, an die die App sich anbinden wird, im Login-Screen
 "login.placeholder.website" = "Website";
 // CONTEXT: Knopf, um auf die Ansicht zu kommen, wo man sich registrieren kann.
-"login.register" = "Jetzt Registrieren";
+"login.register" = "Jetzt registrieren";
 // CONTEXT: Überschrift für den Registrierungsknopf
 "login.register.header" = "Noch nicht registriert?";
 // CONTEXT: Knopf, um das Scannen des Aktivierungscodes abzubrechen.
@@ -128,9 +128,9 @@
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Map.issue
 // CONTEXT: Knopf, um die Details einer Pendenz anzuzeigen.
-"map.issue_list.show_details" = "Details Anzeigen";
+"map.issue_list.show_details" = "Details anzeigen";
 // CONTEXT: Knopf, um die in der liste ausgewählte Pendenz auf dem Grundriss anzuzeigen.
-"map.issue_list.show_in_map" = "Auf Bauplan Anzeigen";
+"map.issue_list.show_in_map" = "Auf Bauplan anzeigen";
 // CONTEXT: Fasst kurz zusammen, was für Pendenzen in einem Bereich sind. Das erste %s wird durch die Anzahl offener Pendenzen ersetzt, das zweite durch die Anzahl insgesamt (innerhalb des Bereichs).
 "map.issue_list.summary" = "%@ Pendenzen offen; %@ insgesamt";
 // CONTEXT: Wird statt map.issue_list.summary angezeigt, wenn ein Filter aktiv ist. das erste %s wird durch die Anzahl Pendenzen ersetzt, die dem Filter entsprechen und somit angezeigt werden; das Zweite wird weiterhin durch die Gesamtzahl ersetzt.
@@ -173,7 +173,7 @@
 // CONTEXT: Nachricht des Alerts für wenn der ausgewählte Bereich nicht mehr existiert.
 "map_list.map_removed.message" = "Dieser Bereich existiert nicht mehr.";
 // CONTEXT: Titel des Alerts für wenn der ausgewählte Bereich nicht mehr existiert.
-"map_list.map_removed.title" = "Bereich Entfernt!";
+"map_list.map_removed.title" = "Bereich entfernt!";
 // CONTEXT: Beschreibt für einen Grundriss, wieviele offene Pendenzen er (rekursiv) enthält; %s wird durch die Anzahl ersetzt.
 "map_list.map_summary.open_issues" = "%@ offene Pendenzen";
 // CONTEXT: Überschrift des Abschnitts in der Liste für die untergeordneten Bereiche
@@ -303,6 +303,6 @@
 // CONTEXT: Titel für das "Pendenz Bearbeiten"-Popup, wenn die Pendenz erstellt wird.
 "view_issue.title_creating" = "Neue Pendenz";
 // CONTEXT: Titel für das "Pendenz Bearbeiten"-Popup, wenn die Pendenz bearbeitet wird.
-"view_issue.title_editing" = "Pendenz Bearbeiten";
+"view_issue.title_editing" = "Pendenz bearbeiten";
 // CONTEXT: Titel für das Popup, worin die Details einer Pendenz angezeigt werden.
 "view_issue.title_viewing" = "Details";

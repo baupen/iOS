@@ -53,7 +53,7 @@ internal enum L10n {
       internal static let message = L10n.tr("Localizable", "alert.wiped.message")
       /// App schliessen
       internal static let quit = L10n.tr("Localizable", "alert.wiped.quit")
-      /// App zurückgesetzt
+      /// App zurückgesetzt!
       internal static let title = L10n.tr("Localizable", "alert.wiped.title")
     }
   }
@@ -102,9 +102,9 @@ internal enum L10n {
   }
 
   internal enum Login {
-    /// Aktivierungscode Scannen
+    /// Aktivierungscode scannen
     internal static let connectToWebsite = L10n.tr("Localizable", "login.connect_to_website")
-    /// Jetzt Registrieren
+    /// Jetzt registrieren
     internal static let register = L10n.tr("Localizable", "login.register")
     internal enum Alert {
       internal enum LoginError {
@@ -146,9 +146,9 @@ internal enum L10n {
     /// Bauplan
     internal static let title = L10n.tr("Localizable", "map.title")
     internal enum IssueList {
-      /// Details Anzeigen
+      /// Details anzeigen
       internal static let showDetails = L10n.tr("Localizable", "map.issue_list.show_details")
-      /// Auf Bauplan Anzeigen
+      /// Auf Bauplan anzeigen
       internal static let showInMap = L10n.tr("Localizable", "map.issue_list.show_in_map")
       /// %@ Pendenzen offen; %@ insgesamt
       internal static func summary(_ p1: Any, _ p2: Any) -> String {
@@ -177,7 +177,7 @@ internal enum L10n {
       internal static let dismiss = L10n.tr("Localizable", "map_list.map_removed.dismiss")
       /// Dieser Bereich existiert nicht mehr.
       internal static let message = L10n.tr("Localizable", "map_list.map_removed.message")
-      /// Bereich Entfernt!
+      /// Bereich entfernt!
       internal static let title = L10n.tr("Localizable", "map_list.map_removed.title")
     }
     internal enum MapSummary {
@@ -302,7 +302,7 @@ internal enum L10n {
     internal static let reviewExplanation = L10n.tr("Localizable", "view_issue.review_explanation")
     /// Neue Pendenz
     internal static let titleCreating = L10n.tr("Localizable", "view_issue.title_creating")
-    /// Pendenz Bearbeiten
+    /// Pendenz bearbeiten
     internal static let titleEditing = L10n.tr("Localizable", "view_issue.title_editing")
     /// Details
     internal static let titleViewing = L10n.tr("Localizable", "view_issue.title_viewing")
