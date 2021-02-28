@@ -176,6 +176,12 @@
 "map_list.map_removed.title" = "Bereich entfernt!";
 // CONTEXT: Beschreibt für einen Grundriss, wieviele offene Pendenzen er (rekursiv) enthält; %s wird durch die Anzahl ersetzt.
 "map_list.map_summary.open_issues" = "%@ offene Pendenzen";
+// CONTEXT: Schliess-Button des Alerts für wenn man vom ausgewählten Bereich entfernt wurde.
+"map_list.removed_from_map.dismiss" = "Schliessen";
+// CONTEXT: Nachricht des Alerts für wenn man vom ausgewählten Bereich entfernt wurde.
+"map_list.removed_from_map.message" = "Diese Baustelle ist diesem Account nicht mehr zugänglich. Auf der Website kann dies unter \"Baustelle auswählen\" verändert werden.";
+// CONTEXT: Titel des Alerts für wenn man vom ausgewählten Bereich entfernt wurde.
+"map_list.removed_from_map.title" = "Kein Zugriff!";
 // CONTEXT: Überschrift des Abschnitts in der Liste für die untergeordneten Bereiche
 "map_list.section.child_maps" = "Untergeordnete Bereiche";
 // CONTEXT: Überschrift des Abschnitts in der Liste für den entsprechenden Bereich

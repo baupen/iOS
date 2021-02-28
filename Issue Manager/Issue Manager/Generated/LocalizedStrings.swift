@@ -186,6 +186,14 @@ internal enum L10n {
         return L10n.tr("Localizable", "map_list.map_summary.open_issues", String(describing: p1))
       }
     }
+    internal enum RemovedFromMap {
+      /// Schliessen
+      internal static let dismiss = L10n.tr("Localizable", "map_list.removed_from_map.dismiss")
+      /// Diese Baustelle ist diesem Account nicht mehr zugänglich. Auf der Website kann dies unter "Baustelle auswählen" verändert werden.
+      internal static let message = L10n.tr("Localizable", "map_list.removed_from_map.message")
+      /// Kein Zugriff!
+      internal static let title = L10n.tr("Localizable", "map_list.removed_from_map.title")
+    }
     internal enum Section {
       /// Untergeordnete Bereiche
       internal static let childMaps = L10n.tr("Localizable", "map_list.section.child_maps")

@@ -73,6 +73,18 @@ final class MapListViewController: RefreshingTableViewController, Reusable {
 		
 		super.refreshCompleted()
 		
+		if
+			let site = Repository.shared.object(holder.constructionSiteID),
+			!site.managers.contains(Client.shared.localUser!.id)
+		{
+			showAlert(
+				titled: Localization.RemovedFromMap.title,
+				message: Localization.RemovedFromMap.message,
+				okMessage: Localization.RemovedFromMap.dismiss
+			)
+		}
+		 
+		
 		let isValid = handleRefresh()
 		if isValid {
 			if mainController.isExtended {
