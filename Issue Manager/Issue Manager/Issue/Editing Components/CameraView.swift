@@ -165,7 +165,7 @@ extension CameraView: UIImagePickerControllerDelegate, UINavigationControllerDel
 	
 	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
 		let image = info[.originalImage] as! UIImage
-		delegate?.pictureSelected(image.cropped())
+		delegate?.pictureSelected(image)
 		picker.presentingViewController!.dismiss(animated: true)
 	}
 }
@@ -185,7 +185,7 @@ enum CameraViewError: Error {
 	case cameraNotConfigured
 }
 
-extension UIImage {
+private extension UIImage {
 	/// crops to 4:3, applying orientation in the process
 	func cropped() -> UIImage {
 		let newRect = AVMakeRect(
