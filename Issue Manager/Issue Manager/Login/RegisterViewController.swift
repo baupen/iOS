@@ -112,7 +112,6 @@ final class RegisterViewController: UIViewController {
 	}
 	
 	func showAlert(for error: Error) {
-		// FIXME: change messages
 		switch error {
 		case RequestError.communicationError:
 			showAlert(

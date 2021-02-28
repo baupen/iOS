@@ -39,8 +39,6 @@ protocol FileContainer: StoredObject {
 	func deleteFile()
 }
 
-// TODO: make sure to delete existing caches on first launch of new version
-
 private extension File {
 	var subpath: String {
 		let sanitized = urlPath.replacingOccurrences(of: "/", with: "#")

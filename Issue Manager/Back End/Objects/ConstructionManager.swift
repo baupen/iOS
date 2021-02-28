@@ -42,9 +42,3 @@ extension ConstructionManager: StoredObject {
 	typealias Model = APIConstructionManager
 	static let apiType = "construction_managers"
 }
-
-// TODO: remove
-struct TrialUser: Codable {
-	var username: String
-	var password: String	
-}
