@@ -103,9 +103,10 @@ extension Client {
 extension Client {
 	/// ensures local changes are pushed first
 	func pullRemoteChanges() -> Future<Void> {
-		pushChangesThen {
-			try self.doPullRemoteChanges().await()
-			Repository.shared.downloadMissingFiles()
+		sync {
+			try Repository.shared.read(ConstructionSite.fetchAll)
+				.traverse(self.doPullRemoteChanges(for:))
+				.await()
 		}
 	}
 	
@@ -116,25 +117,27 @@ extension Client {
 	
 	/// ensures local changes are pushed first
 	func pullRemoteChanges(for site: ConstructionSite) -> Future<Void> {
-		pushChangesThen {
+		sync {
 			try self.doPullRemoteChanges(for: site).await()
+		}
+	}
+	
+	private func sync(running block: @escaping () throws -> Void) -> Future<Void> {
+		pushChangesThen {
+			try self.doPullChangedTopLevelObjects().await()
+			try block()
 			Repository.shared.downloadMissingFiles()
 		}
 	}
 	
-	private func doPullRemoteChanges() -> Future<Void> {
+	private func doPullChangedTopLevelObjects() -> Future<Void> {
 		[
 			doPullChangedObjects(existing: ConstructionManager.all(), context: ())
 				.ignoringValue()
 				.map { self.localUser = Repository.shared.object(self.localUser!.id) },
 			doPullChangedObjects(existing: ConstructionSite.none(), context: ())
-				.flatMap { $0.traverse(self.doPullRemoteChanges(for:)) }
+				.ignoringValue()
 		].sequence()
-	}
-	
-	private func doPullChangedSites() -> Future<[ConstructionSite]> {
-		send(GetObjectsRequest<ConstructionSite>())
-			.map { $0.members.map { $0.makeObject() } }
 	}
 	
 	private func doPullChangedObjects<Object: StoredObject>(
