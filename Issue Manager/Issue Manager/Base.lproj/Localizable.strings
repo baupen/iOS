@@ -99,13 +99,6 @@
 "issue.unregistered" = "neu";
 
 ////////////////////////////////////////////////////////////////////////////////
-// MARK: Login.alert.invalid
-// CONTEXT: Nachricht für den Alert, dass man eine ungültige Website-Adresse eingegeben hat.
-"login.alert.invalid_website.message" = "Die eingegebene Adresse für die Website ist ungültig. Hier sollte die Adresse stehen, die auch im Browser steht, wenn du dort die Pendenzen verwaltest, z.B. app.mangel.io";
-// CONTEXT: Titel für den Alert, dass man eine ungültige Website-Adresse eingegeben hat.
-"login.alert.invalid_website.title" = "Ungültige Website";
-
-////////////////////////////////////////////////////////////////////////////////
 // MARK: Login.alert.login
 // CONTEXT: Nachricht für den Alert, dass man sich aus einem unbekannten Grund nicht einloggen kann.
 "login.alert.login_error.message" = "Beim Einloggen ist ein Fehler aufgetreten.";
@@ -125,7 +118,7 @@
 // CONTEXT: Knopf, um das Scannen des Aktivierungscodes abzubrechen.
 "login.scan.cancel" = "Abbrechen";
 // CONTEXT: Anleitung in der Ansicht zum Aktivierungscode (QR) scannen.
-"login.scan.instructions" = "Finde den Aktivierungscode unter \"Mit App verbinden\" oben auf der Baustellenauswahl.";
+"login.scan.instructions" = "Der Aktivierungscode ist unter \"Mit App verbinden\" oben auf der Baustellenauswahl zu finden.";
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Map.could
@@ -175,8 +168,10 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Map
+// CONTEXT: Schliess-Button des Alerts für wenn der ausgewählte Bereich nicht mehr existiert.
+"map_list.map_removed.dismiss" = "Schliessen";
 // CONTEXT: Nachricht des Alerts für wenn der ausgewählte Bereich nicht mehr existiert.
-"map_list.map_removed.message" = "Dieser Bereich existiert nicht mehr. Du wirst jetzt zurück zur Baustellenauswahl geleitet.";
+"map_list.map_removed.message" = "Dieser Bereich existiert nicht mehr.";
 // CONTEXT: Titel des Alerts für wenn der ausgewählte Bereich nicht mehr existiert.
 "map_list.map_removed.title" = "Bereich Entfernt!";
 // CONTEXT: Beschreibt für einen Grundriss, wieviele offene Pendenzen er (rekursiv) enthält; %s wird durch die Anzahl ersetzt.
@@ -224,7 +219,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Register.email
 // CONTEXT: Erklärung für die weiteren Schritte nach dem Registrieren in der App.
-"register.email_explanation" = "Du bekommst jetzt eine E-Mail, über die du deinen Account fertig erstellen kannst.";
+"register.email_explanation" = "Es wird jetzt eine E-Mail verschickt, über welche der Account fertig erstellt werden kann.";
 // CONTEXT: Platzhalter für das Textfeld, wo man beim Registrieren seine E-Mail eingibt.
 "register.placeholder.email" = "E-Mail";
 // CONTEXT: Platzhalter für das Textfeld, wo man beim Registrieren die Website angibt, bei der man sich registrieren will.

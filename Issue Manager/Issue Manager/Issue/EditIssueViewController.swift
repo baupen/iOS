@@ -180,7 +180,7 @@ final class EditIssueViewController: UITableViewController, Reusable {
 		markButton.setImage(issue.isMarked ? #imageLiteral(resourceName: "mark_marked.pdf") : #imageLiteral(resourceName: "mark_unmarked.pdf"), for: .normal)
 		
 		craftsman = Repository.read(issue.craftsman)
-		craftsmanNameLabel.setText(to: craftsman?.companyAndContact, fallback: L10n.Issue.noCraftsman)
+		craftsmanNameLabel.setText(to: craftsman?.company, fallback: L10n.Issue.noCraftsman)
 		trade = craftsman?.trade
 		
 		descriptionField.text = issue.description

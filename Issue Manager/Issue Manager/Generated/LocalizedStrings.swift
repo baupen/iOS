@@ -107,12 +107,6 @@ internal enum L10n {
     /// Jetzt Registrieren
     internal static let register = L10n.tr("Localizable", "login.register")
     internal enum Alert {
-      internal enum InvalidWebsite {
-        /// Die eingegebene Adresse für die Website ist ungültig. Hier sollte die Adresse stehen, die auch im Browser steht, wenn du dort die Pendenzen verwaltest, z.B. app.mangel.io
-        internal static let message = L10n.tr("Localizable", "login.alert.invalid_website.message")
-        /// Ungültige Website
-        internal static let title = L10n.tr("Localizable", "login.alert.invalid_website.title")
-      }
       internal enum LoginError {
         /// Beim Einloggen ist ein Fehler aufgetreten.
         internal static let message = L10n.tr("Localizable", "login.alert.login_error.message")
@@ -131,7 +125,7 @@ internal enum L10n {
     internal enum Scan {
       /// Abbrechen
       internal static let cancel = L10n.tr("Localizable", "login.scan.cancel")
-      /// Finde den Aktivierungscode unter "Mit App verbinden" oben auf der Baustellenauswahl.
+      /// Der Aktivierungscode ist unter "Mit App verbinden" oben auf der Baustellenauswahl zu finden.
       internal static let instructions = L10n.tr("Localizable", "login.scan.instructions")
     }
   }
@@ -179,7 +173,9 @@ internal enum L10n {
 
   internal enum MapList {
     internal enum MapRemoved {
-      /// Dieser Bereich existiert nicht mehr. Du wirst jetzt zurück zur Baustellenauswahl geleitet.
+      /// Schliessen
+      internal static let dismiss = L10n.tr("Localizable", "map_list.map_removed.dismiss")
+      /// Dieser Bereich existiert nicht mehr.
       internal static let message = L10n.tr("Localizable", "map_list.map_removed.message")
       /// Bereich Entfernt!
       internal static let title = L10n.tr("Localizable", "map_list.map_removed.title")
@@ -210,7 +206,7 @@ internal enum L10n {
     internal static let createAccount = L10n.tr("Localizable", "register.create_account")
     /// Auf anderer Website registrieren
     internal static let customizeWebsite = L10n.tr("Localizable", "register.customize_website")
-    /// Du bekommst jetzt eine E-Mail, über die du deinen Account fertig erstellen kannst.
+    /// Es wird jetzt eine E-Mail verschickt, über welche der Account fertig erstellt werden kann.
     internal static let emailExplanation = L10n.tr("Localizable", "register.email_explanation")
     internal enum Alert {
       internal enum InvalidEmail {

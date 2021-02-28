@@ -10,10 +10,6 @@ struct Craftsman: Equatable {
 	var contactName: String
 	var company: String
 	var trade: String
-	
-	var companyAndContact: String {
-		"\(company) (\(contactName))"
-	}
 }
 
 extension Craftsman: StoredObject {

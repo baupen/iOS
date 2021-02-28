@@ -81,7 +81,8 @@ final class MapListViewController: RefreshingTableViewController, Reusable {
 		} else {
 			showAlert(
 				titled: Localization.MapRemoved.title,
-				message: Localization.MapRemoved.message
+				message: Localization.MapRemoved.message,
+				okMessage: Localization.MapRemoved.dismiss
 			) {
 				self.performSegue(withIdentifier: "back to site list", sender: self)
 			}
@@ -94,10 +95,18 @@ final class MapListViewController: RefreshingTableViewController, Reusable {
 	
 	/// - returns: whether or not the holder is still valid
 	@discardableResult private func handleRefresh() -> Bool {
-		if let oldSite = holder as? ConstructionSite, let site = Repository.object(oldSite.id) {
+		if
+			let oldSite = holder as? ConstructionSite,
+			let site = Repository.object(oldSite.id),
+			!site.isDeleted
+		{
 			holder = site
 			return true
-		} else if let oldMap = holder as? Map, let map = Repository.object(oldMap.id) {
+		} else if
+			let oldMap = holder as? Map,
+			let map = Repository.object(oldMap.id),
+			!map.isDeleted
+		{
 			holder = map
 			return true
 		} else {
