@@ -518,10 +518,8 @@
                                                         <outlet property="delegate" destination="Bne-PF-7lo" id="qLJ-6W-Ib0"/>
                                                     </connections>
                                                 </collectionView>
-                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6qc-QJ-bLk">
-                                                    <rect key="frame" x="20" y="99" width="374" height="61"/>
-                                                    <string key="text">Noch keine Daten geladen!
-Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
+                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Noch keine Daten geladen! Hier herunterziehen, um mit dem Server zu synchronisieren." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6qc-QJ-bLk">
+                                                    <rect key="frame" x="20" y="99" width="374" height="41"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1030,10 +1028,10 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                                                                     <color key="backgroundColor" systemColor="separatorColor"/>
                                                                                 </view>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="800" verticalHuggingPriority="300" verticalCompressionResistancePriority="800" alignment="firstBaseline" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="sZ7-dJ-tWE" userLabel="Description">
-                                                                                    <rect key="frame" x="0.0" y="22.5" width="380" height="20.5"/>
+                                                                                    <rect key="frame" x="0.0" y="10.5" width="380" height="44"/>
                                                                                     <subviews>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="900" verticalCompressionResistancePriority="900" text="Beschreibung:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kn0-17-wq6">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="129.5" height="20.5"/>
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="110" height="20.5"/>
                                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                             <color key="textColor" systemColor="secondaryLabelColor"/>
                                                                                             <nil key="highlightedColor"/>
@@ -1042,18 +1040,19 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                                                                             </userDefinedRuntimeAttributes>
                                                                                         </label>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="200" verticalHuggingPriority="300" horizontalCompressionResistancePriority="200" verticalCompressionResistancePriority="800" text="Etwas ist falsch!" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MGR-UU-vfh">
-                                                                                            <rect key="frame" x="137.5" y="0.0" width="242.5" height="20.5"/>
+                                                                                            <rect key="frame" x="0.0" y="23.5" width="122.5" height="20.5"/>
                                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                             <nil key="textColor"/>
                                                                                             <nil key="highlightedColor"/>
                                                                                         </label>
                                                                                     </subviews>
+                                                                                    <variation key="widthClass=compact" alignment="top" axis="vertical" spacing="3"/>
                                                                                 </stackView>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="801" verticalCompressionResistancePriority="801" alignment="firstBaseline" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="LRM-vN-RA2" userLabel="Craftsman">
-                                                                                    <rect key="frame" x="0.0" y="64" width="380" height="41"/>
+                                                                                    <rect key="frame" x="0.0" y="64" width="380" height="64.5"/>
                                                                                     <subviews>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="900" verticalCompressionResistancePriority="900" text="Handwerker:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KzX-dL-fRc">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="129.5" height="20.5"/>
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="97" height="20.5"/>
                                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                             <color key="textColor" systemColor="secondaryLabelColor"/>
                                                                                             <nil key="highlightedColor"/>
@@ -1062,7 +1061,7 @@ Zieh runter, um die lokalen Daten mit dem Server zu synchronisieren.</string>
                                                                                             </userDefinedRuntimeAttributes>
                                                                                         </label>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="301" verticalCompressionResistancePriority="801" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Shy-g3-Y7T">
-                                                                                            <rect key="frame" x="137.5" y="0.0" width="242.5" height="41"/>
+                                                                                            <rect key="frame" x="0.0" y="23.5" width="135.5" height="41"/>
                                                                                             <string key="text">Malerfirma GmbH
 Maler</string>
                                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -1070,32 +1069,13 @@ Maler</string>
                                                                                             <nil key="highlightedColor"/>
                                                                                         </label>
                                                                                     </subviews>
-                                                                                </stackView>
-                                                                                <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="303" verticalCompressionResistancePriority="803" alignment="firstBaseline" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="htu-bp-Qww" userLabel="Client Mode">
-                                                                                    <rect key="frame" x="0.0" y="126.5" width="380" height="20.5"/>
-                                                                                    <subviews>
-                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="900" verticalCompressionResistancePriority="900" text="Abnahmemodus:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YyI-ws-4EP">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="129.5" height="20.5"/>
-                                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                                            <color key="textColor" systemColor="secondaryLabelColor"/>
-                                                                                            <nil key="highlightedColor"/>
-                                                                                            <userDefinedRuntimeAttributes>
-                                                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="issue.is_client_mode:"/>
-                                                                                            </userDefinedRuntimeAttributes>
-                                                                                        </label>
-                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="200" verticalHuggingPriority="303" horizontalCompressionResistancePriority="200" verticalCompressionResistancePriority="803" text="Ja" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oqu-tl-KrD">
-                                                                                            <rect key="frame" x="137.5" y="0.0" width="242.5" height="20.5"/>
-                                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                                            <nil key="textColor"/>
-                                                                                            <nil key="highlightedColor"/>
-                                                                                        </label>
-                                                                                    </subviews>
+                                                                                    <variation key="widthClass=compact" alignment="top" axis="vertical" spacing="3"/>
                                                                                 </stackView>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="302" verticalCompressionResistancePriority="802" alignment="firstBaseline" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="t9n-Ih-HNp" userLabel="Status">
-                                                                                    <rect key="frame" x="0.0" y="168" width="380" height="20.5"/>
+                                                                                    <rect key="frame" x="0.0" y="138" width="380" height="44"/>
                                                                                     <subviews>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="900" verticalCompressionResistancePriority="900" text="Status:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p7f-t6-5ei" userLabel="Status:">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="129.5" height="20.5"/>
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="53.5" height="20.5"/>
                                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                             <color key="textColor" systemColor="secondaryLabelColor"/>
                                                                                             <nil key="highlightedColor"/>
@@ -1104,15 +1084,25 @@ Maler</string>
                                                                                             </userDefinedRuntimeAttributes>
                                                                                         </label>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="200" verticalHuggingPriority="302" horizontalCompressionResistancePriority="200" verticalCompressionResistancePriority="802" text="Registriert von Julian" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OXl-vS-TbP">
-                                                                                            <rect key="frame" x="137.5" y="0.0" width="242.5" height="20.5"/>
+                                                                                            <rect key="frame" x="0.0" y="23.5" width="159.5" height="20.5"/>
                                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                             <nil key="textColor"/>
                                                                                             <nil key="highlightedColor"/>
                                                                                         </label>
                                                                                     </subviews>
+                                                                                    <variation key="widthClass=compact" alignment="top" axis="vertical" spacing="3"/>
                                                                                 </stackView>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="200" verticalHuggingPriority="303" horizontalCompressionResistancePriority="200" verticalCompressionResistancePriority="803" text="Im Abnahmemodus aufgenommen" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oqu-tl-KrD">
+                                                                                    <rect key="frame" x="0.0" y="191.5" width="380" height="20.5"/>
+                                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                                    <nil key="textColor"/>
+                                                                                    <nil key="highlightedColor"/>
+                                                                                    <userDefinedRuntimeAttributes>
+                                                                                        <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="issue.is_client_mode"/>
+                                                                                    </userDefinedRuntimeAttributes>
+                                                                                </label>
                                                                                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="SjD-Ox-Qrb" userLabel="Separator" customClass="SeparatorLine" customModule="Issue_Manager" customModuleProvider="target">
-                                                                                    <rect key="frame" x="0.0" y="210" width="380" height="1"/>
+                                                                                    <rect key="frame" x="0.0" y="221.5" width="380" height="1"/>
                                                                                     <color key="backgroundColor" systemColor="separatorColor"/>
                                                                                 </view>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="900" verticalCompressionResistancePriority="900" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="3bx-QB-Czz">
@@ -1145,9 +1135,14 @@ Maler</string>
                                                                             </subviews>
                                                                             <constraints>
                                                                                 <constraint firstItem="p7f-t6-5ei" firstAttribute="trailing" secondItem="kn0-17-wq6" secondAttribute="trailing" id="Cd6-KP-w6n"/>
-                                                                                <constraint firstItem="YyI-ws-4EP" firstAttribute="trailing" secondItem="kn0-17-wq6" secondAttribute="trailing" id="SvU-l6-bto"/>
                                                                                 <constraint firstItem="KzX-dL-fRc" firstAttribute="trailing" secondItem="kn0-17-wq6" secondAttribute="trailing" id="aRm-cz-knJ"/>
                                                                             </constraints>
+                                                                            <variation key="widthClass=compact">
+                                                                                <mask key="constraints">
+                                                                                    <exclude reference="aRm-cz-knJ"/>
+                                                                                    <exclude reference="Cd6-KP-w6n"/>
+                                                                                </mask>
+                                                                            </variation>
                                                                         </stackView>
                                                                     </subviews>
                                                                     <constraints>
@@ -1668,91 +1663,71 @@ Beantwortet von Malerfirma GmbH</string>
                             </tableViewSection>
                             <tableViewSection headerTitle="Aktionen" id="FfC-sF-YPy" userLabel="Actions">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="130" id="qtY-rR-p1G" userLabel="Summary">
-                                        <rect key="frame" x="0.0" y="791" width="414" height="130"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qtY-rR-p1G" id="8I7-uM-cuk">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="130"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="800" verticalHuggingPriority="251" horizontalCompressionResistancePriority="800" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sYc-jC-hYE">
-                                                    <rect key="frame" x="8" y="14" width="398" height="102"/>
-                                                    <string key="text">Diese Pendenz wurde vom Handwerker beantwortet.
-Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) oder ablehnen (und sie somit rückgängig machen).</string>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="sYc-jC-hYE" secondAttribute="trailing" id="6gi-2p-Ugc"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="sYc-jC-hYE" secondAttribute="bottom" constant="3" id="OSq-fR-mD4"/>
-                                                <constraint firstItem="sYc-jC-hYE" firstAttribute="top" secondItem="8I7-uM-cuk" secondAttribute="topMargin" constant="3" id="fNk-9J-nxl"/>
-                                                <constraint firstItem="sYc-jC-hYE" firstAttribute="leading" secondItem="8I7-uM-cuk" secondAttribute="leadingMargin" id="oB8-L3-rhs"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="twH-Bk-u17" userLabel="Status Actions">
-                                        <rect key="frame" x="0.0" y="921" width="414" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="182" id="twH-Bk-u17" userLabel="Status Actions">
+                                        <rect key="frame" x="0.0" y="791" width="414" height="182"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="twH-Bk-u17" id="4b0-Ku-SKP">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="182"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="cfH-zC-hO6">
-                                                    <rect key="frame" x="8" y="11" width="398" height="21.5"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="aVh-Vw-wKs">
+                                                    <rect key="frame" x="8" y="11" width="398" height="160"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vR3-G2-DlT">
-                                                            <rect key="frame" x="0.0" y="0.0" width="93.5" height="21.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="200" verticalHuggingPriority="500" horizontalCompressionResistancePriority="800" text="Diese Pendenz wurde vom Unternehmer als umgesetzt markiert." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sYc-jC-hYE">
+                                                            <rect key="frame" x="0.0" y="0.0" width="398" height="53"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <state key="normal" title="Als Abgeschlossen Markieren"/>
+                                                            <nil key="highlightedColor"/>
                                                             <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="view_issue.mark_as_completed"/>
+                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="view_issue.review_explanation"/>
                                                             </userDefinedRuntimeAttributes>
-                                                            <connections>
-                                                                <action selector="closeIssue" destination="eHl-SE-8vo" eventType="touchUpInside" id="rIW-g7-Fla"/>
-                                                            </connections>
-                                                        </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eWz-ll-UIT">
-                                                            <rect key="frame" x="101.5" y="0.0" width="93.5" height="21.5"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <state key="normal" title="Ablehnen"/>
-                                                            <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="view_issue.reject_response"/>
-                                                            </userDefinedRuntimeAttributes>
-                                                            <connections>
-                                                                <action selector="revertResolution" destination="eHl-SE-8vo" eventType="touchUpInside" id="4cY-DF-fBj"/>
-                                                            </connections>
-                                                        </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zvb-pR-KSI">
-                                                            <rect key="frame" x="203" y="0.0" width="93.5" height="21.5"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <state key="normal" title="Annehmen"/>
-                                                            <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="view_issue.accept_response"/>
-                                                            </userDefinedRuntimeAttributes>
-                                                            <connections>
-                                                                <action selector="closeIssue" destination="eHl-SE-8vo" eventType="touchUpInside" id="eIL-2S-k5K"/>
-                                                            </connections>
-                                                        </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mdV-Nf-etQ">
-                                                            <rect key="frame" x="304.5" y="0.0" width="93.5" height="21.5"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <state key="normal" title="Wieder Eröffnen"/>
-                                                            <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="view_issue.undo_review"/>
-                                                            </userDefinedRuntimeAttributes>
-                                                            <connections>
-                                                                <action selector="reopenIssue" destination="eHl-SE-8vo" eventType="touchUpInside" id="d8C-8O-r3D"/>
-                                                            </connections>
-                                                        </button>
+                                                        </label>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="5mn-sJ-47R">
+                                                            <rect key="frame" x="0.0" y="61" width="398" height="99"/>
+                                                            <subviews>
+                                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="200" verticalHuggingPriority="900" horizontalCompressionResistancePriority="900" verticalCompressionResistancePriority="900" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eWz-ll-UIT">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="398" height="33"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <state key="normal" title="Markierung zurücksetzen"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="view_issue.action.reset_resolution"/>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                    <connections>
+                                                                        <action selector="revertResolution" destination="eHl-SE-8vo" eventType="touchUpInside" id="4cY-DF-fBj"/>
+                                                                    </connections>
+                                                                </button>
+                                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="200" verticalHuggingPriority="900" horizontalCompressionResistancePriority="900" verticalCompressionResistancePriority="899" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vR3-G2-DlT">
+                                                                    <rect key="frame" x="0.0" y="33" width="398" height="33"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <state key="normal" title="Pendenz schliessen"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="view_issue.action.close"/>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                    <connections>
+                                                                        <action selector="closeIssue" destination="eHl-SE-8vo" eventType="touchUpInside" id="rIW-g7-Fla"/>
+                                                                    </connections>
+                                                                </button>
+                                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="200" verticalHuggingPriority="900" horizontalCompressionResistancePriority="900" verticalCompressionResistancePriority="898" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mdV-Nf-etQ">
+                                                                    <rect key="frame" x="0.0" y="66" width="398" height="33"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <state key="normal" title="Pendenz wiedereröffnen"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="view_issue.action.reopen"/>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                    <connections>
+                                                                        <action selector="reopenIssue" destination="eHl-SE-8vo" eventType="touchUpInside" id="d8C-8O-r3D"/>
+                                                                    </connections>
+                                                                </button>
+                                                            </subviews>
+                                                            <variation key="widthClass=compact" axis="vertical"/>
+                                                        </stackView>
                                                     </subviews>
                                                 </stackView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="cfH-zC-hO6" secondAttribute="trailing" id="Lv8-u0-Fha"/>
-                                                <constraint firstItem="cfH-zC-hO6" firstAttribute="top" secondItem="4b0-Ku-SKP" secondAttribute="topMargin" id="Xd7-Je-Rmi"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="cfH-zC-hO6" secondAttribute="bottom" id="YAQ-Rh-GH9"/>
-                                                <constraint firstItem="cfH-zC-hO6" firstAttribute="leading" secondItem="4b0-Ku-SKP" secondAttribute="leadingMargin" id="yNW-UP-N5p"/>
+                                                <constraint firstItem="aVh-Vw-wKs" firstAttribute="top" secondItem="4b0-Ku-SKP" secondAttribute="topMargin" id="7wZ-4l-gKQ"/>
+                                                <constraint firstItem="aVh-Vw-wKs" firstAttribute="leading" secondItem="4b0-Ku-SKP" secondAttribute="leadingMargin" id="H64-lp-UjZ"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="aVh-Vw-wKs" secondAttribute="bottom" id="J1E-Qx-u4X"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="aVh-Vw-wKs" secondAttribute="trailing" id="xG3-2I-71E"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -1777,9 +1752,8 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <modalFormSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
-                        <outlet property="acceptButton" destination="Zvb-pR-KSI" id="dvF-G3-YtD"/>
                         <outlet property="clientModeLabel" destination="OuV-IJ-QrG" id="ivc-UT-3aQ"/>
-                        <outlet property="completeButton" destination="vR3-G2-DlT" id="U6o-hY-V7K"/>
+                        <outlet property="closeButton" destination="vR3-G2-DlT" id="U6o-hY-V7K"/>
                         <outlet property="craftsmanNameLabel" destination="Ogv-Sf-weY" id="e1b-Ia-cOt"/>
                         <outlet property="craftsmanTradeLabel" destination="W1b-dy-atz" id="bkN-Ub-q7X"/>
                         <outlet property="descriptionLabel" destination="BjK-D6-ajw" id="rtJ-1x-U3s"/>
@@ -1788,8 +1762,8 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                         <outlet property="markButton" destination="xP0-0T-cF7" id="gjA-nf-0Ag"/>
                         <outlet property="noImageLabel" destination="ItY-0n-acO" id="hrf-4N-mDz"/>
                         <outlet property="numberLabel" destination="ehn-Tg-B2f" id="A2Z-va-aIG"/>
-                        <outlet property="rejectButton" destination="eWz-ll-UIT" id="vor-51-j5Z"/>
                         <outlet property="reopenButton" destination="mdV-Nf-etQ" id="bjx-gb-p3h"/>
+                        <outlet property="resetResolutionButton" destination="eWz-ll-UIT" id="vor-51-j5Z"/>
                         <outlet property="statusLabel" destination="jbi-eP-6Ca" id="Vlb-B2-8Ji"/>
                         <outlet property="summaryLabel" destination="sYc-jC-hYE" id="0gu-m7-QAX"/>
                     </connections>
@@ -1797,7 +1771,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sp3-Cv-Lzj" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="czw-vx-eOq" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2201" y="129"/>
+            <point key="canvasLocation" x="2198.5507246376815" y="128.57142857142856"/>
         </scene>
         <!--Pendenz Bearbeiten-->
         <scene sceneID="098-5R-0wN">
@@ -3373,7 +3347,7 @@ Du kannst diese Antwort entweder bestätigen (um die Pendenz abzuschliessen) ode
     <inferredMetricsTieBreakers>
         <segue reference="EOg-36-OMz"/>
         <segue reference="L64-rs-k1Y"/>
-        <segue reference="OdI-J8-6Ad"/>
+        <segue reference="PB9-0e-xdP"/>
         <segue reference="QK8-t8-g4B"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="Main"/>

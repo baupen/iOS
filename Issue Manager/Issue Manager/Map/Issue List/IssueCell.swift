@@ -87,13 +87,13 @@ final class IssueCell: UITableViewCell, Reusable {
 			fallback: Localization.noCraftsman
 		)
 		craftsmanLabel.setText(
-			to: craftsman.map { "\($0.company)\n(\($0.contactName))\n\($0.trade)" },
+			to: craftsman.map { "\($0.company)\n\($0.trade)" },
 			fallback: Localization.noCraftsman
 		)
 		
-		clientModeLabel.text = issue.wasAddedWithClient ? Localization.IsClientMode.true : Localization.IsClientMode.false
-		
 		statusLabel.text = issue.status.makeLocalizedMultilineDescription()
+		
+		clientModeLabel.isShown = issue.wasAddedWithClient
 	}
 }
 

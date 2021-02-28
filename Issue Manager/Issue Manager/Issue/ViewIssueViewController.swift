@@ -20,9 +20,8 @@ final class ViewIssueViewController: UITableViewController, Reusable {
 	@IBOutlet private var statusLabel: UILabel!
 	
 	@IBOutlet private var summaryLabel: UILabel!
-	@IBOutlet private var completeButton: UIButton!
-	@IBOutlet private var rejectButton: UIButton!
-	@IBOutlet private var acceptButton: UIButton!
+	@IBOutlet private var resetResolutionButton: UIButton!
+	@IBOutlet private var closeButton: UIButton!
 	@IBOutlet private var reopenButton: UIButton!
 	
 	@IBAction func markIssue() {
@@ -61,6 +60,15 @@ final class ViewIssueViewController: UITableViewController, Reusable {
 		}
 	}
 	
+	private var isSyncing = false {
+		didSet {
+			// block other actions while applying this one.
+			// other changes would be overwritten by the canonical issue returned in the server response
+			[markButton, resetResolutionButton, closeButton, reopenButton]
+				.forEach { $0!.isEnabled = !isSyncing }
+		}
+	}
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -94,21 +102,10 @@ final class ViewIssueViewController: UITableViewController, Reusable {
 		statusLabel.text = issue.status.makeLocalizedMultilineDescription()
 		
 		let status = issue.status.simplified
-		completeButton.isShown = status == .registered
-		rejectButton.isShown = status == .resolved
-		acceptButton.isShown = status == .resolved
+		summaryLabel.isShown = status == .resolved
+		resetResolutionButton.isShown = status == .resolved
+		closeButton.isShown = status != .closed
 		reopenButton.isShown = status == .closed
-		
-		switch status {
-		case .new:
-			break // shouldn't happen anyway after adding edit view
-		case .registered:
-			summaryLabel.text = Localization.Summary.noResponse
-		case .resolved:
-			summaryLabel.text = Localization.Summary.hasResponse
-		case .closed:
-			summaryLabel.text = Localization.Summary.reviewed
-		}
 		
 		DispatchQueue.main.async {
 			self.tableView.performBatchUpdates(nil) // invalidate previously calculated row heights
@@ -116,10 +113,13 @@ final class ViewIssueViewController: UITableViewController, Reusable {
 	}
 	
 	private func saveChanges() {
-		issue.saveAndSync().then { [parent] in
-			self.issue = Repository.shared.object(self.issue.id)
-			(parent as? MapViewController)?.updateFromRepository()
-		}
+		isSyncing = true
+		issue.saveAndSync()
+			.always { self.isSyncing = false }
+			.then { [parent] in
+				self.issue = Repository.shared.object(self.issue.id)
+				(parent as? MapViewController)?.updateFromRepository()
+			}
 	}
 	
 	override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
