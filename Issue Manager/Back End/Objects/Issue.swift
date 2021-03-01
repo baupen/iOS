@@ -96,6 +96,7 @@ struct Issue: Equatable {
 		}
 		
 		enum Columns {
+			static let createdAt = Column(CodingKeys.createdAt)
 			static let closedAt = Column(CodingKeys.closedAt)
 			static let resolvedAt = Column(CodingKeys.resolvedAt)
 		}

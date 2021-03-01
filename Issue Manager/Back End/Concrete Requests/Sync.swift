@@ -21,7 +21,7 @@ private struct IssueCreationRequest: JSONJSONRequest {
 	let body: APIIssuePatch
 }
 
-private struct ImageUploadRequest: MultipartEncodingRequest, StatusCodeRequest {
+private struct ImageUploadRequest: MultipartEncodingRequest {
 	var path: String
 	
 	var fileURL: URL
@@ -33,6 +33,15 @@ private struct ImageUploadRequest: MultipartEncodingRequest, StatusCodeRequest {
 	init(issue: Issue, fileURL: URL) {
 		self.path = "\(issue.apiPath)/image"
 		self.fileURL = fileURL
+	}
+	
+	func decode(from data: Data, using decoder: JSONDecoder) throws -> String {
+		try String(bytes: data, encoding: .utf8)
+			??? ImageUploadError.invalidPathResponse
+	}
+	
+	enum ImageUploadError: Error {
+		case invalidPathResponse
 	}
 }
 
@@ -51,7 +60,9 @@ private struct DeletionRequest: GetRequest, StatusCodeRequest {
 }
 
 extension Client {
-	private static let issuePatchLimiter = ConcurrencyLimiter(label: "issue patch", maxConcurrency: 16)
+	// no concurrency for creation to ensure correct ordering
+	private static let issueCreationLimiter = ConcurrencyLimiter(label: "issue creation", maxConcurrency: 1)
+	private static let issuePatchLimiter = ConcurrencyLimiter(label: "issue patch", maxConcurrency: 3)
 	
 	func pushLocalChanges() -> Future<Void> {
 		pushChangesThen {}
@@ -60,34 +71,54 @@ extension Client {
 	func synchronouslyPushLocalChanges() throws {
 		assertOnLinearQueue()
 		
-		try syncChanges(for: Issue.filter(Issue.Columns.patchIfChanged != nil)) { issue in
-			let result = issue.wasUploaded
-				? self.send(IssuePatchRequest(path: issue.apiPath, body: issue.patchIfChanged!.makeModel()))
-				: self.send(IssueCreationRequest(body: issue.patchIfChanged!.makeModel()))
-			return result.map {
+		try syncChanges(
+			for: Issue.filter(Issue.Columns.patchIfChanged != nil)
+				.order(Issue.Status.Columns.createdAt)
+		) { issue in
+			self.syncPatch(for: issue).map {
 				Repository.shared.remove(issue) // remove non-canonical copy
-				Repository.shared.save($0.makeObject(context: issue.constructionSiteID) <- {
+				Repository.shared.save($0 <- {
 					$0.image = issue.image // keep local changes to image to sync next
 				})
 			}
 		}
 		
 		try syncChanges(for: Issue.filter(Issue.Columns.didChangeImage)) { issue in
-			let result = issue.image
-				.map { self.send(ImageUploadRequest(issue: issue, fileURL: Issue.localURL(for: $0))) }
-				?? self.send(DeletionRequest(forImageOf: issue))
-			return result.map {
+			self.syncImageChange(for: issue).map {
 				let newState = issue <- { $0.didChangeImage = false }
-				   Repository.shared.save([.didChangeImage], of: newState)
+				Repository.shared.save([.didChangeImage], of: newState)
 			}
 		}
 		
 		try syncChanges(for: Issue.filter(Issue.Columns.didDelete)) { issue in
 			self.send(DeletionRequest(for: issue)).map {
 				let newState = issue <- { $0.didDelete = false }
-				   Repository.shared.save([.didDelete], of: newState)
+				Repository.shared.save([.didDelete], of: newState)
 			}
 		}
+	}
+	
+	private func syncPatch(for issue: Issue) -> Future<Issue> {
+		let patch = issue.patchIfChanged!.makeModel()
+		let canonical = issue.wasUploaded
+			? send(IssuePatchRequest(path: issue.apiPath, body: patch))
+			: Self.issueCreationLimiter.dispatch {
+				self.send(IssueCreationRequest(body: patch))
+			}
+		return canonical.map { $0.makeObject(context: issue.constructionSiteID) }
+	}
+	
+	private func syncImageChange(for issue: Issue) -> Future<Void> {
+		issue.image
+			.map {
+				send(ImageUploadRequest(issue: issue, fileURL: Issue.localURL(for: $0)))
+					.map { path in
+						let newState = issue <- { $0.image = .init(urlPath: path) }
+						Repository.shared.save([.image], of: newState)
+						Issue.onChange(from: issue, to: newState)
+					}
+			}
+			?? send(DeletionRequest(forImageOf: issue))
 	}
 	
 	private func syncChanges(for query: QueryInterfaceRequest<Issue>, performing upload: @escaping (Issue) -> Future<Void>) throws {

@@ -67,6 +67,15 @@ extension FileContainer {
 		downloadFile(previous: nil)
 	}
 	
+	func fileUploaded(to location: File<Self>) {
+		guard let file = file else { return }
+		// doesn't matter if this fails; we'll end up being safe by downloading anyway
+		try? manager.moveItem(
+			at: Self.localURL(for: file),
+			to: Self.cacheURL(for: location)
+		)
+	}
+	
 	func downloadFile(previous: Self?) -> Future<Void> {
 		if let previous = previous {
 			switch (previous.file, file) {
@@ -77,11 +86,7 @@ extension FileContainer {
 			case (_?, nil): // no longer has file
 				previous.deleteFile()
 			case let (prev?, new?) where prev == new: // same file
-				// move after uploading
-				try? manager.moveItem(
-					at: Self.localURL(for: prev),
-					to: Self.cacheURL(for: new)
-				)
+				// move after uploading already handled in sync logic
 				return .fulfilled
 			case (_?, _?): // different file
 				previous.deleteFile()
@@ -93,7 +98,8 @@ extension FileContainer {
 		
 		guard !manager.fileExists(atPath: url.path) else { return .fulfilled }
 		
-		print("Downloading \(file) for \(Self.pathPrefix)")
+		print("Downloading \(file) for \(Self.pathPrefix) (id \(id))")
+		dump(self)
 		
 		return Client.shared.download(file)
 			.map { data in
