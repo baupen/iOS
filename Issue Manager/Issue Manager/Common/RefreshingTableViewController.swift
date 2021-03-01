@@ -33,6 +33,11 @@ class RefreshingTableViewController: UITableViewController {
 				titled: Alert.ConnectionIssues.title,
 				message: Alert.ConnectionIssues.message
 			)
+		case RequestError.notAuthenticated:
+			self.showAlert(
+				titled: Alert.InvalidSession.title,
+				message: Alert.InvalidSession.message
+			) { self.performSegue(withIdentifier: "log out", sender: self) }
 		default:
 			print("refresh error!")
 			dump(error)
