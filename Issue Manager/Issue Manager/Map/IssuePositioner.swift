@@ -30,11 +30,6 @@ final class IssuePositioner: UIView {
 	override func awakeFromNib() {
 		super.awakeFromNib()
 		
-		crosshairView.layer.shadowOpacity = 1
-		crosshairView.layer.shadowOffset = .zero
-		crosshairView.layer.shadowRadius = 4
-		crosshairView.layer.shadowColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-		
 		let panRecognizer = UIPanGestureRecognizer(target: self, action: #selector(viewPanned))
 		panRecognizer.delegate = self
 		addGestureRecognizer(panRecognizer)
