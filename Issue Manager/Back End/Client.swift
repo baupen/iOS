@@ -37,6 +37,11 @@ final class Client {
 	
 	private init() {}
 	
+	func wipeAllData() {
+		loginInfo = nil
+		localUser = nil
+	}
+	
 	func send<R: Request>(_ request: R) -> Future<R.Response> {
 		Future { try urlRequest(for: request) }
 			.flatMap { rawRequest in

@@ -115,7 +115,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControll
 		
 		wipeDownloadedFiles()
 		DatabaseDataStore.wipeData()
-		Client.shared.loginInfo = nil
-		Client.shared.localUser = nil
+		Client.shared.wipeAllData()
 	}
 }
