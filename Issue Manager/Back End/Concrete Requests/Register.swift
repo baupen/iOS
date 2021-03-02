@@ -16,6 +16,7 @@ private struct RegisterRequest: JSONEncodingRequest, StatusCodeRequest {
 
 extension Client {
 	func register(asEmail email: String, at domain: URL) -> Future<Void> {
-		send(RegisterRequest(baseURLOverride: domain, body: .init(email: email)))
+		wipeAllData()
+		return send(RegisterRequest(baseURLOverride: domain, body: .init(email: email)))
 	}
 }
