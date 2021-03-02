@@ -71,6 +71,8 @@ extension Client {
 	func synchronouslyPushLocalChanges() throws {
 		assertOnLinearQueue()
 		
+		let maxLastChangeTime = Issue.all().maxLastChangeTime()
+		
 		try syncChanges(
 			for: Issue.filter(Issue.Columns.patchIfChanged != nil)
 				.order(Issue.Status.Columns.createdAt)
@@ -79,6 +81,7 @@ extension Client {
 				Repository.shared.remove(issue) // remove non-canonical copy
 				Repository.shared.save($0 <- {
 					$0.image = issue.image // keep local changes to image to sync next
+					$0.lastChangeTime = maxLastChangeTime // fake older last change time to avoid skipping changes between last max change time and this upload
 				})
 			}
 		}

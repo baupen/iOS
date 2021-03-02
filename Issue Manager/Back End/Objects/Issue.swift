@@ -45,6 +45,11 @@ struct Issue: Equatable {
 		}
 	}
 	
+	var lastChangeTime: Date {
+		get { meta.lastChangeTime }
+		set { meta.lastChangeTime = newValue }
+	}
+	
 	// unsync change tracking
 	private(set) var wasUploaded: Bool
 	var didChangeImage = false
