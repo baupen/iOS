@@ -61,6 +61,12 @@ final class LoginViewController: UIViewController {
 				titled: L10n.Alert.ConnectionIssues.title,
 				message: L10n.Alert.ConnectionIssues.message
 			)
+		case RequestError.notAuthenticated: // probably invalid qr code/link
+			// TODO: more specific alert?
+			showAlert(
+				titled: L10n.Alert.InvalidSession.title,
+				message: L10n.Alert.InvalidSession.message
+			)
 		default:
 			print("login error!")
 			dump(error)
