@@ -2977,7 +2977,7 @@ Beantwortet von Malerfirma GmbH</string>
                                                                             <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="E-Mail" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="zbx-Tk-tfj" userLabel="Username Field">
                                                                                 <rect key="frame" x="16" y="12" width="248" height="22"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardType="emailAddress" returnKeyType="next" textContentType="given-name"/>
+                                                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardType="emailAddress" returnKeyType="next" textContentType="email"/>
                                                                                 <attributedString key="userComments">
                                                                                     <fragment content="placeholder for username field">
                                                                                         <attributes>
@@ -3009,7 +3009,7 @@ Beantwortet von Malerfirma GmbH</string>
                                                                             <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="app.mangel.io" placeholder="Website" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="6nE-qh-UuP">
                                                                                 <rect key="frame" x="16" y="12" width="248" height="22"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardType="URL" returnKeyType="go" textContentType="family-name"/>
+                                                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardType="URL" returnKeyType="go" textContentType="url"/>
                                                                                 <userDefinedRuntimeAttributes>
                                                                                     <userDefinedRuntimeAttribute type="string" keyPath="localizedPlaceholder" value="register.placeholder.website"/>
                                                                                 </userDefinedRuntimeAttributes>
