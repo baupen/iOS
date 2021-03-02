@@ -647,7 +647,7 @@
                                 <rect key="frame" x="0.0" y="55.5" width="414" height="71.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WCw-Qf-5nD" id="37f-cq-3Eg">
-                                    <rect key="frame" x="0.0" y="0.0" width="383" height="71.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="395" height="71.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="6HL-im-h5N">
@@ -3346,7 +3346,7 @@ Beantwortet von Malerfirma GmbH</string>
     </designables>
     <inferredMetricsTieBreakers>
         <segue reference="EOg-36-OMz"/>
-        <segue reference="L64-rs-k1Y"/>
+        <segue reference="6gl-uf-ppv"/>
         <segue reference="PB9-0e-xdP"/>
         <segue reference="QK8-t8-g4B"/>
     </inferredMetricsTieBreakers>
