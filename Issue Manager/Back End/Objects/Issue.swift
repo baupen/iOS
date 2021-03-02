@@ -102,8 +102,8 @@ struct Issue: Equatable {
 		
 		enum Columns {
 			static let createdAt = Column(CodingKeys.createdAt)
-			static let closedAt = Column(CodingKeys.closedAt)
 			static let resolvedAt = Column(CodingKeys.resolvedAt)
+			static let closedAt = Column(CodingKeys.closedAt)
 		}
 	}
 }
@@ -236,7 +236,7 @@ extension DerivableRequest where RowDecoder == Issue {
 	}
 	
 	var openIssues: Self {
-		filter(Issue.Status.Columns.closedAt == nil)
+		filter(Issue.Status.Columns.resolvedAt == nil && Issue.Status.Columns.closedAt == nil)
 	}
 	
 	var issuesWithResponse: Self {
