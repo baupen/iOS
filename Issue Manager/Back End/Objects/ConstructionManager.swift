@@ -6,11 +6,13 @@ import GRDB
 struct ConstructionManager: Codable {
 	var meta: Meta
 	var authenticationToken: String?
-	var givenName: String
-	var familyName: String
+	var givenName: String?
+	var familyName: String?
 	
 	var fullName: String {
-		"\(givenName) \(familyName)"
+		[givenName, familyName]
+			.compactMap { $0 }
+			.joined(separator: " ")
 	}
 }
 

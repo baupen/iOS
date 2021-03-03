@@ -50,6 +50,7 @@ final class DatabaseDataStore {
 	}
 	
 	private func registerMigrations(in migrator: inout DatabaseMigrator) {
+		/// initial setup
 		migrator.registerMigration("v1") { db in
 			try db.create(table: "ConstructionManager") {
 				$0.primaryKey(["id"])
@@ -153,6 +154,25 @@ final class DatabaseDataStore {
 				$0.column("closedBy", .text)
 					.references("ConstructionManager")
 			}
+		}
+		
+		/// removal of non-null constraints on construction manager name (happens for registering managers)
+		migrator.registerMigration("v2") { db in
+			// can't just alter constraints; have to migrate explicitly
+			try db.rename(table: "ConstructionManager", to: "_ConstructionManager")
+			try db.create(table: "ConstructionManager") {
+				$0.primaryKey(["id"])
+				// meta
+				$0.column("id", .text).notNull()
+				$0.column("lastChangeTime", .datetime).notNull()
+				$0.column("isDeleted", .boolean).notNull()
+				// contents
+				$0.column("authenticationToken", .text)
+				$0.column("givenName", .text)
+				$0.column("familyName", .text)
+			}
+			try db.execute(sql: "INSERT INTO ConstructionManager SELECT * FROM _ConstructionManager")
+			try db.drop(table: "_ConstructionManager")
 		}
 	}
 }
