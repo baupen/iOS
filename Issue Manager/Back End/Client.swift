@@ -134,7 +134,7 @@ enum RequestError: Error {
 	// TODO: reimplement outdated client logic
 }
 
-fileprivate func debugRepresentation(of data: Data, maxLength: Int = 1000) -> String {
+fileprivate func debugRepresentation(of data: Data, maxLength: Int = 5000) -> String {
 	guard data.count <= maxLength else { return "<\(data.count) bytes>" }
 	
 	return String(bytes: data, encoding: .utf8)?

@@ -26,7 +26,7 @@ final class DatabaseDataStore {
 			$0.label = "main database"
 			#if DEBUG
 			// uncomment when needed:
-			func debugRepresentation(of string: String, maxLength: Int = 500) -> String {
+			func debugRepresentation(of string: String, maxLength: Int = 1000) -> String {
 				if string.count < maxLength {
 					return string
 				} else {
