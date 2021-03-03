@@ -60,10 +60,6 @@ private struct DeletionRequest: GetRequest, StatusCodeRequest {
 }
 
 extension Client {
-	// no concurrency for creation to ensure correct ordering
-	private static let issueCreationLimiter = ConcurrencyLimiter(label: "issue creation", maxConcurrency: 1)
-	private static let issuePatchLimiter = ConcurrencyLimiter(label: "issue patch", maxConcurrency: 3)
-	
 	func pushLocalChanges() -> Future<Void> {
 		pushChangesThen {}
 	}
@@ -73,30 +69,36 @@ extension Client {
 		
 		let maxLastChangeTime = Issue.all().maxLastChangeTime()
 		
-		try syncChanges(
-			for: Issue.filter(Issue.Columns.patchIfChanged != nil)
-				.order(Issue.Status.Columns.createdAt)
-		) { issue in
+		let issuesWithPatches = Issue
+			.filter(Issue.Columns.patchIfChanged != nil)
+			.order(Issue.Status.Columns.createdAt)
+		try syncChanges(for: issuesWithPatches) { issue in
 			self.syncPatch(for: issue).map {
 				Repository.shared.remove(issue) // remove non-canonical copy
 				Repository.shared.save($0 <- {
-					$0.image = issue.image // keep local changes to image to sync next
-					$0.lastChangeTime = maxLastChangeTime // fake older last change time to avoid skipping changes between last max change time and this upload
+					// keep local changes to image to sync next (this sets didChangeImage relative to remote image)
+					$0.image = issue.image
+					// fake older last change time to avoid skipping changes between last max change time and this upload
+					$0.lastChangeTime = maxLastChangeTime
 				})
 			}
 		}
 		
 		try syncChanges(for: Issue.filter(Issue.Columns.didChangeImage)) { issue in
 			self.syncImageChange(for: issue).map {
-				let newState = issue <- { $0.didChangeImage = false }
-				Repository.shared.save([.didChangeImage], of: newState)
+				Repository.shared.save(
+					[.didChangeImage],
+					of: issue <- { $0.didChangeImage = false }
+				)
 			}
 		}
 		
 		try syncChanges(for: Issue.filter(Issue.Columns.didDelete)) { issue in
 			self.send(DeletionRequest(for: issue)).map {
-				let newState = issue <- { $0.didDelete = false }
-				Repository.shared.save([.didDelete], of: newState)
+				Repository.shared.save(
+					[.didDelete],
+					of: issue <- { $0.didDelete = false }
+				)
 			}
 		}
 	}
@@ -105,32 +107,30 @@ extension Client {
 		let patch = issue.patchIfChanged!.makeModel()
 		let canonical = issue.wasUploaded
 			? send(IssuePatchRequest(path: issue.apiPath, body: patch))
-			: Self.issueCreationLimiter.dispatch {
-				self.send(IssueCreationRequest(body: patch))
-			}
+			: send(IssueCreationRequest(body: patch))
 		return canonical.map { $0.makeObject(context: issue.constructionSiteID) }
 	}
 	
 	private func syncImageChange(for issue: Issue) -> Future<Void> {
 		issue.image
 			.map {
-				send(ImageUploadRequest(issue: issue, fileURL: Issue.localURL(for: $0)))
-					.map { path in
-						let newState = issue <- { $0.image = .init(urlPath: path) }
-						Repository.shared.save([.image], of: newState)
-						Issue.onChange(from: issue, to: newState)
-					}
+				send(ImageUploadRequest(issue: issue, fileURL: Issue.localURL(for: $0))).map { path in
+					let image = File<Issue>(urlPath: path)
+					issue.fileUploaded(to: image)
+					Repository.shared.save([.image], of: issue <- { $0.image = image })
+				}
 			}
 			?? send(DeletionRequest(forImageOf: issue))
 	}
 	
-	private func syncChanges(for query: QueryInterfaceRequest<Issue>, performing upload: @escaping (Issue) -> Future<Void>) throws {
-		// TODO: I'm 99% sure this handles things concurrently, but I should check
-		try Repository.shared.read(query.fetchAll)
-			.traverse { issue in
-				Self.issuePatchLimiter.dispatch { upload(issue) }
-			}
-			.await()
+	private func syncChanges(
+		for query: QueryInterfaceRequest<Issue>,
+		performing upload: @escaping (Issue) -> Future<Void>
+	) throws {
+		// no concurrency to ensure correct ordering and avoid unforeseen issues
+		for issue in Repository.shared.read(query.fetchAll) {
+			try upload(issue).await()
+		}
 	}
 }
 
