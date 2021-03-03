@@ -9,7 +9,7 @@ struct ConcurrencyLimiter {
 	let waitQueue: DispatchQueue
 	
 	init(label: String, maxConcurrency: Int) {
-		self.semaphore = .init(value: 32)
+		self.semaphore = .init(value: maxConcurrency)
 		self.waitQueue = .init(label: "\(label) wait", qos: .userInitiated)
 	}
 	
@@ -22,10 +22,10 @@ struct ConcurrencyLimiter {
 			return Future(asyncOn: waitQueue) { promise in
 				semaphore.wait()
 				task()
-					.always { semaphore.signal() }
 					.then(promise.fulfill(with:))
 					.catch(promise.reject(with:))
 			}
+			.always { semaphore.signal() }
 		}
 	}
 }
