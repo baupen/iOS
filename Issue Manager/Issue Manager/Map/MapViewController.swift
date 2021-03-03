@@ -343,7 +343,8 @@ extension MapViewController: UIAdaptivePresentationControllerDelegate {
 		issueListController.update()
 		
 		DispatchQueue.main.async {
-			let mainController = self.splitViewController as! MainViewController
+			guard let splitController = self.splitViewController else { return }
+			let mainController = splitController as! MainViewController
 			for viewController in mainController.masterNav.viewControllers {
 				(viewController as? MapListViewController)?.reload(map)
 			}
