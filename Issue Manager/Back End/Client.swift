@@ -103,7 +103,7 @@ final class Client {
 			url: request.baseURLOverride ?? loginInfo?.origin ?? Self.baseServerURL,
 			resolvingAgainstBaseURL: false
 		)! <- {
-			$0.path += request.path
+			$0.percentEncodedPath += request.path
 			$0.queryItems = request.collectURLQueryItems()
 				.map { URLQueryItem(name: $0, value: "\($1)") }
 				.nonEmptyOptional
