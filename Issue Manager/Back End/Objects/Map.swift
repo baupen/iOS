@@ -10,10 +10,6 @@ struct Map {
 	let name: String
 	let file: File<Map>?
 	let parentID: Map.ID?
-	
-	var parentHolderID: UUID {
-		parentID?.rawValue ?? constructionSiteID.rawValue
-	}
 }
 
 extension Map: DBRecord {

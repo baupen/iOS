@@ -27,7 +27,7 @@ extension StoredObject {
 	var id: ID { meta.id }
 	
 	var rawMeta: AnyObjectMeta { meta }
-	var rawID: UUID { id.rawValue }
+	var rawID: String { id.rawValue }
 	var isDeleted: Bool { meta.isDeleted }
 	
 	static func onChange(from previous: Self?, to new: Self?) {}
@@ -40,5 +40,5 @@ extension DerivableRequest where RowDecoder: StoredObject {
 }
 
 protocol AnyStoredObject: DBRecord {
-	var rawID: UUID { get }
+	var rawID: String { get }
 }

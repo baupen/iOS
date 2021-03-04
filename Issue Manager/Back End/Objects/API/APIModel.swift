@@ -54,7 +54,7 @@ struct APIObjectMeta<Model>: Equatable, Decodable where Model: APIModel {
 	}
 	
 	struct ID: Equatable {
-		var rawValue: UUID
+		var rawValue: String
 		
 		func makeID() -> Object.ID { .init(self.rawValue) }
 	}
@@ -72,18 +72,14 @@ extension APIObjectMeta.ID: Codable {
 				debugDescription: "encountered invalid IRI string (\"\(raw)\") while decoding an ID starting with \(prefix)"
 			)
 		}
-		let uuidString = String(raw.dropFirst(prefix.count))
+		let id = String(raw.dropFirst(prefix.count))
 		
-		self.rawValue = try UUID(uuidString: String(uuidString))
-			??? DecodingError.dataCorruptedError(
-				in: container,
-				debugDescription: "encountered invalid UUID string (\"\(uuidString)\") while decoding an ID"
-			)
+		self.rawValue = id
 	}
 	
 	func encode(to encoder: Encoder) throws {
 		var container = encoder.singleValueContainer()
-		try container.encode("\(Model.Object.apiPath)/\(rawValue.uuidString.lowercased())")
+		try container.encode("\(Model.Object.apiPath)/\(rawValue)")
 	}
 }
 

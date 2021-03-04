@@ -8,7 +8,7 @@ struct ObjectMeta<Object: StoredObject>: AnyObjectMeta, Codable, Equatable {
 	var lastChangeTime = Date.distantPast // intentionally wrong to not throw off most recent lastChangeTime for sync
 	var isDeleted = false
 	
-	var rawID: UUID { id.rawValue }
+	var rawID: String { id.rawValue }
 }
 
 extension ObjectMeta: DBRecord where Object: DBRecord {
@@ -22,7 +22,7 @@ extension ObjectMeta: DBRecord where Object: DBRecord {
 }
 
 protocol AnyObjectMeta {
-	var rawID: UUID { get }
+	var rawID: String { get }
 	var lastChangeTime: Date { get }
 	var isDeleted: Bool { get }
 }

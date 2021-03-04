@@ -4,21 +4,21 @@ import Foundation
 import GRDB
 
 struct ObjectID<Object>: Hashable where Object: StoredObject {
-	var rawValue: UUID
+	var rawValue: String
 	
 	var apiPath: String {
 		"\(Object.apiPath)/\(apiString)"
 	}
 	
 	var apiString: String {
-		rawValue.uuidString.lowercased()
+		rawValue
 	}
 	
 	init() {
-		self.rawValue = UUID()
+		self.rawValue = "\(UUID())"
 	}
 	
-	init(_ rawValue: UUID) {
+	init(_ rawValue: String) {
 		self.rawValue = rawValue
 	}
 }
@@ -31,7 +31,7 @@ extension ObjectID where Object: DBRecord {
 
 extension ObjectID: DatabaseValueConvertible {
 	static func fromDatabaseValue(_ dbValue: DatabaseValue) -> ObjectID? {
-		UUID.fromDatabaseValue(dbValue).map(ObjectID.init)
+		String.fromDatabaseValue(dbValue).map(ObjectID.init)
 	}
 	
 	var databaseValue: DatabaseValue {
@@ -42,7 +42,7 @@ extension ObjectID: DatabaseValueConvertible {
 extension ObjectID: Codable {
 	init(from decoder: Decoder) throws {
 		let container = try decoder.singleValueContainer()
-		self.rawValue = try container.decode(UUID.self)
+		self.rawValue = try container.decode(String.self)
 	}
 	
 	func encode(to encoder: Encoder) throws {
