@@ -239,8 +239,8 @@ extension DerivableRequest where RowDecoder == Issue {
 		filter(Issue.Status.Columns.resolvedAt == nil && Issue.Status.Columns.closedAt == nil)
 	}
 	
-	var issuesWithResponse: Self {
-		filter(Issue.Status.Columns.resolvedAt != nil)
+	var issuesToInspect: Self {
+		filter(Issue.Status.Columns.resolvedAt != nil && Issue.Status.Columns.closedAt != nil)
 	}
 }
 
