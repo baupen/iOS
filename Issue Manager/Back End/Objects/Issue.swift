@@ -240,7 +240,7 @@ extension DerivableRequest where RowDecoder == Issue {
 	}
 	
 	var issuesToInspect: Self {
-		filter(Issue.Status.Columns.resolvedAt != nil && Issue.Status.Columns.closedAt != nil)
+		filter(Issue.Status.Columns.resolvedAt != nil && Issue.Status.Columns.closedAt == nil)
 	}
 }
 
@@ -261,7 +261,7 @@ extension Issue {
 	}
 	
 	var isOpen: Bool {
-		status.closedAt == nil
+		!isResolved && !isClosed
 	}
 }
 
@@ -270,7 +270,7 @@ extension Issue {
 extension Issue {
 	mutating func close() {
 		assert(isRegistered)
-		assert(isOpen)
+		assert(!isClosed)
 		
 		let now = Date()
 		let author = Client.shared.localUser!.id
@@ -292,8 +292,7 @@ extension Issue {
 	
 	mutating func revertResolution() {
 		assert(isResolved)
-		assert(isOpen)
-		
+		assert(!isClosed)
 		
 		status.resolvedAt = nil
 		status.resolvedBy = nil
