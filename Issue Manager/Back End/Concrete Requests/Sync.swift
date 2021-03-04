@@ -210,7 +210,7 @@ extension Client {
 	
 	private func doPullChangedIssues(
 		for site: ConstructionSite,
-		itemsPerPage: Int = 100,
+		itemsPerPage: Int = 1000,
 		prevLastChangeTime: Date? = nil
 	) -> Future<Void> {
 		// detect loops (making the same request multiple times) and respond by asking for larger pages
