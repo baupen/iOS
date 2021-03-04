@@ -35,7 +35,6 @@ protocol FileContainer: StoredObject {
 	var file: File<Self>? { get }
 	
 	@discardableResult func downloadFile() -> Future<Void>
-	@discardableResult func downloadFile(previous: Self?) -> Future<Void>
 	func deleteFile()
 }
 
@@ -46,6 +45,10 @@ private extension File {
 	}
 }
 
+/// limit max concurrent file downloads
+/// (otherwise we start getting overrun with timeouts, though URLSession automatically limits concurrent connections per host)
+private let downloadLimiter = ConcurrencyLimiter(label: "file download", maxConcurrency: 3)
+
 extension FileContainer {
 	static func cacheURL(for file: File<Self>) -> URL {
 		baseCacheURL.appendingPathComponent(file.subpath, isDirectory: false)
@@ -55,16 +58,44 @@ extension FileContainer {
 		baseLocalURL.appendingPathComponent(file.subpath, isDirectory: false)
 	}
 	
-	static func onChange(from previous: Self?, to new: Self?) {
-		if let new = new {
-			new.downloadFile(previous: previous)
-		} else {
-			previous?.deleteFile()
-		}
+	static func downloadMissingFiles() -> Future<Void> {
+		Repository.shared.read(
+			Self.order(Meta.Columns.lastChangeTime.desc)
+				.fetchAll
+		)
+		.traverse { $0.downloadFile() }
 	}
 	
 	func downloadFile() -> Future<Void> {
-		downloadFile(previous: nil)
+		guard let file = file else { return .fulfilled }
+		let url = Self.cacheURL(for: file)
+		
+		guard !manager.fileExists(atPath: url.path) else { return .fulfilled }
+		return downloadLimiter.dispatch(_downloadFile)
+	}
+		
+	private func _downloadFile() -> Future<Void> {
+		// check again in case it's changed by now
+		guard let file = file else { return .fulfilled }
+		let url = Self.cacheURL(for: file)
+		
+		guard !manager.fileExists(atPath: url.path) else { return .fulfilled }
+		
+		let debugDesc = "for \(Self.pathPrefix) (id \(id))"
+		print("Downloading \(file)", debugDesc)
+		
+		return Client.shared.download(file)
+			.map { data in
+				try? manager.createDirectory(
+					at: url.deletingLastPathComponent(),
+					withIntermediateDirectories: true
+				)
+				let success = manager.createFile(atPath: url.path, contents: data)
+				print(success ? "Saved file to" : "Could not save file to", url, debugDesc)
+			}
+			.catch { error in
+				error.printDetails(context: "Could not download \(file) \(debugDesc)")
+			}
 	}
 	
 	func fileUploaded(to location: File<Self>) {
@@ -74,48 +105,6 @@ extension FileContainer {
 			at: Self.localURL(for: file),
 			to: Self.cacheURL(for: location)
 		)
-	}
-	
-	func downloadFile(previous: Self?) -> Future<Void> {
-		if let previous = previous {
-			switch (previous.file, file) {
-			case (nil, nil): // never had file
-				return .fulfilled // nothing to do
-			case (nil, _?): // newly has file
-				break // nothing to do here; just download file
-			case (_?, nil): // no longer has file
-				previous.deleteFile()
-			case let (prev?, new?) where prev == new: // same file
-				// move after uploading already handled in sync logic
-				return .fulfilled
-			case (_?, _?): // different file
-				previous.deleteFile()
-			}
-		}
-		
-		guard let file = file else { return .fulfilled }
-		let url = Self.cacheURL(for: file)
-		
-		guard !manager.fileExists(atPath: url.path) else { return .fulfilled }
-		
-		print("Downloading \(file) for \(Self.pathPrefix) (id \(id))")
-		dump(self)
-		
-		return Client.shared.download(file)
-			.map { data in
-				try? manager.createDirectory(
-					at: url.deletingLastPathComponent(),
-					withIntermediateDirectories: true
-				)
-				let success = manager.createFile(atPath: url.path, contents: data)
-				print(success ? "Saved file to" : "Could not save file to", url)
-			}
-			.catch { error in
-				error.printDetails(context: "Could not download \(file)")
-				//print("container to download file for:")
-				//dump(self)
-				//print()
-			}
 	}
 	
 	func deleteFile() {

@@ -16,8 +16,6 @@ protocol StoredObject: AnyStoredObject {
 	var meta: Meta { get }
 	var id: ID { get }
 	var isDeleted: Bool { get }
-	
-	static func onChange(from previous: Self?, to new: Self?)
 }
 
 extension StoredObject {
@@ -29,8 +27,6 @@ extension StoredObject {
 	var rawMeta: AnyObjectMeta { meta }
 	var rawID: String { id.rawValue }
 	var isDeleted: Bool { meta.isDeleted }
-	
-	static func onChange(from previous: Self?, to new: Self?) {}
 }
 
 extension DerivableRequest where RowDecoder: StoredObject {

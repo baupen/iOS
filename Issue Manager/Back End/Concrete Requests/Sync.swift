@@ -153,11 +153,20 @@ extension Client {
 		}
 	}
 	
+	private static let fileDownloadQueue = DispatchQueue(label: "missing file downloads")
 	private func sync(running block: @escaping () throws -> Void) -> Future<Void> {
 		pushChangesThen {
 			try self.doPullChangedTopLevelObjects().await()
 			try block()
-			Repository.shared.downloadMissingFiles()
+			
+			// download important files now
+			try ConstructionSite.downloadMissingFiles().await()
+			try Map.downloadMissingFiles().await()
+			
+			// download issue images in the background
+			Self.fileDownloadQueue.async {
+				try? Issue.downloadMissingFiles().await()
+			}
 		}
 	}
 	
