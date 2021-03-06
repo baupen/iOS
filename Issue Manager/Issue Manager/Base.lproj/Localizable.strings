@@ -280,8 +280,10 @@
 "view_issue.details" = "Details";
 // CONTEXT: Überschrift für das Bild einer Pendenz
 "view_issue.image" = "Foto";
+// CONTEXT: Steht anstelle des Fotos da, wenn ein Foto gesetzt ist, aber noch nicht lokal runtergeladen wurde.
+"view_issue.image_placeholder.loading" = "Bild noch nicht geladen.";
 // CONTEXT: Steht anstelle des Fotos da, wenn kein Foto gesetzt ist.
-"view_issue.image_placeholder" = "Kein Foto gesetzt";
+"view_issue.image_placeholder.not_set" = "Kein Foto gesetzt";
 // CONTEXT: Überschrift dafür, ob die Pendenz im Abnahmemodus aufgenommen wurde. Diese Überschrift darf etwas länger sein, da sie auch über mehrere Zeilen angezeigt werden kann.
 "view_issue.is_client_mode" = "Im Abnahmemodus aufgenommen";
 // CONTEXT: Drückt kurz aus, dass die Pendenz nicht im Abnahmemodus aufgenommen wurde.

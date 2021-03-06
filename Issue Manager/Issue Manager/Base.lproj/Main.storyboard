@@ -1372,7 +1372,7 @@ Maler</string>
                                                     <color key="textColor" systemColor="secondaryLabelColor"/>
                                                     <nil key="highlightedColor"/>
                                                     <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="view_issue.image_placeholder"/>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="view_issue.image_placeholder.not_set"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Tg9-v9-hne">
@@ -1797,7 +1797,7 @@ Beantwortet von Malerfirma GmbH</string>
                                                     <color key="textColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                     <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="view_issue.image_placeholder"/>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="view_issue.image_placeholder.not_set"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uMf-Vv-Gg9" customClass="TrilinearImageView" customModule="Issue_Manager" customModuleProvider="target">
@@ -3347,7 +3347,7 @@ Beantwortet von Malerfirma GmbH</string>
     <inferredMetricsTieBreakers>
         <segue reference="EOg-36-OMz"/>
         <segue reference="6gl-uf-ppv"/>
-        <segue reference="PB9-0e-xdP"/>
+        <segue reference="OdI-J8-6Ad"/>
         <segue reference="QK8-t8-g4B"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="Main"/>

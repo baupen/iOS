@@ -194,7 +194,7 @@
 // CONTEXT: Überschrift für das Bild einer Pendenz
 "view_issue.image" = "Foto";
 // CONTEXT: Steht anstelle des Fotos da, wenn kein Foto gesetzt ist.
-"view_issue.image_placeholder" = "Nessuna foto caricata";
+"view_issue.image_placeholder.not_set" = "Nessuna foto caricata";
 // CONTEXT: Überschrift dafür, ob die Pendenz im Abnahmemodus aufgenommen wurde. Diese Überschrift darf etwas länger sein, da sie auch über mehrere Zeilen angezeigt werden kann.
 "view_issue.is_client_mode" = "Inserita in modalità sopralluogo";
 // CONTEXT: Drückt kurz aus, dass die Pendenz nicht im Abnahmemodus aufgenommen wurde.

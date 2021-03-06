@@ -93,6 +93,9 @@ final class ViewIssueViewController: UITableViewController, Reusable {
 			// TODO: fall back on localURL for other views
 			UIImage(contentsOfFile: Issue.cacheURL(for: $0).path)
 		}
+		noImageLabel.text = issue.image == nil
+			? Localization.ImagePlaceholder.notSet
+			: Localization.ImagePlaceholder.loading
 		
 		let craftsman = Repository.read(issue.craftsman)
 		craftsmanTradeLabel.setText(to: craftsman?.trade, fallback: L10n.Issue.noCraftsman)

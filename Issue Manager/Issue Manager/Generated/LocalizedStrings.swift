@@ -294,8 +294,6 @@ internal enum L10n {
     internal static let details = L10n.tr("Localizable", "view_issue.details")
     /// Foto
     internal static let image = L10n.tr("Localizable", "view_issue.image")
-    /// Kein Foto gesetzt
-    internal static let imagePlaceholder = L10n.tr("Localizable", "view_issue.image_placeholder")
     /// Im Abnahmemodus aufgenommen
     internal static let isClientMode = L10n.tr("Localizable", "view_issue.is_client_mode")
     /// Auf Foto zeichnen
@@ -335,6 +333,12 @@ internal enum L10n {
     internal enum CouldNotTakePicture {
       /// Fotoaufnahme fehlgeschlagen!
       internal static let title = L10n.tr("Localizable", "view_issue.could_not_take_picture.title")
+    }
+    internal enum ImagePlaceholder {
+      /// Bild noch nicht geladen.
+      internal static let loading = L10n.tr("Localizable", "view_issue.image_placeholder.loading")
+      /// Kein Foto gesetzt
+      internal static let notSet = L10n.tr("Localizable", "view_issue.image_placeholder.not_set")
     }
     internal enum IsClientMode {
       /// Nein
