@@ -267,6 +267,14 @@ internal enum L10n {
       /// Abnahmemodus
       internal static let title = L10n.tr("Localizable", "site_list.client_mode.title")
     }
+    internal enum FileProgress {
+      /// %@/%@ Pendenzbilder geladen…
+      internal static func determinate(_ p1: Any, _ p2: Any) -> String {
+        return L10n.tr("Localizable", "site_list.file_progress.determinate", String(describing: p1), String(describing: p2))
+      }
+      /// Pendenzbilder werden geladen…
+      internal static let indeterminate = L10n.tr("Localizable", "site_list.file_progress.indeterminate")
+    }
     internal enum SiteSummary {
       /// %@ offene Pendenzen
       internal static func openIssues(_ p1: Any) -> String {

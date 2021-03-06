@@ -29,13 +29,7 @@ func wipeDownloadedFiles() {
 protocol FileContainer: StoredObject {
 	static var pathPrefix: String { get }
 	
-	static func cacheURL(for file: File<Self>) -> URL
-	static func localURL(for file: File<Self>) -> URL
-	
 	var file: File<Self>? { get }
-	
-	@discardableResult func downloadFile() -> Future<Void>
-	func deleteFile()
 }
 
 private extension File {
@@ -49,6 +43,15 @@ private extension File {
 /// (otherwise we start getting overrun with timeouts, though URLSession automatically limits concurrent connections per host)
 private let downloadLimiter = ConcurrencyLimiter(label: "file download", maxConcurrency: 3)
 
+enum FileDownloadProgress: Hashable {
+	/// going through local files to figure out what's missing, but also already downloading if necessary
+	case undetermined
+	/// downloading missing files, `current` out of `total` done
+	case determined(current: Int, total: Int)
+	/// downloads complete
+	case done
+}
+
 extension FileContainer {
 	static func cacheURL(for file: File<Self>) -> URL {
 		baseCacheURL.appendingPathComponent(file.subpath, isDirectory: false)
@@ -58,19 +61,39 @@ extension FileContainer {
 		baseLocalURL.appendingPathComponent(file.subpath, isDirectory: false)
 	}
 	
-	static func downloadMissingFiles() -> Future<Void> {
-		Repository.shared.read(
+	static func downloadMissingFiles(
+		onProgress: ((FileDownloadProgress) -> Void)? = nil
+	) -> Future<Void> {
+		onProgress?(.undetermined)
+		
+		let futures = Repository.shared.read(
 			Self.order(Meta.Columns.lastChangeTime.desc)
 				.fetchAll
 		)
-		.traverse { $0.downloadFile() }
+		.compactMap { $0.downloadFile() }
+		
+		guard let onProgress = onProgress else { return futures.sequence() }
+		
+		let total = futures.count
+		var completed: Int32 = 0
+		
+		return futures
+			.map {
+				$0.map { _ in
+					OSAtomicIncrement32(&completed)
+					onProgress(.determined(current: Int(completed), total: total))
+				}
+			}
+			.sequence()
+			.always { onProgress(.done) }
 	}
 	
-	func downloadFile() -> Future<Void> {
-		guard let file = file else { return .fulfilled }
+	/// - returns: A `Future` that resolves when the file is downloaded, or `nil` if there's nothing to do.
+	@discardableResult func downloadFile() -> Future<Void>? {
+		guard let file = file else { return nil }
 		let url = Self.cacheURL(for: file)
+		guard !manager.fileExists(atPath: url.path) else { return nil }
 		
-		guard !manager.fileExists(atPath: url.path) else { return .fulfilled }
 		return downloadLimiter.dispatch(_downloadFile)
 	}
 		
@@ -78,7 +101,6 @@ extension FileContainer {
 		// check again in case it's changed by now
 		guard let file = file else { return .fulfilled }
 		let url = Self.cacheURL(for: file)
-		
 		guard !manager.fileExists(atPath: url.path) else { return .fulfilled }
 		
 		let debugDesc = "for \(Self.pathPrefix) (id \(id))"

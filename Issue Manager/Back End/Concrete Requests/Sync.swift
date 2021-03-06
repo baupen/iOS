@@ -136,8 +136,10 @@ extension Client {
 
 extension Client {
 	/// ensures local changes are pushed first
-	func pullRemoteChanges() -> Future<Void> {
-		sync {
+	func pullRemoteChanges(
+		onIssueImageProgress: ((FileDownloadProgress) -> Void)? = nil
+	) -> Future<Void> {
+		sync(onIssueImageProgress: onIssueImageProgress) {
 			try Repository.shared.read(ConstructionSite.fetchAll)
 				.traverse(self.doPullRemoteChanges(for:))
 				.await()
@@ -154,7 +156,10 @@ extension Client {
 	}
 	
 	private static let fileDownloadQueue = DispatchQueue(label: "missing file downloads")
-	private func sync(running block: @escaping () throws -> Void) -> Future<Void> {
+	private func sync(
+		onIssueImageProgress: ((FileDownloadProgress) -> Void)? = nil,
+		running block: @escaping () throws -> Void
+	) -> Future<Void> {
 		pushChangesThen {
 			try self.doPullChangedTopLevelObjects().await()
 			try block()
@@ -165,7 +170,7 @@ extension Client {
 			
 			// download issue images in the background
 			Self.fileDownloadQueue.async {
-				try? Issue.downloadMissingFiles().await()
+				try? Issue.downloadMissingFiles(onProgress: onIssueImageProgress).await()
 			}
 		}
 	}

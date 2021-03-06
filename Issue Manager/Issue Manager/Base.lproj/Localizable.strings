@@ -237,6 +237,10 @@
 "site_list.client_mode.description" = "Im Abnahmemodus werden nur die Pendenzen angezeigt, die auch im Abnahmemodus erfasst wurden.";
 // CONTEXT: Titel für den Schalter um Abnahmemodus an- und auszuschalten. (Abnahmemodus ist für wenn man mit dem Käufer herumläuft und inspiziert; dabei werden die "normalen" Mängel nicht angezeigt.)
 "site_list.client_mode.title" = "Abnahmemodus";
+// CONTEXT: Beschreibung für den Fortschritt beim im Hintergrund Pendenzbilder Herunterladen, wenn bekannt ist, wie viele Bilder geladen werden müssen.
+"site_list.file_progress.determinate" = "%@/%@ Pendenzbilder geladen…";
+// CONTEXT: Beschreibung für den Fortschritt beim im Hintergrund Pendenzbilder Herunterladen, wenn noch nicht bekannt ist, wie viele Bilder geladen werden müssen.
+"site_list.file_progress.indeterminate" = "Pendenzbilder werden geladen…";
 // CONTEXT: Knopf oben links zum ausloggen
 "site_list.log_out" = "Ausloggen";
 // CONTEXT: Wird anstelle der Baustellen angezeigt, wenn man noch nie synchronisiert hat. Sollte den Benutzer darauf hinweisen, dass er durch runterziehen synchronisieren kann.
