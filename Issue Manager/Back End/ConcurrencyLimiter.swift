@@ -14,7 +14,7 @@ struct ConcurrencyLimiter {
 	}
 	
 	func dispatch<T>(_ task: @escaping () -> Future<T>) -> Future<T> {
-		switch semaphore.wait(timeout: .now() + 0.01) {
+		switch semaphore.wait(timeout: .now()) {
 		case .success:
 			return task()
 				.always { semaphore.signal() }
