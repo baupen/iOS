@@ -1072,7 +1072,7 @@
 				9583C2CE20DC748B00452695 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		9583C2CF20DC748B00452695 /* Build configuration list for PBXNativeTarget "Issue Manager" */ = {
 			isa = XCConfigurationList;
@@ -1081,7 +1081,7 @@
 				9583C2D120DC748B00452695 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 
