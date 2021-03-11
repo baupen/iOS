@@ -106,7 +106,8 @@ extension LoginViewController: QRScannerViewDelegate {
 	func qrsFound(by scanner: QRScannerView, with contents: [String]) {
 		let decoder = JSONDecoder()
 		let infos = contents.compactMap {
-			try? decoder.decode(LoginInfo.self, from: $0.data(using: .utf8)!)
+			DeepLink(from: $0)?.loginInfo
+				?? (try? decoder.decode(LoginInfo.self, from: $0.data(using: .utf8)!))
 		}
 		guard let info = infos.first else { return }
 		scanner.isProcessing = true

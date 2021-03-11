@@ -104,6 +104,7 @@
 		B9124DC825E6EE2800F4D41D /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9124DC725E6EE2800F4D41D /* Register.swift */; };
 		B937766B2394BEA6009CB22D /* NSLayoutConstraint+Legacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B937766A2394BEA6009CB22D /* NSLayoutConstraint+Legacy.swift */; };
 		B9C04D4D24453FF5008EDDEE /* UserDefault in Frameworks */ = {isa = PBXBuildFile; productRef = B9C04D4C24453FF5008EDDEE /* UserDefault */; };
+		B9CA06FB25FA6612002278FB /* DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CA06FA25FA6612002278FB /* DeepLink.swift */; };
 		B9D9B36323917FC400947CE5 /* PassThroughView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D9B36223917FC400947CE5 /* PassThroughView.swift */; };
 		B9DF854025E187A800408CA3 /* ObjectID.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9DF853F25E187A800408CA3 /* ObjectID.swift */; };
 		B9DF854625E187D600408CA3 /* StoredObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9DF854525E187D600408CA3 /* StoredObject.swift */; };
@@ -244,6 +245,7 @@
 		B90A4ED225DE155300EB56C4 /* Hydra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hydra.swift; sourceTree = "<group>"; };
 		B9124DC725E6EE2800F4D41D /* Register.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };
 		B937766A2394BEA6009CB22D /* NSLayoutConstraint+Legacy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Legacy.swift"; sourceTree = "<group>"; };
+		B9CA06FA25FA6612002278FB /* DeepLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLink.swift; sourceTree = "<group>"; };
 		B9D9B36223917FC400947CE5 /* PassThroughView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassThroughView.swift; sourceTree = "<group>"; };
 		B9DF853F25E187A800408CA3 /* ObjectID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectID.swift; sourceTree = "<group>"; };
 		B9DF854525E187D600408CA3 /* StoredObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredObject.swift; sourceTree = "<group>"; };
@@ -352,6 +354,7 @@
 				95758B1221F4223100E5C20F /* TransitionAnimator.swift */,
 				956418652357ED2B002BAD7B /* ThickMaterialBlurView.swift */,
 				B9D9B36223917FC400947CE5 /* PassThroughView.swift */,
+				B9CA06FA25FA6612002278FB /* DeepLink.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -846,6 +849,7 @@
 				9553707520F1A5E2005D81C8 /* IssueListViewController.swift in Sources */,
 				9511A10820DD3BD100101ADE /* Craftsman.swift in Sources */,
 				95A66C7A20F9181D008F10DA /* ViewIssueViewController.swift in Sources */,
+				B9CA06FB25FA6612002278FB /* DeepLink.swift in Sources */,
 				954D38D422423426008FD3B0 /* DataStore.swift in Sources */,
 				9514FC4D210545C700099EC5 /* MarkupViewController.swift in Sources */,
 				B9F9E5FE25E2F6ED0059A93C /* Login.swift in Sources */,

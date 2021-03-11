@@ -33,28 +33,13 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControll
 		open url: URL,
 		options: [UIApplication.OpenURLOptionsKey: Any] = [:]
 	) -> Bool {
-		guard
-			let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
-			components.scheme == "mangelio"
-		else { return false }
+		guard let link = DeepLink(from: url) else { return false }
 		
-		switch components.host {
-		case "login":
-			guard
-				let queryItems = components.queryItems,
-				let payload = queryItems.first(where: { $0.name == "payload" })?.value,
-				let rawPayload = Data(base64Encoded: payload),
-				let loginInfo = try? JSONDecoder().decode(LoginInfo.self, from: rawPayload)
-			else {
-				print("malformed custom url: \(url)")
-				return false
-			}
-			
+		switch link {
+		case .login(let loginInfo):
 			let loginController = window!.rootViewController as! LoginViewController
 			loginController.logIn(with: loginInfo)
-			
-			return true
-		case "wipe":
+		case .wipe:
 			wipeAllData()
 			
 			dismissThenPerform {
@@ -64,11 +49,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControll
 					okMessage: L10n.Alert.Wiped.quit
 				) { exit(0) }
 			}
-			return true
-		default:
-			print("unrecognized custom url host in \(url)")
-			return false
 		}
+		
+		return true
 	}
 	
 	func application(_ application: UIApplication, shouldSaveSecureApplicationState coder: NSCoder) -> Bool { true }
