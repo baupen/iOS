@@ -93,8 +93,8 @@
 // MARK: Issue.status.resolved
 // CONTEXT: Beschreibt genauer, wie die Pendenz beantwortet wurde. %s wird durch den Namen des Beantworters ersetzt.
 "issue.status.resolved_by" = "Umgesetzt von %@";
-// CONTEXT: Überschrift für die Funktion des verantwortlichen Handwerkers.
-"issue.trade" = "Funktion";
+// CONTEXT: Überschrift für das Gewerk des verantwortlichen Handwerkers.
+"issue.trade" = "Gewerk";
 // CONTEXT: Wird anstelle der Nummer (z.B. #123) angezeigt, wenn eine Pendenz noch nicht registriert ist.
 "issue.unregistered" = "neu";
 
@@ -298,8 +298,8 @@
 "view_issue.markup" = "Auf Foto zeichnen";
 // CONTEXT: Wird anstelle der Vorschläge angezeigt, wenn es keinen zutreffenden gibt.
 "view_issue.no_suggestions" = "Keine passenden Vorschläge";
-// CONTEXT: Wird anstelle der Funktion angezeigt, wenn sie noch nicht ausgewählt wurde.
-"view_issue.no_trade" = "Keine Funktion";
+// CONTEXT: Wird anstelle des Gewerks angezeigt, wenn sie noch nicht ausgewählt wurde.
+"view_issue.no_trade" = "Kein Gewerk";
 // CONTEXT: Knopf, um erneut zu versuchen, die Kamera aufzustarten, nachdem es fehlgeschlagen ist.
 "view_issue.retry_camera" = "Erneut versuchen";
 // CONTEXT: Erklärung für den Zustand, dass der Unternehmer die Pendenz als umgesetzt markiert hat. Der Bauleiter kann nun die Markierung zurücksetzen oder die Pendenz schliessen.
@@ -308,10 +308,10 @@
 "view_issue.select_craftsman.none" = "Kein Unternehmer";
 // CONTEXT: Titel für die Ansicht zum auswählen des Namens.
 "view_issue.select_craftsman.title" = "Unternehmer";
-// CONTEXT: Knopf, um keine Funktion auszuwählen.
-"view_issue.select_trade.none" = "Keine Funktion";
-// CONTEXT: Titel für die Ansicht zum auswählen der Funktion.
-"view_issue.select_trade.title" = "Funktionen";
+// CONTEXT: Knopf, um kein Gewerk auszuwählen.
+"view_issue.select_trade.none" = "Kein Gewerk";
+// CONTEXT: Titel für die Ansicht zum auswählen des Gewerks.
+"view_issue.select_trade.title" = "Gewerke";
 // CONTEXT: Titel für das "Pendenz Bearbeiten"-Popup, wenn die Pendenz erstellt wird.
 "view_issue.title_creating" = "Neue Pendenz";
 // CONTEXT: Titel für das "Pendenz Bearbeiten"-Popup, wenn die Pendenz bearbeitet wird.

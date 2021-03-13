@@ -73,7 +73,7 @@ internal enum L10n {
     internal static let noDescription = L10n.tr("Localizable", "issue.no_description")
     /// Status
     internal static let status = L10n.tr("Localizable", "issue.status")
-    /// Funktion
+    /// Gewerk
     internal static let trade = L10n.tr("Localizable", "issue.trade")
     /// neu
     internal static let unregistered = L10n.tr("Localizable", "issue.unregistered")
@@ -308,7 +308,7 @@ internal enum L10n {
     internal static let markup = L10n.tr("Localizable", "view_issue.markup")
     /// Keine passenden Vorschläge
     internal static let noSuggestions = L10n.tr("Localizable", "view_issue.no_suggestions")
-    /// Keine Funktion
+    /// Kein Gewerk
     internal static let noTrade = L10n.tr("Localizable", "view_issue.no_trade")
     /// Erneut versuchen
     internal static let retryCamera = L10n.tr("Localizable", "view_issue.retry_camera")
@@ -361,9 +361,9 @@ internal enum L10n {
       internal static let title = L10n.tr("Localizable", "view_issue.select_craftsman.title")
     }
     internal enum SelectTrade {
-      /// Keine Funktion
+      /// Kein Gewerk
       internal static let `none` = L10n.tr("Localizable", "view_issue.select_trade.none")
-      /// Funktionen
+      /// Gewerke
       internal static let title = L10n.tr("Localizable", "view_issue.select_trade.title")
     }
   }
