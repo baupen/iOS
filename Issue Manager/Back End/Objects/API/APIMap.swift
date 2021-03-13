@@ -3,23 +3,16 @@
 import Foundation
 
 struct APIMap {
-	let meta: ObjectMeta<Map>
-	let sectors: [Map.Sector]
-	let sectorFrame: Rectangle?
-	let file: File<Map>?
 	let name: String
-	let constructionSiteID: ID<ConstructionSite>
-	let parentID: ID<Map>?
+	let parent: APIMap.ID?
+	let fileUrl: File<Map>?
 	
-	func makeObject() -> Map {
+	func makeObject(meta: Map.Meta, context: ConstructionSite.ID) -> Map {
 		Map(
-			meta: meta,
-			sectors: sectors,
-			sectorFrame: sectorFrame,
-			file: file,
+			meta: meta, constructionSiteID: context,
 			name: name,
-			constructionSiteID: constructionSiteID,
-			parentID: parentID
+			file: fileUrl,
+			parentID: parent?.makeID()
 		)
 	}
 }

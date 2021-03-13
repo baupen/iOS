@@ -28,10 +28,12 @@ final class MainViewController: UISplitViewController, Reusable {
 	override func decodeRestorableState(with coder: NSCoder) {
 		super.decodeRestorableState(with: coder)
 		
-		let siteID = ID<ConstructionSite>(coder.decodeObject(of: NSUUID.self, forKey: "siteID")! as UUID)
+		let siteID = ConstructionSite.ID(coder.decodeObject(of: NSString.self, forKey: "siteID")! as String)
 		if let site = Repository.object(siteID) {
 			self.site = site
-			masterNav.mapList.refreshManually()
+			DispatchQueue.main.async {
+				self.masterNav.mapList.refreshManually()
+			}
 		} else {
 			// site to decode has been deleted; this can only really happen in dev environment
 			children.forEach(unembed) // cancel loading actual content

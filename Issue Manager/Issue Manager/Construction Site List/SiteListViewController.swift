@@ -1,18 +1,24 @@
 // Created by Julian Dunskus
 
 import UIKit
+import Promise
 
 final class SiteListViewController: RefreshingTableViewController, Reusable {
 	fileprivate typealias Localization = L10n.SiteList
 	
 	@IBOutlet private var welcomeLabel: UILabel!
-	@IBOutlet private var clientModeSwitch: UISwitch!
-	@IBOutlet private var clientModeCell: UITableViewCell!
+	
 	@IBOutlet private var siteListView: UICollectionView!
 	@IBOutlet private var refreshHintLabel: UILabel!
 	
+	@IBOutlet private var clientModeCell: UITableViewCell!
+	@IBOutlet private var clientModeSwitch: UISwitch!
+	
+	@IBOutlet private var fileProgressBar: UIProgressView!
+	@IBOutlet private var fileProgressLabel: UILabel!
+	
 	@IBAction func clientModeSwitched() {
-		defaults.isInClientMode = clientModeSwitch.isOn
+		Issue.isInClientMode = clientModeSwitch.isOn
 		updateClientModeAppearance()
 		siteListView.reloadData()
 	}
@@ -21,9 +27,29 @@ final class SiteListViewController: RefreshingTableViewController, Reusable {
 		updateContent()
 	}
 	
+	private var fileDownloadProgress = FileDownloadProgress.done {
+		didSet {
+			switch fileDownloadProgress {
+			case .undetermined:
+				fileProgressBar.progress = 0
+				fileProgressLabel.text = Localization.FileProgress.indeterminate
+			case .determined(let current, let total):
+				fileProgressBar.progress = Float(current) / Float(total)
+				fileProgressLabel.text = Localization.FileProgress.determinate(current, total)
+			case .done:
+				break
+			}
+			
+			if (fileDownloadProgress == .done) != (oldValue == .done) {
+				tableView.reloadData()
+			}
+		}
+	}
+	
 	override var isRefreshing: Bool {
 		didSet {
-			siteListView.visibleCells.forEach { ($0 as! SiteCell).isRefreshing = isRefreshing }
+			siteListView.visibleCells
+				.forEach { ($0 as! SiteCell).isRefreshing = isRefreshing }
 		}
 	}
 	
@@ -39,10 +65,10 @@ final class SiteListViewController: RefreshingTableViewController, Reusable {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		let user = Client.shared.localUser!.user
-		welcomeLabel.text = Localization.welcome(user.givenName)
+		let user = Client.shared.localUser!
+		welcomeLabel.text = Localization.welcome(user.givenName ?? "")
 		
-		clientModeSwitch.isOn = defaults.isInClientMode
+		clientModeSwitch.isOn = Issue.isInClientMode
 		updateClientModeAppearance()
 		
 		updateContent()
@@ -60,9 +86,17 @@ final class SiteListViewController: RefreshingTableViewController, Reusable {
 		
 		// have to wait because we're not presenting anything yet
 		DispatchQueue.main.async {
-			if self.needsRefresh {
+			if self.needsRefresh, self.presentedViewController == nil {
 				self.needsRefresh = false
 				self.refreshManually()
+			}
+		}
+	}
+	
+	override func doRefresh() -> Future<Void> {
+		Client.shared.pullRemoteChanges { progress in
+			DispatchQueue.main.async {
+				self.fileDownloadProgress = progress
 			}
 		}
 	}
@@ -74,12 +108,12 @@ final class SiteListViewController: RefreshingTableViewController, Reusable {
 	}
 	
 	private func updateContent() {
-		sites = Repository.read(ConstructionSite.fetchAll) // TODO: order?
+		sites = Repository.read(ConstructionSite.all().withoutDeleted.fetchAll) // TODO: order?
 		siteListView.reloadData()
 	}
 	
 	func updateClientModeAppearance() {
-		let color = defaults.isInClientMode ? UIColor.clientMode : nil
+		let color = Issue.isInClientMode ? UIColor.clientMode : nil
 		UIView.animate(withDuration: 0.1) {
 			self.clientModeCell.backgroundColor = color
 		}
@@ -95,6 +129,10 @@ final class SiteListViewController: RefreshingTableViewController, Reusable {
 	
 	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		UITableView.automaticDimension
+	}
+	
+	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		3 + (fileDownloadProgress == .done ? 0 : 1)
 	}
 }
 

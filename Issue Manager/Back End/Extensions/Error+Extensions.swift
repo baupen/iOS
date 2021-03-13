@@ -14,4 +14,8 @@ extension Error {
 		dump(self)
 		print()
 	}
+	
+	func dumpedDescription() -> String {
+		"" <- { dump(self, to: &$0) }
+	}
 }

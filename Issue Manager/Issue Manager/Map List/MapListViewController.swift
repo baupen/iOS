@@ -1,6 +1,7 @@
 // Created by Julian Dunskus
 
 import UIKit
+import Promise
 
 final class MapListViewController: RefreshingTableViewController, Reusable {
 	typealias Localization = L10n.MapList
@@ -63,6 +64,26 @@ final class MapListViewController: RefreshingTableViewController, Reusable {
 		navigationController?.navigationBar.setNeedsLayout()
 	}
 	
+	/// set to true when encountering a site we've been removed from during refresh to avoid multiple alerts
+	private var isAlreadyReturning = false
+	override func doRefresh() -> Future<Void> {
+		Client.shared.pullRemoteChanges(for: holder.constructionSiteID)
+			.flatMapError { error in
+				if case SyncError.siteAccessRemoved = error {
+					self.isAlreadyReturning = true
+					self.showAlert(
+						titled: Localization.RemovedFromMap.title,
+						message: Localization.RemovedFromMap.message,
+						okMessage: Localization.RemovedFromMap.dismiss,
+						okHandler: self.returnToSiteList
+					)
+					return .fulfilled
+				} else {
+					return .rejected(with: error)
+				}
+			}
+	}
+	
 	override func refreshCompleted() {
 		guard let mainController = mainController else { return } // dismissed in the meantime
 		
@@ -74,11 +95,13 @@ final class MapListViewController: RefreshingTableViewController, Reusable {
 				mainController.detailNav.mapController.holder = holder
 			}
 		} else {
-			showAlert(
-				titled: Localization.MapRemoved.title,
-				message: Localization.MapRemoved.message
-			) {
-				self.performSegue(withIdentifier: "back to site list", sender: self)
+			if !isAlreadyReturning {
+				showAlert(
+					titled: Localization.MapRemoved.title,
+					message: Localization.MapRemoved.message,
+					okMessage: Localization.MapRemoved.dismiss,
+					okHandler: returnToSiteList
+				)
 			}
 		}
 		
@@ -87,12 +110,24 @@ final class MapListViewController: RefreshingTableViewController, Reusable {
 		}
 	}
 	
+	private func returnToSiteList() {
+		self.performSegue(withIdentifier: "back to site list", sender: self)
+	}
+	
 	/// - returns: whether or not the holder is still valid
 	@discardableResult private func handleRefresh() -> Bool {
-		if let oldSite = holder as? ConstructionSite, let site = Repository.object(oldSite.id) {
+		if
+			let oldSite = holder as? ConstructionSite,
+			let site = Repository.object(oldSite.id),
+			!site.isDeleted
+		{
 			holder = site
 			return true
-		} else if let oldMap = holder as? Map, let map = Repository.object(oldMap.id) {
+		} else if
+			let oldMap = holder as? Map,
+			let map = Repository.object(oldMap.id),
+			!map.isDeleted
+		{
 			holder = map
 			return true
 		} else {
@@ -106,9 +141,11 @@ final class MapListViewController: RefreshingTableViewController, Reusable {
 		
 		navigationItem.title = holder.name
 		
-		maps = Repository.read(holder.children
-			.order(Map.Columns.name.asc)
-			.fetchAll
+		maps = Repository.read(
+			holder.children
+				.withoutDeleted
+				.order(Map.Columns.name.asc)
+				.fetchAll
 		)
 	}
 	

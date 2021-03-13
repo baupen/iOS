@@ -1,8 +1,0 @@
-language: swift
-osx_image: xcode11.2
-before_install:
-  - cd Issue\ Manager
-script:
-  - xcodebuild clean build -quiet -sdk iphonesimulator -project Issue\ Manager.xcodeproj/ -scheme Issue\ Manager CODE_SIGNING_REQUIRED=NO
-after_script:
-  - sleep 10 # give logs time to catch up

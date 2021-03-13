@@ -15,7 +15,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Alert.invalid
 // CONTEXT: Nachricht für den Alert, dass der Token, der bei der Anmeldung erhalten wurde, nicht mehr gültig ist, z.B. wenn auf der Website das Passwort geändert wurde.
-"alert.invalid_session.message" = "Bitte log dich wieder neu ein.";
+"alert.invalid_session.message" = "Bitte neu einloggen.";
 // CONTEXT: Titel für den Alert, dass der Token, der bei der Anmeldung erhalten wurde, nicht mehr gültig ist, z.B. wenn auf der Website das Passwort geändert wurde.
 "alert.invalid_session.title" = "Ungültige Sitzung!";
 // CONTEXT: "OK" Knopf in einem Alert
@@ -24,16 +24,29 @@
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Alert.outdated
 // CONTEXT: Nachricht für den Alert, dass der Client zu alt ist, um mit dem Server zu interagieren.
-"alert.outdated_client.message" = "Diese Version der App kann nicht mehr mit dem Server kommunizieren. Bitte installier das neuste Update, um die App weiter zu benutzen.";
+"alert.outdated_client.message" = "Diese Version der App kann leider nicht mehr mit dem Server kommunizieren. Bitte das neuste Update installieren.";
 // CONTEXT: Titel für den Alert, dass der Client zu alt ist, um mit dem Server zu interagieren.
-"alert.outdated_client.title" = "Update Erforderlich";
+"alert.outdated_client.title" = "Update erforderlich";
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Alert.unknown
 // CONTEXT: Nachricht für den Alert, dass beim aktualisieren ein unbekannter Fehler aufgetreten ist. %s wird durch eine (nicht benutzerfreundliche) Beschreibung des Fehlers ersetzt.
-"alert.unknown_sync_error.message" = "Beim Aktualisieren ist ein unbekannter Fehler aufgetreten. Bitte versuch es später nochmal.\n\nFalls der Fehler bestehen bleibt, könnte der folgende Text dem Support behilflich sein:\n%@";
+"alert.unknown_sync_error.message" = "Beim Aktualisieren ist ein unbekannter Fehler aufgetreten. Bitte später noch einmal versuchen. \n\nFalls der Fehler bestehen bleibt, könnte der folgende Text dem Support behilflich sein:\n%@";
 // CONTEXT: Titel für den Alert, dass beim aktualisieren ein unbekannter Fehler aufgetreten ist.
 "alert.unknown_sync_error.title" = "Unbekannter Fehler!";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Alert.upgrade
+// CONTEXT: Nachricht für den Alert, dass ein Update rausgekommen ist und man sich neu anmelden muss.
+"alert.upgrade_wiped.message" = "Willkommen in der neuen Version! Bitte erneut anmelden.";
+// CONTEXT: Titel für den Alert, dass ein Update rausgekommen ist und man sich neu anmelden muss.
+"alert.upgrade_wiped.title" = "App aktualisiert";
+// CONTEXT: Nachricht für den Alert, dass alle lokalen Daten gelöscht wurden.
+"alert.wiped.message" = "Die App wurde in den Originalzustand zurückversetzt. Bitte diese nun neu starten.";
+// CONTEXT: Knopf für den Alert, dass alle lokalen Daten gelöscht wurden – dieser Knopf schliesst die App.
+"alert.wiped.quit" = "App schliessen";
+// CONTEXT: Titel für den Alert, dass alle lokalen Daten gelöscht wurden.
+"alert.wiped.title" = "App zurückgesetzt!";
 // CONTEXT: Überschrift für den Handwerker.
 "issue.craftsman" = "Unternehmer";
 
@@ -46,12 +59,8 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Issue.is
-// CONTEXT: Überschrift dafür, ob die Pendenz im Abnahmemodus aufgenommen wurde. Diese Überschrift sollte möglichst kurz sein, da sie auf eine Zeile passen muss (wird in der Pendenzliste angezeigt).
-"issue.is_client_mode" = "Abnahmemodus";
-// CONTEXT: Drückt aus, dass die Pendenz nicht im Abnahmemodus aufgenommen wurde.
-"issue.is_client_mode.false" = "Normal aufgenommen";
-// CONTEXT: Drückt aus, dass die Pendenz im Abnahmemodus aufgenommen wurde.
-"issue.is_client_mode.true" = "Im Abnahmemodus aufgenommen";
+// CONTEXT: Drückt aus, dass die Pendenz im Abnahmemodus aufgenommen wurde. Wird in der Pendenzliste angezeigt, falls dies zutrifft.
+"issue.is_client_mode" = "Im Abnahmemodus aufgenommen";
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Issue.no
@@ -61,6 +70,13 @@
 "issue.no_description" = "Keine Beschreibung";
 // CONTEXT: Überschrift für den Status.
 "issue.status" = "Status";
+// CONTEXT: Status einer Pendenz, die abgeschlossen ist.
+"issue.status.closed" = "Abgeschlossen";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Issue.status.closed
+// CONTEXT: Beschreibt genauer, wie die Pendenz bestätigt wurde. %s wird durch den Namen des Bestätigers ersetzt.
+"issue.status.closed_by" = "Geschlossen von %@";
 // CONTEXT: Status einer Pendenz, die noch nicht im Verzeichnis (also noch editierbar) ist.
 "issue.status.new" = "Neu";
 // CONTEXT: Status einer Pendenz, die ins Verzeichnis aufgenommen wurde, aber sonst noch nichts.
@@ -71,59 +87,38 @@
 // CONTEXT: Beschreibt genauer, wie die Pendenz registriert wurde. %s wird durch den Namen des Registrierers ersetzt.
 "issue.status.registered_by" = "Registriert von %@";
 // CONTEXT: Status einer Pendenz, die vom Handwerker beantwortet wurde.
-"issue.status.responded" = "Umgesetzt";
+"issue.status.resolved" = "Zur Inspektion";
 
 ////////////////////////////////////////////////////////////////////////////////
-// MARK: Issue.status.responded
+// MARK: Issue.status.resolved
 // CONTEXT: Beschreibt genauer, wie die Pendenz beantwortet wurde. %s wird durch den Namen des Beantworters ersetzt.
-"issue.status.responded_by" = "Umgesetzt von %@";
-// CONTEXT: Status einer Pendenz, die abgeschlossen ist.
-"issue.status.reviewed" = "Abgeschlossen";
-
-////////////////////////////////////////////////////////////////////////////////
-// MARK: Issue.status.reviewed
-// CONTEXT: Beschreibt genauer, wie die Pendenz bestätigt wurde. %s wird durch den Namen des Bestätigers ersetzt.
-"issue.status.reviewed_by" = "Bestätigt von %@";
-// CONTEXT: Überschrift für die Funktion des verantwortlichen Handwerkers.
-"issue.trade" = "Funktion";
+"issue.status.resolved_by" = "Umgesetzt von %@";
+// CONTEXT: Überschrift für das Gewerk des verantwortlichen Handwerkers.
+"issue.trade" = "Gewerk";
 // CONTEXT: Wird anstelle der Nummer (z.B. #123) angezeigt, wenn eine Pendenz noch nicht registriert ist.
 "issue.unregistered" = "neu";
 
 ////////////////////////////////////////////////////////////////////////////////
-// MARK: Login.alert.invalid
-// CONTEXT: Nachricht für den Alert, dass man eine ungültige Website-Adresse eingegeben hat.
-"login.alert.invalid_website.message" = "Die eingegebene Adresse für die Website ist ungültig. Hier sollte die Adresse stehen, die auch im Browser steht, wenn du dort die Pendenzen verwaltest, z.B. app.mangel.io";
-// CONTEXT: Titel für den Alert, dass man eine ungültige Website-Adresse eingegeben hat.
-"login.alert.invalid_website.title" = "Ungültige Website";
-
-////////////////////////////////////////////////////////////////////////////////
 // MARK: Login.alert.login
 // CONTEXT: Nachricht für den Alert, dass man sich aus einem unbekannten Grund nicht einloggen kann.
-"login.alert.login_error.message" = "Beim einloggen ist ein Fehler aufgetreten! Du wirst falls möglich lokal eingeloggt.";
+"login.alert.login_error.message" = "Beim Einloggen ist ein Fehler aufgetreten.";
 // CONTEXT: Titel für den Alert, dass man sich aus einem unbekannten Grund nicht einloggen kann.
 "login.alert.login_error.title" = "Unbekannter Fehler!";
 
 ////////////////////////////////////////////////////////////////////////////////
-// MARK: Login.alert.wrong
-// CONTEXT: Nachricht für den Alert, dass man das falsche Passwort eingegeben hat. %s wird durch den Benutzernamen ersetzt.
-"login.alert.wrong_password.message" = "Das ist nicht das richtige Passwort für den Benutzer %@.";
-// CONTEXT: Titel für den Alert, dass man das falsche Passwort eingegeben hat.
-"login.alert.wrong_password.title" = "Falsches Passwort!";
-// CONTEXT: Nachricht für den Alert, dass man einen falschen Benutzernamen eingegeben hat. %s wird durch den Benutzernamen ersetzt.
-"login.alert.wrong_username.message" = "Es gibt keinen Benutzer namens %@.";
-// CONTEXT: Titel für den Alert, dass man einen falschen Benutzernamen eingegeben hat.
-"login.alert.wrong_username.title" = "Falscher Benutzername!";
-// CONTEXT: Platzhalter für das Passwort im Login-Screen
-"login.placeholder.password" = "Passwort";
-// CONTEXT: Platzhalter für den Benutzernamen im Login-Screen
-"login.placeholder.username" = "Benutzername";
+// MARK: Login.connect
+// CONTEXT: Knopf, um den QR-Scanner aufzubringen und sich mit der Website zu verbinden
+"login.connect_to_website" = "Aktivierungscode scannen";
 // CONTEXT: Platzhalter für die Website, an die die App sich anbinden wird, im Login-Screen
 "login.placeholder.website" = "Website";
-
-////////////////////////////////////////////////////////////////////////////////
-// MARK: Login.stay
-// CONTEXT: Steht beim Schalter, durch den man eingeloggt bleibt, auch wenn die App neugestartet wird.
-"login.stay_logged_in" = "Eingeloggt Bleiben";
+// CONTEXT: Knopf, um auf die Ansicht zu kommen, wo man sich registrieren kann.
+"login.register" = "Jetzt registrieren";
+// CONTEXT: Überschrift für den Registrierungsknopf
+"login.register.header" = "Noch nicht registriert?";
+// CONTEXT: Knopf, um das Scannen des Aktivierungscodes abzubrechen.
+"login.scan.cancel" = "Abbrechen";
+// CONTEXT: Anleitung in der Ansicht zum Aktivierungscode (QR) scannen.
+"login.scan.instructions" = "Der Aktivierungscode ist unter \"Mit App verbinden\" oben auf der Baustellenauswahl zu finden.";
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Map.could
@@ -133,9 +128,9 @@
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Map.issue
 // CONTEXT: Knopf, um die Details einer Pendenz anzuzeigen.
-"map.issue_list.show_details" = "Details Anzeigen";
+"map.issue_list.show_details" = "Details anzeigen";
 // CONTEXT: Knopf, um die in der liste ausgewählte Pendenz auf dem Grundriss anzuzeigen.
-"map.issue_list.show_in_map" = "Auf Bauplan Anzeigen";
+"map.issue_list.show_in_map" = "Auf Bauplan anzeigen";
 // CONTEXT: Fasst kurz zusammen, was für Pendenzen in einem Bereich sind. Das erste %s wird durch die Anzahl offener Pendenzen ersetzt, das zweite durch die Anzahl insgesamt (innerhalb des Bereichs).
 "map.issue_list.summary" = "%@ Pendenzen offen; %@ insgesamt";
 // CONTEXT: Wird statt map.issue_list.summary angezeigt, wenn ein Filter aktiv ist. das erste %s wird durch die Anzahl Pendenzen ersetzt, die dem Filter entsprechen und somit angezeigt werden; das Zweite wird weiterhin durch die Gesamtzahl ersetzt.
@@ -173,12 +168,20 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Map
+// CONTEXT: Schliess-Button des Alerts für wenn der ausgewählte Bereich nicht mehr existiert.
+"map_list.map_removed.dismiss" = "Schliessen";
 // CONTEXT: Nachricht des Alerts für wenn der ausgewählte Bereich nicht mehr existiert.
-"map_list.map_removed.message" = "Dieser Bereich existiert nicht mehr. Du wirst jetzt zurück zur Baustellenauswahl geleitet.";
+"map_list.map_removed.message" = "Dieser Bereich existiert nicht mehr.";
 // CONTEXT: Titel des Alerts für wenn der ausgewählte Bereich nicht mehr existiert.
-"map_list.map_removed.title" = "Bereich Entfernt!";
+"map_list.map_removed.title" = "Bereich entfernt!";
 // CONTEXT: Beschreibt für einen Grundriss, wieviele offene Pendenzen er (rekursiv) enthält; %s wird durch die Anzahl ersetzt.
 "map_list.map_summary.open_issues" = "%@ offene Pendenzen";
+// CONTEXT: Schliess-Button des Alerts für wenn man vom ausgewählten Bereich entfernt wurde.
+"map_list.removed_from_map.dismiss" = "Schliessen";
+// CONTEXT: Nachricht des Alerts für wenn man vom ausgewählten Bereich entfernt wurde.
+"map_list.removed_from_map.message" = "Diese Baustelle ist diesem Account nicht mehr zugänglich. Auf der Website kann dies unter \"Baustelle auswählen\" verändert werden.";
+// CONTEXT: Titel des Alerts für wenn man vom ausgewählten Bereich entfernt wurde.
+"map_list.removed_from_map.title" = "Kein Zugriff!";
 // CONTEXT: Überschrift des Abschnitts in der Liste für die untergeordneten Bereiche
 "map_list.section.child_maps" = "Untergeordnete Bereiche";
 // CONTEXT: Überschrift des Abschnitts in der Liste für den entsprechenden Bereich
@@ -187,15 +190,61 @@
 "markup.title" = "Zeichnen";
 
 ////////////////////////////////////////////////////////////////////////////////
+// MARK: Register.alert.invalid
+// CONTEXT: Nachricht für den Alert, dass die Nutzer-eingegebene E-Mail ungültig ist.
+"register.alert.invalid_email.message" = "'%@' ist keine gültige E-Mail-Adresse.";
+// CONTEXT: Titel für den Alert, dass die Nutzer-eingegebene E-Mail ungültig ist.
+"register.alert.invalid_email.title" = "Ungültige E-Mail!";
+// CONTEXT: Nachricht für den Alert, dass die Nutzer-eingegebene Website ungültig ist.
+"register.alert.invalid_website.message" = "'%@' ist keine gültige Web-Adresse.";
+// CONTEXT: Titel für den Alert, dass die Nutzer-eingegebene Website ungültig ist.
+"register.alert.invalid_website.title" = "Ungültige Website!";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Register.alert.unknown
+// CONTEXT: Nachricht für den Alert, dass beim Registrieren ein unbekannter Fehler aufgetreten ist.
+"register.alert.unknown_error.message" = "Es ist beim Kommunizieren mit der Website ein unbekannter Fehler aufgetreten.\n\nFalls der Fehler bestehen bleibt, könnte der folgende Text dem Support behilflich sein:\n%@";
+// CONTEXT: Titel für den Alert, dass beim Registrieren ein unbekannter Fehler aufgetreten ist.
+"register.alert.unknown_error.title" = "Fehler beim Registrieren!";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Register.back
+// CONTEXT: Knopf, um wieder zurück zum Login-Screen zu kommen.
+"register.back_to_login" = "Zurück zum Login";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Register.create
+// CONTEXT: Knopf, um ein neues Probekonto (zum ausprobieren) zu erstellen.
+"register.create_account" = "Registrieren";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Register.customize
+// CONTEXT: Beschriftung für den Schalter, um sich bei einer anderen Website als app.mangel.io zu registrieren.
+"register.customize_website" = "Auf anderer Website registrieren";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Register.email
+// CONTEXT: Erklärung für die weiteren Schritte nach dem Registrieren in der App.
+"register.email_explanation" = "Es wird jetzt eine E-Mail verschickt, über welche der Account fertig erstellt werden kann.";
+// CONTEXT: Platzhalter für das Textfeld, wo man beim Registrieren seine E-Mail eingibt.
+"register.placeholder.email" = "E-Mail";
+// CONTEXT: Platzhalter für das Textfeld, wo man beim Registrieren die Website angibt, bei der man sich registrieren will.
+"register.placeholder.website" = "Website";
+
+////////////////////////////////////////////////////////////////////////////////
 // MARK: Site
 // CONTEXT: Beschreibung für den Abnahmemodus
 "site_list.client_mode.description" = "Im Abnahmemodus werden nur die Pendenzen angezeigt, die auch im Abnahmemodus erfasst wurden.";
 // CONTEXT: Titel für den Schalter um Abnahmemodus an- und auszuschalten. (Abnahmemodus ist für wenn man mit dem Käufer herumläuft und inspiziert; dabei werden die "normalen" Mängel nicht angezeigt.)
 "site_list.client_mode.title" = "Abnahmemodus";
+// CONTEXT: Beschreibung für den Fortschritt beim im Hintergrund Pendenzbilder Herunterladen, wenn bekannt ist, wie viele Bilder geladen werden müssen.
+"site_list.file_progress.determinate" = "%@/%@ Pendenzbilder geladen…";
+// CONTEXT: Beschreibung für den Fortschritt beim im Hintergrund Pendenzbilder Herunterladen, wenn noch nicht bekannt ist, wie viele Bilder geladen werden müssen.
+"site_list.file_progress.indeterminate" = "Pendenzbilder werden geladen…";
 // CONTEXT: Knopf oben links zum ausloggen
 "site_list.log_out" = "Ausloggen";
 // CONTEXT: Wird anstelle der Baustellen angezeigt, wenn man noch nie synchronisiert hat. Sollte den Benutzer darauf hinweisen, dass er durch runterziehen synchronisieren kann.
-"site_list.refresh_hint" = "Noch keine Daten geladen!\nZieh runter, um die lokalen Daten mit dem Server zu synchronisieren.";
+"site_list.refresh_hint" = "Noch keine Daten geladen! Hier herunterziehen, um mit dem Server zu synchronisieren.";
 // CONTEXT: Beschreibt, wie viele Mängel in einer Baustelle offen sind. %s wird durch die Anzahl offener Mängel ersetzt, z.b. "%s offene Mängel"
 "site_list.site_summary.open_issues" = "%@ offene Pendenzen";
 // CONTEXT: Beschreibt, wie viele Mängel es in einer Baustelle insgesamt gibt. Wird nach site_list.site_summary.open_issues angezeigt, daher darf gerne das Wort "Mängel" weggelassen werden. %s wird durch die Anzahl offener Mängel ersetzt, z.b. "%s insgesamt"
@@ -206,43 +255,17 @@
 "site_list.welcome" = "Willkommen, %@";
 
 ////////////////////////////////////////////////////////////////////////////////
-// MARK: Trial.back
-// CONTEXT: Knopf, um wieder zurück zum Login-Screen zu kommen.
-"trial.back_to_login" = "Zurück zum Login";
-
-////////////////////////////////////////////////////////////////////////////////
-// MARK: Trial.create
-// CONTEXT: Knopf, um ein neues Probekonto (zum ausprobieren) zu erstellen.
-"trial.create_account" = "Probekonto Erstellen";
-
-////////////////////////////////////////////////////////////////////////////////
-// MARK: Trial.existing
-// CONTEXT: Text, der beschreibt, dass man schon ein Probekonto erstellt hat und sich damit auch auf www.mangel.io anmelden kann.
-"trial.existing_account_hint" = "Du hast ein Probekonto erstellt. Die Anmeldung erfolgt mit den folgenden Daten, die du auch auf www.app.mangel.io verwenden kannst.";
-
-////////////////////////////////////////////////////////////////////////////////
-// MARK: Trial.log
-// CONTEXT: Knopf, um sich in ein bestehendes Probekonto einzuloggen.
-"trial.log_in" = "Einloggen";
-
-////////////////////////////////////////////////////////////////////////////////
-// MARK: Trial.placeholder.family
-// CONTEXT: Platzhalter für den Nachnamen im Trial-Screen
-"trial.placeholder.family_name" = "Nachname";
-
-////////////////////////////////////////////////////////////////////////////////
-// MARK: Trial.placeholder.given
-// CONTEXT: Platzhalter für den Vornamen im Trial-Screen
-"trial.placeholder.given_name" = "Vorname";
-
-////////////////////////////////////////////////////////////////////////////////
 // MARK: View
 // CONTEXT: Knopf, um die Antwort vom Handwerker anzunehmen und somit die Pendenz als abgeschlossen zu markieren.
-"view_issue.accept_response" = "Bestätigen";
+"view_issue.action.close" = "Pendenz schliessen";
+// CONTEXT: Knopf, um den Abschluss einer Pendenz rückgangig zu machen und sie somit wieder zu eröffnen.
+"view_issue.action.reopen" = "Pendenz wiedereröffnen";
+// CONTEXT: Knopf, um die Antwort vom Handwerker abzulehnen und sie somit rückgängig zu machen.
+"view_issue.action.reset_resolution" = "Markierung zurücksetzen";
 // CONTEXT: Überschrift für die Aktionen, die auf eine Pendenz ausgeführt werden können.
 "view_issue.actions" = "Aktionen";
 // CONTEXT: Wird angezeigt, wenn der Nutzer noch nie ein Foto gemacht hat. Soll ihm sagen, dass er einfach durch Tippen irgendwo auf die Kameraansicht ein Foto machen kann.
-"view_issue.camera_control_hint" = "Tippe, um ein Foto zu machen.";
+"view_issue.camera_control_hint" = "Tippen, um ein Foto zu machen.";
 // CONTEXT: Wird anstelle der Kameraansicht angezeigt, wenn nicht auf die Kamera zugegriffen werden kann.
 "view_issue.could_not_activate_camera" = "Die Kamera konnte nicht aktiviert werden!";
 // CONTEXT: Nachricht des Alerts für wenn die Fotoauswahl nicht geöffnet werden konnte.
@@ -261,45 +284,37 @@
 "view_issue.details" = "Details";
 // CONTEXT: Überschrift für das Bild einer Pendenz
 "view_issue.image" = "Foto";
+// CONTEXT: Steht anstelle des Fotos da, wenn ein Foto gesetzt ist, aber noch nicht lokal runtergeladen wurde.
+"view_issue.image_placeholder.loading" = "Bild noch nicht geladen.";
 // CONTEXT: Steht anstelle des Fotos da, wenn kein Foto gesetzt ist.
-"view_issue.image_placeholder" = "Kein Foto gesetzt";
+"view_issue.image_placeholder.not_set" = "Kein Foto gesetzt";
 // CONTEXT: Überschrift dafür, ob die Pendenz im Abnahmemodus aufgenommen wurde. Diese Überschrift darf etwas länger sein, da sie auch über mehrere Zeilen angezeigt werden kann.
 "view_issue.is_client_mode" = "Im Abnahmemodus aufgenommen";
 // CONTEXT: Drückt kurz aus, dass die Pendenz nicht im Abnahmemodus aufgenommen wurde.
 "view_issue.is_client_mode.false" = "Nein";
 // CONTEXT: Drückt kurz aus, dass die Pendenz im Abnahmemodus aufgenommen wurde.
 "view_issue.is_client_mode.true" = "Ja";
-// CONTEXT: Knopf, um eine Pendenz als abgeschlossen zu markieren, obwohl der Handwerker sie nicht beantwortet hat.
-"view_issue.mark_as_completed" = "Als Abgeschlossen Markieren";
 // CONTEXT: Knopf, um die Ansicht zu öffnen, mit der man auf das Foto zeichnen kann.
-"view_issue.markup" = "Auf Foto Zeichnen";
+"view_issue.markup" = "Auf Foto zeichnen";
 // CONTEXT: Wird anstelle der Vorschläge angezeigt, wenn es keinen zutreffenden gibt.
 "view_issue.no_suggestions" = "Keine passenden Vorschläge";
-// CONTEXT: Wird anstelle der Funktion angezeigt, wenn sie noch nicht ausgewählt wurde.
-"view_issue.no_trade" = "Keine Funktion";
-// CONTEXT: Knopf, um die Antwort vom Handwerker abzulehnen und sie somit rückgängig zu machen.
-"view_issue.reject_response" = "Ablehnen";
+// CONTEXT: Wird anstelle des Gewerks angezeigt, wenn sie noch nicht ausgewählt wurde.
+"view_issue.no_trade" = "Kein Gewerk";
 // CONTEXT: Knopf, um erneut zu versuchen, die Kamera aufzustarten, nachdem es fehlgeschlagen ist.
-"view_issue.retry_camera" = "Erneut Versuchen";
+"view_issue.retry_camera" = "Erneut versuchen";
+// CONTEXT: Erklärung für den Zustand, dass der Unternehmer die Pendenz als umgesetzt markiert hat. Der Bauleiter kann nun die Markierung zurücksetzen oder die Pendenz schliessen.
+"view_issue.review_explanation" = "Diese Pendenz wurde vom Unternehmer als umgesetzt markiert.";
 // CONTEXT: Knopf, um keinen Handwerker auszuwählen.
 "view_issue.select_craftsman.none" = "Kein Unternehmer";
 // CONTEXT: Titel für die Ansicht zum auswählen des Namens.
 "view_issue.select_craftsman.title" = "Unternehmer";
-// CONTEXT: Knopf, um keine Funktion auszuwählen.
-"view_issue.select_trade.none" = "Keine Funktion";
-// CONTEXT: Titel für die Ansicht zum auswählen der Funktion.
-"view_issue.select_trade.title" = "Funktionen";
-// CONTEXT: Wird über den Aktionen angezeigt, wenn die Pendenz vom Handwerker beantwortet wurde.
-"view_issue.summary.has_response" = "Diese Pendenz wurde vom Unternehmer umgesetzt.\nDu kannst diese Antwort entweder bestätigen (die Pendenz abschliessen) oder ablehnen (rückgängig machen).";
-// CONTEXT: Wird über den Aktionen angezeigt, wenn die Pendenz vom Handwerker noch keine Antwort erhalten hat.
-"view_issue.summary.no_response" = "Diese Pendenz wurde noch nicht vom Unternehmer umgesetzt.\nDu kannst sie trotzdem bestätigen und somit als abgeschlossen markieren.";
-// CONTEXT: Wird über den Aktionen angezeigt, wenn die Pendenz bereits abgeschlossen wurde.
-"view_issue.summary.reviewed" = "Diese Pendenz wurde bereits abgeschlossen.\nDu kannst die Bestätigung rückgangig machen, um sie wieder zu eröffnen.";
+// CONTEXT: Knopf, um kein Gewerk auszuwählen.
+"view_issue.select_trade.none" = "Kein Gewerk";
+// CONTEXT: Titel für die Ansicht zum auswählen des Gewerks.
+"view_issue.select_trade.title" = "Gewerke";
 // CONTEXT: Titel für das "Pendenz Bearbeiten"-Popup, wenn die Pendenz erstellt wird.
 "view_issue.title_creating" = "Neue Pendenz";
 // CONTEXT: Titel für das "Pendenz Bearbeiten"-Popup, wenn die Pendenz bearbeitet wird.
-"view_issue.title_editing" = "Pendenz Bearbeiten";
+"view_issue.title_editing" = "Pendenz bearbeiten";
 // CONTEXT: Titel für das Popup, worin die Details einer Pendenz angezeigt werden.
-"view_issue.title_viewing" = "Pendenzdetails";
-// CONTEXT: Knopf, um den Abschluss einer Pendenz rückgangig zu machen und sie somit wieder zu eröffnen.
-"view_issue.undo_review" = "Wieder Eröffnen";
+"view_issue.title_viewing" = "Details";

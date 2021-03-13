@@ -3,17 +3,16 @@
 import Foundation
 
 struct APICraftsman {
-	let meta: ObjectMeta<Craftsman>
-	let name: String
+	let contactName: String
+	let company: String
 	let trade: String
-	let constructionSiteID: ID<ConstructionSite>
 	
-	func makeObject() -> Craftsman {
+	func makeObject(meta: Craftsman.Meta, context: ConstructionSite.ID) -> Craftsman {
 		Craftsman(
-			meta: meta,
-			name: name,
-			trade: trade,
-			constructionSiteID: constructionSiteID
+			meta: meta, constructionSiteID: context,
+			contactName: contactName,
+			company: company,
+			trade: trade
 		)
 	}
 }

@@ -6,6 +6,7 @@ import GRDB
 protocol MapHolder: AnyStoredObject {
 	var name: String { get }
 	var children: QueryInterfaceRequest<Map> { get }
+	var constructionSiteID: ConstructionSite.ID { get }
 	
 	func recursiveChildren<R>(in request: R) -> R where R: DerivableRequest, R.RowDecoder == Map
 	var recursiveIssues: QueryInterfaceRequest<Issue> { get }
@@ -15,8 +16,10 @@ protocol MapHolder: AnyStoredObject {
 extension MapHolder {
 	var recursiveIssues: QueryInterfaceRequest<Issue> {
 		Issue
-			.joining(required: Issue.map.recursiveChildren(of: self))
+			.all()
+			.withoutDeleted
 			.consideringClientMode
+			.joining(required: Issue.map.recursiveChildren(of: self))
 	}
 }
 
@@ -29,8 +32,10 @@ extension DerivableRequest where RowDecoder == Map {
 extension ConstructionSite: MapHolder {
 	var children: QueryInterfaceRequest<Map> { maps.filter(Map.Columns.parentID == nil) }
 	
+	var constructionSiteID: ID { id }
+	
 	func recursiveChildren<R>(in request: R) -> R where R: DerivableRequest, R.RowDecoder == Map {
-		request.filter(Map.Columns.constructionSiteID == rawID)
+		request.filter(Map.Columns.constructionSiteID == id)
 	}
 	
 	func issues(recursively: Bool) -> QueryInterfaceRequest<Issue> {
