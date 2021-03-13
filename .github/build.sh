@@ -1,3 +1,5 @@
+#!/bin/bash
+
 xcodebuild clean build \
 	-sdk iphoneos \
 	-project "Issue Manager/Issue Manager.xcodeproj" \
