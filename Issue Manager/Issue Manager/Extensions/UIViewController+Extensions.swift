@@ -28,7 +28,9 @@ extension UIViewController {
 		alert.addAction(UIAlertAction(title: okMessage, style: okStyle) { _ in
 			okHandler?()
 		})
-		present(alert, animated: true)
+		let topController = sequence(first: self, next: \UIViewController.presentedViewController)
+			.reduce(self) { $1 }
+		topController.present(alert, animated: true)
 	}
 	
 	func embed(_ child: UIViewController, within view: UIView) {

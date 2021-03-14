@@ -11,6 +11,7 @@ final class ViewIssueViewController: UITableViewController, Reusable {
 	@IBOutlet private var clientModeLabel: UILabel!
 	
 	@IBOutlet private var imageView: UIImageView!
+	@IBOutlet private var noImageLabel: UILabel!
 	
 	@IBOutlet private var craftsmanTradeLabel: UILabel!
 	@IBOutlet private var craftsmanNameLabel: UILabel!
@@ -19,29 +20,32 @@ final class ViewIssueViewController: UITableViewController, Reusable {
 	@IBOutlet private var statusLabel: UILabel!
 	
 	@IBOutlet private var summaryLabel: UILabel!
-	@IBOutlet private var completeButton: UIButton!
-	@IBOutlet private var rejectButton: UIButton!
-	@IBOutlet private var acceptButton: UIButton!
+	@IBOutlet private var resetResolutionButton: UIButton!
+	@IBOutlet private var closeButton: UIButton!
 	@IBOutlet private var reopenButton: UIButton!
 	
 	@IBAction func markIssue() {
-		issue.mark()
+		issue.isMarked.toggle()
+		saveChanges()
 		Haptics.mediumImpact.impactOccurred()
 		update()
 	}
 	
-	@IBAction func revertResponse() {
-		issue.revertResponse()
+	@IBAction func revertResolution() {
+		issue.revertResolution()
+		saveChanges()
 		update()
 	}
 	
-	@IBAction func reviewIssue() {
-		issue.review()
+	@IBAction func closeIssue() {
+		issue.close()
+		saveChanges()
 		update()
 	}
 	
-	@IBAction func revertReview() {
-		issue.revertReview()
+	@IBAction func reopenIssue() {
+		issue.reopen()
+		saveChanges()
 		update()
 	}
 	
@@ -50,7 +54,19 @@ final class ViewIssueViewController: UITableViewController, Reusable {
 	}
 	
 	private var image: UIImage? {
-		didSet { imageView.image = image }
+		didSet {
+			imageView.image = image
+			noImageLabel.isHidden = image != nil
+		}
+	}
+	
+	private var isSyncing = false {
+		didSet {
+			// block other actions while applying this one.
+			// other changes would be overwritten by the canonical issue returned in the server response
+			[markButton, resetResolutionButton, closeButton, reopenButton]
+				.forEach { $0!.isEnabled = !isSyncing }
+		}
 	}
 	
 	override func viewDidLoad() {
@@ -77,32 +93,36 @@ final class ViewIssueViewController: UITableViewController, Reusable {
 			// TODO: fall back on localURL for other views
 			UIImage(contentsOfFile: Issue.cacheURL(for: $0).path)
 		}
+		noImageLabel.text = issue.image == nil
+			? Localization.ImagePlaceholder.notSet
+			: Localization.ImagePlaceholder.loading
 		
 		let craftsman = Repository.read(issue.craftsman)
 		craftsmanTradeLabel.setText(to: craftsman?.trade, fallback: L10n.Issue.noCraftsman)
-		craftsmanNameLabel.setText(to: craftsman?.name, fallback: L10n.Issue.noCraftsman)
+		craftsmanNameLabel.setText(to: craftsman?.company, fallback: L10n.Issue.noCraftsman)
 		
 		descriptionLabel.setText(to: issue.description?.nonEmptyOptional, fallback: L10n.Issue.noDescription)
-		statusLabel.text = issue.status.localizedMultilineDescription
+		statusLabel.text = issue.status.makeLocalizedMultilineDescription()
 		
 		let status = issue.status.simplified
-		completeButton.isShown = status == .registered
-		rejectButton.isShown = status == .responded
-		acceptButton.isShown = status == .responded
-		reopenButton.isShown = status == .reviewed
+		summaryLabel.isShown = status == .resolved
+		resetResolutionButton.isShown = status == .resolved
+		closeButton.isShown = status != .closed
+		reopenButton.isShown = status == .closed
 		
-		switch status {
-		case .new:
-			break // shouldn't happen anyway after adding edit view
-		case .registered:
-			summaryLabel.text = Localization.Summary.noResponse
-		case .responded:
-			summaryLabel.text = Localization.Summary.hasResponse
-		case .reviewed:
-			summaryLabel.text = Localization.Summary.reviewed
+		DispatchQueue.main.async {
+			self.tableView.performBatchUpdates(nil) // invalidate previously calculated row heights
 		}
-		
-		tableView.performBatchUpdates(nil) // invalidate previously calculated row heights
+	}
+	
+	private func saveChanges() {
+		isSyncing = true
+		issue.saveAndSync()
+			.always { self.isSyncing = false }
+			.then { [parent] in
+				self.issue = Repository.shared.object(self.issue.id)
+				(parent as? MapViewController)?.updateFromRepository()
+			}
 	}
 	
 	override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {

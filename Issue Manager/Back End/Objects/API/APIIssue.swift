@@ -3,55 +3,56 @@
 import Foundation
 
 struct APIIssue {
-	let meta: ObjectMeta<Issue>
 	let number: Int?
 	let isMarked: Bool
 	let wasAddedWithClient: Bool
-	let image: File<Issue>?
 	let description: String?
-	let craftsman: ID<Craftsman>?
-	let map: ID<Map>
-	let status: Issue.Status
-	let position: Issue.Position?
+	let deadline: Date?
 	
-	var details: Issue.Details {
-		.init(
-			isMarked: isMarked,
-			image: image,
-			description: description,
-			craftsman: craftsman
-		)
-	}
+	let craftsman: APICraftsman.ID?
+	let map: APIMap.ID?
 	
-	func makeObject() -> Issue {
+	let positionX: Double?
+	let positionY: Double?
+	let positionZoomScale: Double?
+	
+	let createdAt: Date
+	let createdBy: APIConstructionManager.ID
+	let registeredAt: Date?
+	let registeredBy: APIConstructionManager.ID?
+	let resolvedAt: Date?
+	let resolvedBy: APICraftsman.ID?
+	let closedAt: Date?
+	let closedBy: APIConstructionManager.ID?
+	
+	let imageUrl: File<Issue>?
+	
+	func makeObject(meta: Issue.Meta, context: ConstructionSite.ID) -> Issue {
 		Issue(
-			meta: meta,
+			meta: meta, constructionSiteID: context,
+			mapID: map?.makeID(),
 			number: number,
 			wasAddedWithClient: wasAddedWithClient,
-			mapID: map,
-			position: position,
-			status: status,
-			details: details,
+			deadline: deadline,
+			position: positionX == nil ? nil
+				: .init(at: Point(x: positionX!, y: positionY!), zoomScale: positionZoomScale!),
+			isMarked: isMarked,
+			description: description,
+			craftsmanID: craftsman?.makeID(),
+			status: .init(
+				createdAt: createdAt,
+				createdBy: createdBy.makeID(),
+				registeredAt: registeredAt,
+				registeredBy: registeredBy?.makeID(),
+				resolvedAt: resolvedAt,
+				resolvedBy: resolvedBy?.makeID(),
+				closedAt: closedAt,
+				closedBy: closedBy?.makeID()
+			),
+			image: imageUrl,
 			wasUploaded: true
 		)
 	}
 }
 
 extension APIIssue: APIModel {}
-
-extension Issue {
-	func makeModel() -> APIIssue {
-		APIIssue(
-			meta: meta,
-			number: number,
-			isMarked: isMarked,
-			wasAddedWithClient: wasAddedWithClient,
-			image: image,
-			description: description,
-			craftsman: craftsmanID,
-			map: mapID,
-			status: status,
-			position: position
-		)
-	}
-}

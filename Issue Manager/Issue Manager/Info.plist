@@ -25,7 +25,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>mangel.io</string>
+				<string>mangelio</string>
 			</array>
 		</dict>
 	</array>

@@ -23,24 +23,38 @@ internal enum L10n {
       internal static let title = L10n.tr("Localizable", "alert.connection_issues.title")
     }
     internal enum InvalidSession {
-      /// Bitte log dich wieder neu ein.
+      /// Bitte neu einloggen.
       internal static let message = L10n.tr("Localizable", "alert.invalid_session.message")
       /// Ungültige Sitzung!
       internal static let title = L10n.tr("Localizable", "alert.invalid_session.title")
     }
     internal enum OutdatedClient {
-      /// Diese Version der App kann nicht mehr mit dem Server kommunizieren. Bitte installier das neuste Update, um die App weiter zu benutzen.
+      /// Diese Version der App kann leider nicht mehr mit dem Server kommunizieren. Bitte das neuste Update installieren.
       internal static let message = L10n.tr("Localizable", "alert.outdated_client.message")
-      /// Update Erforderlich
+      /// Update erforderlich
       internal static let title = L10n.tr("Localizable", "alert.outdated_client.title")
     }
     internal enum UnknownSyncError {
-      /// Beim Aktualisieren ist ein unbekannter Fehler aufgetreten. Bitte versuch es später nochmal.\n\nFalls der Fehler bestehen bleibt, könnte der folgende Text dem Support behilflich sein:\n%@
+      /// Beim Aktualisieren ist ein unbekannter Fehler aufgetreten. Bitte später noch einmal versuchen. \n\nFalls der Fehler bestehen bleibt, könnte der folgende Text dem Support behilflich sein:\n%@
       internal static func message(_ p1: Any) -> String {
         return L10n.tr("Localizable", "alert.unknown_sync_error.message", String(describing: p1))
       }
       /// Unbekannter Fehler!
       internal static let title = L10n.tr("Localizable", "alert.unknown_sync_error.title")
+    }
+    internal enum UpgradeWiped {
+      /// Willkommen in der neuen Version! Bitte erneut anmelden.
+      internal static let message = L10n.tr("Localizable", "alert.upgrade_wiped.message")
+      /// App aktualisiert
+      internal static let title = L10n.tr("Localizable", "alert.upgrade_wiped.title")
+    }
+    internal enum Wiped {
+      /// Die App wurde in den Originalzustand zurückversetzt. Bitte diese nun neu starten.
+      internal static let message = L10n.tr("Localizable", "alert.wiped.message")
+      /// App schliessen
+      internal static let quit = L10n.tr("Localizable", "alert.wiped.quit")
+      /// App zurückgesetzt!
+      internal static let title = L10n.tr("Localizable", "alert.wiped.title")
     }
   }
 
@@ -51,7 +65,7 @@ internal enum L10n {
     internal static let craftsmanName = L10n.tr("Localizable", "issue.craftsman_name")
     /// Beschreibung
     internal static let description = L10n.tr("Localizable", "issue.description")
-    /// Abnahmemodus
+    /// Im Abnahmemodus aufgenommen
     internal static let isClientMode = L10n.tr("Localizable", "issue.is_client_mode")
     /// Kein Unternehmer
     internal static let noCraftsman = L10n.tr("Localizable", "issue.no_craftsman")
@@ -59,17 +73,17 @@ internal enum L10n {
     internal static let noDescription = L10n.tr("Localizable", "issue.no_description")
     /// Status
     internal static let status = L10n.tr("Localizable", "issue.status")
-    /// Funktion
+    /// Gewerk
     internal static let trade = L10n.tr("Localizable", "issue.trade")
     /// neu
     internal static let unregistered = L10n.tr("Localizable", "issue.unregistered")
-    internal enum IsClientMode {
-      /// Normal aufgenommen
-      internal static let `false` = L10n.tr("Localizable", "issue.is_client_mode.false")
-      /// Im Abnahmemodus aufgenommen
-      internal static let `true` = L10n.tr("Localizable", "issue.is_client_mode.true")
-    }
     internal enum Status {
+      /// Abgeschlossen
+      internal static let closed = L10n.tr("Localizable", "issue.status.closed")
+      /// Geschlossen von %@
+      internal static func closedBy(_ p1: Any) -> String {
+        return L10n.tr("Localizable", "issue.status.closed_by", String(describing: p1))
+      }
       /// Neu
       internal static let new = L10n.tr("Localizable", "issue.status.new")
       /// Im Verzeichnis
@@ -78,61 +92,41 @@ internal enum L10n {
       internal static func registeredBy(_ p1: Any) -> String {
         return L10n.tr("Localizable", "issue.status.registered_by", String(describing: p1))
       }
-      /// Umgesetzt
-      internal static let responded = L10n.tr("Localizable", "issue.status.responded")
+      /// Zur Inspektion
+      internal static let resolved = L10n.tr("Localizable", "issue.status.resolved")
       /// Umgesetzt von %@
-      internal static func respondedBy(_ p1: Any) -> String {
-        return L10n.tr("Localizable", "issue.status.responded_by", String(describing: p1))
-      }
-      /// Abgeschlossen
-      internal static let reviewed = L10n.tr("Localizable", "issue.status.reviewed")
-      /// Bestätigt von %@
-      internal static func reviewedBy(_ p1: Any) -> String {
-        return L10n.tr("Localizable", "issue.status.reviewed_by", String(describing: p1))
+      internal static func resolvedBy(_ p1: Any) -> String {
+        return L10n.tr("Localizable", "issue.status.resolved_by", String(describing: p1))
       }
     }
   }
 
   internal enum Login {
-    /// Eingeloggt Bleiben
-    internal static let stayLoggedIn = L10n.tr("Localizable", "login.stay_logged_in")
+    /// Aktivierungscode scannen
+    internal static let connectToWebsite = L10n.tr("Localizable", "login.connect_to_website")
+    /// Jetzt registrieren
+    internal static let register = L10n.tr("Localizable", "login.register")
     internal enum Alert {
-      internal enum InvalidWebsite {
-        /// Die eingegebene Adresse für die Website ist ungültig. Hier sollte die Adresse stehen, die auch im Browser steht, wenn du dort die Pendenzen verwaltest, z.B. app.mangel.io
-        internal static let message = L10n.tr("Localizable", "login.alert.invalid_website.message")
-        /// Ungültige Website
-        internal static let title = L10n.tr("Localizable", "login.alert.invalid_website.title")
-      }
       internal enum LoginError {
-        /// Beim einloggen ist ein Fehler aufgetreten! Du wirst falls möglich lokal eingeloggt.
+        /// Beim Einloggen ist ein Fehler aufgetreten.
         internal static let message = L10n.tr("Localizable", "login.alert.login_error.message")
         /// Unbekannter Fehler!
         internal static let title = L10n.tr("Localizable", "login.alert.login_error.title")
       }
-      internal enum WrongPassword {
-        /// Das ist nicht das richtige Passwort für den Benutzer %@.
-        internal static func message(_ p1: Any) -> String {
-          return L10n.tr("Localizable", "login.alert.wrong_password.message", String(describing: p1))
-        }
-        /// Falsches Passwort!
-        internal static let title = L10n.tr("Localizable", "login.alert.wrong_password.title")
-      }
-      internal enum WrongUsername {
-        /// Es gibt keinen Benutzer namens %@.
-        internal static func message(_ p1: Any) -> String {
-          return L10n.tr("Localizable", "login.alert.wrong_username.message", String(describing: p1))
-        }
-        /// Falscher Benutzername!
-        internal static let title = L10n.tr("Localizable", "login.alert.wrong_username.title")
-      }
     }
     internal enum Placeholder {
-      /// Passwort
-      internal static let password = L10n.tr("Localizable", "login.placeholder.password")
-      /// Benutzername
-      internal static let username = L10n.tr("Localizable", "login.placeholder.username")
       /// Website
       internal static let website = L10n.tr("Localizable", "login.placeholder.website")
+    }
+    internal enum Register {
+      /// Noch nicht registriert?
+      internal static let header = L10n.tr("Localizable", "login.register.header")
+    }
+    internal enum Scan {
+      /// Abbrechen
+      internal static let cancel = L10n.tr("Localizable", "login.scan.cancel")
+      /// Der Aktivierungscode ist unter "Mit App verbinden" oben auf der Baustellenauswahl zu finden.
+      internal static let instructions = L10n.tr("Localizable", "login.scan.instructions")
     }
   }
 
@@ -152,9 +146,9 @@ internal enum L10n {
     /// Bauplan
     internal static let title = L10n.tr("Localizable", "map.title")
     internal enum IssueList {
-      /// Details Anzeigen
+      /// Details anzeigen
       internal static let showDetails = L10n.tr("Localizable", "map.issue_list.show_details")
-      /// Auf Bauplan Anzeigen
+      /// Auf Bauplan anzeigen
       internal static let showInMap = L10n.tr("Localizable", "map.issue_list.show_in_map")
       /// %@ Pendenzen offen; %@ insgesamt
       internal static func summary(_ p1: Any, _ p2: Any) -> String {
@@ -179,9 +173,11 @@ internal enum L10n {
 
   internal enum MapList {
     internal enum MapRemoved {
-      /// Dieser Bereich existiert nicht mehr. Du wirst jetzt zurück zur Baustellenauswahl geleitet.
+      /// Schliessen
+      internal static let dismiss = L10n.tr("Localizable", "map_list.map_removed.dismiss")
+      /// Dieser Bereich existiert nicht mehr.
       internal static let message = L10n.tr("Localizable", "map_list.map_removed.message")
-      /// Bereich Entfernt!
+      /// Bereich entfernt!
       internal static let title = L10n.tr("Localizable", "map_list.map_removed.title")
     }
     internal enum MapSummary {
@@ -189,6 +185,14 @@ internal enum L10n {
       internal static func openIssues(_ p1: Any) -> String {
         return L10n.tr("Localizable", "map_list.map_summary.open_issues", String(describing: p1))
       }
+    }
+    internal enum RemovedFromMap {
+      /// Schliessen
+      internal static let dismiss = L10n.tr("Localizable", "map_list.removed_from_map.dismiss")
+      /// Diese Baustelle ist diesem Account nicht mehr zugänglich. Auf der Website kann dies unter "Baustelle auswählen" verändert werden.
+      internal static let message = L10n.tr("Localizable", "map_list.removed_from_map.message")
+      /// Kein Zugriff!
+      internal static let title = L10n.tr("Localizable", "map_list.removed_from_map.title")
     }
     internal enum Section {
       /// Untergeordnete Bereiche
@@ -203,10 +207,53 @@ internal enum L10n {
     internal static let title = L10n.tr("Localizable", "markup.title")
   }
 
+  internal enum Register {
+    /// Zurück zum Login
+    internal static let backToLogin = L10n.tr("Localizable", "register.back_to_login")
+    /// Registrieren
+    internal static let createAccount = L10n.tr("Localizable", "register.create_account")
+    /// Auf anderer Website registrieren
+    internal static let customizeWebsite = L10n.tr("Localizable", "register.customize_website")
+    /// Es wird jetzt eine E-Mail verschickt, über welche der Account fertig erstellt werden kann.
+    internal static let emailExplanation = L10n.tr("Localizable", "register.email_explanation")
+    internal enum Alert {
+      internal enum InvalidEmail {
+        /// '%@' ist keine gültige E-Mail-Adresse.
+        internal static func message(_ p1: Any) -> String {
+          return L10n.tr("Localizable", "register.alert.invalid_email.message", String(describing: p1))
+        }
+        /// Ungültige E-Mail!
+        internal static let title = L10n.tr("Localizable", "register.alert.invalid_email.title")
+      }
+      internal enum InvalidWebsite {
+        /// '%@' ist keine gültige Web-Adresse.
+        internal static func message(_ p1: Any) -> String {
+          return L10n.tr("Localizable", "register.alert.invalid_website.message", String(describing: p1))
+        }
+        /// Ungültige Website!
+        internal static let title = L10n.tr("Localizable", "register.alert.invalid_website.title")
+      }
+      internal enum UnknownError {
+        /// Es ist beim Kommunizieren mit der Website ein unbekannter Fehler aufgetreten.\n\nFalls der Fehler bestehen bleibt, könnte der folgende Text dem Support behilflich sein:\n%@
+        internal static func message(_ p1: Any) -> String {
+          return L10n.tr("Localizable", "register.alert.unknown_error.message", String(describing: p1))
+        }
+        /// Fehler beim Registrieren!
+        internal static let title = L10n.tr("Localizable", "register.alert.unknown_error.title")
+      }
+    }
+    internal enum Placeholder {
+      /// E-Mail
+      internal static let email = L10n.tr("Localizable", "register.placeholder.email")
+      /// Website
+      internal static let website = L10n.tr("Localizable", "register.placeholder.website")
+    }
+  }
+
   internal enum SiteList {
     /// Ausloggen
     internal static let logOut = L10n.tr("Localizable", "site_list.log_out")
-    /// Noch keine Daten geladen!\nZieh runter, um die lokalen Daten mit dem Server zu synchronisieren.
+    /// Noch keine Daten geladen! Hier herunterziehen, um mit dem Server zu synchronisieren.
     internal static let refreshHint = L10n.tr("Localizable", "site_list.refresh_hint")
     /// Baustellen
     internal static let title = L10n.tr("Localizable", "site_list.title")
@@ -220,6 +267,14 @@ internal enum L10n {
       /// Abnahmemodus
       internal static let title = L10n.tr("Localizable", "site_list.client_mode.title")
     }
+    internal enum FileProgress {
+      /// %@/%@ Pendenzbilder geladen…
+      internal static func determinate(_ p1: Any, _ p2: Any) -> String {
+        return L10n.tr("Localizable", "site_list.file_progress.determinate", String(describing: p1), String(describing: p2))
+      }
+      /// Pendenzbilder werden geladen…
+      internal static let indeterminate = L10n.tr("Localizable", "site_list.file_progress.indeterminate")
+    }
     internal enum SiteSummary {
       /// %@ offene Pendenzen
       internal static func openIssues(_ p1: Any) -> String {
@@ -232,29 +287,10 @@ internal enum L10n {
     }
   }
 
-  internal enum Trial {
-    /// Zurück zum Login
-    internal static let backToLogin = L10n.tr("Localizable", "trial.back_to_login")
-    /// Probekonto Erstellen
-    internal static let createAccount = L10n.tr("Localizable", "trial.create_account")
-    /// Du hast ein Probekonto erstellt. Die Anmeldung erfolgt mit den folgenden Daten, die du auch auf www.app.mangel.io verwenden kannst.
-    internal static let existingAccountHint = L10n.tr("Localizable", "trial.existing_account_hint")
-    /// Einloggen
-    internal static let logIn = L10n.tr("Localizable", "trial.log_in")
-    internal enum Placeholder {
-      /// Nachname
-      internal static let familyName = L10n.tr("Localizable", "trial.placeholder.family_name")
-      /// Vorname
-      internal static let givenName = L10n.tr("Localizable", "trial.placeholder.given_name")
-    }
-  }
-
   internal enum ViewIssue {
-    /// Bestätigen
-    internal static let acceptResponse = L10n.tr("Localizable", "view_issue.accept_response")
     /// Aktionen
     internal static let actions = L10n.tr("Localizable", "view_issue.actions")
-    /// Tippe, um ein Foto zu machen.
+    /// Tippen, um ein Foto zu machen.
     internal static let cameraControlHint = L10n.tr("Localizable", "view_issue.camera_control_hint")
     /// Die Kamera konnte nicht aktiviert werden!
     internal static let couldNotActivateCamera = L10n.tr("Localizable", "view_issue.could_not_activate_camera")
@@ -266,30 +302,32 @@ internal enum L10n {
     internal static let details = L10n.tr("Localizable", "view_issue.details")
     /// Foto
     internal static let image = L10n.tr("Localizable", "view_issue.image")
-    /// Kein Foto gesetzt
-    internal static let imagePlaceholder = L10n.tr("Localizable", "view_issue.image_placeholder")
     /// Im Abnahmemodus aufgenommen
     internal static let isClientMode = L10n.tr("Localizable", "view_issue.is_client_mode")
-    /// Als Abgeschlossen Markieren
-    internal static let markAsCompleted = L10n.tr("Localizable", "view_issue.mark_as_completed")
-    /// Auf Foto Zeichnen
+    /// Auf Foto zeichnen
     internal static let markup = L10n.tr("Localizable", "view_issue.markup")
     /// Keine passenden Vorschläge
     internal static let noSuggestions = L10n.tr("Localizable", "view_issue.no_suggestions")
-    /// Keine Funktion
+    /// Kein Gewerk
     internal static let noTrade = L10n.tr("Localizable", "view_issue.no_trade")
-    /// Ablehnen
-    internal static let rejectResponse = L10n.tr("Localizable", "view_issue.reject_response")
-    /// Erneut Versuchen
+    /// Erneut versuchen
     internal static let retryCamera = L10n.tr("Localizable", "view_issue.retry_camera")
+    /// Diese Pendenz wurde vom Unternehmer als umgesetzt markiert.
+    internal static let reviewExplanation = L10n.tr("Localizable", "view_issue.review_explanation")
     /// Neue Pendenz
     internal static let titleCreating = L10n.tr("Localizable", "view_issue.title_creating")
-    /// Pendenz Bearbeiten
+    /// Pendenz bearbeiten
     internal static let titleEditing = L10n.tr("Localizable", "view_issue.title_editing")
-    /// Pendenzdetails
+    /// Details
     internal static let titleViewing = L10n.tr("Localizable", "view_issue.title_viewing")
-    /// Wieder Eröffnen
-    internal static let undoReview = L10n.tr("Localizable", "view_issue.undo_review")
+    internal enum Action {
+      /// Pendenz schliessen
+      internal static let close = L10n.tr("Localizable", "view_issue.action.close")
+      /// Pendenz wiedereröffnen
+      internal static let reopen = L10n.tr("Localizable", "view_issue.action.reopen")
+      /// Markierung zurücksetzen
+      internal static let resetResolution = L10n.tr("Localizable", "view_issue.action.reset_resolution")
+    }
     internal enum CouldNotOpenLibrary {
       /// Um die Fotoauswahl zu öffnen, braucht diese App in den Einstellungen Zugriff auf deine Fotos.
       internal static let message = L10n.tr("Localizable", "view_issue.could_not_open_library.message")
@@ -304,6 +342,12 @@ internal enum L10n {
       /// Fotoaufnahme fehlgeschlagen!
       internal static let title = L10n.tr("Localizable", "view_issue.could_not_take_picture.title")
     }
+    internal enum ImagePlaceholder {
+      /// Bild noch nicht geladen.
+      internal static let loading = L10n.tr("Localizable", "view_issue.image_placeholder.loading")
+      /// Kein Foto gesetzt
+      internal static let notSet = L10n.tr("Localizable", "view_issue.image_placeholder.not_set")
+    }
     internal enum IsClientMode {
       /// Nein
       internal static let `false` = L10n.tr("Localizable", "view_issue.is_client_mode.false")
@@ -317,18 +361,10 @@ internal enum L10n {
       internal static let title = L10n.tr("Localizable", "view_issue.select_craftsman.title")
     }
     internal enum SelectTrade {
-      /// Keine Funktion
+      /// Kein Gewerk
       internal static let `none` = L10n.tr("Localizable", "view_issue.select_trade.none")
-      /// Funktionen
+      /// Gewerke
       internal static let title = L10n.tr("Localizable", "view_issue.select_trade.title")
-    }
-    internal enum Summary {
-      /// Diese Pendenz wurde vom Unternehmer umgesetzt.\nDu kannst diese Antwort entweder bestätigen (die Pendenz abschliessen) oder ablehnen (rückgängig machen).
-      internal static let hasResponse = L10n.tr("Localizable", "view_issue.summary.has_response")
-      /// Diese Pendenz wurde noch nicht vom Unternehmer umgesetzt.\nDu kannst sie trotzdem bestätigen und somit als abgeschlossen markieren.
-      internal static let noResponse = L10n.tr("Localizable", "view_issue.summary.no_response")
-      /// Diese Pendenz wurde bereits abgeschlossen.\nDu kannst die Bestätigung rückgangig machen, um sie wieder zu eröffnen.
-      internal static let reviewed = L10n.tr("Localizable", "view_issue.summary.reviewed")
     }
   }
 }
@@ -346,6 +382,12 @@ extension L10n {
 
 // swiftlint:disable convenience_type
 private final class BundleToken {
-  static let bundle = Bundle(for: BundleToken.self)
+  static let bundle: Bundle = {
+    #if SWIFT_PACKAGE
+    return Bundle.module
+    #else
+    return Bundle(for: BundleToken.self)
+    #endif
+  }()
 }
 // swiftlint:enable convenience_type

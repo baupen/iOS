@@ -3,17 +3,18 @@
 import Foundation
 
 struct APIConstructionSite {
-	let meta: ObjectMeta<ConstructionSite>
 	let name: String
-	let address: ConstructionSite.Address
-	let image: File<ConstructionSite>?
+	let createdAt: Date
+	let imageUrl: File<ConstructionSite>?
+	let constructionManagers: [APIConstructionManager.ID]
 	
-	func makeObject() -> ConstructionSite {
+	func makeObject(meta: ConstructionSite.Meta, context: Void) -> ConstructionSite {
 		ConstructionSite(
 			meta: meta,
 			name: name,
-			address: address,
-			image: image
+			creationTime: createdAt,
+			image: imageUrl,
+			managers: .init(constructionManagers.map { $0.makeID() })
 		)
 	}
 }

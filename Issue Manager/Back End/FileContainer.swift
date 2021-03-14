@@ -19,85 +19,113 @@ private let baseLocalURL = try! manager.url(
 	create: true
 )
 
+func wipeDownloadedFiles() {
+	[baseCacheURL, baseLocalURL]
+		.compactMap { try? manager.contentsOfDirectory(at: $0, includingPropertiesForKeys: nil) }
+		.joined()
+		.forEach { try? manager.removeItem(at: $0) }
+}
+
 protocol FileContainer: StoredObject {
 	static var pathPrefix: String { get }
-	static var downloadRequestPath: DownloadRequestPath<Self> { get }
-	
-	static func cacheURL(for file: File<Self>) -> URL
-	static func localURL(for file: File<Self>) -> URL
 	
 	var file: File<Self>? { get }
-	
-	@discardableResult func downloadFile() -> Future<Void>
-	@discardableResult func downloadFile(previous: Self?) -> Future<Void>
-	func deleteFile()
+}
+
+private extension File {
+	var subpath: String {
+		let sanitized = urlPath.replacingOccurrences(of: "/", with: "#")
+		return "files/\(Container.pathPrefix)/\(sanitized)"
+	}
+}
+
+/// limit max concurrent file downloads
+/// (otherwise we start getting overrun with timeouts, though URLSession automatically limits concurrent connections per host)
+private let downloadLimiter = ConcurrencyLimiter(label: "file download", maxConcurrency: 3)
+
+enum FileDownloadProgress: Hashable {
+	/// going through local files to figure out what's missing, but also already downloading if necessary
+	case undetermined
+	/// downloading missing files, `current` out of `total` done
+	case determined(current: Int, total: Int)
+	/// downloads complete
+	case done
 }
 
 extension FileContainer {
 	static func cacheURL(for file: File<Self>) -> URL {
-		let url = baseCacheURL.appendingPathComponent("files/\(Self.pathPrefix)/\(file.id.stringValue)")
-		try? manager.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true)
-		return url
+		baseCacheURL.appendingPathComponent(file.subpath, isDirectory: false)
 	}
 	
 	static func localURL(for file: File<Self>) -> URL {
-		let url = baseLocalURL.appendingPathComponent("files/\(Self.pathPrefix)/\(file.id.stringValue)")
-		try? manager.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true)
-		return url
+		baseLocalURL.appendingPathComponent(file.subpath, isDirectory: false)
 	}
 	
-	static func onChange(from previous: Self?, to new: Self?) {
-		if let new = new {
-			new.downloadFile(previous: previous)
-		} else {
-			previous?.deleteFile()
-		}
-	}
-	
-	func downloadFile() -> Future<Void> {
-		downloadFile(previous: nil)
-	}
-	
-	func downloadFile(previous: Self?) -> Future<Void> {
-		if let previous = previous {
-			switch (previous.file, file) {
-			case (nil, nil): // never had file
-				return .fulfilled // nothing to do
-			case (nil, _?): // newly has file
-				break // nothing to do here; just download file
-			case (_?, nil): // no longer has file
-				previous.deleteFile()
-			case let (prev?, new?) where prev == new: // same file
-				// move after uploading
-				try? manager.moveItem(
-					at: Self.localURL(for: prev),
-					to: Self.cacheURL(for: new)
-				)
-				return .fulfilled
-			case (_?, _?): // different file
-				previous.deleteFile()
-			}
-		}
+	static func downloadMissingFiles(
+		onProgress: ((FileDownloadProgress) -> Void)? = nil
+	) -> Future<Void> {
+		onProgress?(.undetermined)
 		
+		let futures = Repository.shared.read(
+			Self.order(Meta.Columns.lastChangeTime.desc)
+				.fetchAll
+		)
+		.compactMap { $0.downloadFile() }
+		
+		guard let onProgress = onProgress else { return futures.sequence() }
+		
+		let total = futures.count
+		var completed: Int32 = 0
+		
+		return futures
+			.map {
+				$0.map { _ in
+					OSAtomicIncrement32(&completed)
+					onProgress(.determined(current: Int(completed), total: total))
+				}
+			}
+			.sequence()
+			.always { onProgress(.done) }
+	}
+	
+	/// - returns: A `Future` that resolves when the file is downloaded, or `nil` if there's nothing to do.
+	@discardableResult func downloadFile() -> Future<Void>? {
+		guard let file = file else { return nil }
+		let url = Self.cacheURL(for: file)
+		guard !manager.fileExists(atPath: url.path) else { return nil }
+		
+		return downloadLimiter.dispatch(_downloadFile)
+	}
+		
+	private func _downloadFile() -> Future<Void> {
+		// check again in case it's changed by now
 		guard let file = file else { return .fulfilled }
 		let url = Self.cacheURL(for: file)
-		
 		guard !manager.fileExists(atPath: url.path) else { return .fulfilled }
 		
-		print("Downloading \(file) for \(Self.pathPrefix)")
+		let debugDesc = "for \(Self.pathPrefix) (id \(id))"
+		print("Downloading \(file)", debugDesc)
 		
-		return (Client.shared.downloadFile(for: Self.downloadRequestPath, meta: meta)
-			.then { data in
+		return Client.shared.download(file)
+			.map { data in
+				try? manager.createDirectory(
+					at: url.deletingLastPathComponent(),
+					withIntermediateDirectories: true
+				)
 				let success = manager.createFile(atPath: url.path, contents: data)
-				print(success ? "Saved file to" : "Could not save file to", url)
+				print(success ? "Saved file to" : "Could not save file to", url, debugDesc)
 			}
 			.catch { error in
-				error.printDetails(context: "Could not download \(file)")
-				print("container to download file for:")
-				dump(self)
-				print()
+				error.printDetails(context: "Could not download \(file) \(debugDesc)")
 			}
-			.ignoringValue()
+	}
+	
+	func fileUploaded(to location: File<Self>) {
+		guard let file = file else { return }
+		// doesn't matter if this fails; we'll end up being safe by downloading anyway
+		try? manager.moveItem(
+			at: Self.localURL(for: file),
+			to: Self.cacheURL(for: location)
 		)
 	}
 	

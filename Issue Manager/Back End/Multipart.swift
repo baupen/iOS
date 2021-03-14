@@ -2,16 +2,28 @@
 
 import Foundation
 
-func encodeMultipartRequest(containing parts: [MultipartPart], into request: inout URLRequest) throws {
-	let boundary = "boundary-\(UUID())-boundary"
-	let rawBoundary = "--\(boundary)\r\n".data(using: .utf8)!
+/// a request that is encoded as a multipart form
+protocol MultipartEncodingRequest: Request, Encodable {
+	var fileURL: URL { get }
 	
-	request.setValue("multipart/form-data; charset=utf-8; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-	request.httpBody = try parts
-		.lazy
-		.map { try rawBoundary + $0.makeFormData() }
-		.joined()
-		+ "--\(boundary)--\r\n".data(using: .utf8)!
+	@ArrayBuilder<MultipartPart>
+	var parts: [MultipartPart] { get }
+}
+
+private let multipartBoundary = "boundary-\(UUID())-boundary"
+extension MultipartEncodingRequest {
+	static var httpMethod: String { "POST" }
+	static var contentType: String? { "multipart/form-data; charset=utf-8; boundary=\(multipartBoundary)" }
+	
+	func encode(using encoder: JSONEncoder, into request: inout URLRequest) throws {
+		let rawBoundary = "--\(multipartBoundary)\r\n".data(using: .utf8)!
+		
+		request.httpBody = try parts
+			.lazy
+			.map { try rawBoundary + $0.makeFormData() }
+			.joined()
+			+ "--\(multipartBoundary)--\r\n".data(using: .utf8)!
+	}
 }
 
 struct MultipartPart {

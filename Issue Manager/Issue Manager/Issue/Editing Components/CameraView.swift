@@ -64,27 +64,25 @@ final class CameraView: UIView {
 	
 	private func tryToConfigureSession() {
 		do {
-			let session = AVCaptureSession()
-			
-			let device = try AVCaptureDevice.default(for: .video) ??? CameraViewError.noCameraAvailable
-			let input = try AVCaptureDeviceInput(device: device)
-			session.addInput(input)
-			
-			let photoOutput = AVCapturePhotoOutput()
-			self.photoOutput = photoOutput
-			session.sessionPreset = .photo
-			session.addOutput(photoOutput)
-			
-			let previewLayer = AVCaptureVideoPreviewLayer(session: session)
-			self.previewLayer = previewLayer
-			previewLayer.videoGravity = .resizeAspectFill
-			
-			captureSession = session
-			
-			DispatchQueue.main.async {
-				self.layer.addSublayer(previewLayer)
-				self.updateOrientation()
-				self.isHidden = false
+			captureSession = try AVCaptureSession() <- { session in
+				let device = try AVCaptureDevice.default(for: .video) ??? CameraViewError.noCameraAvailable
+				let input = try AVCaptureDeviceInput(device: device)
+				session.addInput(input)
+				
+				self.photoOutput = AVCapturePhotoOutput() <- {
+					session.sessionPreset = .photo
+					session.addOutput($0)
+				}
+				
+				self.previewLayer = AVCaptureVideoPreviewLayer(session: session) <- { preview in
+					preview.videoGravity = .resizeAspectFill
+					
+					DispatchQueue.main.async { [preview] in
+						self.layer.addSublayer(preview)
+						self.updateOrientation()
+						self.isHidden = false
+					}
+				}
 			}
 		} catch {
 			print("Could not set up camera!")
@@ -117,10 +115,10 @@ final class CameraView: UIView {
 	
 	func prepareImagePicker(for source: UIImagePickerController.SourceType) -> UIImagePickerController? {
 		guard UIImagePickerController.isSourceTypeAvailable(source) else { return nil }
-		let picker = UIImagePickerController()
-		picker.delegate = self
-		picker.sourceType = source
-		return picker
+		return UIImagePickerController() <- {
+			$0.delegate = self
+			$0.sourceType = source
+		}
 	}
 	
 	override func layoutSubviews() {
@@ -151,7 +149,7 @@ extension CameraView: AVCapturePhotoCaptureDelegate {
 		} else {
 			Haptics.notify.notificationOccurred(.success)
 			let image = UIImage(data: photo.fileDataRepresentation()!)!
-			delegate?.pictureTaken(image.cropped())
+			delegate?.pictureTaken(image.standardized(shouldCrop: true))
 		}
 		
 		DispatchQueue.main.async { // otherwise it's somehow still visible but unpaused
@@ -167,7 +165,7 @@ extension CameraView: UIImagePickerControllerDelegate, UINavigationControllerDel
 	
 	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
 		let image = info[.originalImage] as! UIImage
-		delegate?.pictureSelected(image.cropped())
+		delegate?.pictureSelected(image.standardized())
 		picker.presentingViewController!.dismiss(animated: true)
 	}
 }
@@ -187,13 +185,17 @@ enum CameraViewError: Error {
 	case cameraNotConfigured
 }
 
-extension UIImage {
-	/// crops to 4:3, applying orientation in the process
-	func cropped() -> UIImage {
-		let newRect = AVMakeRect(
-			aspectRatio: CGSize(width: 4, height: 3),
-			insideRect: CGRect(origin: .zero, size: size)
-		)
+private extension UIImage {
+	/// Applies image orientation.
+	/// - parameter shouldCrop: if set, also crops to 4:3 in the process
+	func standardized(shouldCrop: Bool = false) -> UIImage {
+		let fullRect = CGRect(origin: .zero, size: size)
+		let newRect = shouldCrop
+			? AVMakeRect(
+				aspectRatio: CGSize(width: 4, height: 3),
+				insideRect: CGRect(origin: .zero, size: size)
+			)
+			: fullRect
 		UIGraphicsBeginImageContextWithOptions(newRect.size, true, scale)
 		defer { UIGraphicsEndImageContext() }
 		draw(in: CGRect(origin: -newRect.origin, size: size))
@@ -201,8 +203,8 @@ extension UIImage {
 	}
 }
 
-extension AVCaptureVideoOrientation {
-	fileprivate init(representing orientation: UIInterfaceOrientation) {
+private extension AVCaptureVideoOrientation {
+	init(representing orientation: UIInterfaceOrientation) {
 		// no, this is not a nop
 		switch orientation {
 		case .portrait:

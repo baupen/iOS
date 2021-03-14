@@ -11,10 +11,10 @@ extension Issue.Status.Simplified {
 			return Localization.new
 		case .registered:
 			return Localization.registered
-		case .responded:
-			return Localization.responded
-		case .reviewed:
-			return Localization.reviewed
+		case .resolved:
+			return Localization.resolved
+		case .closed:
+			return Localization.closed
 		}
 	}
 	
@@ -24,9 +24,9 @@ extension Issue.Status.Simplified {
 			return #imageLiteral(resourceName: "issue_new.pdf") 
 		case .registered:
 			return #imageLiteral(resourceName: "issue_created.pdf")
-		case .responded:
+		case .resolved:
 			return #imageLiteral(resourceName: "issue_responded.pdf")
-		case .reviewed:
+		case .closed:
 			return #imageLiteral(resourceName: "issue_reviewed.pdf")
 		}
 	}
@@ -37,9 +37,9 @@ extension Issue.Status.Simplified {
 			return #imageLiteral(resourceName: "flat_issue_new.pdf") 
 		case .registered:
 			return #imageLiteral(resourceName: "flat_issue_created.pdf")
-		case .responded:
+		case .resolved:
 			return #imageLiteral(resourceName: "flat_issue_responded.pdf")
-		case .reviewed:
+		case .closed:
 			return #imageLiteral(resourceName: "flat_issue_reviewed.pdf")
 		}
 	}
@@ -48,21 +48,24 @@ extension Issue.Status.Simplified {
 extension Issue.Status {
 	typealias Localization = L10n.Issue.Status
 	
-	var localizedMultilineDescription: String {
-		guard let registration = registration else {
+	func makeLocalizedMultilineDescription() -> String {
+		guard let registeredBy = registeredBy else {
 			return Localization.new
 		}
 		
-		var description = Localization.registeredBy(registration.author)
+		let name = Repository.shared.object(registeredBy)!.fullName
+		var description = Localization.registeredBy(name)
 		
-		if let response = response {
+		if let resolvedBy = resolvedBy {
+			let name = Repository.shared.object(resolvedBy)!.company
 			description += "\n"
-			description += Localization.respondedBy(response.author)
+			description += Localization.resolvedBy(name)
 		}
 		
-		if let review = review {
+		if let closedBy = closedBy {
+			let name = Repository.shared.object(closedBy)!.fullName
 			description += "\n"
-			description += Localization.reviewedBy(review.author)
+			description += Localization.closedBy(name)
 		}
 		
 		return description

@@ -6,6 +6,7 @@ import SimplePDFKit
 import PullToExpand
 import Promise
 import CGeometry
+import UserDefault
 
 final class MapViewController: UIViewController, Reusable {
 	typealias Localization = L10n.Map
@@ -27,7 +28,7 @@ final class MapViewController: UIViewController, Reusable {
 	
 	// the issue popovers' done buttons link to this
 	@IBAction func backToMapWithUpdates(_ segue: UIStoryboardSegue) {
-		didReturnFromModal()
+		updateFromRepository()
 	}
 	
 	@IBAction func beginAddingIssue() {
@@ -59,11 +60,6 @@ final class MapViewController: UIViewController, Reusable {
 	var markerAlpha: CGFloat = 0.1 {
 		didSet { pdfController?.overlayView.alpha = markerAlpha }
 	}
-	
-	let sectorView = UIView(frame: CGRect(origin: .zero, size: .one)) <- {
-		$0.autoresizingMask = .flexibleSize
-	}
-	var sectorViews: [SectorView] = []
 	
 	var isPlacingIssue = false {
 		didSet {
@@ -100,14 +96,16 @@ final class MapViewController: UIViewController, Reusable {
 			updateMarkerAppearance()
 			filterItem.image = visibleStatuses == Issue.allStatuses ? #imageLiteral(resourceName: "filter_disabled.pdf") : #imageLiteral(resourceName: "filter_enabled.pdf")
 			issueListController.visibleStatuses = visibleStatuses
-			defaults.hiddenStatuses = Array(Issue.allStatuses.subtracting(visibleStatuses))
+			hiddenStatuses = Array(Issue.allStatuses.subtracting(visibleStatuses))
 		}
 	}
+	
+	@UserDefault("hiddenStatuses") var hiddenStatuses: [Issue.Status.Simplified] = []
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		visibleStatuses = Issue.allStatuses.subtracting(defaults.hiddenStatuses)
+		visibleStatuses = Issue.allStatuses.subtracting(hiddenStatuses)
 		update()
 	}
 	
@@ -150,8 +148,7 @@ final class MapViewController: UIViewController, Reusable {
 				let map = holder as! Map
 				let position = Issue.Position(
 					at: issuePositioner.relativePosition(in: pdfController!.overlayView),
-					zoomScale: pdfController!.scrollView.zoomScale / pdfController!.scrollView.minimumZoomScale,
-					in: map.file!
+					zoomScale: pdfController!.scrollView.zoomScale / pdfController!.scrollView.minimumZoomScale
 				)
 				editController.present(Issue(at: isPlacingIssue ? position : nil, in: map))
 			} else {
@@ -184,11 +181,6 @@ final class MapViewController: UIViewController, Reusable {
 		addItem.isEnabled = map != nil
 		
 		issues = (map?.sortedIssues.fetchAll).map(Repository.read) ?? []
-		
-		sectorViews.forEach { $0.removeFromSuperview() }
-		sectorViews = map?.sectors.map(SectorView.init) ?? []
-		sectorViews.forEach { $0.delegate = self }
-		sectorViews.forEach(sectorView.addSubview)
 		
 		issueListController.map = map
 		pullableView.isHidden = map == nil
@@ -233,7 +225,6 @@ final class MapViewController: UIViewController, Reusable {
 				$0.additionalSafeAreaInsets.bottom += self.pullableView.minHeight
 					+ 8 // for symmetry
 			}
-			self.updateSectors()
 			self.updateMarkers()
 		}
 		
@@ -243,17 +234,6 @@ final class MapViewController: UIViewController, Reusable {
 			error.printDetails(context: "Error while loading PDF!")
 			self.activityIndicator.stopAnimating()
 			self.fallbackLabel.text = Localization.couldNotLoad
-		}
-	}
-	
-	private func updateSectors() {
-		let pdfController = self.pdfController!
-		pdfController.view.layoutIfNeeded()
-		if let sectorFrame = map?.sectorFrame.map(CGRect.init) {
-			pdfController.overlayView.addSubview(sectorView)
-			sectorView.frame = sectorFrame * pdfController.overlayView.bounds.size
-		} else {
-			sectorView.removeFromSuperview()
 		}
 	}
 	
@@ -284,6 +264,8 @@ final class MapViewController: UIViewController, Reusable {
 	}
 	
 	func showDetails(for issue: Issue) {
+		let issue = Repository.shared.read(issue.id.get)!
+		
 		let viewController = issue.isRegistered
 			? storyboard!.instantiate(ViewIssueViewController.self)! <- { $0.issue = issue }
 			: storyboard!.instantiate(EditIssueViewController.self)! <- { $0.present(issue) }
@@ -299,7 +281,6 @@ final class MapViewController: UIViewController, Reusable {
 extension MapViewController: SimplePDFViewControllerDelegate {
 	func pdfZoomed(to scale: CGFloat) {
 		markers.forEach { $0.zoomScale = scale }
-		sectorViews.forEach { $0.zoomScale = scale }
 	}
 	
 	func pdfFinishedLoading() {
@@ -347,21 +328,12 @@ extension MapViewController: IssueCellDelegate {
 	}
 }
 
-extension MapViewController: SectorViewDelegate {
-	func zoomMap(to sectorView: SectorView) {
-		let pdfController = self.pdfController!
-		
-		let rect = pdfController.overlayView.convert(sectorView.bounds, from: sectorView)
-		pdfController.scrollView.zoom(to: rect, animated: true)
-	}
-}
-
 extension MapViewController: UIAdaptivePresentationControllerDelegate {
 	func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
-		didReturnFromModal()
+		updateFromRepository()
 	}
 	
-	func didReturnFromModal() {
+	func updateFromRepository() {
 		guard let map = holder as? Map else { return }
 		
 		cancelAddingIssue() // done (if started)
@@ -370,9 +342,12 @@ extension MapViewController: UIAdaptivePresentationControllerDelegate {
 		updateMarkers()
 		issueListController.update()
 		
-		let mainController = splitViewController as! MainViewController
-		for viewController in mainController.masterNav.viewControllers {
-			(viewController as? MapListViewController)?.reload(map)
+		DispatchQueue.main.async {
+			guard let splitController = self.splitViewController else { return }
+			let mainController = splitController as! MainViewController
+			for viewController in mainController.masterNav.viewControllers {
+				(viewController as? MapListViewController)?.reload(map)
+			}
 		}
 	}
 }
@@ -380,3 +355,5 @@ extension MapViewController: UIAdaptivePresentationControllerDelegate {
 extension Issue {
 	static let allStatuses = Set(Issue.Status.Simplified.allCases)
 }
+
+extension Issue.Status.Simplified: DefaultsValueConvertible {}

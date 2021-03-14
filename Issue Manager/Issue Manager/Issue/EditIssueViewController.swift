@@ -2,6 +2,8 @@
 
 import UIKit
 import GRDB
+import Promise
+import UserDefault
 
 final class EditIssueNavigationController: UINavigationController {
 	var editIssueController: EditIssueViewController {
@@ -12,8 +14,10 @@ final class EditIssueNavigationController: UINavigationController {
 final class EditIssueViewController: UITableViewController, Reusable {
 	typealias Localization = L10n.ViewIssue
 	
+	@IBOutlet private var numberLabel: UILabel!
 	@IBOutlet private var markButton: UIButton!
 	
+	@IBOutlet private var noImageLabel: UILabel!
 	@IBOutlet private var imageView: UIImageView!
 	@IBOutlet private var cameraContainerView: CameraContainerView!
 	@IBOutlet private var cameraView: CameraView!
@@ -29,7 +33,7 @@ final class EditIssueViewController: UITableViewController, Reusable {
 	@IBOutlet private var suggestionsTableView: UITableView!
 	
 	@IBAction func markIssue() {
-		isIssueMarked.toggle()
+		issue.isMarked.toggle()
 		Haptics.mediumImpact.impactOccurred()
 	}
 	
@@ -45,10 +49,11 @@ final class EditIssueViewController: UITableViewController, Reusable {
 	
 	@IBAction func descriptionChanged() {
 		suggestionsHandler.currentDescription = descriptionField.text
+		issue.description = descriptionField.text
 	}
 	
 	@IBAction func removeImage() {
-		imageFile = nil
+		issue.image = nil
 	}
 	
 	@IBAction func openImagePicker(_ sender: UIView) {
@@ -75,17 +80,14 @@ final class EditIssueViewController: UITableViewController, Reusable {
 	
 	var isCreating = false
 	
-	private var issue: Issue!
-	private var original: Issue?
-	private var site: ConstructionSite!
-	
-	private var isIssueMarked = false {
+	private var issue: Issue! {
 		didSet {
-			guard isViewLoaded else { return }
-			
-			markButton.setImage(isIssueMarked ? #imageLiteral(resourceName: "mark_marked.pdf") : #imageLiteral(resourceName: "mark_unmarked.pdf"), for: .normal)
+			guard issue != oldValue else { return }
+			update()
 		}
 	}
+	private var original: Issue?
+	private var site: ConstructionSite!
 	
 	private var trade: String? {
 		didSet {
@@ -95,43 +97,28 @@ final class EditIssueViewController: UITableViewController, Reusable {
 			if trade != craftsman?.trade {
 				let options = possibleCraftsmen()
 				if trade != nil, options.count == 1 {
-					craftsman = options.first
+					issue.craftsmanID = options.first!.id
 				} else {
-					craftsman = nil
+					issue.craftsmanID = nil
 				}
 			}
 		}
 	}
 	
-	private var craftsman: Craftsman? {
-		didSet {
-			craftsmanNameLabel.setText(to: craftsman?.name, fallback: L10n.Issue.noCraftsman)
-			
-			if let craftsman = craftsman, craftsman.trade != trade {
-				trade = craftsman.trade
-			}
-		}
-	}
-	
-	private var imageFile: File<Issue>? {
-		didSet {
-			loadedImage = imageFile.flatMap {
-				nil
-					?? UIImage(contentsOfFile: Issue.cacheURL(for: $0).path)
-					?? UIImage(contentsOfFile: Issue.localURL(for: $0).path)
-			}
-		}
-	}
+	private var craftsman: Craftsman?
 	
 	private var loadedImage: UIImage? {
 		didSet {
 			imageView.image = loadedImage
+			noImageLabel.isHidden = loadedImage != nil
 			cameraContainerView.isHidden = loadedImage != nil
 			markupLabel.isEnabled = loadedImage != nil
 		}
 	}
 	
 	private var suggestionsHandler = SuggestionsHandler()
+	
+	@UserDefault("hasTakenPhoto") private var hasTakenPhoto = false
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -142,7 +129,7 @@ final class EditIssueViewController: UITableViewController, Reusable {
 		
 		cameraView.delegate = self
 		
-		cameraControlHintView.isHidden = defaults.hasTakenPhoto
+		cameraControlHintView.isHidden = hasTakenPhoto
 		
 		update()
 		
@@ -168,15 +155,15 @@ final class EditIssueViewController: UITableViewController, Reusable {
 	}
 	
 	func store(_ image: UIImage) {
-		let file = File<Issue>(filename: "\(UUID()).jpg")
+		let file = File<Issue>(urlPath: "/local/\(UUID()).jpg")
 		
 		let url = Issue.localURL(for: file)
 		do {
 			try image.saveJPEG(to: url)
-			imageFile = file
+			issue.image = file
 		} catch {
 			showAlert(titled: Localization.CouldNotSaveImage.title, message: error.localizedFailureReason)
-			imageFile = nil
+			issue.image = nil
 		}
 	}
 	
@@ -189,31 +176,23 @@ final class EditIssueViewController: UITableViewController, Reusable {
 		
 		navigationItem.title = isCreating ? Localization.titleCreating : Localization.titleEditing
 		
-		isIssueMarked = issue.isMarked
+		numberLabel.setText(to: issue.number.map { "#\($0)" }, fallback: L10n.Issue.unregistered)
+		markButton.setImage(issue.isMarked ? #imageLiteral(resourceName: "mark_marked.pdf") : #imageLiteral(resourceName: "mark_unmarked.pdf"), for: .normal)
 		
 		craftsman = Repository.read(issue.craftsman)
+		craftsmanNameLabel.setText(to: craftsman?.company, fallback: L10n.Issue.noCraftsman)
 		trade = craftsman?.trade
 		
 		descriptionField.text = issue.description
 		descriptionChanged()
 		
-		imageFile = issue.image
+		loadedImage = issue.image.flatMap { nil
+			?? UIImage(contentsOfFile: Issue.cacheURL(for: $0).path)
+			?? UIImage(contentsOfFile: Issue.localURL(for: $0).path)
+		}
 	}
 	
-	private func save() {
-		func update(_ details: inout Issue.Details) {
-			details.isMarked = isIssueMarked
-			details.craftsman = craftsman?.id
-			details.description = descriptionField.text
-			details.image = imageFile
-		}
-		
-		if isCreating {
-			issue.create(transform: update)
-		} else {
-			issue.change(transform: update)
-		}
-		
+	private func onSave() {
 		let originalTrade = (original?.craftsman).flatMap(Repository.shared.read)?.trade
 		if trade != originalTrade || issue.description != original?.description {
 			SuggestionStorage.shared.decrementSuggestion(
@@ -232,7 +211,7 @@ final class EditIssueViewController: UITableViewController, Reusable {
 			if let trade = trade {
 				$0 = $0.filter(Craftsman.Columns.trade == trade)
 			}
-			$0 = $0.order(Craftsman.Columns.name)
+			$0 = $0.order(Craftsman.Columns.company)
 		}
 		return Repository.read(request.fetchAll)
 	}
@@ -251,9 +230,13 @@ final class EditIssueViewController: UITableViewController, Reusable {
 		case "cancel":
 			break
 		case "save":
-			save()
+			onSave()
+			let mapController = segue.destination as! MapViewController
+			issue.saveAndSync().then(mapController.updateFromRepository)
 		case "delete":
-			Repository.shared.remove(issue)
+			issue.delete()
+			let mapController = segue.destination as! MapViewController
+			issue.saveAndSync().then(mapController.updateFromRepository)
 		case "lightbox":
 			let lightboxController = segue.destination as! LightboxViewController
 			lightboxController.image = loadedImage!
@@ -273,7 +256,7 @@ final class EditIssueViewController: UITableViewController, Reusable {
 				options: possibleCraftsmen(),
 				trade: trade,
 				current: craftsman
-			) { [unowned self] in self.craftsman = $0 }.wrapped()
+			) { [unowned self] in self.issue.craftsmanID = $0?.id }.wrapped()
 		default:
 			fatalError("unrecognized segue named \(segue.identifier ?? "<no identifier>")")
 		}
@@ -312,7 +295,7 @@ extension EditIssueViewController: UITextFieldDelegate {
 
 extension EditIssueViewController: SuggestionsHandlerDelegate {
 	func use(_ suggestion: Suggestion) {
-		descriptionField.text = suggestion.text
+		issue.description = suggestion.text
 	}
 }
 
@@ -326,7 +309,7 @@ extension EditIssueViewController: CameraViewDelegate {
 	}
 	
 	func pictureTaken(_ image: UIImage) {
-		defaults.hasTakenPhoto = true
+		hasTakenPhoto = true
 		cameraControlHintView.isHidden = true
 		store(image)
 	}
@@ -342,6 +325,10 @@ extension UIImage {
 			throw ImageSavingError.couldNotGenerateRepresentation
 		}
 		print("Saving file to", url)
+		try? FileManager.default.createDirectory(
+			at: url.deletingLastPathComponent(),
+			withIntermediateDirectories: true
+		)
 		try jpg.write(to: url)
 	}
 }
