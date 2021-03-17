@@ -198,7 +198,7 @@ extension Client {
 			constructionSite: site?.id,
 			minLastChangeTime: existing.maxLastChangeTime()
 		))
-		.map { $0.members.map { $0.makeObject(context: context) } }
+		.map { $0.makeObjects(context: context) }
 		.map { $0 <- { Repository.shared.update(changing: $0) } }
 	}
 	
@@ -228,7 +228,7 @@ extension Client {
 			itemsPerPage: itemsPerPage
 		))
 		.flatMap { collection in
-			let issues = collection.members.map { $0.makeObject(context: site.id) }
+			let issues = collection.makeObjects(context: site.id)
 			Repository.shared.update(changing: issues)
 			
 			return collection.view.nextPage == nil

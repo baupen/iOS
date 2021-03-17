@@ -2,7 +2,7 @@
 
 import Foundation
 
-struct HydraCollection<Object>: Decodable where Object: Decodable {
+struct HydraCollection<Object>: Decodable, AnyHydraCollection where Object: Decodable {
 	var members: [Object]
 	
 	private enum CodingKeys: String, CodingKey {
@@ -10,7 +10,20 @@ struct HydraCollection<Object>: Decodable where Object: Decodable {
 	}
 }
 
-struct PagedHydraCollection<Object>: Decodable where Object: Decodable {
+protocol AnyHydraCollection {
+	associatedtype Object
+	
+	var members: [Object] { get }
+}
+
+extension AnyHydraCollection {
+	func makeObjects<Model>(context: Model.Context) -> [Model.Object]
+	where Model: APIModel, Object == APIObject<Model> {
+		members.map { $0.makeObject(context: context) }
+	}
+}
+
+struct PagedHydraCollection<Object>: Decodable, AnyHydraCollection where Object: Decodable {
 	var members: [Object]
 	var totalCount: Int
 	var view: View
