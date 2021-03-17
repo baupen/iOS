@@ -183,7 +183,7 @@ extension Client {
 			doPullChangedObjects(existing: ConstructionSite.none(), context: ())
 				// remove sites we don't have access to
 				.map { $0
-					.filter { !$0.managers.contains(self.localUser!.id) }
+					.filter { !$0.managerIDs.contains(self.localUser!.id) }
 					.forEach { Repository.shared.ensureNotPresent($0) }
 				}
 		].sequence()

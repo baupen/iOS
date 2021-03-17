@@ -14,7 +14,7 @@ struct APIConstructionSite {
 			name: name,
 			creationTime: createdAt,
 			image: imageUrl,
-			managers: .init(constructionManagers.map { $0.makeID() })
+			managerIDs: .init(constructionManagers.map { $0.makeID() })
 		)
 	}
 }

@@ -9,7 +9,7 @@ struct ConstructionSite {
 	let name: String
 	let creationTime: Date
 	let image: File<ConstructionSite>?
-	let managers: Set<ConstructionManager.ID>
+	let managerIDs: Set<ConstructionManager.ID>
 }
 
 extension ConstructionSite: DBRecord {
@@ -28,13 +28,17 @@ extension ConstructionSite: DBRecord {
 		request(for: Self.issues).withoutDeleted
 	}
 	
+	var managers: QueryInterfaceRequest<ConstructionManager> {
+		ConstructionManager.filter(keys: managerIDs)
+	}
+	
 	func encode(to container: inout PersistenceContainer) {
 		meta.encode(to: &container)
 		
 		container[Columns.name] = name
 		container[Columns.creationTime] = creationTime
 		container[Columns.image] = image
-		try! container.encode(managers, forKey: Columns.managers)
+		try! container.encode(managerIDs, forKey: Columns.managers)
 	}
 	
 	init(row: Row) {
@@ -43,7 +47,7 @@ extension ConstructionSite: DBRecord {
 		name = row[Columns.name]
 		creationTime = row[Columns.creationTime]
 		image = row[Columns.image]
-		managers = try! row.decodeValue(forKey: Columns.managers)
+		managerIDs = try! row.decodeValue(forKey: Columns.managers)
 	}
 	
 	enum Columns: String, ColumnExpression {
