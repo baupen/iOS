@@ -71,11 +71,6 @@ final class Repository {
 		write(site.delete)
 	}
 	
-	/// saves modifications to a map
-	func save(_ map: Map) {
-		write(map.save)
-	}
-	
 	// MARK: -
 	// MARK: Management
 	
