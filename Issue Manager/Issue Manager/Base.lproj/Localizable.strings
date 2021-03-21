@@ -93,6 +93,11 @@
 // MARK: Issue.status.resolved
 // CONTEXT: Beschreibt genauer, wie die Pendenz beantwortet wurde. %s wird durch den Namen des Beantworters ersetzt.
 "issue.status.resolved_by" = "Umgesetzt von %@";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Issue.status.unknown
+// CONTEXT: Wird in der Beschreibung vom Pendenzstatus verwendet, falls der Verursacher einer Statusänderung nicht (mehr) bekannt ist.
+"issue.status.unknown_entity" = "[unbekannt]";
 // CONTEXT: Überschrift für das Gewerk des verantwortlichen Handwerkers.
 "issue.trade" = "Gewerk";
 // CONTEXT: Wird anstelle der Nummer (z.B. #123) angezeigt, wenn eine Pendenz noch nicht registriert ist.
