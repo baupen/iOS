@@ -98,6 +98,8 @@ internal enum L10n {
       internal static func resolvedBy(_ p1: Any) -> String {
         return L10n.tr("Localizable", "issue.status.resolved_by", String(describing: p1))
       }
+      /// [unbekannt]
+      internal static let unknownEntity = L10n.tr("Localizable", "issue.status.unknown_entity")
     }
   }
 

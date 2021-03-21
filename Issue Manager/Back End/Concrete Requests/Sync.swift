@@ -183,7 +183,7 @@ extension Client {
 			doPullChangedObjects(existing: ConstructionSite.none(), context: ())
 				// remove sites we don't have access to
 				.map { $0
-					.filter { !$0.managers.contains(self.localUser!.id) }
+					.filter { !$0.managerIDs.contains(self.localUser!.id) }
 					.forEach { Repository.shared.ensureNotPresent($0) }
 				}
 		].sequence()
@@ -198,7 +198,7 @@ extension Client {
 			constructionSite: site?.id,
 			minLastChangeTime: existing.maxLastChangeTime()
 		))
-		.map { $0.members.map { $0.makeObject(context: context) } }
+		.map { $0.makeObjects(context: context) }
 		.map { $0 <- { Repository.shared.update(changing: $0) } }
 	}
 	
@@ -228,7 +228,7 @@ extension Client {
 			itemsPerPage: itemsPerPage
 		))
 		.flatMap { collection in
-			let issues = collection.members.map { $0.makeObject(context: site.id) }
+			let issues = collection.makeObjects(context: site.id)
 			Repository.shared.update(changing: issues)
 			
 			return collection.view.nextPage == nil
