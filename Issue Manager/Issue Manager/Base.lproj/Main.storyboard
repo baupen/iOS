@@ -858,7 +858,7 @@
                                                                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jjv-SQ-jAZ">
                                                                                 <rect key="frame" x="0.0" y="100" width="264" height="33"/>
                                                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
-                                                                                <state key="normal" title="Aktivierungscode Scannen"/>
+                                                                                <state key="normal" title="Einloggen"/>
                                                                                 <userDefinedRuntimeAttributes>
                                                                                     <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="login.connect_to_website"/>
                                                                                 </userDefinedRuntimeAttributes>
@@ -3209,120 +3209,101 @@ Beantwortet von Malerfirma GmbH</string>
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PU3-no-Mhp" userLabel="Camera Container" customClass="CameraContainerView" customModule="Issue_Manager" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="CHo-ii-EXX">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vpd-km-ILj" customClass="QRScannerView" customModule="Issue_Manager" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <view contentMode="scaleToFill" verticalHuggingPriority="200" verticalCompressionResistancePriority="300" translatesAutoresizingMaskIntoConstraints="NO" id="OOB-ZV-sRs">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="620.5"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" verticalHuggingPriority="200" verticalCompressionResistancePriority="200" translatesAutoresizingMaskIntoConstraints="NO" id="vpd-km-ILj" customClass="QRScannerView" customModule="Issue_Manager" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="620.5"/>
+                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </view>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="qr_overlay" translatesAutoresizingMaskIntoConstraints="NO" id="qNj-zb-Lhz">
+                                                <rect key="frame" x="57" y="160.5" width="300" height="300"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="qNj-zb-Lhz" secondAttribute="height" multiplier="1:1" id="VEp-gV-FlW"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="vpd-km-ILj" firstAttribute="top" secondItem="OOB-ZV-sRs" secondAttribute="top" id="5t1-fN-phj"/>
+                                            <constraint firstItem="qNj-zb-Lhz" firstAttribute="centerX" secondItem="OOB-ZV-sRs" secondAttribute="centerX" id="J81-Uo-Vmg"/>
+                                            <constraint firstItem="vpd-km-ILj" firstAttribute="leading" secondItem="OOB-ZV-sRs" secondAttribute="leading" id="Lex-vc-CT0"/>
+                                            <constraint firstAttribute="trailing" secondItem="vpd-km-ILj" secondAttribute="trailing" id="acM-GP-WVr"/>
+                                            <constraint firstItem="qNj-zb-Lhz" firstAttribute="centerY" secondItem="OOB-ZV-sRs" secondAttribute="centerY" id="afe-PH-QKJ"/>
+                                            <constraint firstAttribute="bottom" secondItem="vpd-km-ILj" secondAttribute="bottom" id="xbP-E5-eGw"/>
+                                        </constraints>
                                     </view>
-                                    <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F3p-Tv-M9G">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="57"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="3f9-61-Vcj">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="57"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <subviews>
-                                                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6rA-X8-g2i">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="57"/>
-                                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="NqT-QW-FiC">
-                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="57"/>
-                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                        <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="200" verticalHuggingPriority="500" text="Finde den Aktivierungscode unter &quot;Mit App verbinden&quot; oben auf der Baustellenauswahl." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fzX-on-qww">
-                                                                <rect key="frame" x="8" y="8" width="398" height="41"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <nil key="highlightedColor"/>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="login.scan.instructions"/>
-                                                                </userDefinedRuntimeAttributes>
-                                                            </label>
-                                                        </subviews>
-                                                        <constraints>
-                                                            <constraint firstAttribute="bottomMargin" secondItem="fzX-on-qww" secondAttribute="bottom" id="FqX-Uk-cfg"/>
-                                                            <constraint firstItem="fzX-on-qww" firstAttribute="top" secondItem="NqT-QW-FiC" secondAttribute="topMargin" id="V7o-bS-goP"/>
-                                                            <constraint firstAttribute="trailingMargin" secondItem="fzX-on-qww" secondAttribute="trailing" id="jfu-SI-O4f"/>
-                                                            <constraint firstItem="fzX-on-qww" firstAttribute="leading" secondItem="NqT-QW-FiC" secondAttribute="leadingMargin" id="q4R-bd-tUr"/>
-                                                        </constraints>
-                                                    </view>
-                                                    <vibrancyEffect>
-                                                        <blurEffect style="dark"/>
-                                                    </vibrancyEffect>
-                                                </visualEffectView>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="6rA-X8-g2i" firstAttribute="top" secondItem="3f9-61-Vcj" secondAttribute="top" id="NGL-XI-gc9"/>
-                                                <constraint firstAttribute="trailing" secondItem="6rA-X8-g2i" secondAttribute="trailing" id="qIA-4T-g6k"/>
-                                                <constraint firstItem="6rA-X8-g2i" firstAttribute="leading" secondItem="3f9-61-Vcj" secondAttribute="leading" id="rM4-dj-XCI"/>
-                                                <constraint firstAttribute="bottom" secondItem="6rA-X8-g2i" secondAttribute="bottom" id="sSF-fN-6aU"/>
-                                            </constraints>
-                                        </view>
-                                        <blurEffect style="dark"/>
-                                    </visualEffectView>
-                                    <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dQX-Ib-Thb">
-                                        <rect key="frame" x="0.0" y="762" width="414" height="46"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="8HC-BU-i15">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="46"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <subviews>
-                                                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pvc-vE-6wI">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="46"/>
-                                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="cqd-Dt-Md2">
-                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="46"/>
-                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                        <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jjl-td-gOU">
-                                                                <rect key="frame" x="8" y="8" width="398" height="30"/>
-                                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                                                <state key="normal" title="Abbrechen"/>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="login.scan.cancel"/>
-                                                                </userDefinedRuntimeAttributes>
-                                                                <connections>
-                                                                    <segue destination="Ur9-zz-Cri" kind="unwind" unwindAction="backToLogin:" id="O9P-Rm-oQc"/>
-                                                                </connections>
-                                                            </button>
-                                                        </subviews>
-                                                        <constraints>
-                                                            <constraint firstItem="jjl-td-gOU" firstAttribute="top" secondItem="cqd-Dt-Md2" secondAttribute="topMargin" id="2ok-BH-GyC"/>
-                                                            <constraint firstItem="jjl-td-gOU" firstAttribute="leading" secondItem="cqd-Dt-Md2" secondAttribute="leadingMargin" id="UyX-ID-eDx"/>
-                                                            <constraint firstAttribute="trailingMargin" secondItem="jjl-td-gOU" secondAttribute="trailing" id="dS0-Md-vV6"/>
-                                                            <constraint firstAttribute="bottomMargin" secondItem="jjl-td-gOU" secondAttribute="bottom" id="hxa-9x-RTp"/>
-                                                        </constraints>
-                                                    </view>
-                                                    <vibrancyEffect>
-                                                        <blurEffect style="dark"/>
-                                                    </vibrancyEffect>
-                                                </visualEffectView>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="Pvc-vE-6wI" secondAttribute="trailing" id="BUf-AZ-ZIw"/>
-                                                <constraint firstAttribute="bottom" secondItem="Pvc-vE-6wI" secondAttribute="bottom" id="L1e-p7-dGf"/>
-                                                <constraint firstItem="Pvc-vE-6wI" firstAttribute="top" secondItem="8HC-BU-i15" secondAttribute="top" id="aH4-U0-aw9"/>
-                                                <constraint firstItem="Pvc-vE-6wI" firstAttribute="leading" secondItem="8HC-BU-i15" secondAttribute="leading" id="rUG-N8-KJr"/>
-                                            </constraints>
-                                        </view>
-                                        <blurEffect style="dark"/>
-                                    </visualEffectView>
+                                    <view contentMode="scaleToFill" verticalHuggingPriority="300" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qAd-hO-pbs">
+                                        <rect key="frame" x="0.0" y="620.5" width="414" height="221.5"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="300" axis="vertical" distribution="equalCentering" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="2sE-nb-URp">
+                                                <rect key="frame" x="20" y="20" width="374" height="167.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="800" verticalCompressionResistancePriority="800" text="Login-Code Scannen" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qbo-Ew-XK0">
+                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="33.5"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="28"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="login.scan.title"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="200" verticalHuggingPriority="800" verticalCompressionResistancePriority="800" text="Auf der Website ist oben in der Baustellenauswahl ein Knopf, um diese App anzubinden." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fzX-on-qww">
+                                                        <rect key="frame" x="0.0" y="53.5" width="374" height="61"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="login.scan.instructions"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jjl-td-gOU">
+                                                        <rect key="frame" x="0.0" y="134.5" width="374" height="33"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                        <state key="normal" title="Abbrechen"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="login.scan.cancel"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <segue destination="Ur9-zz-Cri" kind="unwind" unwindAction="backToLogin:" id="O9P-Rm-oQc"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="2sE-nb-URp" firstAttribute="leading" secondItem="qAd-hO-pbs" secondAttribute="leadingMargin" id="FSX-ZA-p1r"/>
+                                            <constraint firstItem="2sE-nb-URp" firstAttribute="top" secondItem="qAd-hO-pbs" secondAttribute="topMargin" id="aJg-HZ-JPv"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="2sE-nb-URp" secondAttribute="trailing" id="sla-8q-OWs"/>
+                                            <constraint firstAttribute="bottomMargin" secondItem="2sE-nb-URp" secondAttribute="bottom" id="uE6-HK-DA4"/>
+                                        </constraints>
+                                        <directionalEdgeInsets key="directionalLayoutMargins" top="20" leading="20" bottom="20" trailing="20"/>
+                                    </view>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="F3p-Tv-M9G" secondAttribute="trailing" id="a3O-lJ-DOG"/>
-                                    <constraint firstAttribute="bottom" secondItem="dQX-Ib-Thb" secondAttribute="bottom" id="hca-Cc-sOe"/>
-                                    <constraint firstItem="F3p-Tv-M9G" firstAttribute="leading" secondItem="PU3-no-Mhp" secondAttribute="leading" id="ikk-Ci-pHw"/>
-                                    <constraint firstItem="F3p-Tv-M9G" firstAttribute="top" secondItem="PU3-no-Mhp" secondAttribute="top" id="ozp-g8-aXB"/>
-                                    <constraint firstAttribute="trailing" secondItem="dQX-Ib-Thb" secondAttribute="trailing" id="qJO-g2-pqp"/>
-                                    <constraint firstItem="dQX-Ib-Thb" firstAttribute="leading" secondItem="PU3-no-Mhp" secondAttribute="leading" id="vvd-ou-iuM"/>
+                                    <constraint firstItem="qAd-hO-pbs" firstAttribute="width" secondItem="CHo-ii-EXX" secondAttribute="width" multiplier="0.4" id="fd6-qG-v92"/>
                                 </constraints>
-                            </view>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="fd6-qG-v92"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=compact-widthClass=regular" axis="horizontal">
+                                    <mask key="constraints">
+                                        <include reference="fd6-qG-v92"/>
+                                    </mask>
+                                </variation>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="NrW-b6-CmU"/>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="PU3-no-Mhp" firstAttribute="leading" secondItem="NrW-b6-CmU" secondAttribute="leading" id="9DT-Ue-lG5"/>
-                            <constraint firstItem="NrW-b6-CmU" firstAttribute="bottom" secondItem="PU3-no-Mhp" secondAttribute="bottom" id="ELz-Nx-dnP"/>
-                            <constraint firstItem="PU3-no-Mhp" firstAttribute="trailing" secondItem="NrW-b6-CmU" secondAttribute="trailing" id="bt5-rM-xUm"/>
-                            <constraint firstItem="PU3-no-Mhp" firstAttribute="top" secondItem="NrW-b6-CmU" secondAttribute="top" id="dCv-7G-Eeh"/>
+                            <constraint firstItem="CHo-ii-EXX" firstAttribute="top" secondItem="dvC-nv-uXf" secondAttribute="top" id="1GJ-Wr-xzy"/>
+                            <constraint firstItem="CHo-ii-EXX" firstAttribute="leading" secondItem="dvC-nv-uXf" secondAttribute="leading" id="WJb-8K-wmD"/>
+                            <constraint firstItem="CHo-ii-EXX" firstAttribute="trailing" secondItem="dvC-nv-uXf" secondAttribute="trailing" id="h6R-bN-qZy"/>
+                            <constraint firstAttribute="bottom" secondItem="CHo-ii-EXX" secondAttribute="bottom" id="jcS-Gm-eWr"/>
                         </constraints>
                     </view>
                     <connections>
@@ -3396,6 +3377,7 @@ Beantwortet von Malerfirma GmbH</string>
         <image name="markup_square" width="32" height="32"/>
         <image name="markup_undo" width="30" height="30"/>
         <image name="qr" width="100" height="100"/>
+        <image name="qr_overlay" width="300" height="300"/>
         <image name="site_image_placeholder" width="512" height="512"/>
         <image name="trash" width="32" height="32"/>
         <namedColor name="Attention">
