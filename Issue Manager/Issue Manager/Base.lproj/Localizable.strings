@@ -123,7 +123,7 @@
 // CONTEXT: Knopf, um das Scannen des Aktivierungscodes abzubrechen.
 "login.scan.cancel" = "Abbrechen";
 // CONTEXT: Anleitung in der Ansicht zum Aktivierungscode (QR) scannen.
-"login.scan.instructions" = "Auf der Website ist oben in der Baustellenauswahl ein Knopf, um diese App anzubinden.";
+"login.scan.instructions" = "Dazu auf der Website auf „mit App verbinden“ klicken (in der Baustellenauswahl oben links).";
 // CONTEXT: Titel für die Ansicht, wo man den Aktivierungscode von der Website scannt.
 "login.scan.title" = "Login-Code Scannen";
 

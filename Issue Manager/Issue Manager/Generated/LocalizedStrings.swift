@@ -127,7 +127,7 @@ internal enum L10n {
     internal enum Scan {
       /// Abbrechen
       internal static let cancel = L10n.tr("Localizable", "login.scan.cancel")
-      /// Auf der Website ist oben in der Baustellenauswahl ein Knopf, um diese App anzubinden.
+      /// Dazu auf der Website auf „mit App verbinden“ klicken (in der Baustellenauswahl oben links).
       internal static let instructions = L10n.tr("Localizable", "login.scan.instructions")
       /// Login-Code Scannen
       internal static let title = L10n.tr("Localizable", "login.scan.title")
