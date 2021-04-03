@@ -2,8 +2,10 @@
 
 import UIKit
 
-final class ViewIssueViewController: UITableViewController, Reusable {
+final class ViewIssueViewController: UITableViewController, InstantiableViewController {
 	typealias Localization = L10n.ViewIssue
+	
+	static let storyboardName = "View Issue"
 	
 	@IBOutlet private var iconView: TrilinearImageView!
 	@IBOutlet private var numberLabel: UILabel!

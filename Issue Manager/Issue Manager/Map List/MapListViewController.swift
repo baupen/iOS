@@ -3,8 +3,10 @@
 import UIKit
 import Promise
 
-final class MapListViewController: RefreshingTableViewController, Reusable {
+final class MapListViewController: RefreshingTableViewController, InstantiableViewController {
 	typealias Localization = L10n.MapList
+	
+	static let storyboardName = "Map List"
 	
 	@IBOutlet private var backToSiteListButton: UIBarButtonItem!
 	
@@ -168,13 +170,13 @@ final class MapListViewController: RefreshingTableViewController, Reusable {
 	}
 	
 	func showMapController(for holder: MapHolder) {
-		let mapController = storyboard!.instantiate(MapViewController.self)!
+		let mapController = MapViewController.instantiate()!
 		mapController.holder = holder
 		show(mapController, sender: self)
 	}
 	
 	func showListController(for holder: MapHolder) {
-		let listController = storyboard!.instantiate(MapListViewController.self)!
+		let listController = MapListViewController.instantiate()!
 		listController.holder = holder
 		show(listController, sender: self)
 	}

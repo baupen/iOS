@@ -11,8 +11,10 @@ final class EditIssueNavigationController: UINavigationController {
 	}
 }
 
-final class EditIssueViewController: UITableViewController, Reusable {
+final class EditIssueViewController: UITableViewController, InstantiableViewController {
 	typealias Localization = L10n.ViewIssue
+	
+	static let storyboardName = "Edit Issue"
 	
 	@IBOutlet private var numberLabel: UILabel!
 	@IBOutlet private var markButton: UIButton!

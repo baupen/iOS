@@ -8,8 +8,10 @@ import Promise
 import CGeometry
 import UserDefault
 
-final class MapViewController: UIViewController, Reusable {
+final class MapViewController: UIViewController, InstantiableViewController {
 	typealias Localization = L10n.Map
+	
+	static let storyboardName = "Map"
 	
 	@IBOutlet private var filterItem: UIBarButtonItem!
 	@IBOutlet private var addItem: UIBarButtonItem!
@@ -267,8 +269,8 @@ final class MapViewController: UIViewController, Reusable {
 		let issue = Repository.shared.read(issue.id.get)!
 		
 		let viewController = issue.isRegistered
-			? storyboard!.instantiate(ViewIssueViewController.self)! <- { $0.issue = issue }
-			: storyboard!.instantiate(EditIssueViewController.self)! <- { $0.present(issue) }
+			? ViewIssueViewController.self.instantiate()! <- { $0.issue = issue }
+			: EditIssueViewController.self.instantiate()! <- { $0.present(issue) }
 		
 		let navController = UINavigationController(rootViewController: viewController)
 			<- { $0.modalPresentationStyle = .formSheet }
