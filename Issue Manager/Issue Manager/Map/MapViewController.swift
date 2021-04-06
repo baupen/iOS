@@ -22,6 +22,7 @@ final class MapViewController: UIViewController, InstantiableViewController {
 	@IBOutlet private var pullableContainer: UIView!
 	@IBOutlet private var pullableView: PullableView!
 	@IBOutlet private var issuePositioner: IssuePositioner!
+	@IBOutlet private var addUnplacedContainer: UIView!
 	
 	// the filter popover's done button and the add marker popover's cancel button link to this
 	@IBAction func backToMap(_ segue: UIStoryboardSegue) {
@@ -35,7 +36,7 @@ final class MapViewController: UIViewController, InstantiableViewController {
 	
 	@IBAction func beginAddingIssue() {
 		guard map?.file != nil else {
-			performSegue(withIdentifier: "create issue", sender: nil)
+			performSegue(withIdentifier: SegueID.createUnplaced.rawValue, sender: nil)
 			return
 		}
 		
@@ -67,7 +68,8 @@ final class MapViewController: UIViewController, InstantiableViewController {
 		didSet {
 			markerAlpha = isPlacingIssue ? 0.25 : 1
 			addItem.isEnabled = !isPlacingIssue
-			issuePositioner.isHidden = !isPlacingIssue
+			issuePositioner.isShown = isPlacingIssue
+			addUnplacedContainer.isShown = isPlacingIssue
 		}
 	}
 	
@@ -146,15 +148,18 @@ final class MapViewController: UIViewController, InstantiableViewController {
 		case let editIssueNav as EditIssueNavigationController:
 			let editController = editIssueNav.editIssueController
 			editController.isCreating = true // otherwise we wouldn't be using a segue
-			if isPlacingIssue {
-				let map = holder as! Map
+			let map = holder as! Map
+			switch segue.identifier.flatMap(SegueID.init) {
+			case .createUnplaced:
+				editController.present(Issue(in: map))
+			case .createPlaced:
 				let position = Issue.Position(
 					at: issuePositioner.relativePosition(in: pdfController!.overlayView),
 					zoomScale: pdfController!.scrollView.zoomScale / pdfController!.scrollView.minimumZoomScale
 				)
 				editController.present(Issue(at: isPlacingIssue ? position : nil, in: map))
-			} else {
-				editController.present(Issue(in: holder as! Map))
+			case nil:
+				fatalError("unrecognized segue to issue editor with identifier '\(segue.identifier ?? "<no id>")'")
 			}
 			segue.destination.presentationController?.delegate = self
 		default:
@@ -277,6 +282,10 @@ final class MapViewController: UIViewController, InstantiableViewController {
 		
 		present(navController, animated: true)
 		navController.presentationController?.delegate = self
+	}
+	
+	private enum SegueID: String {
+		case createPlaced, createUnplaced
 	}
 }
 

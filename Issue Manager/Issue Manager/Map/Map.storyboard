@@ -21,10 +21,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </containerView>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="elz-u4-mxA">
-                                <rect key="frame" x="197" y="404.5" width="20" height="20"/>
+                                <rect key="frame" x="197" y="426.5" width="20" height="20"/>
                             </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wähle links einen Bereich aus, um hier den zugehörigen Grundriss zu sehen." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Cf-dE-GqE" userLabel="Fallback Label">
-                                <rect key="frame" x="41.5" y="432.5" width="331" height="41"/>
+                                <rect key="frame" x="41.5" y="454.5" width="331" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" systemColor="secondaryLabelColor"/>
                                 <nil key="highlightedColor"/>
@@ -51,6 +51,9 @@
                                                                             <rect key="frame" x="0.0" y="0.0" width="85" height="33"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                             <state key="normal" title="Abbrechen"/>
+                                                                            <userDefinedRuntimeAttributes>
+                                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="map.issue_positioner.cancel"/>
+                                                                            </userDefinedRuntimeAttributes>
                                                                             <connections>
                                                                                 <action selector="cancelAddingIssue" destination="JEX-9P-axG" eventType="touchUpInside" id="dX0-2H-iLZ"/>
                                                                             </connections>
@@ -59,8 +62,11 @@
                                                                             <rect key="frame" x="0.0" y="29" width="85" height="39"/>
                                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                                             <state key="normal" title="Weiter"/>
+                                                                            <userDefinedRuntimeAttributes>
+                                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="map.issue_positioner.continue"/>
+                                                                            </userDefinedRuntimeAttributes>
                                                                             <connections>
-                                                                                <segue destination="zxu-Oq-28A" kind="presentation" id="iOy-9i-ghB"/>
+                                                                                <segue destination="zxu-Oq-28A" kind="presentation" identifier="createPlaced" id="iOy-9i-ghB"/>
                                                                             </connections>
                                                                         </button>
                                                                     </subviews>
@@ -111,14 +117,20 @@
                                                                             <rect key="frame" x="0.0" y="0.0" width="85" height="33"/>
                                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                                             <state key="normal" title="Weiter"/>
+                                                                            <userDefinedRuntimeAttributes>
+                                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="map.issue_positioner.continue"/>
+                                                                            </userDefinedRuntimeAttributes>
                                                                             <connections>
-                                                                                <segue destination="zxu-Oq-28A" kind="presentation" id="O8y-cm-e0k"/>
+                                                                                <segue destination="zxu-Oq-28A" kind="presentation" identifier="createPlaced" id="O8y-cm-e0k"/>
                                                                             </connections>
                                                                         </button>
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vyM-0H-yrg">
                                                                             <rect key="frame" x="0.0" y="29" width="85" height="39"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                             <state key="normal" title="Abbrechen"/>
+                                                                            <userDefinedRuntimeAttributes>
+                                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="map.issue_positioner.cancel"/>
+                                                                            </userDefinedRuntimeAttributes>
                                                                             <connections>
                                                                                 <action selector="cancelAddingIssue" destination="JEX-9P-axG" eventType="touchUpInside" id="65u-aX-NL9"/>
                                                                             </connections>
@@ -169,10 +181,10 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f5e-Yf-zj2" userLabel="Pullable Container" customClass="PassThroughView" customModule="Issue_Manager" customModuleProvider="target">
-                                <rect key="frame" x="8" y="52" width="398" height="810"/>
+                                <rect key="frame" x="8" y="96" width="398" height="766"/>
                                 <subviews>
                                     <view opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="Axp-84-gLn" customClass="PullableView" customModule="PullToExpand">
-                                        <rect key="frame" x="0.0" y="682" width="398" height="128"/>
+                                        <rect key="frame" x="0.0" y="638" width="398" height="128"/>
                                         <subviews>
                                             <visualEffectView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0fQ-ZQ-GOx" customClass="ThickMaterialBlurView" customModule="Issue_Manager" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="398" height="128"/>
@@ -245,6 +257,39 @@
                                 </constraints>
                                 <directionalEdgeInsets key="directionalLayoutMargins" top="0.0" leading="0.0" bottom="0.0" trailing="0.0"/>
                             </view>
+                            <visualEffectView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gHm-fd-hfr" userLabel="Unpositioned Button Container" customClass="ThickMaterialBlurView" customModule="Issue_Manager" customModuleProvider="target">
+                                <rect key="frame" x="89" y="108" width="305" height="37"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="xfg-3Y-rcY">
+                                    <rect key="frame" x="0.0" y="0.0" width="305" height="37"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Kd-0C-ZgM">
+                                            <rect key="frame" x="8" y="8" width="289" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                            <inset key="contentEdgeInsets" minX="4" minY="0.0" maxX="4" maxY="0.0"/>
+                                            <state key="normal" title="Pendenz ohne Platzierung erfassen"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="map.new_unpositioned_issue"/>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <segue destination="zxu-Oq-28A" kind="presentation" identifier="createUnplaced" id="TyJ-cy-4iP"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="3Kd-0C-ZgM" firstAttribute="trailing" secondItem="xfg-3Y-rcY" secondAttribute="trailingMargin" id="CDZ-me-FEg"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="3Kd-0C-ZgM" secondAttribute="bottom" id="IJq-Ae-J7q"/>
+                                        <constraint firstItem="3Kd-0C-ZgM" firstAttribute="leading" secondItem="xfg-3Y-rcY" secondAttribute="leadingMargin" id="P8y-Ws-Kye"/>
+                                        <constraint firstItem="3Kd-0C-ZgM" firstAttribute="top" secondItem="xfg-3Y-rcY" secondAttribute="topMargin" id="yHF-Hl-C0V"/>
+                                    </constraints>
+                                </view>
+                                <blurEffect style="prominent"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </visualEffectView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="VUw-jc-0yf"/>
                         <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
@@ -252,11 +297,13 @@
                             <constraint firstItem="9Cf-dE-GqE" firstAttribute="top" secondItem="elz-u4-mxA" secondAttribute="bottom" constant="8" id="4b1-zA-RHd"/>
                             <constraint firstItem="elz-u4-mxA" firstAttribute="centerX" secondItem="VUw-jc-0yf" secondAttribute="centerX" id="9Hx-o9-olH"/>
                             <constraint firstAttribute="trailing" secondItem="f5e-Yf-zj2" secondAttribute="trailing" constant="8" id="A2d-GV-2Xf"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="gHm-fd-hfr" secondAttribute="trailing" id="AGp-JS-Zzw"/>
                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="f5e-Yf-zj2" secondAttribute="bottom" constant="8" id="CLQ-bM-S8t" userLabel="Safety"/>
                             <constraint firstItem="Xk5-hI-15Z" firstAttribute="centerX" secondItem="svH-Pt-448" secondAttribute="centerX" id="UZm-7l-Gmg"/>
                             <constraint firstItem="g4F-zU-ri6" firstAttribute="top" secondItem="svH-Pt-448" secondAttribute="top" id="bKe-LR-qsS"/>
                             <constraint firstItem="9Cf-dE-GqE" firstAttribute="centerY" secondItem="VUw-jc-0yf" secondAttribute="centerY" id="dLi-md-ijV"/>
                             <constraint firstItem="Xk5-hI-15Z" firstAttribute="centerY" secondItem="svH-Pt-448" secondAttribute="centerY" id="eD1-u2-ouK"/>
+                            <constraint firstItem="gHm-fd-hfr" firstAttribute="top" secondItem="svH-Pt-448" secondAttribute="topMargin" id="feF-2y-GGZ"/>
                             <constraint firstAttribute="bottom" secondItem="g4F-zU-ri6" secondAttribute="bottom" id="h1b-2h-6Kx"/>
                             <constraint firstItem="g4F-zU-ri6" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leading" id="k14-DP-nee"/>
                             <constraint firstItem="VUw-jc-0yf" firstAttribute="bottom" secondItem="f5e-Yf-zj2" secondAttribute="bottom" priority="996" id="meL-RM-6hI" userLabel="Safe Area Relative"/>
@@ -267,6 +314,7 @@
                             <constraint firstItem="f5e-Yf-zj2" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leading" constant="8" id="wwH-HM-8jA"/>
                             <constraint firstItem="9Cf-dE-GqE" firstAttribute="centerX" secondItem="VUw-jc-0yf" secondAttribute="centerX" id="zEK-Nr-tUp"/>
                         </constraints>
+                        <directionalEdgeInsets key="directionalLayoutMargins" top="20" leading="20" bottom="20" trailing="20"/>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Detail" id="mOI-FS-AaM">
@@ -285,16 +333,18 @@
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="activityIndicator" destination="elz-u4-mxA" id="Paa-GH-0Rl"/>
                         <outlet property="addItem" destination="xzd-qu-VOw" id="ROt-w0-j5R"/>
+                        <outlet property="addUnplacedContainer" destination="gHm-fd-hfr" id="hUJ-zI-bfo"/>
                         <outlet property="fallbackLabel" destination="9Cf-dE-GqE" id="uj7-dO-mcT"/>
                         <outlet property="filterItem" destination="3w7-54-fmg" id="Yym-J4-g4y"/>
                         <outlet property="issuePositioner" destination="Xk5-hI-15Z" id="BVe-AU-dn3"/>
                         <outlet property="pdfContainerView" destination="g4F-zU-ri6" id="pRf-qb-AVn"/>
                         <outlet property="pullableContainer" destination="f5e-Yf-zj2" id="1R0-2r-Hrs"/>
                         <outlet property="pullableView" destination="Axp-84-gLn" id="c3V-tK-ZCC"/>
-                        <segue destination="zxu-Oq-28A" kind="presentation" identifier="create issue" id="6gl-uf-ppv"/>
+                        <segue destination="zxu-Oq-28A" kind="presentation" identifier="createUnplaced" id="6gl-uf-ppv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FJe-Yq-33r" sceneMemberID="firstResponder"/>
@@ -611,7 +661,7 @@ Maler</string>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="map.new_unpositioned_issue"/>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <segue destination="zxu-Oq-28A" kind="presentation" identifier="" id="L64-rs-k1Y"/>
+                                                    <segue destination="zxu-Oq-28A" kind="presentation" identifier="createUnplaced" id="L64-rs-k1Y"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -773,7 +823,7 @@ Maler</string>
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="iOy-9i-ghB"/>
+        <segue reference="L64-rs-k1Y"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="Main"/>
     <resources>

@@ -163,6 +163,12 @@ internal enum L10n {
         return L10n.tr("Localizable", "map.issue_list.summary_filtered", String(describing: p1), String(describing: p2))
       }
     }
+    internal enum IssuePositioner {
+      /// Abbrechen
+      internal static let cancel = L10n.tr("Localizable", "map.issue_positioner.cancel")
+      /// Weiter
+      internal static let `continue` = L10n.tr("Localizable", "map.issue_positioner.continue")
+    }
     internal enum StatusFilter {
       /// Es werden alle Pendenzen angezeigt.
       internal static let allSelected = L10n.tr("Localizable", "map.status_filter.all_selected")

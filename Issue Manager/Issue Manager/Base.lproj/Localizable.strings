@@ -142,6 +142,10 @@
 "map.issue_list.summary" = "%@ Pendenzen offen; %@ insgesamt";
 // CONTEXT: Wird statt map.issue_list.summary angezeigt, wenn ein Filter aktiv ist. das erste %s wird durch die Anzahl Pendenzen ersetzt, die dem Filter entsprechen und somit angezeigt werden; das Zweite wird weiterhin durch die Gesamtzahl ersetzt.
 "map.issue_list.summary_filtered" = "Filter aktiv: %@/%@ Pendenzen angezeigt";
+// CONTEXT: Knopf beim Fadenkreuz zum Platzieren einer neuen Pendenz, um abzubrechen.
+"map.issue_positioner.cancel" = "Abbrechen";
+// CONTEXT: Knopf beim Fadenkreuz zum Platzieren einer neuen Pendenz, um fortzufahren.
+"map.issue_positioner.continue" = "Weiter";
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Map.new
