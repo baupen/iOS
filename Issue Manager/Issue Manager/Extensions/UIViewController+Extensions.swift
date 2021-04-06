@@ -15,7 +15,7 @@ extension UIViewController {
 	
 	func showAlert(
 		titled title: String?,
-		message: String?,
+		message: String? = nil,
 		canCancel: Bool = false,
 		okMessage: String = L10n.Alert.okay,
 		okStyle: UIAlertAction.Style = .default,

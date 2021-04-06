@@ -58,6 +58,14 @@ final class EditIssueViewController: UITableViewController, InstantiableViewCont
 		issue.image = nil
 	}
 	
+	@IBAction func openCamera(_ sender: UIView) {
+		guard let picker = cameraView.prepareImagePicker(for: .camera) else {
+			showAlert(titled: Localization.couldNotActivateCamera)
+			return
+		}
+		present(picker, animated: true)
+	}
+	
 	@IBAction func openImagePicker(_ sender: UIView) {
 		guard let picker = cameraView.prepareImagePicker(for: .photoLibrary) else {
 			showAlert(
@@ -67,9 +75,10 @@ final class EditIssueViewController: UITableViewController, InstantiableViewCont
 			return
 		}
 		picker.modalPresentationStyle = .popover
-		let popover = picker.popoverPresentationController!
-		popover.sourceView = sender
-		popover.sourceRect = sender.bounds
+		picker.popoverPresentationController! <- {
+			$0.sourceView = sender
+			$0.sourceRect = sender.bounds
+		}
 		present(picker, animated: true)
 	}
 	

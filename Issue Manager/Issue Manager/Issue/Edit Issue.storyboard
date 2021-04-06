@@ -21,15 +21,15 @@
                         <sections>
                             <tableViewSection id="oG0-cn-SUS" userLabel="Image">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="322" id="zeo-OF-HfK" userLabel="Image">
-                                        <rect key="frame" x="0.0" y="1" width="414" height="322"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="311" id="zeo-OF-HfK" userLabel="Image">
+                                        <rect key="frame" x="0.0" y="1" width="414" height="311"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zeo-OF-HfK" id="X1r-Mi-uGU">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="322"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="311"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kein Foto gesetzt" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xzO-NC-90a">
-                                                    <rect key="frame" x="0.0" y="151" width="414" height="20.5"/>
+                                                    <rect key="frame" x="0.0" y="145.5" width="414" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -50,21 +50,21 @@
                                                     </variation>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7mN-iH-wXi" userLabel="Remove Image Button" customClass="ImageControlButton" customModule="Issue_Manager" customModuleProvider="target">
-                                                    <rect key="frame" x="4" y="274.5" width="32" height="32"/>
+                                                    <rect key="frame" x="20" y="268" width="32" height="32"/>
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <state key="normal" image="trash"/>
                                                     <connections>
                                                         <action selector="removeImage" destination="Hkg-Cj-0r5" eventType="touchUpInside" id="dEg-Rm-2SX"/>
                                                     </connections>
                                                 </button>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dXf-yj-EIL" userLabel="Camera Container" customClass="CameraContainerView" customModule="Issue_Manager" customModuleProvider="target">
+                                                <view hidden="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dXf-yj-EIL" userLabel="Camera Container" customClass="CameraContainerView" customModule="Issue_Manager" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="310.5"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="VBN-3z-jb2">
-                                                            <rect key="frame" x="8" y="119" width="398" height="72.5"/>
+                                                            <rect key="frame" x="20" y="119" width="374" height="72.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Die Kamera konnte nicht aktiviert werden!" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kDq-dP-GwV">
-                                                                    <rect key="frame" x="40.5" y="0.0" width="317" height="20.5"/>
+                                                                    <rect key="frame" x="28.5" y="0.0" width="317" height="20.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <color key="textColor" white="1" alpha="0.75" colorSpace="calibratedWhite"/>
                                                                     <nil key="highlightedColor"/>
@@ -73,7 +73,7 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TiN-bL-448" userLabel="Retry Camera Button">
-                                                                    <rect key="frame" x="131.5" y="39.5" width="135" height="33"/>
+                                                                    <rect key="frame" x="119.5" y="39.5" width="135" height="33"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <state key="normal" title="Erneut Versuchen"/>
@@ -91,14 +91,27 @@
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </view>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Gz-5I-dcz" userLabel="Image Library Button" customClass="ImageControlButton" customModule="Issue_Manager" customModuleProvider="target">
-                                                            <rect key="frame" x="378" y="274.5" width="32" height="32"/>
-                                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <state key="normal" image="library"/>
-                                                            <connections>
-                                                                <action selector="openImagePicker:" destination="Hkg-Cj-0r5" eventType="touchUpInside" id="fu6-pF-3DN"/>
-                                                            </connections>
-                                                        </button>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="f9o-DM-t6z">
+                                                            <rect key="frame" x="322" y="268" width="72" height="32"/>
+                                                            <subviews>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Gz-5I-dcz" userLabel="Camera Button" customClass="ImageControlButton" customModule="Issue_Manager" customModuleProvider="target">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
+                                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <state key="normal" image="camera"/>
+                                                                    <connections>
+                                                                        <action selector="openCamera:" destination="Hkg-Cj-0r5" eventType="touchUpInside" id="WKl-O5-wzR"/>
+                                                                    </connections>
+                                                                </button>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rBt-YN-w04" userLabel="Image Library Button" customClass="ImageControlButton" customModule="Issue_Manager" customModuleProvider="target">
+                                                                    <rect key="frame" x="40" y="0.0" width="32" height="32"/>
+                                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <state key="normal" image="library"/>
+                                                                    <connections>
+                                                                        <action selector="openImagePicker:" destination="Hkg-Cj-0r5" eventType="touchUpInside" id="jn8-jU-vdl"/>
+                                                                    </connections>
+                                                                </button>
+                                                            </subviews>
+                                                        </stackView>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bHD-Qc-Wyl">
                                                             <rect key="frame" x="0.0" y="0.0" width="414" height="36.5"/>
                                                             <subviews>
@@ -125,11 +138,11 @@
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" secondItem="bHD-Qc-Wyl" secondAttribute="trailing" id="17q-8D-vfT"/>
                                                         <constraint firstItem="VBN-3z-jb2" firstAttribute="centerY" secondItem="dXf-yj-EIL" secondAttribute="centerY" id="9Kc-jU-sL2"/>
+                                                        <constraint firstAttribute="bottomMargin" secondItem="f9o-DM-t6z" secondAttribute="bottom" id="am7-lt-ihl"/>
                                                         <constraint firstItem="VBN-3z-jb2" firstAttribute="leading" secondItem="dXf-yj-EIL" secondAttribute="leadingMargin" id="ba5-xn-t2C"/>
+                                                        <constraint firstAttribute="trailingMargin" secondItem="f9o-DM-t6z" secondAttribute="trailing" id="cX6-e2-NeT"/>
                                                         <constraint firstItem="bHD-Qc-Wyl" firstAttribute="leading" secondItem="dXf-yj-EIL" secondAttribute="leading" id="dTI-ax-tss"/>
-                                                        <constraint firstAttribute="trailing" secondItem="1Gz-5I-dcz" secondAttribute="trailing" constant="4" id="fBH-YV-2xs"/>
                                                         <constraint firstItem="VBN-3z-jb2" firstAttribute="centerX" secondItem="dXf-yj-EIL" secondAttribute="centerX" id="fN4-Ja-n6I"/>
-                                                        <constraint firstAttribute="bottom" secondItem="1Gz-5I-dcz" secondAttribute="bottom" constant="4" id="u9H-wQ-moK"/>
                                                         <constraint firstItem="bHD-Qc-Wyl" firstAttribute="top" secondItem="dXf-yj-EIL" secondAttribute="top" id="yvk-KV-laP"/>
                                                     </constraints>
                                                     <connections>
@@ -145,13 +158,13 @@
                                                 <constraint firstItem="dXf-yj-EIL" firstAttribute="height" secondItem="uMf-Vv-Gg9" secondAttribute="height" id="GLO-Tp-nWt"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="uMf-Vv-Gg9" secondAttribute="bottom" priority="999" id="MNP-n2-kOv"/>
                                                 <constraint firstItem="uMf-Vv-Gg9" firstAttribute="centerX" secondItem="X1r-Mi-uGU" secondAttribute="centerX" id="N8h-cH-fJe"/>
-                                                <constraint firstItem="7mN-iH-wXi" firstAttribute="leading" secondItem="uMf-Vv-Gg9" secondAttribute="leading" constant="4" id="RDx-Ky-Jjn"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="7mN-iH-wXi" secondAttribute="bottom" id="PCp-Yy-ezy"/>
                                                 <constraint firstItem="xzO-NC-90a" firstAttribute="width" secondItem="uMf-Vv-Gg9" secondAttribute="width" id="UG8-5c-uNh"/>
                                                 <constraint firstItem="uMf-Vv-Gg9" firstAttribute="leading" secondItem="X1r-Mi-uGU" secondAttribute="leading" id="UT1-c4-TXn"/>
                                                 <constraint firstItem="dXf-yj-EIL" firstAttribute="width" secondItem="uMf-Vv-Gg9" secondAttribute="width" id="Vj3-JS-wOX"/>
+                                                <constraint firstItem="7mN-iH-wXi" firstAttribute="leading" secondItem="X1r-Mi-uGU" secondAttribute="leadingMargin" id="Wbe-QI-QMR"/>
                                                 <constraint firstItem="uMf-Vv-Gg9" firstAttribute="top" secondItem="X1r-Mi-uGU" secondAttribute="top" id="cTI-oa-v5V"/>
                                                 <constraint firstItem="dXf-yj-EIL" firstAttribute="centerX" secondItem="uMf-Vv-Gg9" secondAttribute="centerX" id="fnl-WW-vON"/>
-                                                <constraint firstItem="uMf-Vv-Gg9" firstAttribute="bottom" secondItem="7mN-iH-wXi" secondAttribute="bottom" constant="4" id="ftB-3C-3Nr"/>
                                                 <constraint firstItem="xzO-NC-90a" firstAttribute="centerX" secondItem="X1r-Mi-uGU" secondAttribute="centerX" id="oEc-m5-EL1"/>
                                             </constraints>
                                             <variation key="default">
@@ -177,7 +190,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="lAr-os-Baz" userLabel="Mark Up">
-                                        <rect key="frame" x="0.0" y="323" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="312" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lAr-os-Baz" id="7op-Wf-Lq4">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -218,7 +231,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="fOL-k8-TiD" userLabel="Basics">
-                                        <rect key="frame" x="0.0" y="367" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="356" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fOL-k8-TiD" id="gHr-uD-rV3">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -280,7 +293,7 @@
                             <tableViewSection headerTitle="Handwerker" id="nVm-Ci-m0j" userLabel="Craftsman">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="ny7-Zo-LQB" userLabel="Trade">
-                                        <rect key="frame" x="0.0" y="467" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="456" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ny7-Zo-LQB" id="2ZA-eL-OKi">
                                             <rect key="frame" x="0.0" y="0.0" width="383" height="44"/>
@@ -331,7 +344,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="w2x-8V-zpl" userLabel="Name">
-                                        <rect key="frame" x="0.0" y="511" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="500" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="w2x-8V-zpl" id="gkw-iu-gD0">
                                             <rect key="frame" x="0.0" y="0.0" width="383" height="44"/>
@@ -386,7 +399,7 @@
                             <tableViewSection headerTitle="Beschreibung" id="UG7-0k-28l" userLabel="Description">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="mHG-MX-E35" userLabel="Description">
-                                        <rect key="frame" x="0.0" y="611" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="600" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mHG-MX-E35" id="345-34-lbU">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -427,7 +440,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="200" id="Bge-3o-NlX" userLabel="Suggestions">
-                                        <rect key="frame" x="0.0" y="655" width="414" height="200"/>
+                                        <rect key="frame" x="0.0" y="644" width="414" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Bge-3o-NlX" id="wch-uu-9ye">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
@@ -495,7 +508,7 @@
                             <tableViewSection headerTitle="Aktionen" id="kvz-Uf-HIP" userLabel="Delete">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="pve-xL-UrK" userLabel="Delete">
-                                        <rect key="frame" x="0.0" y="911" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="900" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pve-xL-UrK" id="g72-fk-d87">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -814,12 +827,16 @@
         <designable name="7mN-iH-wXi">
             <size key="intrinsicContentSize" width="32" height="32"/>
         </designable>
+        <designable name="rBt-YN-w04">
+            <size key="intrinsicContentSize" width="32" height="32"/>
+        </designable>
     </designables>
     <inferredMetricsTieBreakers>
         <segue reference="a5G-fh-9Or"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="Main"/>
     <resources>
+        <image name="camera" width="32" height="32"/>
         <image name="flat_issue_new" width="96" height="96"/>
         <image name="library" width="32" height="32"/>
         <image name="mark_unmarked" width="32" height="32"/>
