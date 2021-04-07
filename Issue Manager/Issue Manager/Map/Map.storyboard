@@ -405,7 +405,7 @@
                                         <color key="backgroundColor" systemColor="separatorColor"/>
                                     </view>
                                     <tableView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="100" verticalHuggingPriority="100" horizontalCompressionResistancePriority="100" verticalCompressionResistancePriority="100" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" sectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="eSQ-Ii-ycc">
-                                        <rect key="frame" x="0.0" y="65" width="420" height="459"/>
+                                        <rect key="frame" x="0.0" y="65" width="420" height="501"/>
                                         <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <prototypes>
@@ -646,32 +646,6 @@ Maler</string>
                                             <outlet property="delegate" destination="XdX-XP-UgZ" id="XRv-j3-QBy"/>
                                         </connections>
                                     </tableView>
-                                    <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="8Y2-LF-7rN" customClass="SeparatorLine" customModule="Issue_Manager" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="524" width="420" height="1"/>
-                                        <color key="backgroundColor" systemColor="separatorColor"/>
-                                    </view>
-                                    <view clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="400" verticalHuggingPriority="400" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="700" translatesAutoresizingMaskIntoConstraints="NO" id="Gd7-UM-IME">
-                                        <rect key="frame" x="0.0" y="525" width="420" height="41"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="998" verticalCompressionResistancePriority="999" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fFY-qh-e9R">
-                                                <rect key="frame" x="0.0" y="4" width="420" height="33"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <state key="normal" title="Pendenz ohne Platzierung Erfassen"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="map.new_unpositioned_issue"/>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <segue destination="zxu-Oq-28A" kind="presentation" identifier="createUnplaced" id="L64-rs-k1Y"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstItem="fFY-qh-e9R" firstAttribute="leading" secondItem="Gd7-UM-IME" secondAttribute="leading" id="1VU-Kx-QFJ"/>
-                                            <constraint firstItem="fFY-qh-e9R" firstAttribute="top" secondItem="Gd7-UM-IME" secondAttribute="top" priority="950" constant="4" id="FV7-pw-Lyb"/>
-                                            <constraint firstAttribute="bottom" secondItem="fFY-qh-e9R" secondAttribute="bottom" constant="4" id="VLx-DG-9kV"/>
-                                            <constraint firstAttribute="trailing" secondItem="fFY-qh-e9R" secondAttribute="trailing" id="ZiP-Is-MFu"/>
-                                        </constraints>
-                                    </view>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -806,9 +780,6 @@ Maler</string>
         </scene>
     </scenes>
     <designables>
-        <designable name="8Y2-LF-7rN">
-            <size key="intrinsicContentSize" width="-1" height="1"/>
-        </designable>
         <designable name="Axp-84-gLn">
             <size key="intrinsicContentSize" width="-1" height="128"/>
         </designable>
@@ -823,7 +794,7 @@ Maler</string>
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="L64-rs-k1Y"/>
+        <segue reference="6gl-uf-ppv"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="Main"/>
     <resources>
