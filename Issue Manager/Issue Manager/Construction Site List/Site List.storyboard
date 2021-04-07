@@ -47,6 +47,9 @@
                                                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pie-53-hts">
                                                             <rect key="frame" x="301" y="0.0" width="73" height="30"/>
                                                             <state key="normal" title="Ausloggen"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="site_list.log_out"/>
+                                                            </userDefinedRuntimeAttributes>
                                                             <connections>
                                                                 <segue destination="Gox-Jy-bEL" kind="unwind" identifier="" unwindAction="logOut:" id="pbP-VW-To5"/>
                                                             </connections>
