@@ -74,7 +74,7 @@ extension Client {
 			.order(Issue.Status.Columns.createdAt)
 		let patchErrors = syncChanges(
 			for: issuesWithPatches,
-			stage: "patch"
+			stage: .patch
 		) { issue in
 			self.syncPatch(for: issue).map {
 				Repository.shared.remove(issue) // remove non-canonical copy
@@ -91,7 +91,7 @@ extension Client {
 		
 		let imageErrors = syncChanges(
 			for: Issue.filter(Issue.Columns.didChangeImage),
-			stage: "image"
+			stage: .imageUpload
 		) { issue in
 			self.syncImageChange(for: issue).map {
 				Repository.shared.save(
@@ -103,7 +103,7 @@ extension Client {
 		
 		let deletionErrors = syncChanges(
 			for: Issue.filter(Issue.Columns.didDelete),
-			stage: "deletion"
+			stage: .deletion
 		) { issue in
 			self.send(DeletionRequest(for: issue)).map {
 				Repository.shared.save(
@@ -138,7 +138,7 @@ extension Client {
 	
 	private func syncChanges(
 		for query: QueryInterfaceRequest<Issue>,
-		stage: String,
+		stage: IssuePushError.Stage,
 		performing upload: @escaping (Issue) -> Future<Void>
 	) -> [IssuePushError] {
 		// no concurrency to ensure correct ordering and avoid unforeseen issues
@@ -154,9 +154,15 @@ extension Client {
 }
 
 struct IssuePushError: Error {
-	var stage: String
+	var stage: Stage
 	var cause: Error
 	var issue: Issue
+	
+	enum Stage {
+		case patch
+		case imageUpload
+		case deletion
+	}
 }
 
 extension Client {

@@ -40,26 +40,40 @@ class RefreshingTableViewController: UITableViewController {
 				message: Alert.InvalidSession.message
 			) { self.performSegue(withIdentifier: "log out", sender: self) }
 		case RequestError.pushFailed(let errors):
-			self.showAlert(
-				// FIXME: localize
-				titled: "Fehler beim Hochladen!",
-				message: """
-					Einige Änderungen auf dem Gerät konnten nicht erfolgreich an die Website hochgeladen werden. Dies betrifft die folgenden Pendenzen:
-					
-					\(errors.map(\.issueIdentifier).map { "• \($0)" }.joined(separator: "\n"))
-					"""
+			showAlertWithDetails(
+				for: error,
+				title: Alert.PushFailed.title,
+				message: Alert.PushFailed.message(
+					errors
+						.map(\.quickIssueIdentifier)
+						.map { "• \($0)" }
+						.joined(separator: "\n")
+				)
 			)
 		default:
 			print("refresh error!")
 			dump(error)
-			let errorDesc = "" <- {
-				dump(error, to: &$0)
-			}
-			self.showAlert(
-				titled: Alert.UnknownSyncError.title,
-				message: Alert.UnknownSyncError.message(errorDesc)
+			showAlertWithDetails(
+				for: error,
+				title: Alert.UnknownSyncError.title,
+				message: Alert.UnknownSyncError.message
 			)
 		}
+	}
+	
+	private func showAlertWithDetails(for error: Error, title: String, message: String? = nil) {
+		self.presentOnTop(UIAlertController(
+			title: title,
+			message: message,
+			preferredStyle: .alert
+		) <- {
+			$0.addAction(UIAlertAction(title: L10n.Alert.moreInfo, style: .default) { _ in
+				let navController = ErrorViewerNavigationController.instantiate()!
+				navController.errorViewerController.error = error
+				self.presentOnTop(navController)
+			})
+			$0.addAction(UIAlertAction(title: L10n.Alert.okay, style: .cancel))
+		})
 	}
 	
 	override func viewDidLoad() {
@@ -77,31 +91,5 @@ class RefreshingTableViewController: UITableViewController {
 		refresher.beginRefreshing()
 		self.refresh(refresher)
 		self.tableView.scrollRectToVisible(refresher.bounds, animated: true)
-	}
-}
-
-extension IssuePushError {
-	var issueIdentifier: String {
-		[String].init {
-			issue.number.map { "#\($0)" }
-			
-			if let description = issue.description {
-				let maxDescLength = 50
-				if description.count <= maxDescLength {
-					description
-				} else {
-					String(description.prefix(maxDescLength))
-				}
-			}
-			
-			issue.rawID
-		}.joined(separator: " – ")
-	}
-	
-	var quickDescription: String {
-		"""
-		\(issueIdentifier):
-		\("" <- { dump(cause, to: &$0) })
-		"""
 	}
 }

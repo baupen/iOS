@@ -5,6 +5,10 @@ import UserDefault
 
 @UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
+	static var shared: AppDelegate {
+		UIApplication.shared.delegate as! Self
+	}
+	
 	var window: UIWindow?
 	
 	let reachability = Reachability() <- {
@@ -40,18 +44,22 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControll
 			let loginController = window!.rootViewController as! LoginViewController
 			loginController.logIn(with: loginInfo)
 		case .wipe:
-			wipeAllData()
-			
-			dismissThenPerform {
-				$0.showAlert(
-					titled: L10n.Alert.Wiped.title,
-					message: L10n.Alert.Wiped.message,
-					okMessage: L10n.Alert.Wiped.quit
-				) { exit(0) }
-			}
+			wipeAllDataThenExit()
 		}
 		
 		return true
+	}
+	
+	func wipeAllDataThenExit() {
+		wipeAllData()
+		
+		dismissThenPerform {
+			$0.showAlert(
+				titled: L10n.Alert.Wiped.title,
+				message: L10n.Alert.Wiped.message,
+				okMessage: L10n.Alert.Wiped.quit
+			) { exit(0) }
+		}
 	}
 	
 	func application(_ application: UIApplication, shouldSaveSecureApplicationState coder: NSCoder) -> Bool { true }

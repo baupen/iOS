@@ -14,6 +14,8 @@ internal enum L10n {
   internal enum Alert {
     /// Abbrechen
     internal static let cancel = L10n.tr("Localizable", "alert.cancel")
+    /// Mehr Informationen…
+    internal static let moreInfo = L10n.tr("Localizable", "alert.more_info")
     /// OK
     internal static let okay = L10n.tr("Localizable", "alert.okay")
     internal enum ConnectionIssues {
@@ -34,11 +36,17 @@ internal enum L10n {
       /// Update erforderlich
       internal static let title = L10n.tr("Localizable", "alert.outdated_client.title")
     }
-    internal enum UnknownSyncError {
-      /// Beim Aktualisieren ist ein unbekannter Fehler aufgetreten. Bitte später noch einmal versuchen. \n\nFalls der Fehler bestehen bleibt, könnte der folgende Text dem Support behilflich sein:\n%@
+    internal enum PushFailed {
+      /// Einige Änderungen auf dem Gerät konnten nicht erfolgreich an die Website hochgeladen werden. Dies betrifft die folgenden Pendenzen:\n\n%@
       internal static func message(_ p1: Any) -> String {
-        return L10n.tr("Localizable", "alert.unknown_sync_error.message", String(describing: p1))
+        return L10n.tr("Localizable", "alert.push_failed.message", String(describing: p1))
       }
+      /// Fehler beim Hochladen!
+      internal static let title = L10n.tr("Localizable", "alert.push_failed.title")
+    }
+    internal enum UnknownSyncError {
+      /// Beim Aktualisieren ist ein unbekannter Fehler aufgetreten. Bitte später noch einmal versuchen.\n\nFalls der Fehler bestehen bleibt, sollte der Text unter "Mehr Informationen…" dem Support behilflich sein
+      internal static let message = L10n.tr("Localizable", "alert.unknown_sync_error.message")
       /// Unbekannter Fehler!
       internal static let title = L10n.tr("Localizable", "alert.unknown_sync_error.title")
     }
@@ -55,6 +63,51 @@ internal enum L10n {
       internal static let quit = L10n.tr("Localizable", "alert.wiped.quit")
       /// App zurückgesetzt!
       internal static let title = L10n.tr("Localizable", "alert.wiped.title")
+    }
+  }
+
+  internal enum ErrorViewer {
+    /// Fehlerdetails
+    internal static let title = L10n.tr("Localizable", "error_viewer.title")
+    internal enum PushFailed {
+      /// Diese Änderungen verwerfen
+      internal static let discardChanges = L10n.tr("Localizable", "error_viewer.push_failed.discard_changes")
+      /// Einige Änderungen auf dem Gerät konnten nicht erfolgreich an die Website hochgeladen werden. Dies betrifft die folgenden Pendenzen:\n\n%@\n\nWeitere Details:\n\n%@
+      internal static func message(_ p1: Any, _ p2: Any) -> String {
+        return L10n.tr("Localizable", "error_viewer.push_failed.message", String(describing: p1), String(describing: p2))
+      }
+      internal enum ChangesDiscarded {
+        /// Bitte nun erneut das Synchronisieren versuchen.
+        internal static let message = L10n.tr("Localizable", "error_viewer.push_failed.changes_discarded.message")
+        /// Änderungen verworfen!
+        internal static let title = L10n.tr("Localizable", "error_viewer.push_failed.changes_discarded.title")
+      }
+      internal enum Stage {
+        /// Neue Pendenz Hochladen
+        internal static let create = L10n.tr("Localizable", "error_viewer.push_failed.stage.create")
+        /// Pendenz Löschen
+        internal static let deletion = L10n.tr("Localizable", "error_viewer.push_failed.stage.deletion")
+        /// Bild Hochladen
+        internal static let imageUpload = L10n.tr("Localizable", "error_viewer.push_failed.stage.image_upload")
+        /// Details Hochladen
+        internal static let patch = L10n.tr("Localizable", "error_viewer.push_failed.stage.patch")
+      }
+    }
+    internal enum UnknownError {
+      /// Beim Aktualisieren ist ein unbekannter Fehler aufgetreten. Folgende Informationen sollten dem Support beim Diagnostizieren helfen:\n\n%@
+      internal static func message(_ p1: Any) -> String {
+        return L10n.tr("Localizable", "error_viewer.unknown_error.message", String(describing: p1))
+      }
+    }
+    internal enum WipeAllData {
+      /// App zurücksetzen
+      internal static let button = L10n.tr("Localizable", "error_viewer.wipe_all_data.button")
+      /// Abbrechen
+      internal static let cancel = L10n.tr("Localizable", "error_viewer.wipe_all_data.cancel")
+      /// Alles Löschen
+      internal static let confirm = L10n.tr("Localizable", "error_viewer.wipe_all_data.confirm")
+      /// Es werden alle Daten gelöscht, die nicht auf der Website sind. Fortfahren?
+      internal static let warning = L10n.tr("Localizable", "error_viewer.wipe_all_data.warning")
     }
   }
 
