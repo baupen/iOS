@@ -2,6 +2,7 @@
 
 import UIKit
 import Promise
+import ArrayBuilder
 
 class RefreshingTableViewController: UITableViewController {
 	var isRefreshing = false
@@ -38,6 +39,16 @@ class RefreshingTableViewController: UITableViewController {
 				titled: Alert.InvalidSession.title,
 				message: Alert.InvalidSession.message
 			) { self.performSegue(withIdentifier: "log out", sender: self) }
+		case RequestError.pushFailed(let errors):
+			self.showAlert(
+				// FIXME: localize
+				titled: "Fehler beim Hochladen!",
+				message: """
+					Einige Änderungen auf dem Gerät konnten nicht erfolgreich an die Website hochgeladen werden. Dies betrifft die folgenden Pendenzen:
+					
+					\(errors.map(\.issueIdentifier).map { "• \($0)" }.joined(separator: "\n"))
+					"""
+			)
 		default:
 			print("refresh error!")
 			dump(error)
@@ -66,5 +77,31 @@ class RefreshingTableViewController: UITableViewController {
 		refresher.beginRefreshing()
 		self.refresh(refresher)
 		self.tableView.scrollRectToVisible(refresher.bounds, animated: true)
+	}
+}
+
+extension IssuePushError {
+	var issueIdentifier: String {
+		[String].init {
+			issue.number.map { "#\($0)" }
+			
+			if let description = issue.description {
+				let maxDescLength = 50
+				if description.count <= maxDescLength {
+					description
+				} else {
+					String(description.prefix(maxDescLength))
+				}
+			}
+			
+			issue.rawID
+		}.joined(separator: " – ")
+	}
+	
+	var quickDescription: String {
+		"""
+		\(issueIdentifier):
+		\("" <- { dump(cause, to: &$0) })
+		"""
 	}
 }

@@ -64,7 +64,7 @@ extension Client {
 		pushChangesThen {}
 	}
 	
-	func synchronouslyPushLocalChanges() throws {
+	func synchronouslyPushLocalChanges() -> [IssuePushError] {
 		assertOnLinearQueue()
 		
 		let maxLastChangeTime = Issue.all().maxLastChangeTime()
@@ -72,7 +72,10 @@ extension Client {
 		let issuesWithPatches = Issue
 			.filter(Issue.Columns.patchIfChanged != nil)
 			.order(Issue.Status.Columns.createdAt)
-		try syncChanges(for: issuesWithPatches) { issue in
+		let patchErrors = syncChanges(
+			for: issuesWithPatches,
+			stage: "patch"
+		) { issue in
 			self.syncPatch(for: issue).map {
 				Repository.shared.remove(issue) // remove non-canonical copy
 				Repository.shared.save($0 <- {
@@ -84,7 +87,12 @@ extension Client {
 			}
 		}
 		
-		try syncChanges(for: Issue.filter(Issue.Columns.didChangeImage)) { issue in
+		guard patchErrors.isEmpty else { return patchErrors }
+		
+		let imageErrors = syncChanges(
+			for: Issue.filter(Issue.Columns.didChangeImage),
+			stage: "image"
+		) { issue in
 			self.syncImageChange(for: issue).map {
 				Repository.shared.save(
 					[.didChangeImage],
@@ -93,7 +101,10 @@ extension Client {
 			}
 		}
 		
-		try syncChanges(for: Issue.filter(Issue.Columns.didDelete)) { issue in
+		let deletionErrors = syncChanges(
+			for: Issue.filter(Issue.Columns.didDelete),
+			stage: "deletion"
+		) { issue in
 			self.send(DeletionRequest(for: issue)).map {
 				Repository.shared.save(
 					[.didDelete],
@@ -101,6 +112,8 @@ extension Client {
 				)
 			}
 		}
+		
+		return imageErrors + deletionErrors
 	}
 	
 	private func syncPatch(for issue: Issue) -> Future<Issue> {
@@ -125,13 +138,25 @@ extension Client {
 	
 	private func syncChanges(
 		for query: QueryInterfaceRequest<Issue>,
+		stage: String,
 		performing upload: @escaping (Issue) -> Future<Void>
-	) throws {
+	) -> [IssuePushError] {
 		// no concurrency to ensure correct ordering and avoid unforeseen issues
-		for issue in Repository.shared.read(query.fetchAll) {
-			try upload(issue).await()
+		Repository.shared.read(query.fetchAll).compactMap { issue in
+			do {
+				try upload(issue).await()
+				return nil
+			} catch {
+				return IssuePushError(stage: stage, cause: error, issue: issue)
+			}
 		}
 	}
+}
+
+struct IssuePushError: Error {
+	var stage: String
+	var cause: Error
+	var issue: Issue
 }
 
 extension Client {
