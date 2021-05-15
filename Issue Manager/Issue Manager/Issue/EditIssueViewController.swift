@@ -190,7 +190,10 @@ final class EditIssueViewController: UITableViewController, InstantiableViewCont
 		craftsmanNameLabel.setText(to: craftsman?.company, fallback: L10n.Issue.noCraftsman)
 		trade = craftsman?.trade
 		
-		descriptionField.text = issue.description
+		if descriptionField.text != issue.description {
+			// this also resets the cursor position, which is why it should be conditional
+			descriptionField.text = issue.description
+		}
 		descriptionChanged()
 		
 		loadedImage = issue.image.flatMap { nil
