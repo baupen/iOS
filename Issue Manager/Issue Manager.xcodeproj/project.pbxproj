@@ -97,7 +97,6 @@
 		95FC9DC121080BB700044C93 /* RefreshingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FC9DC021080BB700044C93 /* RefreshingTableViewController.swift */; };
 		B9028E2025E3FFF100D0FCEC /* QRScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9028E1F25E3FFF100D0FCEC /* QRScannerView.swift */; };
 		B90A4ED325DE155300EB56C4 /* Hydra.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90A4ED225DE155300EB56C4 /* Hydra.swift */; };
-		B90B67A1264AE2A3004CCA19 /* ArrayBuilder in Frameworks */ = {isa = PBXBuildFile; productRef = B90B67A0264AE2A3004CCA19 /* ArrayBuilder */; };
 		B90B67A6264AE75A004CCA19 /* Error Viewer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B90B67A5264AE75A004CCA19 /* Error Viewer.storyboard */; };
 		B9124DC825E6EE2800F4D41D /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9124DC725E6EE2800F4D41D /* Register.swift */; };
 		B91A04C8261920E5002905C6 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B91A04C7261920E5002905C6 /* Login.storyboard */; };
@@ -111,6 +110,7 @@
 		B91A04DA2619344C002905C6 /* Map List.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B91A04D92619344C002905C6 /* Map List.storyboard */; };
 		B937766B2394BEA6009CB22D /* NSLayoutConstraint+Legacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B937766A2394BEA6009CB22D /* NSLayoutConstraint+Legacy.swift */; };
 		B9485F80264AECE800AC3456 /* ErrorViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9485F7F264AECE800AC3456 /* ErrorViewerViewController.swift */; };
+		B96F079E265098F0006A1495 /* ArrayBuilder in Frameworks */ = {isa = PBXBuildFile; productRef = B96F079D265098F0006A1495 /* ArrayBuilder */; };
 		B98E8DF32603F08600FD6386 /* Foundation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98E8DF22603F08600FD6386 /* Foundation+Extensions.swift */; };
 		B9C04D4D24453FF5008EDDEE /* UserDefault in Frameworks */ = {isa = PBXBuildFile; productRef = B9C04D4C24453FF5008EDDEE /* UserDefault */; };
 		B9CA06FB25FA6612002278FB /* DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CA06FA25FA6612002278FB /* DeepLink.swift */; };
@@ -280,7 +280,7 @@
 			files = (
 				9573A05823576C4700DE5AC1 /* PullToExpand in Frameworks */,
 				9573A05523576BD900DE5AC1 /* Promise in Frameworks */,
-				B90B67A1264AE2A3004CCA19 /* ArrayBuilder in Frameworks */,
+				B96F079E265098F0006A1495 /* ArrayBuilder in Frameworks */,
 				9564186323578E80002BAD7B /* SimplePDFKit.framework in Frameworks */,
 				9573A05223576AF200DE5AC1 /* GRDB in Frameworks */,
 				B9C04D4D24453FF5008EDDEE /* UserDefault in Frameworks */,
@@ -650,7 +650,7 @@
 				9573A05423576BD900DE5AC1 /* Promise */,
 				9573A05723576C4700DE5AC1 /* PullToExpand */,
 				B9C04D4C24453FF5008EDDEE /* UserDefault */,
-				B90B67A0264AE2A3004CCA19 /* ArrayBuilder */,
+				B96F079D265098F0006A1495 /* ArrayBuilder */,
 			);
 			productName = "Issue Manager";
 			productReference = 9583C2BB20DC748800452695 /* Issue Manager.app */;
@@ -688,7 +688,7 @@
 				9573A05623576C4700DE5AC1 /* XCRemoteSwiftPackageReference "PullToExpand" */,
 				B9E3ABC5238E22D50029CE16 /* XCRemoteSwiftPackageReference "CGeometry" */,
 				B9C04D4B24453FF4008EDDEE /* XCRemoteSwiftPackageReference "UserDefault" */,
-				B90B679F264AE2A3004CCA19 /* XCRemoteSwiftPackageReference "ArrayBuilder" */,
+				B96F079C265098F0006A1495 /* XCRemoteSwiftPackageReference "ArrayBuilder" */,
 			);
 			productRefGroup = 9583C2BC20DC748800452695 /* Products */;
 			projectDirPath = "";
@@ -1150,9 +1150,9 @@
 				minimumVersion = 1.3.0;
 			};
 		};
-		B90B679F264AE2A3004CCA19 /* XCRemoteSwiftPackageReference "ArrayBuilder" */ = {
+		B96F079C265098F0006A1495 /* XCRemoteSwiftPackageReference "ArrayBuilder" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "git@github.com:juliand665/ArrayBuilder.git";
+			repositoryURL = "https://github.com/juliand665/ArrayBuilder.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 1.0.0;
@@ -1192,9 +1192,9 @@
 			package = 9573A05623576C4700DE5AC1 /* XCRemoteSwiftPackageReference "PullToExpand" */;
 			productName = PullToExpand;
 		};
-		B90B67A0264AE2A3004CCA19 /* ArrayBuilder */ = {
+		B96F079D265098F0006A1495 /* ArrayBuilder */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = B90B679F264AE2A3004CCA19 /* XCRemoteSwiftPackageReference "ArrayBuilder" */;
+			package = B96F079C265098F0006A1495 /* XCRemoteSwiftPackageReference "ArrayBuilder" */;
 			productName = ArrayBuilder;
 		};
 		B9C04D4C24453FF5008EDDEE /* UserDefault */ = {
