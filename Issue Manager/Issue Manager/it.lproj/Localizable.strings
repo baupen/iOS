@@ -230,7 +230,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Register.customize
-// CONTEXT: Beschriftung für den Schalter, um sich bei einer anderen Website als app.mangel.io zu registrieren.
+// CONTEXT: Beschriftung für den Schalter, um sich bei einer anderen Website als app.baupen.ch zu registrieren.
 "register.customize_website" = "Registrati su un altro sito web";
 
 ////////////////////////////////////////////////////////////////////////////////

@@ -30,7 +30,7 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="fse-b6-Kot" userLabel="Main Stack">
                                                         <rect key="frame" x="0.0" y="16" width="280" height="321.5"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="mangel.io" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f6a-CJ-5sz">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="baupen" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f6a-CJ-5sz">
                                                                 <rect key="frame" x="0.0" y="0.0" width="280" height="57.5"/>
                                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="48"/>
                                                                 <color key="textColor" name="Main"/>
@@ -237,7 +237,7 @@
                                                                     <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hfm-fH-Heb" userLabel="Website Wrapper" customClass="TextFieldContainer" customModule="Issue_Manager" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="47" width="280" height="46"/>
                                                                         <subviews>
-                                                                            <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="app.mangel.io" placeholder="Website" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="CRI-UO-IZz">
+                                                                            <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="app.baupen.ch" placeholder="Website" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="CRI-UO-IZz">
                                                                                 <rect key="frame" x="16" y="12" width="248" height="22"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardType="URL" returnKeyType="go" textContentType="url"/>

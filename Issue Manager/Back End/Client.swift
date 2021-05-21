@@ -10,7 +10,7 @@ final class Client {
 	static let shared = Client()
 	static let dateFormatter = ISO8601DateFormatter()
 	
-	private static let baseServerURL = URL(string: "https://app.mangel.io")!
+	private static let baseServerURL = URL(string: "https://app.baupen.ch")!
 	
 	@UserDefault("client.loginInfo") var loginInfo: LoginInfo?
 	
