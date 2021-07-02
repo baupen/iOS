@@ -68,6 +68,7 @@ extension FileContainer {
 		
 		let futures = Repository.shared.read(
 			Self.order(Meta.Columns.lastChangeTime.desc)
+				.withoutDeleted
 				.fetchAll
 		)
 		.compactMap { $0.downloadFile() }
