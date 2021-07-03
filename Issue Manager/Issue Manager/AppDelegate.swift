@@ -29,6 +29,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControll
 		
 		wipeIfNecessary()
 		
+		Issue.moveLegacyFiles()
+		
 		return true
 	}
 	

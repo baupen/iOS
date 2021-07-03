@@ -15,6 +15,14 @@ private let baseCacheURL = try! manager.url(
 
 /// for images from all sites the user has access to
 private let baseLocalURL = try! manager.url(
+	for: .applicationSupportDirectory,
+	in: .userDomainMask,
+	appropriateFor: nil,
+	create: true
+)
+
+/// to migrate data from previous installations
+private let baseLegacyLocalURL = try! manager.url(
 	for: .documentDirectory,
 	in: .userDomainMask,
 	appropriateFor: nil,
@@ -55,6 +63,21 @@ enum FileDownloadProgress: Hashable {
 	case determined(current: Int, total: Int)
 	/// downloads complete
 	case done
+}
+
+extension Issue {
+	/// Since we're changing from the documents folder to the application support folder, we should make sure to take any issue images from the former that haven't been uploaded yet with us.
+	static func moveLegacyFiles() {
+		let legacy = baseLegacyLocalURL.appendingPathComponent(File<Self>.subpath, isDirectory: true)
+		try! manager.createDirectory(
+			at: baseLocalFolder.deletingLastPathComponent(),
+			withIntermediateDirectories: true
+		)
+		do {
+			try manager.moveItem(at: legacy, to: baseLocalFolder)
+			print("migrated legacy files from \(legacy) to \(baseLocalFolder)")
+		} catch {}
+	}
 }
 
 extension FileContainer {
@@ -123,6 +146,8 @@ extension FileContainer {
 		
 		let total = futures.count
 		var completed: Int32 = 0
+		
+		onProgress(.determined(current: 0, total: total))
 		
 		return futures
 			.map {
