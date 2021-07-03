@@ -7,6 +7,13 @@ import ArrayBuilder
 class RefreshingTableViewController: UITableViewController {
 	var isRefreshing = false
 	
+	var syncProgress: SyncProgress? {
+		didSet {
+			refreshControl!.attributedTitle = (syncProgress?.localizedDescription)
+				.map(NSAttributedString.init(string:))
+		}
+	}
+	
 	@objc final func refresh(_ refresher: UIRefreshControl) {
 		isRefreshing = true
 		
@@ -91,5 +98,39 @@ class RefreshingTableViewController: UITableViewController {
 		refresher.beginRefreshing()
 		self.refresh(refresher)
 		self.tableView.scrollRectToVisible(refresher.bounds, animated: true)
+	}
+}
+
+private extension SyncProgress {
+	private typealias L = L10n.Sync.Progress
+	
+	var localizedDescription: String {
+		switch self {
+		case .pushingLocalChanges:
+			return L.pushingLocalChanges
+		case .fetchingTopLevelObjects:
+			return L.fetchingTopLevelObjects
+		case .pullingSiteData(let site):
+			return L.pullingSiteData(site.name)
+		case .downloadingConstructionSiteFiles(let progress):
+			return L.downloadingConstructionSiteFiles(progress.localizedDescription)
+		case .downloadingMapFiles(let progress):
+			return L.downloadingMapFiles(progress.localizedDescription)
+		}
+	}
+}
+
+private extension FileDownloadProgress {
+	private typealias L = L10n.Sync.Progress.FileProgress
+	
+	var localizedDescription: String {
+		switch self {
+		case .undetermined:
+			return L.indeterminate
+		case .determined(let current, let total):
+			return L.determinate(current, total)
+		case .done:
+			return L.done
+		}
 	}
 }

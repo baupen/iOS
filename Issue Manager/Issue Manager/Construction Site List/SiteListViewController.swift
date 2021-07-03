@@ -98,7 +98,11 @@ final class SiteListViewController: RefreshingTableViewController, InstantiableV
 	override func doRefresh() -> Future<Void> {
 		Client.shared.pullRemoteChanges { progress in
 			DispatchQueue.main.async {
-				self.fileDownloadProgress = progress
+				self.syncProgress = progress
+			}
+		} onIssueImageProgress: { imageProgress in
+			DispatchQueue.main.async {
+				self.fileDownloadProgress = imageProgress
 			}
 		}
 	}

@@ -65,21 +65,25 @@ final class MapListViewController: RefreshingTableViewController, InstantiableVi
 	/// set to true when encountering a site we've been removed from during refresh to avoid multiple alerts
 	private var isAlreadyReturning = false
 	override func doRefresh() -> Future<Void> {
-		Client.shared.pullRemoteChanges(for: holder.constructionSiteID)
-			.flatMapError { error in
-				if case SyncError.siteAccessRemoved = error {
-					self.isAlreadyReturning = true
-					self.showAlert(
-						titled: Localization.RemovedFromMap.title,
-						message: Localization.RemovedFromMap.message,
-						okMessage: Localization.RemovedFromMap.dismiss,
-						okHandler: self.returnToSiteList
-					)
-					return .fulfilled
-				} else {
-					return .rejected(with: error)
-				}
+		Client.shared.pullRemoteChanges(for: holder.constructionSiteID) { progress in
+			DispatchQueue.main.async {
+				self.syncProgress = progress
 			}
+		}
+		.flatMapError { error in
+			if case SyncError.siteAccessRemoved = error {
+				self.isAlreadyReturning = true
+				self.showAlert(
+					titled: Localization.RemovedFromMap.title,
+					message: Localization.RemovedFromMap.message,
+					okMessage: Localization.RemovedFromMap.dismiss,
+					okHandler: self.returnToSiteList
+				)
+				return .fulfilled
+			} else {
+				return .rejected(with: error)
+			}
+		}
 	}
 	
 	override func refreshCompleted() {

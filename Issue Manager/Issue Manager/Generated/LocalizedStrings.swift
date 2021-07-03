@@ -350,6 +350,37 @@ internal enum L10n {
     }
   }
 
+  internal enum Sync {
+    internal enum Progress {
+      /// Baustellenfotos laden: %@
+      internal static func downloadingConstructionSiteFiles(_ p1: Any) -> String {
+        return L10n.tr("Localizable", "sync.progress.downloading_construction_site_files", String(describing: p1))
+      }
+      /// Grundrisse laden: %@
+      internal static func downloadingMapFiles(_ p1: Any) -> String {
+        return L10n.tr("Localizable", "sync.progress.downloading_map_files", String(describing: p1))
+      }
+      /// Baustellen laden…
+      internal static let fetchingTopLevelObjects = L10n.tr("Localizable", "sync.progress.fetching_top_level_objects")
+      /// Pendenzen laden: %@
+      internal static func pullingSiteData(_ p1: Any) -> String {
+        return L10n.tr("Localizable", "sync.progress.pulling_site_data", String(describing: p1))
+      }
+      /// Änderungen hochladen…
+      internal static let pushingLocalChanges = L10n.tr("Localizable", "sync.progress.pushing_local_changes")
+      internal enum FileProgress {
+        /// %@/%@
+        internal static func determinate(_ p1: Any, _ p2: Any) -> String {
+          return L10n.tr("Localizable", "sync.progress.file_progress.determinate", String(describing: p1), String(describing: p2))
+        }
+        /// fertig!
+        internal static let done = L10n.tr("Localizable", "sync.progress.file_progress.done")
+        /// …
+        internal static let indeterminate = L10n.tr("Localizable", "sync.progress.file_progress.indeterminate")
+      }
+    }
+  }
+
   internal enum ViewIssue {
     /// Aktionen
     internal static let actions = L10n.tr("Localizable", "view_issue.actions")

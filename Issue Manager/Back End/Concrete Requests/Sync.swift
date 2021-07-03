@@ -164,39 +164,65 @@ struct IssuePushError: Error {
 	}
 }
 
+enum SyncProgress {
+	case pushingLocalChanges
+	case fetchingTopLevelObjects
+	case pullingSiteData(ConstructionSite)
+	case downloadingConstructionSiteFiles(FileDownloadProgress)
+	case downloadingMapFiles(FileDownloadProgress)
+}
+
 extension Client {
 	/// ensures local changes are pushed first
 	func pullRemoteChanges(
+		onProgress: ((SyncProgress) -> Void)? = nil,
 		onIssueImageProgress: ((FileDownloadProgress) -> Void)? = nil
 	) -> Future<Void> {
-		sync(onIssueImageProgress: onIssueImageProgress) {
-			try Repository.shared.read(ConstructionSite.fetchAll)
-				.traverse(self.doPullRemoteChanges(for:))
-				.await()
+		sync(onProgress: onProgress, onIssueImageProgress: onIssueImageProgress) { onProgress in
+			let sites = Repository.shared.read(ConstructionSite.fetchAll)
+			for site in sites {
+				onProgress?(.pullingSiteData(site))
+				try self.doPullRemoteChanges(for: site).await()
+			}
 		}
 	}
 	
 	/// ensures local changes are pushed first
-	func pullRemoteChanges(for siteID: ConstructionSite.ID) -> Future<Void> {
-		sync {
+	func pullRemoteChanges(
+		for siteID: ConstructionSite.ID,
+		onProgress: ((SyncProgress) -> Void)? = nil
+	) -> Future<Void> {
+		sync(onProgress: onProgress) { onProgress in
 			guard let site = Repository.shared.read(siteID.get)
 			else { throw SyncError.siteAccessRemoved }
+			onProgress?(.pullingSiteData(site))
 			try self.doPullRemoteChanges(for: site).await()
 		}
 	}
 	
 	private static let fileDownloadQueue = DispatchQueue(label: "missing file downloads")
 	private func sync(
+		onProgress: ((SyncProgress) -> Void)? = nil,
 		onIssueImageProgress: ((FileDownloadProgress) -> Void)? = nil,
-		running block: @escaping () throws -> Void
+		running block: @escaping (((SyncProgress) -> Void)?) throws -> Void
 	) -> Future<Void> {
-		pushChangesThen {
+		onProgress?(.pushingLocalChanges)
+		return pushChangesThen {
+			onProgress?(.fetchingTopLevelObjects)
 			try self.doPullChangedTopLevelObjects().await()
-			try block()
+			try block(onProgress)
 			
 			// download important files now
-			try ConstructionSite.downloadMissingFiles().await()
-			try Map.downloadMissingFiles().await()
+			try ConstructionSite.downloadMissingFiles(
+				onProgress: onProgress.map { onProgress in
+					{ onProgress(.downloadingConstructionSiteFiles($0)) }
+				}
+			).await()
+			try Map.downloadMissingFiles(
+				onProgress: onProgress.map { onProgress in
+					{ onProgress(.downloadingMapFiles($0)) }
+				}
+			).await()
 			
 			// download issue images in the background
 			Self.fileDownloadQueue.async {

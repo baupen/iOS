@@ -309,6 +309,29 @@
 "site_list.welcome" = "Willkommen, %@";
 
 ////////////////////////////////////////////////////////////////////////////////
+// MARK: Sync.progress.downloading
+"sync.progress.downloading_construction_site_files" = "Baustellenfotos laden: %@";
+"sync.progress.downloading_map_files" = "Grundrisse laden: %@";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Sync.progress.fetching
+"sync.progress.fetching_top_level_objects" = "Baustellen laden…";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Sync.progress.file
+"sync.progress.file_progress.determinate" = "%@/%@";
+"sync.progress.file_progress.done" = "fertig!";
+"sync.progress.file_progress.indeterminate" = "…";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Sync.progress.pulling
+"sync.progress.pulling_site_data" = "Pendenzen laden: %@";
+
+////////////////////////////////////////////////////////////////////////////////
+// MARK: Sync.progress.pushing
+"sync.progress.pushing_local_changes" = "Änderungen hochladen…";
+
+////////////////////////////////////////////////////////////////////////////////
 // MARK: View
 // CONTEXT: Knopf, um die Antwort vom Handwerker anzunehmen und somit die Pendenz als abgeschlossen zu markieren.
 "view_issue.action.close" = "Pendenz schliessen";
