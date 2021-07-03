@@ -197,7 +197,6 @@ final class EditIssueViewController: UITableViewController, InstantiableViewCont
 		descriptionChanged()
 		
 		loadedImage = issue.image.flatMap { nil
-			?? UIImage(contentsOfFile: Issue.cacheURL(for: $0).path)
 			?? UIImage(contentsOfFile: Issue.localURL(for: $0).path)
 		}
 	}

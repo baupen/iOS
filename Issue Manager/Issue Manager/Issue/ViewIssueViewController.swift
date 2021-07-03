@@ -92,8 +92,7 @@ final class ViewIssueViewController: UITableViewController, InstantiableViewCont
 		clientModeLabel.text = issue.wasAddedWithClient ? Localization.IsClientMode.true : Localization.IsClientMode.false
 		
 		image = issue.image.flatMap {
-			// TODO: fall back on localURL for other views
-			UIImage(contentsOfFile: Issue.cacheURL(for: $0).path)
+			UIImage(contentsOfFile: Issue.localURL(for: $0).path)
 		}
 		noImageLabel.text = issue.image == nil
 			? Localization.ImagePlaceholder.notSet

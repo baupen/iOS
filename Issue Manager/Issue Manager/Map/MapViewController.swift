@@ -193,7 +193,7 @@ final class MapViewController: UIViewController, InstantiableViewController {
 		pullableView.isHidden = map == nil
 		
 		if let map = map, let file = map.file {
-			let url = Map.cacheURL(for: file)
+			let url = Map.localURL(for: file)
 			asyncLoadPDF(for: map, at: url)
 		} else {
 			pdfController = nil

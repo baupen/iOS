@@ -129,7 +129,6 @@ extension Client {
 			.map {
 				send(ImageUploadRequest(issue: issue, fileURL: Issue.localURL(for: $0))).map { path in
 					let image = File<Issue>(urlPath: path)
-					issue.fileUploaded(to: image)
 					Repository.shared.save([.image], of: issue <- { $0.image = image })
 				}
 			}
