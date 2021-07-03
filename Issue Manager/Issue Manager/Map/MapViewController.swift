@@ -207,11 +207,11 @@ final class MapViewController: UIViewController, InstantiableViewController {
 	
 	private var currentLoadingTaskID: UUID!
 	func asyncLoadPDF(for map: Map, at url: URL) {
-		let page = Future
-			.init(asyncOn: .global(qos: .userInitiated), map.downloadFile) // download explicitly just in case it's not there yet
-			.mapError { _ in .fulfilled } // errors are fine (e.g. bad network)
-			.map { _ in try PDFDocument(at: url).page(0) }
-			.on(.main)
+		let page = Future<PDFPage>(asyncOn: .global(qos: .userInitiated)) {
+			// download explicitly just in case it's not there yet
+			try? map.downloadFile()?.await() // errors are fine (e.g. bad network)
+			return try PDFDocument(at: url).page(0)
+		}.on(.main)
 		
 		pdfController = nil
 		fallbackLabel.text = Localization.pdfLoading
