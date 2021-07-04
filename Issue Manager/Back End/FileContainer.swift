@@ -69,14 +69,17 @@ extension Issue {
 	/// Since we're changing from the documents folder to the application support folder, we should make sure to take any issue images from the former that haven't been uploaded yet with us.
 	static func moveLegacyFiles() {
 		let legacy = baseLegacyLocalURL.appendingPathComponent(File<Self>.subpath, isDirectory: true)
+		guard manager.fileExists(atPath: legacy.path) else { return }
 		try! manager.createDirectory(
 			at: baseLocalFolder.deletingLastPathComponent(),
 			withIntermediateDirectories: true
 		)
+		print("migrating legacy files from \(legacy) to \(baseLocalFolder)")
 		do {
 			try manager.moveItem(at: legacy, to: baseLocalFolder)
-			print("migrated legacy files from \(legacy) to \(baseLocalFolder)")
-		} catch {}
+		} catch {
+			error.printDetails(context: "could not migrate legacy files!")
+		}
 	}
 }
 
@@ -103,8 +106,7 @@ extension FileContainer {
 		do {
 			allLocalFiles = Set(try manager.contentsOfDirectory(atPath: baseLocalFolder.path))
 		} catch {
-			print("could not establish present files in \(baseLocalFolder): \(error.localizedFailureReason)")
-			dump(error)
+			error.printDetails(context: "could not establish present files in \(baseLocalFolder)")
 			return
 		}
 		
@@ -120,8 +122,7 @@ extension FileContainer {
 				try? manager.removeItem(at: cacheURL)
 				try manager.moveItem(at: localURL, to: cacheURL)
 			} catch {
-				print("could not move local file at \(localURL) to \(cacheURL): \(error.localizedFailureReason)")
-				dump(error)
+				error.printDetails(context: "could not move local file at \(localURL) to \(cacheURL)")
 			}
 		}
 	}
@@ -175,7 +176,7 @@ extension FileContainer {
 				try manager.moveItem(at: cached, to: url)
 				return nil
 			} catch {
-				print("could not restore local file at \(url) from cached file at \(cached)")
+				error.printDetails(context: "could not restore local file at \(url) from cached file at \(cached)")
 			}
 		}
 		
