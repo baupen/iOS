@@ -74,18 +74,18 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControll
 	
 	private static let wipeVersion = 2
 	@UserDefault("lastWipeVersion")
-	private var lastWipeVersion: Int?
+	private static var lastWipeVersion: Int?
 	
 	private func wipeIfNecessary() {
-		if lastWipeVersion == nil, DatabaseDataStore.databaseFileExists() {
+		if Self.lastWipeVersion == nil, DatabaseDataStore.databaseFileExists() {
 			print("setting missing last wipe version to 1 because a database was present")
-			lastWipeVersion = 1
+			Self.lastWipeVersion = 1
 		}
 		
-		if let lastWipe = lastWipeVersion, lastWipe < Self.wipeVersion {
+		if let lastWipe = Self.lastWipeVersion, lastWipe < Self.wipeVersion {
 			print("last wipe version (\(lastWipe)) is older than current wipe version (\(Self.wipeVersion)).")
 			wipeAllData()
-			lastWipeVersion = Self.wipeVersion
+			Self.lastWipeVersion = Self.wipeVersion
 			
 			dismissThenPerform {
 				$0.showAlert(
