@@ -207,10 +207,10 @@ final class MapViewController: UIViewController, InstantiableViewController {
 	
 	private var currentLoadingTaskID: UUID!
 	func asyncLoadPDF(for map: Map, at url: URL) {
-		let page = Future<PDFPage>(asyncOn: .global(qos: .userInitiated)) {
+		let page = Future<PDFKitPage>(asyncOn: .global(qos: .userInitiated)) {
 			// download explicitly just in case it's not there yet
 			try? map.downloadFile()?.await() // errors are fine (e.g. bad network)
-			return try PDFDocument(at: url).page(0)
+			return try PDFKitDocument(at: url).page(0)
 		}.on(.main)
 		
 		pdfController = nil
@@ -226,7 +226,7 @@ final class MapViewController: UIViewController, InstantiableViewController {
 			self.pdfController = SimplePDFViewController() <- {
 				$0.delegate = self
 				$0.backgroundColor = .white // some maps have a transparent background and black elements, so they need a bright background
-				$0.page = page // should be set after the background color (technically a race condition otherwise)
+				$0.display(page) // should be set after the background color (technically a race condition otherwise)
 				$0.overlayView.alpha = self.markerAlpha
 				$0.overlayView.backgroundColor = .darkOverlay
 				$0.additionalSafeAreaInsets.bottom += self.pullableView.minHeight
@@ -367,4 +367,6 @@ extension Issue {
 	static let allStatuses = Set(Issue.Status.Simplified.allCases)
 }
 
-extension Issue.Status.Simplified: DefaultsValueConvertible {}
+extension Issue.Status.Simplified: DefaultsValueConvertible {
+	typealias DefaultsRepresentation = RawValue
+}
