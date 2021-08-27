@@ -30,7 +30,7 @@
       },
       {
         "package": "HandyOperators",
-        "repositoryURL": "git@github.com:juliand665/HandyOperators.git",
+        "repositoryURL": "https://github.com/juliand665/HandyOperators.git",
         "state": {
           "branch": null,
           "revision": "27f60a00d9ad310afdf66cc7a25adc4bdb387d58",
