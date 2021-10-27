@@ -37,7 +37,9 @@ internal enum L10n {
       internal static let title = L10n.tr("Localizable", "alert.outdated_client.title")
     }
     internal enum PushFailed {
-      /// Einige Änderungen auf dem Gerät konnten nicht erfolgreich an die Website hochgeladen werden. Dies betrifft die folgenden Pendenzen:\n\n%@
+      /// Einige Änderungen auf dem Gerät konnten nicht erfolgreich an die Website hochgeladen werden. Dies betrifft die folgenden Pendenzen:
+      /// 
+      /// %@
       internal static func message(_ p1: Any) -> String {
         return L10n.tr("Localizable", "alert.push_failed.message", String(describing: p1))
       }
@@ -45,7 +47,9 @@ internal enum L10n {
       internal static let title = L10n.tr("Localizable", "alert.push_failed.title")
     }
     internal enum UnknownSyncError {
-      /// Beim Aktualisieren ist ein unbekannter Fehler aufgetreten. Bitte später noch einmal versuchen.\n\nFalls der Fehler bestehen bleibt, sollte der Text unter "Mehr Informationen…" dem Support behilflich sein
+      /// Beim Aktualisieren ist ein unbekannter Fehler aufgetreten. Bitte später noch einmal versuchen.
+      /// 
+      /// Falls der Fehler bestehen bleibt, sollte der Text unter "Mehr Informationen…" dem Support behilflich sein
       internal static let message = L10n.tr("Localizable", "alert.unknown_sync_error.message")
       /// Unbekannter Fehler!
       internal static let title = L10n.tr("Localizable", "alert.unknown_sync_error.title")
@@ -72,7 +76,13 @@ internal enum L10n {
     internal enum PushFailed {
       /// Diese Änderungen verwerfen
       internal static let discardChanges = L10n.tr("Localizable", "error_viewer.push_failed.discard_changes")
-      /// Einige Änderungen auf dem Gerät konnten nicht erfolgreich an die Website hochgeladen werden. Dies betrifft die folgenden Pendenzen:\n\n%@\n\nWeitere Details:\n\n%@
+      /// Einige Änderungen auf dem Gerät konnten nicht erfolgreich an die Website hochgeladen werden. Dies betrifft die folgenden Pendenzen:
+      /// 
+      /// %@
+      /// 
+      /// Weitere Details:
+      /// 
+      /// %@
       internal static func message(_ p1: Any, _ p2: Any) -> String {
         return L10n.tr("Localizable", "error_viewer.push_failed.message", String(describing: p1), String(describing: p2))
       }
@@ -94,7 +104,9 @@ internal enum L10n {
       }
     }
     internal enum UnknownError {
-      /// Beim Aktualisieren ist ein unbekannter Fehler aufgetreten. Folgende Informationen sollten dem Support beim Diagnostizieren helfen:\n\n%@
+      /// Beim Aktualisieren ist ein unbekannter Fehler aufgetreten. Folgende Informationen sollten dem Support beim Diagnostizieren helfen:
+      /// 
+      /// %@
       internal static func message(_ p1: Any) -> String {
         return L10n.tr("Localizable", "error_viewer.unknown_error.message", String(describing: p1))
       }
@@ -297,7 +309,10 @@ internal enum L10n {
         internal static let title = L10n.tr("Localizable", "register.alert.invalid_website.title")
       }
       internal enum UnknownError {
-        /// Es ist beim Kommunizieren mit der Website ein unbekannter Fehler aufgetreten.\n\nFalls der Fehler bestehen bleibt, könnte der folgende Text dem Support behilflich sein:\n%@
+        /// Es ist beim Kommunizieren mit der Website ein unbekannter Fehler aufgetreten.
+        /// 
+        /// Falls der Fehler bestehen bleibt, könnte der folgende Text dem Support behilflich sein:
+        /// %@
         internal static func message(_ p1: Any) -> String {
           return L10n.tr("Localizable", "register.alert.unknown_error.message", String(describing: p1))
         }

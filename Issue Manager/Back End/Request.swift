@@ -50,7 +50,7 @@ protocol JSONEncodingRequest: Request {
 	var body: Body { get }
 }
 
-extension JSONEncodingRequest where Body == Self, Self: Encodable {
+extension JSONEncodingRequest where Body == Self {
 	var body: Self { self }
 }
 
