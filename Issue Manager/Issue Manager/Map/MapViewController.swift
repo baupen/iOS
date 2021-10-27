@@ -109,10 +109,6 @@ final class MapViewController: UIViewController, InstantiableViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		if #available(iOS 13.0, *) {
-			activityIndicator.style = .medium
-		}
-		
 		visibleStatuses = Issue.allStatuses.subtracting(hiddenStatuses)
 		update()
 	}

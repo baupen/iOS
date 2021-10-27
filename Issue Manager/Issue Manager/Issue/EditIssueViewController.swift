@@ -144,9 +144,7 @@ final class EditIssueViewController: UITableViewController, InstantiableViewCont
 		
 		update()
 		
-		if #available(iOS 13.0, *) {
-			isModalInPresentation = true // don't just dismiss
-		}
+		isModalInPresentation = true // don't just dismiss
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {

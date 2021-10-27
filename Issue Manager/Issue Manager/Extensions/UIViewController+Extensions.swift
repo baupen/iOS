@@ -7,7 +7,7 @@ extension UIViewController {
 	var forceModalInPresentation: Bool {
 		get { false } // dummy
 		set {
-			if #available(iOS 13, *), newValue {
+			if newValue {
 				isModalInPresentation = true
 			}
 		}

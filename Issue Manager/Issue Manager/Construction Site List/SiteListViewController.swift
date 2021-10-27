@@ -130,11 +130,6 @@ final class SiteListViewController: RefreshingTableViewController, InstantiableV
 		let main = MainViewController.instantiate()!
 		main.site = site
 		
-		if #available(iOS 13, *) {} else { // can't negate #available
-			// iOS pre-13 is more strict about this, while on iOS 13+ it looks best as .currentContext
-			main.modalPresentationStyle = .fullScreen
-		}
-		
 		present(main, animated: animated)
 	}
 	

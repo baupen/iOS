@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="JEX-9P-axG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="JEX-9P-axG">
     <device id="ipad11_0rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -20,11 +20,11 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g4F-zU-ri6" userLabel="PDF Container View">
                                 <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
                             </containerView>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="elz-u4-mxA">
-                                <rect key="frame" x="407" y="574" width="20" height="20"/>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="elz-u4-mxA">
+                                <rect key="frame" x="407" y="586" width="20" height="20"/>
                             </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wähle links einen Bereich aus, um hier den zugehörigen Grundriss zu sehen." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Cf-dE-GqE" userLabel="Fallback Label">
-                                <rect key="frame" x="83.5" y="602" width="667" height="20.5"/>
+                                <rect key="frame" x="83.5" y="614" width="667" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" systemColor="secondaryLabelColor"/>
                                 <nil key="highlightedColor"/>
@@ -38,7 +38,7 @@
                                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bjy-Tg-AFn">
                                                 <rect key="frame" x="0.0" y="0.0" width="101" height="68"/>
                                                 <subviews>
-                                                    <visualEffectView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bKI-Zh-sqe" customClass="ThickMaterialBlurView" customModule="Issue_Manager" customModuleProvider="target">
+                                                    <visualEffectView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bKI-Zh-sqe">
                                                         <rect key="frame" x="0.0" y="0.0" width="101" height="68"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="3M4-9f-4u2">
                                                             <rect key="frame" x="0.0" y="0.0" width="101" height="68"/>
@@ -79,7 +79,7 @@
                                                                 <constraint firstItem="fW3-iF-60F" firstAttribute="leading" secondItem="3M4-9f-4u2" secondAttribute="leading" constant="8" id="wOx-fe-LfM"/>
                                                             </constraints>
                                                         </view>
-                                                        <blurEffect style="prominent"/>
+                                                        <blurEffect style="systemThickMaterial"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                                 <integer key="value" value="4"/>
@@ -104,7 +104,7 @@
                                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rza-L5-Ans">
                                                 <rect key="frame" x="0.0" y="164" width="101" height="68"/>
                                                 <subviews>
-                                                    <visualEffectView hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zy7-wh-41P" customClass="ThickMaterialBlurView" customModule="Issue_Manager" customModuleProvider="target">
+                                                    <visualEffectView hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zy7-wh-41P">
                                                         <rect key="frame" x="0.0" y="0.0" width="101" height="68"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="FLD-11-sUs">
                                                             <rect key="frame" x="0.0" y="0.0" width="101" height="68"/>
@@ -145,7 +145,7 @@
                                                                 <constraint firstAttribute="trailing" secondItem="uHu-8a-q8q" secondAttribute="trailing" constant="8" id="yCq-Eu-mNe"/>
                                                             </constraints>
                                                         </view>
-                                                        <blurEffect style="prominent"/>
+                                                        <blurEffect style="systemThickMaterial"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                                 <integer key="value" value="4"/>
@@ -181,12 +181,12 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f5e-Yf-zj2" userLabel="Pullable Container" customClass="PassThroughView" customModule="Issue_Manager" customModuleProvider="target">
-                                <rect key="frame" x="8" y="58" width="818" height="1116"/>
+                                <rect key="frame" x="8" y="82" width="818" height="1092"/>
                                 <subviews>
                                     <view opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="Axp-84-gLn" customClass="PullableView" customModule="PullToExpand">
-                                        <rect key="frame" x="0.0" y="988" width="818" height="128"/>
+                                        <rect key="frame" x="0.0" y="964" width="818" height="128"/>
                                         <subviews>
-                                            <visualEffectView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0fQ-ZQ-GOx" customClass="ThickMaterialBlurView" customModule="Issue_Manager" customModuleProvider="target">
+                                            <visualEffectView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0fQ-ZQ-GOx">
                                                 <rect key="frame" x="0.0" y="0.0" width="818" height="128"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="0Gy-ZS-TQM">
                                                     <rect key="frame" x="0.0" y="0.0" width="818" height="128"/>
@@ -206,7 +206,7 @@
                                                         <constraint firstItem="rHo-jf-rQe" firstAttribute="top" secondItem="0Gy-ZS-TQM" secondAttribute="top" id="fp7-xT-rV6"/>
                                                     </constraints>
                                                 </view>
-                                                <blurEffect style="prominent"/>
+                                                <blurEffect style="systemThickMaterial"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                         <integer key="value" value="8"/>
@@ -257,8 +257,8 @@
                                 </constraints>
                                 <directionalEdgeInsets key="directionalLayoutMargins" top="0.0" leading="0.0" bottom="0.0" trailing="0.0"/>
                             </view>
-                            <visualEffectView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gHm-fd-hfr" userLabel="Unpositioned Button Container" customClass="ThickMaterialBlurView" customModule="Issue_Manager" customModuleProvider="target">
-                                <rect key="frame" x="509" y="70" width="305" height="37"/>
+                            <visualEffectView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gHm-fd-hfr" userLabel="Unpositioned Button Container">
+                                <rect key="frame" x="509" y="94" width="305" height="37"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="xfg-3Y-rcY">
                                     <rect key="frame" x="0.0" y="0.0" width="305" height="37"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -283,7 +283,7 @@
                                         <constraint firstItem="3Kd-0C-ZgM" firstAttribute="top" secondItem="xfg-3Y-rcY" secondAttribute="topMargin" id="yHF-Hl-C0V"/>
                                     </constraints>
                                 </view>
-                                <blurEffect style="prominent"/>
+                                <blurEffect style="systemThickMaterial"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="4"/>
@@ -410,7 +410,7 @@
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="IssueCell" rowHeight="320" id="X3S-og-f79" customClass="IssueCell" customModule="Issue_Manager" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="24.5" width="420" height="320"/>
+                                                <rect key="frame" x="0.0" y="44.5" width="420" height="320"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="X3S-og-f79" id="dE6-pX-HX1">
                                                     <rect key="frame" x="0.0" y="0.0" width="420" height="320"/>
@@ -682,7 +682,7 @@ Maler</string>
                         <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="StatusCell" id="iNe-H1-nc3" customClass="StatusCell" customModule="Issue_Manager" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="49.5" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="32" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iNe-H1-nc3" id="zEe-no-L85">
                                     <rect key="frame" x="0.0" y="0.0" width="283.5" height="44"/>
@@ -707,20 +707,8 @@ Maler</string>
                                         </stackView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="bottomMargin" secondItem="xTD-Gz-5Pp" secondAttribute="bottom" id="0Kz-HZ-wp3">
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="legacyConstant">
-                                                    <real key="value" value="3"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                        </constraint>
-                                        <constraint firstItem="xTD-Gz-5Pp" firstAttribute="top" secondItem="zEe-no-L85" secondAttribute="topMargin" id="1Ot-NF-C2E">
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="legacyConstant">
-                                                    <real key="value" value="3"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                        </constraint>
+                                        <constraint firstAttribute="bottomMargin" secondItem="xTD-Gz-5Pp" secondAttribute="bottom" id="0Kz-HZ-wp3"/>
+                                        <constraint firstItem="xTD-Gz-5Pp" firstAttribute="top" secondItem="zEe-no-L85" secondAttribute="topMargin" id="1Ot-NF-C2E"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="xTD-Gz-5Pp" secondAttribute="trailing" id="8M0-0D-ZME"/>
                                         <constraint firstItem="xTD-Gz-5Pp" firstAttribute="leading" secondItem="zEe-no-L85" secondAttribute="leadingMargin" id="Ga5-lq-RcB"/>
                                     </constraints>

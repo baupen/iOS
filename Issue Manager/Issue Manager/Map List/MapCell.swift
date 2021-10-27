@@ -65,16 +65,9 @@ final class MapCell: UITableViewCell, Reusable {
 			accessoryView = nil
 			// nil makes it use accessoryType, which is a disclosure indicator
 		} else {
-			// oh no
-			let accessoryWidth: CGFloat
-			if #available(iOS 13.0, *) {
-				accessoryWidth = 11
-			} else {
-				accessoryWidth = 18
-			}
 			// fake accessory view so we have the same margins as with a disclosure indicator
 			accessoryView = UIView() <- {
-				$0.frame.size.width = accessoryWidth
+				$0.frame.size.width = 11
 				$0.isHidden = true
 			}
 		}

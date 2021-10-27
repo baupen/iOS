@@ -49,7 +49,6 @@
 		9562F944223C1DBE0014BFB0 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9562F943223C1DBE0014BFB0 /* Repository.swift */; };
 		9564186323578E80002BAD7B /* SimplePDFKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9573A05F2357766D00DE5AC1 /* SimplePDFKit.framework */; };
 		9564186423578E80002BAD7B /* SimplePDFKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9573A05F2357766D00DE5AC1 /* SimplePDFKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		956418662357ED2B002BAD7B /* ThickMaterialBlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956418652357ED2B002BAD7B /* ThickMaterialBlurView.swift */; };
 		9573A05223576AF200DE5AC1 /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 9573A05123576AF200DE5AC1 /* GRDB */; };
 		9573A05523576BD900DE5AC1 /* Promise in Frameworks */ = {isa = PBXBuildFile; productRef = 9573A05423576BD900DE5AC1 /* Promise */; };
 		9573A05823576C4700DE5AC1 /* PullToExpand in Frameworks */ = {isa = PBXBuildFile; productRef = 9573A05723576C4700DE5AC1 /* PullToExpand */; };
@@ -108,7 +107,6 @@
 		B91A04D62619267C002905C6 /* View Issue.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B91A04D52619267C002905C6 /* View Issue.storyboard */; };
 		B91A04D826192706002905C6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B91A04D726192706002905C6 /* Main.storyboard */; };
 		B91A04DA2619344C002905C6 /* Map List.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B91A04D92619344C002905C6 /* Map List.storyboard */; };
-		B937766B2394BEA6009CB22D /* NSLayoutConstraint+Legacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B937766A2394BEA6009CB22D /* NSLayoutConstraint+Legacy.swift */; };
 		B9485F80264AECE800AC3456 /* ErrorViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9485F7F264AECE800AC3456 /* ErrorViewerViewController.swift */; };
 		B96F079E265098F0006A1495 /* ArrayBuilder in Frameworks */ = {isa = PBXBuildFile; productRef = B96F079D265098F0006A1495 /* ArrayBuilder */; };
 		B98E8DF32603F08600FD6386 /* Foundation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98E8DF22603F08600FD6386 /* Foundation+Extensions.swift */; };
@@ -199,7 +197,6 @@
 		956015332100C50500F84600 /* StringDistance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringDistance.swift; sourceTree = "<group>"; };
 		956015362101302700F84600 /* SmallestN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallestN.swift; sourceTree = "<group>"; };
 		9562F943223C1DBE0014BFB0 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
-		956418652357ED2B002BAD7B /* ThickMaterialBlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThickMaterialBlurView.swift; sourceTree = "<group>"; };
 		9573A0592357766D00DE5AC1 /* SimplePDFKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SimplePDFKit.xcodeproj; path = SimplePDFKit/SimplePDFKit/SimplePDFKit.xcodeproj; sourceTree = "<group>"; };
 		95758B1221F4223100E5C20F /* TransitionAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionAnimator.swift; sourceTree = "<group>"; };
 		957E16A920E7D81B00F3DEA1 /* SiteListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiteListViewController.swift; sourceTree = "<group>"; };
@@ -258,7 +255,6 @@
 		B91A04D52619267C002905C6 /* View Issue.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "View Issue.storyboard"; sourceTree = "<group>"; };
 		B91A04D726192706002905C6 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		B91A04D92619344C002905C6 /* Map List.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Map List.storyboard"; sourceTree = "<group>"; };
-		B937766A2394BEA6009CB22D /* NSLayoutConstraint+Legacy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Legacy.swift"; sourceTree = "<group>"; };
 		B9485F7F264AECE800AC3456 /* ErrorViewerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewerViewController.swift; sourceTree = "<group>"; };
 		B98E8DF22603F08600FD6386 /* Foundation+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Foundation+Extensions.swift"; sourceTree = "<group>"; };
 		B9CA06FA25FA6612002278FB /* DeepLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLink.swift; sourceTree = "<group>"; };
@@ -320,7 +316,6 @@
 				95E83C10221A4C2A000BB75F /* UILayout+Extensions.swift */,
 				95E83C12221A4C63000BB75F /* UIView+Extensions.swift */,
 				9583C2D220DC74BA00452695 /* UIViewController+Extensions.swift */,
-				B937766A2394BEA6009CB22D /* NSLayoutConstraint+Legacy.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -365,7 +360,6 @@
 				95FC9DC021080BB700044C93 /* RefreshingTableViewController.swift */,
 				958AE1B121AE2E40008EBD95 /* DrawingView.swift */,
 				95758B1221F4223100E5C20F /* TransitionAnimator.swift */,
-				956418652357ED2B002BAD7B /* ThickMaterialBlurView.swift */,
 				B9D9B36223917FC400947CE5 /* PassThroughView.swift */,
 				B9CA06FA25FA6612002278FB /* DeepLink.swift */,
 			);
@@ -861,7 +855,6 @@
 				95870B3020E9C06B00BB1B39 /* MapCell.swift in Sources */,
 				9511A14420DD56D700101ADE /* Sequence+Extensions.swift in Sources */,
 				9562F944223C1DBE0014BFB0 /* Repository.swift in Sources */,
-				956418662357ED2B002BAD7B /* ThickMaterialBlurView.swift in Sources */,
 				9529A63D20EECF8600C7E0A0 /* IssueBadge.swift in Sources */,
 				9506A96320EDAAAD00AF6AB7 /* UIColor+Constants.swift in Sources */,
 				9502842D20FAB67A00880AD7 /* EditIssueViewController.swift in Sources */,
@@ -877,7 +870,6 @@
 				95339A3020F8445100A01F07 /* SeparatorLine.swift in Sources */,
 				9550E0E820F38D7600921387 /* StatusFilterViewController.swift in Sources */,
 				95BBF32120F26F49006E162E /* IssueCell.swift in Sources */,
-				B937766B2394BEA6009CB22D /* NSLayoutConstraint+Legacy.swift in Sources */,
 				B9124DC825E6EE2800F4D41D /* Register.swift in Sources */,
 				95EE7DFD21060CB100B603EF /* UndoBuffer.swift in Sources */,
 				950283A820E70C46001A5083 /* LocalizedStrings.swift in Sources */,
@@ -987,7 +979,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1045,7 +1037,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
