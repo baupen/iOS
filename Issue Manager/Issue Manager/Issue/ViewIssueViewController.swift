@@ -91,12 +91,7 @@ final class ViewIssueViewController: UITableViewController, InstantiableViewCont
 		markButton.setImage(issue.isMarked ? #imageLiteral(resourceName: "mark_marked.pdf") : #imageLiteral(resourceName: "mark_unmarked.pdf"), for: .normal)
 		clientModeLabel.text = issue.wasAddedWithClient ? Localization.IsClientMode.true : Localization.IsClientMode.false
 		
-		image = issue.image.flatMap {
-			UIImage(contentsOfFile: Issue.localURL(for: $0).path)
-		}
-		noImageLabel.text = issue.image == nil
-			? Localization.ImagePlaceholder.notSet
-			: Localization.ImagePlaceholder.loading
+		updateImage()
 		
 		let craftsman = Repository.read(issue.craftsman)
 		craftsmanTradeLabel.setText(to: craftsman?.trade, fallback: L10n.Issue.noCraftsman)
@@ -113,6 +108,22 @@ final class ViewIssueViewController: UITableViewController, InstantiableViewCont
 		
 		DispatchQueue.main.async {
 			self.tableView.performBatchUpdates(nil) // invalidate previously calculated row heights
+		}
+	}
+	
+	private func updateImage() {
+		if let issueImage = issue.image {
+			image = UIImage(contentsOfFile: Issue.localURL(for: issueImage).path)
+			if image == nil {
+				noImageLabel.text = Localization.ImagePlaceholder.loading
+				// download
+				issue.downloadFile()?.then { [weak self] in
+					self?.updateImage()
+				}
+			}
+		} else {
+			image = nil
+			noImageLabel.text = Localization.ImagePlaceholder.notSet
 		}
 	}
 	

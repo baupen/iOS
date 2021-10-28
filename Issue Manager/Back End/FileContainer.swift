@@ -40,6 +40,7 @@ protocol FileContainer: StoredObject {
 	static var pathPrefix: String { get }
 	
 	var file: File<Self>? { get }
+	var shouldAutoDownloadFile: Bool { get }
 }
 
 private extension File {
@@ -84,6 +85,8 @@ extension Issue {
 }
 
 extension FileContainer {
+	var shouldAutoDownloadFile: Bool { true }
+	
 	private static var baseCacheFolder: URL {
 		baseCacheURL.appendingPathComponent(File<Self>.subpath, isDirectory: true)
 	}
@@ -136,7 +139,7 @@ extension FileContainer {
 			Self.order(Meta.Columns.lastChangeTime.desc)
 				.withoutDeleted
 				.fetchAll
-		)
+		).filter(\.shouldAutoDownloadFile)
 		
 		moveDisusedFiles(inUse: containers)
 		
