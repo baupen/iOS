@@ -46,8 +46,6 @@
 		956015342100C50500F84600 /* StringDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956015332100C50500F84600 /* StringDistance.swift */; };
 		956015372101302700F84600 /* SmallestN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956015362101302700F84600 /* SmallestN.swift */; };
 		9562F944223C1DBE0014BFB0 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9562F943223C1DBE0014BFB0 /* Repository.swift */; };
-		9564186323578E80002BAD7B /* SimplePDFKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9573A05F2357766D00DE5AC1 /* SimplePDFKit.framework */; };
-		9564186423578E80002BAD7B /* SimplePDFKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9573A05F2357766D00DE5AC1 /* SimplePDFKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9573A05223576AF200DE5AC1 /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 9573A05123576AF200DE5AC1 /* GRDB */; };
 		9573A05523576BD900DE5AC1 /* Promise in Frameworks */ = {isa = PBXBuildFile; productRef = 9573A05423576BD900DE5AC1 /* Promise */; };
 		9573A05823576C4700DE5AC1 /* PullToExpand in Frameworks */ = {isa = PBXBuildFile; productRef = 9573A05723576C4700DE5AC1 /* PullToExpand */; };
@@ -106,6 +104,7 @@
 		B91A04D62619267C002905C6 /* View Issue.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B91A04D52619267C002905C6 /* View Issue.storyboard */; };
 		B91A04D826192706002905C6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B91A04D726192706002905C6 /* Main.storyboard */; };
 		B91A04DA2619344C002905C6 /* Map List.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B91A04D92619344C002905C6 /* Map List.storyboard */; };
+		B945BE2C272B38AC0089C213 /* SimplePDFKit in Frameworks */ = {isa = PBXBuildFile; productRef = B945BE2B272B38AC0089C213 /* SimplePDFKit */; };
 		B9485F80264AECE800AC3456 /* ErrorViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9485F7F264AECE800AC3456 /* ErrorViewerViewController.swift */; };
 		B96F079E265098F0006A1495 /* ArrayBuilder in Frameworks */ = {isa = PBXBuildFile; productRef = B96F079D265098F0006A1495 /* ArrayBuilder */; };
 		B98E8DF32603F08600FD6386 /* Foundation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98E8DF22603F08600FD6386 /* Foundation+Extensions.swift */; };
@@ -122,23 +121,6 @@
 		B9F9E60425E2FC6B0059A93C /* APIConstructionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F9E60325E2FC6B0059A93C /* APIConstructionManager.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		9573A05E2357766D00DE5AC1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9573A0592357766D00DE5AC1 /* SimplePDFKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 954CFBEC20E9AEC20014E02F;
-			remoteInfo = SimplePDFKit;
-		};
-		9573A0602357766D00DE5AC1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9573A0592357766D00DE5AC1 /* SimplePDFKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 953C237720F0132500BE51F7;
-			remoteInfo = SimplePDFExample;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		9543CA652277D2D8001482D5 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -146,7 +128,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				9564186423578E80002BAD7B /* SimplePDFKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -253,6 +234,7 @@
 		B91A04D52619267C002905C6 /* View Issue.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "View Issue.storyboard"; sourceTree = "<group>"; };
 		B91A04D726192706002905C6 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		B91A04D92619344C002905C6 /* Map List.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Map List.storyboard"; sourceTree = "<group>"; };
+		B945BE55272B39840089C213 /* SimplePDFKit */ = {isa = PBXFileReference; lastKnownFileType = folder; path = SimplePDFKit; sourceTree = "<group>"; };
 		B9485F7F264AECE800AC3456 /* ErrorViewerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewerViewController.swift; sourceTree = "<group>"; };
 		B98E8DF22603F08600FD6386 /* Foundation+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Foundation+Extensions.swift"; sourceTree = "<group>"; };
 		B9CA06FA25FA6612002278FB /* DeepLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLink.swift; sourceTree = "<group>"; };
@@ -275,8 +257,8 @@
 				9573A05823576C4700DE5AC1 /* PullToExpand in Frameworks */,
 				9573A05523576BD900DE5AC1 /* Promise in Frameworks */,
 				B96F079E265098F0006A1495 /* ArrayBuilder in Frameworks */,
-				9564186323578E80002BAD7B /* SimplePDFKit.framework in Frameworks */,
 				9573A05223576AF200DE5AC1 /* GRDB in Frameworks */,
+				B945BE2C272B38AC0089C213 /* SimplePDFKit in Frameworks */,
 				B9C04D4D24453FF5008EDDEE /* UserDefault in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -337,10 +319,10 @@
 		9511A12320DD558700101ADE /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				9573A0592357766D00DE5AC1 /* SimplePDFKit.xcodeproj */,
 				95E83C0E221A47CE000BB75F /* Operators.swift */,
 				9512666920FFE08D00155162 /* Reachability.swift */,
 				9511A10320DD3A7100101ADE /* Reusable.swift */,
+				B945BE55272B39840089C213 /* SimplePDFKit */,
 			);
 			path = Libraries;
 			sourceTree = "<group>";
@@ -408,15 +390,6 @@
 				954D38D322423426008FD3B0 /* DataStore.swift */,
 			);
 			path = Storage;
-			sourceTree = "<group>";
-		};
-		9573A05A2357766D00DE5AC1 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				9573A05F2357766D00DE5AC1 /* SimplePDFKit.framework */,
-				9573A0612357766D00DE5AC1 /* SimplePDFExample.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		9583C2B220DC748800452695 = {
@@ -642,6 +615,7 @@
 				9573A05723576C4700DE5AC1 /* PullToExpand */,
 				B9C04D4C24453FF5008EDDEE /* UserDefault */,
 				B96F079D265098F0006A1495 /* ArrayBuilder */,
+				B945BE2B272B38AC0089C213 /* SimplePDFKit */,
 			);
 			productName = "Issue Manager";
 			productReference = 9583C2BB20DC748800452695 /* Issue Manager.app */;
@@ -680,38 +654,16 @@
 				B9E3ABC5238E22D50029CE16 /* XCRemoteSwiftPackageReference "CGeometry" */,
 				B9C04D4B24453FF4008EDDEE /* XCRemoteSwiftPackageReference "UserDefault" */,
 				B96F079C265098F0006A1495 /* XCRemoteSwiftPackageReference "ArrayBuilder" */,
+				B945BE2A272B38AC0089C213 /* XCRemoteSwiftPackageReference "SimplePDFKit" */,
 			);
 			productRefGroup = 9583C2BC20DC748800452695 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 9573A05A2357766D00DE5AC1 /* Products */;
-					ProjectRef = 9573A0592357766D00DE5AC1 /* SimplePDFKit.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				9583C2BA20DC748800452695 /* Issue Manager */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		9573A05F2357766D00DE5AC1 /* SimplePDFKit.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SimplePDFKit.framework;
-			remoteRef = 9573A05E2357766D00DE5AC1 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		9573A0612357766D00DE5AC1 /* SimplePDFExample.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = SimplePDFExample.app;
-			remoteRef = 9573A0602357766D00DE5AC1 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		9583C2B920DC748800452695 /* Resources */ = {
@@ -1138,6 +1090,14 @@
 				minimumVersion = 1.3.0;
 			};
 		};
+		B945BE2A272B38AC0089C213 /* XCRemoteSwiftPackageReference "SimplePDFKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/baupen/SimplePDFKit.git";
+			requirement = {
+				branch = "swift-package";
+				kind = branch;
+			};
+		};
 		B96F079C265098F0006A1495 /* XCRemoteSwiftPackageReference "ArrayBuilder" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/juliand665/ArrayBuilder.git";
@@ -1179,6 +1139,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9573A05623576C4700DE5AC1 /* XCRemoteSwiftPackageReference "PullToExpand" */;
 			productName = PullToExpand;
+		};
+		B945BE2B272B38AC0089C213 /* SimplePDFKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B945BE2A272B38AC0089C213 /* XCRemoteSwiftPackageReference "SimplePDFKit" */;
+			productName = SimplePDFKit;
 		};
 		B96F079D265098F0006A1495 /* ArrayBuilder */ = {
 			isa = XCSwiftPackageProductDependency;
