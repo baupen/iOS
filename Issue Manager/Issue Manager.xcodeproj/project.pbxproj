@@ -23,7 +23,6 @@
 		9512666A20FFE08E00155162 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9512666920FFE08D00155162 /* Reachability.swift */; };
 		9514FC4D210545C700099EC5 /* MarkupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9514FC4C210545C700099EC5 /* MarkupViewController.swift */; };
 		9514FC5021055D6500099EC5 /* ColorChangeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9514FC4F21055D6500099EC5 /* ColorChangeButton.swift */; };
-		951FDD4B20E59AA200268BEB /* KeyboardLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951FDD4A20E59AA100268BEB /* KeyboardLayoutConstraint.swift */; };
 		9529A63D20EECF8600C7E0A0 /* IssueBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9529A63C20EECF8600C7E0A0 /* IssueBadge.swift */; };
 		952CB48820E830A300E6B664 /* SiteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952CB48720E830A300E6B664 /* SiteCell.swift */; };
 		952CB48C20E8429D00E6B664 /* SiteListLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952CB48B20E8429D00E6B664 /* SiteListLayout.swift */; };
@@ -172,7 +171,6 @@
 		9512666920FFE08D00155162 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		9514FC4C210545C700099EC5 /* MarkupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkupViewController.swift; sourceTree = "<group>"; };
 		9514FC4F21055D6500099EC5 /* ColorChangeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorChangeButton.swift; sourceTree = "<group>"; };
-		951FDD4A20E59AA100268BEB /* KeyboardLayoutConstraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardLayoutConstraint.swift; sourceTree = "<group>"; };
 		9529A63C20EECF8600C7E0A0 /* IssueBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueBadge.swift; sourceTree = "<group>"; };
 		952CB48720E830A300E6B664 /* SiteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiteCell.swift; sourceTree = "<group>"; };
 		952CB48B20E8429D00E6B664 /* SiteListLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiteListLayout.swift; sourceTree = "<group>"; };
@@ -340,7 +338,6 @@
 			isa = PBXGroup;
 			children = (
 				9573A0592357766D00DE5AC1 /* SimplePDFKit.xcodeproj */,
-				951FDD4A20E59AA100268BEB /* KeyboardLayoutConstraint.swift */,
 				95E83C0E221A47CE000BB75F /* Operators.swift */,
 				9512666920FFE08D00155162 /* Reachability.swift */,
 				9511A10320DD3A7100101ADE /* Reusable.swift */,
@@ -814,7 +811,6 @@
 				B9D9B36323917FC400947CE5 /* PassThroughView.swift in Sources */,
 				9511A10C20DD3C0500101ADE /* Issue.swift in Sources */,
 				B9028E2025E3FFF100D0FCEC /* QRScannerView.swift in Sources */,
-				951FDD4B20E59AA200268BEB /* KeyboardLayoutConstraint.swift in Sources */,
 				95D2C2AE20E5C3E700D887C8 /* UIKit+Localization.swift in Sources */,
 				9584F24A20E92F8E00A8C884 /* CenteringScrollViewDelegate.swift in Sources */,
 				95E83C0D221A4791000BB75F /* Error+Extensions.swift in Sources */,

@@ -36,8 +36,6 @@ final class CameraView: UIView {
 	override func awakeFromNib() {
 		super.awakeFromNib()
 		
-		NotificationCenter.default.addObserver(self, selector: #selector(updateOrientation), name: UIApplication.didChangeStatusBarOrientationNotification, object: nil)
-		
 		let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
 		addGestureRecognizer(tapRecognizer)
 		
@@ -125,10 +123,12 @@ final class CameraView: UIView {
 		super.layoutSubviews()
 		
 		previewLayer?.frame = layer.bounds
+		
+		updateOrientation()
 	}
 	
 	@objc func updateOrientation() {
-		let orientation = UIApplication.shared.statusBarOrientation // kinda dirty
+		guard let orientation = window?.windowScene?.interfaceOrientation else { return }
 		let videoOrientation = AVCaptureVideoOrientation(representing: orientation)
 		previewLayer?.connection!.videoOrientation = videoOrientation
 		photoOutput?.connection(with: .video)!.videoOrientation = videoOrientation

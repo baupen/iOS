@@ -7,6 +7,8 @@ final class RegisterViewController: UIViewController {
 	
 	private static let defaultWebsite = "app.baupen.ch"
 	
+	@IBOutlet private var scrollView: UIScrollView!
+	@IBOutlet private var keyboardSpacer: NSLayoutConstraint!
 	@IBOutlet private var windowView: UIView!
 	@IBOutlet private var formView: UIView!
 	
@@ -109,6 +111,42 @@ final class RegisterViewController: UIViewController {
 		
 		canEditWebsite = false
 		websiteField.text = Self.defaultWebsite
+		
+		NotificationCenter.default.addObserver(
+			forName: Self.keyboardWillShowNotification, object: nil, queue: .main
+		) { [weak self] notification in
+			guard
+				let self = self,
+				let userInfo = notification.userInfo,
+				let frame = userInfo[Self.keyboardFrameBeginUserInfoKey] as? NSValue
+			else { return }
+			
+			let keyboardFrame = self.view.convert(frame.cgRectValue, from: nil)
+			self.updateKeyboardHeight(to: keyboardFrame.height, userInfo: userInfo)
+		}
+		
+		NotificationCenter.default.addObserver(
+			forName: Self.keyboardWillHideNotification, object: nil, queue: .main
+		) { [weak self] notification in
+			guard let userInfo = notification.userInfo else { return }
+			self?.updateKeyboardHeight(to: 0, userInfo: userInfo)
+		}
+	}
+	
+	private func updateKeyboardHeight(to height: CGFloat, userInfo: [AnyHashable: Any]) {
+		keyboardSpacer.constant = height
+		
+		// the things i do in the name of smoothness…
+		guard
+			let duration = userInfo[Self.keyboardAnimationDurationUserInfoKey] as? TimeInterval,
+			let options = userInfo[Self.keyboardAnimationCurveUserInfoKey] as? UInt
+		else { return }
+		
+		UIView.animate(
+			withDuration: duration, delay: 0,
+			options: .init(rawValue: options),
+			animations: view.layoutIfNeeded
+		)
 	}
 	
 	func showAlert(for error: Error) {
