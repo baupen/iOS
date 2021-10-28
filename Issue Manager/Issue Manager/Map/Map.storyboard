@@ -676,20 +676,19 @@ Maler</string>
         <scene sceneID="Cng-52-hy9">
             <objects>
                 <tableViewController storyboardIdentifier="StatusFilterViewController" id="Bfc-S7-GGm" customClass="StatusFilterViewController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="AGp-gF-W33">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="44" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="AGp-gF-W33">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="383"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="StatusCell" id="iNe-H1-nc3" customClass="StatusCell" customModule="Issue_Manager" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="32" width="320" height="44"/>
+                                <rect key="frame" x="16" y="32" width="288" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iNe-H1-nc3" id="zEe-no-L85">
-                                    <rect key="frame" x="0.0" y="0.0" width="283.5" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="251.5" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="xTD-Gz-5Pp">
-                                            <rect key="frame" x="16" y="11" width="259.5" height="22"/>
+                                            <rect key="frame" x="16" y="11" width="227.5" height="22"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" image="flat_issue_new" translatesAutoresizingMaskIntoConstraints="NO" id="hwv-k2-g01" customClass="TrilinearImageView" customModule="Issue_Manager" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
@@ -698,7 +697,7 @@ Maler</string>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Neu" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ALj-0b-AKs">
-                                                    <rect key="frame" x="30" y="1" width="229.5" height="20.5"/>
+                                                    <rect key="frame" x="30" y="1" width="197.5" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
