@@ -4,6 +4,8 @@ import SwiftUI
 import GRDB
 
 struct StorageSpaceView: View {
+	fileprivate typealias Localization = L10n.ManageStorage
+	
 	private static let spaceFormatter = ByteCountFormatter() <- {
 		$0.countStyle = .file
 	}
@@ -22,7 +24,7 @@ struct StorageSpaceView: View {
 				Section {
 					infoRows(for: overallDetails, issues: Issue.all())
 				} header: {
-					Text("Insgesamt")
+					Text(Localization.Section.total)
 				}
 				
 				Section {
@@ -38,13 +40,13 @@ struct StorageSpaceView: View {
 						}
 					}
 				} header: {
-					Text("Nach Baustelle")
+					Text(Localization.Section.bySite)
 				}
 			}
-			.navigationTitle("Speicher Verwalten")
+			.navigationTitle(Localization.title)
 			.toolbar {
 				ToolbarItemGroup(placement: .navigationBarLeading) {
-					Button("Schliessen") {
+					Button(Localization.close) {
 						presentationMode.dismiss()
 					}
 				}
@@ -56,18 +58,18 @@ struct StorageSpaceView: View {
 	
 	@ViewBuilder
 	func infoRows(for details: StorageSpaceDetails?, issues: QueryInterfaceRequest<Issue>) -> some View {
-		spaceRow(label: "Verwendet:", bytes: details?.usedSpace)
-		spaceRow(label: "Einsparbar:", bytes: details?.purgeableSpace)
+		spaceRow(label: Localization.spaceUsed, bytes: details?.usedSpace)
+		spaceRow(label: Localization.spacePurgeable, bytes: details?.purgeableSpace)
 		
 		VStack(spacing: 8) {
-			Button("Jetzt Platz Einsparen") {
+			Button(Localization.purgeNow) {
 				Issue.purgeInactiveFiles(for: issues)
 				recalculateSpaceDetails()
 			}
 			.buttonStyle(.plain)
 			.foregroundColor(.accentColor)
 			
-			Text("Um Daten zu sparen, werden nur Bilder von aktiven Pendenzen heruntergeladen. Bereits geladene Bilder können mit diesem Knopf lokal entfernt werden.")
+			Text(Localization.purgeInfo)
 				.font(.footnote)
 				.foregroundColor(.secondary)
 				.frame(maxWidth: .infinity, alignment: .leading)
@@ -83,7 +85,7 @@ struct StorageSpaceView: View {
 				ProgressView(value: Double(current), total: Double(total))
 				Text(L10n.SiteList.FileProgress.determinate(current, total))
 			case .done:
-				Button("Alle Bilder Laden") {
+				Button(Localization.downloadAll) {
 					Issue.downloadMissingFiles(for: issues, includeInactive: true) {
 						downloadProgress = $0
 					}

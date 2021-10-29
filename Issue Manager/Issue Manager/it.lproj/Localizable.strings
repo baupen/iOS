@@ -171,6 +171,22 @@
 "login.scan.title" = "Scansione del codice di accesso";
 
 ////////////////////////////////////////////////////////////////////////////////
+// MARK: Manage
+// CONTEXT: Knopf, um die Ansicht zu schliessen.
+"manage_storage.close" = "Concludere";
+"manage_storage.download_all" = "Carica tutte le immagini";
+"manage_storage.purge_info" = "Per salvare i dati, vengono scaricate solo le immagini delle attività in sospeso attive. Le immagini che sono già state caricate possono essere rimosse localmente con questo pulsante.";
+"manage_storage.purge_now" = "Risparmia spazio ora";
+// CONTEXT: Überschrift für den Listenabschnitt, der Speicherplatz nach Baustelle aufzählt.
+"manage_storage.section.by_site" = "Dopo il cantiere";
+// CONTEXT: Überschrift für den Listenabschnitt, der Speicherplatz für alle Baustellen aufsummiert.
+"manage_storage.section.total" = "Tutto sommato";
+"manage_storage.space_purgeable" = "Risparmio:";
+"manage_storage.space_used" = "Usato:";
+// CONTEXT: Titel für die Ansicht, wo man lokalen Speicherplatz von Pendenzbildern verwalten kann.
+"manage_storage.title" = "Gestisci lo spazio di archiviazione";
+
+////////////////////////////////////////////////////////////////////////////////
 // MARK: Map.could
 // CONTEXT: Wird angezeigt, wenn das PDF nicht geladen werden konnte.
 "map.could_not_load" = "Non è stato possibile caricare la pianta!";
@@ -297,6 +313,8 @@
 "site_list.file_progress.indeterminate" = "Le immagini in attesa sono caricate...";
 // CONTEXT: Knopf oben links zum ausloggen
 "site_list.log_out" = "Logout";
+// CONTEXT: Knopf, um auf die Ansicht zu kommen, wo man lokalen Speicherplatz von Pendenzbildern verwalten kann.
+"site_list.manage_storage" = "Gestisci lo spazio di archiviazione";
 // CONTEXT: Wird anstelle der Baustellen angezeigt, wenn man noch nie synchronisiert hat. Sollte den Benutzer darauf hinweisen, dass er durch runterziehen synchronisieren kann.
 "site_list.refresh_hint" = "Ancora nessun dato caricato!\nScorri in basso per sincronizzare i dati locali con il server.";
 // CONTEXT: Beschreibt, wie viele Mängel in einer Baustelle offen sind. %s wird durch die Anzahl offener Mängel ersetzt, z.b. "%s offene Mängel"

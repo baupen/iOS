@@ -171,6 +171,22 @@
 "login.scan.title" = "Login-Code Scannen";
 
 ////////////////////////////////////////////////////////////////////////////////
+// MARK: Manage
+// CONTEXT: Knopf, um die Ansicht zu schliessen.
+"manage_storage.close" = "Schliessen";
+"manage_storage.download_all" = "Alle Bilder laden";
+"manage_storage.purge_info" = "Um Daten zu sparen, werden nur Bilder von aktiven Pendenzen heruntergeladen. Bereits geladene Bilder können mit diesem Knopf lokal entfernt werden.";
+"manage_storage.purge_now" = "Jetzt Platz einsparen";
+// CONTEXT: Überschrift für den Listenabschnitt, der Speicherplatz nach Baustelle aufzählt.
+"manage_storage.section.by_site" = "Nach Baustelle";
+// CONTEXT: Überschrift für den Listenabschnitt, der Speicherplatz für alle Baustellen aufsummiert.
+"manage_storage.section.total" = "Insgesamt";
+"manage_storage.space_purgeable" = "Einsparbar:";
+"manage_storage.space_used" = "Verwendet:";
+// CONTEXT: Titel für die Ansicht, wo man lokalen Speicherplatz von Pendenzbildern verwalten kann.
+"manage_storage.title" = "Speicher Verwalten";
+
+////////////////////////////////////////////////////////////////////////////////
 // MARK: Map.could
 // CONTEXT: Wird angezeigt, wenn das PDF nicht geladen werden konnte.
 "map.could_not_load" = "Der Bauplan konnte nicht geladen werden!";
@@ -297,6 +313,8 @@
 "site_list.file_progress.indeterminate" = "Pendenzbilder werden geladen…";
 // CONTEXT: Knopf oben links zum ausloggen
 "site_list.log_out" = "Ausloggen";
+// CONTEXT: Knopf, um auf die Ansicht zu kommen, wo man lokalen Speicherplatz von Pendenzbildern verwalten kann.
+"site_list.manage_storage" = "Speicherplatz verwalten";
 // CONTEXT: Wird anstelle der Baustellen angezeigt, wenn man noch nie synchronisiert hat. Sollte den Benutzer darauf hinweisen, dass er durch runterziehen synchronisieren kann.
 "site_list.refresh_hint" = "Noch keine Daten geladen! Hier herunterziehen, um mit dem Server zu synchronisieren.";
 // CONTEXT: Beschreibt, wie viele Mängel in einer Baustelle offen sind. %s wird durch die Anzahl offener Mängel ersetzt, z.b. "%s offene Mängel"

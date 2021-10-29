@@ -199,6 +199,29 @@ internal enum L10n {
     }
   }
 
+  internal enum ManageStorage {
+    /// Schliessen
+    internal static let close = L10n.tr("Localizable", "manage_storage.close")
+    /// Alle Bilder laden
+    internal static let downloadAll = L10n.tr("Localizable", "manage_storage.download_all")
+    /// Um Daten zu sparen, werden nur Bilder von aktiven Pendenzen heruntergeladen. Bereits geladene Bilder können mit diesem Knopf lokal entfernt werden.
+    internal static let purgeInfo = L10n.tr("Localizable", "manage_storage.purge_info")
+    /// Jetzt Platz einsparen
+    internal static let purgeNow = L10n.tr("Localizable", "manage_storage.purge_now")
+    /// Einsparbar:
+    internal static let spacePurgeable = L10n.tr("Localizable", "manage_storage.space_purgeable")
+    /// Verwendet:
+    internal static let spaceUsed = L10n.tr("Localizable", "manage_storage.space_used")
+    /// Speicher Verwalten
+    internal static let title = L10n.tr("Localizable", "manage_storage.title")
+    internal enum Section {
+      /// Nach Baustelle
+      internal static let bySite = L10n.tr("Localizable", "manage_storage.section.by_site")
+      /// Insgesamt
+      internal static let total = L10n.tr("Localizable", "manage_storage.section.total")
+    }
+  }
+
   internal enum Map {
     /// Der Bauplan konnte nicht geladen werden!
     internal static let couldNotLoad = L10n.tr("Localizable", "map.could_not_load")
@@ -331,6 +354,8 @@ internal enum L10n {
   internal enum SiteList {
     /// Ausloggen
     internal static let logOut = L10n.tr("Localizable", "site_list.log_out")
+    /// Speicherplatz verwalten
+    internal static let manageStorage = L10n.tr("Localizable", "site_list.manage_storage")
     /// Noch keine Daten geladen! Hier herunterziehen, um mit dem Server zu synchronisieren.
     internal static let refreshHint = L10n.tr("Localizable", "site_list.refresh_hint")
     /// Baustellen
