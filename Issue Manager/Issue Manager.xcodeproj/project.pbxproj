@@ -83,7 +83,6 @@
 		95D2C2B120E5C50200D887C8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 95D2C2B320E5C50200D887C8 /* Localizable.strings */; };
 		95DDA4D721AA47F5009628B0 /* fake_read_response.private.json in Resources */ = {isa = PBXBuildFile; fileRef = 95DDA4D621AA47F5009628B0 /* fake_read_response.private.json */; };
 		95E83C0D221A4791000BB75F /* Error+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E83C0C221A4791000BB75F /* Error+Extensions.swift */; };
-		95E83C0F221A47CE000BB75F /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E83C0E221A47CE000BB75F /* Operators.swift */; };
 		95E83C11221A4C2A000BB75F /* UILayout+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E83C10221A4C2A000BB75F /* UILayout+Extensions.swift */; };
 		95E83C13221A4C63000BB75F /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E83C12221A4C63000BB75F /* UIView+Extensions.swift */; };
 		95E83C15221A4CE7000BB75F /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E83C14221A4CE7000BB75F /* UILabel+Extensions.swift */; };
@@ -104,6 +103,7 @@
 		B91A04D62619267C002905C6 /* View Issue.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B91A04D52619267C002905C6 /* View Issue.storyboard */; };
 		B91A04D826192706002905C6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B91A04D726192706002905C6 /* Main.storyboard */; };
 		B91A04DA2619344C002905C6 /* Map List.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B91A04D92619344C002905C6 /* Map List.storyboard */; };
+		B92D0DEE272C3BFE0097BE26 /* HandyOperators in Frameworks */ = {isa = PBXBuildFile; productRef = B92D0DED272C3BFE0097BE26 /* HandyOperators */; };
 		B945BE2C272B38AC0089C213 /* SimplePDFKit in Frameworks */ = {isa = PBXBuildFile; productRef = B945BE2B272B38AC0089C213 /* SimplePDFKit */; };
 		B9485F80264AECE800AC3456 /* ErrorViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9485F7F264AECE800AC3456 /* ErrorViewerViewController.swift */; };
 		B96F079E265098F0006A1495 /* ArrayBuilder in Frameworks */ = {isa = PBXBuildFile; productRef = B96F079D265098F0006A1495 /* ArrayBuilder */; };
@@ -213,7 +213,6 @@
 		95D2C2B520E5C52700D887C8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		95DDA4D621AA47F5009628B0 /* fake_read_response.private.json */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = text.json; path = fake_read_response.private.json; sourceTree = "<group>"; tabWidth = 4; usesTabs = 0; };
 		95E83C0C221A4791000BB75F /* Error+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error+Extensions.swift"; sourceTree = "<group>"; };
-		95E83C0E221A47CE000BB75F /* Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
 		95E83C10221A4C2A000BB75F /* UILayout+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILayout+Extensions.swift"; sourceTree = "<group>"; };
 		95E83C12221A4C63000BB75F /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		95E83C14221A4CE7000BB75F /* UILabel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
@@ -261,6 +260,7 @@
 				9573A05223576AF200DE5AC1 /* GRDB in Frameworks */,
 				B945BE2C272B38AC0089C213 /* SimplePDFKit in Frameworks */,
 				B9C04D4D24453FF5008EDDEE /* UserDefault in Frameworks */,
+				B92D0DEE272C3BFE0097BE26 /* HandyOperators in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,7 +320,6 @@
 		9511A12320DD558700101ADE /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				95E83C0E221A47CE000BB75F /* Operators.swift */,
 				9512666920FFE08D00155162 /* Reachability.swift */,
 				9511A10320DD3A7100101ADE /* Reusable.swift */,
 				B945BE55272B39840089C213 /* SimplePDFKit */,
@@ -618,6 +617,7 @@
 				B9C04D4C24453FF5008EDDEE /* UserDefault */,
 				B96F079D265098F0006A1495 /* ArrayBuilder */,
 				B945BE2B272B38AC0089C213 /* SimplePDFKit */,
+				B92D0DED272C3BFE0097BE26 /* HandyOperators */,
 			);
 			productName = "Issue Manager";
 			productReference = 9583C2BB20DC748800452695 /* Issue Manager.app */;
@@ -657,6 +657,7 @@
 				B9C04D4B24453FF4008EDDEE /* XCRemoteSwiftPackageReference "UserDefault" */,
 				B96F079C265098F0006A1495 /* XCRemoteSwiftPackageReference "ArrayBuilder" */,
 				B945BE2A272B38AC0089C213 /* XCRemoteSwiftPackageReference "SimplePDFKit" */,
+				B92D0DEC272C3BFE0097BE26 /* XCRemoteSwiftPackageReference "HandyOperators" */,
 			);
 			productRefGroup = 9583C2BC20DC748800452695 /* Products */;
 			projectDirPath = "";
@@ -794,7 +795,6 @@
 				95B2735320DE7AD600D2BD44 /* Multipart.swift in Sources */,
 				95890A5D21B2E4D600510E44 /* Haptics.swift in Sources */,
 				95E83C19221A52F4000BB75F /* File.swift in Sources */,
-				95E83C0F221A47CE000BB75F /* Operators.swift in Sources */,
 				9583C2BF20DC748800452695 /* AppDelegate.swift in Sources */,
 				95E83C13221A4C63000BB75F /* UIView+Extensions.swift in Sources */,
 				B90A4ED325DE155300EB56C4 /* Hydra.swift in Sources */,
@@ -1095,6 +1095,14 @@
 				minimumVersion = 1.3.0;
 			};
 		};
+		B92D0DEC272C3BFE0097BE26 /* XCRemoteSwiftPackageReference "HandyOperators" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/juliand665/HandyOperators";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		B945BE2A272B38AC0089C213 /* XCRemoteSwiftPackageReference "SimplePDFKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/baupen/SimplePDFKit.git";
@@ -1144,6 +1152,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9573A05623576C4700DE5AC1 /* XCRemoteSwiftPackageReference "PullToExpand" */;
 			productName = PullToExpand;
+		};
+		B92D0DED272C3BFE0097BE26 /* HandyOperators */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B92D0DEC272C3BFE0097BE26 /* XCRemoteSwiftPackageReference "HandyOperators" */;
+			productName = HandyOperators;
 		};
 		B945BE2B272B38AC0089C213 /* SimplePDFKit */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -14,21 +14,21 @@ struct Map {
 
 extension Map: DBRecord {
 	static let site = belongsTo(ConstructionSite.self)
-	var site: QueryInterfaceRequest<ConstructionSite> {
+	var site: ConstructionSite.Query {
 		request(for: Self.site)
 	}
 	
 	static let issues = hasMany(Issue.self)
-	var issues: QueryInterfaceRequest<Issue> {
+	var issues: Issue.Query {
 		request(for: Self.issues).withoutDeleted.consideringClientMode
 	}
 	
-	var sortedIssues: QueryInterfaceRequest<Issue> {
+	var sortedIssues: Issue.Query {
 		issues.withoutDeleted.order(Issue.Columns.number.asc, Issue.Meta.Columns.lastChangeTime.desc)
 	}
 	
 	static let children = hasMany(Map.self)
-	var children: QueryInterfaceRequest<Map> {
+	var children: Map.Query {
 		request(for: Self.children).withoutDeleted
 	}
 	

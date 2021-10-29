@@ -4,6 +4,7 @@ import UIKit
 import GRDB
 import Promise
 import UserDefault
+import HandyOperators
 
 final class EditIssueNavigationController: UINavigationController {
 	var editIssueController: EditIssueViewController {
@@ -362,3 +363,5 @@ final class ImageControlButton: UIButton {
 		layer.shadowRadius = 4
 	}
 }
+
+infix operator <-: WithPrecedence // resolve conflict between GRDB and HandyOperators

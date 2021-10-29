@@ -3,6 +3,7 @@
 import Foundation
 import Promise
 import GRDB
+import HandyOperators
 
 private struct IssuePatchRequest: JSONJSONRequest {
 	typealias Response = APIObject<APIIssue>
@@ -136,7 +137,7 @@ extension Client {
 	}
 	
 	private func syncChanges(
-		for query: QueryInterfaceRequest<Issue>,
+		for query: Issue.Query,
 		stage: IssuePushError.Stage,
 		performing upload: @escaping (Issue) -> Future<Void>
 	) -> [IssuePushError] {
@@ -247,7 +248,7 @@ extension Client {
 	
 	private func doPullChangedObjects<Object: StoredObject>(
 		for site: ConstructionSite? = nil,
-		existing: QueryInterfaceRequest<Object>,
+		existing: Object.Query,
 		context: Object.Model.Context
 	) -> Future<[Object]> {
 		send(GetObjectsRequest<Object>(
@@ -308,3 +309,5 @@ private extension QueryInterfaceRequest where RowDecoder: StoredObject {
 		) ?? .distantPast
 	}
 }
+
+infix operator <-: WithPrecedence // resolve conflict between GRDB and HandyOperators

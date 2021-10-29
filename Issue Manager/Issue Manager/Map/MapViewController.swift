@@ -7,6 +7,7 @@ import PullToExpand
 import Promise
 import CGeometry
 import UserDefault
+import HandyOperators
 
 final class MapViewController: UIViewController, InstantiableViewController {
 	typealias Localization = L10n.Map

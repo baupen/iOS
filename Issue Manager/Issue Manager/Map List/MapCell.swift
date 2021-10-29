@@ -2,6 +2,7 @@
 
 import UIKit
 import Promise
+import HandyOperators
 
 final class MapCell: UITableViewCell, Reusable {
 	typealias Localization = L10n.MapList.MapSummary

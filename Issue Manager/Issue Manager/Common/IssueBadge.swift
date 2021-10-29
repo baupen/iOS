@@ -2,6 +2,7 @@
 
 import UIKit
 import Promise
+import HandyOperators
 
 final class IssueBadge: UIView {
 	let label = UILabel() <- {

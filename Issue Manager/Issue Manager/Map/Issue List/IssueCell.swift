@@ -1,6 +1,7 @@
 // Created by Julian Dunskus
 
 import UIKit
+import HandyOperators
 
 final class IssueCell: UITableViewCell, Reusable {
 	typealias Localization = L10n.Issue

@@ -18,21 +18,21 @@ extension ConstructionSite: Identifiable {
 
 extension ConstructionSite: DBRecord {
 	static let craftsmen = hasMany(Craftsman.self)
-	var craftsmen: QueryInterfaceRequest<Craftsman> {
+	var craftsmen: Craftsman.Query {
 		request(for: Self.craftsmen).withoutDeleted
 	}
 	
 	static let maps = hasMany(Map.self)
-	var maps: QueryInterfaceRequest<Map> {
+	var maps: Map.Query {
 		request(for: Self.maps).withoutDeleted
 	}
 	
 	static let issues = hasMany(Issue.self)
-	var issues: QueryInterfaceRequest<Issue> {
+	var issues: Issue.Query {
 		request(for: Self.issues).withoutDeleted
 	}
 	
-	var managers: QueryInterfaceRequest<ConstructionManager> {
+	var managers: ConstructionManager.Query {
 		ConstructionManager.filter(keys: managerIDs)
 	}
 	

@@ -2,6 +2,7 @@
 
 import UIKit
 import UserDefault
+import HandyOperators
 
 @UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {

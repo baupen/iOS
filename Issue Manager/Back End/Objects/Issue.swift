@@ -159,12 +159,12 @@ extension Issue {
 
 extension Issue: DBRecord {
 	static let map = belongsTo(Map.self)
-	var map: QueryInterfaceRequest<Map> {
+	var map: Map.Query {
 		request(for: Self.map)
 	}
 	
 	static let site = belongsTo(ConstructionSite.self)
-	var site: QueryInterfaceRequest<ConstructionSite> {
+	var site: ConstructionSite.Query {
 		request(for: Self.site)
 	}
 	

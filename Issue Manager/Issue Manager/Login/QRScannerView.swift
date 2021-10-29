@@ -3,6 +3,7 @@
 import UIKit
 import AVFoundation
 import CGeometry
+import HandyOperators
 
 final class QRScannerViewController: UIViewController {
 	@IBOutlet private(set) var scannerView: QRScannerView!

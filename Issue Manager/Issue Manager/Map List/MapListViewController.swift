@@ -2,6 +2,7 @@
 
 import UIKit
 import Promise
+import HandyOperators
 
 final class MapListViewController: RefreshingTableViewController, InstantiableViewController {
 	typealias Localization = L10n.MapList

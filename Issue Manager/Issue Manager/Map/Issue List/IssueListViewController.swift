@@ -2,6 +2,7 @@
 
 import UIKit
 import PullToExpand
+import HandyOperators
 
 final class IssueListViewController: UIViewController {
 	typealias Localization = L10n.Map.IssueList

@@ -3,6 +3,7 @@
 import Foundation
 import Promise
 import UserDefault
+import HandyOperators
 
 typealias TaskResult = (data: Data, response: HTTPURLResponse)
 

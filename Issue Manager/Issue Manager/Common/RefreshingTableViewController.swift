@@ -3,6 +3,7 @@
 import UIKit
 import Promise
 import ArrayBuilder
+import HandyOperators
 
 class RefreshingTableViewController: UITableViewController {
 	var isRefreshing = false

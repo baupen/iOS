@@ -2,7 +2,6 @@
 
 import Foundation
 import Promise
-import GRDB
 
 private let manager = FileManager.default
 
@@ -132,7 +131,7 @@ extension FileContainer {
 	}
 	
 	static func purgeInactiveFiles(
-		for containers: QueryInterfaceRequest<Self> = Self.all()
+		for containers: Self.Query = Self.all()
 	) {
 		let allContainers = Repository.shared.read(containers.fetchAll)
 		for container in allContainers where !container.shouldAutoDownloadFile {
@@ -141,20 +140,22 @@ extension FileContainer {
 	}
 	
 	static func downloadMissingFiles(
-		for containers: QueryInterfaceRequest<Self> = Self.all(),
+		for containers: Self.Query? = nil,
 		includeInactive: Bool = false,
 		onProgress: ((FileDownloadProgress) -> Void)? = nil
 	) -> Future<Void> {
 		onProgress?(.undetermined)
 		
 		let allContainers = Repository.shared.read(
-			containers
+			(containers ?? all())
 				.order(Meta.Columns.lastChangeTime.desc)
 				.withoutDeleted
 				.fetchAll
 		)
 		
-		moveDisusedFiles(inUse: allContainers)
+		if containers == nil { // can't do this when only handling a subset
+			moveDisusedFiles(inUse: allContainers)
+		}
 		let activeContainers = includeInactive
 			? allContainers
 			: allContainers.filter(\.shouldAutoDownloadFile)

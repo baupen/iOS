@@ -3,6 +3,7 @@
 import UIKit
 import AVFoundation
 import CGeometry
+import HandyOperators
 
 final class CameraContainerView: UIView {
 	@IBOutlet private var cameraView: CameraView!

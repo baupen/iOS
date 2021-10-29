@@ -29,6 +29,15 @@
         }
       },
       {
+        "package": "HandyOperators",
+        "repositoryURL": "https://github.com/juliand665/HandyOperators",
+        "state": {
+          "branch": null,
+          "revision": "27f60a00d9ad310afdf66cc7a25adc4bdb387d58",
+          "version": "2.0.1"
+        }
+      },
+      {
         "package": "Promise",
         "repositoryURL": "https://github.com/timvermeulen/Promise.git",
         "state": {
@@ -44,15 +53,6 @@
           "branch": null,
           "revision": "0e7d27acc686fe3d7a65ffa25407e9479cec1047",
           "version": "1.3.0"
-        }
-      },
-      {
-        "package": "SimplePDFKit",
-        "repositoryURL": "https://github.com/baupen/SimplePDFKit.git",
-        "state": {
-          "branch": "swift-package",
-          "revision": "a32ad5bd21481a8bb2fe20e9eda04c9f50614fb2",
-          "version": null
         }
       },
       {
