@@ -2,6 +2,7 @@
 
 import UIKit
 import Promise
+import SwiftUI
 
 final class SiteListViewController: RefreshingTableViewController, InstantiableViewController {
 	fileprivate typealias Localization = L10n.SiteList
@@ -27,6 +28,11 @@ final class SiteListViewController: RefreshingTableViewController, InstantiableV
 	
 	@IBAction func backToSiteList(_ segue: UIStoryboardSegue) {
 		updateContent()
+	}
+	
+	@IBAction func manageStorage() {
+		let controller = UIHostingController(rootView: StorageSpaceView())
+		present(controller, animated: true)
 	}
 	
 	private var fileDownloadProgress = FileDownloadProgress.done {
@@ -138,7 +144,7 @@ final class SiteListViewController: RefreshingTableViewController, InstantiableV
 	}
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		3 + (fileDownloadProgress == .done ? 0 : 1)
+		4 + (fileDownloadProgress == .done ? 0 : 1)
 	}
 }
 

@@ -12,6 +12,10 @@ struct ConstructionSite {
 	let managerIDs: Set<ConstructionManager.ID>
 }
 
+extension ConstructionSite: Identifiable {
+	typealias ID = ObjectID<Self>
+}
+
 extension ConstructionSite: DBRecord {
 	static let craftsmen = hasMany(Craftsman.self)
 	var craftsmen: QueryInterfaceRequest<Craftsman> {

@@ -107,6 +107,7 @@
 		B945BE2C272B38AC0089C213 /* SimplePDFKit in Frameworks */ = {isa = PBXBuildFile; productRef = B945BE2B272B38AC0089C213 /* SimplePDFKit */; };
 		B9485F80264AECE800AC3456 /* ErrorViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9485F7F264AECE800AC3456 /* ErrorViewerViewController.swift */; };
 		B96F079E265098F0006A1495 /* ArrayBuilder in Frameworks */ = {isa = PBXBuildFile; productRef = B96F079D265098F0006A1495 /* ArrayBuilder */; };
+		B96F9E0B272AF2C800D4929B /* StorageSpaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96F9E0A272AF2C800D4929B /* StorageSpaceView.swift */; };
 		B98E8DF32603F08600FD6386 /* Foundation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98E8DF22603F08600FD6386 /* Foundation+Extensions.swift */; };
 		B9C04D4D24453FF5008EDDEE /* UserDefault in Frameworks */ = {isa = PBXBuildFile; productRef = B9C04D4C24453FF5008EDDEE /* UserDefault */; };
 		B9CA06FB25FA6612002278FB /* DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CA06FA25FA6612002278FB /* DeepLink.swift */; };
@@ -176,7 +177,6 @@
 		956015332100C50500F84600 /* StringDistance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringDistance.swift; sourceTree = "<group>"; };
 		956015362101302700F84600 /* SmallestN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallestN.swift; sourceTree = "<group>"; };
 		9562F943223C1DBE0014BFB0 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
-		9573A0592357766D00DE5AC1 /* SimplePDFKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SimplePDFKit.xcodeproj; path = SimplePDFKit/SimplePDFKit/SimplePDFKit.xcodeproj; sourceTree = "<group>"; };
 		95758B1221F4223100E5C20F /* TransitionAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionAnimator.swift; sourceTree = "<group>"; };
 		957E16A920E7D81B00F3DEA1 /* SiteListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiteListViewController.swift; sourceTree = "<group>"; };
 		9583C2BB20DC748800452695 /* Issue Manager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Issue Manager.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -236,6 +236,7 @@
 		B91A04D92619344C002905C6 /* Map List.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Map List.storyboard"; sourceTree = "<group>"; };
 		B945BE55272B39840089C213 /* SimplePDFKit */ = {isa = PBXFileReference; lastKnownFileType = folder; path = SimplePDFKit; sourceTree = "<group>"; };
 		B9485F7F264AECE800AC3456 /* ErrorViewerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewerViewController.swift; sourceTree = "<group>"; };
+		B96F9E0A272AF2C800D4929B /* StorageSpaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageSpaceView.swift; sourceTree = "<group>"; };
 		B98E8DF22603F08600FD6386 /* Foundation+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Foundation+Extensions.swift"; sourceTree = "<group>"; };
 		B9CA06FA25FA6612002278FB /* DeepLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLink.swift; sourceTree = "<group>"; };
 		B9D9B36223917FC400947CE5 /* PassThroughView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassThroughView.swift; sourceTree = "<group>"; };
@@ -352,6 +353,7 @@
 				957E16A920E7D81B00F3DEA1 /* SiteListViewController.swift */,
 				952CB48720E830A300E6B664 /* SiteCell.swift */,
 				952CB48B20E8429D00E6B664 /* SiteListLayout.swift */,
+				B96F9E0A272AF2C800D4929B /* StorageSpaceView.swift */,
 			);
 			path = "Construction Site List";
 			sourceTree = "<group>";
@@ -706,7 +708,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftgen >/dev/null; then\n    cd \"Issue Manager\"\n    swiftgen\nelse\n    echo \"warning: SwiftGen not installed, download it from https://github.com/SwiftGen/SwiftGen\"\nfi\n";
+			shellScript = "if [[ $ENABLE_PREVIEWS == \"YES\" ]]; then exit 0; fi\n\nif which swiftgen >/dev/null; then\n    cd \"Issue Manager\"\n    swiftgen\nelse\n    echo \"warning: SwiftGen not installed, download it from https://github.com/SwiftGen/SwiftGen\"\nfi\n";
 		};
 		950283AA20E71001001A5083 /* Run Poesie */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -724,7 +726,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which poesie >/dev/null; then\n    cd \"Issue Manager\"\n    poesie --lang de --token \"8921aa79c88bf258f7e28b3a25c1ee11\" --project 194177 --ios Base.lproj/Localizable.strings\n    poesie --lang it --token \"8921aa79c88bf258f7e28b3a25c1ee11\" --project 194177 --ios it.lproj/Localizable.strings\n    poesie --lang de --token \"8921aa79c88bf258f7e28b3a25c1ee11\" --project 197855 --ios Base.lproj/InfoPlist.strings\n    poesie --lang it --token \"8921aa79c88bf258f7e28b3a25c1ee11\" --project 197855 --ios it.lproj/InfoPlist.strings\nelse\n    echo \"warning: Poesie not installed\"\nfi\n";
+			shellScript = "if [[ $ENABLE_PREVIEWS == \"YES\" ]]; then exit 0; fi\n\nif which poesie >/dev/null; then\n    cd \"Issue Manager\"\n    poesie --lang de --token \"8921aa79c88bf258f7e28b3a25c1ee11\" --project 194177 --ios Base.lproj/Localizable.strings\n    poesie --lang it --token \"8921aa79c88bf258f7e28b3a25c1ee11\" --project 194177 --ios it.lproj/Localizable.strings\n    poesie --lang de --token \"8921aa79c88bf258f7e28b3a25c1ee11\" --project 197855 --ios Base.lproj/InfoPlist.strings\n    poesie --lang it --token \"8921aa79c88bf258f7e28b3a25c1ee11\" --project 197855 --ios it.lproj/InfoPlist.strings\nelse\n    echo \"warning: Poesie not installed\"\nfi\n";
 		};
 		95A4E6572102302400591EAE /* Generate Private Files (if necessary) */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -738,7 +740,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "find . -name '*.public.*' -exec ./generate_private.sh {} +\nexit 0\n";
+			shellScript = "if [[ $ENABLE_PREVIEWS == \"YES\" ]]; then exit 0; fi\n\nfind . -name '*.public.*' -exec ./generate_private.sh {} +\nexit 0\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -747,6 +749,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B96F9E0B272AF2C800D4929B /* StorageSpaceView.swift in Sources */,
 				B9F9E5FC25E2DD3F0059A93C /* LoginInfo.swift in Sources */,
 				9583C2C120DC748800452695 /* MainViewController.swift in Sources */,
 				B9DF854625E187D600408CA3 /* StoredObject.swift in Sources */,
@@ -927,9 +930,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-function-bodies=500";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -985,8 +989,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-function-bodies=500";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";

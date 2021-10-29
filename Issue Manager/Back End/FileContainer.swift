@@ -2,6 +2,7 @@
 
 import Foundation
 import Promise
+import GRDB
 
 private let manager = FileManager.default
 
@@ -43,8 +44,8 @@ protocol FileContainer: StoredObject {
 	var shouldAutoDownloadFile: Bool { get }
 }
 
-private extension File {
-	static var subpath: String {
+extension File {
+	fileprivate static var subpath: String {
 		"files/\(Container.pathPrefix)"
 	}
 	
@@ -130,20 +131,37 @@ extension FileContainer {
 		}
 	}
 	
+	static func purgeInactiveFiles(
+		for containers: QueryInterfaceRequest<Self> = Self.all()
+	) {
+		let allContainers = Repository.shared.read(containers.fetchAll)
+		for container in allContainers where !container.shouldAutoDownloadFile {
+			container.deleteFile()
+		}
+	}
+	
 	static func downloadMissingFiles(
+		for containers: QueryInterfaceRequest<Self> = Self.all(),
+		includeInactive: Bool = false,
 		onProgress: ((FileDownloadProgress) -> Void)? = nil
 	) -> Future<Void> {
 		onProgress?(.undetermined)
 		
-		let containers = Repository.shared.read(
-			Self.order(Meta.Columns.lastChangeTime.desc)
+		let allContainers = Repository.shared.read(
+			containers
+				.order(Meta.Columns.lastChangeTime.desc)
 				.withoutDeleted
 				.fetchAll
-		).filter(\.shouldAutoDownloadFile)
+		)
 		
-		moveDisusedFiles(inUse: containers)
+		moveDisusedFiles(inUse: allContainers)
+		let activeContainers = includeInactive
+			? allContainers
+			: allContainers.filter(\.shouldAutoDownloadFile)
 		
-		let futures = containers.compactMap { $0.downloadFile() }
+		print("downloading files for \(activeContainers.count) \(Self.self)s")
+		let futures = activeContainers.compactMap { $0.downloadFile() }
+		print("\(futures.count) downloads to make")
 		
 		// this is much easier if we don't have to report progress
 		guard let onProgress = onProgress else { return futures.sequence() }
