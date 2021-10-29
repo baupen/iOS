@@ -117,16 +117,11 @@ extension Issue: FileContainer {
 	static let pathPrefix = "issue"
 	var file: File<Issue>? { image }
 	
-	private static var completeAutoDownloadThreshold = Date(timeIntervalSinceNow: -3600 * 24 * 90) // 90 days
-	private static var incompleteAutoDownloadThreshold = Date(timeIntervalSinceNow: -3600 * 24 * 365) // 1 year for issues that aren't completed
+	private static var autoDownloadThreshold = Date(timeIntervalSinceNow: -3600 * 24 * 90) // 90 days
 	
 	var shouldAutoDownloadFile: Bool {
-		// always download images for issues we can still edit—that way, we don't have to handle that case in the editor
-		guard status.registeredAt != nil else { return true }
-		let threshold = status.closedAt != nil
-			? Self.completeAutoDownloadThreshold
-			: Self.incompleteAutoDownloadThreshold
-		return lastChangeTime > threshold
+		guard let closedAt = status.closedAt else { return true }
+		return closedAt > Self.autoDownloadThreshold
 	}
 }
 

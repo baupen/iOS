@@ -1,7 +1,7 @@
 // Created by Julian Dunskus
 
 import SwiftUI
-import GRDB
+import HandyOperators
 
 struct StorageSpaceView: View {
 	fileprivate typealias Localization = L10n.ManageStorage
@@ -10,8 +10,8 @@ struct StorageSpaceView: View {
 		$0.countStyle = .file
 	}
 	
-	@State var overallDetails: StorageSpaceDetails?
-	@State var spaceDetails: [ConstructionSite.ID: StorageSpaceDetails]?
+	@State var details: StorageSpaceDetails?
+	@State var lastUpdate = Date()
 	@State var downloadProgress = FileDownloadProgress.done
 	
 	var sites = Repository.shared.read(ConstructionSite.fetchAll)
@@ -22,14 +22,14 @@ struct StorageSpaceView: View {
 		NavigationView {
 			List {
 				Section {
-					infoRows(for: overallDetails, issues: Issue.all())
+					infoRows(for: details?.total, issues: Issue.all())
 				} header: {
 					Text(Localization.Section.total)
 				}
 				
 				Section {
 					ForEach(sites) { site in
-						let details = spaceDetails.map { $0[site.id] ?? .zero }
+						let details = details.map { $0.bySite[site.id] ?? .init() }
 						NavigationLink {
 							List {
 								infoRows(for: details, issues: site.issues)
@@ -53,18 +53,22 @@ struct StorageSpaceView: View {
 			}
 		}
 		.navigationViewStyle(.stack)
-		.onAppear { calculateSpaceDetails() }
+		.onAppear {
+			if details == nil {
+				calculateSpaceDetails()
+			}
+		}
     }
 	
 	@ViewBuilder
-	func infoRows(for details: StorageSpaceDetails?, issues: QueryInterfaceRequest<Issue>) -> some View {
+	func infoRows(for details: StorageSpaceDetails.Group?, issues: Issue.Query) -> some View {
 		spaceRow(label: Localization.spaceUsed, bytes: details?.usedSpace)
 		spaceRow(label: Localization.spacePurgeable, bytes: details?.purgeableSpace)
 		
-		VStack(spacing: 8) {
+		cellVStack {
 			Button(Localization.purgeNow) {
 				Issue.purgeInactiveFiles(for: issues)
-				recalculateSpaceDetails()
+				calculateSpaceDetails()
 			}
 			.buttonStyle(.plain)
 			.foregroundColor(.accentColor)
@@ -74,9 +78,8 @@ struct StorageSpaceView: View {
 				.foregroundColor(.secondary)
 				.frame(maxWidth: .infinity, alignment: .leading)
 		}
-		.padding(.vertical, 8)
 		
-		VStack {
+		cellVStack {
 			switch downloadProgress {
 			case .undetermined:
 				ProgressView()
@@ -85,17 +88,38 @@ struct StorageSpaceView: View {
 				ProgressView(value: Double(current), total: Double(total))
 				Text(L10n.SiteList.FileProgress.determinate(current, total))
 			case .done:
-				Button(Localization.downloadAll) {
-					Issue.downloadMissingFiles(for: issues, includeInactive: true) {
-						downloadProgress = $0
+				if let details = details {
+					if details.missingImages == 0 {
+						Text(Localization.allImagesDownloaded)
+							.foregroundColor(.secondary)
+					} else {
+						Button(Localization.downloadAll(details.missingImages)) {
+							Issue.downloadMissingFiles(for: issues, includeInactive: true) {
+								downloadProgress = $0
+								
+								let now = Date()
+								if now.timeIntervalSince(lastUpdate) > 20 {
+									lastUpdate = now
+									// recalculate every 20 seconds to provide up-to-date info while avoiding too much battery drainage
+									calculateSpaceDetails()
+								}
+							}
+							.then(calculateSpaceDetails)
+						}
 					}
-					.then(recalculateSpaceDetails)
+				} else {
+					ProgressView()
 				}
-				.frame(maxWidth: .infinity)
 			}
 		}
-		.progressViewStyle(.linear)
+	}
+	
+	func cellVStack<Content: View>(@ViewBuilder content: () -> Content) -> some View {
+		VStack(spacing: 8) {
+			content()
+		}
 		.padding(.vertical, 8)
+		.frame(maxWidth: .infinity)
 	}
 	
 	func spaceRow(label: String, bytes: Int?) -> some View {
@@ -113,60 +137,11 @@ struct StorageSpaceView: View {
 		}
 	}
 	
-	func recalculateSpaceDetails() {
-		overallDetails = nil
-		spaceDetails = nil
-		calculateSpaceDetails()
-	}
-	
-	private static let calculationQueue = DispatchQueue(label: "storage space calculation")
-	
 	func calculateSpaceDetails() {
-		guard overallDetails == nil else { return } // already working on it
-		Self.calculationQueue.async {
-			let issues = Repository.shared.read(Issue.fetchAll)
-			let issuesByFilename = Dictionary(uniqueKeysWithValues: issues.compactMap { issue in
-				issue.file.map { ($0.localFilename, issue) }
-			})
-			
-			let imageURLs = try! FileManager.default.contentsOfDirectory(
-				at: Issue.baseLocalFolder,
-				includingPropertiesForKeys: [.fileSizeKey]
-			)
-			
-			var total = StorageSpaceDetails.zero
-			var detailsBySite: [ConstructionSite.ID: StorageSpaceDetails] = [:]
-			for imageURL in imageURLs {
-				let values = try! imageURL.resourceValues(forKeys: [.fileSizeKey])
-				let size = values.fileSize!
-				
-				total.usedSpace += size
-				guard let issue = issuesByFilename[imageURL.lastPathComponent] else {
-					print("could not find issue for \(imageURL)!")
-					continue
-				}
-				var siteDetails = detailsBySite[issue.constructionSiteID] ?? .zero
-				siteDetails.usedSpace += size
-				if !issue.shouldAutoDownloadFile {
-					total.purgeableSpace += size
-					siteDetails.purgeableSpace += size
-				}
-				detailsBySite[issue.constructionSiteID] = siteDetails
-			}
-			
-			DispatchQueue.main.async {
-				overallDetails = total
-				spaceDetails = detailsBySite
-			}
-		}
+		StorageSpaceDetails.calculate()
+			.on(.main)
+			.then { details = $0 }
 	}
-}
-
-struct StorageSpaceDetails {
-	static let zero = Self(usedSpace: 0, purgeableSpace: 0)
-	
-	var usedSpace: Int
-	var purgeableSpace: Int
 }
 
 struct StorageSpaceView_Previews: PreviewProvider {
@@ -180,10 +155,21 @@ struct StorageSpaceView_Previews: PreviewProvider {
 		)
 		
         StorageSpaceView(
-			overallDetails: .init(usedSpace: 12_345_678_901, purgeableSpace: 1_234_567_890),
-			spaceDetails: [:],
+			details: .init(
+				total: .init(usedSpace: 12_345_678_901, purgeableSpace: 1_234_567_890, missingImages: 1337),
+				bySite: [:]
+			),
 			downloadProgress: .determined(current: 42, total: 69),
 			sites: [exampleSite]
 		)
+		
+		StorageSpaceView(
+			details: .init(
+				total: .init(usedSpace: 12_345_678_901, purgeableSpace: 1_234_567_890, missingImages: 1337),
+				bySite: [:]
+			),
+			sites: [exampleSite]
+		)
+		.preferredColorScheme(.dark)
     }
 }

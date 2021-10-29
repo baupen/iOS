@@ -172,10 +172,11 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Manage
+"manage_storage.all_images_downloaded" = "Tutte le immagini sono caricate.";
 // CONTEXT: Knopf, um die Ansicht zu schliessen.
 "manage_storage.close" = "Concludere";
-"manage_storage.download_all" = "Carica tutte le immagini";
-"manage_storage.purge_info" = "Per salvare i dati, vengono scaricate solo le immagini delle attività in sospeso attive. Le immagini che sono già state caricate possono essere rimosse localmente con questo pulsante.";
+"manage_storage.download_all" = "Carica %@ immagini mancanti";
+"manage_storage.purge_info" = "Per risparmiare dati, vengono scaricate solo le immagini degli articoli in sospeso che sono ancora aperti o che sono stati chiusi da meno di 90 giorni. Le immagini che sono già state caricate possono essere rimosse localmente con questo pulsante.";
 "manage_storage.purge_now" = "Risparmia spazio ora";
 // CONTEXT: Überschrift für den Listenabschnitt, der Speicherplatz nach Baustelle aufzählt.
 "manage_storage.section.by_site" = "Dopo il cantiere";

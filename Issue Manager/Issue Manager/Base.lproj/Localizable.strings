@@ -172,10 +172,11 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Manage
+"manage_storage.all_images_downloaded" = "Alle Bilder sind geladen.";
 // CONTEXT: Knopf, um die Ansicht zu schliessen.
 "manage_storage.close" = "Schliessen";
-"manage_storage.download_all" = "Alle Bilder laden";
-"manage_storage.purge_info" = "Um Daten zu sparen, werden nur Bilder von aktiven Pendenzen heruntergeladen. Bereits geladene Bilder können mit diesem Knopf lokal entfernt werden.";
+"manage_storage.download_all" = "%@ fehlende Bilder laden";
+"manage_storage.purge_info" = "Um Daten zu sparen, werden nur Bilder von Pendenzen heruntergeladen, die noch offen sind oder seit weniger als 90 Tagen abgeschlossen sind. Bereits geladene Bilder können mit diesem Knopf lokal entfernt werden.";
 "manage_storage.purge_now" = "Jetzt Platz einsparen";
 // CONTEXT: Überschrift für den Listenabschnitt, der Speicherplatz nach Baustelle aufzählt.
 "manage_storage.section.by_site" = "Nach Baustelle";
@@ -184,7 +185,7 @@
 "manage_storage.space_purgeable" = "Einsparbar:";
 "manage_storage.space_used" = "Verwendet:";
 // CONTEXT: Titel für die Ansicht, wo man lokalen Speicherplatz von Pendenzbildern verwalten kann.
-"manage_storage.title" = "Speicher Verwalten";
+"manage_storage.title" = "Speicher verwalten";
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Map.could
@@ -314,7 +315,7 @@
 // CONTEXT: Knopf oben links zum ausloggen
 "site_list.log_out" = "Ausloggen";
 // CONTEXT: Knopf, um auf die Ansicht zu kommen, wo man lokalen Speicherplatz von Pendenzbildern verwalten kann.
-"site_list.manage_storage" = "Speicherplatz verwalten";
+"site_list.manage_storage" = "Speicher verwalten";
 // CONTEXT: Wird anstelle der Baustellen angezeigt, wenn man noch nie synchronisiert hat. Sollte den Benutzer darauf hinweisen, dass er durch runterziehen synchronisieren kann.
 "site_list.refresh_hint" = "Noch keine Daten geladen! Hier herunterziehen, um mit dem Server zu synchronisieren.";
 // CONTEXT: Beschreibt, wie viele Mängel in einer Baustelle offen sind. %s wird durch die Anzahl offener Mängel ersetzt, z.b. "%s offene Mängel"

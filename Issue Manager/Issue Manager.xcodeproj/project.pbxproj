@@ -104,6 +104,7 @@
 		B91A04D826192706002905C6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B91A04D726192706002905C6 /* Main.storyboard */; };
 		B91A04DA2619344C002905C6 /* Map List.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B91A04D92619344C002905C6 /* Map List.storyboard */; };
 		B92D0DEE272C3BFE0097BE26 /* HandyOperators in Frameworks */ = {isa = PBXBuildFile; productRef = B92D0DED272C3BFE0097BE26 /* HandyOperators */; };
+		B92D0DF2272C40060097BE26 /* StorageSpaceDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92D0DF1272C40060097BE26 /* StorageSpaceDetails.swift */; };
 		B945BE2C272B38AC0089C213 /* SimplePDFKit in Frameworks */ = {isa = PBXBuildFile; productRef = B945BE2B272B38AC0089C213 /* SimplePDFKit */; };
 		B9485F80264AECE800AC3456 /* ErrorViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9485F7F264AECE800AC3456 /* ErrorViewerViewController.swift */; };
 		B96F079E265098F0006A1495 /* ArrayBuilder in Frameworks */ = {isa = PBXBuildFile; productRef = B96F079D265098F0006A1495 /* ArrayBuilder */; };
@@ -233,6 +234,7 @@
 		B91A04D52619267C002905C6 /* View Issue.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "View Issue.storyboard"; sourceTree = "<group>"; };
 		B91A04D726192706002905C6 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		B91A04D92619344C002905C6 /* Map List.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Map List.storyboard"; sourceTree = "<group>"; };
+		B92D0DF1272C40060097BE26 /* StorageSpaceDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageSpaceDetails.swift; sourceTree = "<group>"; };
 		B945BE55272B39840089C213 /* SimplePDFKit */ = {isa = PBXFileReference; lastKnownFileType = folder; path = SimplePDFKit; sourceTree = "<group>"; };
 		B9485F7F264AECE800AC3456 /* ErrorViewerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewerViewController.swift; sourceTree = "<group>"; };
 		B96F9E0A272AF2C800D4929B /* StorageSpaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageSpaceView.swift; sourceTree = "<group>"; };
@@ -353,6 +355,7 @@
 				952CB48720E830A300E6B664 /* SiteCell.swift */,
 				952CB48B20E8429D00E6B664 /* SiteListLayout.swift */,
 				B96F9E0A272AF2C800D4929B /* StorageSpaceView.swift */,
+				B92D0DF1272C40060097BE26 /* StorageSpaceDetails.swift */,
 			);
 			path = "Construction Site List";
 			sourceTree = "<group>";
@@ -767,6 +770,7 @@
 				B9D9B36323917FC400947CE5 /* PassThroughView.swift in Sources */,
 				9511A10C20DD3C0500101ADE /* Issue.swift in Sources */,
 				B9028E2025E3FFF100D0FCEC /* QRScannerView.swift in Sources */,
+				B92D0DF2272C40060097BE26 /* StorageSpaceDetails.swift in Sources */,
 				95D2C2AE20E5C3E700D887C8 /* UIKit+Localization.swift in Sources */,
 				9584F24A20E92F8E00A8C884 /* CenteringScrollViewDelegate.swift in Sources */,
 				95E83C0D221A4791000BB75F /* Error+Extensions.swift in Sources */,
