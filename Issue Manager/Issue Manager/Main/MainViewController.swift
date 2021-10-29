@@ -15,7 +15,7 @@ final class MainViewController: UISplitViewController, InstantiableViewControlle
 	override func awakeFromNib() {
 		super.awakeFromNib()
 		
-		preferredDisplayMode = .allVisible
+		preferredDisplayMode = .oneBesideSecondary
 		
 		masterNav = (viewControllers.first as! MasterNavigationController)
 		detailNav = (viewControllers.last as! DetailNavigationController)

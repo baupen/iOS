@@ -122,7 +122,7 @@ extension Issue: FileContainer {
 	
 	var shouldAutoDownloadFile: Bool {
 		// always download images for issues we can still edit—that way, we don't have to handle that case in the editor
-		guard status.registeredAt == nil else { return true }
+		guard status.registeredAt != nil else { return true }
 		let threshold = status.closedAt != nil
 			? Self.completeAutoDownloadThreshold
 			: Self.incompleteAutoDownloadThreshold
