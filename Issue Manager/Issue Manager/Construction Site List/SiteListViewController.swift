@@ -2,9 +2,12 @@
 
 import UIKit
 import Promise
+import SwiftUI
 
-final class SiteListViewController: RefreshingTableViewController, Reusable {
+final class SiteListViewController: RefreshingTableViewController, InstantiableViewController {
 	fileprivate typealias Localization = L10n.SiteList
+	
+	static let storyboardName = "Site List"
 	
 	@IBOutlet private var welcomeLabel: UILabel!
 	
@@ -25,6 +28,11 @@ final class SiteListViewController: RefreshingTableViewController, Reusable {
 	
 	@IBAction func backToSiteList(_ segue: UIStoryboardSegue) {
 		updateContent()
+	}
+	
+	@IBAction func manageStorage() {
+		let controller = UIHostingController(rootView: StorageSpaceView())
+		present(controller, animated: true)
 	}
 	
 	private var fileDownloadProgress = FileDownloadProgress.done {
@@ -96,7 +104,11 @@ final class SiteListViewController: RefreshingTableViewController, Reusable {
 	override func doRefresh() -> Future<Void> {
 		Client.shared.pullRemoteChanges { progress in
 			DispatchQueue.main.async {
-				self.fileDownloadProgress = progress
+				self.syncProgress = progress
+			}
+		} onIssueImageProgress: { imageProgress in
+			DispatchQueue.main.async {
+				self.fileDownloadProgress = imageProgress
 			}
 		}
 	}
@@ -121,7 +133,7 @@ final class SiteListViewController: RefreshingTableViewController, Reusable {
 	}
 	
 	func showMapList(for site: ConstructionSite, animated: Bool = true) {
-		let main = storyboard!.instantiate(MainViewController.self)!
+		let main = MainViewController.instantiate()!
 		main.site = site
 		
 		present(main, animated: animated)
@@ -132,7 +144,7 @@ final class SiteListViewController: RefreshingTableViewController, Reusable {
 	}
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		3 + (fileDownloadProgress == .done ? 0 : 1)
+		4 + (fileDownloadProgress == .done ? 0 : 1)
 	}
 }
 

@@ -7,9 +7,12 @@ import PullToExpand
 import Promise
 import CGeometry
 import UserDefault
+import HandyOperators
 
-final class MapViewController: UIViewController, Reusable {
+final class MapViewController: UIViewController, InstantiableViewController {
 	typealias Localization = L10n.Map
+	
+	static let storyboardName = "Map"
 	
 	@IBOutlet private var filterItem: UIBarButtonItem!
 	@IBOutlet private var addItem: UIBarButtonItem!
@@ -20,6 +23,7 @@ final class MapViewController: UIViewController, Reusable {
 	@IBOutlet private var pullableContainer: UIView!
 	@IBOutlet private var pullableView: PullableView!
 	@IBOutlet private var issuePositioner: IssuePositioner!
+	@IBOutlet private var addUnplacedContainer: UIView!
 	
 	// the filter popover's done button and the add marker popover's cancel button link to this
 	@IBAction func backToMap(_ segue: UIStoryboardSegue) {
@@ -33,7 +37,7 @@ final class MapViewController: UIViewController, Reusable {
 	
 	@IBAction func beginAddingIssue() {
 		guard map?.file != nil else {
-			performSegue(withIdentifier: "create issue", sender: nil)
+			performSegue(withIdentifier: SegueID.createUnplaced.rawValue, sender: nil)
 			return
 		}
 		
@@ -65,7 +69,8 @@ final class MapViewController: UIViewController, Reusable {
 		didSet {
 			markerAlpha = isPlacingIssue ? 0.25 : 1
 			addItem.isEnabled = !isPlacingIssue
-			issuePositioner.isHidden = !isPlacingIssue
+			issuePositioner.isShown = isPlacingIssue
+			addUnplacedContainer.isShown = isPlacingIssue
 		}
 	}
 	
@@ -144,15 +149,18 @@ final class MapViewController: UIViewController, Reusable {
 		case let editIssueNav as EditIssueNavigationController:
 			let editController = editIssueNav.editIssueController
 			editController.isCreating = true // otherwise we wouldn't be using a segue
-			if isPlacingIssue {
-				let map = holder as! Map
+			let map = holder as! Map
+			switch segue.identifier.flatMap(SegueID.init) {
+			case .createUnplaced:
+				editController.present(Issue(in: map))
+			case .createPlaced:
 				let position = Issue.Position(
 					at: issuePositioner.relativePosition(in: pdfController!.overlayView),
 					zoomScale: pdfController!.scrollView.zoomScale / pdfController!.scrollView.minimumZoomScale
 				)
 				editController.present(Issue(at: isPlacingIssue ? position : nil, in: map))
-			} else {
-				editController.present(Issue(in: holder as! Map))
+			case nil:
+				fatalError("unrecognized segue to issue editor with identifier '\(segue.identifier ?? "<no id>")'")
 			}
 			segue.destination.presentationController?.delegate = self
 		default:
@@ -186,7 +194,7 @@ final class MapViewController: UIViewController, Reusable {
 		pullableView.isHidden = map == nil
 		
 		if let map = map, let file = map.file {
-			let url = Map.cacheURL(for: file)
+			let url = Map.localURL(for: file)
 			asyncLoadPDF(for: map, at: url)
 		} else {
 			pdfController = nil
@@ -200,11 +208,11 @@ final class MapViewController: UIViewController, Reusable {
 	
 	private var currentLoadingTaskID: UUID!
 	func asyncLoadPDF(for map: Map, at url: URL) {
-		let page = Future
-			.init(asyncOn: .global(qos: .userInitiated), map.downloadFile) // download explicitly just in case it's not there yet
-			.mapError { _ in .fulfilled } // errors are fine (e.g. bad network)
-			.map { _ in try PDFDocument(at: url).page(0) }
-			.on(.main)
+		let page = Future<PDFKitPage>(asyncOn: .global(qos: .userInitiated)) {
+			// download explicitly just in case it's not there yet
+			try? map.downloadFile()?.await() // errors are fine (e.g. bad network)
+			return try PDFKitDocument(at: url).page(0)
+		}.on(.main)
 		
 		pdfController = nil
 		fallbackLabel.text = Localization.pdfLoading
@@ -219,7 +227,7 @@ final class MapViewController: UIViewController, Reusable {
 			self.pdfController = SimplePDFViewController() <- {
 				$0.delegate = self
 				$0.backgroundColor = .white // some maps have a transparent background and black elements, so they need a bright background
-				$0.page = page // should be set after the background color (technically a race condition otherwise)
+				$0.display(page) // should be set after the background color (technically a race condition otherwise)
 				$0.overlayView.alpha = self.markerAlpha
 				$0.overlayView.backgroundColor = .darkOverlay
 				$0.additionalSafeAreaInsets.bottom += self.pullableView.minHeight
@@ -267,14 +275,18 @@ final class MapViewController: UIViewController, Reusable {
 		let issue = Repository.shared.read(issue.id.get)!
 		
 		let viewController = issue.isRegistered
-			? storyboard!.instantiate(ViewIssueViewController.self)! <- { $0.issue = issue }
-			: storyboard!.instantiate(EditIssueViewController.self)! <- { $0.present(issue) }
+			? ViewIssueViewController.self.instantiate()! <- { $0.issue = issue }
+			: EditIssueViewController.self.instantiate()! <- { $0.present(issue) }
 		
 		let navController = UINavigationController(rootViewController: viewController)
 			<- { $0.modalPresentationStyle = .formSheet }
 		
 		present(navController, animated: true)
 		navController.presentationController?.delegate = self
+	}
+	
+	private enum SegueID: String {
+		case createPlaced, createUnplaced
 	}
 }
 
@@ -356,4 +368,6 @@ extension Issue {
 	static let allStatuses = Set(Issue.Status.Simplified.allCases)
 }
 
-extension Issue.Status.Simplified: DefaultsValueConvertible {}
+extension Issue.Status.Simplified: DefaultsValueConvertible {
+	typealias DefaultsRepresentation = RawValue
+}

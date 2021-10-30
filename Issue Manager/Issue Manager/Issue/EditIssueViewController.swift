@@ -4,6 +4,7 @@ import UIKit
 import GRDB
 import Promise
 import UserDefault
+import HandyOperators
 
 final class EditIssueNavigationController: UINavigationController {
 	var editIssueController: EditIssueViewController {
@@ -11,8 +12,10 @@ final class EditIssueNavigationController: UINavigationController {
 	}
 }
 
-final class EditIssueViewController: UITableViewController, Reusable {
+final class EditIssueViewController: UITableViewController, InstantiableViewController {
 	typealias Localization = L10n.ViewIssue
+	
+	static let storyboardName = "Edit Issue"
 	
 	@IBOutlet private var numberLabel: UILabel!
 	@IBOutlet private var markButton: UIButton!
@@ -56,6 +59,14 @@ final class EditIssueViewController: UITableViewController, Reusable {
 		issue.image = nil
 	}
 	
+	@IBAction func openCamera(_ sender: UIView) {
+		guard let picker = cameraView.prepareImagePicker(for: .camera) else {
+			showAlert(titled: Localization.couldNotActivateCamera)
+			return
+		}
+		present(picker, animated: true)
+	}
+	
 	@IBAction func openImagePicker(_ sender: UIView) {
 		guard let picker = cameraView.prepareImagePicker(for: .photoLibrary) else {
 			showAlert(
@@ -65,9 +76,10 @@ final class EditIssueViewController: UITableViewController, Reusable {
 			return
 		}
 		picker.modalPresentationStyle = .popover
-		let popover = picker.popoverPresentationController!
-		popover.sourceView = sender
-		popover.sourceRect = sender.bounds
+		picker.popoverPresentationController! <- {
+			$0.sourceView = sender
+			$0.sourceRect = sender.bounds
+		}
 		present(picker, animated: true)
 	}
 	
@@ -133,19 +145,13 @@ final class EditIssueViewController: UITableViewController, Reusable {
 		
 		update()
 		
-		if #available(iOS 13.0, *) {
-			isModalInPresentation = true // don't just dismiss
-		}
+		isModalInPresentation = true // don't just dismiss
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
 		tableView.reloadData()
-		
-		// workaround for the navigation bar being laid out incorrectly in iOS 13
-		// TODO: remove once apple fix this issue
-		navigationController?.navigationBar.setNeedsLayout()
 	}
 	
 	func present(_ issue: Issue) {
@@ -183,11 +189,13 @@ final class EditIssueViewController: UITableViewController, Reusable {
 		craftsmanNameLabel.setText(to: craftsman?.company, fallback: L10n.Issue.noCraftsman)
 		trade = craftsman?.trade
 		
-		descriptionField.text = issue.description
+		if descriptionField.text != issue.description {
+			// this also resets the cursor position, which is why it should be conditional
+			descriptionField.text = issue.description
+		}
 		descriptionChanged()
 		
 		loadedImage = issue.image.flatMap { nil
-			?? UIImage(contentsOfFile: Issue.cacheURL(for: $0).path)
 			?? UIImage(contentsOfFile: Issue.localURL(for: $0).path)
 		}
 	}
@@ -355,3 +363,5 @@ final class ImageControlButton: UIButton {
 		layer.shadowRadius = 4
 	}
 }
+
+infix operator <-: WithPrecedence // resolve conflict between GRDB and HandyOperators

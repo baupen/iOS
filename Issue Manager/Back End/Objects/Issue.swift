@@ -116,6 +116,13 @@ extension Issue: StoredObject {
 extension Issue: FileContainer {
 	static let pathPrefix = "issue"
 	var file: File<Issue>? { image }
+	
+	private static var autoDownloadThreshold = Date(timeIntervalSinceNow: -3600 * 24 * 90) // 90 days
+	
+	var shouldAutoDownloadFile: Bool {
+		guard let closedAt = status.closedAt else { return true }
+		return closedAt > Self.autoDownloadThreshold
+	}
 }
 
 extension Issue {
@@ -147,12 +154,12 @@ extension Issue {
 
 extension Issue: DBRecord {
 	static let map = belongsTo(Map.self)
-	var map: QueryInterfaceRequest<Map> {
+	var map: Map.Query {
 		request(for: Self.map)
 	}
 	
 	static let site = belongsTo(ConstructionSite.self)
-	var site: QueryInterfaceRequest<ConstructionSite> {
+	var site: ConstructionSite.Query {
 		request(for: Self.site)
 	}
 	
@@ -303,6 +310,10 @@ extension Issue {
 	mutating func delete() {
 		meta.isDeleted = true
 		didDelete = true
+	}
+	
+	mutating func discardChangePatch() {
+		patchIfChanged = nil
 	}
 	
 	func saveAndSync() -> Future<Void> {

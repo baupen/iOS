@@ -3,6 +3,7 @@
 import UIKit
 import AVFoundation
 import CGeometry
+import HandyOperators
 
 final class QRScannerViewController: UIViewController {
 	@IBOutlet private(set) var scannerView: QRScannerView!
@@ -48,8 +49,6 @@ final class QRScannerView: UIView {
 	
 	override func awakeFromNib() {
 		super.awakeFromNib()
-		
-		NotificationCenter.default.addObserver(self, selector: #selector(updateOrientation), name: UIApplication.didChangeStatusBarOrientationNotification, object: nil)
 		
 		addSubview(activityIndicator)
 		
@@ -108,10 +107,12 @@ final class QRScannerView: UIView {
 		super.layoutSubviews()
 		
 		previewLayer?.frame = layer.bounds
+		
+		updateOrientation()
 	}
 	
 	@objc func updateOrientation() {
-		let orientation = UIApplication.shared.statusBarOrientation // kinda dirty
+		guard let orientation = window?.windowScene?.interfaceOrientation else { return }
 		let videoOrientation = AVCaptureVideoOrientation(representing: orientation)
 		previewLayer?.connection!.videoOrientation = videoOrientation
 	}

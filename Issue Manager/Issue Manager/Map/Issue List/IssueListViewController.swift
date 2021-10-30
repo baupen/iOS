@@ -2,6 +2,7 @@
 
 import UIKit
 import PullToExpand
+import HandyOperators
 
 final class IssueListViewController: UIViewController {
 	typealias Localization = L10n.Map.IssueList
@@ -57,11 +58,6 @@ final class IssueListViewController: UIViewController {
 		} else {
 			summaryLabel.text = Localization.summaryFiltered(String(issues.count), String(totalCount))
 		}
-	}
-	
-	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		// since this view controller is made to be embedded, we delegate all segues to the parent
-		parent?.prepare(for: segue, sender: sender)
 	}
 	
 	// MARK: PullableView-UIScrollView interaction 

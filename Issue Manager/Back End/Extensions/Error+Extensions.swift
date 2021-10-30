@@ -1,6 +1,7 @@
 // Created by Julian Dunskus
 
 import Foundation
+import HandyOperators
 
 extension Error {
 	var localizedFailureReason: String {

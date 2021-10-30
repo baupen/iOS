@@ -2,6 +2,7 @@
 
 import UIKit
 import CGeometry
+import HandyOperators
 
 final class MarkupNavigationController: UINavigationController {
 	var markupController: MarkupViewController {
@@ -88,14 +89,6 @@ final class MarkupViewController: UIViewController {
 		updateUndoButtons()
 		
 		displayLink = CADisplayLink(target: self, selector: #selector(updateImage))
-	}
-	
-	override func viewWillAppear(_ animated: Bool) {
-		super.viewWillAppear(animated)
-		
-		// workaround for the navigation bar being laid out incorrectly in iOS 13
-		// TODO: remove once apple fix this issue
-		navigationController?.navigationBar.setNeedsLayout()
 	}
 	
 	override func viewDidDisappear(_ animated: Bool) {
@@ -222,9 +215,7 @@ final class MarkupViewController: UIViewController {
 			undoBuffer.push(snapshot)
 			updateUndoButtons()
 			
-			if #available(iOS 13.0, *) {
-				isModalInPresentation = true // we've made changes; don't just dismiss
-			}
+			isModalInPresentation = true // we've made changes; don't just dismiss
 			
 			fallthrough
 		case .cancelled, .failed:
@@ -261,13 +252,7 @@ final class MarkupViewController: UIViewController {
 final class ModeChangeButton: UIButton {
 	override var isSelected: Bool {
 		didSet {
-			tintColor = isSelected ? .main : {
-				if #available(iOS 13.0, *) {
-					return .secondaryLabel
-				} else {
-					return #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.25)
-				}
-			}()
+			tintColor = isSelected ? .main : .secondaryLabel
 		}
 	}
 }

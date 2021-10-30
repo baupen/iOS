@@ -1,6 +1,7 @@
 // Created by Julian Dunskus
 
 import UIKit
+import HandyOperators
 
 fileprivate let rowHeight: CGFloat = 37
 

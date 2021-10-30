@@ -19,6 +19,8 @@ protocol StoredObject: AnyStoredObject {
 }
 
 extension StoredObject {
+	typealias Query = QueryInterfaceRequest<Self>
+	
 	static var apiPath: String { "/api/\(apiType)" }
 	var apiPath: String { id.apiPath }
 	

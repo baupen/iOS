@@ -2,6 +2,7 @@
 
 import UIKit
 import GRDB
+import HandyOperators
 
 final class DatabaseDataStore {
 	private static let databaseURL = documentsURL.appendingPathComponent("db/main.sqlite")
@@ -183,3 +184,5 @@ private let documentsURL = try! FileManager.default.url(
 	appropriateFor: nil,
 	create: true
 )
+
+infix operator <-: WithPrecedence // resolve conflict between GRDB and HandyOperators

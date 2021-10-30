@@ -1,6 +1,7 @@
 // Created by Julian Dunskus
 
 import Foundation
+import ArrayBuilder
 
 /// Conform to one of the more specific protocols rather than this.
 protocol Request {
@@ -49,7 +50,7 @@ protocol JSONEncodingRequest: Request {
 	var body: Body { get }
 }
 
-extension JSONEncodingRequest where Body == Self, Self: Encodable {
+extension JSONEncodingRequest where Body == Self {
 	var body: Self { self }
 }
 

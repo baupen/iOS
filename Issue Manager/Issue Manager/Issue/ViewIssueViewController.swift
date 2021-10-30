@@ -2,8 +2,10 @@
 
 import UIKit
 
-final class ViewIssueViewController: UITableViewController, Reusable {
+final class ViewIssueViewController: UITableViewController, InstantiableViewController {
 	typealias Localization = L10n.ViewIssue
+	
+	static let storyboardName = "View Issue"
 	
 	@IBOutlet private var iconView: TrilinearImageView!
 	@IBOutlet private var numberLabel: UILabel!
@@ -89,13 +91,7 @@ final class ViewIssueViewController: UITableViewController, Reusable {
 		markButton.setImage(issue.isMarked ? #imageLiteral(resourceName: "mark_marked.pdf") : #imageLiteral(resourceName: "mark_unmarked.pdf"), for: .normal)
 		clientModeLabel.text = issue.wasAddedWithClient ? Localization.IsClientMode.true : Localization.IsClientMode.false
 		
-		image = issue.image.flatMap {
-			// TODO: fall back on localURL for other views
-			UIImage(contentsOfFile: Issue.cacheURL(for: $0).path)
-		}
-		noImageLabel.text = issue.image == nil
-			? Localization.ImagePlaceholder.notSet
-			: Localization.ImagePlaceholder.loading
+		updateImage()
 		
 		let craftsman = Repository.read(issue.craftsman)
 		craftsmanTradeLabel.setText(to: craftsman?.trade, fallback: L10n.Issue.noCraftsman)
@@ -112,6 +108,22 @@ final class ViewIssueViewController: UITableViewController, Reusable {
 		
 		DispatchQueue.main.async {
 			self.tableView.performBatchUpdates(nil) // invalidate previously calculated row heights
+		}
+	}
+	
+	private func updateImage() {
+		if let issueImage = issue.image {
+			image = UIImage(contentsOfFile: Issue.localURL(for: issueImage).path)
+			if image == nil {
+				noImageLabel.text = Localization.ImagePlaceholder.loading
+				// download
+				issue.downloadFile()?.then { [weak self] in
+					self?.updateImage()
+				}
+			}
+		} else {
+			image = nil
+			noImageLabel.text = Localization.ImagePlaceholder.notSet
 		}
 	}
 	

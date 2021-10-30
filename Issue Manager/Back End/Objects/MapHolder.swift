@@ -5,16 +5,16 @@ import GRDB
 
 protocol MapHolder: AnyStoredObject {
 	var name: String { get }
-	var children: QueryInterfaceRequest<Map> { get }
+	var children: Map.Query { get }
 	var constructionSiteID: ConstructionSite.ID { get }
 	
 	func recursiveChildren<R>(in request: R) -> R where R: DerivableRequest, R.RowDecoder == Map
-	var recursiveIssues: QueryInterfaceRequest<Issue> { get }
-	func issues(recursively: Bool) -> QueryInterfaceRequest<Issue>
+	var recursiveIssues: Issue.Query { get }
+	func issues(recursively: Bool) -> Issue.Query
 }
 
 extension MapHolder {
-	var recursiveIssues: QueryInterfaceRequest<Issue> {
+	var recursiveIssues: Issue.Query {
 		Issue
 			.all()
 			.withoutDeleted
@@ -30,7 +30,7 @@ extension DerivableRequest where RowDecoder == Map {
 }
 
 extension ConstructionSite: MapHolder {
-	var children: QueryInterfaceRequest<Map> { maps.filter(Map.Columns.parentID == nil) }
+	var children: Map.Query { maps.filter(Map.Columns.parentID == nil) }
 	
 	var constructionSiteID: ID { id }
 	
@@ -38,7 +38,7 @@ extension ConstructionSite: MapHolder {
 		request.filter(Map.Columns.constructionSiteID == id)
 	}
 	
-	func issues(recursively: Bool) -> QueryInterfaceRequest<Issue> {
+	func issues(recursively: Bool) -> Issue.Query {
 		precondition(recursively, "construction sites only have recursive issues")
 		return recursiveIssues
 	}
@@ -47,7 +47,7 @@ extension ConstructionSite: MapHolder {
 extension Map: MapHolder {
 	func recursiveChildren<R>(in request: R) -> R where R: DerivableRequest, R.RowDecoder == Map {
 		// recursive common table expression, in case you want to google that
-		return request.filter(
+		request.filter(
 			literal: """
 			\(sql: Map.databaseTableName).id IN (
 				WITH rec_maps AS (
@@ -63,7 +63,7 @@ extension Map: MapHolder {
 		)
 	}
 	
-	func issues(recursively: Bool) -> QueryInterfaceRequest<Issue> {
+	func issues(recursively: Bool) -> Issue.Query {
 		recursively ? recursiveIssues : issues
 	}
 }

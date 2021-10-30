@@ -2,6 +2,7 @@
 
 import Foundation
 import UserDefault
+import HandyOperators
 
 final class Suggestion: Codable {
 	var text: String

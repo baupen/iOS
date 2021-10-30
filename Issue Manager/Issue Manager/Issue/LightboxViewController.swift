@@ -143,12 +143,6 @@ fileprivate final class PresentAnimator: TransitionAnimator {
 fileprivate final class DismissAnimator: TransitionAnimator {
 	override func animateTransition(using transitionContext: Context) {
 		let lightboxController = transitionContext.viewController(forKey: .from) as! LightboxViewController
-		let toVC = transitionContext.viewController(forKey: .to)!
-		
-		if #available(iOS 13, *) {} else { // this seems to be done for us on iOS 13
-			transitionContext.containerView.insertSubview(toVC.view, belowSubview: lightboxController.view)
-			toVC.view.frame = transitionContext.finalFrame(for: toVC)
-		}
 		
 		let pulledView = lightboxController.imageView!
 		
