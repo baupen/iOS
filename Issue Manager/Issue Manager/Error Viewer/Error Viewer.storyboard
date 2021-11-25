@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bfN-Ba-iXv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19528" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bfN-Ba-iXv">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -28,7 +28,7 @@
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="300" horizontalCompressionResistancePriority="900" verticalCompressionResistancePriority="900" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ex5-0u-BA7" userLabel="Error Description">
                                                         <rect key="frame" x="0.0" y="0.0" width="350" height="750.66666666666663"/>
-                                                        <mutableString key="text">Einige Änderungen auf dem Gerät konnten nicht erfolgreich an die Website hochgeladen werden. Dies betrifft die folgenden Pendenzen:
+                                                        <string key="text">Einige Änderungen auf dem Gerät konnten nicht erfolgreich an die Website hochgeladen werden. Dies betrifft die folgenden Pendenzen:
 
 • #8 – neue pendenz – 3a7aa767-b274-11eb-b9d1-48df377f3c8c
 • #8 – neue pendenz – 3a7aa767-b274-11eb-b9d1-48df377f3c8c
@@ -39,7 +39,7 @@
 
 #8 – neue pendenz – 3a7aa767-b274-11eb-b9d1-48df377f3c8c:
 - Error Domain=NSCocoaErrorDomain Code=260 "ERR260.DFV" UserInfo={NSFilePath=/var/mobile/Containers/Data/Application/03507ED7-60EF-4D7E-B984-CB8F50004080/Documents/files/issue/#local#158DF002-C2DB-4E88-A1B0-0D836F6B1526.jpg, NSUnderlyingError=0x2807cc1e0 {Error Domain=NSPOSIXErrorDomain Code=2 "No such file or directory"}} #0
-  - super: NSObject</mutableString>
+  - super: NSObject</string>
                                                         <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
