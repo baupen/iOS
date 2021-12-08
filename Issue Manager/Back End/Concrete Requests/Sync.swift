@@ -127,9 +127,10 @@ extension Client {
 	
 	private func syncImageChange(for issue: Issue) -> Future<Void> {
 		issue.image
-			.map {
-				send(ImageUploadRequest(issue: issue, fileURL: Issue.localURL(for: $0))).map { path in
+			.map { localImage in
+				send(ImageUploadRequest(issue: issue, fileURL: Issue.localURL(for: localImage))).map { path in
 					let image = File<Issue>(urlPath: path)
+					try localImage.onUpload(as: image)
 					Repository.shared.save([.image], of: issue <- { $0.image = image })
 				}
 			}

@@ -51,6 +51,13 @@ extension File {
 	var localFilename: String {
 		urlPath.replacingOccurrences(of: "/", with: "#")
 	}
+	
+	func onUpload(as file: Self) throws  {
+		try manager.moveItem(
+			at: Container.localURL(for: self),
+			to: Container.localURL(for: file)
+		)
+	}
 }
 
 /// limit max concurrent file downloads
