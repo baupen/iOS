@@ -52,7 +52,7 @@ extension Map: MapHolder {
 			\(sql: Map.databaseTableName).id IN (
 				WITH rec_maps AS (
 					SELECT \(rawID) AS id
-					UNION ALL
+					UNION
 					SELECT child.id
 						FROM \(sql: Map.databaseTableName) child
 						JOIN rec_maps parent ON child.parentID = parent.id
