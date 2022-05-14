@@ -78,9 +78,13 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControll
 	private static var lastWipeVersion: Int?
 	
 	private func wipeIfNecessary() {
-		if Self.lastWipeVersion == nil, DatabaseDataStore.databaseFileExists() {
-			print("setting missing last wipe version to 1 because a database was present")
-			Self.lastWipeVersion = 1
+		if Self.lastWipeVersion == nil {
+			if DatabaseDataStore.databaseFileExists() {
+				print("setting missing last wipe version to 1 because a database was present")
+				Self.lastWipeVersion = 1
+			} else {
+				Self.lastWipeVersion = Self.wipeVersion
+			}
 		}
 		
 		if let lastWipe = Self.lastWipeVersion, lastWipe < Self.wipeVersion {
