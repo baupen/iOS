@@ -66,7 +66,7 @@ extension JSONEncodingRequest {
 protocol StatusCodeRequest: Request where Response == Void {}
 
 extension StatusCodeRequest {
-	func decode(from data: Data, using decoder: JSONDecoder) throws -> Response {}
+	func decode(from data: Data, using decoder: JSONDecoder) throws -> Response { () }
 }
 
 /// a request that expects a JSON-decodable response
