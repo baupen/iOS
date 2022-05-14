@@ -95,7 +95,7 @@ internal enum L10n {
       internal enum Stage {
         /// Neue Pendenz Hochladen
         internal static let create = L10n.tr("Localizable", "error_viewer.push_failed.stage.create")
-        /// Pendenz Löschen
+        /// Pendenz löschen
         internal static let deletion = L10n.tr("Localizable", "error_viewer.push_failed.stage.deletion")
         /// Bild Hochladen
         internal static let imageUpload = L10n.tr("Localizable", "error_viewer.push_failed.stage.image_upload")
@@ -116,7 +116,7 @@ internal enum L10n {
       internal static let button = L10n.tr("Localizable", "error_viewer.wipe_all_data.button")
       /// Abbrechen
       internal static let cancel = L10n.tr("Localizable", "error_viewer.wipe_all_data.cancel")
-      /// Alles Löschen
+      /// Alles löschen
       internal static let confirm = L10n.tr("Localizable", "error_viewer.wipe_all_data.confirm")
       /// Es werden alle Daten gelöscht, die nicht auf der Website sind. Fortfahren?
       internal static let warning = L10n.tr("Localizable", "error_viewer.wipe_all_data.warning")
@@ -316,7 +316,7 @@ internal enum L10n {
     internal static let createAccount = L10n.tr("Localizable", "register.create_account")
     /// Auf anderer Website registrieren
     internal static let customizeWebsite = L10n.tr("Localizable", "register.customize_website")
-    /// Es wird jetzt eine E-Mail verschickt, über welche der Account fertig erstellt werden kann.
+    /// Es wird jetzt eine E-Mail verschickt, über welche der Account fertig erstellt werden kann. Möglicherweise wird die E-Mail als Spam einsortiert.
     internal static let emailExplanation = L10n.tr("Localizable", "register.email_explanation")
     internal enum Alert {
       internal enum InvalidEmail {

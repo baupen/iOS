@@ -31,6 +31,7 @@ final class SuggestionStorage {
 	@UserDefault("suggestions")
 	private static var rawSuggestions: Data?
 	
+	/// dictionary of suggestions for each trade
 	private var storage: [String: [Suggestion]] {
 		didSet { save() }
 	}
