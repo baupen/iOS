@@ -91,7 +91,7 @@ extension Client {
 		guard patchErrors.isEmpty else { return patchErrors }
 		
 		let imageErrors = syncChanges(
-			for: Issue.filter(Issue.Columns.didChangeImage),
+			for: Issue.filter(Issue.Columns.didChangeImage).withoutDeleted,
 			stage: .imageUpload
 		) { issue in
 			self.syncImageChange(for: issue).map {
