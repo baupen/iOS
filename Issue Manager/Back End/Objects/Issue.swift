@@ -312,6 +312,11 @@ extension Issue {
 		didDelete = true
 	}
 	
+	mutating func undelete() {
+		meta.isDeleted = false
+		didDelete = false
+	}
+	
 	mutating func discardChangePatch() {
 		patchIfChanged = nil
 	}

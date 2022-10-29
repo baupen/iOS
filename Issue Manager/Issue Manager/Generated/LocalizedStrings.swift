@@ -10,6 +10,8 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum L10n {
+  /// Schliessen
+  internal static let closeSheet = L10n.tr("Localizable", "close_sheet")
 
   internal enum Alert {
     /// Abbrechen
@@ -71,26 +73,40 @@ internal enum L10n {
   }
 
   internal enum ErrorViewer {
+    /// Aktionen
+    internal static let actionsSection = L10n.tr("Localizable", "error_viewer.actions_section")
+    /// An Entwickler schicken
+    internal static let sendToDeveloper = L10n.tr("Localizable", "error_viewer.send_to_developer")
+    /// Details für Entwickler
+    internal static let technicalDetailsSection = L10n.tr("Localizable", "error_viewer.technical_details_section")
     /// Fehlerdetails
     internal static let title = L10n.tr("Localizable", "error_viewer.title")
     internal enum PushFailed {
+      /// Betroffene Pendenzen
+      internal static let affectedIssuesSection = L10n.tr("Localizable", "error_viewer.push_failed.affected_issues_section")
       /// Diese Änderungen verwerfen
       internal static let discardChanges = L10n.tr("Localizable", "error_viewer.push_failed.discard_changes")
-      /// Einige Änderungen auf dem Gerät konnten nicht erfolgreich an die Website hochgeladen werden. Dies betrifft die folgenden Pendenzen:
-      /// 
-      /// %@
-      /// 
-      /// Weitere Details:
-      /// 
-      /// %@
-      internal static func message(_ p1: Any, _ p2: Any) -> String {
-        return L10n.tr("Localizable", "error_viewer.push_failed.message", String(describing: p1), String(describing: p2))
-      }
+      /// Einige Änderungen auf dem Gerät konnten nicht erfolgreich an die Website hochgeladen werden.
+      internal static let message = L10n.tr("Localizable", "error_viewer.push_failed.message")
       internal enum ChangesDiscarded {
         /// Bitte nun erneut das Synchronisieren versuchen.
         internal static let message = L10n.tr("Localizable", "error_viewer.push_failed.changes_discarded.message")
         /// Änderungen verworfen!
         internal static let title = L10n.tr("Localizable", "error_viewer.push_failed.changes_discarded.title")
+      }
+      internal enum DiscardChanges {
+        /// Diese Änderungen werden verworfen, um den Sync wiederherzustellen.
+        internal static let confirm = L10n.tr("Localizable", "error_viewer.push_failed.discard_changes.confirm")
+      }
+      internal enum MassDiscardChanges {
+        /// Alle %@ Änderungen verwerfen
+        internal static func action(_ p1: Any) -> String {
+          return L10n.tr("Localizable", "error_viewer.push_failed.mass_discard_changes.action", String(describing: p1))
+        }
+        /// Es werden Änderungen an %@ Pendenzen verworfen.
+        internal static func confirm(_ p1: Any) -> String {
+          return L10n.tr("Localizable", "error_viewer.push_failed.mass_discard_changes.confirm", String(describing: p1))
+        }
       }
       internal enum Stage {
         /// Neue Pendenz Hochladen
@@ -105,11 +121,7 @@ internal enum L10n {
     }
     internal enum UnknownError {
       /// Beim Aktualisieren ist ein unbekannter Fehler aufgetreten. Folgende Informationen sollten dem Support beim Diagnostizieren helfen:
-      /// 
-      /// %@
-      internal static func message(_ p1: Any) -> String {
-        return L10n.tr("Localizable", "error_viewer.unknown_error.message", String(describing: p1))
-      }
+      internal static let message = L10n.tr("Localizable", "error_viewer.unknown_error.message")
     }
     internal enum WipeAllData {
       /// App zurücksetzen
@@ -202,8 +214,6 @@ internal enum L10n {
   internal enum ManageStorage {
     /// Alle Bilder sind geladen.
     internal static let allImagesDownloaded = L10n.tr("Localizable", "manage_storage.all_images_downloaded")
-    /// Schliessen
-    internal static let close = L10n.tr("Localizable", "manage_storage.close")
     /// %@ fehlende Bilder laden
     internal static func downloadAll(_ p1: Any) -> String {
       return L10n.tr("Localizable", "manage_storage.download_all", String(describing: p1))

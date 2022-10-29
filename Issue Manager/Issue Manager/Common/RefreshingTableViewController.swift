@@ -4,6 +4,7 @@ import UIKit
 import Promise
 import ArrayBuilder
 import HandyOperators
+import SwiftUI
 
 class RefreshingTableViewController: UITableViewController {
 	var isRefreshing = false
@@ -76,9 +77,8 @@ class RefreshingTableViewController: UITableViewController {
 			preferredStyle: .alert
 		) <- {
 			$0.addAction(UIAlertAction(title: L10n.Alert.moreInfo, style: .default) { _ in
-				let navController = ErrorViewerNavigationController.instantiate()!
-				navController.errorViewerController.error = error
-				self.presentOnTop(navController)
+				let view = ErrorDetailsView(error: error)
+				self.presentOnTop(UIHostingController(rootView: view))
 			})
 			$0.addAction(UIAlertAction(title: L10n.Alert.okay, style: .cancel))
 		})

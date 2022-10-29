@@ -154,12 +154,14 @@ extension Client {
 	}
 }
 
-struct IssuePushError: Error {
+struct IssuePushError: Error, Identifiable {
+	let id = UUID()
+	
 	var stage: Stage
 	var cause: Error
 	var issue: Issue
 	
-	enum Stage {
+	enum Stage: Equatable, CaseIterable {
 		case patch
 		case imageUpload
 		case deletion

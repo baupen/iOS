@@ -46,7 +46,7 @@ struct StorageSpaceView: View {
 			.navigationTitle(Localization.title)
 			.toolbar {
 				ToolbarItemGroup(placement: .navigationBarLeading) {
-					Button(Localization.close) {
+					Button(L10n.closeSheet) {
 						presentationMode.dismiss()
 					}
 				}
