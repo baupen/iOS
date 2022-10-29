@@ -633,7 +633,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0940;
-				LastUpgradeCheck = 1200;
+				LastUpgradeCheck = 1400;
 				ORGANIZATIONNAME = "Julian Dunskus";
 				TargetAttributes = {
 					9583C2BA20DC748800452695 = {
@@ -1012,7 +1012,6 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 76;
-				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 7T94ZGGJX3;
 				INFOPLIST_FILE = "Issue Manager/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1036,7 +1035,6 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 76;
-				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 7T94ZGGJX3;
 				INFOPLIST_FILE = "Issue Manager/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
