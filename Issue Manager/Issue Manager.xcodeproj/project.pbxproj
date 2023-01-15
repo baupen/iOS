@@ -36,7 +36,7 @@
 		953FFF6021D9BE7C00A917F2 /* Geometry+CoreGraphics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953FFF5F21D9BE7C00A917F2 /* Geometry+CoreGraphics.swift */; };
 		954D38D422423426008FD3B0 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954D38D322423426008FD3B0 /* DataStore.swift */; };
 		9550E0E620F2E70700921387 /* IssueMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9550E0E520F2E70700921387 /* IssueMarker.swift */; };
-		9550E0E820F38D7600921387 /* StatusFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9550E0E720F38D7600921387 /* StatusFilterViewController.swift */; };
+		9550E0E820F38D7600921387 /* ViewOptionsEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9550E0E720F38D7600921387 /* ViewOptionsEditor.swift */; };
 		95512B0820FBEAB300878163 /* DownloadFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95512B0720FBEAB200878163 /* DownloadFile.swift */; };
 		95512B1620FBFDE500878163 /* IssuePositioner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95512B1520FBFDE500878163 /* IssuePositioner.swift */; };
 		95512B1820FC22D200878163 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95512B1720FC22D200878163 /* CameraView.swift */; };
@@ -110,6 +110,7 @@
 		B96F079E265098F0006A1495 /* ArrayBuilder in Frameworks */ = {isa = PBXBuildFile; productRef = B96F079D265098F0006A1495 /* ArrayBuilder */; };
 		B96F9E0B272AF2C800D4929B /* StorageSpaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96F9E0A272AF2C800D4929B /* StorageSpaceView.swift */; };
 		B98E8DF32603F08600FD6386 /* Foundation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98E8DF22603F08600FD6386 /* Foundation+Extensions.swift */; };
+		B9A5B4EB2974723100D380B5 /* ViewOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A5B4EA2974723100D380B5 /* ViewOptions.swift */; };
 		B9C04D4D24453FF5008EDDEE /* UserDefault in Frameworks */ = {isa = PBXBuildFile; productRef = B9C04D4C24453FF5008EDDEE /* UserDefault */; };
 		B9CA06FB25FA6612002278FB /* DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CA06FA25FA6612002278FB /* DeepLink.swift */; };
 		B9D9B36323917FC400947CE5 /* PassThroughView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D9B36223917FC400947CE5 /* PassThroughView.swift */; };
@@ -167,7 +168,7 @@
 		953FFF5F21D9BE7C00A917F2 /* Geometry+CoreGraphics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Geometry+CoreGraphics.swift"; sourceTree = "<group>"; };
 		954D38D322423426008FD3B0 /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		9550E0E520F2E70700921387 /* IssueMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueMarker.swift; sourceTree = "<group>"; };
-		9550E0E720F38D7600921387 /* StatusFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusFilterViewController.swift; sourceTree = "<group>"; };
+		9550E0E720F38D7600921387 /* ViewOptionsEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewOptionsEditor.swift; sourceTree = "<group>"; };
 		95512B0720FBEAB200878163 /* DownloadFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadFile.swift; sourceTree = "<group>"; };
 		95512B1520FBFDE500878163 /* IssuePositioner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssuePositioner.swift; sourceTree = "<group>"; };
 		95512B1720FC22D200878163 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
@@ -239,6 +240,7 @@
 		B952A841290CE56B005EEFCA /* IssuePushError+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IssuePushError+UI.swift"; sourceTree = "<group>"; };
 		B96F9E0A272AF2C800D4929B /* StorageSpaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageSpaceView.swift; sourceTree = "<group>"; };
 		B98E8DF22603F08600FD6386 /* Foundation+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Foundation+Extensions.swift"; sourceTree = "<group>"; };
+		B9A5B4EA2974723100D380B5 /* ViewOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewOptions.swift; sourceTree = "<group>"; };
 		B9CA06FA25FA6612002278FB /* DeepLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLink.swift; sourceTree = "<group>"; };
 		B9D9B36223917FC400947CE5 /* PassThroughView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassThroughView.swift; sourceTree = "<group>"; };
 		B9DF853F25E187A800408CA3 /* ObjectID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectID.swift; sourceTree = "<group>"; };
@@ -449,6 +451,7 @@
 				95B2735220DE7AD600D2BD44 /* Multipart.swift */,
 				9511A11E20DD4F5600101ADE /* Client.swift */,
 				B9E3071225DF6C440019CFE0 /* ConcurrencyLimiter.swift */,
+				B9A5B4EA2974723100D380B5 /* ViewOptions.swift */,
 			);
 			path = "Back End";
 			sourceTree = "<group>";
@@ -470,7 +473,7 @@
 				9583C2D420DC757800452695 /* MapViewController.swift */,
 				95512B1520FBFDE500878163 /* IssuePositioner.swift */,
 				9550E0E520F2E70700921387 /* IssueMarker.swift */,
-				9550E0E720F38D7600921387 /* StatusFilterViewController.swift */,
+				9550E0E720F38D7600921387 /* ViewOptionsEditor.swift */,
 				95EE7DFA2106096100B603EF /* Issue List */,
 			);
 			path = Map;
@@ -803,6 +806,7 @@
 				9583C2BF20DC748800452695 /* AppDelegate.swift in Sources */,
 				95E83C13221A4C63000BB75F /* UIView+Extensions.swift in Sources */,
 				B90A4ED325DE155300EB56C4 /* Hydra.swift in Sources */,
+				B9A5B4EB2974723100D380B5 /* ViewOptions.swift in Sources */,
 				9511A11F20DD4F5600101ADE /* Client.swift in Sources */,
 				9597935020F7AC2400AA40C1 /* Status+Assets.swift in Sources */,
 				9583C2D520DC757800452695 /* MapViewController.swift in Sources */,
@@ -824,7 +828,7 @@
 				9554234F20DC781E009CCCE0 /* ObjectMeta.swift in Sources */,
 				9583C2D820DC76F200452695 /* ConstructionManager.swift in Sources */,
 				95339A3020F8445100A01F07 /* SeparatorLine.swift in Sources */,
-				9550E0E820F38D7600921387 /* StatusFilterViewController.swift in Sources */,
+				9550E0E820F38D7600921387 /* ViewOptionsEditor.swift in Sources */,
 				95BBF32120F26F49006E162E /* IssueCell.swift in Sources */,
 				B9124DC825E6EE2800F4D41D /* Register.swift in Sources */,
 				95EE7DFD21060CB100B603EF /* UndoBuffer.swift in Sources */,

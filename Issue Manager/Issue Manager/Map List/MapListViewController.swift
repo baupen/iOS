@@ -3,6 +3,7 @@
 import UIKit
 import Promise
 import HandyOperators
+import class Combine.AnyCancellable
 
 final class MapListViewController: RefreshingTableViewController, InstantiableViewController {
 	typealias Localization = L10n.MapList
@@ -30,10 +31,16 @@ final class MapListViewController: RefreshingTableViewController, InstantiableVi
 		}
 	}
 	
+	private var viewOptionsToken: AnyCancellable?
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		clearsSelectionOnViewWillAppear = false
+		
+		viewOptionsToken = ViewOptions.shared.didChange.sink { [unowned self] in
+			update()
+		}
 		
 		update()
 	}

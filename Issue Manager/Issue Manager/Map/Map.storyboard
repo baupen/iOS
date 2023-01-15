@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="JEX-9P-axG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="JEX-9P-axG">
     <device id="ipad11_0rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -326,9 +326,7 @@
                             </barButtonItem>
                             <barButtonItem image="filter_disabled" id="3w7-54-fmg">
                                 <connections>
-                                    <segue destination="vtj-ft-jtK" kind="popoverPresentation" identifier="" popoverAnchorBarButtonItem="3w7-54-fmg" id="s2X-hv-9QT">
-                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                    </segue>
+                                    <action selector="showStatusFilterEditor:" destination="JEX-9P-axG" id="JdF-kL-Raj"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
@@ -410,7 +408,7 @@
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="IssueCell" rowHeight="320" id="X3S-og-f79" customClass="IssueCell" customModule="Issue_Manager" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="44.5" width="420" height="320"/>
+                                                <rect key="frame" x="0.0" y="50" width="420" height="320"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="X3S-og-f79" id="dE6-pX-HX1">
                                                     <rect key="frame" x="0.0" y="0.0" width="420" height="320"/>
@@ -671,92 +669,6 @@ Maler</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="61v-Hv-iZJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1477" y="79"/>
-        </scene>
-        <!--Filter nach Status-->
-        <scene sceneID="Cng-52-hy9">
-            <objects>
-                <tableViewController storyboardIdentifier="StatusFilterViewController" id="Bfc-S7-GGm" customClass="StatusFilterViewController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="44" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="AGp-gF-W33">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="383"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="StatusCell" id="iNe-H1-nc3" customClass="StatusCell" customModule="Issue_Manager" customModuleProvider="target">
-                                <rect key="frame" x="16" y="32" width="288" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iNe-H1-nc3" id="zEe-no-L85">
-                                    <rect key="frame" x="0.0" y="0.0" width="251.5" height="44"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="xTD-Gz-5Pp">
-                                            <rect key="frame" x="16" y="11" width="227.5" height="22"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" image="flat_issue_new" translatesAutoresizingMaskIntoConstraints="NO" id="hwv-k2-g01" customClass="TrilinearImageView" customModule="Issue_Manager" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" secondItem="hwv-k2-g01" secondAttribute="height" multiplier="1:1" id="1R3-hg-ajy"/>
-                                                    </constraints>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Neu" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ALj-0b-AKs">
-                                                    <rect key="frame" x="30" y="1" width="197.5" height="20.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </stackView>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="bottomMargin" secondItem="xTD-Gz-5Pp" secondAttribute="bottom" id="0Kz-HZ-wp3"/>
-                                        <constraint firstItem="xTD-Gz-5Pp" firstAttribute="top" secondItem="zEe-no-L85" secondAttribute="topMargin" id="1Ot-NF-C2E"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="xTD-Gz-5Pp" secondAttribute="trailing" id="8M0-0D-ZME"/>
-                                        <constraint firstItem="xTD-Gz-5Pp" firstAttribute="leading" secondItem="zEe-no-L85" secondAttribute="leadingMargin" id="Ga5-lq-RcB"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="iconView" destination="hwv-k2-g01" id="4j5-6w-0VT"/>
-                                    <outlet property="nameLabel" destination="ALj-0b-AKs" id="LJp-SV-UIp"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="Bfc-S7-GGm" id="Wkr-Ms-k3T"/>
-                            <outlet property="delegate" destination="Bfc-S7-GGm" id="hEi-70-gyj"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Filter nach Status" id="OJF-lh-wTZ">
-                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="JEl-lL-nCj">
-                            <connections>
-                                <segue destination="9yb-Gn-S7D" kind="unwind" unwindAction="backToMap:" id="wIn-Kv-ygr"/>
-                            </connections>
-                        </barButtonItem>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="string" keyPath="localizedTitle" value="map.status_filter.title"/>
-                        </userDefinedRuntimeAttributes>
-                    </navigationItem>
-                    <value key="contentSizeForViewInPopover" type="size" width="320" height="320"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="WjX-dk-UF2" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="9yb-Gn-S7D" userLabel="Exit" sceneMemberID="exit"/>
-            </objects>
-            <point key="canvasLocation" x="2202" y="-630"/>
-        </scene>
-        <!--Status Filter Navigation Controller-->
-        <scene sceneID="6Vg-ET-7dq">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="vtj-ft-jtK" customClass="StatusFilterNavigationController" customModule="Issue_Manager" customModuleProvider="target" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="rNG-1A-zxC">
-                        <rect key="frame" x="0.0" y="13" width="320" height="50"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="Bfc-S7-GGm" kind="relationship" relationship="rootViewController" id="c8J-MR-epc"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sBd-Fj-8dI" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1478" y="-630"/>
         </scene>
         <!--Edit Issue-->
         <scene sceneID="i4R-q1-lTT">

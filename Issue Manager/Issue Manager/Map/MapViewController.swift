@@ -1,7 +1,8 @@
 // Created by Julian Dunskus
 
 // import ALL the things!
-import UIKit
+import SwiftUI
+import class Combine.AnyCancellable
 import SimplePDFKit
 import PullToExpand
 import Promise
@@ -60,6 +61,14 @@ final class MapViewController: UIViewController, InstantiableViewController {
 		}
 	}
 	
+	@IBAction func showStatusFilterEditor(_ sender: UIBarButtonItem) {
+		let view = ViewOptionsEditor()
+		let controller = UIHostingController(rootView: view)
+		controller.modalPresentationStyle = .popover
+		controller.popoverPresentationController!.barButtonItem = sender
+		present(controller, animated: true)
+	}
+	
 	var markers: [IssueMarker] = []
 	var markerAlpha: CGFloat = 0.1 {
 		didSet { pdfController?.overlayView.alpha = markerAlpha }
@@ -96,22 +105,25 @@ final class MapViewController: UIViewController, InstantiableViewController {
 	
 	var issues: [Issue] = []
 	
-	var visibleStatuses = Issue.allStatuses {
-		didSet {
-			updateMarkerAppearance()
-			filterItem.image = visibleStatuses == Issue.allStatuses ? #imageLiteral(resourceName: "filter_disabled.pdf") : #imageLiteral(resourceName: "filter_enabled.pdf")
-			issueListController.visibleStatuses = visibleStatuses
-			hiddenStatuses = Array(Issue.allStatuses.subtracting(visibleStatuses))
-		}
-	}
-	
-	@UserDefault("hiddenStatuses") var hiddenStatuses: [Issue.Status.Simplified] = []
+	private var viewOptionsToken: AnyCancellable?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		visibleStatuses = Issue.allStatuses.subtracting(hiddenStatuses)
+		viewOptionsToken = ViewOptions.shared.didChange.sink { [unowned self] in
+			issues = (map?.sortedIssues.fetchAll).map(Repository.read) ?? []
+			updateMarkers()
+			applyViewOptions()
+		}
+		
 		update()
+		applyViewOptions()
+	}
+	
+	func applyViewOptions() {
+		let options = ViewOptions.shared
+		filterItem.image = options.isFiltering ? #imageLiteral(resourceName: "filter_enabled.pdf") : #imageLiteral(resourceName: "filter_disabled.pdf")
+		issueListController.visibleStatuses = options.visibleStatuses
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -141,11 +153,6 @@ final class MapViewController: UIViewController, InstantiableViewController {
 			issueListController = issueList
 			issueListController.issueCellDelegate = self
 			issueListController.pullableView = pullableView
-		case let statusFilterNav as StatusFilterNavigationController:
-			let filterController = statusFilterNav.statusFilterController
-			filterController.selected = visibleStatuses
-			filterController.delegate = self
-			segue.destination.presentationController?.delegate = self
 		case let editIssueNav as EditIssueNavigationController:
 			let editController = editIssueNav.editIssueController
 			editController.isCreating = true // otherwise we wouldn't be using a segue
@@ -265,6 +272,7 @@ final class MapViewController: UIViewController, InstantiableViewController {
 	}
 	
 	func updateMarkerAppearance() {
+		let visibleStatuses = ViewOptions.shared.visibleStatuses
 		for marker in markers {
 			marker.update()
 			marker.isStatusShown = visibleStatuses.contains(marker.issue.status.simplified)
@@ -304,12 +312,6 @@ extension MapViewController: SimplePDFViewControllerDelegate {
 		fallbackLabel.text = nil
 		
 		markerAlpha = 1
-	}
-}
-
-extension MapViewController: StatusFilterViewControllerDelegate {
-	func statusFilterChanged(to newValue: Set<Issue.Status.Simplified>) {
-		visibleStatuses = newValue
 	}
 }
 

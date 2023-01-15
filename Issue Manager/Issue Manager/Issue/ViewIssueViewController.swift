@@ -7,7 +7,7 @@ final class ViewIssueViewController: UITableViewController, InstantiableViewCont
 	
 	static let storyboardName = "View Issue"
 	
-	@IBOutlet private var iconView: TrilinearImageView!
+	@IBOutlet private var iconView: UIImageView!
 	@IBOutlet private var numberLabel: UILabel!
 	@IBOutlet private var markButton: UIButton!
 	@IBOutlet private var clientModeLabel: UILabel!
@@ -174,5 +174,13 @@ final class ViewIssueViewController: UITableViewController, InstantiableViewCont
 	
 	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		UITableView.automaticDimension
+	}
+}
+
+final class TrilinearImageView: UIImageView {
+	override func awakeFromNib() {
+		super.awakeFromNib()
+		
+		layer.minificationFilter = .trilinear
 	}
 }

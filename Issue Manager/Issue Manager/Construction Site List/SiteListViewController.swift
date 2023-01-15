@@ -3,6 +3,7 @@
 import UIKit
 import Promise
 import SwiftUI
+import class Combine.AnyCancellable
 
 final class SiteListViewController: RefreshingTableViewController, InstantiableViewController {
 	fileprivate typealias Localization = L10n.SiteList
@@ -21,9 +22,7 @@ final class SiteListViewController: RefreshingTableViewController, InstantiableV
 	@IBOutlet private var fileProgressLabel: UILabel!
 	
 	@IBAction func clientModeSwitched() {
-		Issue.isInClientMode = clientModeSwitch.isOn
-		updateClientModeAppearance()
-		siteListView.reloadData()
+		ViewOptions.shared.isInClientMode = clientModeSwitch.isOn
 	}
 	
 	@IBAction func backToSiteList(_ segue: UIStoryboardSegue) {
@@ -70,14 +69,19 @@ final class SiteListViewController: RefreshingTableViewController, InstantiableV
 		}
 	}
 	
+	private var viewOptionsToken: AnyCancellable?
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		let user = Client.shared.localUser!
 		welcomeLabel.text = Localization.welcome(user.givenName ?? "")
 		
-		clientModeSwitch.isOn = Issue.isInClientMode
 		updateClientModeAppearance()
+		viewOptionsToken = ViewOptions.shared.didChange.sink { [unowned self] in
+			updateClientModeAppearance()
+			siteListView.reloadData()
+		}
 		
 		updateContent()
 	}
@@ -125,11 +129,11 @@ final class SiteListViewController: RefreshingTableViewController, InstantiableV
 	}
 	
 	func updateClientModeAppearance() {
+		clientModeSwitch.isOn = Issue.isInClientMode
 		let color = Issue.isInClientMode ? UIColor.clientMode : nil
 		UIView.animate(withDuration: 0.1) {
 			self.clientModeCell.backgroundColor = color
 		}
-		UINavigationBar.appearance().barTintColor = color
 	}
 	
 	func showMapList(for site: ConstructionSite, animated: Bool = true) {

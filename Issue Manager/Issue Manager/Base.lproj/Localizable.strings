@@ -59,6 +59,8 @@
 "alert.wiped.quit" = "App schliessen";
 // CONTEXT: Titel für den Alert, dass alle lokalen Daten gelöscht wurden.
 "alert.wiped.title" = "App zurückgesetzt!";
+// CONTEXT: Knopf, um etwas abzuschliessen. Wird meist von iOS selbst übersetzt, aber nicht immer, z.B. im View-Options-Popup
+"button.done" = "Fertig";
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Close
@@ -240,17 +242,6 @@
 // MARK: Map.pdf
 // CONTEXT: Wird angezeigt, während der Grundriss geladen wird.
 "map.pdf_loading" = "Bauplan wird geladen…";
-
-////////////////////////////////////////////////////////////////////////////////
-// MARK: Map.status
-// CONTEXT: Wird unter der Liste im Filter angezeigt, wenn alle Status angezeigt werden.
-"map.status_filter.all_selected" = "Es werden alle Pendenzen angezeigt.";
-// CONTEXT: Wird unter der Liste im Filter angezeigt, wenn keine Status angezeigt werden.
-"map.status_filter.none_selected" = "Es werden keine Pendenzen angezeigt.";
-// CONTEXT: Wird unter der Liste im Filter angezeigt, wenn nur manche Status angezeigt werden.
-"map.status_filter.some_selected" = "Es werden nur Pendenzen mit einem der ausgewählten Status angezeigt.";
-// CONTEXT: Titel für das Popup, womit die Pendenzen gefiltert werden können.
-"map.status_filter.title" = "Filter nach Status";
 // CONTEXT: Titel für die Grundrissansicht. (Wird angezeigt, wenn kein Grundriss ausgewählt ist.)
 "map.title" = "Bauplan";
 
@@ -431,3 +422,15 @@
 "view_issue.title_editing" = "Pendenz bearbeiten";
 // CONTEXT: Titel für das Popup, worin die Details einer Pendenz angezeigt werden.
 "view_issue.title_viewing" = "Details";
+// CONTEXT: Beschriftung für den Abnahmemodus-Toggle im View Options popup
+"view_options.client_mode" = "Abnahmemodus";
+// CONTEXT: Wird unter der Liste im Filter angezeigt, wenn alle Status angezeigt werden.
+"view_options.status_filter.all_selected" = "Es werden alle Pendenzen angezeigt.";
+// CONTEXT: Wird unter der Liste im Filter angezeigt, wenn keine Status angezeigt werden.
+"view_options.status_filter.none_selected" = "Es werden keine Pendenzen angezeigt.";
+// CONTEXT: Wird unter der Liste im Filter angezeigt, wenn nur manche Status angezeigt werden.
+"view_options.status_filter.some_selected" = "Es werden nur Pendenzen mit einem der ausgewählten Status angezeigt.";
+// CONTEXT: Titel für das Popup, womit die Pendenzen gefiltert werden können.
+"view_options.status_filter.title" = "Filter nach Status";
+// CONTEXT: Titel für das View-Options-Popup mit Einstellungen zur Ansicht (Filter etc.)
+"view_options.title" = "Ansicht Anpassen";

@@ -6,7 +6,9 @@ import Promise
 import UserDefault
 
 struct Issue: Equatable {
-	@UserDefault("isInClientMode") static var isInClientMode = false
+	static var isInClientMode: Bool {
+		ViewOptions.shared.isInClientMode
+	}
 	
 	private(set) var meta: Meta
 	let constructionSiteID: ConstructionSite.ID
