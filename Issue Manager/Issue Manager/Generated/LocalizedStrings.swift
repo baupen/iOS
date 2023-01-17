@@ -502,6 +502,24 @@ internal enum L10n {
     internal static let clientMode = L10n.tr("Localizable", "view_options.client_mode", fallback: "Abnahmemodus")
     /// Ansicht Anpassen
     internal static let title = L10n.tr("Localizable", "view_options.title", fallback: "Ansicht Anpassen")
+    internal enum CraftsmanFilter {
+      /// Alle verstecken
+      internal static let hideAll = L10n.tr("Localizable", "view_options.craftsman_filter.hide_all", fallback: "Alle verstecken")
+      /// Alle anzeigen
+      internal static let showAll = L10n.tr("Localizable", "view_options.craftsman_filter.show_all", fallback: "Alle anzeigen")
+      /// Nach Unternehmer Filtern
+      internal static let title = L10n.tr("Localizable", "view_options.craftsman_filter.title", fallback: "Nach Unternehmer Filtern")
+      internal enum Label {
+        /// alle sichtbar
+        internal static let allVisible = L10n.tr("Localizable", "view_options.craftsman_filter.label.all_visible", fallback: "alle sichtbar")
+        /// Unternehmer
+        internal static let title = L10n.tr("Localizable", "view_options.craftsman_filter.label.title", fallback: "Unternehmer")
+        /// %@ sichtbar
+        internal static func visibleCount(_ p1: Any) -> String {
+          return L10n.tr("Localizable", "view_options.craftsman_filter.label.visible_count", String(describing: p1), fallback: "%@ sichtbar")
+        }
+      }
+    }
     internal enum StatusFilter {
       /// Es werden alle Pendenzen angezeigt.
       internal static let allSelected = L10n.tr("Localizable", "view_options.status_filter.all_selected", fallback: "Es werden alle Pendenzen angezeigt.")

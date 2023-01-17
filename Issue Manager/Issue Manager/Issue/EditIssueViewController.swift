@@ -186,6 +186,10 @@ final class EditIssueViewController: UITableViewController, InstantiableViewCont
 		markButton.setImage(issue.isMarked ? #imageLiteral(resourceName: "mark_marked.pdf") : #imageLiteral(resourceName: "mark_unmarked.pdf"), for: .normal)
 		
 		craftsman = Repository.read(issue.craftsman)
+		if isCreating, craftsman == nil, let filtered = ViewOptions.shared.onlyCraftsman(in: site) {
+			craftsman = Repository.read(filtered.get)
+		}
+		
 		craftsmanNameLabel.setText(to: craftsman?.company, fallback: L10n.Issue.noCraftsman)
 		trade = craftsman?.trade
 		

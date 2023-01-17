@@ -62,7 +62,10 @@ final class MapViewController: UIViewController, InstantiableViewController {
 	}
 	
 	@IBAction func showStatusFilterEditor(_ sender: UIBarButtonItem) {
-		let view = ViewOptionsEditor()
+		guard let holder else { return } // should be disabled otherwise
+		let site = Repository.read(holder.constructionSiteID.get)!
+		let craftsmen = Repository.read(site.craftsmen.fetchAll)
+		let view = ViewOptionsEditor(craftsmen: craftsmen)
 		let controller = UIHostingController(rootView: view)
 		controller.modalPresentationStyle = .popover
 		controller.popoverPresentationController!.barButtonItem = sender
@@ -194,6 +197,7 @@ final class MapViewController: UIViewController, InstantiableViewController {
 		navigationItem.title = holder?.name ?? Localization.title
 		
 		addItem.isEnabled = map != nil
+		filterItem.isEnabled = holder != nil
 		
 		issues = (map?.sortedIssues.fetchAll).map(Repository.read) ?? []
 		
@@ -272,10 +276,8 @@ final class MapViewController: UIViewController, InstantiableViewController {
 	}
 	
 	func updateMarkerAppearance() {
-		let visibleStatuses = ViewOptions.shared.visibleStatuses
 		for marker in markers {
 			marker.update()
-			marker.isStatusShown = visibleStatuses.contains(marker.issue.status.simplified)
 		}
 	}
 	

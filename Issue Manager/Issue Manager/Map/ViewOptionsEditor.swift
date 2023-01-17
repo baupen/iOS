@@ -6,6 +6,7 @@ struct ViewOptionsEditor: View {
 	typealias Status = Issue.Status.Simplified
 	typealias Localization = L10n.ViewOptions
 	
+	var craftsmen: [Craftsman]
 	@ObservedObject var options = ViewOptions.shared
 	
 	@Environment(\.presentationMode) @Binding private var presentationMode
@@ -15,6 +16,27 @@ struct ViewOptionsEditor: View {
 			Form {
 				Section {
 					Toggle(L10n.SiteList.ClientMode.title, isOn: $options.isInClientMode)
+					NavigationLink {
+						craftsmanFilter()
+					} label: {
+						HStack {
+							Text(Localization.CraftsmanFilter.Label.title)
+							
+							Spacer()
+							
+							Group {
+								let shown = craftsmen.filter { !options.hiddenCraftsmen.contains($0.id) }
+								if options.hiddenCraftsmen.isEmpty {
+									Text(Localization.CraftsmanFilter.Label.allVisible)
+								} else if shown.count == 1 {
+									Text(shown.first!.company)
+								} else {
+									Text(Localization.CraftsmanFilter.Label.visibleCount(shown.count))
+								}
+							}
+							.foregroundColor(.secondary)
+						}
+					}
 				}
 				
 				Section {
@@ -37,6 +59,46 @@ struct ViewOptionsEditor: View {
 			}
 		}
 		.navigationViewStyle(.stack)
+	}
+	
+	@ViewBuilder
+	func craftsmanFilter() -> some View {
+		List {
+			Section {
+				Button {
+					options.hiddenCraftsmen = []
+				} label: {
+					Text(Localization.CraftsmanFilter.showAll)
+				}
+				
+				Button {
+					options.hiddenCraftsmen = .init(craftsmen.lazy.map(\.id))
+				} label: {
+					Text(Localization.CraftsmanFilter.hideAll)
+				}
+			}
+			
+			Section {
+				ForEach(craftsmen, id: \.id) { craftsman in
+					Button {
+						options.hiddenCraftsmen.formSymmetricDifference([craftsman.id])
+					} label: {
+						HStack {
+							VStack(alignment: .leading) {
+								Text(craftsman.company)
+									.foregroundColor(.primary)
+								Text(craftsman.trade)
+									.foregroundColor(.secondary)
+							}
+							Spacer()
+							Image(systemName: "checkmark")
+								.opacity(options.hiddenCraftsmen.contains(craftsman.id) ? 0 : 1)
+						}
+					}
+				}
+			}
+		}
+		.navigationTitle(Localization.CraftsmanFilter.title)
 	}
 	
 	@ViewBuilder
@@ -72,8 +134,21 @@ struct ViewOptionsEditor: View {
 
 struct StatusFilterEditor_Previews: PreviewProvider {
 	static var previews: some View {
-		ViewOptionsEditor(options: .init(visibleStatuses: []))
-		ViewOptionsEditor(options: .init(visibleStatuses: [.new]))
-		ViewOptionsEditor(options: .init(visibleStatuses: [.new, .registered, .resolved, .closed]))
+		let siteID = ConstructionSite.ID()
+		let craftsmen = (1...3).map {
+			Craftsman(meta: .init(), constructionSiteID: siteID, contactName: "Kontakt", company: "Unternehmer #\($0)", trade: "Gewerk #\($0)")
+		}
+		ViewOptionsEditor(craftsmen: craftsmen, options: .init(
+			visibleStatuses: [],
+			hiddenCraftsmen: []
+		))
+		ViewOptionsEditor(craftsmen: craftsmen, options: .init(
+			visibleStatuses: [.new],
+			hiddenCraftsmen: .init(craftsmen.dropLast().map(\.id))
+		))
+		ViewOptionsEditor(craftsmen: craftsmen, options: .init(
+			visibleStatuses: [.new, .registered, .resolved, .closed],
+			hiddenCraftsmen: .init(craftsmen.map(\.id))
+		))
 	}
 }

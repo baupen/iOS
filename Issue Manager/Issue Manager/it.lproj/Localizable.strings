@@ -59,7 +59,7 @@
 "alert.wiped.quit" = "Chiudere l'applicazione";
 // CONTEXT: Titel für den Alert, dass alle lokalen Daten gelöscht wurden.
 "alert.wiped.title" = "App reset!";
-// CONTEXT: Knopf, um etwas abzuschliessen. Wird meist von iOS selbst übersetzt, aber nicht immer, z.B. im View-Options-Popup
+// CONTEXT: Knopf, um etwas abzuschliessen (wie "Bearbeiten"/"Fertig"). Wird meist von iOS selbst übersetzt, aber nicht immer, z.B. im View-Options-Popup
 "button.done" = "Fine";
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -424,6 +424,18 @@
 "view_issue.title_viewing" = "Dettagli della pendenza";
 // CONTEXT: Beschriftung für den Abnahmemodus-Toggle im View Options popup
 "view_options.client_mode" = "Modalità sopralluogo";
+// CONTEXT: Knopf, um alle Unternehmer zu verstecken
+"view_options.craftsman_filter.hide_all" = "Nascondi tutti";
+// CONTEXT: Beschriftung, wenn alle Unternehmer sichtbar sind
+"view_options.craftsman_filter.label.all_visible" = "tutti visibile";
+// CONTEXT: Beschriftung für den Knopf, um nach Unternehmer zu filtern
+"view_options.craftsman_filter.label.title" = "Operaio";
+// CONTEXT: Beschriftung, wenn mehr oder weniger als 1 Unternehmer sichtbar ist. %s wird durch die Anzahl sichtbarer Unternehmer ersetzt.
+"view_options.craftsman_filter.label.visible_count" = "%@ visibile";
+// CONTEXT: Knopf, um alle Unternehmer anzuzeigen
+"view_options.craftsman_filter.show_all" = "Mostra tutti";
+// CONTEXT: Überschrift für den Unternehmerfilter
+"view_options.craftsman_filter.title" = "Filtra per operaio";
 // CONTEXT: Wird unter der Liste im Filter angezeigt, wenn alle Status angezeigt werden.
 "view_options.status_filter.all_selected" = "Visualizzare tutte le pendenze.";
 // CONTEXT: Wird unter der Liste im Filter angezeigt, wenn keine Status angezeigt werden.
