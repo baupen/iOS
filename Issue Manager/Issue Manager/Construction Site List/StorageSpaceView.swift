@@ -14,7 +14,7 @@ struct StorageSpaceView: View {
 	@State var lastUpdate = Date()
 	@State var downloadProgress = FileDownloadProgress.done
 	
-	var sites = Repository.shared.read(ConstructionSite.fetchAll)
+	var sites = Repository.read(ConstructionSite.fetchAll)
 	
 	@Environment(\.presentationMode) @Binding var presentationMode
 	

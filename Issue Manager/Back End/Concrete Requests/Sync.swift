@@ -143,7 +143,7 @@ extension Client {
 		performing upload: @escaping (Issue) -> Future<Void>
 	) -> [IssuePushError] {
 		// no concurrency to ensure correct ordering and avoid unforeseen issues
-		Repository.shared.read(query.fetchAll).compactMap { issue in
+		Repository.read(query.fetchAll).compactMap { issue in
 			do {
 				try upload(issue).await()
 				return nil
@@ -183,7 +183,7 @@ extension Client {
 		onIssueImageProgress: ((FileDownloadProgress) -> Void)? = nil
 	) -> Future<Void> {
 		sync(onProgress: onProgress, onIssueImageProgress: onIssueImageProgress) { onProgress in
-			let sites = Repository.shared.read(ConstructionSite.fetchAll)
+			let sites = Repository.read(ConstructionSite.fetchAll)
 			for site in sites {
 				onProgress?(.pullingSiteData(site))
 				try self.doPullRemoteChanges(for: site).await()
@@ -197,7 +197,7 @@ extension Client {
 		onProgress: ((SyncProgress) -> Void)? = nil
 	) -> Future<Void> {
 		sync(onProgress: onProgress) { onProgress in
-			guard let site = Repository.shared.read(siteID.get)
+			guard let site = Repository.read(siteID.get)
 			else { throw SyncError.siteAccessRemoved }
 			onProgress?(.pullingSiteData(site))
 			try self.doPullRemoteChanges(for: site).await()
@@ -239,7 +239,7 @@ extension Client {
 		[
 			doPullChangedObjects(existing: ConstructionManager.all(), context: ())
 				.ignoringValue()
-				.map { self.localUser = Repository.shared.object(self.localUser!.id) },
+				.map { self.localUser = Repository.object(self.localUser!.id) },
 			doPullChangedObjects(existing: ConstructionSite.none(), context: ())
 				// remove sites we don't have access to
 				.map { $0
@@ -304,7 +304,7 @@ enum SyncError: Error {
 
 private extension QueryInterfaceRequest where RowDecoder: StoredObject {
 	func maxLastChangeTime() -> Date {
-		Repository.shared.read(
+		Repository.read(
 			self
 				.select(max(Issue.Meta.Columns.lastChangeTime), as: Date.self)
 				.expectingSingleResult()

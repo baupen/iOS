@@ -132,7 +132,7 @@ final class ViewIssueViewController: UITableViewController, InstantiableViewCont
 		issue.saveAndSync()
 			.always { self.isSyncing = false }
 			.then { [parent] in
-				self.issue = Repository.shared.object(self.issue.id)
+				self.issue = Repository.object(self.issue.id)
 				(parent as? MapViewController)?.updateFromRepository()
 			}
 	}

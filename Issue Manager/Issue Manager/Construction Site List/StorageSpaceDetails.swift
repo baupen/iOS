@@ -20,7 +20,7 @@ struct StorageSpaceDetails {
 		return BasicFuture(asyncOn: Self.calculationQueue) {
 			defer { isCalculating = false }
 			
-			let issues = Repository.shared.read(Issue.all().withoutDeleted.fetchAll)
+			let issues = Repository.read(Issue.all().withoutDeleted.fetchAll)
 			let issuesWithFiles = issues.compactMap { issue in
 				issue.file.map { (issue: issue, file: $0) }
 			}

@@ -201,7 +201,7 @@ final class EditIssueViewController: UITableViewController, InstantiableViewCont
 	}
 	
 	private func onSave() {
-		let originalTrade = (original?.craftsman).flatMap(Repository.shared.read)?.trade
+		let originalTrade = (original?.craftsman).flatMap(Repository.read)?.trade
 		if trade != originalTrade || issue.description != original?.description {
 			SuggestionStorage.shared.decrementSuggestion(
 				description: original?.description,

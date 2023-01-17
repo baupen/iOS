@@ -53,17 +53,17 @@ extension Issue.Status {
 			return Localization.new
 		}
 		
-		let name = Repository.shared.object(registeredBy)?.fullName ?? Localization.unknownEntity
+		let name = Repository.object(registeredBy)?.fullName ?? Localization.unknownEntity
 		var description = Localization.registeredBy(name)
 		
 		if let resolvedBy = resolvedBy {
-			let name = Repository.shared.object(resolvedBy)?.company ?? Localization.unknownEntity
+			let name = Repository.object(resolvedBy)?.company ?? Localization.unknownEntity
 			description += "\n"
 			description += Localization.resolvedBy(name)
 		}
 		
 		if let closedBy = closedBy {
-			let name = Repository.shared.object(closedBy)?.fullName ?? Localization.unknownEntity
+			let name = Repository.object(closedBy)?.fullName ?? Localization.unknownEntity
 			description += "\n"
 			description += Localization.closedBy(name)
 		}

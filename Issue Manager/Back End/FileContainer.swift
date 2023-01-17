@@ -140,7 +140,7 @@ extension FileContainer {
 	static func purgeInactiveFiles(
 		for containers: Self.Query = Self.all()
 	) {
-		let allContainers = Repository.shared.read(containers.fetchAll)
+		let allContainers = Repository.read(containers.fetchAll)
 		for container in allContainers where !container.shouldAutoDownloadFile {
 			container.deleteFile()
 		}
@@ -153,7 +153,7 @@ extension FileContainer {
 	) -> Future<Void> {
 		onProgress?(.undetermined)
 		
-		let allContainers = Repository.shared.read(
+		let allContainers = Repository.read(
 			(containers ?? all())
 				.order(Meta.Columns.lastChangeTime.desc)
 				.withoutDeleted

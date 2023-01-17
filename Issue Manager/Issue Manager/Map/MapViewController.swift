@@ -280,7 +280,7 @@ final class MapViewController: UIViewController, InstantiableViewController {
 	}
 	
 	func showDetails(for issue: Issue) {
-		guard let issue = Repository.shared.read(issue.id.get) else {
+		guard let issue = Repository.read(issue.id.get) else {
 			// there's a time between uploading an issue (giving it a new id) and uploading its image (after which we'd refresh our view) during which we're displaying an outdated id.
 			updateFromRepository() // must have been showing outdated data
 			return
