@@ -15,28 +15,8 @@ struct ViewOptionsEditor: View {
 		NavigationView {
 			Form {
 				Section {
-					Toggle(L10n.SiteList.ClientMode.title, isOn: $options.isInClientMode)
-					NavigationLink {
-						craftsmanFilter()
-					} label: {
-						HStack {
-							Text(Localization.CraftsmanFilter.Label.title)
-							
-							Spacer()
-							
-							Group {
-								let shown = craftsmen.filter { !options.hiddenCraftsmen.contains($0.id) }
-								if options.hiddenCraftsmen.isEmpty {
-									Text(Localization.CraftsmanFilter.Label.allVisible)
-								} else if shown.count == 1 {
-									Text(shown.first!.company)
-								} else {
-									Text(Localization.CraftsmanFilter.Label.visibleCount(shown.count))
-								}
-							}
-							.foregroundColor(.secondary)
-						}
-					}
+					clientModeToggle()
+					craftsmanFilterLink()
 				}
 				
 				Section {
@@ -59,6 +39,41 @@ struct ViewOptionsEditor: View {
 			}
 		}
 		.navigationViewStyle(.stack)
+	}
+	
+	@ViewBuilder
+	func clientModeToggle() -> some View {
+		let toggle = Toggle(L10n.SiteList.ClientMode.title, isOn: $options.isInClientMode)
+		if #available(iOS 15.0, *) {
+			toggle.tint(.accentColor)
+		} else {
+			// green is fine i guess lol
+			toggle
+		}
+	}
+	
+	func craftsmanFilterLink() -> some View {
+		NavigationLink {
+			craftsmanFilter()
+		} label: {
+			HStack {
+				Text(Localization.CraftsmanFilter.Label.title)
+				
+				Spacer()
+				
+				Group {
+					let shown = craftsmen.filter { !options.hiddenCraftsmen.contains($0.id) }
+					if options.hiddenCraftsmen.isEmpty {
+						Text(Localization.CraftsmanFilter.Label.allVisible)
+					} else if shown.count == 1 {
+						Text(shown.first!.company)
+					} else {
+						Text(Localization.CraftsmanFilter.Label.visibleCount(shown.count))
+					}
+				}
+				.foregroundColor(.secondary)
+			}
+		}
 	}
 	
 	@ViewBuilder
@@ -144,6 +159,7 @@ struct StatusFilterEditor_Previews: PreviewProvider {
 		))
 		ViewOptionsEditor(craftsmen: craftsmen, options: .init(
 			visibleStatuses: [.new],
+			isInClientMode: true,
 			hiddenCraftsmen: .init(craftsmen.dropLast().map(\.id))
 		))
 		ViewOptionsEditor(craftsmen: craftsmen, options: .init(
