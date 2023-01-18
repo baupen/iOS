@@ -79,6 +79,8 @@ struct ViewOptionsEditor: View {
 	@ViewBuilder
 	func craftsmanFilter() -> some View {
 		List {
+			let craftsmanIDs: Set<Craftsman.ID?> = Set(craftsmen.lazy.map(\.id))
+			
 			Section {
 				Button {
 					options.hiddenCraftsmen = []
@@ -87,13 +89,27 @@ struct ViewOptionsEditor: View {
 				}
 				
 				Button {
-					options.hiddenCraftsmen = .init(craftsmen.lazy.map(\.id))
+					options.hiddenCraftsmen = craftsmanIDs.union([nil])
 				} label: {
 					Text(Localization.CraftsmanFilter.hideAll)
 				}
 			}
 			
 			Section {
+				Button {
+					options.hiddenCraftsmen.formSymmetricDifference([nil])
+				} label: {
+					HStack {
+						VStack(alignment: .leading) {
+							Text(Localization.CraftsmanFilter.withoutCraftsman)
+								.foregroundColor(.primary)
+						}
+						Spacer()
+						Image(systemName: "checkmark")
+							.opacity(options.hiddenCraftsmen.contains(nil) ? 0 : 1)
+					}
+				}
+				
 				ForEach(craftsmen, id: \.id) { craftsman in
 					Button {
 						options.hiddenCraftsmen.formSymmetricDifference([craftsman.id])

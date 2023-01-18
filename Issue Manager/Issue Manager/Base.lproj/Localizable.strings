@@ -436,6 +436,8 @@
 "view_options.craftsman_filter.show_all" = "Alle anzeigen";
 // CONTEXT: Überschrift für den Unternehmerfilter
 "view_options.craftsman_filter.title" = "Nach Unternehmer Filtern";
+// CONTEXT: Eintrag, um Pendenzen anzuzeigen, die noch keinen Unternehmer zugewiesen bekommen haben.
+"view_options.craftsman_filter.without_craftsman" = "Ohne Unternehmer";
 // CONTEXT: Wird unter der Liste im Filter angezeigt, wenn alle Status angezeigt werden.
 "view_options.status_filter.all_selected" = "Es werden alle Pendenzen angezeigt.";
 // CONTEXT: Wird unter der Liste im Filter angezeigt, wenn keine Status angezeigt werden.

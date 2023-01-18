@@ -31,7 +31,7 @@ final class ViewOptions: ObservableObject {
 	}
 	
 	@UserDefault("hiddenCraftsmen")
-	private static var hiddenCraftsmen: Set<Craftsman.ID> = []
+	private static var hiddenCraftsmen: Set<Craftsman.ID?> = []
 	
 	@Published var hiddenCraftsmen = ViewOptions.hiddenCraftsmen {
 		didSet {

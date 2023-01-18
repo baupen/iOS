@@ -28,17 +28,15 @@ final class IssueMarker: UIView {
 		button.addTarget(self, action: #selector(buttonPressed(_:)), for: .touchUpInside)
 	}
 	
-	required init?(coder aDecoder: NSCoder) {
+	required init?(coder: NSCoder) {
 		fatalError()
 	}
 	
 	func matchesFilter() -> Bool {
 		let options = ViewOptions.shared
-		guard options.visibleStatuses.contains(issue.status.simplified) else { return false }
-		if let craftsman = issue.craftsmanID {
-			guard !options.hiddenCraftsmen.contains(craftsman) else { return false }
-		}
 		return true
+		&& options.visibleStatuses.contains(issue.status.simplified)
+		&& !options.hiddenCraftsmen.contains(issue.craftsmanID)
 	}
 	
 	@objc func buttonPressed(_ sender: UIButton) {

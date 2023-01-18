@@ -509,6 +509,8 @@ internal enum L10n {
       internal static let showAll = L10n.tr("Localizable", "view_options.craftsman_filter.show_all", fallback: "Alle anzeigen")
       /// Nach Unternehmer Filtern
       internal static let title = L10n.tr("Localizable", "view_options.craftsman_filter.title", fallback: "Nach Unternehmer Filtern")
+      /// Ohne Unternehmer
+      internal static let withoutCraftsman = L10n.tr("Localizable", "view_options.craftsman_filter.without_craftsman", fallback: "Ohne Unternehmer")
       internal enum Label {
         /// alle sichtbar
         internal static let allVisible = L10n.tr("Localizable", "view_options.craftsman_filter.label.all_visible", fallback: "alle sichtbar")
