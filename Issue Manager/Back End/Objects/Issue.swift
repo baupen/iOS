@@ -15,7 +15,12 @@ struct Issue: Equatable {
 	let mapID: Map.ID?
 	
 	let number: Int?
-	let wasAddedWithClient: Bool // "abnahmemodus"
+	var wasAddedWithClient: Bool { // "abnahmemodus"
+		didSet {
+			guard wasAddedWithClient != oldValue else { return }
+			patch.wasAddedWithClient = wasAddedWithClient
+		}
+	}
 	let deadline: Date?
 	
 	let position: Position?

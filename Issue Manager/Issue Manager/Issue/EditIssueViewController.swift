@@ -19,6 +19,7 @@ final class EditIssueViewController: UITableViewController, InstantiableViewCont
 	
 	@IBOutlet private var numberLabel: UILabel!
 	@IBOutlet private var markButton: UIButton!
+	@IBOutlet private var clientModeSwitch: UISwitch!
 	
 	@IBOutlet private var noImageLabel: UILabel!
 	@IBOutlet private var imageView: UIImageView!
@@ -48,6 +49,10 @@ final class EditIssueViewController: UITableViewController, InstantiableViewCont
 		DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) { [tableView] in
 			tableView!.scrollToRow(at: indexPath, at: .top, animated: true)
 		}
+	}
+	
+	@IBAction func setClientMode(_ sender: UISwitch) {
+		issue.wasAddedWithClient = sender.isOn
 	}
 	
 	@IBAction func descriptionChanged() {
@@ -184,6 +189,7 @@ final class EditIssueViewController: UITableViewController, InstantiableViewCont
 		
 		numberLabel.setText(to: issue.number.map { "#\($0)" }, fallback: L10n.Issue.unregistered)
 		markButton.setImage(issue.isMarked ? #imageLiteral(resourceName: "mark_marked.pdf") : #imageLiteral(resourceName: "mark_unmarked.pdf"), for: .normal)
+		clientModeSwitch.isOn = issue.wasAddedWithClient
 		
 		craftsman = Repository.read(issue.craftsman)
 		if isCreating, craftsman == nil, let filtered = ViewOptions.shared.onlyCraftsman(in: site) {
