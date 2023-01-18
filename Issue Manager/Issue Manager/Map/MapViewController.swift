@@ -64,7 +64,7 @@ final class MapViewController: UIViewController, InstantiableViewController {
 	@IBAction func showStatusFilterEditor(_ sender: UIBarButtonItem) {
 		guard let holder else { return } // should be disabled otherwise
 		let site = Repository.read(holder.constructionSiteID.get)!
-		let craftsmen = Repository.read(site.craftsmen.fetchAll)
+		let craftsmen = Repository.read(site.craftsmen.order(Craftsman.Columns.company).fetchAll)
 		let view = ViewOptionsEditor(craftsmen: craftsmen)
 		let controller = UIHostingController(rootView: view)
 		controller.modalPresentationStyle = .popover
