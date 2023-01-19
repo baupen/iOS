@@ -26,8 +26,11 @@ final class MapViewController: UIViewController, InstantiableViewController {
 	@IBOutlet private var issuePositioner: IssuePositioner!
 	@IBOutlet private var addUnplacedContainer: UIView!
 	
-	// the filter popover's done button and the add marker popover's cancel button link to this
-	@IBAction func backToMap(_ segue: UIStoryboardSegue) {
+	// the filter popover's done button and the issue editor's reposition button link to this
+	@IBAction func backToMap(_ segue: UIStoryboardSegue) {}
+	
+	// the issue editor & viewers' close buttons link to this
+	@IBAction func backToMapCancelling(_ segue: UIStoryboardSegue) {
 		cancelAddingIssue() // even if issue editor closed by cancelling
 	}
 	
@@ -42,22 +45,16 @@ final class MapViewController: UIViewController, InstantiableViewController {
 			return
 		}
 		
-		if !pullableView.isCompact {
-			pullableView.contract()
-		}
-		
-		issuePositioner.center = CGPoint(x: view.bounds.width, y: 0) // more or less where the add button is
-		view.setNeedsLayout()
-		
-		UIView.animate(withDuration: 0.25) {
-			self.isPlacingIssue = true
-			self.view.layoutIfNeeded() // centers issue positioner according to constraints
-		}
+		enterPlacementMode()
 	}
 	
 	@IBAction func cancelAddingIssue() {
 		UIView.animate(withDuration: 0.25) {
 			self.isPlacingIssue = false
+		}
+		if isMovingIssue {
+			// unplaced = don't apply new position
+			performSegue(withIdentifier: SegueID.createUnplaced.rawValue, sender: nil)
 		}
 	}
 	
@@ -82,7 +79,7 @@ final class MapViewController: UIViewController, InstantiableViewController {
 			markerAlpha = isPlacingIssue ? 0.25 : 1
 			addItem.isEnabled = !isPlacingIssue
 			issuePositioner.isShown = isPlacingIssue
-			addUnplacedContainer.isShown = isPlacingIssue
+			addUnplacedContainer.isShown = isPlacingIssue && !isMovingIssue
 		}
 	}
 	
@@ -100,6 +97,9 @@ final class MapViewController: UIViewController, InstantiableViewController {
 			}
 		}
 	}
+	
+	var isMovingIssue: Bool { editorForPlacingIssue != nil }
+	private var editorForPlacingIssue: EditIssueViewController?
 	
 	var holder: MapHolder? {
 		didSet { update() }
@@ -157,24 +157,55 @@ final class MapViewController: UIViewController, InstantiableViewController {
 			issueListController.issueCellDelegate = self
 			issueListController.pullableView = pullableView
 		case let editIssueNav as EditIssueNavigationController:
-			let editController = editIssueNav.editIssueController
-			editController.isCreating = true // otherwise we wouldn't be using a segue
-			let map = holder as! Map
-			switch segue.identifier.flatMap(SegueID.init) {
-			case .createUnplaced:
-				editController.present(Issue(in: map))
-			case .createPlaced:
-				let position = Issue.Position(
-					at: issuePositioner.relativePosition(in: pdfController!.overlayView),
-					zoomScale: pdfController!.scrollView.zoomScale / pdfController!.scrollView.minimumZoomScale
-				)
-				editController.present(Issue(at: isPlacingIssue ? position : nil, in: map))
-			case nil:
+			guard let segueID = segue.identifier.flatMap(SegueID.init) else {
 				fatalError("unrecognized segue to issue editor with identifier '\(segue.identifier ?? "<no id>")'")
 			}
 			segue.destination.presentationController?.delegate = self
+			lazy var position = Issue.Position(
+				at: issuePositioner.relativePosition(in: pdfController!.overlayView),
+				zoomScale: pdfController!.scrollView.zoomScale / pdfController!.scrollView.minimumZoomScale
+			)
+			let editController = editIssueNav.editIssueController
+			editController.initiateReposition = { [unowned self] in moveIssue(for: $0) }
+			if let editorForPlacingIssue {
+				self.editorForPlacingIssue = nil
+				editController.copySettings(
+					from: editorForPlacingIssue,
+					movingTo: segueID == .createPlaced ? position : nil // don't move if cancelled
+				)
+			} else {
+				editController.isCreating = true // otherwise we wouldn't be using a segue
+				let map = holder as! Map
+				switch segueID {
+				case .createUnplaced:
+					editController.present(Issue(in: map))
+				case .createPlaced:
+					editController.present(Issue(at: isPlacingIssue ? position : nil, in: map))
+				}
+			}
 		default:
 			fatalError("unrecognized segue to \(segue.destination)")
+		}
+	}
+	
+	func moveIssue(for editor: EditIssueViewController) {
+		editorForPlacingIssue = editor
+		enterPlacementMode()
+	}
+	
+	private func enterPlacementMode() {
+		guard !isPlacingIssue else { return }
+		
+		if !pullableView.isCompact {
+			pullableView.contract()
+		}
+		
+		issuePositioner.center = CGPoint(x: view.bounds.width, y: 0) // more or less where the add button is
+		view.setNeedsLayout()
+		
+		UIView.animate(withDuration: 0.25) {
+			self.isPlacingIssue = true
+			self.view.layoutIfNeeded() // centers issue positioner according to constraints
 		}
 	}
 	
@@ -289,8 +320,11 @@ final class MapViewController: UIViewController, InstantiableViewController {
 		}
 		
 		let viewController = issue.isRegistered
-			? ViewIssueViewController.self.instantiate()! <- { $0.issue = issue }
-			: EditIssueViewController.self.instantiate()! <- { $0.present(issue) }
+		? ViewIssueViewController.self.instantiate()! <- { $0.issue = issue }
+		: EditIssueViewController.self.instantiate()! <- {
+			$0.present(issue)
+			$0.initiateReposition = { [unowned self] in moveIssue(for: $0) }
+		}
 		
 		let navController = UINavigationController(rootViewController: viewController)
 			<- { $0.modalPresentationStyle = .formSheet }

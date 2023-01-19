@@ -141,6 +141,8 @@ internal enum L10n {
     internal static let craftsman = L10n.tr("Localizable", "issue.craftsman", fallback: "Unternehmer")
     /// Name
     internal static let craftsmanName = L10n.tr("Localizable", "issue.craftsman_name", fallback: "Name")
+    /// Pendenz löschen
+    internal static let delete = L10n.tr("Localizable", "issue.delete", fallback: "Pendenz löschen")
     /// Beschreibung
     internal static let description = L10n.tr("Localizable", "issue.description", fallback: "Beschreibung")
     /// Im Abnahmemodus aufgenommen
@@ -149,6 +151,8 @@ internal enum L10n {
     internal static let noCraftsman = L10n.tr("Localizable", "issue.no_craftsman", fallback: "Kein Unternehmer")
     /// Keine Beschreibung
     internal static let noDescription = L10n.tr("Localizable", "issue.no_description", fallback: "Keine Beschreibung")
+    /// Pendenz neu platzieren
+    internal static let reposition = L10n.tr("Localizable", "issue.reposition", fallback: "Pendenz neu platzieren")
     /// Status
     internal static let status = L10n.tr("Localizable", "issue.status", fallback: "Status")
     /// Gewerk

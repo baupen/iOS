@@ -23,7 +23,12 @@ struct Issue: Equatable {
 	}
 	let deadline: Date?
 	
-	let position: Position?
+	var position: Position? {
+		didSet {
+			guard position != oldValue else { return }
+			patch.position = position
+		}
+	}
 	var isMarked = false {
 		didSet {
 			guard isMarked != oldValue else { return }

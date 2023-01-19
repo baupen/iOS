@@ -118,6 +118,8 @@
 // MARK: Issue.craftsman
 // CONTEXT: Überschrift für den Namen des verantwortlichen Handwerkers.
 "issue.craftsman_name" = "Name";
+// CONTEXT: Knopf, um eine Pendenz zu löschen.
+"issue.delete" = "Pendenz löschen";
 // CONTEXT: Überschrift für die Beschreibung.
 "issue.description" = "Beschreibung";
 
@@ -132,6 +134,8 @@
 "issue.no_craftsman" = "Kein Unternehmer";
 // CONTEXT: Wird anstelle der Beschreibung angezeigt, wenn sie nicht gesetzt ist.
 "issue.no_description" = "Keine Beschreibung";
+// CONTEXT: Knopf, um eine Pendenz neu zu platzieren.
+"issue.reposition" = "Pendenz neu platzieren";
 // CONTEXT: Überschrift für den Status.
 "issue.status" = "Status";
 // CONTEXT: Status einer Pendenz, die abgeschlossen ist.

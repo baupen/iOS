@@ -137,6 +137,8 @@ final class EditIssueViewController: UITableViewController, InstantiableViewCont
 	
 	@UserDefault("hasTakenPhoto") private var hasTakenPhoto = false
 	
+	var initiateReposition: ((EditIssueViewController) -> Void)!
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -157,6 +159,14 @@ final class EditIssueViewController: UITableViewController, InstantiableViewCont
 		super.viewWillAppear(animated)
 		
 		tableView.reloadData()
+	}
+	
+	func copySettings(from other: EditIssueViewController, movingTo position: Issue.Position?) {
+		original = other.original
+		issue = other.issue
+		if let position {
+			issue.position = position
+		}
 	}
 	
 	func present(_ issue: Issue) {
@@ -251,6 +261,8 @@ final class EditIssueViewController: UITableViewController, InstantiableViewCont
 			onSave()
 			let mapController = segue.destination as! MapViewController
 			issue.saveAndSync().then(mapController.updateFromRepository)
+		case "reposition":
+			self.initiateReposition(self)
 		case "delete":
 			issue.delete()
 			let mapController = segue.destination as! MapViewController
