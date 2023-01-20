@@ -10,7 +10,7 @@ final class ViewIssueViewController: UITableViewController, InstantiableViewCont
 	@IBOutlet private var iconView: UIImageView!
 	@IBOutlet private var numberLabel: UILabel!
 	@IBOutlet private var markButton: UIButton!
-	@IBOutlet private var clientModeLabel: UILabel!
+	@IBOutlet private var clientModeSwitch: UISwitch!
 	
 	@IBOutlet private var imageView: UIImageView!
 	@IBOutlet private var noImageLabel: UILabel!
@@ -31,6 +31,11 @@ final class ViewIssueViewController: UITableViewController, InstantiableViewCont
 		saveChanges()
 		Haptics.mediumImpact.impactOccurred()
 		update()
+	}
+	
+	@IBAction func setClientMode(_ sender: UISwitch) {
+		issue.wasAddedWithClient = sender.isOn
+		saveChanges()
 	}
 	
 	@IBAction func revertResolution() {
@@ -89,7 +94,7 @@ final class ViewIssueViewController: UITableViewController, InstantiableViewCont
 		iconView.image = issue.status.simplified.flatIcon
 		numberLabel.setText(to: issue.number.map { "#\($0)" }, fallback: L10n.Issue.unregistered)
 		markButton.setImage(issue.isMarked ? #imageLiteral(resourceName: "mark_marked.pdf") : #imageLiteral(resourceName: "mark_unmarked.pdf"), for: .normal)
-		clientModeLabel.text = issue.wasAddedWithClient ? Localization.IsClientMode.true : Localization.IsClientMode.false
+		clientModeSwitch.isOn = issue.wasAddedWithClient
 		
 		updateImage()
 		
