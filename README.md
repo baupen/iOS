@@ -15,4 +15,4 @@
 	</a>
 </p>
 
-## Official iOS app for mangel.io
+## Official iOS app for baupen.ch
