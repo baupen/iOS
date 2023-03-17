@@ -273,6 +273,11 @@
 "markup.title" = "Zeichnen";
 
 ////////////////////////////////////////////////////////////////////////////////
+// MARK: Message
+"message_abnahmemodus_being_turned_off" = "Abnahmemodus wird deaktiviert";
+"message_abnahmemodus_being_turned_on" = "Abnahmemodus wird aktiviert";
+
+////////////////////////////////////////////////////////////////////////////////
 // MARK: Register.alert.invalid
 // CONTEXT: Nachricht für den Alert, dass die Nutzer-eingegebene E-Mail ungültig ist.
 "register.alert.invalid_email.message" = "'%@' ist keine gültige E-Mail-Adresse.";

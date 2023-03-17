@@ -12,6 +12,10 @@ import Foundation
 internal enum L10n {
   /// Schliessen
   internal static let closeSheet = L10n.tr("Localizable", "close_sheet", fallback: "Schliessen")
+  /// Abnahmemodus wird deaktiviert
+  internal static let messageAbnahmemodusBeingTurnedOff = L10n.tr("Localizable", "message_abnahmemodus_being_turned_off", fallback: "Abnahmemodus wird deaktiviert")
+  /// Abnahmemodus wird aktiviert
+  internal static let messageAbnahmemodusBeingTurnedOn = L10n.tr("Localizable", "message_abnahmemodus_being_turned_on", fallback: "Abnahmemodus wird aktiviert")
   internal enum Alert {
     /// Abbrechen
     internal static let cancel = L10n.tr("Localizable", "alert.cancel", fallback: "Abbrechen")
