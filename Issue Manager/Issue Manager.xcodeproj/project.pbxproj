@@ -43,7 +43,6 @@
 		9553707520F1A5E2005D81C8 /* IssueListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9553707420F1A5E2005D81C8 /* IssueListViewController.swift */; };
 		9554234F20DC781E009CCCE0 /* ObjectMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9554234E20DC781E009CCCE0 /* ObjectMeta.swift */; };
 		956015342100C50500F84600 /* StringDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956015332100C50500F84600 /* StringDistance.swift */; };
-		956015372101302700F84600 /* SmallestN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956015362101302700F84600 /* SmallestN.swift */; };
 		9562F944223C1DBE0014BFB0 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9562F943223C1DBE0014BFB0 /* Repository.swift */; };
 		9573A05223576AF200DE5AC1 /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 9573A05123576AF200DE5AC1 /* GRDB */; };
 		9573A05823576C4700DE5AC1 /* PullToExpand in Frameworks */ = {isa = PBXBuildFile; productRef = 9573A05723576C4700DE5AC1 /* PullToExpand */; };
@@ -100,6 +99,7 @@
 		B91A04D62619267C002905C6 /* View Issue.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B91A04D52619267C002905C6 /* View Issue.storyboard */; };
 		B91A04D826192706002905C6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B91A04D726192706002905C6 /* Main.storyboard */; };
 		B91A04DA2619344C002905C6 /* Map List.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B91A04D92619344C002905C6 /* Map List.storyboard */; };
+		B92140FA2B64C04300FEA7E3 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = B92140F92B64C04300FEA7E3 /* Algorithms */; };
 		B92D0DEE272C3BFE0097BE26 /* HandyOperators in Frameworks */ = {isa = PBXBuildFile; productRef = B92D0DED272C3BFE0097BE26 /* HandyOperators */; };
 		B92D0DF2272C40060097BE26 /* StorageSpaceDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92D0DF1272C40060097BE26 /* StorageSpaceDetails.swift */; };
 		B945BE2C272B38AC0089C213 /* SimplePDFKit in Frameworks */ = {isa = PBXBuildFile; productRef = B945BE2B272B38AC0089C213 /* SimplePDFKit */; };
@@ -176,7 +176,6 @@
 		9553707420F1A5E2005D81C8 /* IssueListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListViewController.swift; sourceTree = "<group>"; };
 		9554234E20DC781E009CCCE0 /* ObjectMeta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectMeta.swift; sourceTree = "<group>"; };
 		956015332100C50500F84600 /* StringDistance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringDistance.swift; sourceTree = "<group>"; };
-		956015362101302700F84600 /* SmallestN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallestN.swift; sourceTree = "<group>"; };
 		9562F943223C1DBE0014BFB0 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		95758B1221F4223100E5C20F /* TransitionAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionAnimator.swift; sourceTree = "<group>"; };
 		957E16A920E7D81B00F3DEA1 /* SiteListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiteListViewController.swift; sourceTree = "<group>"; };
@@ -260,6 +259,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9573A05823576C4700DE5AC1 /* PullToExpand in Frameworks */,
+				B92140FA2B64C04300FEA7E3 /* Algorithms in Frameworks */,
 				B96F079E265098F0006A1495 /* ArrayBuilder in Frameworks */,
 				9573A05223576AF200DE5AC1 /* GRDB in Frameworks */,
 				B945BE2C272B38AC0089C213 /* SimplePDFKit in Frameworks */,
@@ -535,7 +535,6 @@
 				9502843820FADAB300880AD7 /* SuggestionsHandler.swift */,
 				9502843420FACDD800880AD7 /* Suggestions.swift */,
 				956015332100C50500F84600 /* StringDistance.swift */,
-				956015362101302700F84600 /* SmallestN.swift */,
 			);
 			path = Suggestions;
 			sourceTree = "<group>";
@@ -624,6 +623,7 @@
 				B96F079D265098F0006A1495 /* ArrayBuilder */,
 				B945BE2B272B38AC0089C213 /* SimplePDFKit */,
 				B92D0DED272C3BFE0097BE26 /* HandyOperators */,
+				B92140F92B64C04300FEA7E3 /* Algorithms */,
 			);
 			productName = "Issue Manager";
 			productReference = 9583C2BB20DC748800452695 /* Issue Manager.app */;
@@ -664,6 +664,7 @@
 				B96F079C265098F0006A1495 /* XCRemoteSwiftPackageReference "ArrayBuilder" */,
 				B945BE2A272B38AC0089C213 /* XCRemoteSwiftPackageReference "SimplePDFKit" */,
 				B92D0DEC272C3BFE0097BE26 /* XCRemoteSwiftPackageReference "HandyOperators" */,
+				B92140F82B64C04300FEA7E3 /* XCRemoteSwiftPackageReference "swift-algorithms" */,
 			);
 			productRefGroup = 9583C2BC20DC748800452695 /* Products */;
 			projectDirPath = "";
@@ -850,7 +851,6 @@
 				B9F9E5FE25E2F6ED0059A93C /* Login.swift in Sources */,
 				95E83C11221A4C2A000BB75F /* UILayout+Extensions.swift in Sources */,
 				B9F9E60025E2F9B40059A93C /* GetObjects.swift in Sources */,
-				956015372101302700F84600 /* SmallestN.swift in Sources */,
 				9583C2D320DC74BA00452695 /* UIViewController+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1105,6 +1105,14 @@
 				minimumVersion = 1.3.0;
 			};
 		};
+		B92140F82B64C04300FEA7E3 /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-algorithms.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.0;
+			};
+		};
 		B92D0DEC272C3BFE0097BE26 /* XCRemoteSwiftPackageReference "HandyOperators" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/juliand665/HandyOperators";
@@ -1157,6 +1165,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9573A05623576C4700DE5AC1 /* XCRemoteSwiftPackageReference "PullToExpand" */;
 			productName = PullToExpand;
+		};
+		B92140F92B64C04300FEA7E3 /* Algorithms */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B92140F82B64C04300FEA7E3 /* XCRemoteSwiftPackageReference "swift-algorithms" */;
+			productName = Algorithms;
 		};
 		B92D0DED272C3BFE0097BE26 /* HandyOperators */ = {
 			isa = XCSwiftPackageProductDependency;

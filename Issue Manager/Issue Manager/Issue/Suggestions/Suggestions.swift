@@ -1,6 +1,7 @@
 // Created by Julian Dunskus
 
 import Foundation
+import Algorithms
 import UserDefault
 import HandyOperators
 
@@ -99,7 +100,7 @@ final actor SuggestionStorage {
 				.lazy
 				.filter { $0.text.lowercased().hasPrefix(prefix) }
 				.filter { option in !matches.contains(where: { $0.text == option.text }) } // no duplicates
-				.max(count - matches.count, by: { $0.occurrences < $1.occurrences })
+				.max(count: count - matches.count) { $0.occurrences < $1.occurrences }
 			matches.append(contentsOf: filtered)
 			guard matches.count < count else {
 				break // done
