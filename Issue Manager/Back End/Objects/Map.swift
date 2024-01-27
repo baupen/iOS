@@ -19,10 +19,12 @@ extension Map: DBRecord {
 	}
 	
 	static let issues = hasMany(Issue.self)
+	@MainActor
 	var issues: Issue.Query {
 		request(for: Self.issues).withoutDeleted.consideringClientMode
 	}
 	
+	@MainActor
 	var sortedIssues: Issue.Query {
 		issues.withoutDeleted.order(Issue.Columns.number.asc, Issue.Meta.Columns.lastChangeTime.desc)
 	}

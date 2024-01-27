@@ -20,7 +20,7 @@ struct ViewOptionsEditor: View {
 				}
 				
 				Section {
-					ForEach(Status.allCases, id: \.self, content: statusButton(for:))
+					ForEach(Status.allCases, id: \.self) { statusButton(for: $0) }
 				} header: {
 					Text(Localization.StatusFilter.title)
 				} footer: {

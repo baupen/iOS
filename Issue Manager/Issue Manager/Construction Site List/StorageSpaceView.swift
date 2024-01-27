@@ -3,6 +3,7 @@
 import SwiftUI
 import HandyOperators
 
+@MainActor
 struct StorageSpaceView: View {
 	fileprivate typealias Localization = L10n.ManageStorage
 	
@@ -13,6 +14,7 @@ struct StorageSpaceView: View {
 	@State var details: StorageSpaceDetails?
 	@State var lastUpdate = Date()
 	@State var downloadProgress = FileDownloadProgress.done
+	@State var cancelDownloads: (() -> Void)?
 	
 	var sites = Repository.read(ConstructionSite.fetchAll)
 	
@@ -58,6 +60,9 @@ struct StorageSpaceView: View {
 				calculateSpaceDetails()
 			}
 		}
+		.onDisappear {
+			cancelDownloads?()
+		}
     }
 	
 	@ViewBuilder
@@ -80,13 +85,19 @@ struct StorageSpaceView: View {
 		}
 		
 		cellVStack {
+			let cancelButton = Button(Localization.cancelDownload) {
+				cancelDownloads?()
+			}
+			
 			switch downloadProgress {
 			case .undetermined:
 				ProgressView()
 				Text(L10n.SiteList.FileProgress.indeterminate)
+				cancelButton
 			case .determined(let current, let total):
 				ProgressView(value: Double(current), total: Double(total))
 				Text(L10n.SiteList.FileProgress.determinate(current, total))
+				cancelButton
 			case .done:
 				if let details = details {
 					if details.missingImages == 0 {
@@ -94,17 +105,15 @@ struct StorageSpaceView: View {
 							.foregroundColor(.secondary)
 					} else {
 						Button(Localization.downloadAll(details.missingImages)) {
-							Issue.downloadMissingFiles(for: issues, includeInactive: true) {
-								downloadProgress = $0
-								
-								let now = Date()
-								if now.timeIntervalSince(lastUpdate) > 20 {
-									lastUpdate = now
-									// recalculate every 20 seconds to provide up-to-date info while avoiding too much battery drainage
-									calculateSpaceDetails()
-								}
+							let task = Task {
+								try await downloadMissingFiles(for: issues)
 							}
-							.then(calculateSpaceDetails)
+							cancelDownloads?()
+							cancelDownloads = {
+								task.cancel()
+								print("cancelled")
+								downloadProgress = .done
+							}
 						}
 					}
 				} else {
@@ -114,7 +123,26 @@ struct StorageSpaceView: View {
 		}
 	}
 	
-	func cellVStack<Content: View>(@ViewBuilder content: () -> Content) -> some View {
+	func downloadMissingFiles(for issues: Issue.Query) async throws {
+		var lastUpdate = Date.now
+		try await Issue.downloadMissingFiles(
+			for: issues, includeInactive: true,
+			onProgress: .onMainActor {
+				downloadProgress = $0
+				
+				let now = Date()
+				if now.timeIntervalSince(lastUpdate) > 20 {
+					lastUpdate = now
+					// recalculate every 20 seconds to provide up-to-date info while avoiding too much battery drainage
+					// (this function already makes sure only one task is running at a time)
+					calculateSpaceDetails()
+				}
+			}
+		)
+		calculateSpaceDetails()
+	}
+	
+	func cellVStack(@ViewBuilder content: () -> some View) -> some View {
 		VStack(spacing: 8) {
 			content()
 		}
@@ -138,9 +166,11 @@ struct StorageSpaceView: View {
 	}
 	
 	func calculateSpaceDetails() {
-		StorageSpaceDetails.calculate()
-			.on(.main)
-			.then { details = $0 }
+		Task {
+			let new = await StorageSpaceDetails.calculate()
+			guard new.startTime > details?.startTime ?? .distantPast else { return }
+			details = new
+		}
 	}
 }
 
@@ -157,7 +187,7 @@ struct StorageSpaceView_Previews: PreviewProvider {
         StorageSpaceView(
 			details: .init(
 				total: .init(usedSpace: 12_345_678_901, purgeableSpace: 1_234_567_890, missingImages: 1337),
-				bySite: [:]
+				bySite: [:], startTime: .now
 			),
 			downloadProgress: .determined(current: 42, total: 69),
 			sites: [exampleSite]
@@ -166,7 +196,7 @@ struct StorageSpaceView_Previews: PreviewProvider {
 		StorageSpaceView(
 			details: .init(
 				total: .init(usedSpace: 12_345_678_901, purgeableSpace: 1_234_567_890, missingImages: 1337),
-				bySite: [:]
+				bySite: [:], startTime: .now
 			),
 			sites: [exampleSite]
 		)

@@ -37,6 +37,12 @@ extension DerivableRequest where RowDecoder: StoredObject {
 	}
 }
 
-protocol AnyStoredObject: DBRecord {
+protocol AnyStoredObject: DBRecord, Sendable {
 	var rawID: String { get }
 }
+
+// pure value types: of course they're sendable
+extension QueryInterfaceRequest: @unchecked Sendable {}
+extension BelongsToAssociation: @unchecked Sendable {}
+extension HasManyAssociation: @unchecked Sendable {}
+extension Column: @unchecked Sendable {}

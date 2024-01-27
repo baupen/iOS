@@ -5,7 +5,6 @@ import SwiftUI
 import class Combine.AnyCancellable
 import SimplePDFKit
 import PullToExpand
-import Promise
 import CGeometry
 import UserDefault
 import HandyOperators
@@ -248,23 +247,31 @@ final class MapViewController: UIViewController, InstantiableViewController {
 		}
 	}
 	
-	private var currentLoadingTaskID: UUID!
+	private var currentLoadingTask: Task<Void, Never>?
 	func asyncLoadPDF(for map: Map, at url: URL) {
-		let page = Future<PDFKitPage>(asyncOn: .global(qos: .userInitiated)) {
-			// download explicitly just in case it's not there yet
-			try? map.downloadFile()?.await() // errors are fine (e.g. bad network)
-			return try PDFKitDocument(at: url).page(0)
-		}.on(.main)
-		
 		pdfController = nil
 		fallbackLabel.text = Localization.pdfLoading
 		activityIndicator.startAnimating()
 		
-		let taskID = UUID()
-		currentLoadingTaskID = taskID
-		
-		page.then { page in
-			guard taskID == self.currentLoadingTaskID else { return }
+		currentLoadingTask?.cancel()
+		currentLoadingTask = Task {
+			// download explicitly just in case it's not there yet
+			try? await map.downloadFileIfNeeded() // errors are fine (e.g. bad network)
+			
+			let page: PDFKitPage
+			do {
+				page = try await Task.detached(priority: .userInitiated) {
+					UncheckedSendable(try PDFKitDocument(at: url).page(0))
+				}.value.value
+			} catch {
+				guard !Task.isCancelled else { return }
+				error.printDetails(context: "Error while loading PDF!")
+				self.activityIndicator.stopAnimating()
+				self.fallbackLabel.text = Localization.couldNotLoad
+				return
+			}
+			
+			guard !Task.isCancelled else { return }
 			
 			self.pdfController = SimplePDFViewController() <- {
 				$0.delegate = self
@@ -276,14 +283,6 @@ final class MapViewController: UIViewController, InstantiableViewController {
 					+ 8 // for symmetry
 			}
 			self.updateMarkers()
-		}
-		
-		page.catch { error in
-			guard taskID == self.currentLoadingTaskID else { return }
-			
-			error.printDetails(context: "Error while loading PDF!")
-			self.activityIndicator.stopAnimating()
-			self.fallbackLabel.text = Localization.couldNotLoad
 		}
 	}
 	
@@ -396,7 +395,7 @@ extension MapViewController: UIAdaptivePresentationControllerDelegate {
 		updateMarkers()
 		issueListController.update()
 		
-		DispatchQueue.main.async {
+		Task {
 			guard let splitController = self.splitViewController else { return }
 			let mainController = splitController as! MainViewController
 			for viewController in mainController.masterNav.viewControllers {

@@ -1,7 +1,6 @@
 // Created by Julian Dunskus
 
 import Foundation
-import Promise
 
 private struct FileDownloadRequest: GetDataRequest {
 	var path: String
@@ -19,8 +18,8 @@ private struct FileDownloadRequest: GetDataRequest {
 	}
 }
 
-extension Client {
-	func download(_ file: AnyFile) -> Future<Data> {
-		send(FileDownloadRequest(file: file))
+extension RequestContext {
+	func download(_ file: AnyFile) async throws -> Data {
+		try await send(FileDownloadRequest(file: file))
 	}
 }

@@ -9,8 +9,9 @@ final class CameraContainerView: UIView {
 	@IBOutlet private var cameraView: CameraView!
 }
 
+@MainActor
 final class CameraView: UIView {
-	var captureSession: AVCaptureSession?
+	private var captureSession: CaptureSession?
 	var photoOutput: AVCapturePhotoOutput?
 	var previewLayer: AVCaptureVideoPreviewLayer?
 	
@@ -46,51 +47,43 @@ final class CameraView: UIView {
 	}
 	
 	deinit {
-		captureSession?.stopRunning()
-	}
-	
-	func configure() {
-		guard captureSession?.isRunning != true else { return } // already configured
-		
-		DispatchQueue.global().async {
-			if self.captureSession == nil {
-				self.tryToConfigureSession()
-			}
-			
-			self.captureSession?.startRunning()
+		Task { [captureSession] in
+			await captureSession?.stop()
 		}
 	}
 	
-	private func tryToConfigureSession() {
+	func configure() {
+		guard captureSession == nil else { return } // already configured
+		
 		do {
-			captureSession = try AVCaptureSession() <- { session in
-				let device = try AVCaptureDevice.default(for: .video) ??? CameraViewError.noCameraAvailable
-				let input = try AVCaptureDeviceInput(device: device)
-				session.addInput(input)
+			let session = try CaptureSession()
+			captureSession = session
+			
+			Task.detached(priority: .userInitiated) {
+				await session.start()
 				
-				self.photoOutput = AVCapturePhotoOutput() <- {
-					session.sessionPreset = .photo
-					session.addOutput($0)
-				}
-				
-				self.previewLayer = AVCaptureVideoPreviewLayer(session: session) <- { preview in
-					preview.videoGravity = .resizeAspectFill
-					
-					DispatchQueue.main.async { [preview] in
-						self.layer.addSublayer(preview)
-						self.updateOrientation()
-						self.isHidden = false
-					}
+				Task { @MainActor in
+					await self.connect(to: session)
 				}
 			}
 		} catch {
 			print("Could not set up camera!")
 			dump(error)
 			
-			DispatchQueue.main.async {
-				self.isHidden = true
-				self.delegate?.cameraFailed(with: error)
-			}
+			self.isHidden = true
+			self.delegate?.cameraFailed(with: error)
+		}
+	}
+	
+	private func connect(to session: CaptureSession) async {
+		self.photoOutput = await session.makePhotoOutput().value
+		
+		self.previewLayer = await session.makePreview().value <- { preview in
+			preview.videoGravity = .resizeAspectFill
+			
+			self.layer.addSublayer(preview)
+			self.updateOrientation()
+			self.isHidden = false
 		}
 	}
 	
@@ -143,17 +136,18 @@ final class CameraView: UIView {
 }
 
 extension CameraView: AVCapturePhotoCaptureDelegate {
-	func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
-		if let error = error {
-			Haptics.notify.notificationOccurred(.error)
-			delegate?.pictureFailed(with: error)
-		} else {
-			Haptics.notify.notificationOccurred(.success)
-			let image = UIImage(data: photo.fileDataRepresentation()!)!
-			delegate?.pictureTaken(image.standardized(shouldCrop: true))
-		}
-		
-		DispatchQueue.main.async { // otherwise it's somehow still visible but unpaused
+	nonisolated func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
+		let data = photo.fileDataRepresentation()!
+		Task { @MainActor in
+			if let error = error {
+				Haptics.notify.notificationOccurred(.error)
+				delegate?.pictureFailed(with: error)
+			} else {
+				Haptics.notify.notificationOccurred(.success)
+				let image = UIImage(data: data)!
+				delegate?.pictureTaken(image.standardized(shouldCrop: true))
+			}
+			
 			self.isProcessing = false
 		}
 	}
@@ -171,6 +165,7 @@ extension CameraView: UIImagePickerControllerDelegate, UINavigationControllerDel
 	}
 }
 
+@MainActor
 protocol CameraViewDelegate: AnyObject {
 	func cameraFailed(with error: Error)
 	func pictureTaken(_ image: UIImage)

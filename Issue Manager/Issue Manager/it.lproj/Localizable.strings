@@ -106,7 +106,7 @@
 // CONTEXT: Knopf, um als Lösungsversuch alle lokalen Daten zu löschen.
 "error_viewer.wipe_all_data.button" = "Reset app";
 // CONTEXT: Knopf, um das Löschen abzubrechen.
-"error_viewer.wipe_all_data.cancel" = "Cancella";
+"error_viewer.wipe_all_data.cancel" = "Annulla";
 // CONTEXT: Knopf, um das Löschen zu bestätigen.
 "error_viewer.wipe_all_data.confirm" = "Cancellare tutto";
 // CONTEXT: Warnung für den Lösungsversuch, alle lokalen Daten zu löschen.
@@ -189,7 +189,7 @@
 // CONTEXT: Überschrift für den Registrierungsknopf
 "login.register.header" = "Non sei ancora registrato?";
 // CONTEXT: Knopf, um das Scannen des Aktivierungscodes abzubrechen.
-"login.scan.cancel" = "Cancella";
+"login.scan.cancel" = "Annulla";
 // CONTEXT: Anleitung in der Ansicht zum Aktivierungscode (QR) scannen.
 "login.scan.instructions" = "Per farlo, clicca su \"connect with app\" sul sito web (nella selezione del sito in alto a sinistra).";
 // CONTEXT: Titel für die Ansicht, wo man den Aktivierungscode von der Website scannt.
@@ -198,6 +198,8 @@
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Manage
 "manage_storage.all_images_downloaded" = "Tutte le immagini sono caricate.";
+// CONTEXT: Knopf, um das Runterladen von fehlenden Bildern abzubrechen
+"manage_storage.cancel_download" = "Annulla";
 "manage_storage.download_all" = "Carica %@ immagini mancanti";
 "manage_storage.purge_info" = "Per risparmiare dati, vengono scaricate solo le immagini degli articoli in sospeso che sono ancora aperti o che sono stati chiusi da meno di 90 giorni. Le immagini che sono già state caricate possono essere rimosse localmente con questo pulsante.";
 "manage_storage.purge_now" = "Risparmia spazio ora";
@@ -226,7 +228,7 @@
 // CONTEXT: Wird statt map.issue_list.summary angezeigt, wenn ein Filter aktiv ist. das erste %s wird durch die Anzahl Pendenzen ersetzt, die dem Filter entsprechen und somit angezeigt werden; das Zweite wird weiterhin durch die Gesamtzahl ersetzt.
 "map.issue_list.summary_filtered" = "Filtro attivo: %@/%@ pendenze visualizzate.";
 // CONTEXT: Knopf beim Fadenkreuz zum Platzieren einer neuen Pendenz, um abzubrechen.
-"map.issue_positioner.cancel" = "Cancella";
+"map.issue_positioner.cancel" = "Annulla";
 // CONTEXT: Knopf beim Fadenkreuz zum Platzieren einer neuen Pendenz, um fortzufahren.
 "map.issue_positioner.continue" = "Vai a";
 

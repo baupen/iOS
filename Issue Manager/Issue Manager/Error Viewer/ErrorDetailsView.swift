@@ -5,6 +5,7 @@ import HandyOperators
 
 // this code would be a lot nicer if i could use the new SwiftUI shorthands in iOS 15+ (and 16+)
 
+@MainActor
 struct ErrorDetailsView: View {
 	fileprivate typealias Localization = L10n.ErrorViewer
 	
@@ -34,6 +35,7 @@ struct ErrorDetailsView: View {
 		.navigationViewStyle(.stack)
 	}
 	
+	@MainActor
 	struct FailedPushContents: View {
 		fileprivate typealias Localization = L10n.ErrorViewer.PushFailed
 		

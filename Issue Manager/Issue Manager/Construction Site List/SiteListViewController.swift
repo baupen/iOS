@@ -1,7 +1,6 @@
 // Created by Julian Dunskus
 
 import UIKit
-import Promise
 import SwiftUI
 import class Combine.AnyCancellable
 
@@ -97,7 +96,7 @@ final class SiteListViewController: RefreshingTableViewController, InstantiableV
 		super.viewDidAppear(animated)
 		
 		// have to wait because we're not presenting anything yet
-		DispatchQueue.main.async {
+		Task {
 			if self.needsRefresh, self.presentedViewController == nil {
 				self.needsRefresh = false
 				self.refreshManually()
@@ -105,20 +104,13 @@ final class SiteListViewController: RefreshingTableViewController, InstantiableV
 		}
 	}
 	
-	override func doRefresh() -> Future<Void> {
-		Client.shared.pullRemoteChanges { progress in
-			DispatchQueue.main.async {
-				self.syncProgress = progress
-			}
-		} onIssueImageProgress: { imageProgress in
-			DispatchQueue.main.async {
-				self.fileDownloadProgress = imageProgress
-			}
+	override func doRefresh() async throws {
+		try await SyncManager.shared.withContext { 
+			try await $0
+				.onProgress(.onMainActor { self.syncProgress = $0 })
+				.onIssueImageProgress(.onMainActor { self.fileDownloadProgress = $0 })
+				.pullRemoteChanges()
 		}
-	}
-	
-	override func refreshCompleted() {
-		super.refreshCompleted()
 		
 		updateContent()
 	}

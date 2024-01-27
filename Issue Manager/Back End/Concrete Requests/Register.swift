@@ -1,7 +1,6 @@
 // Created by Julian Dunskus
 
 import Foundation
-import Promise
 
 private struct RegisterRequest: JSONEncodingRequest, StatusCodeRequest {
 	var baseURLOverride: URL?
@@ -15,8 +14,8 @@ private struct RegisterRequest: JSONEncodingRequest, StatusCodeRequest {
 }
 
 extension Client {
-	func register(asEmail email: String, at domain: URL) -> Future<Void> {
+	func register(asEmail email: String, at domain: URL) async throws {
 		wipeAllData()
-		return send(RegisterRequest(baseURLOverride: domain, body: .init(email: email)))
+		return try await makeContext().send(RegisterRequest(baseURLOverride: domain, body: .init(email: email)))
 	}
 }

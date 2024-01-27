@@ -2,7 +2,7 @@
 
 import UIKit
 import GRDB
-import Promise
+import Combine
 import UserDefault
 import HandyOperators
 
@@ -222,15 +222,17 @@ final class EditIssueViewController: UITableViewController, InstantiableViewCont
 	
 	private func onSave() {
 		let originalTrade = (original?.craftsman).flatMap(Repository.read)?.trade
-		if trade != originalTrade || issue.description != original?.description {
-			SuggestionStorage.shared.decrementSuggestion(
-				description: original?.description,
-				forTrade: originalTrade
-			)
-			SuggestionStorage.shared.used(
-				description: issue.description,
-				forTrade: trade
-			)
+		Task {
+			if trade != originalTrade || issue.description != original?.description {
+				await SuggestionStorage.shared.decrementSuggestion(
+					description: original?.description,
+					forTrade: originalTrade
+				)
+				await SuggestionStorage.shared.used(
+					description: issue.description,
+					forTrade: trade
+				)
+			}
 		}
 	}
 	
@@ -260,13 +262,19 @@ final class EditIssueViewController: UITableViewController, InstantiableViewCont
 		case "save":
 			onSave()
 			let mapController = segue.destination as! MapViewController
-			issue.saveAndSync().then(mapController.updateFromRepository)
+			Task {
+				try await issue.saveAndSync()
+				mapController.updateFromRepository()
+			}
 		case "reposition":
 			self.initiateReposition(self)
 		case "delete":
 			issue.delete()
 			let mapController = segue.destination as! MapViewController
-			issue.saveAndSync().then(mapController.updateFromRepository)
+			Task {
+				try await issue.saveAndSync()
+				mapController.updateFromRepository()
+			}
 		case "lightbox":
 			let lightboxController = segue.destination as! LightboxViewController
 			lightboxController.image = loadedImage!

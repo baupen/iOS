@@ -221,6 +221,8 @@ internal enum L10n {
   internal enum ManageStorage {
     /// Alle Bilder sind geladen.
     internal static let allImagesDownloaded = L10n.tr("Localizable", "manage_storage.all_images_downloaded", fallback: "Alle Bilder sind geladen.")
+    /// Abbrechen
+    internal static let cancelDownload = L10n.tr("Localizable", "manage_storage.cancel_download", fallback: "Abbrechen")
     /// %@ fehlende Bilder laden
     internal static func downloadAll(_ p1: Any) -> String {
       return L10n.tr("Localizable", "manage_storage.download_all", String(describing: p1), fallback: "%@ fehlende Bilder laden")

@@ -9,11 +9,14 @@ extension Error {
 	}
 	
 	func printDetails(context: String) {
-		print("———————————————————————— ERROR ————————————————————————")
-		print(context, localizedFailureReason)
-		print(self)
-		dump(self)
-		print()
+		var output = ""
+		print("———————————————————————— ERROR ————————————————————————", to: &output)
+		print(context, localizedFailureReason, to: &output)
+		print(self, to: &output)
+		dump(self, to: &output)
+		print(to: &output)
+		// make sure we're printing all at once
+		print(output)
 	}
 	
 	func dumpedDescription() -> String {

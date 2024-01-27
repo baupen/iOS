@@ -111,7 +111,7 @@ final class ViewIssueViewController: UITableViewController, InstantiableViewCont
 		closeButton.isShown = status != .closed
 		reopenButton.isShown = status == .closed
 		
-		DispatchQueue.main.async {
+		Task {
 			self.tableView.performBatchUpdates(nil) // invalidate previously calculated row heights
 		}
 	}
@@ -122,7 +122,8 @@ final class ViewIssueViewController: UITableViewController, InstantiableViewCont
 			if image == nil {
 				noImageLabel.text = Localization.ImagePlaceholder.loading
 				// download
-				issue.downloadFile()?.then { [weak self] in
+				Task { [issue, weak self] in
+					try await issue!.downloadFileIfNeeded()
 					self?.updateImage()
 				}
 			}
@@ -133,13 +134,14 @@ final class ViewIssueViewController: UITableViewController, InstantiableViewCont
 	}
 	
 	private func saveChanges() {
+		assert(!isSyncing)
 		isSyncing = true
-		issue.saveAndSync()
-			.always { self.isSyncing = false }
-			.then { [parent] in
-				self.issue = Repository.object(self.issue.id)
-				(parent as? MapViewController)?.updateFromRepository()
-			}
+		Task {
+			defer { self.isSyncing = false }
+			try await issue.saveAndSync()
+			issue = Repository.object(issue.id)
+			(parent as? MapViewController)?.updateFromRepository()
+		}
 	}
 	
 	override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {

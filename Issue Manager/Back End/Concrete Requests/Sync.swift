@@ -1,7 +1,6 @@
 // Created by Julian Dunskus
 
 import Foundation
-import Promise
 import GRDB
 import HandyOperators
 
@@ -60,97 +59,152 @@ private struct DeletionRequest: GetRequest, StatusCodeRequest {
 	}
 }
 
-extension Client {
-	func pushLocalChanges() -> Future<Void> {
-		pushChangesThen {}
+final actor SyncManager {
+	static let shared = SyncManager()
+	
+	private init() {}
+	
+	private var currentTask: (() async -> Void)?
+	/// waits for there to be no running task, then runs the given block
+	private func withoutReentrancy<Result: Sendable>(
+		run block: @escaping (isolated SyncManager) async throws -> Result
+	) async throws -> Result {
+		while let currentTask {
+			print("waiting for opening...")
+			await currentTask()
+		}
+		print("running block!")
+		// block can't actually escape, but withoutActuallyEscaping doesn't play nice with actor isolation as of Xcode 15.1
+		let task = Task {
+			// this is the best place to safely nil out currentTask, since places awaiting the task may resume in any order
+			defer { self.currentTask = nil }
+			return try await block(self)
+		}
+		let wait = { _ = await task.result }
+		currentTask = wait
+		return try await task.value
 	}
 	
-	func synchronouslyPushLocalChanges() -> [IssuePushError] {
-		assertOnLinearQueue()
-		
+	/// runs the given block once any in-progress syncing has completed, to avoid bad interleavings
+	func withContext(run block: @escaping @Sendable (SyncContext) async throws -> Void) async throws {
+		try await withoutReentrancy { _ in
+			try await block(SyncContext(client: .shared))
+		}
+	}
+}
+
+struct SyncContext {
+	var requestContext: RequestContext
+	var progressHandler: ProgressHandler<SyncProgress> = .ignore
+	var issueImageProgressHandler: ProgressHandler<FileDownloadProgress> = .ignore
+	
+	@MainActor
+	fileprivate init(client: Client) {
+		self.requestContext = client.makeContext()
+	}
+	
+	func onProgress(_ handler: ProgressHandler<SyncProgress>) -> Self {
+		self <- { $0.progressHandler = handler }
+	}
+	
+	func onIssueImageProgress(_ handler: ProgressHandler<FileDownloadProgress>) -> Self {
+		self <- { $0.issueImageProgressHandler = handler }
+	}
+	
+	fileprivate func send<R: Request>(_ request: R) async throws -> R.Response {
+		try await requestContext.send(request)
+	}
+}
+
+extension SyncContext {
+	func pushLocalChanges() async throws {
+		let errors = await tryPushLocalChanges()
+		guard errors.isEmpty else {
+			throw RequestError.pushFailed(errors)
+		}
+	}
+	
+	private func tryPushLocalChanges() async -> [IssuePushError] {
 		let maxLastChangeTime = Issue.all().maxLastChangeTime()
 		
 		let issuesWithPatches = Issue
 			.filter(Issue.Columns.patchIfChanged != nil)
 			.order(Issue.Status.Columns.createdAt)
-		let patchErrors = syncChanges(
+		let patchErrors = await syncChanges(
 			for: issuesWithPatches,
 			stage: .patch
 		) { issue in
-			self.syncPatch(for: issue).map {
-				Repository.shared.remove(issue) // remove non-canonical copy
-				Repository.shared.save($0 <- {
-					// keep local changes to image to sync next (this sets didChangeImage relative to remote image)
-					$0.image = issue.image
-					// fake older last change time to avoid skipping changes between last max change time and this upload
-					$0.lastChangeTime = maxLastChangeTime
-				})
-			}
+			let canonical = try await self.syncPatch(for: issue)
+			Repository.shared.remove(issue) // remove non-canonical copy
+			Repository.shared.save(canonical <- {
+				// keep local changes to image to sync next (this sets didChangeImage relative to remote image)
+				$0.image = issue.image
+				// fake older last change time to avoid skipping changes between last max change time and this upload
+				$0.lastChangeTime = maxLastChangeTime
+			})
 		}
 		
 		guard patchErrors.isEmpty else { return patchErrors }
 		
-		let imageErrors = syncChanges(
+		let imageErrors = await syncChanges(
 			for: Issue.filter(Issue.Columns.didChangeImage).withoutDeleted,
 			stage: .imageUpload
 		) { issue in
-			self.syncImageChange(for: issue).map {
-				Repository.shared.save(
-					[.didChangeImage],
-					of: issue <- { $0.didChangeImage = false }
-				)
-			}
+			try await self.syncImageChange(for: issue)
+			Repository.shared.save(
+				[.didChangeImage],
+				of: issue <- { $0.didChangeImage = false }
+			)
 		}
 		
-		let deletionErrors = syncChanges(
+		let deletionErrors = await syncChanges(
 			for: Issue.filter(Issue.Columns.didDelete),
 			stage: .deletion
 		) { issue in
-			self.send(DeletionRequest(for: issue)).map {
-				Repository.shared.save(
-					[.didDelete],
-					of: issue <- { $0.didDelete = false }
-				)
-			}
+			try await send(DeletionRequest(for: issue))
+			Repository.shared.save(
+				[.didDelete],
+				of: issue <- { $0.didDelete = false }
+			)
 		}
 		
 		return imageErrors + deletionErrors
 	}
 	
-	private func syncPatch(for issue: Issue) -> Future<Issue> {
+	private func syncPatch(for issue: Issue) async throws -> Issue {
 		let patch = issue.patchIfChanged!.makeModel()
-		let canonical = issue.wasUploaded
+		let canonical = try await issue.wasUploaded
 			? send(IssuePatchRequest(path: issue.apiPath, body: patch))
 			: send(IssueCreationRequest(body: patch))
-		return canonical.map { $0.makeObject(context: issue.constructionSiteID) }
+		return canonical.makeObject(context: issue.constructionSiteID)
 	}
 	
-	private func syncImageChange(for issue: Issue) -> Future<Void> {
-		issue.image
-			.map { localImage in
-				send(ImageUploadRequest(issue: issue, fileURL: Issue.localURL(for: localImage))).map { path in
-					let image = File<Issue>(urlPath: path)
-					try localImage.onUpload(as: image)
-					Repository.shared.save([.image], of: issue <- { $0.image = image })
-				}
-			}
-			?? send(DeletionRequest(forImageOf: issue))
+	private func syncImageChange(for issue: Issue) async throws {
+		if let localImage = issue.image {
+			let path = try await send(ImageUploadRequest(issue: issue, fileURL: Issue.localURL(for: localImage)))
+			let image = File<Issue>(urlPath: path)
+			try localImage.onUpload(as: image)
+			Repository.shared.save([.image], of: issue <- { $0.image = image })
+		} else {
+			try await send(DeletionRequest(forImageOf: issue))
+		}
 	}
 	
 	private func syncChanges(
 		for query: Issue.Query,
 		stage: IssuePushError.Stage,
-		performing upload: @escaping (Issue) -> Future<Void>
-	) -> [IssuePushError] {
+		performing upload: @escaping (Issue) async throws -> Void
+	) async -> [IssuePushError] {
 		// no concurrency to ensure correct ordering and avoid unforeseen issues
-		Repository.read(query.fetchAll).compactMap { issue in
+		var errors: [IssuePushError] = []
+		for issue in Repository.read(query.fetchAll) {
 			do {
-				try upload(issue).await()
-				return nil
+				try await upload(issue)
 			} catch {
-				return IssuePushError(stage: stage, cause: error, issue: issue)
+				errors.append(IssuePushError(stage: stage, cause: error, issue: issue))
 			}
 		}
+		return errors
 	}
 }
 
@@ -176,124 +230,110 @@ enum SyncProgress {
 	case downloadingMapFiles(FileDownloadProgress)
 }
 
-extension Client {
+extension SyncContext {
 	/// ensures local changes are pushed first
-	func pullRemoteChanges(
-		onProgress: ((SyncProgress) -> Void)? = nil,
-		onIssueImageProgress: ((FileDownloadProgress) -> Void)? = nil
-	) -> Future<Void> {
-		sync(onProgress: onProgress, onIssueImageProgress: onIssueImageProgress) { onProgress in
+	func pullRemoteChanges() async throws {
+		try await sync { onProgress in
 			let sites = Repository.read(ConstructionSite.fetchAll)
 			for site in sites {
-				onProgress?(.pullingSiteData(site))
-				try self.doPullRemoteChanges(for: site).await()
+				onProgress(.pullingSiteData(site))
+				try await self.doPullRemoteChanges(for: site)
 			}
 		}
 	}
 	
 	/// ensures local changes are pushed first
-	func pullRemoteChanges(
-		for siteID: ConstructionSite.ID,
-		onProgress: ((SyncProgress) -> Void)? = nil
-	) -> Future<Void> {
-		sync(onProgress: onProgress) { onProgress in
+	func pullRemoteChanges(for siteID: ConstructionSite.ID) async throws {
+		try await sync { onProgress in
 			guard let site = Repository.read(siteID.get)
 			else { throw SyncError.siteAccessRemoved }
-			onProgress?(.pullingSiteData(site))
-			try self.doPullRemoteChanges(for: site).await()
+			onProgress(.pullingSiteData(site))
+			try await self.doPullRemoteChanges(for: site)
 		}
 	}
 	
 	private static let fileDownloadQueue = DispatchQueue(label: "missing file downloads")
 	private func sync(
-		onProgress: ((SyncProgress) -> Void)? = nil,
-		onIssueImageProgress: ((FileDownloadProgress) -> Void)? = nil,
-		running block: @escaping (((SyncProgress) -> Void)?) throws -> Void
-	) -> Future<Void> {
-		onProgress?(.pushingLocalChanges)
-		return pushChangesThen {
-			onProgress?(.fetchingTopLevelObjects)
-			try self.doPullChangedTopLevelObjects().await()
-			try block(onProgress)
+		running block: @escaping @Sendable (ProgressHandler<SyncProgress>.Unisolated) async throws -> Void
+	) async throws {
+		try await progressHandler.unisolated { onProgress in
+			onProgress(.pushingLocalChanges)
+			try await pushLocalChanges() // reentrant version
+			
+			onProgress(.fetchingTopLevelObjects)
+			try await doPullChangedTopLevelObjects()
+			try await block(onProgress)
 			
 			// download important files now
-			try ConstructionSite.downloadMissingFiles(
-				onProgress: onProgress.map { onProgress in
-					{ onProgress(.downloadingConstructionSiteFiles($0)) }
-				}
-			).await()
-			try Map.downloadMissingFiles(
-				onProgress: onProgress.map { onProgress in
-					{ onProgress(.downloadingMapFiles($0)) }
-				}
-			).await()
-			
-			// download issue images in the background
-			Self.fileDownloadQueue.async {
-				try? Issue.downloadMissingFiles(onProgress: onIssueImageProgress).await()
-			}
+			try await ConstructionSite.downloadMissingFiles(
+				onProgress: onProgress.wrapped { .downloadingConstructionSiteFiles($0) }
+			)
+			try await Map.downloadMissingFiles(
+				onProgress: onProgress.wrapped { .downloadingMapFiles($0) }
+			)
+		}
+		
+		// download issue images in the background
+		Task.detached(priority: .utility) {
+			try? await Issue.downloadMissingFiles(onProgress: issueImageProgressHandler)
 		}
 	}
 	
-	private func doPullChangedTopLevelObjects() -> Future<Void> {
-		[
-			doPullChangedObjects(existing: ConstructionManager.all(), context: ())
-				.ignoringValue()
-				.map { self.localUser = Repository.object(self.localUser!.id) },
-			doPullChangedObjects(existing: ConstructionSite.none(), context: ())
-				// remove sites we don't have access to
-				.map { $0
-					.filter { !$0.managerIDs.contains(self.localUser!.id) }
-					.forEach { Repository.shared.ensureNotPresent($0) }
-				}
-		].sequence()
+	private func doPullChangedTopLevelObjects() async throws {
+		try await doPullChangedObjects(existing: ConstructionManager.all(), context: ())
+		let userID = await requestContext.client.updateLocalUser()!.id
+		let sites = try await doPullChangedObjects(existing: ConstructionSite.none(), context: ())
+		// remove sites we don't have access to
+		sites
+			.filter { !$0.managerIDs.contains(userID) }
+			.forEach { Repository.shared.ensureNotPresent($0) }
 	}
 	
+	@discardableResult
 	private func doPullChangedObjects<Object: StoredObject>(
 		for site: ConstructionSite? = nil,
 		existing: Object.Query,
 		context: Object.Model.Context
-	) -> Future<[Object]> {
-		send(GetObjectsRequest<Object>(
+	) async throws -> [Object] {
+		let collection = try await send(GetObjectsRequest<Object>(
 			constructionSite: site?.id,
 			minLastChangeTime: existing.maxLastChangeTime()
 		))
-		.map { $0.makeObjects(context: context) }
-		.map { $0 <- { Repository.shared.update(changing: $0) } }
+		let objects = collection.makeObjects(context: context)
+		Repository.shared.update(changing: objects)
+		return objects
 	}
 	
-	private func doPullRemoteChanges(for site: ConstructionSite) -> Future<Void> {
-		[
-			doPullChangedObjects(for: site, existing: site.maps, context: site.id)
-				.ignoringValue(),
-			doPullChangedObjects(for: site, existing: site.craftsmen, context: site.id)
-				.ignoringValue(),
-		]
-		.sequence() // insert issues only after maps & craftsmen to keep intact foreign key constraints
-		.flatMap { self.doPullChangedIssues(for: site) }
+	private func doPullRemoteChanges(for site: ConstructionSite) async throws {
+		try await doPullChangedObjects(for: site, existing: site.maps, context: site.id)
+		try await doPullChangedObjects(for: site, existing: site.craftsmen, context: site.id)
+		// insert issues only after maps & craftsmen to maintain foreign key constraints
+		try await doPullChangedIssues(for: site)
 	}
 	
-	private func doPullChangedIssues(
-		for site: ConstructionSite,
-		itemsPerPage: Int = 1000,
-		prevLastChangeTime: Date? = nil
-	) -> Future<Void> {
-		// detect loops (making the same request multiple times) and respond by asking for larger pages
-		let lastChangeTime = site.issues.maxLastChangeTime()
-		let itemsPerPage = lastChangeTime != prevLastChangeTime ? itemsPerPage : itemsPerPage * 2
-		
-		return send(GetPagedObjectsRequest<APIIssue>(
-			constructionSite: site.id,
-			minLastChangeTime: lastChangeTime,
-			itemsPerPage: itemsPerPage
-		))
-		.flatMap { collection in
+	private func doPullChangedIssues(for site: ConstructionSite) async throws {
+		var itemsPerPage = 1000
+		var lastChangeTime = Date.distantPast
+		while true {
+			// detect loops (making the same request multiple times) and respond by asking for larger pages
+			let newTime = site.issues.maxLastChangeTime()
+			if newTime == lastChangeTime {
+				itemsPerPage *= 2
+			} else {
+				itemsPerPage = 1000
+				lastChangeTime = newTime
+			}
+			
+			let collection = try await send(GetPagedObjectsRequest<APIIssue>(
+				constructionSite: site.id,
+				minLastChangeTime: lastChangeTime,
+				itemsPerPage: itemsPerPage
+			))
+			
 			let issues = collection.makeObjects(context: site.id)
 			Repository.shared.update(changing: issues)
 			
-			return collection.view.nextPage == nil
-				? .fulfilled
-				: self.doPullChangedIssues(for: site, itemsPerPage: itemsPerPage, prevLastChangeTime: lastChangeTime)
+			guard collection.view.nextPage != nil else { break } // done
 		}
 	}
 }

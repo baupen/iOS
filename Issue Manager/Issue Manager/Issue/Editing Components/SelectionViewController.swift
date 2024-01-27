@@ -31,6 +31,7 @@ final class SelectionViewController: UIViewController {
 	}
 }
 
+@MainActor
 protocol AnySelectionHandler: UITableViewDelegate, UITableViewDataSource {
 	var title: String { get }
 	func prepare(_ tableView: UITableView, in controller: UIViewController)
@@ -88,6 +89,7 @@ final class SelectionHandler<Handler: SimpleSelectionHandler>: NSObject, AnySele
 	}
 }
 
+@MainActor
 protocol SimpleSelectionHandler: AnyObject {
 	associatedtype Item: Equatable
 	associatedtype Cell: UITableViewCell, Reusable

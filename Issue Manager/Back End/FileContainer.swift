@@ -1,7 +1,6 @@
 // Created by Julian Dunskus
 
 import Foundation
-import Promise
 
 private let manager = FileManager.default
 
@@ -59,10 +58,6 @@ extension File {
 		)
 	}
 }
-
-/// limit max concurrent file downloads
-/// (otherwise we start getting overrun with timeouts, though URLSession automatically limits concurrent connections per host)
-private let downloadLimiter = ConcurrencyLimiter(label: "file download", maxConcurrency: 3)
 
 enum FileDownloadProgress: Hashable {
 	/// going through local files to figure out what's missing, but also already downloading if necessary
@@ -149,90 +144,92 @@ extension FileContainer {
 	static func downloadMissingFiles(
 		for containers: Self.Query? = nil,
 		includeInactive: Bool = false,
-		onProgress: ((FileDownloadProgress) -> Void)? = nil
-	) -> Future<Void> {
-		onProgress?(.undetermined)
-		
-		let allContainers = Repository.read(
-			(containers ?? all())
-				.order(Meta.Columns.lastChangeTime.desc)
-				.withoutDeleted
-				.fetchAll
-		)
-		
-		if containers == nil { // can't do this when only handling a subset
-			moveDisusedFiles(inUse: allContainers)
-		}
-		let activeContainers = includeInactive
+		onProgress: ProgressHandler<FileDownloadProgress> = .ignore
+	) async throws {
+		try await onProgress.unisolated { onProgress in
+			onProgress(.undetermined)
+			
+			// bookkeeping
+			let allContainers = Repository.read(
+				(containers ?? all())
+					.withoutDeleted
+					.order(Meta.Columns.lastChangeTime.desc)
+					.fetchAll
+			)
+			if containers == nil { // can't do this when only handling a subset
+				moveDisusedFiles(inUse: allContainers)
+			}
+			
+			// figure out what to download
+			let activeContainers = includeInactive
 			? allContainers
 			: allContainers.filter(\.shouldAutoDownloadFile)
-		
-		print("downloading files for \(activeContainers.count) \(Self.self)s")
-		let futures = activeContainers.compactMap { $0.downloadFile() }
-		print("\(futures.count) downloads to make")
-		
-		// this is much easier if we don't have to report progress
-		guard let onProgress = onProgress else { return futures.sequence() }
-		
-		let total = futures.count
-		var completed: Int32 = 0
-		
-		onProgress(.determined(current: 0, total: total))
-		
-		return futures
-			.map {
-				$0.map {
-					OSAtomicIncrement32(&completed)
-					onProgress(.determined(current: Int(completed), total: total))
-				}
+			let filesToDownload = activeContainers.filter { $0.checkForFileDownload() }
+			print("\(Self.self): downloading files for \(filesToDownload.count)/\(activeContainers.count) containers")
+			onProgress(.determined(current: 0, total: filesToDownload.count))
+			
+			// parallel downloads
+			let context = await Client.shared.makeContext()
+			var completed = 0
+			// limit concurrent downloads to avoid overwhelming the server
+			try await filesToDownload.concurrentForEach(slots: 5) { container in
+				try await container.downloadFile(using: context)
+			} onProgress: {
+				completed += 1
+				onProgress(.determined(current: completed, total: filesToDownload.count))
 			}
-			.sequence()
-			.always { onProgress(.done) }
+			
+			onProgress(.done)
+		}
 	}
 	
-	/// - returns: A `Future` that resolves when the file is downloaded, or `nil` if there's nothing to do.
-	@discardableResult func downloadFile() -> Future<Void>? {
-		guard let file = file else { return nil }
+	func downloadFileIfNeeded() async throws {
+		guard checkForFileDownload() else { return }
+		try await downloadFile(using: await Client.shared.makeContext())
+	}
+	
+	// returns whether the file needs to be downloaded
+	func checkForFileDownload() -> Bool {
+		guard let file = file else { return false }
 		
 		// check if it already exists
 		let url = Self.localURL(for: file)
-		guard !manager.fileExists(atPath: url.path) else { return nil }
+		guard !manager.fileExists(atPath: url.path) else { return false }
 		
 		// check if we already have it cached
 		let cached = Self.cacheURL(for: file)
 		if manager.fileExists(atPath: cached.path) {
 			do {
 				try manager.moveItem(at: cached, to: url)
-				return nil
+				return false
 			} catch {
 				error.printDetails(context: "could not restore local file at \(url) from cached file at \(cached)")
 			}
 		}
 		
-		return downloadLimiter.dispatch(_downloadFile)
+		return true // needs download
 	}
-		
-	private func _downloadFile() -> Future<Void> {
+	
+	private func downloadFile(using context: RequestContext) async throws {
 		// check again in case it's changed by now (defensive coding, i know…)
-		guard let file = file else { return .fulfilled }
+		guard let file = file else { return }
 		let url = Self.localURL(for: file)
-		guard !manager.fileExists(atPath: url.path) else { return .fulfilled }
+		guard !manager.fileExists(atPath: url.path) else { return }
 		
 		let debugDesc = "for \(Self.pathPrefix) (id \(id))"
 		print("Downloading \(file)", debugDesc)
 		
-		return Client.shared.download(file)
-			.map { data in
-				try? manager.createDirectory(
-					at: url.deletingLastPathComponent(),
-					withIntermediateDirectories: true
-				)
-				let success = manager.createFile(atPath: url.path, contents: data)
-				print(success ? "Saved file to" : "Could not save file to", url, debugDesc)
-			}
-			.catch { error in
-				error.printDetails(context: "Could not download \(file) \(debugDesc)")
-			}
+		do {
+			let data = try await context.download(file)
+			try? manager.createDirectory(
+				at: url.deletingLastPathComponent(),
+				withIntermediateDirectories: true
+			)
+			let success = manager.createFile(atPath: url.path, contents: data)
+			print(success ? "Saved file to" : "Could not save file to", url, debugDesc)
+		} catch {
+			error.printDetails(context: "Could not download \(file) \(debugDesc)")
+		}
 	}
 	
 	func deleteFile() {

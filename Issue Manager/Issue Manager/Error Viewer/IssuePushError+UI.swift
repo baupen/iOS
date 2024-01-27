@@ -4,6 +4,7 @@ import Foundation
 import HandyOperators
 
 extension IssuePushError {
+	@MainActor
 	func discardChanges() {
 		switch (stage, issue.wasUploaded) {
 		case (.patch, true): // could not patch an existing issue

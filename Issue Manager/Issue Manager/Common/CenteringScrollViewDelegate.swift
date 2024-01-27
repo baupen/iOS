@@ -3,6 +3,7 @@
 import UIKit
 import CGeometry
 
+@MainActor
 final class CenteringScrollViewDelegate: NSObject, UIScrollViewDelegate {
 	@IBOutlet private weak var viewForZooming: UIView?
 	

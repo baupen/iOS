@@ -48,18 +48,18 @@ final class RegisterViewController: UIViewController {
 		
 		canEdit = false
 		isLoading = true
-		Client.shared.register(asEmail: email, at: url)
-			.on(.main)
-			.always { self.isLoading = false }
-			.catch { error in
+		Task {
+			defer { isLoading = false }
+			do {
+				try await Client.shared.register(asEmail: email, at: url)
+				registerButton.isHidden = true
+				emailExplanation.isHidden = false
+			} catch {
 				error.printDetails(context: "Registration failed!")
-				self.canEdit = true
-				self.showAlert(for: error)
+				canEdit = true
+				showAlert(for: error)
 			}
-			.then {
-				self.registerButton.isHidden = true
-				self.emailExplanation.isHidden = false
-			}
+		}
 	}
 	
 	// unwind segue

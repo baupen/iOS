@@ -1,7 +1,6 @@
 // Created by Julian Dunskus
 
 import Foundation
-import Promise
 
 private struct SelfRequest: GetJSONRequest {
 	let path = "/api/me"
@@ -12,19 +11,18 @@ private struct SelfRequest: GetJSONRequest {
 }
 
 extension Client {
-	func logIn(with loginInfo: LoginInfo) -> Future<Void> {
+	func logIn(with loginInfo: LoginInfo) async throws {
 		self.loginInfo = loginInfo
-		return send(SelfRequest())
-			.map { GetObjectRequest(for: $0.constructionManagerIri.makeID()) }
-			.flatMap(send)
-			.map {
-				self.loginInfo = loginInfo // set again in case something else changed it since
-				let user = $0.makeObject()
-				self.localUser = user
-				Repository.shared.signedIn(as: user)
-			}
-			.catch { _ in
-				self.loginInfo = nil
-			}
+		do {
+			let context = makeContext()
+			let userID = try await context.send(SelfRequest()).constructionManagerIri.makeID()
+			let user = try await context.send(GetObjectRequest(for: userID)).makeObject()
+			self.loginInfo = loginInfo // set again in case something else changed it since
+			self.localUser = user
+			Repository.shared.signedIn(as: user)
+		} catch {
+			self.loginInfo = nil
+			throw error
+		}
 	}
 }

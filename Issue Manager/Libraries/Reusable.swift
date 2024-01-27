@@ -32,6 +32,7 @@ extension UICollectionView {
 	}
 }
 
+@MainActor
 protocol InstantiableViewController: Reusable where Self: UIViewController {
 	static var storyboardName: String { get }
 }

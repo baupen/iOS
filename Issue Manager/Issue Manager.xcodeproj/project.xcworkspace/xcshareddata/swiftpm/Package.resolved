@@ -38,15 +38,6 @@
         }
       },
       {
-        "package": "Promise",
-        "repositoryURL": "https://github.com/timvermeulen/Promise.git",
-        "state": {
-          "branch": null,
-          "revision": "5152cf895afe696193c881af6bfc5c3caa876db4",
-          "version": "1.14.0"
-        }
-      },
-      {
         "package": "PullToExpand",
         "repositoryURL": "https://github.com/juliand665/PullToExpand.git",
         "state": {

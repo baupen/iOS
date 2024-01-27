@@ -1,17 +1,15 @@
 // Created by Julian Dunskus
 
 import Foundation
-import Promise
 import UserDefault
 import HandyOperators
 
 typealias TaskResult = (data: Data, response: HTTPURLResponse)
 
+@MainActor
 final class Client {
-	static let shared = Client()
-	static let dateFormatter = ISO8601DateFormatter()
-	
-	private static let baseServerURL = URL(string: "https://app.baupen.ch")!
+	nonisolated static let shared = Client()
+	nonisolated static let dateFormatter = ISO8601DateFormatter()
 	
 	@UserDefault("client.loginInfo") var loginInfo: LoginInfo?
 	
@@ -20,50 +18,46 @@ final class Client {
 	
 	var isLoggedIn: Bool { loginInfo != nil && localUser != nil }
 	
-	private let urlSession = URLSession.shared
-	
-	private let requestEncoder = JSONEncoder() <- {
-		$0.dateEncodingStrategy = .iso8601
-	}
-	private let responseDecoder = JSONDecoder() <- {
-		$0.dateDecodingStrategy = .iso8601
-	}
-	
-	/// any dependent requests are executed on this queue, so as to avoid bad interleavings and races and such
-	private let linearQueue = DispatchQueue(label: "dependent request execution")
-	
-	func assertOnLinearQueue() {
-		dispatchPrecondition(condition: .onQueue(linearQueue))
-	}
-	
-	private init() {}
+	private nonisolated init() {}
 	
 	func wipeAllData() {
 		loginInfo = nil
 		localUser = nil
 	}
 	
-	func send<R: Request>(_ request: R) -> Future<R.Response> {
-		Future { try urlRequest(for: request) }
-			.flatMap { rawRequest in
-				let bodyDesc = rawRequest.httpBody
-					.map { "\"\(debugRepresentation(of: $0))\"" }
-					?? "request without body"
-				print("\(request.path): \(rawRequest.httpMethod!)ing \(bodyDesc) to \(rawRequest.url!)")
-				
-				return self.send(rawRequest)
-					.catch { _ in print("\(request.path): failed!") }
-			}
-			.map { try self.extractData(from: $0, for: request) }
+	@discardableResult
+	func updateLocalUser() -> ConstructionManager? {
+		localUser.flatMap { Repository.object($0.id) } 
+			<- { localUser = $0 }
 	}
 	
-	func pushChangesThen<T>(perform task: @escaping () throws -> T) -> Future<T> {
-		Future(asyncOn: linearQueue) {
-			let errors = self.synchronouslyPushLocalChanges()
-			guard errors.isEmpty else {
-				throw RequestError.pushFailed(errors)
-			}
-			return try task()
+	/// Provides a context for performing authenticated requests.
+	///
+	/// - Note: This is a method (not a property) to encourage reusing it when important, since the `await` that would usually notify of the main actor hop is already expected for the `send` that usually follows.
+	/// If you're not on the main actor, getting this context cannot be done synchronously and would thus silently introduce a main actor hop with every `await client.send(...)`.
+	func makeContext() -> RequestContext {
+		.init(client: self, loginInfo: loginInfo)
+	}
+}
+
+struct RequestContext: Sendable {
+	let client: Client
+	let loginInfo: LoginInfo?
+	
+	func send<R: Request>(_ request: R) async throws -> R.Response {
+		let rawRequest = try urlRequest(for: request)
+		
+		let bodyDesc = rawRequest.httpBody
+			.map { "\"\(debugRepresentation(of: $0))\"" }
+		?? "request without body"
+		print("\(request.path): \(rawRequest.httpMethod!)ing \(bodyDesc) to \(rawRequest.url!)")
+		
+		do {
+			let rawResponse = try await send(rawRequest)
+			return try extractData(from: rawResponse, for: request)
+		} catch {
+			print("\(request.path): failed!")
+			throw error
 		}
 	}
 	
@@ -104,7 +98,7 @@ final class Client {
 	
 	private func apiURL<R: Request>(for request: R) -> URL {
 		(URLComponents(
-			url: request.baseURLOverride ?? loginInfo?.origin ?? Self.baseServerURL,
+			url: request.baseURLOverride ?? loginInfo?.origin ?? baseServerURL,
 			resolvingAgainstBaseURL: false
 		)! <- {
 			$0.percentEncodedPath += request.path
@@ -114,11 +108,24 @@ final class Client {
 		}).url!
 	}
 	
-	private func send(_ request: URLRequest) -> Future<TaskResult> {
-		urlSession.dataTask(with: request)
-			.transformError { _, error in throw RequestError.communicationError(error) }
+	private func send(_ request: URLRequest) async throws -> TaskResult {
+		do {
+			let (data, response) = try await urlSession.data(for: request)
+			return (data, response as! HTTPURLResponse)
+		} catch {
+			throw RequestError.communicationError(error)
+		}
 	}
 }
+
+private let requestEncoder = JSONEncoder() <- {
+	$0.dateEncodingStrategy = .iso8601
+}
+private let responseDecoder = JSONDecoder() <- {
+	$0.dateDecodingStrategy = .iso8601
+}
+private let urlSession = URLSession.shared
+private let baseServerURL = URL(string: "https://app.baupen.ch")!
 
 extension HTTPURLResponse {
 	var contentType: String? {

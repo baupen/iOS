@@ -198,6 +198,8 @@
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Manage
 "manage_storage.all_images_downloaded" = "Alle Bilder sind geladen.";
+// CONTEXT: Knopf, um das Runterladen von fehlenden Bildern abzubrechen
+"manage_storage.cancel_download" = "Abbrechen";
 "manage_storage.download_all" = "%@ fehlende Bilder laden";
 "manage_storage.purge_info" = "Um Daten zu sparen, werden nur Bilder von Pendenzen heruntergeladen, die noch offen sind oder seit weniger als 90 Tagen abgeschlossen sind. Bereits geladene Bilder können mit diesem Knopf lokal entfernt werden.";
 "manage_storage.purge_now" = "Jetzt Platz einsparen";

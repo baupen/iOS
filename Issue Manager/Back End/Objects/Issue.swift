@@ -2,10 +2,10 @@
 
 import Foundation
 import GRDB
-import Promise
 import UserDefault
 
 struct Issue: Equatable {
+	@MainActor
 	static var isInClientMode: Bool {
 		ViewOptions.shared.isInClientMode
 	}
@@ -129,7 +129,7 @@ extension Issue: FileContainer {
 	static let pathPrefix = "issue"
 	var file: File<Issue>? { image }
 	
-	private static var autoDownloadThreshold = Date(timeIntervalSinceNow: -3600 * 24 * 90) // 90 days
+	private static let autoDownloadThreshold = Date(timeIntervalSinceNow: -3600 * 24 * 90) // 90 days
 	
 	var shouldAutoDownloadFile: Bool {
 		guard let closedAt = status.closedAt else { return true }
@@ -138,6 +138,7 @@ extension Issue: FileContainer {
 }
 
 extension Issue {
+	@MainActor
 	init(at position: Position? = nil, in map: Map) {
 		self.meta = .init()
 		self.constructionSiteID = map.constructionSiteID
@@ -250,6 +251,7 @@ extension Issue: DBRecord {
 }
 
 extension DerivableRequest where RowDecoder == Issue {
+	@MainActor
 	var consideringClientMode: Self {
 		Issue.isInClientMode ? filter(Issue.Columns.wasAddedWithClient) : self
 	}
@@ -286,6 +288,7 @@ extension Issue {
 
 // MARK: -
 // MARK: Mutation
+@MainActor
 extension Issue {
 	mutating func close() {
 		assert(isRegistered)
@@ -333,15 +336,17 @@ extension Issue {
 		patchIfChanged = nil
 	}
 	
-	func saveAndSync() -> Future<Void> {
-		let shouldDeleteLocally = isDeleted && !wasUploaded
-		guard !shouldDeleteLocally else {
-			Repository.shared.remove(self)
-			return .fulfilled
+	func saveAndSync() async throws {
+		if isDeleted {
+			guard wasUploaded else {
+				Repository.shared.remove(self)
+				return
+			}
 		}
-		
 		Repository.shared.save(self)
-		return Client.shared.pushLocalChanges()
+		try await SyncManager.shared.withContext {
+			try await $0.pushLocalChanges()
+		}
 	}
 }
 

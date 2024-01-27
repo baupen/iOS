@@ -1,7 +1,6 @@
 // Created by Julian Dunskus
 
 import UIKit
-import Promise
 import HandyOperators
 
 final class IssueBadge: UIView {
@@ -48,17 +47,16 @@ final class IssueBadge: UIView {
 	func update() {
 		let issues = holder.issues(recursively: shouldUseRecursiveIssues).issuesToInspect
 		// async because there could be a lot of issues (e.g. if we're calculating it for a whole site)
-		let issueCount = BasicFuture(asyncOn: .global(qos: .userInitiated)) {
-			Repository.read(issues.fetchCount)
-		}
-		
-		issueCount.on(.main).then { count in
-			if count == 0 {
-				self.isHidden = true
-			} else {
-				self.isHidden = false
-				self.label.text = String(count)
-				self.setNeedsLayout()
+		Task.detached(priority: .userInitiated) {
+			let count = Repository.read(issues.fetchCount)
+			await MainActor.run {
+				if count == 0 {
+					self.isHidden = true
+				} else {
+					self.isHidden = false
+					self.label.text = String(count)
+					self.setNeedsLayout()
+				}
 			}
 		}
 	}

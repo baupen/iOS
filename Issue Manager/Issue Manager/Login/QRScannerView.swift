@@ -17,10 +17,17 @@ final class QRScannerViewController: UIViewController {
 		
 		scannerView.delegate = delegate
 	}
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		// only now can we handle errors with alerts
+		scannerView.configure()
+	}
 }
 
 final class QRScannerView: UIView {
-	var captureSession: AVCaptureSession?
+	var captureSession: CaptureSession?
 	var metadataOutput: AVCaptureMetadataOutput?
 	var previewLayer: AVCaptureVideoPreviewLayer?
 	
@@ -32,14 +39,18 @@ final class QRScannerView: UIView {
 	
 	weak var delegate: QRScannerViewDelegate?
 	
-	var isProcessing = false {
+	private var isProcessing = false {
 		didSet {
 			if isProcessing {
 				activityIndicator.startAnimating()
-				captureSession?.stopRunning()
+				Task {
+					await captureSession?.stop()
+				}
 			} else {
 				activityIndicator.stopAnimating()
-				captureSession?.startRunning()
+				Task {
+					await captureSession?.start()
+				}
 			}
 			
 			previewLayer?.connection?.isEnabled = !isProcessing // pause
@@ -51,55 +62,44 @@ final class QRScannerView: UIView {
 		super.awakeFromNib()
 		
 		addSubview(activityIndicator)
-		
-		configure()
 	}
 	
 	deinit {
-		captureSession?.stopRunning()
-	}
-	
-	func configure() {
-		guard captureSession?.isRunning != true else { return } // already configured
-		
-		DispatchQueue.global().async {
-			if self.captureSession == nil {
-				self.tryToConfigureSession()
-			}
-			
-			self.captureSession?.startRunning()
+		Task { [captureSession] in
+			await captureSession?.stop()
 		}
 	}
 	
-	private func tryToConfigureSession() {
+	func configure() {
 		do {
-			captureSession = try AVCaptureSession() <- { session in
-				let device = try AVCaptureDevice.default(for: .video) ??? CameraViewError.noCameraAvailable
-				session.addInput(try AVCaptureDeviceInput(device: device))
+			let session = try CaptureSession()
+			captureSession = session
+			
+			Task.detached(priority: .userInitiated) {
+				await session.start()
 				
-				self.metadataOutput = AVCaptureMetadataOutput() <- {
-					session.addOutput($0)
-					$0.setMetadataObjectsDelegate(self, queue: .main)
-					$0.metadataObjectTypes = [.qr]
-				}
-				
-				self.previewLayer = AVCaptureVideoPreviewLayer(session: session) <- { preview in
-					preview.videoGravity = .resizeAspectFill
-					
-					DispatchQueue.main.async { [preview] in
-						self.layer.addSublayer(preview)
-						self.updateOrientation()
-						self.isHidden = false
-					}
-				}
+				await self.connect(to: session)
 			}
 		} catch {
 			print("Could not set up camera!")
 			dump(error)
 			
-			DispatchQueue.main.async {
-				self.delegate?.cameraFailed(with: error)
-			}
+			delegate?.cameraFailed(with: error)
+		}
+	}
+	
+	private func connect(to session: CaptureSession) async {
+		self.metadataOutput = await session.makeMetadataOutput().value <- {
+			$0.setMetadataObjectsDelegate(self, queue: .main)
+			$0.metadataObjectTypes = [.qr]
+		}
+		
+		self.previewLayer = await session.makePreview().value <- { preview in
+			preview.videoGravity = .resizeAspectFill
+			
+			self.layer.addSublayer(preview)
+			self.updateOrientation()
+			self.isHidden = false
 		}
 	}
 	
@@ -119,23 +119,29 @@ final class QRScannerView: UIView {
 }
 
 extension QRScannerView: AVCaptureMetadataOutputObjectsDelegate {
-	func metadataOutput(
+	nonisolated func metadataOutput(
 		_ output: AVCaptureMetadataOutput,
 		didOutput metadataObjects: [AVMetadataObject],
 		from connection: AVCaptureConnection
 	) {
-		guard !isProcessing else { return }
 		let qrs = metadataObjects
 			.compactMap { $0 as? AVMetadataMachineReadableCodeObject }
 			.compactMap { $0.stringValue }
 		guard !qrs.isEmpty else { return }
-		delegate?.qrsFound(by: self, with: qrs)
+		Task { @MainActor in
+			guard !isProcessing else { return }
+			if let delegate {
+				isProcessing = delegate.qrsFound(withContents: qrs)
+			}
+		}
 	}
 }
 
+@MainActor
 protocol QRScannerViewDelegate: AnyObject {
 	func cameraFailed(with error: Error)
-	func qrsFound(by scanner: QRScannerView, with contents: [String])
+	/// - returns: whether to block further input from the scanner
+	func qrsFound(withContents contents: [String]) -> Bool
 }
 
 enum QRScannerViewError: Error {

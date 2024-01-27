@@ -7,13 +7,16 @@ protocol MapHolder: AnyStoredObject {
 	var name: String { get }
 	var children: Map.Query { get }
 	var constructionSiteID: ConstructionSite.ID { get }
+	var isDeleted: Bool { get }
 	
-	func recursiveChildren<R>(in request: R) -> R where R: DerivableRequest, R.RowDecoder == Map
-	var recursiveIssues: Issue.Query { get }
-	func issues(recursively: Bool) -> Issue.Query
+	@MainActor func recursiveChildren<R>(in request: R) -> R where R: DerivableRequest, R.RowDecoder == Map
+	@MainActor var recursiveIssues: Issue.Query { get }
+	@MainActor func issues(recursively: Bool) -> Issue.Query
+	func freshlyFetched() -> Self?
 }
 
 extension MapHolder {
+	@MainActor
 	var recursiveIssues: Issue.Query {
 		Issue
 			.all()
@@ -24,6 +27,7 @@ extension MapHolder {
 }
 
 extension DerivableRequest where RowDecoder == Map {
+	@MainActor
 	func recursiveChildren(of holder: MapHolder) -> Self {
 		holder.recursiveChildren(in: self)
 	}
@@ -41,6 +45,10 @@ extension ConstructionSite: MapHolder {
 	func issues(recursively: Bool) -> Issue.Query {
 		precondition(recursively, "construction sites only have recursive issues")
 		return recursiveIssues
+	}
+	
+	func freshlyFetched() -> Self? {
+		Repository.shared.object(id)
 	}
 }
 
@@ -65,5 +73,9 @@ extension Map: MapHolder {
 	
 	func issues(recursively: Bool) -> Issue.Query {
 		recursively ? recursiveIssues : issues
+	}
+	
+	func freshlyFetched() -> Self? {
+		Repository.shared.object(id)
 	}
 }

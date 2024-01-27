@@ -1,7 +1,6 @@
 // Created by Julian Dunskus
 
 import UIKit
-import Promise
 import ArrayBuilder
 import HandyOperators
 import SwiftUI
@@ -19,20 +18,25 @@ class RefreshingTableViewController: UITableViewController {
 	@objc final func refresh(_ refresher: UIRefreshControl) {
 		isRefreshing = true
 		
-		let result = doRefresh().on(.main)
-		
-		result.always {
-			refresher.endRefreshing()
-			self.isRefreshing = false
+		Task {
+			defer {
+				refresher.endRefreshing()
+				isRefreshing = false
+			}
+			do {
+				try await doRefresh()
+			} catch {
+				showAlert(for: error)
+			}
 		}
-		result.then {
-			self.refreshCompleted()
-		}
-		result.catch(showAlert)
 	}
 	
-	func doRefresh() -> Future<Void> {
-		Client.shared.pullRemoteChanges()
+	func doRefresh() async throws {
+		try await SyncManager.shared.withContext { 
+			try await $0
+				.onProgress(.onMainActor { self.syncProgress = $0 })
+				.pullRemoteChanges()
+		}
 	}
 	
 	private func showAlert(for error: Error) {
@@ -91,8 +95,6 @@ class RefreshingTableViewController: UITableViewController {
 			$0.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
 		}
 	}
-	
-	func refreshCompleted() {}
 	
 	func refreshManually() {
 		let refresher = self.tableView.refreshControl!

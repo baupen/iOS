@@ -1,7 +1,6 @@
 // Created by Julian Dunskus
 
 import UIKit
-import Promise
 import HandyOperators
 import class Combine.AnyCancellable
 
@@ -70,34 +69,25 @@ final class MapListViewController: RefreshingTableViewController, InstantiableVi
 		super.viewWillAppear(animated)
 	}
 	
-	/// set to true when encountering a site we've been removed from during refresh to avoid multiple alerts
-	private var isAlreadyReturning = false
-	override func doRefresh() -> Future<Void> {
-		Client.shared.pullRemoteChanges(for: holder.constructionSiteID) { progress in
-			DispatchQueue.main.async {
-				self.syncProgress = progress
+	override func doRefresh() async throws {
+		do {
+			let siteID = holder.constructionSiteID
+			try await SyncManager.shared.withContext {
+				try await $0
+					.onProgress(.onMainActor { self.syncProgress = $0 })
+					.pullRemoteChanges(for: siteID)
 			}
+		} catch SyncError.siteAccessRemoved {
+			self.showAlert(
+				titled: Localization.RemovedFromMap.title,
+				message: Localization.RemovedFromMap.message,
+				okMessage: Localization.RemovedFromMap.dismiss,
+				okHandler: self.returnToSiteList
+			)
+			return
 		}
-		.flatMapError { error in
-			if case SyncError.siteAccessRemoved = error {
-				self.isAlreadyReturning = true
-				self.showAlert(
-					titled: Localization.RemovedFromMap.title,
-					message: Localization.RemovedFromMap.message,
-					okMessage: Localization.RemovedFromMap.dismiss,
-					okHandler: self.returnToSiteList
-				)
-				return .fulfilled
-			} else {
-				return .rejected(with: error)
-			}
-		}
-	}
-	
-	override func refreshCompleted() {
-		guard let mainController = mainController else { return } // dismissed in the meantime
 		
-		super.refreshCompleted()
+		guard let mainController = mainController else { return } // dismissed in the meantime
 		
 		let isValid = handleRefresh()
 		if isValid {
@@ -105,14 +95,12 @@ final class MapListViewController: RefreshingTableViewController, InstantiableVi
 				mainController.detailNav.mapController.holder = holder
 			}
 		} else {
-			if !isAlreadyReturning {
-				showAlert(
-					titled: Localization.MapRemoved.title,
-					message: Localization.MapRemoved.message,
-					okMessage: Localization.MapRemoved.dismiss,
-					okHandler: returnToSiteList
-				)
-			}
+			showAlert(
+				titled: Localization.MapRemoved.title,
+				message: Localization.MapRemoved.message,
+				okMessage: Localization.MapRemoved.dismiss,
+				okHandler: returnToSiteList
+			)
 		}
 		
 		for viewController in navigationController!.viewControllers where viewController !== self {
@@ -121,29 +109,17 @@ final class MapListViewController: RefreshingTableViewController, InstantiableVi
 	}
 	
 	private func returnToSiteList() {
-		self.performSegue(withIdentifier: "back to site list", sender: self)
+		performSegue(withIdentifier: "back to site list", sender: self)
 	}
 	
 	/// - returns: whether or not the holder is still valid
 	@discardableResult private func handleRefresh() -> Bool {
-		if
-			let oldSite = holder as? ConstructionSite,
-			let site = Repository.object(oldSite.id),
-			!site.isDeleted
-		{
-			holder = site
-			return true
-		} else if
-			let oldMap = holder as? Map,
-			let map = Repository.object(oldMap.id),
-			!map.isDeleted
-		{
-			holder = map
-			return true
-		} else {
+		guard let fresh = holder.freshlyFetched(), !fresh.isDeleted else {
 			maps = []
 			return false
 		}
+		holder = fresh
+		return true
 	}
 	
 	func update() {

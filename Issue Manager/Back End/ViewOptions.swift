@@ -4,6 +4,7 @@ import UIKit
 import UserDefault
 import Combine
 
+@MainActor
 final class ViewOptions: ObservableObject {
 	static let shared = ViewOptions()
 	
