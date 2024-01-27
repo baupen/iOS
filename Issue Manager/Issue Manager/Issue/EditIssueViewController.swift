@@ -42,13 +42,22 @@ final class EditIssueViewController: UITableViewController, InstantiableViewCont
 	}
 	
 	@IBAction func descriptionBeganEditing() {
-		// make suggestions visible
-		guard let indexPath = tableView.indexPath(for: descriptionCell)
-			else { return } // description cell not visible; not sure how this could happen but we shouldn't rely on it
-		// after the table view scrolls by itself
-		DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) { [tableView] in
-			tableView!.scrollToRow(at: indexPath, at: .top, animated: true)
-		}
+		// iOS will automatically scroll down to move the text field above the newly popped-up keyboard, but the suggestions won't be visible, so we'll handle them ourselves
+		
+		// wait for the keyboard to pop up
+		var token: AnyCancellable?
+		token = NotificationCenter.default
+			.publisher(for: Self.keyboardWillShowNotification)
+			.timeout(1, scheduler: DispatchQueue.main) // give up after some time
+			.first() // run only once
+			.sink { notification in
+				_ = token // retain until run or timed out
+				guard let indexPath = self.tableView.indexPath(for: self.descriptionCell) else {
+					print("could not locate description cell instance!")
+					return
+				}
+				self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+			}
 	}
 	
 	@IBAction func setClientMode(_ sender: UISwitch) {
