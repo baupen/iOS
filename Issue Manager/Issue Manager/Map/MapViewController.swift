@@ -100,7 +100,7 @@ final class MapViewController: UIViewController, InstantiableViewController {
 	var isMovingIssue: Bool { editorForPlacingIssue != nil }
 	private var editorForPlacingIssue: EditIssueViewController?
 	
-	var holder: MapHolder? {
+	var holder: (any MapHolder)? {
 		didSet { update() }
 	}
 	var map: Map? { holder as? Map }

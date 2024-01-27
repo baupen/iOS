@@ -16,7 +16,7 @@ final class IssueBadge: UIView {
 	}
 	
 	var shouldUseRecursiveIssues = true
-	var holder: MapHolder! {
+	var holder: (any MapHolder)! {
 		didSet { update() }
 	}
 	

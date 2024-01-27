@@ -3,7 +3,7 @@
 import Foundation
 import GRDB
 
-protocol MapHolder: AnyStoredObject {
+protocol MapHolder: StoredObject {
 	var name: String { get }
 	var children: Map.Query { get }
 	var constructionSiteID: ConstructionSite.ID { get }
@@ -28,7 +28,7 @@ extension MapHolder {
 
 extension DerivableRequest where RowDecoder == Map {
 	@MainActor
-	func recursiveChildren(of holder: MapHolder) -> Self {
+	func recursiveChildren(of holder: some MapHolder) -> Self {
 		holder.recursiveChildren(in: self)
 	}
 }

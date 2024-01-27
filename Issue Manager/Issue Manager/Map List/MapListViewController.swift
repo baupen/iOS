@@ -11,7 +11,7 @@ final class MapListViewController: RefreshingTableViewController, InstantiableVi
 	
 	@IBOutlet private var backToSiteListButton: UIBarButtonItem!
 	
-	var holder: MapHolder! {
+	var holder: (any MapHolder)! {
 		didSet { update() }
 	}
 	
@@ -149,17 +149,18 @@ final class MapListViewController: RefreshingTableViewController, InstantiableVi
 				mapController.holder = holder
 			}
 		} else {
-			showMapController(for: holder)
+			let h = holder! // awkward work around for implicit existential opening not opening IUOs
+			showMapController(for: h)
 		}
 	}
 	
-	func showMapController(for holder: MapHolder) {
+	func showMapController(for holder: some MapHolder) {
 		let mapController = MapViewController.instantiate()!
 		mapController.holder = holder
 		show(mapController, sender: self)
 	}
 	
-	func showListController(for holder: MapHolder) {
+	func showListController(for holder: some MapHolder) {
 		let listController = MapListViewController.instantiate()!
 		listController.holder = holder
 		show(listController, sender: self)
