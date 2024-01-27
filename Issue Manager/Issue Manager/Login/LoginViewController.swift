@@ -116,6 +116,7 @@ extension LoginViewController: QRScannerViewDelegate {
 				?? (try? decoder.decode(LoginInfo.self, from: $0.data(using: .utf8)!))
 		}
 		guard let info = infos.first else { return false }
+		Haptics.notify.notificationOccurred(.success)
 		// dismiss presented qr scanner
 		dismiss(animated: true)
 		logIn(with: info)
