@@ -35,11 +35,11 @@ extension Map: DBRecord {
 	}
 	
 	func hasChildren(in db: Database) throws -> Bool {
-		try children.fetchCount(db) > 0 // TODO: SQL exists() might be nice here
+		try !children.isEmpty(db)
 	}
 	
-	init(row: Row) {
-		meta = .init(row: row)
+	init(row: Row) throws {
+		meta = try .init(row: row)
 		constructionSiteID = row[Columns.constructionSiteID]
 		
 		file = row[Columns.file]
@@ -47,8 +47,8 @@ extension Map: DBRecord {
 		parentID = row[Columns.parentID]
 	}
 	
-	func encode(to container: inout PersistenceContainer) {
-		meta.encode(to: &container)
+	func encode(to container: inout PersistenceContainer) throws {
+		try meta.encode(to: &container)
 		container[Columns.constructionSiteID] = constructionSiteID
 		
 		container[Columns.file] = file

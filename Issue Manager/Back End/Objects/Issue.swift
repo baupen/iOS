@@ -180,8 +180,8 @@ extension Issue: DBRecord {
 		try craftsmanID?.get(in: db)
 	}
 	
-	func encode(to container: inout PersistenceContainer) {
-		meta.encode(to: &container)
+	func encode(to container: inout PersistenceContainer) throws {
+		try meta.encode(to: &container)
 		container[Columns.constructionSiteID] = constructionSiteID
 		container[Columns.mapID] = mapID
 		
@@ -189,7 +189,7 @@ extension Issue: DBRecord {
 		container[Columns.wasAddedWithClient] = wasAddedWithClient
 		container[Columns.deadline] = deadline
 		
-		try! container.encode(position, forKey: Columns.position)
+		try container.encode(position, forKey: Columns.position)
 		container[Columns.isMarked] = isMarked
 		container[Columns.description] = description
 		container[Columns.craftsmanID] = craftsmanID
@@ -199,13 +199,13 @@ extension Issue: DBRecord {
 		container[Columns.wasUploaded] = wasUploaded
 		container[Columns.didChangeImage] = didChangeImage
 		container[Columns.didDelete] = didDelete
-		try! container.encode(patchIfChanged, forKey: Columns.patchIfChanged)
+		try container.encode(patchIfChanged, forKey: Columns.patchIfChanged)
 		
-		status.encode(to: &container)
+		try status.encode(to: &container)
 	}
 	
-	init(row: Row) {
-		meta = .init(row: row)
+	init(row: Row) throws {
+		meta = try .init(row: row)
 		constructionSiteID = row[Columns.constructionSiteID]
 		mapID = row[Columns.mapID]
 		
@@ -213,7 +213,7 @@ extension Issue: DBRecord {
 		wasAddedWithClient = row[Columns.wasAddedWithClient]
 		deadline = row[Columns.deadline]
 		
-		position = try! row.decodeValueIfPresent(forKey: Columns.position)
+		position = try row.decodeValueIfPresent(forKey: Columns.position)
 		isMarked = row[Columns.isMarked]
 		description = row[Columns.description]
 		craftsmanID = row[Columns.craftsmanID]
@@ -223,9 +223,9 @@ extension Issue: DBRecord {
 		wasUploaded = row[Columns.wasUploaded]
 		didChangeImage = row[Columns.didChangeImage]
 		didDelete = row[Columns.didDelete]
-		patchIfChanged = try! row.decodeValueIfPresent(forKey: Columns.patchIfChanged)
+		patchIfChanged = try row.decodeValueIfPresent(forKey: Columns.patchIfChanged)
 		
-		status = .init(row: row)
+		status = try .init(row: row)
 	}
 	
 	enum Columns: String, ColumnExpression {

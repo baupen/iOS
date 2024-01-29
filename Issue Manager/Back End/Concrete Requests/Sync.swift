@@ -353,7 +353,6 @@ private extension QueryInterfaceRequest where RowDecoder: StoredObject {
 		Repository.read(
 			self
 				.select(max(Issue.Meta.Columns.lastChangeTime), as: Date.self)
-				.expectingSingleResult()
 				.fetchOne
 		) ?? .distantPast
 	}
