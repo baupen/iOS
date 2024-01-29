@@ -91,6 +91,12 @@ final actor SyncManager {
 			try await block(SyncContext(client: .shared))
 		}
 	}
+	
+	func pushLocalChanges() async throws {
+		try await withContext {
+			try await $0.pushLocalChanges()
+		}
+	}
 }
 
 struct SyncContext {

@@ -31,9 +31,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControll
 			
 			print("Reachable again! Trying to push any changes that weren't pushed earlier...")
 			Task {
-				try? await SyncManager.shared.withContext {
-					try await $0.pushLocalChanges()
-				}
+				try await SyncManager.shared.pushLocalChanges()
 			}
 		}
 		

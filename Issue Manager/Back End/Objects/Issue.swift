@@ -336,17 +336,16 @@ extension Issue {
 		patchIfChanged = nil
 	}
 	
-	func saveAndSync() async throws {
+	/// - returns: a closure that syncs any changes to the server, if desired
+	func saveChanges() -> () async throws -> Void {
 		if isDeleted {
 			guard wasUploaded else {
 				Repository.shared.remove(self)
-				return
+				return {}
 			}
 		}
 		Repository.shared.save(self)
-		try await SyncManager.shared.withContext {
-			try await $0.pushLocalChanges()
-		}
+		return SyncManager.shared.pushLocalChanges
 	}
 }
 

@@ -232,16 +232,16 @@ final class EditIssueViewController: UITableViewController, InstantiableViewCont
 	private func onSave() {
 		let originalTrade = (original?.craftsman).flatMap(Repository.read)?.trade
 		Task {
-			if trade != originalTrade || issue.description != original?.description {
-				await SuggestionStorage.shared.decrementSuggestion(
-					description: original?.description,
-					forTrade: originalTrade
-				)
-				await SuggestionStorage.shared.used(
-					description: issue.description,
-					forTrade: trade
-				)
-			}
+			guard trade != originalTrade || issue.description != original?.description else { return }
+			
+			await SuggestionStorage.shared.decrementSuggestion(
+				description: original?.description,
+				forTrade: originalTrade
+			)
+			await SuggestionStorage.shared.used(
+				description: issue.description,
+				forTrade: trade
+			)
 		}
 	}
 	
@@ -271,8 +271,9 @@ final class EditIssueViewController: UITableViewController, InstantiableViewCont
 		case "save":
 			onSave()
 			let mapController = segue.destination as! MapViewController
+			let sync = issue.saveChanges()
 			Task {
-				try await issue.saveAndSync()
+				try await sync()
 				mapController.updateFromRepository()
 			}
 		case "reposition":
@@ -280,8 +281,9 @@ final class EditIssueViewController: UITableViewController, InstantiableViewCont
 		case "delete":
 			issue.delete()
 			let mapController = segue.destination as! MapViewController
+			let sync = issue.saveChanges()
 			Task {
-				try await issue.saveAndSync()
+				try await sync()
 				mapController.updateFromRepository()
 			}
 		case "lightbox":

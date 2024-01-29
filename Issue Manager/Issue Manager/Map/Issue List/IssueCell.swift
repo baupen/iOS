@@ -22,7 +22,8 @@ final class IssueCell: UITableViewCell, Reusable {
 	
 	@IBAction func markPressed() {
 		issue.isMarked.toggle()
-		Task { try await issue.saveAndSync() }
+		let sync = issue.saveChanges()
+		Task { try await sync() }
 		Haptics.mediumImpact.impactOccurred()
 		update()
 	}
