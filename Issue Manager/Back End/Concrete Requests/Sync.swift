@@ -124,19 +124,19 @@ struct SyncContext {
 
 extension SyncContext {
 	func pushLocalChanges() async throws {
-		let errors = await tryPushLocalChanges()
+		let errors = try await tryPushLocalChanges()
 		guard errors.isEmpty else {
 			throw RequestError.pushFailed(errors)
 		}
 	}
 	
-	private func tryPushLocalChanges() async -> [IssuePushError] {
+	private func tryPushLocalChanges() async throws -> [IssuePushError] {
 		let maxLastChangeTime = Issue.all().maxLastChangeTime()
 		
 		let issuesWithPatches = Issue
 			.filter(Issue.Columns.patchIfChanged != nil)
 			.order(Issue.Status.Columns.createdAt)
-		let patchErrors = await syncChanges(
+		let patchErrors = try await syncChanges(
 			for: issuesWithPatches,
 			stage: .patch
 		) { issue in
@@ -152,7 +152,7 @@ extension SyncContext {
 		
 		guard patchErrors.isEmpty else { return patchErrors }
 		
-		let imageErrors = await syncChanges(
+		let imageErrors = try await syncChanges(
 			for: Issue.filter(Issue.Columns.didChangeImage).withoutDeleted,
 			stage: .imageUpload
 		) { issue in
@@ -163,7 +163,7 @@ extension SyncContext {
 			)
 		}
 		
-		let deletionErrors = await syncChanges(
+		let deletionErrors = try await syncChanges(
 			for: Issue.filter(Issue.Columns.didDelete),
 			stage: .deletion
 		) { issue in
@@ -200,12 +200,14 @@ extension SyncContext {
 		for query: Issue.Query,
 		stage: IssuePushError.Stage,
 		performing upload: @escaping (Issue) async throws -> Void
-	) async -> [IssuePushError] {
+	) async throws -> [IssuePushError] {
 		// no concurrency to ensure correct ordering and avoid unforeseen issues
 		var errors: [IssuePushError] = []
 		for issue in Repository.read(query.fetchAll) {
 			do {
 				try await upload(issue)
+			} catch RequestError.communicationError(let error) {
+				throw RequestError.communicationError(error) // cancel if connection interrupted
 			} catch {
 				errors.append(IssuePushError(stage: stage, cause: error, issue: issue))
 			}
