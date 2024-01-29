@@ -16,7 +16,6 @@ final class ReachabilityTracker {
 		
 		// a zero address lets us monitor the connection to the internet without looking at any server in particular
 		let address = sockaddr() <- {
-			// TODO: is this necessary?
 			$0.sa_len = .init(MemoryLayout<sockaddr>.size)
 			$0.sa_family = .init(AF_INET)
 		}
