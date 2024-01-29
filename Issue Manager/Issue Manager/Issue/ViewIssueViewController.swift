@@ -137,11 +137,12 @@ final class ViewIssueViewController: UITableViewController, InstantiableViewCont
 		let sync = issue.saveChanges()
 		assert(!isSyncing)
 		isSyncing = true
+		let mapController = parent as? MapViewController // capture before dismissal
 		Task {
 			defer { self.isSyncing = false }
 			try await sync()
 			issue = Repository.object(issue.id)
-			(parent as? MapViewController)?.updateFromRepository()
+			mapController?.updateFromRepository()
 		}
 	}
 	
