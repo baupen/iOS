@@ -250,7 +250,7 @@ extension Issue: DBRecord {
 	}
 }
 
-extension DerivableRequest where RowDecoder == Issue {
+extension DerivableRequest<Issue> {
 	@MainActor
 	var consideringClientMode: Self {
 		Issue.isInClientMode ? filter(Issue.Columns.wasAddedWithClient) : self

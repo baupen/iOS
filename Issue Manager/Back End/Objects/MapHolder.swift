@@ -9,7 +9,7 @@ protocol MapHolder: StoredObject {
 	var constructionSiteID: ConstructionSite.ID { get }
 	var isDeleted: Bool { get }
 	
-	@MainActor func recursiveChildren<R>(in request: R) -> R where R: DerivableRequest, R.RowDecoder == Map
+	@MainActor func recursiveChildren<R>(in request: R) -> R where R: DerivableRequest<Map>
 	@MainActor var recursiveIssues: Issue.Query { get }
 	@MainActor func issues(recursively: Bool) -> Issue.Query
 	func freshlyFetched() -> Self?
@@ -26,7 +26,7 @@ extension MapHolder {
 	}
 }
 
-extension DerivableRequest where RowDecoder == Map {
+extension DerivableRequest<Map> {
 	@MainActor
 	func recursiveChildren(of holder: some MapHolder) -> Self {
 		holder.recursiveChildren(in: self)
@@ -38,7 +38,7 @@ extension ConstructionSite: MapHolder {
 	
 	var constructionSiteID: ID { id }
 	
-	func recursiveChildren<R>(in request: R) -> R where R: DerivableRequest, R.RowDecoder == Map {
+	func recursiveChildren<R>(in request: R) -> R where R: DerivableRequest<Map> {
 		request.filter(Map.Columns.constructionSiteID == id)
 	}
 	
@@ -53,7 +53,7 @@ extension ConstructionSite: MapHolder {
 }
 
 extension Map: MapHolder {
-	func recursiveChildren<R>(in request: R) -> R where R: DerivableRequest, R.RowDecoder == Map {
+	func recursiveChildren<R>(in request: R) -> R where R: DerivableRequest<Map> {
 		// recursive common table expression, in case you want to google that
 		request.filter(
 			literal: """
