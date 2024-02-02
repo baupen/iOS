@@ -281,9 +281,25 @@ final class MapViewController: UIViewController, InstantiableViewController {
 				$0.overlayView.backgroundColor = .darkOverlay
 				$0.additionalSafeAreaInsets.bottom += self.pullableView.minHeight
 					+ 8 // for symmetry
+				$0.overlayView.addGestureRecognizer(UITapGestureRecognizer(
+					target: self, action: #selector(mapTapped(_:))
+				))
 			}
 			self.updateMarkers()
 		}
+	}
+	
+	@objc func mapTapped(_ recognizer: UITapGestureRecognizer) {
+		guard recognizer.state == .ended else { return }
+		
+		let markersView = pdfController!.overlayView!
+		let tap = recognizer.location(in: markersView)
+		let distances = markers.lazy.map { ($0.center - tap).length }
+		let closest = zip(markers, distances).min { $0.1 < $1.1 }?.0
+		guard let closest else { return }
+		let screenSpaceDistance = (markersView.convert(closest.center, to: view) - recognizer.location(in: view)).length
+		guard screenSpaceDistance < 40 else { return } // too far to be intentional
+		showDetails(for: closest.issue)
 	}
 	
 	private func updateMarkers() {
