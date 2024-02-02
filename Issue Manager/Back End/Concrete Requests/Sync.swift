@@ -2,9 +2,10 @@
 
 import Foundation
 import GRDB
+import Protoquest
 import HandyOperators
 
-private struct IssuePatchRequest: JSONJSONRequest {
+private struct IssuePatchRequest: JSONJSONRequest, BaupenRequest {
 	typealias Response = APIObject<APIIssue>
 	static let httpMethod = "PATCH"
 	static let contentType: String? = "application/merge-patch+json"
@@ -13,7 +14,7 @@ private struct IssuePatchRequest: JSONJSONRequest {
 	let body: APIIssuePatch
 }
 
-private struct IssueCreationRequest: JSONJSONRequest {
+private struct IssueCreationRequest: JSONJSONRequest, BaupenRequest {
 	typealias Response = APIObject<APIIssue>
 	static let contentType: String? = "application/json"
 	
@@ -21,31 +22,22 @@ private struct IssueCreationRequest: JSONJSONRequest {
 	let body: APIIssuePatch
 }
 
-private struct ImageUploadRequest: MultipartEncodingRequest {
+private struct ImageUploadRequest: MultipartEncodingRequest, StringDecodingRequest, BaupenRequest {
 	var path: String
 	
 	var fileURL: URL
 	
-	var parts: [MultipartPart] {
-		MultipartPart(name: "image", content: .jpeg(at: fileURL))
+	func parts() throws -> [(String, MultipartPart)] {
+		("image", MultipartPart.file(at: fileURL, contentType: "image/jpeg"))
 	}
 	
 	init(issue: Issue, fileURL: URL) {
 		self.path = "\(issue.apiPath)/image"
 		self.fileURL = fileURL
 	}
-	
-	func decode(from data: Data, using decoder: JSONDecoder) throws -> String {
-		try String(bytes: data, encoding: .utf8)
-			??? ImageUploadError.invalidPathResponse
-	}
-	
-	enum ImageUploadError: Error {
-		case invalidPathResponse
-	}
 }
 
-private struct DeletionRequest: GetRequest, StatusCodeRequest {
+private struct DeletionRequest: GetRequest, StatusCodeRequest, BaupenRequest {
 	static var httpMethod: String { "DELETE" }
 	
 	var path: String
@@ -117,7 +109,7 @@ struct SyncContext {
 		self <- { $0.issueImageProgressHandler = handler }
 	}
 	
-	fileprivate func send<R: Request>(_ request: R) async throws -> R.Response {
+	fileprivate func send<R: BaupenRequest>(_ request: R) async throws -> R.Response {
 		try await requestContext.send(request)
 	}
 }

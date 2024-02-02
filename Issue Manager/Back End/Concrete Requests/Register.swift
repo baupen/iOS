@@ -1,8 +1,9 @@
 // Created by Julian Dunskus
 
 import Foundation
+import Protoquest
 
-private struct RegisterRequest: JSONEncodingRequest, StatusCodeRequest {
+private struct RegisterRequest: JSONEncodingRequest, StatusCodeRequest, BaupenRequest {
 	var baseURLOverride: URL?
 	var path: String { ConstructionManager.apiPath }
 	

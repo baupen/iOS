@@ -38,6 +38,15 @@
         }
       },
       {
+        "package": "Protoquest",
+        "repositoryURL": "https://github.com/juliand665/Protoquest.git",
+        "state": {
+          "branch": "main",
+          "revision": "523b5f735d38e827f3c52a3f87849fbed54209e3",
+          "version": null
+        }
+      },
+      {
         "package": "PullToExpand",
         "repositoryURL": "https://github.com/juliand665/PullToExpand.git",
         "state": {

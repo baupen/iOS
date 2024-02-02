@@ -1,8 +1,9 @@
 // Created by Julian Dunskus
 
 import Foundation
+import Protoquest
 
-private struct SelfRequest: GetJSONRequest {
+private struct SelfRequest: GetJSONRequest, BaupenRequest {
 	let path = "/api/me"
 	
 	struct Response: Decodable {

@@ -68,7 +68,6 @@
 		95A995CB20FD3BED006A1EE8 /* LightboxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A995CA20FD3BED006A1EE8 /* LightboxViewController.swift */; };
 		95AA606920EEFA700067A656 /* MapHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AA606820EEFA700067A656 /* MapHolder.swift */; };
 		95AB959320E572C900A0AE8D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AB959220E572C900A0AE8D /* LoginViewController.swift */; };
-		95B2735320DE7AD600D2BD44 /* Multipart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B2735220DE7AD600D2BD44 /* Multipart.swift */; };
 		95B9BA6A20DEEE8500261954 /* FileContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B9BA6920DEEE8400261954 /* FileContainer.swift */; };
 		95BBF31920F26373006E162E /* FakePanGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BBF31820F26373006E162E /* FakePanGestureRecognizer.swift */; };
 		95BBF32120F26F49006E162E /* IssueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BBF32020F26F49006E162E /* IssueCell.swift */; };
@@ -83,7 +82,6 @@
 		95E83C13221A4C63000BB75F /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E83C12221A4C63000BB75F /* UIView+Extensions.swift */; };
 		95E83C15221A4CE7000BB75F /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E83C14221A4CE7000BB75F /* UILabel+Extensions.swift */; };
 		95E83C19221A52F4000BB75F /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E83C18221A52F4000BB75F /* File.swift */; };
-		95E83C1B221A537C000BB75F /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E83C1A221A537C000BB75F /* Request.swift */; };
 		95EE7DFD21060CB100B603EF /* UndoBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EE7DFC21060CB100B603EF /* UndoBuffer.swift */; };
 		95FC9DC121080BB700044C93 /* RefreshingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FC9DC021080BB700044C93 /* RefreshingTableViewController.swift */; };
 		B9007C542B2FEFF600A0E3E7 /* CaptureSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9007C532B2FEFF600A0E3E7 /* CaptureSession.swift */; };
@@ -99,6 +97,7 @@
 		B91A04D62619267C002905C6 /* View Issue.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B91A04D52619267C002905C6 /* View Issue.storyboard */; };
 		B91A04D826192706002905C6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B91A04D726192706002905C6 /* Main.storyboard */; };
 		B91A04DA2619344C002905C6 /* Map List.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B91A04D92619344C002905C6 /* Map List.storyboard */; };
+		B92082562B6CB9410052CE4F /* Protoquest in Frameworks */ = {isa = PBXBuildFile; productRef = B92082552B6CB9410052CE4F /* Protoquest */; };
 		B92140FA2B64C04300FEA7E3 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = B92140F92B64C04300FEA7E3 /* Algorithms */; };
 		B92D0DEE272C3BFE0097BE26 /* HandyOperators in Frameworks */ = {isa = PBXBuildFile; productRef = B92D0DED272C3BFE0097BE26 /* HandyOperators */; };
 		B92D0DF2272C40060097BE26 /* StorageSpaceDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92D0DF1272C40060097BE26 /* StorageSpaceDetails.swift */; };
@@ -201,7 +200,6 @@
 		95A995CA20FD3BED006A1EE8 /* LightboxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightboxViewController.swift; sourceTree = "<group>"; };
 		95AA606820EEFA700067A656 /* MapHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapHolder.swift; sourceTree = "<group>"; };
 		95AB959220E572C900A0AE8D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		95B2735220DE7AD600D2BD44 /* Multipart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Multipart.swift; sourceTree = "<group>"; };
 		95B9BA6920DEEE8400261954 /* FileContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileContainer.swift; sourceTree = "<group>"; };
 		95BBF31820F26373006E162E /* FakePanGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakePanGestureRecognizer.swift; sourceTree = "<group>"; };
 		95BBF32020F26F49006E162E /* IssueCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCell.swift; sourceTree = "<group>"; };
@@ -216,7 +214,6 @@
 		95E83C12221A4C63000BB75F /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		95E83C14221A4CE7000BB75F /* UILabel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
 		95E83C18221A52F4000BB75F /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
-		95E83C1A221A537C000BB75F /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		95EE7DFC21060CB100B603EF /* UndoBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoBuffer.swift; sourceTree = "<group>"; };
 		95FC9DC021080BB700044C93 /* RefreshingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshingTableViewController.swift; sourceTree = "<group>"; };
 		B9007C532B2FEFF600A0E3E7 /* CaptureSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureSession.swift; sourceTree = "<group>"; };
@@ -258,6 +255,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B92082562B6CB9410052CE4F /* Protoquest in Frameworks */,
 				9573A05823576C4700DE5AC1 /* PullToExpand in Frameworks */,
 				B92140FA2B64C04300FEA7E3 /* Algorithms in Frameworks */,
 				B96F079E265098F0006A1495 /* ArrayBuilder in Frameworks */,
@@ -448,10 +446,8 @@
 				9562F942223C1D6A0014BFB0 /* Storage */,
 				9511A12020DD4F6100101ADE /* Objects */,
 				95D1C9C420FBDF44006A9C19 /* Concrete Requests */,
-				95E83C1A221A537C000BB75F /* Request.swift */,
 				95B9BA6920DEEE8400261954 /* FileContainer.swift */,
 				B90A4ED225DE155300EB56C4 /* Hydra.swift */,
-				95B2735220DE7AD600D2BD44 /* Multipart.swift */,
 				9511A11E20DD4F5600101ADE /* Client.swift */,
 				B9A5B4EA2974723100D380B5 /* ViewOptions.swift */,
 			);
@@ -624,6 +620,7 @@
 				B945BE2B272B38AC0089C213 /* SimplePDFKit */,
 				B92D0DED272C3BFE0097BE26 /* HandyOperators */,
 				B92140F92B64C04300FEA7E3 /* Algorithms */,
+				B92082552B6CB9410052CE4F /* Protoquest */,
 			);
 			productName = "Issue Manager";
 			productReference = 9583C2BB20DC748800452695 /* Issue Manager.app */;
@@ -665,6 +662,7 @@
 				B945BE2A272B38AC0089C213 /* XCRemoteSwiftPackageReference "SimplePDFKit" */,
 				B92D0DEC272C3BFE0097BE26 /* XCRemoteSwiftPackageReference "HandyOperators" */,
 				B92140F82B64C04300FEA7E3 /* XCRemoteSwiftPackageReference "swift-algorithms" */,
+				B92082542B6CB9410052CE4F /* XCRemoteSwiftPackageReference "Protoquest" */,
 			);
 			productRefGroup = 9583C2BC20DC748800452695 /* Products */;
 			projectDirPath = "";
@@ -771,7 +769,6 @@
 				95BBF31920F26373006E162E /* FakePanGestureRecognizer.swift in Sources */,
 				953AAD15227C4FEC00359D9B /* APIConstructionSite.swift in Sources */,
 				95A995CB20FD3BED006A1EE8 /* LightboxViewController.swift in Sources */,
-				95E83C1B221A537C000BB75F /* Request.swift in Sources */,
 				953AAD19227C50A200359D9B /* APIIssue.swift in Sources */,
 				958AE1B221AE2E40008EBD95 /* DrawingView.swift in Sources */,
 				B9D9B36323917FC400947CE5 /* PassThroughView.swift in Sources */,
@@ -804,7 +801,6 @@
 				953AAD1B227C50FD00359D9B /* APICraftsman.swift in Sources */,
 				95512B0820FBEAB300878163 /* DownloadFile.swift in Sources */,
 				953FFF6021D9BE7C00A917F2 /* Geometry+CoreGraphics.swift in Sources */,
-				95B2735320DE7AD600D2BD44 /* Multipart.swift in Sources */,
 				95890A5D21B2E4D600510E44 /* Haptics.swift in Sources */,
 				95E83C19221A52F4000BB75F /* File.swift in Sources */,
 				9583C2BF20DC748800452695 /* AppDelegate.swift in Sources */,
@@ -1105,6 +1101,14 @@
 				minimumVersion = 1.3.0;
 			};
 		};
+		B92082542B6CB9410052CE4F /* XCRemoteSwiftPackageReference "Protoquest" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/juliand665/Protoquest.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		B92140F82B64C04300FEA7E3 /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-algorithms.git";
@@ -1165,6 +1169,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9573A05623576C4700DE5AC1 /* XCRemoteSwiftPackageReference "PullToExpand" */;
 			productName = PullToExpand;
+		};
+		B92082552B6CB9410052CE4F /* Protoquest */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B92082542B6CB9410052CE4F /* XCRemoteSwiftPackageReference "Protoquest" */;
+			productName = Protoquest;
 		};
 		B92140F92B64C04300FEA7E3 /* Algorithms */ = {
 			isa = XCSwiftPackageProductDependency;

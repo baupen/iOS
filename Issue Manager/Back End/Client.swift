@@ -2,6 +2,7 @@
 
 import Foundation
 import UserDefault
+import Protoquest
 import HandyOperators
 
 typealias TaskResult = (data: Data, response: HTTPURLResponse)
@@ -44,78 +45,53 @@ struct RequestContext: Sendable {
 	let client: Client
 	let loginInfo: LoginInfo?
 	
-	func send<R: Request>(_ request: R) async throws -> R.Response {
-		let rawRequest = try urlRequest(for: request)
-		
-		let bodyDesc = rawRequest.httpBody
-			.map { "\"\(debugRepresentation(of: $0))\"" }
-		?? "request without body"
-		print("\(request.path): \(rawRequest.httpMethod!)ing \(bodyDesc) to \(rawRequest.url!)")
+	func send<R: BaupenRequest>(_ request: R) async throws -> R.Response {
+		let layer = Protolayer.urlSession(baseURL: loginInfo?.origin ?? baseServerURL)
+			.wrapErrors(RequestError.communicationError(_:))
+			.printExchanges()
+			.transformRequest { request in
+				if let token = loginInfo?.token {
+					request.setValue(token, forHTTPHeaderField: "X-Authentication")
+				}
+			}
+			.readResponse(handleErrors(in:))
 		
 		do {
-			let rawResponse = try await send(rawRequest)
-			return try extractData(from: rawResponse, for: request)
+			return try await layer.send(request)
 		} catch {
 			print("\(request.path): failed!")
 			throw error
 		}
 	}
 	
-	private func extractData<R: Request>(from taskResult: TaskResult, for request: R) throws -> R.Response {
-		let (data, response) = taskResult
-		print("\(request.path): status code: \(response.statusCode), body: \(debugRepresentation(of: data))")
-		
-		switch response.statusCode {
+	private func handleErrors(in response: Protoresponse) throws {
+		switch response.httpMetadata!.statusCode {
 		case 200..<300:
-			return try request.decode(from: data, using: responseDecoder)
+			break // success
 		case 401:
 			throw RequestError.notAuthenticated
 		case let statusCode:
-			var hydraError: HydraError?
-			if
+			let hydraError: HydraError? = if
 				response.contentType?.hasPrefix("application/ld+json") == true,
-				let metadata = try? responseDecoder.decode(HydraMetadata.self, from: data),
+				let metadata = try? response.decodeJSON(as: HydraMetadata.self, using: responseDecoder),
 				metadata.type == HydraError.type
 			{
-				hydraError = try? responseDecoder.decode(from: data)
-			}
+				try? response.decodeJSON(using: responseDecoder)
+			} else { nil }
 			throw RequestError.apiError(hydraError, statusCode: statusCode)
 		}
 	}
-	
-	private func urlRequest<R: Request>(for request: R) throws -> URLRequest {
-		try URLRequest(url: apiURL(for: request)) <- { rawRequest in
-			rawRequest.httpMethod = R.httpMethod
-			try request.encode(using: requestEncoder, into: &rawRequest)
-			if let token = loginInfo?.token {
-				rawRequest.setValue(token, forHTTPHeaderField: "X-Authentication")
-			}
-			if let contentType = R.contentType {
-				rawRequest.setValue(contentType, forHTTPHeaderField: "Content-Type")
-			}
-		}
-	}
-	
-	private func apiURL<R: Request>(for request: R) -> URL {
-		(URLComponents(
-			url: request.baseURLOverride ?? loginInfo?.origin ?? baseServerURL,
-			resolvingAgainstBaseURL: false
-		)! <- {
-			$0.percentEncodedPath += request.path
-			$0.queryItems = request.collectURLQueryItems()
-				.map { URLQueryItem(name: $0, value: "\($1)") }
-				.nonEmptyOptional
-		}).url!
-	}
-	
-	private func send(_ request: URLRequest) async throws -> TaskResult {
-		do {
-			let (data, response) = try await urlSession.data(for: request)
-			return (data, response as! HTTPURLResponse)
-		} catch {
-			throw RequestError.communicationError(error)
-		}
-	}
+}
+
+protocol BaupenRequest: Request {}
+extension BaupenRequest where Self: JSONEncodingRequest {
+	var encoderOverride: JSONEncoder? { requestEncoder }
+}
+extension BaupenRequest where Self: MultipartEncodingRequest {
+	var encoderOverride: JSONEncoder? { requestEncoder }
+}
+extension BaupenRequest where Self: JSONDecodingRequest {
+	var decoderOverride: JSONDecoder? { responseDecoder }
 }
 
 private let requestEncoder = JSONEncoder() <- {
@@ -124,14 +100,7 @@ private let requestEncoder = JSONEncoder() <- {
 private let responseDecoder = JSONDecoder() <- {
 	$0.dateDecodingStrategy = .iso8601
 }
-private let urlSession = URLSession.shared
 private let baseServerURL = URL(string: "https://app.baupen.ch")!
-
-extension HTTPURLResponse {
-	var contentType: String? {
-		allHeaderFields["Content-Type"] as? String
-	}
-}
 
 /// An error that occurs while interfacing with the server.
 enum RequestError: Error {
@@ -145,15 +114,6 @@ enum RequestError: Error {
 	case pushFailed([IssuePushError])
 	/// The client is outdated, so we'd rather not risk further communication.
 	// TODO: reimplement outdated client logic
-}
-
-fileprivate func debugRepresentation(of data: Data, maxLength: Int = 5000) -> String {
-	guard data.count <= maxLength else { return "<\(data.count) bytes>" }
-	
-	return String(bytes: data, encoding: .utf8)?
-		.replacingOccurrences(of: "\n", with: "\\n")
-		.replacingOccurrences(of: "\r", with: "\\r")
-		?? "<\(data.count) bytes not UTF-8 decodable data>"
 }
 
 extension LoginInfo: DefaultsValueConvertible {}
