@@ -7,8 +7,9 @@ import HandyOperators
 
 private struct IssuePatchRequest: JSONJSONRequest, BaupenRequest {
 	typealias Response = APIObject<APIIssue>
-	static let httpMethod = "PATCH"
-	static let contentType: String? = "application/merge-patch+json"
+	
+	var httpMethod: String { "PATCH" }
+	var contentType: String? { "application/merge-patch+json" }
 	
 	var path: String
 	let body: APIIssuePatch
@@ -16,7 +17,6 @@ private struct IssuePatchRequest: JSONJSONRequest, BaupenRequest {
 
 private struct IssueCreationRequest: JSONJSONRequest, BaupenRequest {
 	typealias Response = APIObject<APIIssue>
-	static let contentType: String? = "application/json"
 	
 	let path = Issue.apiPath
 	let body: APIIssuePatch
@@ -38,7 +38,7 @@ private struct ImageUploadRequest: MultipartEncodingRequest, StringDecodingReque
 }
 
 private struct DeletionRequest: GetRequest, StatusCodeRequest, BaupenRequest {
-	static var httpMethod: String { "DELETE" }
+	var httpMethod: String { "DELETE" }
 	
 	var path: String
 	
