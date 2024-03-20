@@ -12,13 +12,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControll
 	
 	var window: UIWindow?
 	
-	let reachability = Reachability() <- {
-		$0?.whenReachable = { _ in
-			print("Reachable again! Trying to push any changes that weren't pushed earlier...")
-			try? Client.shared.pushLocalChanges().await()
-		}
-	}
-	
 	func application(
 		_ app: UIApplication,
 		willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
@@ -31,6 +24,16 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControll
 		wipeIfNecessary()
 		
 		Issue.moveLegacyFiles()
+		
+		ReachabilityTracker.shared.reachabilityChanged = { old, new in
+			// check for transition from to reachable state (perhaps we switched from cellular to wifi—we still want to reattempt then)
+			guard new.isReachable else { return }
+			
+			print("Reachable again! Trying to push any changes that weren't pushed earlier...")
+			Task {
+				try await SyncManager.shared.pushLocalChanges()
+			}
+		}
 		
 		return true
 	}
@@ -78,9 +81,13 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControll
 	private static var lastWipeVersion: Int?
 	
 	private func wipeIfNecessary() {
-		if Self.lastWipeVersion == nil, DatabaseDataStore.databaseFileExists() {
-			print("setting missing last wipe version to 1 because a database was present")
-			Self.lastWipeVersion = 1
+		if Self.lastWipeVersion == nil {
+			if DatabaseDataStore.databaseFileExists() {
+				print("setting missing last wipe version to 1 because a database was present")
+				Self.lastWipeVersion = 1
+			} else {
+				Self.lastWipeVersion = Self.wipeVersion
+			}
 		}
 		
 		if let lastWipe = Self.lastWipeVersion, lastWipe < Self.wipeVersion {

@@ -7,6 +7,7 @@ fileprivate let rowHeight: CGFloat = 37
 
 fileprivate typealias SuggestionMatch = (suggestion: Suggestion, matchingPrefix: String?)
 
+@MainActor
 final class SuggestionsHandler: NSObject, UITableViewDataSource, UITableViewDelegate {
 	static let intrinsicHeight = CGFloat(suggestionCount) * rowHeight - 1
 	static let suggestionCount = 3
@@ -39,27 +40,24 @@ final class SuggestionsHandler: NSObject, UITableViewDataSource, UITableViewDele
 			tableView.reloadData()
 		}
 	}
-	private var updatingQueue = DispatchQueue(label: "updating suggestions")
 	
-	private var currentTaskID = UUID()
+	private static let taskManager = TaskManager<Void, Never>()
+	
 	func update() {
 		guard tableView != nil else { return }
 		
-		let taskID = UUID()
-		currentTaskID = taskID
-		
 		let trade = self.trade
 		let prefix = self.currentDescription?.nonEmptyOptional
-		updatingQueue.async {
-			guard self.currentTaskID == taskID else { return }
-			
-			let suggestions = SuggestionStorage.shared.suggestions(
-				forTrade: trade,
-				matching: prefix,
-				count: SuggestionsHandler.suggestionCount
-			)
-			
-			DispatchQueue.main.async {
+		
+		Task {
+			await Self.taskManager.runIfNewest {
+				let suggestions = await Task.detached(priority: .userInitiated) {
+					await SuggestionStorage.shared.suggestions(
+						forTrade: trade,
+						matching: prefix,
+						count: SuggestionsHandler.suggestionCount
+					)
+				}.value
 				self.matches = suggestions.map { ($0, prefix) }
 			}
 		}
@@ -86,6 +84,7 @@ final class SuggestionsHandler: NSObject, UITableViewDataSource, UITableViewDele
 	}
 }
 
+@MainActor
 protocol SuggestionsHandlerDelegate: AnyObject {
 	func use(_ suggestion: Suggestion)
 }

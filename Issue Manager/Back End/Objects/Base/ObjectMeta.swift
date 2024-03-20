@@ -3,7 +3,7 @@
 import Foundation
 import GRDB
 
-struct ObjectMeta<Object: StoredObject>: AnyObjectMeta, Codable, Equatable {
+struct ObjectMeta<Object: StoredObject>: Codable, Equatable {
 	var id = Object.ID()
 	var lastChangeTime = Date.distantPast // intentionally wrong to not throw off most recent lastChangeTime for sync
 	var isDeleted = false
@@ -19,10 +19,4 @@ extension ObjectMeta: DBRecord where Object: DBRecord {
 		case lastChangeTime
 		case isDeleted
 	}
-}
-
-protocol AnyObjectMeta {
-	var rawID: String { get }
-	var lastChangeTime: Date { get }
-	var isDeleted: Bool { get }
 }

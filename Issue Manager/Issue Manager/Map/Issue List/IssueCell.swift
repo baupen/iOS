@@ -22,7 +22,8 @@ final class IssueCell: UITableViewCell, Reusable {
 	
 	@IBAction func markPressed() {
 		issue.isMarked.toggle()
-		_ = issue.saveAndSync()
+		let sync = issue.saveChanges()
+		Task { try await sync() }
 		Haptics.mediumImpact.impactOccurred()
 		update()
 	}
@@ -98,6 +99,7 @@ final class IssueCell: UITableViewCell, Reusable {
 	}
 }
 
+@MainActor
 protocol IssueCellDelegate: AnyObject {
 	func zoomMap(to issue: Issue)
 	func showDetails(for issue: Issue)

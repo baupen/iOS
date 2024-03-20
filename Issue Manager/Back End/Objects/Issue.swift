@@ -2,21 +2,33 @@
 
 import Foundation
 import GRDB
-import Promise
 import UserDefault
 
 struct Issue: Equatable {
-	@UserDefault("isInClientMode") static var isInClientMode = false
+	@MainActor
+	static var isInClientMode: Bool {
+		ViewOptions.shared.isInClientMode
+	}
 	
 	private(set) var meta: Meta
 	let constructionSiteID: ConstructionSite.ID
 	let mapID: Map.ID?
 	
 	let number: Int?
-	let wasAddedWithClient: Bool // "abnahmemodus"
+	var wasAddedWithClient: Bool { // "abnahmemodus"
+		didSet {
+			guard wasAddedWithClient != oldValue else { return }
+			patch.wasAddedWithClient = wasAddedWithClient
+		}
+	}
 	let deadline: Date?
 	
-	let position: Position?
+	var position: Position? {
+		didSet {
+			guard position != oldValue else { return }
+			patch.position = position
+		}
+	}
 	var isMarked = false {
 		didSet {
 			guard isMarked != oldValue else { return }
@@ -117,7 +129,7 @@ extension Issue: FileContainer {
 	static let pathPrefix = "issue"
 	var file: File<Issue>? { image }
 	
-	private static var autoDownloadThreshold = Date(timeIntervalSinceNow: -3600 * 24 * 90) // 90 days
+	private static let autoDownloadThreshold = Date(timeIntervalSinceNow: -3600 * 24 * 90) // 90 days
 	
 	var shouldAutoDownloadFile: Bool {
 		guard let closedAt = status.closedAt else { return true }
@@ -126,6 +138,7 @@ extension Issue: FileContainer {
 }
 
 extension Issue {
+	@MainActor
 	init(at position: Position? = nil, in map: Map) {
 		self.meta = .init()
 		self.constructionSiteID = map.constructionSiteID
@@ -167,8 +180,8 @@ extension Issue: DBRecord {
 		try craftsmanID?.get(in: db)
 	}
 	
-	func encode(to container: inout PersistenceContainer) {
-		meta.encode(to: &container)
+	func encode(to container: inout PersistenceContainer) throws {
+		try meta.encode(to: &container)
 		container[Columns.constructionSiteID] = constructionSiteID
 		container[Columns.mapID] = mapID
 		
@@ -176,7 +189,7 @@ extension Issue: DBRecord {
 		container[Columns.wasAddedWithClient] = wasAddedWithClient
 		container[Columns.deadline] = deadline
 		
-		try! container.encode(position, forKey: Columns.position)
+		try container.encode(position, forKey: Columns.position)
 		container[Columns.isMarked] = isMarked
 		container[Columns.description] = description
 		container[Columns.craftsmanID] = craftsmanID
@@ -186,13 +199,13 @@ extension Issue: DBRecord {
 		container[Columns.wasUploaded] = wasUploaded
 		container[Columns.didChangeImage] = didChangeImage
 		container[Columns.didDelete] = didDelete
-		try! container.encode(patchIfChanged, forKey: Columns.patchIfChanged)
+		try container.encode(patchIfChanged, forKey: Columns.patchIfChanged)
 		
-		status.encode(to: &container)
+		try status.encode(to: &container)
 	}
 	
-	init(row: Row) {
-		meta = .init(row: row)
+	init(row: Row) throws {
+		meta = try .init(row: row)
 		constructionSiteID = row[Columns.constructionSiteID]
 		mapID = row[Columns.mapID]
 		
@@ -200,7 +213,7 @@ extension Issue: DBRecord {
 		wasAddedWithClient = row[Columns.wasAddedWithClient]
 		deadline = row[Columns.deadline]
 		
-		position = try! row.decodeValueIfPresent(forKey: Columns.position)
+		position = try row.decodeValueIfPresent(forKey: Columns.position)
 		isMarked = row[Columns.isMarked]
 		description = row[Columns.description]
 		craftsmanID = row[Columns.craftsmanID]
@@ -210,9 +223,9 @@ extension Issue: DBRecord {
 		wasUploaded = row[Columns.wasUploaded]
 		didChangeImage = row[Columns.didChangeImage]
 		didDelete = row[Columns.didDelete]
-		patchIfChanged = try! row.decodeValueIfPresent(forKey: Columns.patchIfChanged)
+		patchIfChanged = try row.decodeValueIfPresent(forKey: Columns.patchIfChanged)
 		
-		status = .init(row: row)
+		status = try .init(row: row)
 	}
 	
 	enum Columns: String, ColumnExpression {
@@ -237,7 +250,8 @@ extension Issue: DBRecord {
 	}
 }
 
-extension DerivableRequest where RowDecoder == Issue {
+extension DerivableRequest<Issue> {
+	@MainActor
 	var consideringClientMode: Self {
 		Issue.isInClientMode ? filter(Issue.Columns.wasAddedWithClient) : self
 	}
@@ -274,6 +288,7 @@ extension Issue {
 
 // MARK: -
 // MARK: Mutation
+@MainActor
 extension Issue {
 	mutating func close() {
 		assert(isRegistered)
@@ -312,19 +327,25 @@ extension Issue {
 		didDelete = true
 	}
 	
+	mutating func undelete() {
+		meta.isDeleted = false
+		didDelete = false
+	}
+	
 	mutating func discardChangePatch() {
 		patchIfChanged = nil
 	}
 	
-	func saveAndSync() -> Future<Void> {
-		let shouldDeleteLocally = isDeleted && !wasUploaded
-		guard !shouldDeleteLocally else {
-			Repository.shared.remove(self)
-			return .fulfilled
+	/// - returns: a closure that syncs any changes to the server, if desired
+	func saveChanges() -> () async throws -> Void {
+		if isDeleted {
+			guard wasUploaded else {
+				Repository.shared.remove(self)
+				return {}
+			}
 		}
-		
 		Repository.shared.save(self)
-		return Client.shared.pushLocalChanges()
+		return SyncManager.shared.pushLocalChanges
 	}
 }
 

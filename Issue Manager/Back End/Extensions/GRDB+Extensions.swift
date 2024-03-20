@@ -9,20 +9,20 @@ typealias DBRecord = PersistableRecord & FetchableRecord & TableRecord & Encodab
 extension Row {
 	private static let decoder = JSONDecoder()
 	
-	func decodeValue<Column, Value>(
+	func decodeValue<Value>(
 		_: Value.Type = Value.self,
-		forKey key: Column,
+		forKey key: some ColumnExpression,
 		using decoder: JSONDecoder = Row.decoder
-	) throws -> Value where Column: ColumnExpression, Value: Decodable {
+	) throws -> Value where Value: Decodable {
 		try decoder.decode(from: self[key])
 	}
 	
-	func decodeValueIfPresent<Column, Value>(
+	func decodeValueIfPresent<Value>(
 		_: Value.Type = Value.self,
-		forKey key: Column,
+		forKey key: some ColumnExpression,
 		using decoder: JSONDecoder = Row.decoder
-	) throws -> Value? where Column: ColumnExpression, Value: Decodable {
-		try self[key].map(decoder.decode)
+	) throws -> Value? where Value: Decodable {
+		try (self[key] as Data?).map(decoder.decode)
 	}
 }
 

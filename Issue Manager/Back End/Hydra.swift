@@ -2,7 +2,7 @@
 
 import Foundation
 
-struct HydraCollection<Object>: Decodable, AnyHydraCollection where Object: Decodable {
+struct HydraCollection<Object>: Decodable, AnyHydraCollection where Object: Decodable & Sendable {
 	var members: [Object]
 	
 	private enum CodingKeys: String, CodingKey {
@@ -10,7 +10,7 @@ struct HydraCollection<Object>: Decodable, AnyHydraCollection where Object: Deco
 	}
 }
 
-protocol AnyHydraCollection {
+protocol AnyHydraCollection: Sendable {
 	associatedtype Object
 	
 	var members: [Object] { get }
@@ -23,7 +23,7 @@ extension AnyHydraCollection {
 	}
 }
 
-struct PagedHydraCollection<Object>: Decodable, AnyHydraCollection where Object: Decodable {
+struct PagedHydraCollection<Object>: Decodable, AnyHydraCollection where Object: Decodable & Sendable {
 	var members: [Object]
 	var totalCount: Int
 	var view: View

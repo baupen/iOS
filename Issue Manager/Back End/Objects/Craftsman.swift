@@ -23,8 +23,8 @@ extension Craftsman: DBRecord {
 		request(for: Self.site)
 	}
 	
-	init(row: Row) {
-		meta = ObjectMeta(row: row)
+	init(row: Row) throws {
+		meta = try ObjectMeta(row: row)
 		constructionSiteID = row[Columns.constructionSiteID]
 		
 		contactName = row[Columns.contactName]
@@ -32,8 +32,8 @@ extension Craftsman: DBRecord {
 		trade = row[Columns.trade]
 	}
 	
-	func encode(to container: inout PersistenceContainer) {
-		meta.encode(to: &container)
+	func encode(to container: inout PersistenceContainer) throws {
+		try meta.encode(to: &container)
 		container[Columns.constructionSiteID] = constructionSiteID
 		
 		container[Columns.contactName] = contactName

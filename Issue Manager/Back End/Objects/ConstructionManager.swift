@@ -17,16 +17,16 @@ struct ConstructionManager: Codable {
 }
 
 extension ConstructionManager: DBRecord {
-	func encode(to container: inout PersistenceContainer) {
-		meta.encode(to: &container)
+	func encode(to container: inout PersistenceContainer) throws {
+		try meta.encode(to: &container)
 		
 		container[Columns.authenticationToken] = authenticationToken
 		container[Columns.givenName] = givenName
 		container[Columns.familyName] = familyName
 	}
 	
-	init(row: Row) {
-		meta = .init(row: row)
+	init(row: Row) throws {
+		meta = try .init(row: row)
 		
 		authenticationToken = row[Columns.authenticationToken]
 		givenName = row[Columns.givenName]

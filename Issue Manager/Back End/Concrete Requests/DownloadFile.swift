@@ -1,9 +1,9 @@
 // Created by Julian Dunskus
 
 import Foundation
-import Promise
+import Protoquest
 
-private struct FileDownloadRequest: GetDataRequest {
+private struct FileDownloadRequest: GetDataRequest, BaupenRequest {
 	var path: String
 	
 	var size: String? = "full"
@@ -12,15 +12,15 @@ private struct FileDownloadRequest: GetDataRequest {
 		path = file.urlPath
 	}
 	
-	func collectURLQueryItems() -> [(String, Any)] {
+	var urlParams: [URLParameter] {
 		if let size = size {
 			("size", size)
 		}
 	}
 }
 
-extension Client {
-	func download(_ file: AnyFile) -> Future<Data> {
-		send(FileDownloadRequest(file: file))
+extension RequestContext {
+	func download(_ file: AnyFile) async throws -> Data {
+		try await send(FileDownloadRequest(file: file))
 	}
 }

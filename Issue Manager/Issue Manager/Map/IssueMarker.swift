@@ -14,10 +14,6 @@ final class IssueMarker: UIView {
 	
 	var buttonAction: (() -> Void)!
 	
-	var isStatusShown = true {
-		didSet { updateVisibility() }
-	}
-	
 	private let button = UIButton()
 	
 	init(issue: Issue) {
@@ -32,8 +28,15 @@ final class IssueMarker: UIView {
 		button.addTarget(self, action: #selector(buttonPressed(_:)), for: .touchUpInside)
 	}
 	
-	required init?(coder aDecoder: NSCoder) {
+	required init?(coder: NSCoder) {
 		fatalError()
+	}
+	
+	func matchesFilter() -> Bool {
+		let options = ViewOptions.shared
+		return true
+		&& options.visibleStatuses.contains(issue.status.simplified)
+		&& !options.hiddenCraftsmen.contains(issue.craftsmanID)
 	}
 	
 	@objc func buttonPressed(_ sender: UIButton) {
@@ -47,7 +50,7 @@ final class IssueMarker: UIView {
 	}
 	
 	func updateVisibility() {
-		isHidden = !isStatusShown || issue.position == nil
+		isHidden = !matchesFilter() || issue.position == nil
 	}
 	
 	private func resize() {

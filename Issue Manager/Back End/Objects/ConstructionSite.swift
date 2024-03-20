@@ -36,22 +36,22 @@ extension ConstructionSite: DBRecord {
 		ConstructionManager.filter(keys: managerIDs)
 	}
 	
-	func encode(to container: inout PersistenceContainer) {
-		meta.encode(to: &container)
+	func encode(to container: inout PersistenceContainer) throws {
+		try meta.encode(to: &container)
 		
 		container[Columns.name] = name
 		container[Columns.creationTime] = creationTime
 		container[Columns.image] = image
-		try! container.encode(managerIDs, forKey: Columns.managers)
+		try container.encode(managerIDs, forKey: Columns.managers)
 	}
 	
-	init(row: Row) {
-		meta = .init(row: row)
+	init(row: Row) throws {
+		meta = try .init(row: row)
 		
 		name = row[Columns.name]
 		creationTime = row[Columns.creationTime]
 		image = row[Columns.image]
-		managerIDs = try! row.decodeValue(forKey: Columns.managers)
+		managerIDs = try row.decodeValue(forKey: Columns.managers)
 	}
 	
 	enum Columns: String, ColumnExpression {

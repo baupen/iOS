@@ -53,7 +53,7 @@ final class Repository {
 	
 	/// saves modifications to an issue
 	func save(_ issue: Issue) {
-		write(issue.save)
+		write { try issue.save($0) }
 	}
 	
 	/// saves modifications to some columns of an issue
