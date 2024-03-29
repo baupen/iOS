@@ -73,6 +73,11 @@
             value = "1"
             isEnabled = "NO">
          </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "OS_ACTIVITY_MODE"
+            value = "disable"
+            isEnabled = "NO">
+         </EnvironmentVariable>
       </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction
