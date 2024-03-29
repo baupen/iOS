@@ -27,9 +27,9 @@ final class Client {
 	}
 	
 	@discardableResult
-	func updateLocalUser() -> ConstructionManager? {
-		localUser.flatMap { Repository.object($0.id) } 
-			<- { localUser = $0 }
+	func updateLocalUser(from repository: Repository) -> ConstructionManager? {
+		localUser = localUser.flatMap { repository.object($0.id) }
+		return localUser
 	}
 	
 	/// Provides a context for performing authenticated requests.

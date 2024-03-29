@@ -52,9 +52,14 @@ private struct DeletionRequest: GetRequest, StatusCodeRequest, BaupenRequest {
 }
 
 final actor SyncManager {
-	static let shared = SyncManager()
+	private let client: Client
+	private let repository: Repository
 	
-	private init() {}
+	/// - Note: Do not instantiate this type yourself unless you're testing code! Outside of testing, the entire app should use a singleton.
+	init(client: Client, repository: Repository) {
+		self.client = client
+		self.repository = repository
+	}
 	
 	private var currentTask: (() async -> Void)?
 	/// waits for there to be no running task, then runs the given block
@@ -79,8 +84,8 @@ final actor SyncManager {
 	
 	/// runs the given block once any in-progress syncing has completed, to avoid bad interleavings
 	func withContext(run block: @escaping @Sendable (SyncContext) async throws -> Void) async throws {
-		try await withoutReentrancy { _ in
-			try await block(SyncContext(client: .shared))
+		try await withoutReentrancy { [client, repository] _ in
+			try await block(SyncContext(client: client, repository: repository))
 		}
 	}
 	
@@ -92,12 +97,14 @@ final actor SyncManager {
 }
 
 struct SyncContext {
+	var repository: Repository
 	var requestContext: RequestContext
 	var progressHandler: ProgressHandler<SyncProgress> = .ignore
 	var issueImageProgressHandler: ProgressHandler<FileDownloadProgress> = .ignore
 	
 	@MainActor
-	fileprivate init(client: Client) {
+	fileprivate init(client: Client, repository: Repository) {
+		self.repository = repository
 		self.requestContext = client.makeContext()
 	}
 	
@@ -123,7 +130,7 @@ extension SyncContext {
 	}
 	
 	private func tryPushLocalChanges() async throws -> [IssuePushError] {
-		let maxLastChangeTime = Issue.all().maxLastChangeTime()
+		let maxLastChangeTime = Issue.all().maxLastChangeTime(in: repository)
 		
 		let issuesWithPatches = Issue
 			.filter(Issue.Columns.patchIfChanged != nil)
@@ -133,8 +140,8 @@ extension SyncContext {
 			stage: .patch
 		) { issue in
 			let canonical = try await self.syncPatch(for: issue)
-			Repository.shared.remove(issue) // remove non-canonical copy
-			Repository.shared.save(canonical <- {
+			repository.remove(issue) // remove non-canonical copy
+			repository.save(canonical <- {
 				// keep local changes to image to sync next (this sets didChangeImage relative to remote image)
 				$0.image = issue.image
 				// fake older last change time to avoid skipping changes between last max change time and this upload
@@ -149,7 +156,7 @@ extension SyncContext {
 			stage: .imageUpload
 		) { issue in
 			try await self.syncImageChange(for: issue)
-			Repository.shared.save(
+			repository.save(
 				[.didChangeImage],
 				of: issue <- { $0.didChangeImage = false }
 			)
@@ -160,7 +167,7 @@ extension SyncContext {
 			stage: .deletion
 		) { issue in
 			try await send(DeletionRequest(for: issue))
-			Repository.shared.save(
+			repository.save(
 				[.didDelete],
 				of: issue <- { $0.didDelete = false }
 			)
@@ -182,7 +189,7 @@ extension SyncContext {
 			let path = try await send(ImageUploadRequest(issue: issue, fileURL: Issue.localURL(for: localImage)))
 			let image = File<Issue>(urlPath: path)
 			try localImage.onUpload(as: image)
-			Repository.shared.save([.image], of: issue <- { $0.image = image })
+			repository.save([.image], of: issue <- { $0.image = image })
 		} else {
 			try await send(DeletionRequest(forImageOf: issue))
 		}
@@ -195,7 +202,7 @@ extension SyncContext {
 	) async throws -> [IssuePushError] {
 		// no concurrency to ensure correct ordering and avoid unforeseen issues
 		var errors: [IssuePushError] = []
-		for issue in Repository.read(query.fetchAll) {
+		for issue in repository.read(query.fetchAll) {
 			do {
 				try await upload(issue)
 			} catch RequestError.communicationError(let error) {
@@ -234,7 +241,7 @@ extension SyncContext {
 	/// ensures local changes are pushed first
 	func pullRemoteChanges() async throws {
 		try await sync { onProgress in
-			let sites = Repository.read(ConstructionSite.fetchAll)
+			let sites = repository.read(ConstructionSite.fetchAll)
 			for site in sites {
 				onProgress(.pullingSiteData(site))
 				try await self.doPullRemoteChanges(for: site)
@@ -245,7 +252,7 @@ extension SyncContext {
 	/// ensures local changes are pushed first
 	func pullRemoteChanges(for siteID: ConstructionSite.ID) async throws {
 		try await sync { onProgress in
-			guard let site = Repository.read(siteID.get)
+			guard let site = repository.read(siteID.get)
 			else { throw SyncError.siteAccessRemoved }
 			onProgress(.pullingSiteData(site))
 			try await self.doPullRemoteChanges(for: site)
@@ -266,27 +273,29 @@ extension SyncContext {
 			
 			// download important files now
 			try await ConstructionSite.downloadMissingFiles(
+				in: repository,
 				onProgress: onProgress.wrapped { .downloadingConstructionSiteFiles($0) }
 			)
 			try await Map.downloadMissingFiles(
+				in: repository,
 				onProgress: onProgress.wrapped { .downloadingMapFiles($0) }
 			)
 		}
 		
 		// download issue images in the background
 		Task.detached(priority: .utility) {
-			try? await Issue.downloadMissingFiles(onProgress: issueImageProgressHandler)
+			try? await Issue.downloadMissingFiles(in: repository, onProgress: issueImageProgressHandler)
 		}
 	}
 	
 	private func doPullChangedTopLevelObjects() async throws {
 		try await doPullChangedObjects(existing: ConstructionManager.all(), context: ())
-		let userID = await requestContext.client.updateLocalUser()!.id
+		let userID = await requestContext.client.updateLocalUser(from: repository)!.id
 		let sites = try await doPullChangedObjects(existing: ConstructionSite.none(), context: ())
 		// remove sites we don't have access to
 		sites
 			.filter { !$0.managerIDs.contains(userID) }
-			.forEach { Repository.shared.ensureNotPresent($0) }
+			.forEach { repository.ensureNotPresent($0) }
 	}
 	
 	@discardableResult
@@ -297,10 +306,10 @@ extension SyncContext {
 	) async throws -> [Object] {
 		let collection = try await send(GetObjectsRequest<Object>(
 			constructionSite: site?.id,
-			minLastChangeTime: existing.maxLastChangeTime()
+			minLastChangeTime: existing.maxLastChangeTime(in: repository)
 		))
 		let objects = collection.makeObjects(context: context)
-		Repository.shared.update(changing: objects)
+		repository.update(changing: objects)
 		return objects
 	}
 	
@@ -316,7 +325,7 @@ extension SyncContext {
 		var lastChangeTime = Date.distantPast
 		while true {
 			// detect loops (making the same request multiple times) and respond by asking for larger pages
-			let newTime = site.issues.maxLastChangeTime()
+			let newTime = site.issues.maxLastChangeTime(in: repository)
 			if newTime == lastChangeTime {
 				itemsPerPage *= 2
 			} else {
@@ -331,7 +340,7 @@ extension SyncContext {
 			))
 			
 			let issues = collection.makeObjects(context: site.id)
-			Repository.shared.update(changing: issues)
+			repository.update(changing: issues)
 			
 			guard collection.view.nextPage != nil else { break } // done
 		}
@@ -343,8 +352,8 @@ enum SyncError: Error {
 }
 
 private extension QueryInterfaceRequest where RowDecoder: StoredObject {
-	func maxLastChangeTime() -> Date {
-		Repository.read(
+	func maxLastChangeTime(in repository: Repository) -> Date {
+		repository.read(
 			self
 				.select(max(Issue.Meta.Columns.lastChangeTime), as: Date.self)
 				.fetchOne

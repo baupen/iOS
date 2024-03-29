@@ -4,7 +4,7 @@ import UIKit
 import GRDB
 import HandyOperators
 
-final class DatabaseDataStore {
+final class DatabaseDataStore: Sendable {
 	private static let databaseURL = documentsURL.appendingPathComponent("db/main.sqlite")
 	
 	static func databaseFileExists() -> Bool {
@@ -15,7 +15,7 @@ final class DatabaseDataStore {
 		try? FileManager.default.removeItem(at: databaseURL)
 	}
 	
-	var dbPool: DatabasePool
+	let dbPool: DatabasePool
 	
 	init() throws {
 		try FileManager.default.createDirectory(

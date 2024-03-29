@@ -53,7 +53,7 @@ final class MapListViewController: RefreshingTableViewController, InstantiableVi
 			}
 		} else if let selected = tableView.indexPathForSelectedRow {
 			// not appearing for the first time
-			if Repository.read(map(for: selected).hasChildren) {
+			if repository.read(map(for: selected).hasChildren) {
 				// coming back from selected map's sublist
 				showOwnMap(in: mainController)
 			} else {
@@ -72,7 +72,7 @@ final class MapListViewController: RefreshingTableViewController, InstantiableVi
 	override func doRefresh() async throws {
 		do {
 			let siteID = holder.constructionSiteID
-			try await SyncManager.shared.withContext {
+			try await syncManager.withContext {
 				try await $0
 					.onProgress(.onMainActor { self.syncProgress = $0 })
 					.pullRemoteChanges(for: siteID)
@@ -114,7 +114,7 @@ final class MapListViewController: RefreshingTableViewController, InstantiableVi
 	
 	/// - returns: whether or not the holder is still valid
 	@discardableResult private func handleRefresh() -> Bool {
-		guard let fresh = holder.freshlyFetched(), !fresh.isDeleted else {
+		guard let fresh = holder.freshlyFetched(in: repository), !fresh.isDeleted else {
 			maps = []
 			return false
 		}
@@ -127,7 +127,7 @@ final class MapListViewController: RefreshingTableViewController, InstantiableVi
 		
 		navigationItem.title = holder.name
 		
-		maps = Repository.read(
+		maps = repository.read(
 			holder.children
 				.withoutDeleted
 				.order(Map.Columns.name.asc)
@@ -231,7 +231,7 @@ final class MapListViewController: RefreshingTableViewController, InstantiableVi
 			showOwnMap(in: mainController)
 		} else {
 			let map = maps[indexPath.row]
-			let mapHasChildren = Repository.read(map.hasChildren)
+			let mapHasChildren = repository.read(map.hasChildren)
 			
 			if mainController.isExtended {
 				let mapController = mainController.detailNav.mapController

@@ -46,7 +46,7 @@ final class IssueListViewController: UIViewController {
 	func update() {
 		guard isViewLoaded, let map = map else { return }
 		
-		let allIssues = Repository.read(map.sortedIssues.fetchAll)
+		let allIssues = repository.read(map.sortedIssues.fetchAll)
 		issues = allIssues.filter {
 			visibleStatuses.contains($0.status.simplified)
 		}

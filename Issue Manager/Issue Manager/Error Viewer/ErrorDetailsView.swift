@@ -95,7 +95,7 @@ struct ErrorDetailsView: View {
 		
 		func discardAllChanges() {
 			for error in errors where !handledErrors.contains(error.id) {
-				error.discardChanges()
+				error.discardChanges(in: repository)
 				handledErrors.insert(error.id)
 			}
 		}
@@ -130,7 +130,7 @@ struct ErrorDetailsView: View {
 						title: Localization.PushFailed.discardChanges,
 						confirmationTitle: Localization.PushFailed.DiscardChanges.confirm
 					) {
-						error.discardChanges()
+						error.discardChanges(in: repository)
 						onDiscard()
 					}
 				} header: {

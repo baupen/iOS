@@ -133,9 +133,10 @@ extension FileContainer {
 	}
 	
 	static func purgeInactiveFiles(
-		for containers: Self.Query = Self.all()
+		for containers: Self.Query = Self.all(),
+		in repository: Repository
 	) {
-		let allContainers = Repository.read(containers.fetchAll)
+		let allContainers = repository.read(containers.fetchAll)
 		for container in allContainers where !container.shouldAutoDownloadFile {
 			container.deleteFile()
 		}
@@ -143,6 +144,7 @@ extension FileContainer {
 	
 	static func downloadMissingFiles(
 		for containers: Self.Query? = nil,
+		in repository: Repository,
 		includeInactive: Bool = false,
 		onProgress: ProgressHandler<FileDownloadProgress> = .ignore
 	) async throws {
@@ -150,7 +152,7 @@ extension FileContainer {
 			onProgress(.undetermined)
 			
 			// bookkeeping
-			let allContainers = Repository.read(
+			let allContainers = repository.read(
 				(containers ?? all())
 					.withoutDeleted
 					.order(Meta.Columns.lastChangeTime.desc)

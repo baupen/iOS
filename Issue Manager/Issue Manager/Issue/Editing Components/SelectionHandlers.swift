@@ -14,7 +14,7 @@ final class TradeSelectionHandler: SimpleSelectionHandler {
 	var selectionCallback: (String?) -> Void
 	
 	init(in site: ConstructionSite, currentTrade: String?, callback: @escaping SelectionCallback) {
-		self.items = Repository.read(site.trades
+		self.items = AppDelegate.shared.repository.read(site.trades
 			.order(Craftsman.Columns.trade.asc)
 			.fetchAll
 		)

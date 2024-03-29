@@ -51,7 +51,7 @@ final class LoginViewController: UIViewController {
 		
 		Task {
 			do {
-				try await Client.shared.logIn(with: info)
+				try await Client.shared.logIn(with: info, repository: repository)
 				print("logged in!")
 				showSiteList()
 			} catch {

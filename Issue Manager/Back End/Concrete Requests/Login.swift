@@ -12,7 +12,7 @@ private struct SelfRequest: GetJSONRequest, BaupenRequest {
 }
 
 extension Client {
-	func logIn(with loginInfo: LoginInfo) async throws {
+	func logIn(with loginInfo: LoginInfo, repository: Repository) async throws {
 		self.loginInfo = loginInfo
 		do {
 			let context = makeContext()
@@ -20,7 +20,7 @@ extension Client {
 			let user = try await context.send(GetObjectRequest(for: userID)).makeObject()
 			self.loginInfo = loginInfo // set again in case something else changed it since
 			self.localUser = user
-			Repository.shared.signedIn(as: user)
+			repository.signedIn(as: user)
 		} catch {
 			self.loginInfo = nil
 			throw error

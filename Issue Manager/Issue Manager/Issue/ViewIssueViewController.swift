@@ -98,12 +98,12 @@ final class ViewIssueViewController: UITableViewController, InstantiableViewCont
 		
 		updateImage()
 		
-		let craftsman = Repository.read(issue.craftsman)
+		let craftsman = repository.read(issue.craftsman)
 		craftsmanTradeLabel.setText(to: craftsman?.trade, fallback: L10n.Issue.noCraftsman)
 		craftsmanNameLabel.setText(to: craftsman?.company, fallback: L10n.Issue.noCraftsman)
 		
 		descriptionLabel.setText(to: issue.description?.nonEmptyOptional, fallback: L10n.Issue.noDescription)
-		statusLabel.text = issue.status.makeLocalizedMultilineDescription()
+		statusLabel.text = issue.status.makeLocalizedMultilineDescription(repository: repository)
 		
 		let status = issue.status.simplified
 		summaryLabel.isShown = status == .resolved
@@ -134,14 +134,14 @@ final class ViewIssueViewController: UITableViewController, InstantiableViewCont
 	}
 	
 	private func saveChanges() {
-		let sync = issue.saveChanges()
+		let sync = issue.saveChanges(in: repository)
 		assert(!isSyncing)
 		isSyncing = true
 		let mapController = parent as? MapViewController // capture before dismissal
 		Task {
 			defer { self.isSyncing = false }
-			try await sync()
-			issue = Repository.object(issue.id)
+			try await sync(syncManager)
+			issue = repository.object(issue.id)
 			mapController?.updateFromRepository()
 		}
 	}

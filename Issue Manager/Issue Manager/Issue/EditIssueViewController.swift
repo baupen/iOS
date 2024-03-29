@@ -202,7 +202,7 @@ final class EditIssueViewController: UITableViewController, InstantiableViewCont
 		assert(issue.isRegistered != true)
 		guard isViewLoaded else { return }
 		
-		site = Repository.read(issue.site.fetchOne)!
+		site = repository.read(issue.site.fetchOne)!
 		
 		navigationItem.title = isCreating ? Localization.titleCreating : Localization.titleEditing
 		
@@ -210,9 +210,9 @@ final class EditIssueViewController: UITableViewController, InstantiableViewCont
 		markButton.setImage(issue.isMarked ? #imageLiteral(resourceName: "mark_marked.pdf") : #imageLiteral(resourceName: "mark_unmarked.pdf"), for: .normal)
 		clientModeSwitch.isOn = issue.wasAddedWithClient
 		
-		craftsman = Repository.read(issue.craftsman)
-		if isCreating, craftsman == nil, let filtered = ViewOptions.shared.onlyCraftsman(in: site) {
-			craftsman = Repository.read(filtered.get)
+		craftsman = repository.read(issue.craftsman)
+		if isCreating, craftsman == nil, let filtered = ViewOptions.shared.onlyCraftsman(in: site, in: repository) {
+			craftsman = repository.read(filtered.get)
 		}
 		
 		craftsmanNameLabel.setText(to: craftsman?.company, fallback: L10n.Issue.noCraftsman)
@@ -230,7 +230,7 @@ final class EditIssueViewController: UITableViewController, InstantiableViewCont
 	}
 	
 	private func onSave() {
-		let originalTrade = (original?.craftsman).flatMap(Repository.read)?.trade
+		let originalTrade = (original?.craftsman).flatMap(repository.read)?.trade
 		Task {
 			guard trade != originalTrade || issue.description != original?.description else { return }
 			
@@ -252,7 +252,7 @@ final class EditIssueViewController: UITableViewController, InstantiableViewCont
 			}
 			$0 = $0.order(Craftsman.Columns.company)
 		}
-		return Repository.read(request.fetchAll)
+		return repository.read(request.fetchAll)
 	}
 	
 	override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
@@ -271,9 +271,9 @@ final class EditIssueViewController: UITableViewController, InstantiableViewCont
 		case "save":
 			onSave()
 			let mapController = segue.destination as! MapViewController
-			let sync = issue.saveChanges()
+			let sync = issue.saveChanges(in: repository)
 			Task {
-				try await sync()
+				try await sync(syncManager)
 				mapController.updateFromRepository()
 			}
 		case "reposition":
@@ -281,9 +281,9 @@ final class EditIssueViewController: UITableViewController, InstantiableViewCont
 		case "delete":
 			issue.delete()
 			let mapController = segue.destination as! MapViewController
-			let sync = issue.saveChanges()
+			let sync = issue.saveChanges(in: repository)
 			Task {
-				try await sync()
+				try await sync(syncManager)
 				mapController.updateFromRepository()
 			}
 		case "lightbox":

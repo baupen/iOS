@@ -3,12 +3,11 @@
 import UIKit
 import UserDefault
 import HandyOperators
+import SwiftUI
 
 @UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
-	static var shared: AppDelegate {
-		UIApplication.shared.delegate as! Self
-	}
+	static let shared = UIApplication.shared.delegate as! AppDelegate
 	
 	var window: UIWindow?
 	
@@ -25,13 +24,13 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControll
 		
 		Issue.moveLegacyFiles()
 		
-		ReachabilityTracker.shared.reachabilityChanged = { old, new in
+		ReachabilityTracker.shared.reachabilityChanged = { [syncManager] old, new in
 			// check for transition from to reachable state (perhaps we switched from cellular to wifi—we still want to reattempt then)
 			guard new.isReachable else { return }
 			
 			print("Reachable again! Trying to push any changes that weren't pushed earlier...")
 			Task {
-				try await SyncManager.shared.pushLocalChanges()
+				try await syncManager.pushLocalChanges()
 			}
 		}
 		
@@ -118,4 +117,20 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControll
 		DatabaseDataStore.wipeData()
 		Client.shared.wipeAllData()
 	}
+}
+
+// singletons
+private let sharedRepository = Repository()
+private let sharedSyncManager = SyncManager(client: .shared, repository: sharedRepository)
+
+// poor man's dependency injection lol
+// we're not testing view code, so it's fine to give that stuff access to the singleton
+
+extension UIResponder {
+	nonisolated var repository: Repository { sharedRepository }
+	nonisolated var syncManager: SyncManager { sharedSyncManager }
+}
+
+extension View {
+	nonisolated var repository: Repository { sharedRepository }
 }

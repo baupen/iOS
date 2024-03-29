@@ -16,18 +16,18 @@ struct StorageSpaceDetails {
 	private static let calculationTaskManager = TaskManager<StorageSpaceDetails, Never>()
 	
 	@MainActor
-	static func calculate() async -> StorageSpaceDetails {
+	static func calculate(in repository: Repository) async -> StorageSpaceDetails {
 		await calculationTaskManager.runIfNewest { @Sendable in
 			Task.detached(priority: .userInitiated) {
-				doCalculate()
+				doCalculate(in: repository)
 			}
 		}.value
 	}
 	
-	private static func doCalculate() -> StorageSpaceDetails {
+	private static func doCalculate(in repository: Repository) -> StorageSpaceDetails {
 		let startTime = Date.now
 		
-		let issues = Repository.read(Issue.all().withoutDeleted.fetchAll)
+		let issues = repository.read(Issue.all().withoutDeleted.fetchAll)
 		let issuesWithFiles = issues.compactMap { issue in
 			issue.file.map { (issue: issue, file: $0) }
 		}

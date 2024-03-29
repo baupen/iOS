@@ -5,18 +5,18 @@ import HandyOperators
 
 extension IssuePushError {
 	@MainActor
-	func discardChanges() {
+	func discardChanges(in repository: Repository) {
 		switch (stage, issue.wasUploaded) {
 		case (.patch, true): // could not patch an existing issue
-			Repository.shared.save(issue <- { $0.discardChangePatch() })
+			repository.save(issue <- { $0.discardChangePatch() })
 		case (.deletion, true): // could not delete an uploaded issue
-			Repository.shared.save(issue <- { $0.undelete() })
+			repository.save(issue <- { $0.undelete() })
 		case
 			(.patch, false), // could not upload a freshly-created issue
 			(.deletion, false): // could not delete a freshly-created issue
-			Repository.shared.remove(issue) // simply discard the new issue
+			repository.remove(issue) // simply discard the new issue
 		case (.imageUpload, _): // could not upload an image for an issue
-			Repository.shared.save(issue <- { $0.didChangeImage = false })
+			repository.save(issue <- { $0.didChangeImage = false })
 		}
 	}
 	

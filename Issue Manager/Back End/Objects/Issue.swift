@@ -337,15 +337,15 @@ extension Issue {
 	}
 	
 	/// - returns: a closure that syncs any changes to the server, if desired
-	func saveChanges() -> () async throws -> Void {
+	func saveChanges(in repository: Repository) -> (SyncManager) async throws -> Void {
 		if isDeleted {
 			guard wasUploaded else {
-				Repository.shared.remove(self)
-				return {}
+				repository.remove(self)
+				return { _ in }
 			}
 		}
-		Repository.shared.save(self)
-		return SyncManager.shared.pushLocalChanges
+		repository.save(self)
+		return { try await $0.pushLocalChanges() }
 	}
 }
 

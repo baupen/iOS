@@ -16,7 +16,7 @@ struct StorageSpaceView: View {
 	@State var downloadProgress = FileDownloadProgress.done
 	@State var cancelDownloads: (() -> Void)?
 	
-	var sites = Repository.read(ConstructionSite.fetchAll)
+	var sites: [ConstructionSite] = AppDelegate.shared.repository.read(ConstructionSite.fetchAll)
 	
 	@Environment(\.presentationMode) @Binding var presentationMode
 	
@@ -72,7 +72,7 @@ struct StorageSpaceView: View {
 		
 		cellVStack {
 			Button(Localization.purgeNow) {
-				Issue.purgeInactiveFiles(for: issues)
+				Issue.purgeInactiveFiles(for: issues, in: repository)
 				calculateSpaceDetails()
 			}
 			.buttonStyle(.plain)
@@ -126,7 +126,7 @@ struct StorageSpaceView: View {
 	func downloadMissingFiles(for issues: Issue.Query) async throws {
 		var lastUpdate = Date.now
 		try await Issue.downloadMissingFiles(
-			for: issues, includeInactive: true,
+			for: issues, in: repository, includeInactive: true,
 			onProgress: .onMainActor {
 				downloadProgress = $0
 				
@@ -167,7 +167,7 @@ struct StorageSpaceView: View {
 	
 	func calculateSpaceDetails() {
 		Task {
-			let new = await StorageSpaceDetails.calculate()
+			let new = await StorageSpaceDetails.calculate(in: repository)
 			guard new.startTime > details?.startTime ?? .distantPast else { return }
 			details = new
 		}

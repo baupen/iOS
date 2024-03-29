@@ -32,7 +32,7 @@ class RefreshingTableViewController: UITableViewController {
 	}
 	
 	func doRefresh() async throws {
-		try await SyncManager.shared.withContext { 
+		try await syncManager.withContext { 
 			try await $0
 				.onProgress(.onMainActor { self.syncProgress = $0 })
 				.pullRemoteChanges()

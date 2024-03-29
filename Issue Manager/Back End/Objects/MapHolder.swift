@@ -12,7 +12,7 @@ protocol MapHolder: StoredObject {
 	@MainActor func recursiveChildren<R>(in request: R) -> R where R: DerivableRequest<Map>
 	@MainActor var recursiveIssues: Issue.Query { get }
 	@MainActor func issues(recursively: Bool) -> Issue.Query
-	func freshlyFetched() -> Self?
+	func freshlyFetched(in repository: Repository) -> Self?
 }
 
 extension MapHolder {
@@ -47,8 +47,8 @@ extension ConstructionSite: MapHolder {
 		return recursiveIssues
 	}
 	
-	func freshlyFetched() -> Self? {
-		Repository.shared.object(id)
+	func freshlyFetched(in repository: Repository) -> Self? {
+		repository.object(id)
 	}
 }
 
@@ -75,7 +75,7 @@ extension Map: MapHolder {
 		recursively ? recursiveIssues : issues
 	}
 	
-	func freshlyFetched() -> Self? {
-		Repository.shared.object(id)
+	func freshlyFetched(in repository: Repository) -> Self? {
+		repository.object(id)
 	}
 }

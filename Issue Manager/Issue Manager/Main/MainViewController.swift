@@ -31,7 +31,7 @@ final class MainViewController: UISplitViewController, InstantiableViewControlle
 		super.decodeRestorableState(with: coder)
 		
 		let siteID = ConstructionSite.ID(coder.decodeObject(of: NSString.self, forKey: "siteID")! as String)
-		if let site = Repository.object(siteID) {
+		if let site = repository.object(siteID) {
 			self.site = site
 			Task {
 				self.masterNav.mapList.refreshManually()

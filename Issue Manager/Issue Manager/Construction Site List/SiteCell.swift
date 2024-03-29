@@ -62,9 +62,9 @@ final class SiteCell: UICollectionViewCell, Reusable {
 		let meta = site.meta // capture current site
 		let issues = site.issues(recursively: true)
 		// async because there could be a lot of issues (e.g. if we're calculating it for a whole site)
-		Task.detached(priority: .userInitiated) {
-			let totalCount = Repository.read(issues.fetchCount)
-			let openCount = Repository.read(issues.openIssues.fetchCount)
+		Task.detached(priority: .userInitiated) { [repository] in
+			let totalCount = repository.read(issues.fetchCount)
+			let openCount = repository.read(issues.openIssues.fetchCount)
 			Task { @MainActor in
 				guard self.site.meta == meta else { return }
 				self.totalIssuesLabel.text = Localization.totalIssues(String(totalCount))

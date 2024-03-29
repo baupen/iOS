@@ -41,8 +41,8 @@ final class ViewOptions: ObservableObject {
 		}
 	}
 	
-	func onlyCraftsman(in site: ConstructionSite) -> Craftsman.ID? {
-		let all = Repository.read(site.craftsmen
+	func onlyCraftsman(in site: ConstructionSite, in repository: Repository) -> Craftsman.ID? {
+		let all = repository.read(site.craftsmen
 			.select([Craftsman.Meta.Columns.id], as: Craftsman.ID.self)
 			.fetchAll
 		)

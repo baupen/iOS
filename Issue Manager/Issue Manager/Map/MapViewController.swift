@@ -59,8 +59,8 @@ final class MapViewController: UIViewController, InstantiableViewController {
 	
 	@IBAction func showStatusFilterEditor(_ sender: UIBarButtonItem) {
 		guard let holder else { return } // should be disabled otherwise
-		let site = Repository.read(holder.constructionSiteID.get)!
-		let craftsmen = Repository.read(site.craftsmen.order(Craftsman.Columns.company).fetchAll)
+		let site = repository.read(holder.constructionSiteID.get)!
+		let craftsmen = repository.read(site.craftsmen.order(Craftsman.Columns.company).fetchAll)
 		let view = ViewOptionsEditor(craftsmen: craftsmen)
 		let controller = UIHostingController(rootView: view)
 		controller.modalPresentationStyle = .popover
@@ -113,7 +113,7 @@ final class MapViewController: UIViewController, InstantiableViewController {
 		super.viewDidLoad()
 		
 		viewOptionsToken = ViewOptions.shared.didChange.sink { [unowned self] in
-			issues = (map?.sortedIssues.fetchAll).map(Repository.read) ?? []
+			issues = (map?.sortedIssues.fetchAll).map(repository.read) ?? []
 			updateMarkers()
 			applyViewOptions()
 		}
@@ -229,7 +229,7 @@ final class MapViewController: UIViewController, InstantiableViewController {
 		addItem.isEnabled = map != nil
 		filterItem.isEnabled = holder != nil
 		
-		issues = (map?.sortedIssues.fetchAll).map(Repository.read) ?? []
+		issues = (map?.sortedIssues.fetchAll).map(repository.read) ?? []
 		
 		issueListController.map = map
 		pullableView.isHidden = map == nil
@@ -328,7 +328,7 @@ final class MapViewController: UIViewController, InstantiableViewController {
 	}
 	
 	func showDetails(for issue: Issue) {
-		guard let issue = Repository.read(issue.id.get) else {
+		guard let issue = repository.read(issue.id.get) else {
 			// there's a time between uploading an issue (giving it a new id) and uploading its image (after which we'd refresh our view) during which we're displaying an outdated id.
 			updateFromRepository() // must have been showing outdated data
 			return
@@ -407,7 +407,7 @@ extension MapViewController: UIAdaptivePresentationControllerDelegate {
 		
 		cancelAddingIssue() // done (if started)
 		
-		issues = Repository.read(map.sortedIssues.fetchAll)
+		issues = repository.read(map.sortedIssues.fetchAll)
 		updateMarkers()
 		issueListController.update()
 		

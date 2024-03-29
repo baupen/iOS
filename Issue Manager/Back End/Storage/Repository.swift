@@ -4,29 +4,19 @@ import Foundation
 import GRDB
 import UserDefault
 
-final class Repository {
-	static let shared = Repository()
-	
-	static func read<Result>(_ block: (Database) throws -> Result) -> Result {
-		shared.read(block)
-	}
-	
-	static func object<Object>(_ id: Object.ID) -> Object? where Object: StoredObject {
-		shared.object(id)
-	}
-	
-	@UserDefault("repository.userID") private var userID: ConstructionManager.ID?
-	
+final class Repository: Sendable {
 	private let dataStore: DatabaseDataStore
+	private let userTracker = UserTracker()
 	
 	init() {
 		self.dataStore = try! DatabaseDataStore()
 	}
 	
+	@MainActor
 	func signedIn(as manager: ConstructionManager) {
-		guard manager.id != userID else { return } // nothing changed
-		resetAllData()
-		userID = manager.id
+		userTracker.switchUser(to: manager, ifChanged: {
+			resetAllData()
+		})
 	}
 	
 	func resetAllData() {
@@ -92,6 +82,21 @@ final class Repository {
 			}
 		}
 	}
+	
+	@MainActor
+	private final class UserTracker: Sendable {
+		@UserDefault("repository.userID") private var userID: ConstructionManager.ID?
+		
+		nonisolated init() {}
+		
+		/// Calls `ifChanged` whenever the user changes, before storing the new user.
+		func switchUser(to manager: ConstructionManager, ifChanged: () -> Void) {
+			guard manager.id != userID else { return } // nothing changed
+			ifChanged()
+			userID = manager.id
+		}
+	}
+	
 }
 
 extension ObjectID: DefaultsValueConvertible {}

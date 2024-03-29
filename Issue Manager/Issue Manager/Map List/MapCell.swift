@@ -51,8 +51,8 @@ final class MapCell: UITableViewCell, Reusable {
 		
 		let issues = map.issues(recursively: shouldUseRecursiveIssues).openIssues
 		// async because there could be a lot of issues (e.g. if we're calculating it for a high-level map)
-		Task.detached(priority: .userInitiated) {
-			let count = Repository.read(issues.fetchCount)
+		Task.detached(priority: .userInitiated) { [repository] in
+			let count = repository.read(issues.fetchCount)
 			await MainActor.run {
 				self.openIssuesLabel?.text = Localization.openIssues(String(count))
 			}
@@ -61,7 +61,7 @@ final class MapCell: UITableViewCell, Reusable {
 		issueBadge.shouldUseRecursiveIssues = shouldUseRecursiveIssues
 		issueBadge.holder = map
 		
-		if shouldUseRecursiveIssues, Repository.read(map.hasChildren) {
+		if shouldUseRecursiveIssues, repository.read(map.hasChildren) {
 			accessoryView = nil
 			// nil makes it use accessoryType, which is a disclosure indicator
 		} else {

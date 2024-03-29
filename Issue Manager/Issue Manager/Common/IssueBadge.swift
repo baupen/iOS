@@ -47,8 +47,8 @@ final class IssueBadge: UIView {
 	func update() {
 		let issues = holder.issues(recursively: shouldUseRecursiveIssues).issuesToInspect
 		// async because there could be a lot of issues (e.g. if we're calculating it for a whole site)
-		Task.detached(priority: .userInitiated) {
-			let count = Repository.read(issues.fetchCount)
+		Task.detached(priority: .userInitiated) { [repository] in
+			let count = repository.read(issues.fetchCount)
 			await MainActor.run {
 				if count == 0 {
 					self.isHidden = true

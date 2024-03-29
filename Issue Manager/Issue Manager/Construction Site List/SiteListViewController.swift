@@ -105,7 +105,7 @@ final class SiteListViewController: RefreshingTableViewController, InstantiableV
 	}
 	
 	override func doRefresh() async throws {
-		try await SyncManager.shared.withContext { 
+		try await syncManager.withContext { 
 			try await $0
 				.onProgress(.onMainActor { self.syncProgress = $0 })
 				.onIssueImageProgress(.onMainActor { self.fileDownloadProgress = $0 })
@@ -116,7 +116,7 @@ final class SiteListViewController: RefreshingTableViewController, InstantiableV
 	}
 	
 	private func updateContent() {
-		sites = Repository.read(ConstructionSite.all().withoutDeleted.fetchAll) // TODO: order?
+		sites = repository.read(ConstructionSite.all().withoutDeleted.fetchAll) // TODO: order?
 		siteListView.reloadData()
 	}
 	
