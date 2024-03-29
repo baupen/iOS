@@ -120,7 +120,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControll
 }
 
 // singletons
-private let sharedRepository = Repository()
+private let sharedRepository = Repository(dataStore: try! .fromFile())
 private let sharedSyncManager = SyncManager(client: .shared, repository: sharedRepository)
 
 // poor man's dependency injection lol

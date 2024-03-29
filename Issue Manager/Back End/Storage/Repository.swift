@@ -8,8 +8,8 @@ final class Repository: Sendable {
 	private let dataStore: DatabaseDataStore
 	private let userTracker = UserTracker()
 	
-	init() {
-		self.dataStore = try! DatabaseDataStore()
+	init(dataStore: DatabaseDataStore) {
+		self.dataStore = dataStore
 	}
 	
 	@MainActor
@@ -20,7 +20,7 @@ final class Repository: Sendable {
 	}
 	
 	func resetAllData() {
-		try! dataStore.dbPool.write { db in
+		try! dataStore.accessor.write { db in
 			try Issue.deleteAll(db)
 			try Map.deleteAll(db)
 			try Craftsman.deleteAll(db)
@@ -30,11 +30,11 @@ final class Repository: Sendable {
 	}
 	
 	func read<Result>(_ block: (Database) throws -> Result) -> Result {
-		try! dataStore.dbPool.read(block)
+		try! dataStore.accessor.read(block)
 	}
 	
 	private func write<Result>(_ block: (Database) throws -> Result) -> Result {
-		try! dataStore.dbPool.write(block)
+		try! dataStore.accessor.write(block)
 	}
 	
 	func object<Object>(_ id: Object.ID) -> Object? where Object: StoredObject {
