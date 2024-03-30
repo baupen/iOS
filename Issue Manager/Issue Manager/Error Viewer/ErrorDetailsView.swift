@@ -283,7 +283,7 @@ struct ErrorDetailsView_Previews: PreviewProvider {
 		.init(
 			meta: .init(),
 			constructionSiteID: .init(),
-			mapID: nil,
+			mapID: .init(),
 			number: number,
 			wasAddedWithClient: false,
 			deadline: nil,

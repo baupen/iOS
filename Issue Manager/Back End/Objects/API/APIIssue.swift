@@ -10,7 +10,7 @@ struct APIIssue {
 	let deadline: Date?
 	
 	let craftsman: APICraftsman.ID?
-	let map: APIMap.ID?
+	let map: APIMap.ID
 	
 	let positionX: Double?
 	let positionY: Double?
@@ -30,7 +30,7 @@ struct APIIssue {
 	func makeObject(meta: Issue.Meta, context: ConstructionSite.ID) -> Issue {
 		Issue(
 			meta: meta, constructionSiteID: context,
-			mapID: map?.makeID(),
+			mapID: map.makeID(),
 			number: number,
 			wasAddedWithClient: wasAddedWithClient,
 			deadline: deadline,

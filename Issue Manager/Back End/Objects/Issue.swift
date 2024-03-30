@@ -12,7 +12,7 @@ struct Issue: Equatable {
 	
 	private(set) var meta: Meta
 	let constructionSiteID: ConstructionSite.ID
-	let mapID: Map.ID?
+	let mapID: Map.ID
 	
 	let number: Int?
 	var wasAddedWithClient: Bool { // "abnahmemodus"

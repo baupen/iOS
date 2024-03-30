@@ -10,7 +10,7 @@ struct IssuePatch: Equatable, Codable, Sendable {
 	@Tracked var description: String?
 	
 	@Tracked var craftsmanID: Craftsman.ID?
-	@Tracked var mapID: Map.ID?
+	@Tracked var mapID = Map.ID()
 	@Tracked var constructionSiteID: ConstructionSite.ID?
 	
 	@Tracked var position: Issue.Position?
@@ -73,7 +73,7 @@ struct APIIssuePatch: Encodable {
 	var description: String??
 	
 	var craftsman: APICraftsman.ID??
-	var map: APIMap.ID??
+	var map: APIMap.ID?
 	var constructionSite: APIConstructionSite.ID??
 	
 	var positionX: Double??
