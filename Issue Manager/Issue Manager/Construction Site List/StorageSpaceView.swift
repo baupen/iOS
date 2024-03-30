@@ -126,7 +126,8 @@ struct StorageSpaceView: View {
 	func downloadMissingFiles(for issues: Issue.Query) async throws {
 		var lastUpdate = Date.now
 		try await Issue.downloadMissingFiles(
-			for: issues, in: repository, includeInactive: true,
+			for: issues, in: repository, using: client,
+			includeInactive: true,
 			onProgress: .onMainActor {
 				downloadProgress = $0
 				

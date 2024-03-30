@@ -145,6 +145,7 @@ extension FileContainer {
 	static func downloadMissingFiles(
 		for containers: Self.Query? = nil,
 		in repository: Repository,
+		using client: Client,
 		includeInactive: Bool = false,
 		onProgress: ProgressHandler<FileDownloadProgress> = .ignore
 	) async throws {
@@ -171,7 +172,7 @@ extension FileContainer {
 			onProgress(.determined(current: 0, total: filesToDownload.count))
 			
 			// parallel downloads
-			let context = await Client.shared.makeContext()
+			let context = await client.makeContext()
 			var completed = 0
 			// limit concurrent downloads to avoid overwhelming the server
 			try await filesToDownload.concurrentForEach(slots: 5) { container in
@@ -185,9 +186,9 @@ extension FileContainer {
 		}
 	}
 	
-	func downloadFileIfNeeded() async throws {
+	func downloadFileIfNeeded(using client: Client) async throws {
 		guard checkForFileDownload() else { return }
-		try await downloadFile(using: await Client.shared.makeContext())
+		try await downloadFile(using: await client.makeContext())
 	}
 	
 	// returns whether the file needs to be downloaded

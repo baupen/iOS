@@ -10,7 +10,7 @@ final class LoginViewController: UIViewController {
 	
 	// unwind segue
 	@IBAction func logOut(_ segue: UIStoryboardSegue) {
-		Client.shared.localUser = nil
+		client.localUser = nil
 	}
 	
 	// unwind segue
@@ -27,7 +27,7 @@ final class LoginViewController: UIViewController {
 		guard shouldRestoreState else { return }
 		shouldRestoreState = false
 		
-		guard Client.shared.isLoggedIn, presentedViewController == nil else { return }
+		guard client.isLoggedIn, presentedViewController == nil else { return }
 		
 		showSiteList(userInitiated: false)
 	}
@@ -51,7 +51,7 @@ final class LoginViewController: UIViewController {
 		
 		Task {
 			do {
-				try await Client.shared.logIn(with: info, repository: repository)
+				try await client.logIn(with: info, repository: repository)
 				print("logged in!")
 				showSiteList()
 			} catch {

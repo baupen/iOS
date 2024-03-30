@@ -45,7 +45,7 @@ final class ViewIssueViewController: UITableViewController, InstantiableViewCont
 	}
 	
 	@IBAction func closeIssue() {
-		issue.close()
+		issue.close(as: client.localUser!)
 		saveChanges()
 		update()
 	}
@@ -122,8 +122,8 @@ final class ViewIssueViewController: UITableViewController, InstantiableViewCont
 			if image == nil {
 				noImageLabel.text = Localization.ImagePlaceholder.loading
 				// download
-				Task { [issue, weak self] in
-					try await issue!.downloadFileIfNeeded()
+				Task { [issue, client, weak self] in
+					try await issue!.downloadFileIfNeeded(using: client)
 					self?.updateImage()
 				}
 			}

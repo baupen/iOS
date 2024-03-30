@@ -273,18 +273,21 @@ extension SyncContext {
 			
 			// download important files now
 			try await ConstructionSite.downloadMissingFiles(
-				in: repository,
+				in: repository, using: requestContext.client,
 				onProgress: onProgress.wrapped { .downloadingConstructionSiteFiles($0) }
 			)
 			try await Map.downloadMissingFiles(
-				in: repository,
+				in: repository, using: requestContext.client,
 				onProgress: onProgress.wrapped { .downloadingMapFiles($0) }
 			)
 		}
 		
 		// download issue images in the background
 		Task.detached(priority: .utility) {
-			try? await Issue.downloadMissingFiles(in: repository, onProgress: issueImageProgressHandler)
+			try? await Issue.downloadMissingFiles(
+				in: repository, using: requestContext.client,
+				onProgress: issueImageProgressHandler
+			)
 		}
 	}
 	

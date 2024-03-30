@@ -51,7 +51,7 @@ final class RegisterViewController: UIViewController {
 		Task {
 			defer { isLoading = false }
 			do {
-				try await Client.shared.register(asEmail: email, at: url)
+				try await client.register(asEmail: email, at: url)
 				registerButton.isHidden = true
 				emailExplanation.isHidden = false
 			} catch {

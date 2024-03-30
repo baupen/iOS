@@ -174,12 +174,13 @@ final class MapViewController: UIViewController, InstantiableViewController {
 				)
 			} else {
 				editController.isCreating = true // otherwise we wouldn't be using a segue
+				let author = client.localUser!
 				let map = holder as! Map
 				switch segueID {
 				case .createUnplaced:
-					editController.present(Issue(in: map))
+					editController.present(Issue(in: map, by: author))
 				case .createPlaced:
-					editController.present(Issue(at: isPlacingIssue ? position : nil, in: map))
+					editController.present(Issue(at: isPlacingIssue ? position : nil, in: map, by: author))
 				}
 			}
 		default:
@@ -256,7 +257,7 @@ final class MapViewController: UIViewController, InstantiableViewController {
 		currentLoadingTask?.cancel()
 		currentLoadingTask = Task {
 			// download explicitly just in case it's not there yet
-			try? await map.downloadFileIfNeeded() // errors are fine (e.g. bad network)
+			try? await map.downloadFileIfNeeded(using: client) // errors are fine (e.g. bad network)
 			
 			let page: PDFKitPage
 			do {

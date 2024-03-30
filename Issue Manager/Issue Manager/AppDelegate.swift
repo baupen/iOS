@@ -70,7 +70,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControll
 	func application(_ application: UIApplication, shouldSaveSecureApplicationState coder: NSCoder) -> Bool { true }
 	
 	func application(_ app: UIApplication, shouldRestoreSecureApplicationState coder: NSCoder) -> Bool {
-		Client.shared.localUser != nil && !Issue.isInClientMode
+		client.localUser != nil && !Issue.isInClientMode
 	}
 	
 	// MARK: - Wiping
@@ -115,13 +115,14 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControll
 		
 		wipeDownloadedFiles()
 		DatabaseDataStore.wipeData()
-		Client.shared.wipeAllData()
+		client.wipeAllData()
 	}
 }
 
 // singletons
 private let sharedRepository = Repository(dataStore: try! .fromFile())
-private let sharedSyncManager = SyncManager(client: .shared, repository: sharedRepository)
+private let sharedClient = Client()
+private let sharedSyncManager = SyncManager(client: sharedClient, repository: sharedRepository)
 
 // poor man's dependency injection lol
 // we're not testing view code, so it's fine to give that stuff access to the singleton
@@ -129,8 +130,10 @@ private let sharedSyncManager = SyncManager(client: .shared, repository: sharedR
 extension UIResponder {
 	nonisolated var repository: Repository { sharedRepository }
 	nonisolated var syncManager: SyncManager { sharedSyncManager }
+	nonisolated var client: Client { sharedClient}
 }
 
 extension View {
 	nonisolated var repository: Repository { sharedRepository }
+	nonisolated var client: Client { sharedClient}
 }

@@ -73,7 +73,7 @@ final class SiteListViewController: RefreshingTableViewController, InstantiableV
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		let user = Client.shared.localUser!
+		let user = client.localUser!
 		welcomeLabel.text = Localization.welcome(user.givenName ?? "")
 		
 		updateClientModeAppearance()

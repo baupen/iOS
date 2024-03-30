@@ -139,7 +139,7 @@ extension Issue: FileContainer {
 
 extension Issue {
 	@MainActor
-	init(at position: Position? = nil, in map: Map) {
+	init(at position: Position? = nil, in map: Map, by author: ConstructionManager) {
 		self.meta = .init()
 		self.constructionSiteID = map.constructionSiteID
 		self.mapID = map.id
@@ -151,7 +151,7 @@ extension Issue {
 		
 		self.wasUploaded = false
 		
-		self.status = .init(createdBy: Client.shared.localUser!.id)
+		self.status = .init(createdBy: author.id)
 		
 		patch.wasAddedWithClient = wasAddedWithClient
 		
@@ -290,16 +290,15 @@ extension Issue {
 // MARK: Mutation
 @MainActor
 extension Issue {
-	mutating func close() {
+	mutating func close(as author: ConstructionManager) {
 		assert(isRegistered)
 		assert(!isClosed)
 		
 		let now = Date()
-		let author = Client.shared.localUser!.id
 		status.closedAt = now
-		status.closedBy = author
+		status.closedBy = author.id
 		patch.closedAt = now
-		patch.closedBy = author
+		patch.closedBy = author.id
 	}
 	
 	mutating func reopen() {

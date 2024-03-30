@@ -9,7 +9,6 @@ typealias TaskResult = (data: Data, response: HTTPURLResponse)
 
 @MainActor
 final class Client {
-	nonisolated static let shared = Client()
 	nonisolated static let dateFormatter = ISO8601DateFormatter()
 	
 	@UserDefault("client.loginInfo") var loginInfo: LoginInfo?
@@ -19,7 +18,7 @@ final class Client {
 	
 	var isLoggedIn: Bool { loginInfo != nil && localUser != nil }
 	
-	private nonisolated init() {}
+	nonisolated init() {}
 	
 	func wipeAllData() {
 		loginInfo = nil
