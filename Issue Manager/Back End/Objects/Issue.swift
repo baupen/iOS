@@ -336,7 +336,7 @@ extension Issue {
 	}
 	
 	/// - returns: a closure that syncs any changes to the server, if desired
-	func saveChanges(in repository: Repository) -> (SyncManager) async throws -> Void {
+	func saveChanges(in repository: Repository) -> @Sendable (SyncManager) async throws -> Void {
 		if isDeleted {
 			guard wasUploaded else {
 				repository.remove(self)

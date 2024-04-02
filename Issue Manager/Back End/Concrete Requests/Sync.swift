@@ -5,7 +5,7 @@ import GRDB
 import Protoquest
 import HandyOperators
 
-private struct IssuePatchRequest: JSONJSONRequest, BaupenRequest {
+struct IssuePatchRequest: JSONJSONRequest, BaupenRequest {
 	typealias Response = APIObject<APIIssue>
 	
 	var httpMethod: String { "PATCH" }
@@ -15,14 +15,14 @@ private struct IssuePatchRequest: JSONJSONRequest, BaupenRequest {
 	let body: APIIssuePatch
 }
 
-private struct IssueCreationRequest: JSONJSONRequest, BaupenRequest {
+struct IssueCreationRequest: JSONJSONRequest, BaupenRequest {
 	typealias Response = APIObject<APIIssue>
 	
 	let path = Issue.apiPath
 	let body: APIIssuePatch
 }
 
-private struct ImageUploadRequest: MultipartEncodingRequest, StringDecodingRequest, BaupenRequest {
+struct ImageUploadRequest: MultipartEncodingRequest, StringDecodingRequest, BaupenRequest {
 	var path: String
 	
 	var fileURL: URL
@@ -37,7 +37,7 @@ private struct ImageUploadRequest: MultipartEncodingRequest, StringDecodingReque
 	}
 }
 
-private struct DeletionRequest: GetRequest, StatusCodeRequest, BaupenRequest {
+struct DeletionRequest: GetRequest, StatusCodeRequest, BaupenRequest {
 	var httpMethod: String { "DELETE" }
 	
 	var path: String

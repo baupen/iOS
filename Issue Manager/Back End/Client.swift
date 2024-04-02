@@ -18,7 +18,15 @@ final class Client {
 	
 	var isLoggedIn: Bool { loginInfo != nil && localUser != nil }
 	
-	nonisolated init() {}
+	private let _makeContext: @Sendable (Client, LoginInfo?) -> any RequestContext
+	
+	nonisolated init(
+		makeContext: @escaping @Sendable (Client, LoginInfo?) -> any RequestContext = {
+			DefaultRequestContext(client: $0, loginInfo: $1)
+		} // can't use pointfree reference to DefaultRequestContext.init because it's not sendable
+	) {
+		self._makeContext = makeContext
+	}
 	
 	func wipeAllData() {
 		loginInfo = nil
@@ -35,12 +43,19 @@ final class Client {
 	///
 	/// - Note: This is a method (not a property) to encourage reusing it when important, since the `await` that would usually notify of the main actor hop is already expected for the `send` that usually follows.
 	/// If you're not on the main actor, getting this context cannot be done synchronously and would thus silently introduce a main actor hop with every `await client.send(...)`.
-	func makeContext() -> RequestContext {
-		.init(client: self, loginInfo: loginInfo)
+	func makeContext() -> any RequestContext {
+		_makeContext(self, loginInfo)
 	}
 }
 
-struct RequestContext: Sendable {
+protocol RequestContext: Sendable {
+	var client: Client { get }
+	var loginInfo: LoginInfo? { get }
+	
+	func send<R: BaupenRequest>(_ request: R) async throws -> R.Response
+}
+
+struct DefaultRequestContext: RequestContext {
 	let client: Client
 	let loginInfo: LoginInfo?
 	
@@ -82,7 +97,7 @@ struct RequestContext: Sendable {
 	}
 }
 
-protocol BaupenRequest: Request {}
+protocol BaupenRequest: Request, Sendable where Response: Sendable {}
 extension BaupenRequest where Self: JSONEncodingRequest {
 	var encoderOverride: JSONEncoder? { requestEncoder }
 }

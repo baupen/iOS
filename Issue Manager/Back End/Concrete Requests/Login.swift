@@ -26,4 +26,12 @@ extension Client {
 			throw error
 		}
 	}
+	
+	#if DEBUG
+	func mockLogIn(loginInfo: LoginInfo, user: ConstructionManager, repository: Repository) {
+		self.loginInfo = loginInfo
+		self.localUser = user
+		repository.signedIn(as: user)
+	}
+	#endif
 }

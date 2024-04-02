@@ -15,6 +15,14 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControll
 		_ app: UIApplication,
 		willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
 	) -> Bool {
+		#if DEBUG
+		if ProcessInfo.processInfo.environment["RUNNING_TESTS"] == "1" {
+			// hijack actual app content
+			window!.rootViewController = UIViewController()
+			return true
+		}
+		#endif
+		
 		window!.tintColor = .main
 		
 		// disables state restoration animations
