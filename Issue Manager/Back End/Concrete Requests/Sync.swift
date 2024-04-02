@@ -244,7 +244,7 @@ extension SyncContext {
 			let sites = repository.read(ConstructionSite.fetchAll)
 			for site in sites {
 				onProgress(.pullingSiteData(site))
-				try await self.doPullRemoteChanges(for: site)
+				try await self.pullRemoteChanges(for: site)
 			}
 		}
 	}
@@ -255,7 +255,7 @@ extension SyncContext {
 			guard let site = repository.read(siteID.get)
 			else { throw SyncError.siteAccessRemoved }
 			onProgress(.pullingSiteData(site))
-			try await self.doPullRemoteChanges(for: site)
+			try await self.pullRemoteChanges(for: site)
 		}
 	}
 	
@@ -292,9 +292,9 @@ extension SyncContext {
 	}
 	
 	private func doPullChangedTopLevelObjects() async throws {
-		try await doPullChangedObjects(existing: ConstructionManager.all(), context: ())
+		try await pullChangedObjects(existing: ConstructionManager.all(), context: ())
 		let userID = await requestContext.client.updateLocalUser(from: repository)!.id
-		let sites = try await doPullChangedObjects(existing: ConstructionSite.none(), context: ())
+		let sites = try await pullChangedObjects(existing: ConstructionSite.none(), context: ())
 		// remove sites we don't have access to
 		sites
 			.filter { !$0.managerIDs.contains(userID) }
@@ -302,7 +302,7 @@ extension SyncContext {
 	}
 	
 	@discardableResult
-	private func doPullChangedObjects<Object: StoredObject>(
+	private func pullChangedObjects<Object: StoredObject>(
 		for site: ConstructionSite? = nil,
 		existing: Object.Query,
 		context: Object.Model.Context
@@ -316,14 +316,14 @@ extension SyncContext {
 		return objects
 	}
 	
-	private func doPullRemoteChanges(for site: ConstructionSite) async throws {
-		try await doPullChangedObjects(for: site, existing: site.maps, context: site.id)
-		try await doPullChangedObjects(for: site, existing: site.craftsmen, context: site.id)
+	private func pullRemoteChanges(for site: ConstructionSite) async throws {
+		try await pullChangedObjects(for: site, existing: site.maps, context: site.id)
+		try await pullChangedObjects(for: site, existing: site.craftsmen, context: site.id)
 		// insert issues only after maps & craftsmen to maintain foreign key constraints
-		try await doPullChangedIssues(for: site)
+		try await pullChangedIssues(for: site)
 	}
 	
-	private func doPullChangedIssues(for site: ConstructionSite) async throws {
+	private func pullChangedIssues(for site: ConstructionSite) async throws {
 		var itemsPerPage = 1000
 		var lastChangeTime = Date.distantPast
 		while true {
