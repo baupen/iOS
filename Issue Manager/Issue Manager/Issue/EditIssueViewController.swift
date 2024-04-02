@@ -373,7 +373,7 @@ extension UIImage {
 		guard let jpg = jpegData(compressionQuality: 0.75) else {
 			throw ImageSavingError.couldNotGenerateRepresentation
 		}
-		print("Saving file to", url)
+		print("Saving \(jpg.count)-byte file to", url)
 		try? FileManager.default.createDirectory(
 			at: url.deletingLastPathComponent(),
 			withIntermediateDirectories: true

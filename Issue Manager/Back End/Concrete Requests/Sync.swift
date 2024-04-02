@@ -142,8 +142,10 @@ extension SyncContext {
 			let canonical = try await self.syncPatch(for: issue)
 			repository.remove(issue) // remove non-canonical copy
 			repository.save(canonical <- {
-				// keep local changes to image to sync next (this sets didChangeImage relative to remote image)
-				$0.image = issue.image
+				if issue.didChangeImage {
+					// keep local changes to image to sync next (this sets didChangeImage relative to remote image)
+					$0.image = issue.image
+				}
 				// fake older last change time to avoid skipping changes between last max change time and this upload
 				$0.lastChangeTime = maxLastChangeTime
 			})

@@ -132,7 +132,7 @@ extension Issue: FileContainer {
 	private static let autoDownloadThreshold = Date(timeIntervalSinceNow: -3600 * 24 * 90) // 90 days
 	
 	var shouldAutoDownloadFile: Bool {
-		guard let closedAt = status.closedAt else { return true }
+		guard !didChangeImage, let closedAt = status.closedAt else { return true }
 		return closedAt > Self.autoDownloadThreshold
 	}
 }

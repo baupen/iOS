@@ -106,13 +106,19 @@ extension FileContainer {
 	}
 	
 	/// Identifies files in the local folder that are no longer actively needed (e.g. because their construction site is no longer selected for this user), and moves them to the caches folder.
-	static func moveDisusedFiles(inUse: [Self]) {
+	static func moveDisusedFiles(in repository: Repository) async {
 		let allLocalFiles: Set<String>
 		do {
 			allLocalFiles = Set(try manager.contentsOfDirectory(atPath: baseLocalFolder.path))
 		} catch {
 			error.printDetails(context: "could not establish present files in \(baseLocalFolder)")
 			return
+		}
+		
+		// only fetch in-use containers _after_ reading files to avoid clearing files created between the query and the file system check
+		// run on main actor to further minimize data race potential
+		let inUse = await MainActor.run {
+			repository.read(Self.fetchAll)
 		}
 		
 		let necessaryFiles = inUse.compactMap(\.file?.localFilename)
@@ -152,6 +158,10 @@ extension FileContainer {
 		try await onProgress.unisolated { onProgress in
 			onProgress(.undetermined)
 			
+			if containers == nil { // can't do this when only handling a subset
+				await moveDisusedFiles(in: repository)
+			}
+			
 			// bookkeeping
 			let allContainers = repository.read(
 				(containers ?? all())
@@ -159,9 +169,6 @@ extension FileContainer {
 					.order(Meta.Columns.lastChangeTime.desc)
 					.fetchAll
 			)
-			if containers == nil { // can't do this when only handling a subset
-				moveDisusedFiles(inUse: allContainers)
-			}
 			
 			// figure out what to download
 			let activeContainers = includeInactive
