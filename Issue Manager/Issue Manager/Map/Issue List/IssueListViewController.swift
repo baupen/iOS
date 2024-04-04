@@ -18,11 +18,6 @@ final class IssueListViewController: UIViewController {
 		didSet { pullableView.tapRecognizer.delegate = self }
 	}
 	
-	/// set this before setting `map` initially or before loading the view to avoid calculating stuff twice
-	var visibleStatuses = Issue.allStatuses {
-		didSet { update() }
-	}
-	
 	var map: Map? {
 		didSet { update() }
 	}
@@ -57,27 +52,25 @@ final class IssueListViewController: UIViewController {
 		guard isViewLoaded, let map = map else { return }
 		
 		let allIssues = repository.read(map.sortedIssues.fetchAll)
-		issues = allIssues.filter {
-			visibleStatuses.contains($0.status.simplified)
-		}
+		issues = allIssues.filter(ViewOptions.shared.shouldDisplay)
 		updateListedIssues()
 		
 		let unplacedCount = issues.count(where: \.isUnplaced)
 		let placedCount = issues.count - unplacedCount
-		placementTypePicker.setTitle(Localization.positionedIssues(placedCount), forSegmentAt: 0)
+		placementTypePicker.setTitle(Localization.allIssues(placedCount), forSegmentAt: 0)
 		placementTypePicker.setTitle(Localization.unpositionedIssues(unplacedCount), forSegmentAt: 1)
 		
 		let openCount = issues.count { $0.isOpen }
 		let totalCount = allIssues.count
-		if visibleStatuses == Issue.allStatuses {
-			summaryLabel.text = Localization.summary(String(openCount), String(totalCount))
+		summaryLabel.text = if ViewOptions.shared.isFiltering {
+			Localization.summaryFiltered(String(issues.count), String(totalCount))
 		} else {
-			summaryLabel.text = Localization.summaryFiltered(String(issues.count), String(totalCount))
+			Localization.summary(String(openCount), String(totalCount))
 		}
 	}
 	
 	func updateListedIssues() {
-		listedIssues = issues.filter { $0.isUnplaced == isShowingUnplacedIssues }
+		listedIssues = isShowingUnplacedIssues ? issues.filter(\.isUnplaced) : issues
 		issueTableView.reloadData()
 	}
 	

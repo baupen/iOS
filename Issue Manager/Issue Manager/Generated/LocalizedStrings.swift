@@ -262,9 +262,9 @@ internal enum L10n {
     /// Pendenzen ohne Platzierung:
     internal static let unpositionedIssueHint = L10n.tr("Localizable", "map.unpositioned_issue_hint", fallback: "Pendenzen ohne Platzierung:")
     internal enum IssueList {
-      /// mit Platzierung (%@)
-      internal static func positionedIssues(_ p1: Any) -> String {
-        return L10n.tr("Localizable", "map.issue_list.positioned_issues", String(describing: p1), fallback: "mit Platzierung (%@)")
+      /// alle (%@)
+      internal static func allIssues(_ p1: Any) -> String {
+        return L10n.tr("Localizable", "map.issue_list.all_issues", String(describing: p1), fallback: "alle (%@)")
       }
       /// Details anzeigen
       internal static let showDetails = L10n.tr("Localizable", "map.issue_list.show_details", fallback: "Details anzeigen")

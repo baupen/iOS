@@ -134,7 +134,8 @@ final class MapViewController: UIViewController, InstantiableViewController {
 	func applyViewOptions() {
 		let options = ViewOptions.shared
 		filterItem.image = options.isFiltering ? #imageLiteral(resourceName: "filter_enabled.pdf") : #imageLiteral(resourceName: "filter_disabled.pdf")
-		issueListController.visibleStatuses = options.visibleStatuses
+		issueListController.update()
+		updateUnplacedIssueHint()
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -258,14 +259,21 @@ final class MapViewController: UIViewController, InstantiableViewController {
 	}
 	
 	private func updateUnplacedIssueHint() {
-		let unplacedCount = issues.count(where: \.isUnplaced)
+		let unplacedCount = issues.lazy
+			.filter(ViewOptions.shared.shouldDisplay)
+			.count(where: \.isUnplaced)
 		unplacedHintContainer.isHidden = unplacedCount == 0
 		guard unplacedCount > 0 else { return }
 		
 		unplacedCountLabel.text = "\(unplacedCount)"
 		
-		isUnplacedIssueHintExpanded = true
-		contractUnplacedHintSoon()
+		Task { // doesn't animate if we do it immediately on appear
+			view.layoutIfNeeded()
+			UIView.animate(withDuration: 1) { [self] in
+				isUnplacedIssueHintExpanded = true
+			}
+			contractUnplacedHintSoon()
+		}
 	}
 	
 	private var cancelUnplacedAnimation: (() -> Void)?
@@ -477,9 +485,9 @@ extension MapViewController: UIAdaptivePresentationControllerDelegate {
 }
 
 extension Issue {
-	static let allStatuses = Set(Issue.Status.Simplified.allCases)
+	static let allStatuses = Set(Issue.Status.Stage.allCases)
 }
 
-extension Issue.Status.Simplified: DefaultsValueConvertible {
+extension Issue.Status.Stage: DefaultsValueConvertible {
 	typealias DefaultsRepresentation = RawValue
 }

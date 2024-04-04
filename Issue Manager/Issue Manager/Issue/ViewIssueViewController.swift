@@ -91,7 +91,7 @@ final class ViewIssueViewController: UITableViewController, InstantiableViewCont
 	func update() {
 		guard isViewLoaded, let issue = issue else { return }
 		
-		iconView.image = issue.status.simplified.flatIcon
+		iconView.image = issue.status.stage.flatIcon
 		numberLabel.setText(to: issue.number.map { "#\($0)" }, fallback: L10n.Issue.unregistered)
 		markButton.setImage(issue.isMarked ? #imageLiteral(resourceName: "mark_marked.pdf") : #imageLiteral(resourceName: "mark_unmarked.pdf"), for: .normal)
 		clientModeSwitch.isOn = issue.wasAddedWithClient
@@ -105,7 +105,7 @@ final class ViewIssueViewController: UITableViewController, InstantiableViewCont
 		descriptionLabel.setText(to: issue.description?.nonEmptyOptional, fallback: L10n.Issue.noDescription)
 		statusLabel.text = issue.status.makeLocalizedMultilineDescription(repository: repository)
 		
-		let status = issue.status.simplified
+		let status = issue.status.stage
 		summaryLabel.isShown = status == .resolved
 		resetResolutionButton.isShown = status == .resolved
 		closeButton.isShown = status != .closed

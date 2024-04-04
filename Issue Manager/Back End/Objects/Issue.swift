@@ -96,7 +96,7 @@ struct Issue: Equatable {
 		var closedAt: Date?
 		var closedBy: ConstructionManager.ID?
 		
-		var simplified: Simplified {
+		var stage: Stage {
 			if closedAt != nil {
 				return .closed
 			} else if resolvedAt != nil {
@@ -109,7 +109,7 @@ struct Issue: Equatable {
 		}
 		
 		/// a simplified representation of the status
-		enum Simplified: Int, Codable, CaseIterable {
+		enum Stage: Int, Codable, CaseIterable {
 			case new, registered, resolved, closed
 		}
 		

@@ -3,7 +3,7 @@
 import SwiftUI
 
 struct ViewOptionsEditor: View {
-	typealias Status = Issue.Status.Simplified
+	typealias Status = Issue.Status.Stage
 	typealias Localization = L10n.ViewOptions
 	
 	var craftsmen: [Craftsman]

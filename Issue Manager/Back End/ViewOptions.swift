@@ -12,7 +12,7 @@ final class ViewOptions: ObservableObject {
 	private let _didChange = PassthroughSubject<Void, Never>()
 	
 	@UserDefault("hiddenStatuses")
-	private static var hiddenStatuses: [Issue.Status.Simplified] = []
+	private static var hiddenStatuses: [Issue.Status.Stage] = []
 	
 	@Published var visibleStatuses = Issue.allStatuses.subtracting(ViewOptions.hiddenStatuses) {
 		didSet {
@@ -61,12 +61,17 @@ final class ViewOptions: ObservableObject {
 	
 	// for previews
 	init(
-		visibleStatuses: Set<Issue.Status.Simplified> = [],
+		visibleStatuses: Set<Issue.Status.Stage> = [],
 		isInClientMode: Bool = false,
 		hiddenCraftsmen: Set<Craftsman.ID> = []
 	) {
 		self.visibleStatuses = visibleStatuses
 		self.isInClientMode = isInClientMode
 		self.hiddenCraftsmen = hiddenCraftsmen
+	}
+	
+	func shouldDisplay(_ issue: Issue) -> Bool {
+		visibleStatuses.contains(issue.status.stage)
+		&& !hiddenCraftsmen.contains(issue.craftsmanID)
 	}
 }

@@ -33,10 +33,7 @@ final class IssueMarker: UIView {
 	}
 	
 	func matchesFilter() -> Bool {
-		let options = ViewOptions.shared
-		return true
-		&& options.visibleStatuses.contains(issue.status.simplified)
-		&& !options.hiddenCraftsmen.contains(issue.craftsmanID)
+		ViewOptions.shared.shouldDisplay(issue)
 	}
 	
 	@objc func buttonPressed(_ sender: UIButton) {
@@ -44,7 +41,7 @@ final class IssueMarker: UIView {
 	}
 	
 	func update() {
-		button.setImage(issue.status.simplified.shadedIcon, for: .normal)
+		button.setImage(issue.status.stage.shadedIcon, for: .normal)
 		updateVisibility()
 		reposition()
 	}

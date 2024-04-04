@@ -219,8 +219,8 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 // MARK: Map.issue
-// CONTEXT: Knopf, um in der Liste Pendenzen mit Platzierung anzuzeigen
-"map.issue_list.positioned_issues" = "con posizione (%@)";
+// CONTEXT: Knopf, um in der Liste alle Pendenzen anzuzeigen
+"map.issue_list.all_issues" = "tutte (%@)";
 // CONTEXT: Knopf, um die Details einer Pendenz anzuzeigen.
 "map.issue_list.show_details" = "Mostra dettagli";
 // CONTEXT: Knopf, um die in der liste ausgewählte Pendenz auf dem Grundriss anzuzeigen.

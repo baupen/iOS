@@ -2,7 +2,7 @@
 
 import UIKit
 
-extension Issue.Status.Simplified {
+extension Issue.Status.Stage {
 	typealias Localization = L10n.Issue.Status
 	
 	var localizedName: String {

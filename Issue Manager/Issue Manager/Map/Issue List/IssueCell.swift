@@ -74,7 +74,7 @@ final class IssueCell: UITableViewCell, Reusable {
 		
 		markButton.setImage(issue.isMarked ? #imageLiteral(resourceName: "mark_marked.pdf") : #imageLiteral(resourceName: "mark_unmarked.pdf"), for: .normal)
 		
-		iconView.image = issue.status.simplified.flatIcon
+		iconView.image = issue.status.stage.flatIcon
 		
 		numberLabel.setText(to: issue.number.map { "#\($0)" }, fallback: Localization.unregistered)
 		
