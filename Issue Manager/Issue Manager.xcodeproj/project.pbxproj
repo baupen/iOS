@@ -114,6 +114,7 @@
 		B9A5B4EB2974723100D380B5 /* ViewOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A5B4EA2974723100D380B5 /* ViewOptions.swift */; };
 		B9AD95542BBCB1BE000D7EDF /* TestingContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9AD95532BBCB1BE000D7EDF /* TestingContext.swift */; };
 		B9AD95562BBE13B1000D7EDF /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = B9AD95552BBE13B1000D7EDF /* PrivacyInfo.xcprivacy */; };
+		B9AD95582BBE4B67000D7EDF /* IBPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9AD95572BBE4B67000D7EDF /* IBPlaceholderView.swift */; };
 		B9AE59C82BB65D43009A1947 /* SyncTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9AE59C72BB65D43009A1947 /* SyncTests.swift */; };
 		B9C04D4D24453FF5008EDDEE /* UserDefault in Frameworks */ = {isa = PBXBuildFile; productRef = B9C04D4C24453FF5008EDDEE /* UserDefault */; };
 		B9CA06FB25FA6612002278FB /* DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CA06FA25FA6612002278FB /* DeepLink.swift */; };
@@ -258,6 +259,7 @@
 		B9A5B4EA2974723100D380B5 /* ViewOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewOptions.swift; sourceTree = "<group>"; };
 		B9AD95532BBCB1BE000D7EDF /* TestingContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingContext.swift; sourceTree = "<group>"; };
 		B9AD95552BBE13B1000D7EDF /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		B9AD95572BBE4B67000D7EDF /* IBPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IBPlaceholderView.swift; sourceTree = "<group>"; };
 		B9AE59C52BB65D43009A1947 /* Issue Manager Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Issue Manager Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9AE59C72BB65D43009A1947 /* SyncTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncTests.swift; sourceTree = "<group>"; };
 		B9CA06FA25FA6612002278FB /* DeepLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLink.swift; sourceTree = "<group>"; };
@@ -363,6 +365,7 @@
 			children = (
 				95890A5C21B2E4D600510E44 /* Haptics.swift */,
 				95339A2F20F8445100A01F07 /* SeparatorLine.swift */,
+				B9AD95572BBE4B67000D7EDF /* IBPlaceholderView.swift */,
 				9529A63C20EECF8600C7E0A0 /* IssueBadge.swift */,
 				9584F24720E92DB800A8C884 /* TextFieldContainer.swift */,
 				9584F24920E92F8E00A8C884 /* CenteringScrollViewDelegate.swift */,
@@ -911,6 +914,7 @@
 				95E83C15221A4CE7000BB75F /* UILabel+Extensions.swift in Sources */,
 				95758B1321F4223100E5C20F /* TransitionAnimator.swift in Sources */,
 				9584F24E20E936ED00A8C884 /* LoginWindowView.swift in Sources */,
+				B9AD95582BBE4B67000D7EDF /* IBPlaceholderView.swift in Sources */,
 				9553707520F1A5E2005D81C8 /* IssueListViewController.swift in Sources */,
 				9511A10820DD3BD100101ADE /* Craftsman.swift in Sources */,
 				95A66C7A20F9181D008F10DA /* ViewIssueViewController.swift in Sources */,

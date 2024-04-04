@@ -23,6 +23,7 @@ struct Issue: Equatable {
 	}
 	let deadline: Date?
 	
+	var isUnplaced: Bool { position == nil }
 	var position: Position? {
 		didSet {
 			guard position != oldValue else { return }

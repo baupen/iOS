@@ -25,6 +25,11 @@ final class MapViewController: UIViewController, InstantiableViewController {
 	@IBOutlet private var issuePositioner: IssuePositioner!
 	@IBOutlet private var addUnplacedContainer: UIView!
 	
+	@IBOutlet private var unplacedHintContainer: UIView!
+	@IBOutlet private var unplacedHintLabel: UILabel!
+	@IBOutlet private var unplacedCountLabel: UILabel!
+	@IBOutlet private var unplacedHintFinalConstraint: NSLayoutConstraint!
+	
 	// the filter popover's done button and the issue editor's reposition button link to this
 	@IBAction func backToMap(_ segue: UIStoryboardSegue) {}
 	
@@ -105,7 +110,11 @@ final class MapViewController: UIViewController, InstantiableViewController {
 	}
 	var map: Map? { holder as? Map }
 	
-	var issues: [Issue] = []
+	var issues: [Issue] = [] {
+		didSet {
+			updateUnplacedIssueHint()
+		}
+	}
 	
 	private var viewOptionsToken: AnyCancellable?
 	
@@ -245,6 +254,51 @@ final class MapViewController: UIViewController, InstantiableViewController {
 			} else {
 				fallbackLabel.text = Localization.noMapSelected
 			}
+		}
+	}
+	
+	private func updateUnplacedIssueHint() {
+		let unplacedCount = issues.count(where: \.isUnplaced)
+		unplacedHintContainer.isHidden = unplacedCount == 0
+		guard unplacedCount > 0 else { return }
+		
+		unplacedCountLabel.text = "\(unplacedCount)"
+		
+		isUnplacedIssueHintExpanded = true
+		contractUnplacedHintSoon()
+	}
+	
+	private var cancelUnplacedAnimation: (() -> Void)?
+	private func contractUnplacedHintSoon(delay: TimeInterval = 5) {
+		cancelUnplacedAnimation?() // replace current animation
+		cancelUnplacedAnimation = Task {
+			try await Task.sleep(forSeconds: delay)
+			try Task.checkCancellation()
+			UIView.animate(withDuration: 1) { [self] in
+				isUnplacedIssueHintExpanded = false
+			}
+		}.cancel
+	}
+	
+	@IBAction func unplacedHintTapped(_ sender: UITapGestureRecognizer) {
+		contractUnplacedHintSoon() // postpone possible current animation
+		if isUnplacedIssueHintExpanded {
+			pullableView.expand()
+			UIView.animate(withDuration: 1.0) { [self] in
+				issueListController.isShowingUnplacedIssues = true
+			}
+		} else {
+			UIView.animate(withDuration: 0.25) { [self] in
+				isUnplacedIssueHintExpanded = true
+			}
+		}
+	}
+	
+	private var isUnplacedIssueHintExpanded = false {
+		didSet {
+			unplacedHintFinalConstraint.isActive = !isUnplacedIssueHintExpanded
+			view.layoutIfNeeded()
+			unplacedHintLabel.layer.opacity = isUnplacedIssueHintExpanded ? 1 : 0
 		}
 	}
 	

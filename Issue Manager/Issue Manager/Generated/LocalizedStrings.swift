@@ -259,7 +259,13 @@ internal enum L10n {
     internal static let pdfLoading = L10n.tr("Localizable", "map.pdf_loading", fallback: "Bauplan wird geladen…")
     /// Bauplan
     internal static let title = L10n.tr("Localizable", "map.title", fallback: "Bauplan")
+    /// Pendenzen ohne Platzierung:
+    internal static let unpositionedIssueHint = L10n.tr("Localizable", "map.unpositioned_issue_hint", fallback: "Pendenzen ohne Platzierung:")
     internal enum IssueList {
+      /// mit Platzierung (%@)
+      internal static func positionedIssues(_ p1: Any) -> String {
+        return L10n.tr("Localizable", "map.issue_list.positioned_issues", String(describing: p1), fallback: "mit Platzierung (%@)")
+      }
       /// Details anzeigen
       internal static let showDetails = L10n.tr("Localizable", "map.issue_list.show_details", fallback: "Details anzeigen")
       /// Auf Bauplan anzeigen
@@ -271,6 +277,10 @@ internal enum L10n {
       /// Filter aktiv: %@/%@ Pendenzen angezeigt
       internal static func summaryFiltered(_ p1: Any, _ p2: Any) -> String {
         return L10n.tr("Localizable", "map.issue_list.summary_filtered", String(describing: p1), String(describing: p2), fallback: "Filter aktiv: %@/%@ Pendenzen angezeigt")
+      }
+      /// ohne Platzierung (%@)
+      internal static func unpositionedIssues(_ p1: Any) -> String {
+        return L10n.tr("Localizable", "map.issue_list.unpositioned_issues", String(describing: p1), fallback: "ohne Platzierung (%@)")
       }
     }
     internal enum IssuePositioner {
