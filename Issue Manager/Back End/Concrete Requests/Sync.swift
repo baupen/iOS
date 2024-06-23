@@ -326,6 +326,25 @@ extension SyncContext {
 	}
 	
 	private func pullChangedIssues(for site: ConstructionSite) async throws {
+        let knownMaps = repository.ids(for: site.maps)
+        let knownCraftsmen = repository.ids(for: site.craftsmen)
+        let knownManagers = repository.ids(for: ConstructionManager.all())
+        
+        func validate(_ issue: Issue) throws {
+            func check<Object: StoredObject>(_ id: Object.ID?, against known: Set<Object.ID>) throws {
+                guard let id else { return }
+                guard known.contains(id) else {
+                    throw MissingIssueDependency(id: id, knownIDs: known, issue: issue)
+                }
+            }
+            try check(issue.mapID, against: knownMaps)
+            try check(issue.craftsmanID, against: knownCraftsmen)
+            try check(issue.status.createdBy, against: knownManagers)
+            try check(issue.status.registeredBy, against: knownManagers)
+            try check(issue.status.resolvedBy, against: knownCraftsmen)
+            try check(issue.status.closedBy, against: knownManagers)
+        }
+        
 		var itemsPerPage = 1000
 		var lastChangeTime = Date.distantPast
 		while true {
@@ -345,11 +364,18 @@ extension SyncContext {
 			))
 			
 			let issues = collection.makeObjects(context: site.id)
+            try issues.forEach(validate) // validate that foreign key constraints will hold before inserting into DB with a `try!`
 			repository.update(changing: issues)
 			
 			guard collection.view.nextPage != nil else { break } // done
 		}
 	}
+}
+
+struct MissingIssueDependency<Object: StoredObject>: Error {
+    var id: Object.ID
+    var knownIDs: Set<Object.ID>
+    var issue: Issue
 }
 
 enum SyncError: Error {
