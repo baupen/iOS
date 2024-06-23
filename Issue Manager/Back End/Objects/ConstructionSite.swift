@@ -19,13 +19,17 @@ extension ConstructionSite: Identifiable {
 extension ConstructionSite: DBRecord {
 	static let craftsmen = hasMany(Craftsman.self)
 	var craftsmen: Craftsman.Query {
-		request(for: Self.craftsmen).withoutDeleted
+        allCraftsmen.withoutDeleted
 	}
+    /// includes deleted craftsmen
+    var allCraftsmen: Craftsman.Query { request(for: Self.craftsmen) }
 	
 	static let maps = hasMany(Map.self)
 	var maps: Map.Query {
-		request(for: Self.maps).withoutDeleted
+		allMaps.withoutDeleted
 	}
+    /// includes deleted maps
+    var allMaps: Map.Query { request(for: Self.maps) }
 	
 	static let issues = hasMany(Issue.self)
 	var issues: Issue.Query {

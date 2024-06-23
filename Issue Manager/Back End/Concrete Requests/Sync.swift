@@ -326,8 +326,8 @@ extension SyncContext {
 	}
 	
 	private func pullChangedIssues(for site: ConstructionSite) async throws {
-        let knownMaps = repository.ids(for: site.maps)
-        let knownCraftsmen = repository.ids(for: site.craftsmen)
+        let knownMaps = repository.ids(for: site.allMaps)
+        let knownCraftsmen = repository.ids(for: site.allCraftsmen)
         let knownManagers = repository.ids(for: ConstructionManager.all())
         
         func validate(_ issue: Issue) throws {
