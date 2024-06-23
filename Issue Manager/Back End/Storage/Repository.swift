@@ -40,10 +40,10 @@ final class Repository: Sendable {
 	func object<Object>(_ id: Object.ID) -> Object? where Object: StoredObject {
 		read(id.get)
 	}
-    
-    func ids<Object>(for objects: QueryInterfaceRequest<Object>) -> Set<ObjectID<Object>> where Object: StoredObject {
-        Set(read(objects.select(ObjectMeta<Object>.Columns.id).fetchAll))
-    }
+	
+	func ids<Object>(for objects: QueryInterfaceRequest<Object>) -> Set<ObjectID<Object>> where Object: StoredObject {
+		Set(read(objects.select(ObjectMeta<Object>.Columns.id).fetchAll))
+	}
 	
 	/// saves modifications to an issue
 	func save(_ issue: Issue) {
