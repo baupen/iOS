@@ -3,7 +3,7 @@
 import Foundation
 import GRDB
 
-protocol StoredObject: AnyStoredObject {
+protocol StoredObject: DBRecord, Sendable {
 	typealias ID = ObjectID<Self>
 	typealias Meta = ObjectMeta<Self>
 	
@@ -26,7 +26,6 @@ extension StoredObject {
 	
 	var id: ID { meta.id }
 	
-	var rawMeta: AnyObjectMeta { meta }
 	var rawID: String { id.rawValue }
 	var isDeleted: Bool { meta.isDeleted }
 }
@@ -37,6 +36,8 @@ extension DerivableRequest where RowDecoder: StoredObject {
 	}
 }
 
-protocol AnyStoredObject: DBRecord {
-	var rawID: String { get }
-}
+// pure value types: of course they're sendable
+extension QueryInterfaceRequest: @unchecked Sendable {}
+extension BelongsToAssociation: @unchecked Sendable {}
+extension HasManyAssociation: @unchecked Sendable {}
+extension Column: @unchecked Sendable {}

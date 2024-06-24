@@ -2,7 +2,7 @@
 
 import Foundation
 
-struct IssuePatch: Equatable, Codable {
+struct IssuePatch: Equatable, Codable, Sendable {
 	// the defaults for these fields don't matter since they won't be encoded; using non-optionals just ensures they can't be set to nil
 	
 	@Tracked var isMarked = false
@@ -10,7 +10,7 @@ struct IssuePatch: Equatable, Codable {
 	@Tracked var description: String?
 	
 	@Tracked var craftsmanID: Craftsman.ID?
-	@Tracked var mapID: Map.ID?
+	@Tracked var mapID = Map.ID()
 	@Tracked var constructionSiteID: ConstructionSite.ID?
 	
 	@Tracked var position: Issue.Position?
@@ -46,7 +46,7 @@ struct IssuePatch: Equatable, Codable {
 	
 	@propertyWrapper
 	@dynamicMemberLookup
-	struct Tracked<Value> {
+	struct Tracked<Value: Sendable>: Sendable {
 		var wrappedValue: Value {
 			didSet { wasChanged = true }
 		}
@@ -73,7 +73,7 @@ struct APIIssuePatch: Encodable {
 	var description: String??
 	
 	var craftsman: APICraftsman.ID??
-	var map: APIMap.ID??
+	var map: APIMap.ID?
 	var constructionSite: APIConstructionSite.ID??
 	
 	var positionX: Double??

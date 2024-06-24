@@ -2,7 +2,7 @@
 
 import Foundation
 
-protocol APIModel: Decodable {
+protocol APIModel: Decodable, Sendable {
 	associatedtype Object: StoredObject
 	associatedtype Context
 	
@@ -11,9 +11,16 @@ protocol APIModel: Decodable {
 	func makeObject(meta: Object.Meta, context: Context) -> Object
 }
 
-struct APIObject<Model>: Decodable where Model: APIModel {
+struct APIObject<Model>: Decodable, Sendable where Model: APIModel {
 	var meta: APIObjectMeta<Model>
 	var model: Model
+	
+	#if DEBUG
+	init(meta: APIObjectMeta<Model>, model: Model) {
+		self.meta = meta
+		self.model = model
+	}
+	#endif
 	
 	init(from decoder: Decoder) throws {
 		// flatten

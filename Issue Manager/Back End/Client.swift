@@ -1,17 +1,15 @@
 // Created by Julian Dunskus
 
 import Foundation
-import Promise
 import UserDefault
+import Protoquest
 import HandyOperators
 
 typealias TaskResult = (data: Data, response: HTTPURLResponse)
 
+@MainActor
 final class Client {
-	static let shared = Client()
-	static let dateFormatter = ISO8601DateFormatter()
-	
-	private static let baseServerURL = URL(string: "https://app.baupen.ch")!
+	nonisolated static let dateFormatter = ISO8601DateFormatter()
 	
 	@UserDefault("client.loginInfo") var loginInfo: LoginInfo?
 	
@@ -20,111 +18,103 @@ final class Client {
 	
 	var isLoggedIn: Bool { loginInfo != nil && localUser != nil }
 	
-	private let urlSession = URLSession.shared
+	private let _makeContext: @Sendable (Client, LoginInfo?) -> any RequestContext
 	
-	private let requestEncoder = JSONEncoder() <- {
-		$0.dateEncodingStrategy = .iso8601
+	nonisolated init(
+		makeContext: @escaping @Sendable (Client, LoginInfo?) -> any RequestContext = {
+			DefaultRequestContext(client: $0, loginInfo: $1)
+		} // can't use pointfree reference to DefaultRequestContext.init because it's not sendable
+	) {
+		self._makeContext = makeContext
 	}
-	private let responseDecoder = JSONDecoder() <- {
-		$0.dateDecodingStrategy = .iso8601
-	}
-	
-	/// any dependent requests are executed on this queue, so as to avoid bad interleavings and races and such
-	private let linearQueue = DispatchQueue(label: "dependent request execution")
-	
-	func assertOnLinearQueue() {
-		dispatchPrecondition(condition: .onQueue(linearQueue))
-	}
-	
-	private init() {}
 	
 	func wipeAllData() {
 		loginInfo = nil
 		localUser = nil
 	}
 	
-	func send<R: Request>(_ request: R) -> Future<R.Response> {
-		Future { try urlRequest(for: request) }
-			.flatMap { rawRequest in
-				let bodyDesc = rawRequest.httpBody
-					.map { "\"\(debugRepresentation(of: $0))\"" }
-					?? "request without body"
-				print("\(request.path): \(rawRequest.httpMethod!)ing \(bodyDesc) to \(rawRequest.url!)")
-				
-				return self.send(rawRequest)
-					.catch { _ in print("\(request.path): failed!") }
-			}
-			.map { try self.extractData(from: $0, for: request) }
+	@discardableResult
+	func updateLocalUser(from repository: Repository) -> ConstructionManager? {
+		localUser = localUser.flatMap { repository.object($0.id) }
+		return localUser
 	}
 	
-	func pushChangesThen<T>(perform task: @escaping () throws -> T) -> Future<T> {
-		Future(asyncOn: linearQueue) {
-			let errors = self.synchronouslyPushLocalChanges()
-			guard errors.isEmpty else {
-				throw RequestError.pushFailed(errors)
-			}
-			return try task()
-		}
-	}
-	
-	private func extractData<R: Request>(from taskResult: TaskResult, for request: R) throws -> R.Response {
-		let (data, response) = taskResult
-		print("\(request.path): status code: \(response.statusCode), body: \(debugRepresentation(of: data))")
-		
-		switch response.statusCode {
-		case 200..<300:
-			return try request.decode(from: data, using: responseDecoder)
-		case 401:
-			throw RequestError.notAuthenticated
-		case let statusCode:
-			var hydraError: HydraError?
-			if
-				response.contentType?.hasPrefix("application/ld+json") == true,
-				let metadata = try? responseDecoder.decode(HydraMetadata.self, from: data),
-				metadata.type == HydraError.type
-			{
-				hydraError = try? responseDecoder.decode(from: data)
-			}
-			throw RequestError.apiError(hydraError, statusCode: statusCode)
-		}
-	}
-	
-	private func urlRequest<R: Request>(for request: R) throws -> URLRequest {
-		try URLRequest(url: apiURL(for: request)) <- { rawRequest in
-			rawRequest.httpMethod = R.httpMethod
-			try request.encode(using: requestEncoder, into: &rawRequest)
-			if let token = loginInfo?.token {
-				rawRequest.setValue(token, forHTTPHeaderField: "X-Authentication")
-			}
-			if let contentType = R.contentType {
-				rawRequest.setValue(contentType, forHTTPHeaderField: "Content-Type")
-			}
-		}
-	}
-	
-	private func apiURL<R: Request>(for request: R) -> URL {
-		(URLComponents(
-			url: request.baseURLOverride ?? loginInfo?.origin ?? Self.baseServerURL,
-			resolvingAgainstBaseURL: false
-		)! <- {
-			$0.percentEncodedPath += request.path
-			$0.queryItems = request.collectURLQueryItems()
-				.map { URLQueryItem(name: $0, value: "\($1)") }
-				.nonEmptyOptional
-		}).url!
-	}
-	
-	private func send(_ request: URLRequest) -> Future<TaskResult> {
-		urlSession.dataTask(with: request)
-			.transformError { _, error in throw RequestError.communicationError(error) }
+	/// Provides a context for performing authenticated requests.
+	///
+	/// - Note: This is a method (not a property) to encourage reusing it when important, since the `await` that would usually notify of the main actor hop is already expected for the `send` that usually follows.
+	/// If you're not on the main actor, getting this context cannot be done synchronously and would thus silently introduce a main actor hop with every `await client.send(...)`.
+	func makeContext() -> any RequestContext {
+		_makeContext(self, loginInfo)
 	}
 }
 
-extension HTTPURLResponse {
-	var contentType: String? {
-		allHeaderFields["Content-Type"] as? String
+protocol RequestContext: Sendable {
+	var client: Client { get }
+	var loginInfo: LoginInfo? { get }
+	
+	func send<R: BaupenRequest>(_ request: R) async throws -> R.Response
+}
+
+struct DefaultRequestContext: RequestContext {
+	let client: Client
+	let loginInfo: LoginInfo?
+	
+	func send<R: BaupenRequest>(_ request: R) async throws -> R.Response {
+		let layer = Protolayer.urlSession(baseURL: loginInfo?.origin ?? baseServerURL)
+			.wrapErrors(RequestError.communicationError(_:))
+			.printExchanges()
+			.transformRequest { request in
+				if let token = loginInfo?.token {
+					request.setValue(token, forHTTPHeaderField: "X-Authentication")
+				}
+			}
+			.readResponse(handleErrors(in:))
+		
+		do {
+			return try await layer.send(request)
+		} catch {
+			print("\(request.path): failed!")
+			throw error
+		}
+	}
+	
+	private func handleErrors(in response: Protoresponse) throws {
+		switch response.httpMetadata!.statusCode {
+		case 200..<300:
+			break // success
+		case 401:
+			throw RequestError.notAuthenticated
+		case let statusCode:
+			let hydraError: HydraError? = if
+				response.contentType?.hasPrefix("application/ld+json") == true,
+				let metadata = try? response.decodeJSON(as: HydraMetadata.self, using: responseDecoder),
+				metadata.type == HydraError.type
+			{
+				try? response.decodeJSON(using: responseDecoder)
+			} else { nil }
+			throw RequestError.apiError(hydraError, statusCode: statusCode)
+		}
 	}
 }
+
+protocol BaupenRequest: Request, Sendable where Response: Sendable {}
+extension BaupenRequest where Self: JSONEncodingRequest {
+	var encoderOverride: JSONEncoder? { requestEncoder }
+}
+extension BaupenRequest where Self: MultipartEncodingRequest {
+	var encoderOverride: JSONEncoder? { requestEncoder }
+}
+extension BaupenRequest where Self: JSONDecodingRequest {
+	var decoderOverride: JSONDecoder? { responseDecoder }
+}
+
+private let requestEncoder = JSONEncoder() <- {
+	$0.dateEncodingStrategy = .iso8601
+}
+private let responseDecoder = JSONDecoder() <- {
+	$0.dateDecodingStrategy = .iso8601
+}
+private let baseServerURL = URL(string: "https://app.baupen.ch")!
 
 /// An error that occurs while interfacing with the server.
 enum RequestError: Error {
@@ -138,15 +128,6 @@ enum RequestError: Error {
 	case pushFailed([IssuePushError])
 	/// The client is outdated, so we'd rather not risk further communication.
 	// TODO: reimplement outdated client logic
-}
-
-fileprivate func debugRepresentation(of data: Data, maxLength: Int = 5000) -> String {
-	guard data.count <= maxLength else { return "<\(data.count) bytes>" }
-	
-	return String(bytes: data, encoding: .utf8)?
-		.replacingOccurrences(of: "\n", with: "\\n")
-		.replacingOccurrences(of: "\r", with: "\\r")
-		?? "<\(data.count) bytes not UTF-8 decodable data>"
 }
 
 extension LoginInfo: DefaultsValueConvertible {}

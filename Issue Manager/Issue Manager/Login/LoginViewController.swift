@@ -10,12 +10,13 @@ final class LoginViewController: UIViewController {
 	
 	// unwind segue
 	@IBAction func logOut(_ segue: UIStoryboardSegue) {
-		Client.shared.localUser = nil
+		client.localUser = nil
 	}
 	
 	// unwind segue
 	@IBAction func backToLogin(_ segue: UIStoryboardSegue) {}
 	
+	// prevent restoring state if launched through a deep link to log in
 	private var shouldRestoreState = true
 	
 	override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
@@ -26,7 +27,7 @@ final class LoginViewController: UIViewController {
 		guard shouldRestoreState else { return }
 		shouldRestoreState = false
 		
-		guard Client.shared.isLoggedIn, presentedViewController == nil else { return }
+		guard client.isLoggedIn, presentedViewController == nil else { return }
 		
 		showSiteList(userInitiated: false)
 	}
@@ -48,10 +49,15 @@ final class LoginViewController: UIViewController {
 		// dismiss any presented view controllers
 		dismiss(animated: false) // don't have to animate since we're not visible until done anyway
 		
-		Client.shared.logIn(with: info)
-			.on(.main)
-			.catch(showAlert(for:))
-			.then { self.showSiteList() }
+		Task {
+			do {
+				try await client.logIn(with: info, repository: repository)
+				print("logged in!")
+				showSiteList()
+			} catch {
+				showAlert(for: error)
+			}
+		}
 	}
 	
 	func showAlert(for error: Error) {
@@ -103,16 +109,17 @@ extension LoginViewController: QRScannerViewDelegate {
 		}
 	}
 	
-	func qrsFound(by scanner: QRScannerView, with contents: [String]) {
+	func qrsFound(withContents contents: [String]) -> Bool {
 		let decoder = JSONDecoder()
 		let infos = contents.compactMap {
 			DeepLink(from: $0)?.loginInfo
 				?? (try? decoder.decode(LoginInfo.self, from: $0.data(using: .utf8)!))
 		}
-		guard let info = infos.first else { return }
-		scanner.isProcessing = true
+		guard let info = infos.first else { return false }
+		Haptics.notify.notificationOccurred(.success)
 		// dismiss presented qr scanner
 		dismiss(animated: true)
 		logIn(with: info)
+		return true
 	}
 }

@@ -1,8 +1,9 @@
 // Created by Julian Dunskus
 
 import Foundation
+import Protoquest
 
-struct GetObjectRequest<Object: StoredObject>: GetJSONRequest {
+struct GetObjectRequest<Object: StoredObject>: GetJSONRequest, BaupenRequest {
 	typealias Response = APIObject<Object.Model>
 	
 	var path: String
@@ -14,7 +15,7 @@ extension GetObjectRequest {
 	}
 }
 
-struct GetObjectsRequest<Object: StoredObject>: GetJSONRequest {
+struct GetObjectsRequest<Object: StoredObject>: GetJSONRequest, BaupenRequest {
 	typealias Response = HydraCollection<APIObject<Object.Model>>
 	
 	var path: String { Object.apiPath }
@@ -22,7 +23,7 @@ struct GetObjectsRequest<Object: StoredObject>: GetJSONRequest {
 	var constructionSite: ConstructionSite.ID?
 	var minLastChangeTime: Date?
 	
-	func collectURLQueryItems() -> [(String, Any)] {
+	var urlParams: [URLParameter] {
 		if let constructionSite = constructionSite {
 			("constructionSite", constructionSite.apiString)
 		}
@@ -33,7 +34,7 @@ struct GetObjectsRequest<Object: StoredObject>: GetJSONRequest {
 	}
 }
 
-struct GetPagedObjectsRequest<Model: APIModel>: GetJSONRequest {
+struct GetPagedObjectsRequest<Model: APIModel>: GetJSONRequest, BaupenRequest {
 	typealias Response = PagedHydraCollection<APIObject<Model>>
 	
 	var path: String { Model.Object.apiPath }
@@ -43,7 +44,7 @@ struct GetPagedObjectsRequest<Model: APIModel>: GetJSONRequest {
 	var page = 1
 	var itemsPerPage = 1000
 	
-	func collectURLQueryItems() -> [(String, Any)] {
+	var urlParams: [URLParameter] {
 		if let constructionSite = constructionSite {
 			("constructionSite", constructionSite.apiString)
 		}

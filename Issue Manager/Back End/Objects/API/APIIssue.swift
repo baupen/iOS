@@ -3,34 +3,34 @@
 import Foundation
 
 struct APIIssue {
-	let number: Int?
-	let isMarked: Bool
-	let wasAddedWithClient: Bool
-	let description: String?
-	let deadline: Date?
+	var number: Int?
+	var isMarked: Bool
+	var wasAddedWithClient: Bool
+	var description: String?
+	var deadline: Date?
 	
-	let craftsman: APICraftsman.ID?
-	let map: APIMap.ID?
+	var craftsman: APICraftsman.ID?
+	var map: APIMap.ID
 	
-	let positionX: Double?
-	let positionY: Double?
-	let positionZoomScale: Double?
+	var positionX: Double?
+	var positionY: Double?
+	var positionZoomScale: Double?
 	
-	let createdAt: Date
-	let createdBy: APIConstructionManager.ID
-	let registeredAt: Date?
-	let registeredBy: APIConstructionManager.ID?
-	let resolvedAt: Date?
-	let resolvedBy: APICraftsman.ID?
-	let closedAt: Date?
-	let closedBy: APIConstructionManager.ID?
+	var createdAt: Date
+	var createdBy: APIConstructionManager.ID
+	var registeredAt: Date?
+	var registeredBy: APIConstructionManager.ID?
+	var resolvedAt: Date?
+	var resolvedBy: APICraftsman.ID?
+	var closedAt: Date?
+	var closedBy: APIConstructionManager.ID?
 	
-	let imageUrl: File<Issue>?
+	var imageUrl: File<Issue>?
 	
 	func makeObject(meta: Issue.Meta, context: ConstructionSite.ID) -> Issue {
 		Issue(
 			meta: meta, constructionSiteID: context,
-			mapID: map?.makeID(),
+			mapID: map.makeID(),
 			number: number,
 			wasAddedWithClient: wasAddedWithClient,
 			deadline: deadline,

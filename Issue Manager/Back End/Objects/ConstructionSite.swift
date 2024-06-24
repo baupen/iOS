@@ -19,13 +19,17 @@ extension ConstructionSite: Identifiable {
 extension ConstructionSite: DBRecord {
 	static let craftsmen = hasMany(Craftsman.self)
 	var craftsmen: Craftsman.Query {
-		request(for: Self.craftsmen).withoutDeleted
+		allCraftsmen.withoutDeleted
 	}
+	/// includes deleted craftsmen
+	var allCraftsmen: Craftsman.Query { request(for: Self.craftsmen) }
 	
 	static let maps = hasMany(Map.self)
 	var maps: Map.Query {
-		request(for: Self.maps).withoutDeleted
+		allMaps.withoutDeleted
 	}
+	/// includes deleted maps
+	var allMaps: Map.Query { request(for: Self.maps) }
 	
 	static let issues = hasMany(Issue.self)
 	var issues: Issue.Query {
@@ -36,22 +40,22 @@ extension ConstructionSite: DBRecord {
 		ConstructionManager.filter(keys: managerIDs)
 	}
 	
-	func encode(to container: inout PersistenceContainer) {
-		meta.encode(to: &container)
+	func encode(to container: inout PersistenceContainer) throws {
+		try meta.encode(to: &container)
 		
 		container[Columns.name] = name
 		container[Columns.creationTime] = creationTime
 		container[Columns.image] = image
-		try! container.encode(managerIDs, forKey: Columns.managers)
+		try container.encode(managerIDs, forKey: Columns.managers)
 	}
 	
-	init(row: Row) {
-		meta = .init(row: row)
+	init(row: Row) throws {
+		meta = try .init(row: row)
 		
 		name = row[Columns.name]
 		creationTime = row[Columns.creationTime]
 		image = row[Columns.image]
-		managerIDs = try! row.decodeValue(forKey: Columns.managers)
+		managerIDs = try row.decodeValue(forKey: Columns.managers)
 	}
 	
 	enum Columns: String, ColumnExpression {

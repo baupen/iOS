@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/juliand665/ArrayBuilder.git",
         "state": {
           "branch": null,
-          "revision": "1d7b2707ba07789b1ebe2589a40407849c43420c",
-          "version": "1.0.0"
+          "revision": "f713ffd1432c5fb7cbf47a84bd634b18256957b6",
+          "version": "1.1.0"
         }
       },
       {
@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/juliand665/CGeometry",
         "state": {
           "branch": null,
-          "revision": "ac52d6473d585836108a51a5f940464795efdc26",
-          "version": "0.3.0"
+          "revision": "b4c52b1e0ab545af08acc54e0252ce21dbc4bcad",
+          "version": "0.4.0"
         }
       },
       {
@@ -24,8 +24,8 @@
         "repositoryURL": "https://github.com/groue/GRDB.swift.git",
         "state": {
           "branch": null,
-          "revision": "5ee47c3c2765bdfde0f44c2ea9a263f6aa252d63",
-          "version": "4.14.0"
+          "revision": "77b85bed259b7f107710a0b78c439b1c5839dc45",
+          "version": "6.26.0"
         }
       },
       {
@@ -33,17 +33,17 @@
         "repositoryURL": "https://github.com/juliand665/HandyOperators",
         "state": {
           "branch": null,
-          "revision": "27f60a00d9ad310afdf66cc7a25adc4bdb387d58",
-          "version": "2.0.1"
+          "revision": "39f39ae74471112d54152227bb70053b59ea796f",
+          "version": "2.1.0"
         }
       },
       {
-        "package": "Promise",
-        "repositoryURL": "https://github.com/timvermeulen/Promise.git",
+        "package": "Protoquest",
+        "repositoryURL": "https://github.com/juliand665/Protoquest.git",
         "state": {
-          "branch": null,
-          "revision": "5152cf895afe696193c881af6bfc5c3caa876db4",
-          "version": "1.14.0"
+          "branch": "main",
+          "revision": "523b5f735d38e827f3c52a3f87849fbed54209e3",
+          "version": null
         }
       },
       {
@@ -56,12 +56,30 @@
         }
       },
       {
+        "package": "swift-algorithms",
+        "repositoryURL": "https://github.com/apple/swift-algorithms.git",
+        "state": {
+          "branch": null,
+          "revision": "f6919dfc309e7f1b56224378b11e28bab5bccc42",
+          "version": "1.2.0"
+        }
+      },
+      {
+        "package": "swift-numerics",
+        "repositoryURL": "https://github.com/apple/swift-numerics.git",
+        "state": {
+          "branch": null,
+          "revision": "0a5bc04095a675662cf24757cc0640aa2204253b",
+          "version": "1.0.2"
+        }
+      },
+      {
         "package": "UserDefault",
         "repositoryURL": "https://github.com/juliand665/UserDefault.git",
         "state": {
           "branch": null,
-          "revision": "01f3380fb7ba86b4ac0c81d96c8992bed9f2b8f5",
-          "version": "1.0.2"
+          "revision": "8ca856780b36c008576acf1b2dff07bad7e29ebd",
+          "version": "1.2.0"
         }
       }
     ]

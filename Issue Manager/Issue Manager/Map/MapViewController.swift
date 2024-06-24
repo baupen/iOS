@@ -1,10 +1,10 @@
 // Created by Julian Dunskus
 
 // import ALL the things!
-import UIKit
+import SwiftUI
+import class Combine.AnyCancellable
 import SimplePDFKit
 import PullToExpand
-import Promise
 import CGeometry
 import UserDefault
 import HandyOperators
@@ -25,8 +25,16 @@ final class MapViewController: UIViewController, InstantiableViewController {
 	@IBOutlet private var issuePositioner: IssuePositioner!
 	@IBOutlet private var addUnplacedContainer: UIView!
 	
-	// the filter popover's done button and the add marker popover's cancel button link to this
-	@IBAction func backToMap(_ segue: UIStoryboardSegue) {
+	@IBOutlet private var unplacedHintContainer: UIView!
+	@IBOutlet private var unplacedHintLabel: UILabel!
+	@IBOutlet private var unplacedCountLabel: UILabel!
+	@IBOutlet private var unplacedHintFinalConstraint: NSLayoutConstraint!
+	
+	// the filter popover's done button and the issue editor's reposition button link to this
+	@IBAction func backToMap(_ segue: UIStoryboardSegue) {}
+	
+	// the issue editor & viewers' close buttons link to this
+	@IBAction func backToMapCancelling(_ segue: UIStoryboardSegue) {
 		cancelAddingIssue() // even if issue editor closed by cancelling
 	}
 	
@@ -41,23 +49,28 @@ final class MapViewController: UIViewController, InstantiableViewController {
 			return
 		}
 		
-		if !pullableView.isCompact {
-			pullableView.contract()
-		}
-		
-		issuePositioner.center = CGPoint(x: view.bounds.width, y: 0) // more or less where the add button is
-		view.setNeedsLayout()
-		
-		UIView.animate(withDuration: 0.25) {
-			self.isPlacingIssue = true
-			self.view.layoutIfNeeded() // centers issue positioner according to constraints
-		}
+		enterPlacementMode()
 	}
 	
 	@IBAction func cancelAddingIssue() {
 		UIView.animate(withDuration: 0.25) {
 			self.isPlacingIssue = false
 		}
+		if isMovingIssue {
+			// unplaced = don't apply new position
+			performSegue(withIdentifier: SegueID.createUnplaced.rawValue, sender: nil)
+		}
+	}
+	
+	@IBAction func showStatusFilterEditor(_ sender: UIBarButtonItem) {
+		guard let holder else { return } // should be disabled otherwise
+		let site = repository.read(holder.constructionSiteID.get)!
+		let craftsmen = repository.read(site.craftsmen.order(Craftsman.Columns.company).fetchAll)
+		let view = ViewOptionsEditor(craftsmen: craftsmen)
+		let controller = UIHostingController(rootView: view)
+		controller.modalPresentationStyle = .popover
+		controller.popoverPresentationController!.barButtonItem = sender
+		present(controller, animated: true)
 	}
 	
 	var markers: [IssueMarker] = []
@@ -70,7 +83,7 @@ final class MapViewController: UIViewController, InstantiableViewController {
 			markerAlpha = isPlacingIssue ? 0.25 : 1
 			addItem.isEnabled = !isPlacingIssue
 			issuePositioner.isShown = isPlacingIssue
-			addUnplacedContainer.isShown = isPlacingIssue
+			addUnplacedContainer.isShown = isPlacingIssue && !isMovingIssue
 		}
 	}
 	
@@ -89,29 +102,40 @@ final class MapViewController: UIViewController, InstantiableViewController {
 		}
 	}
 	
-	var holder: MapHolder? {
+	var isMovingIssue: Bool { editorForPlacingIssue != nil }
+	private var editorForPlacingIssue: EditIssueViewController?
+	
+	var holder: (any MapHolder)? {
 		didSet { update() }
 	}
 	var map: Map? { holder as? Map }
 	
-	var issues: [Issue] = []
-	
-	var visibleStatuses = Issue.allStatuses {
+	var issues: [Issue] = [] {
 		didSet {
-			updateMarkerAppearance()
-			filterItem.image = visibleStatuses == Issue.allStatuses ? #imageLiteral(resourceName: "filter_disabled.pdf") : #imageLiteral(resourceName: "filter_enabled.pdf")
-			issueListController.visibleStatuses = visibleStatuses
-			hiddenStatuses = Array(Issue.allStatuses.subtracting(visibleStatuses))
+			updateUnplacedIssueHint()
 		}
 	}
 	
-	@UserDefault("hiddenStatuses") var hiddenStatuses: [Issue.Status.Simplified] = []
+	private var viewOptionsToken: AnyCancellable?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		visibleStatuses = Issue.allStatuses.subtracting(hiddenStatuses)
+		viewOptionsToken = ViewOptions.shared.didChange.sink { [unowned self] in
+			issues = (map?.sortedIssues.fetchAll).map(repository.read) ?? []
+			updateMarkers()
+			applyViewOptions()
+		}
+		
 		update()
+		applyViewOptions()
+	}
+	
+	func applyViewOptions() {
+		let options = ViewOptions.shared
+		filterItem.image = options.isFiltering ? #imageLiteral(resourceName: "filter_enabled.pdf") : #imageLiteral(resourceName: "filter_disabled.pdf")
+		issueListController.update()
+		updateUnplacedIssueHint()
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -141,30 +165,57 @@ final class MapViewController: UIViewController, InstantiableViewController {
 			issueListController = issueList
 			issueListController.issueCellDelegate = self
 			issueListController.pullableView = pullableView
-		case let statusFilterNav as StatusFilterNavigationController:
-			let filterController = statusFilterNav.statusFilterController
-			filterController.selected = visibleStatuses
-			filterController.delegate = self
-			segue.destination.presentationController?.delegate = self
 		case let editIssueNav as EditIssueNavigationController:
-			let editController = editIssueNav.editIssueController
-			editController.isCreating = true // otherwise we wouldn't be using a segue
-			let map = holder as! Map
-			switch segue.identifier.flatMap(SegueID.init) {
-			case .createUnplaced:
-				editController.present(Issue(in: map))
-			case .createPlaced:
-				let position = Issue.Position(
-					at: issuePositioner.relativePosition(in: pdfController!.overlayView),
-					zoomScale: pdfController!.scrollView.zoomScale / pdfController!.scrollView.minimumZoomScale
-				)
-				editController.present(Issue(at: isPlacingIssue ? position : nil, in: map))
-			case nil:
+			guard let segueID = segue.identifier.flatMap(SegueID.init) else {
 				fatalError("unrecognized segue to issue editor with identifier '\(segue.identifier ?? "<no id>")'")
 			}
 			segue.destination.presentationController?.delegate = self
+			lazy var position = Issue.Position(
+				at: issuePositioner.relativePosition(in: pdfController!.overlayView),
+				zoomScale: pdfController!.scrollView.zoomScale / pdfController!.scrollView.minimumZoomScale
+			)
+			let editController = editIssueNav.editIssueController
+			editController.initiateReposition = { [unowned self] in moveIssue(for: $0) }
+			if let editorForPlacingIssue {
+				self.editorForPlacingIssue = nil
+				editController.copySettings(
+					from: editorForPlacingIssue,
+					movingTo: segueID == .createPlaced ? position : nil // don't move if cancelled
+				)
+			} else {
+				editController.isCreating = true // otherwise we wouldn't be using a segue
+				let author = client.localUser!
+				let map = holder as! Map
+				switch segueID {
+				case .createUnplaced:
+					editController.present(Issue(in: map, by: author))
+				case .createPlaced:
+					editController.present(Issue(at: isPlacingIssue ? position : nil, in: map, by: author))
+				}
+			}
 		default:
 			fatalError("unrecognized segue to \(segue.destination)")
+		}
+	}
+	
+	func moveIssue(for editor: EditIssueViewController) {
+		editorForPlacingIssue = editor
+		enterPlacementMode()
+	}
+	
+	private func enterPlacementMode() {
+		guard !isPlacingIssue else { return }
+		
+		if !pullableView.isCompact {
+			pullableView.contract()
+		}
+		
+		issuePositioner.center = CGPoint(x: view.bounds.width, y: 0) // more or less where the add button is
+		view.setNeedsLayout()
+		
+		UIView.animate(withDuration: 0.25) {
+			self.isPlacingIssue = true
+			self.view.layoutIfNeeded() // centers issue positioner according to constraints
 		}
 	}
 	
@@ -187,8 +238,9 @@ final class MapViewController: UIViewController, InstantiableViewController {
 		navigationItem.title = holder?.name ?? Localization.title
 		
 		addItem.isEnabled = map != nil
+		filterItem.isEnabled = holder != nil
 		
-		issues = (map?.sortedIssues.fetchAll).map(Repository.read) ?? []
+		issues = (map?.sortedIssues.fetchAll).map(repository.read) ?? []
 		
 		issueListController.map = map
 		pullableView.isHidden = map == nil
@@ -206,23 +258,83 @@ final class MapViewController: UIViewController, InstantiableViewController {
 		}
 	}
 	
-	private var currentLoadingTaskID: UUID!
-	func asyncLoadPDF(for map: Map, at url: URL) {
-		let page = Future<PDFKitPage>(asyncOn: .global(qos: .userInitiated)) {
-			// download explicitly just in case it's not there yet
-			try? map.downloadFile()?.await() // errors are fine (e.g. bad network)
-			return try PDFKitDocument(at: url).page(0)
-		}.on(.main)
+	private func updateUnplacedIssueHint() {
+		let unplacedCount = issues.lazy
+			.filter(ViewOptions.shared.shouldDisplay)
+			.count(where: \.isUnplaced)
+		unplacedHintContainer.isHidden = unplacedCount == 0
+		guard unplacedCount > 0 else { return }
 		
+		unplacedCountLabel.text = "\(unplacedCount)"
+		
+		Task { // doesn't animate if we do it immediately on appear
+			view.layoutIfNeeded()
+			UIView.animate(withDuration: 1) { [self] in
+				isUnplacedIssueHintExpanded = true
+			}
+			contractUnplacedHintSoon()
+		}
+	}
+	
+	private var cancelUnplacedAnimation: (() -> Void)?
+	private func contractUnplacedHintSoon(delay: TimeInterval = 5) {
+		cancelUnplacedAnimation?() // replace current animation
+		cancelUnplacedAnimation = Task {
+			try await Task.sleep(forSeconds: delay)
+			try Task.checkCancellation()
+			UIView.animate(withDuration: 1) { [self] in
+				isUnplacedIssueHintExpanded = false
+			}
+		}.cancel
+	}
+	
+	@IBAction func unplacedHintTapped(_ sender: UITapGestureRecognizer) {
+		contractUnplacedHintSoon() // postpone possible current animation
+		if isUnplacedIssueHintExpanded {
+			pullableView.expand()
+			UIView.animate(withDuration: 1.0) { [self] in
+				issueListController.isShowingUnplacedIssues = true
+			}
+		} else {
+			UIView.animate(withDuration: 0.25) { [self] in
+				isUnplacedIssueHintExpanded = true
+			}
+		}
+	}
+	
+	private var isUnplacedIssueHintExpanded = false {
+		didSet {
+			unplacedHintFinalConstraint.isActive = !isUnplacedIssueHintExpanded
+			view.layoutIfNeeded()
+			unplacedHintLabel.layer.opacity = isUnplacedIssueHintExpanded ? 1 : 0
+		}
+	}
+	
+	private var currentLoadingTask: Task<Void, Never>?
+	func asyncLoadPDF(for map: Map, at url: URL) {
 		pdfController = nil
 		fallbackLabel.text = Localization.pdfLoading
 		activityIndicator.startAnimating()
 		
-		let taskID = UUID()
-		currentLoadingTaskID = taskID
-		
-		page.then { page in
-			guard taskID == self.currentLoadingTaskID else { return }
+		currentLoadingTask?.cancel()
+		currentLoadingTask = Task {
+			// download explicitly just in case it's not there yet
+			try? await map.downloadFileIfNeeded(using: client) // errors are fine (e.g. bad network)
+			
+			let page: PDFKitPage
+			do {
+				page = try await Task.detached(priority: .userInitiated) {
+					UncheckedSendable(try PDFKitDocument(at: url).page(0))
+				}.value.value
+			} catch {
+				guard !Task.isCancelled else { return }
+				error.printDetails(context: "Error while loading PDF!")
+				self.activityIndicator.stopAnimating()
+				self.fallbackLabel.text = Localization.couldNotLoad
+				return
+			}
+			
+			guard !Task.isCancelled else { return }
 			
 			self.pdfController = SimplePDFViewController() <- {
 				$0.delegate = self
@@ -232,17 +344,25 @@ final class MapViewController: UIViewController, InstantiableViewController {
 				$0.overlayView.backgroundColor = .darkOverlay
 				$0.additionalSafeAreaInsets.bottom += self.pullableView.minHeight
 					+ 8 // for symmetry
+				$0.overlayView.addGestureRecognizer(UITapGestureRecognizer(
+					target: self, action: #selector(mapTapped(_:))
+				))
 			}
 			self.updateMarkers()
 		}
+	}
+	
+	@objc func mapTapped(_ recognizer: UITapGestureRecognizer) {
+		guard recognizer.state == .ended else { return }
 		
-		page.catch { error in
-			guard taskID == self.currentLoadingTaskID else { return }
-			
-			error.printDetails(context: "Error while loading PDF!")
-			self.activityIndicator.stopAnimating()
-			self.fallbackLabel.text = Localization.couldNotLoad
-		}
+		let markersView = pdfController!.overlayView!
+		let tap = recognizer.location(in: markersView)
+		let distances = markers.lazy.map { ($0.center - tap).length }
+		let closest = zip(markers, distances).min { $0.1 < $1.1 }?.0
+		guard let closest else { return }
+		let screenSpaceDistance = (markersView.convert(closest.center, to: view) - recognizer.location(in: view)).length
+		guard screenSpaceDistance < 40 else { return } // too far to be intentional
+		showDetails(for: closest.issue)
 	}
 	
 	private func updateMarkers() {
@@ -267,20 +387,22 @@ final class MapViewController: UIViewController, InstantiableViewController {
 	func updateMarkerAppearance() {
 		for marker in markers {
 			marker.update()
-			marker.isStatusShown = visibleStatuses.contains(marker.issue.status.simplified)
 		}
 	}
 	
 	func showDetails(for issue: Issue) {
-		guard let issue = Repository.shared.read(issue.id.get) else {
+		guard let issue = repository.read(issue.id.get) else {
 			// there's a time between uploading an issue (giving it a new id) and uploading its image (after which we'd refresh our view) during which we're displaying an outdated id.
 			updateFromRepository() // must have been showing outdated data
 			return
 		}
 		
 		let viewController = issue.isRegistered
-			? ViewIssueViewController.self.instantiate()! <- { $0.issue = issue }
-			: EditIssueViewController.self.instantiate()! <- { $0.present(issue) }
+		? ViewIssueViewController.self.instantiate()! <- { $0.issue = issue }
+		: EditIssueViewController.self.instantiate()! <- {
+			$0.present(issue)
+			$0.initiateReposition = { [unowned self] in moveIssue(for: $0) }
+		}
 		
 		let navController = UINavigationController(rootViewController: viewController)
 			<- { $0.modalPresentationStyle = .formSheet }
@@ -304,12 +426,6 @@ extension MapViewController: SimplePDFViewControllerDelegate {
 		fallbackLabel.text = nil
 		
 		markerAlpha = 1
-	}
-}
-
-extension MapViewController: StatusFilterViewControllerDelegate {
-	func statusFilterChanged(to newValue: Set<Issue.Status.Simplified>) {
-		visibleStatuses = newValue
 	}
 }
 
@@ -354,11 +470,11 @@ extension MapViewController: UIAdaptivePresentationControllerDelegate {
 		
 		cancelAddingIssue() // done (if started)
 		
-		issues = Repository.read(map.sortedIssues.fetchAll)
+		issues = repository.read(map.sortedIssues.fetchAll)
 		updateMarkers()
 		issueListController.update()
 		
-		DispatchQueue.main.async {
+		Task {
 			guard let splitController = self.splitViewController else { return }
 			let mainController = splitController as! MainViewController
 			for viewController in mainController.masterNav.viewControllers {
@@ -369,9 +485,9 @@ extension MapViewController: UIAdaptivePresentationControllerDelegate {
 }
 
 extension Issue {
-	static let allStatuses = Set(Issue.Status.Simplified.allCases)
+	static let allStatuses = Set(Issue.Status.Stage.allCases)
 }
 
-extension Issue.Status.Simplified: DefaultsValueConvertible {
+extension Issue.Status.Stage: DefaultsValueConvertible {
 	typealias DefaultsRepresentation = RawValue
 }

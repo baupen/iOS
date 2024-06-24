@@ -4,33 +4,23 @@ import Foundation
 import GRDB
 import UserDefault
 
-final class Repository {
-	static let shared = Repository()
-	
-	static func read<Result>(_ block: (Database) throws -> Result) -> Result {
-		shared.read(block)
-	}
-	
-	static func object<Object>(_ id: Object.ID) -> Object? where Object: StoredObject {
-		shared.object(id)
-	}
-	
-	@UserDefault("repository.userID") private var userID: ConstructionManager.ID?
-	
+final class Repository: Sendable {
 	private let dataStore: DatabaseDataStore
+	private let userTracker = UserTracker()
 	
-	init() {
-		self.dataStore = try! DatabaseDataStore()
+	init(dataStore: DatabaseDataStore) {
+		self.dataStore = dataStore
 	}
 	
+	@MainActor
 	func signedIn(as manager: ConstructionManager) {
-		guard manager.id != userID else { return } // nothing changed
-		resetAllData()
-		userID = manager.id
+		userTracker.switchUser(to: manager, ifChanged: {
+			resetAllData()
+		})
 	}
 	
 	func resetAllData() {
-		try! dataStore.dbPool.write { db in
+		try! dataStore.accessor.write { db in
 			try Issue.deleteAll(db)
 			try Map.deleteAll(db)
 			try Craftsman.deleteAll(db)
@@ -40,20 +30,24 @@ final class Repository {
 	}
 	
 	func read<Result>(_ block: (Database) throws -> Result) -> Result {
-		try! dataStore.dbPool.read(block)
+		try! dataStore.accessor.read(block)
 	}
 	
 	private func write<Result>(_ block: (Database) throws -> Result) -> Result {
-		try! dataStore.dbPool.write(block)
+		try! dataStore.accessor.write(block)
 	}
 	
 	func object<Object>(_ id: Object.ID) -> Object? where Object: StoredObject {
 		read(id.get)
 	}
 	
+	func ids<Object>(for objects: QueryInterfaceRequest<Object>) -> Set<ObjectID<Object>> where Object: StoredObject {
+		Set(read(objects.select(ObjectMeta<Object>.Columns.id).fetchAll))
+	}
+	
 	/// saves modifications to an issue
 	func save(_ issue: Issue) {
-		write(issue.save)
+		write { try issue.save($0) }
 	}
 	
 	/// saves modifications to some columns of an issue
@@ -92,6 +86,21 @@ final class Repository {
 			}
 		}
 	}
+	
+	@MainActor
+	private final class UserTracker: Sendable {
+		@UserDefault("repository.userID") private var userID: ConstructionManager.ID?
+		
+		nonisolated init() {}
+		
+		/// Calls `ifChanged` whenever the user changes, before storing the new user.
+		func switchUser(to manager: ConstructionManager, ifChanged: () -> Void) {
+			guard manager.id != userID else { return } // nothing changed
+			ifChanged()
+			userID = manager.id
+		}
+	}
+	
 }
 
 extension ObjectID: DefaultsValueConvertible {}

@@ -4,7 +4,7 @@ import UIKit
 import GRDB
 import HandyOperators
 
-final class DatabaseDataStore {
+final class DatabaseDataStore: Sendable {
 	private static let databaseURL = documentsURL.appendingPathComponent("db/main.sqlite")
 	
 	static func databaseFileExists() -> Bool {
@@ -15,9 +15,10 @@ final class DatabaseDataStore {
 		try? FileManager.default.removeItem(at: databaseURL)
 	}
 	
-	var dbPool: DatabasePool
+	let accessor: any DatabaseWriter
 	
-	init() throws {
+	/// Starts up a database in the default location.
+	static func fromFile() throws -> Self {
 		try FileManager.default.createDirectory(
 			at: Self.databaseURL.deletingLastPathComponent(),
 			withIntermediateDirectories: true
@@ -29,15 +30,25 @@ final class DatabaseDataStore {
 			// uncomment when needed:
 			func debugRepresentation(of string: String, maxLength: Int = 1000) -> String {
 				if string.count < maxLength {
-					return string
+					string
 				} else {
-					return "\(string.prefix(maxLength))… <\(string.count - maxLength)/\(string.count) more>"
+					"\(string.prefix(maxLength))… <\(string.count - maxLength)/\(string.count) more>"
 				}
 			}
 			//$0.trace = { print("--- executing SQL:", debugRepresentation(of: $0)) }
 			#endif
 		}
-		dbPool = try .init(path: Self.databaseURL.absoluteString, configuration: config)
+		let pool = try DatabasePool(path: Self.databaseURL.absoluteString, configuration: config)
+		return try .init(accessor: pool)
+	}
+	
+	/// Wraps a fresh in-memory database that is discarded on exit.
+	static func temporary() throws -> Self {
+		try .init(accessor: try DatabaseQueue())
+	}
+	
+	init(accessor: any DatabaseWriter) throws {
+		self.accessor = accessor
 		
 		let migrator = DatabaseMigrator() <- { migrator in
 			registerMigrations(in: &migrator)
@@ -47,7 +58,7 @@ final class DatabaseDataStore {
 			#endif
 		}
 		
-		try migrator.migrate(dbPool)
+		try migrator.migrate(accessor)
 	}
 	
 	private func registerMigrations(in migrator: inout DatabaseMigrator) {

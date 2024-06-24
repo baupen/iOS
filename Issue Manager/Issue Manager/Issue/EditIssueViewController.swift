@@ -2,7 +2,7 @@
 
 import UIKit
 import GRDB
-import Promise
+import Combine
 import UserDefault
 import HandyOperators
 
@@ -19,6 +19,7 @@ final class EditIssueViewController: UITableViewController, InstantiableViewCont
 	
 	@IBOutlet private var numberLabel: UILabel!
 	@IBOutlet private var markButton: UIButton!
+	@IBOutlet private var clientModeSwitch: UISwitch!
 	
 	@IBOutlet private var noImageLabel: UILabel!
 	@IBOutlet private var imageView: UIImageView!
@@ -41,13 +42,26 @@ final class EditIssueViewController: UITableViewController, InstantiableViewCont
 	}
 	
 	@IBAction func descriptionBeganEditing() {
-		// make suggestions visible
-		guard let indexPath = tableView.indexPath(for: descriptionCell)
-			else { return } // description cell not visible; not sure how this could happen but we shouldn't rely on it
-		// after the table view scrolls by itself
-		DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) { [tableView] in
-			tableView!.scrollToRow(at: indexPath, at: .top, animated: true)
-		}
+		// iOS will automatically scroll down to move the text field above the newly popped-up keyboard, but the suggestions won't be visible, so we'll handle them ourselves
+		
+		// wait for the keyboard to pop up
+		var token: AnyCancellable?
+		token = NotificationCenter.default
+			.publisher(for: Self.keyboardWillShowNotification)
+			.timeout(1, scheduler: DispatchQueue.main) // give up after some time
+			.first() // run only once
+			.sink { notification in
+				_ = token // retain until run or timed out
+				guard let indexPath = self.tableView.indexPath(for: self.descriptionCell) else {
+					print("could not locate description cell instance!")
+					return
+				}
+				self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+			}
+	}
+	
+	@IBAction func setClientMode(_ sender: UISwitch) {
+		issue.wasAddedWithClient = sender.isOn
 	}
 	
 	@IBAction func descriptionChanged() {
@@ -132,6 +146,8 @@ final class EditIssueViewController: UITableViewController, InstantiableViewCont
 	
 	@UserDefault("hasTakenPhoto") private var hasTakenPhoto = false
 	
+	var initiateReposition: ((EditIssueViewController) -> Void)!
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -152,6 +168,14 @@ final class EditIssueViewController: UITableViewController, InstantiableViewCont
 		super.viewWillAppear(animated)
 		
 		tableView.reloadData()
+	}
+	
+	func copySettings(from other: EditIssueViewController, movingTo position: Issue.Position?) {
+		original = other.original
+		issue = other.issue
+		if let position {
+			issue.position = position
+		}
 	}
 	
 	func present(_ issue: Issue) {
@@ -178,14 +202,19 @@ final class EditIssueViewController: UITableViewController, InstantiableViewCont
 		assert(issue.isRegistered != true)
 		guard isViewLoaded else { return }
 		
-		site = Repository.read(issue.site.fetchOne)!
+		site = repository.read(issue.site.fetchOne)!
 		
 		navigationItem.title = isCreating ? Localization.titleCreating : Localization.titleEditing
 		
 		numberLabel.setText(to: issue.number.map { "#\($0)" }, fallback: L10n.Issue.unregistered)
 		markButton.setImage(issue.isMarked ? #imageLiteral(resourceName: "mark_marked.pdf") : #imageLiteral(resourceName: "mark_unmarked.pdf"), for: .normal)
+		clientModeSwitch.isOn = issue.wasAddedWithClient
 		
-		craftsman = Repository.read(issue.craftsman)
+		craftsman = repository.read(issue.craftsman)
+		if isCreating, craftsman == nil, let filtered = ViewOptions.shared.onlyCraftsman(in: site, in: repository) {
+			craftsman = repository.read(filtered.get)
+		}
+		
 		craftsmanNameLabel.setText(to: craftsman?.company, fallback: L10n.Issue.noCraftsman)
 		trade = craftsman?.trade
 		
@@ -201,13 +230,15 @@ final class EditIssueViewController: UITableViewController, InstantiableViewCont
 	}
 	
 	private func onSave() {
-		let originalTrade = (original?.craftsman).flatMap(Repository.shared.read)?.trade
-		if trade != originalTrade || issue.description != original?.description {
-			SuggestionStorage.shared.decrementSuggestion(
+		let originalTrade = (original?.craftsman).flatMap(repository.read)?.trade
+		Task {
+			guard trade != originalTrade || issue.description != original?.description else { return }
+			
+			await SuggestionStorage.shared.decrementSuggestion(
 				description: original?.description,
 				forTrade: originalTrade
 			)
-			SuggestionStorage.shared.used(
+			await SuggestionStorage.shared.used(
 				description: issue.description,
 				forTrade: trade
 			)
@@ -221,7 +252,7 @@ final class EditIssueViewController: UITableViewController, InstantiableViewCont
 			}
 			$0 = $0.order(Craftsman.Columns.company)
 		}
-		return Repository.read(request.fetchAll)
+		return repository.read(request.fetchAll)
 	}
 	
 	override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
@@ -240,11 +271,21 @@ final class EditIssueViewController: UITableViewController, InstantiableViewCont
 		case "save":
 			onSave()
 			let mapController = segue.destination as! MapViewController
-			issue.saveAndSync().then(mapController.updateFromRepository)
+			let sync = issue.saveChanges(in: repository)
+			Task {
+				try await sync(syncManager)
+				mapController.updateFromRepository()
+			}
+		case "reposition":
+			self.initiateReposition(self)
 		case "delete":
 			issue.delete()
 			let mapController = segue.destination as! MapViewController
-			issue.saveAndSync().then(mapController.updateFromRepository)
+			let sync = issue.saveChanges(in: repository)
+			Task {
+				try await sync(syncManager)
+				mapController.updateFromRepository()
+			}
 		case "lightbox":
 			let lightboxController = segue.destination as! LightboxViewController
 			lightboxController.image = loadedImage!
@@ -332,7 +373,7 @@ extension UIImage {
 		guard let jpg = jpegData(compressionQuality: 0.75) else {
 			throw ImageSavingError.couldNotGenerateRepresentation
 		}
-		print("Saving file to", url)
+		print("Saving \(jpg.count)-byte file to", url)
 		try? FileManager.default.createDirectory(
 			at: url.deletingLastPathComponent(),
 			withIntermediateDirectories: true

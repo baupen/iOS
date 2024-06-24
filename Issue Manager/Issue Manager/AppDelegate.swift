@@ -3,26 +3,26 @@
 import UIKit
 import UserDefault
 import HandyOperators
+import SwiftUI
 
 @UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
-	static var shared: AppDelegate {
-		UIApplication.shared.delegate as! Self
-	}
+	static let shared = UIApplication.shared.delegate as! AppDelegate
 	
 	var window: UIWindow?
-	
-	let reachability = Reachability() <- {
-		$0?.whenReachable = { _ in
-			print("Reachable again! Trying to push any changes that weren't pushed earlier...")
-			try? Client.shared.pushLocalChanges().await()
-		}
-	}
 	
 	func application(
 		_ app: UIApplication,
 		willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
 	) -> Bool {
+		#if DEBUG
+		if ProcessInfo.processInfo.environment["RUNNING_TESTS"] == "1" {
+			// hijack actual app content
+			window!.rootViewController = UIViewController()
+			return true
+		}
+		#endif
+		
 		window!.tintColor = .main
 		
 		// disables state restoration animations
@@ -31,6 +31,16 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControll
 		wipeIfNecessary()
 		
 		Issue.moveLegacyFiles()
+		
+		ReachabilityTracker.shared.reachabilityChanged = { [syncManager] old, new in
+			// check for transition from to reachable state (perhaps we switched from cellular to wifi—we still want to reattempt then)
+			guard new.isReachable else { return }
+			
+			print("Reachable again! Trying to push any changes that weren't pushed earlier...")
+			Task {
+				try await syncManager.pushLocalChanges()
+			}
+		}
 		
 		return true
 	}
@@ -68,7 +78,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControll
 	func application(_ application: UIApplication, shouldSaveSecureApplicationState coder: NSCoder) -> Bool { true }
 	
 	func application(_ app: UIApplication, shouldRestoreSecureApplicationState coder: NSCoder) -> Bool {
-		Client.shared.localUser != nil && !Issue.isInClientMode
+		client.localUser != nil && !Issue.isInClientMode
 	}
 	
 	// MARK: - Wiping
@@ -78,9 +88,13 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControll
 	private static var lastWipeVersion: Int?
 	
 	private func wipeIfNecessary() {
-		if Self.lastWipeVersion == nil, DatabaseDataStore.databaseFileExists() {
-			print("setting missing last wipe version to 1 because a database was present")
-			Self.lastWipeVersion = 1
+		if Self.lastWipeVersion == nil {
+			if DatabaseDataStore.databaseFileExists() {
+				print("setting missing last wipe version to 1 because a database was present")
+				Self.lastWipeVersion = 1
+			} else {
+				Self.lastWipeVersion = Self.wipeVersion
+			}
 		}
 		
 		if let lastWipe = Self.lastWipeVersion, lastWipe < Self.wipeVersion {
@@ -109,6 +123,25 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControll
 		
 		wipeDownloadedFiles()
 		DatabaseDataStore.wipeData()
-		Client.shared.wipeAllData()
+		client.wipeAllData()
 	}
+}
+
+// singletons
+private let sharedRepository = Repository(dataStore: try! .fromFile())
+private let sharedClient = Client()
+private let sharedSyncManager = SyncManager(client: sharedClient, repository: sharedRepository)
+
+// poor man's dependency injection lol
+// we're not testing view code, so it's fine to give that stuff access to the singleton
+
+extension UIResponder {
+	nonisolated var repository: Repository { sharedRepository }
+	nonisolated var syncManager: SyncManager { sharedSyncManager }
+	nonisolated var client: Client { sharedClient}
+}
+
+extension View {
+	nonisolated var repository: Repository { sharedRepository }
+	nonisolated var client: Client { sharedClient}
 }

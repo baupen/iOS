@@ -3,17 +3,20 @@
 import Foundation
 import GRDB
 
-protocol MapHolder: AnyStoredObject {
+protocol MapHolder: StoredObject {
 	var name: String { get }
 	var children: Map.Query { get }
 	var constructionSiteID: ConstructionSite.ID { get }
+	var isDeleted: Bool { get }
 	
-	func recursiveChildren<R>(in request: R) -> R where R: DerivableRequest, R.RowDecoder == Map
-	var recursiveIssues: Issue.Query { get }
-	func issues(recursively: Bool) -> Issue.Query
+	@MainActor func recursiveChildren<R>(in request: R) -> R where R: DerivableRequest<Map>
+	@MainActor var recursiveIssues: Issue.Query { get }
+	@MainActor func issues(recursively: Bool) -> Issue.Query
+	func freshlyFetched(in repository: Repository) -> Self?
 }
 
 extension MapHolder {
+	@MainActor
 	var recursiveIssues: Issue.Query {
 		Issue
 			.all()
@@ -23,8 +26,9 @@ extension MapHolder {
 	}
 }
 
-extension DerivableRequest where RowDecoder == Map {
-	func recursiveChildren(of holder: MapHolder) -> Self {
+extension DerivableRequest<Map> {
+	@MainActor
+	func recursiveChildren(of holder: some MapHolder) -> Self {
 		holder.recursiveChildren(in: self)
 	}
 }
@@ -34,7 +38,7 @@ extension ConstructionSite: MapHolder {
 	
 	var constructionSiteID: ID { id }
 	
-	func recursiveChildren<R>(in request: R) -> R where R: DerivableRequest, R.RowDecoder == Map {
+	func recursiveChildren<R>(in request: R) -> R where R: DerivableRequest<Map> {
 		request.filter(Map.Columns.constructionSiteID == id)
 	}
 	
@@ -42,10 +46,14 @@ extension ConstructionSite: MapHolder {
 		precondition(recursively, "construction sites only have recursive issues")
 		return recursiveIssues
 	}
+	
+	func freshlyFetched(in repository: Repository) -> Self? {
+		repository.object(id)
+	}
 }
 
 extension Map: MapHolder {
-	func recursiveChildren<R>(in request: R) -> R where R: DerivableRequest, R.RowDecoder == Map {
+	func recursiveChildren<R>(in request: R) -> R where R: DerivableRequest<Map> {
 		// recursive common table expression, in case you want to google that
 		request.filter(
 			literal: """
@@ -65,5 +73,9 @@ extension Map: MapHolder {
 	
 	func issues(recursively: Bool) -> Issue.Query {
 		recursively ? recursiveIssues : issues
+	}
+	
+	func freshlyFetched(in repository: Repository) -> Self? {
+		repository.object(id)
 	}
 }

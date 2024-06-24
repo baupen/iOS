@@ -8,8 +8,8 @@ final class IssueListViewController: UIViewController {
 	typealias Localization = L10n.Map.IssueList
 	
 	@IBOutlet private var summaryLabel: UILabel!
-	@IBOutlet private var separatorView: UIView!
 	@IBOutlet private var issueTableView: UITableView!
+	@IBOutlet private var placementTypePicker: UISegmentedControl!
 	
 	/// - note: set this _before_ the list loads its data
 	weak var issueCellDelegate: IssueCellDelegate?
@@ -18,23 +18,28 @@ final class IssueListViewController: UIViewController {
 		didSet { pullableView.tapRecognizer.delegate = self }
 	}
 	
-	/// set this before setting `map` initially or before loading the view to avoid calculating stuff twice
-	var visibleStatuses = Issue.allStatuses {
-		didSet { update() }
-	}
-	
 	var map: Map? {
 		didSet { update() }
 	}
 	
-	private var issues: [Issue] = [] {
-		didSet { issueTableView.reloadData() }
+	private var issues: [Issue] = []
+	private var listedIssues: [Issue] = []
+	
+	var isShowingUnplacedIssues = false {
+		didSet {
+			placementTypePicker.selectedSegmentIndex = isShowingUnplacedIssues ? 1 : 0
+			if isShowingUnplacedIssues != oldValue {
+				updateListedIssues()
+			}
+		}
+	}
+	
+	@IBAction func placementTypeChanged(_ sender: UISegmentedControl) {
+		isShowingUnplacedIssues = sender.selectedSegmentIndex == 1
 	}
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
-		separatorView.backgroundColor = issueTableView.separatorColor
 		
 		issueTableView.panGestureRecognizer.addTarget(self, action: #selector(listPanned))
 		
@@ -46,18 +51,27 @@ final class IssueListViewController: UIViewController {
 	func update() {
 		guard isViewLoaded, let map = map else { return }
 		
-		let allIssues = Repository.read(map.sortedIssues.fetchAll)
-		issues = allIssues.filter {
-			visibleStatuses.contains($0.status.simplified)
-		}
+		let allIssues = repository.read(map.sortedIssues.fetchAll)
+		issues = allIssues.filter(ViewOptions.shared.shouldDisplay)
+		updateListedIssues()
+		
+		let unplacedCount = issues.count(where: \.isUnplaced)
+		let placedCount = issues.count - unplacedCount
+		placementTypePicker.setTitle(Localization.allIssues(placedCount), forSegmentAt: 0)
+		placementTypePicker.setTitle(Localization.unpositionedIssues(unplacedCount), forSegmentAt: 1)
 		
 		let openCount = issues.count { $0.isOpen }
 		let totalCount = allIssues.count
-		if visibleStatuses == Issue.allStatuses {
-			summaryLabel.text = Localization.summary(String(openCount), String(totalCount))
+		summaryLabel.text = if ViewOptions.shared.isFiltering {
+			Localization.summaryFiltered(String(issues.count), String(totalCount))
 		} else {
-			summaryLabel.text = Localization.summaryFiltered(String(issues.count), String(totalCount))
+			Localization.summary(String(openCount), String(totalCount))
 		}
+	}
+	
+	func updateListedIssues() {
+		listedIssues = isShowingUnplacedIssues ? issues.filter(\.isUnplaced) : issues
+		issueTableView.reloadData()
 	}
 	
 	// MARK: PullableView-UIScrollView interaction 
@@ -121,13 +135,13 @@ final class IssueListViewController: UIViewController {
 
 extension IssueListViewController: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		issues.count
+		listedIssues.count
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		tableView.dequeue(IssueCell.self, for: indexPath)! <- {
 			$0.delegate = issueCellDelegate
-			$0.issue = issues[indexPath.row]
+			$0.issue = listedIssues[indexPath.row]
 		}
 	}
 }

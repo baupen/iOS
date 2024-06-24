@@ -7,10 +7,10 @@ final class ViewIssueViewController: UITableViewController, InstantiableViewCont
 	
 	static let storyboardName = "View Issue"
 	
-	@IBOutlet private var iconView: TrilinearImageView!
+	@IBOutlet private var iconView: UIImageView!
 	@IBOutlet private var numberLabel: UILabel!
 	@IBOutlet private var markButton: UIButton!
-	@IBOutlet private var clientModeLabel: UILabel!
+	@IBOutlet private var clientModeSwitch: UISwitch!
 	
 	@IBOutlet private var imageView: UIImageView!
 	@IBOutlet private var noImageLabel: UILabel!
@@ -33,6 +33,11 @@ final class ViewIssueViewController: UITableViewController, InstantiableViewCont
 		update()
 	}
 	
+	@IBAction func setClientMode(_ sender: UISwitch) {
+		issue.wasAddedWithClient = sender.isOn
+		saveChanges()
+	}
+	
 	@IBAction func revertResolution() {
 		issue.revertResolution()
 		saveChanges()
@@ -40,7 +45,7 @@ final class ViewIssueViewController: UITableViewController, InstantiableViewCont
 	}
 	
 	@IBAction func closeIssue() {
-		issue.close()
+		issue.close(as: client.localUser!)
 		saveChanges()
 		update()
 	}
@@ -86,27 +91,27 @@ final class ViewIssueViewController: UITableViewController, InstantiableViewCont
 	func update() {
 		guard isViewLoaded, let issue = issue else { return }
 		
-		iconView.image = issue.status.simplified.flatIcon
+		iconView.image = issue.status.stage.flatIcon
 		numberLabel.setText(to: issue.number.map { "#\($0)" }, fallback: L10n.Issue.unregistered)
 		markButton.setImage(issue.isMarked ? #imageLiteral(resourceName: "mark_marked.pdf") : #imageLiteral(resourceName: "mark_unmarked.pdf"), for: .normal)
-		clientModeLabel.text = issue.wasAddedWithClient ? Localization.IsClientMode.true : Localization.IsClientMode.false
+		clientModeSwitch.isOn = issue.wasAddedWithClient
 		
 		updateImage()
 		
-		let craftsman = Repository.read(issue.craftsman)
+		let craftsman = repository.read(issue.craftsman)
 		craftsmanTradeLabel.setText(to: craftsman?.trade, fallback: L10n.Issue.noCraftsman)
 		craftsmanNameLabel.setText(to: craftsman?.company, fallback: L10n.Issue.noCraftsman)
 		
 		descriptionLabel.setText(to: issue.description?.nonEmptyOptional, fallback: L10n.Issue.noDescription)
-		statusLabel.text = issue.status.makeLocalizedMultilineDescription()
+		statusLabel.text = issue.status.makeLocalizedMultilineDescription(repository: repository)
 		
-		let status = issue.status.simplified
+		let status = issue.status.stage
 		summaryLabel.isShown = status == .resolved
 		resetResolutionButton.isShown = status == .resolved
 		closeButton.isShown = status != .closed
 		reopenButton.isShown = status == .closed
 		
-		DispatchQueue.main.async {
+		Task {
 			self.tableView.performBatchUpdates(nil) // invalidate previously calculated row heights
 		}
 	}
@@ -117,7 +122,8 @@ final class ViewIssueViewController: UITableViewController, InstantiableViewCont
 			if image == nil {
 				noImageLabel.text = Localization.ImagePlaceholder.loading
 				// download
-				issue.downloadFile()?.then { [weak self] in
+				Task { [issue, client, weak self] in
+					try await issue!.downloadFileIfNeeded(using: client)
 					self?.updateImage()
 				}
 			}
@@ -128,13 +134,16 @@ final class ViewIssueViewController: UITableViewController, InstantiableViewCont
 	}
 	
 	private func saveChanges() {
+		let sync = issue.saveChanges(in: repository)
+		assert(!isSyncing)
 		isSyncing = true
-		issue.saveAndSync()
-			.always { self.isSyncing = false }
-			.then { [parent] in
-				self.issue = Repository.shared.object(self.issue.id)
-				(parent as? MapViewController)?.updateFromRepository()
-			}
+		let mapController = parent as? MapViewController // capture before dismissal
+		Task {
+			defer { self.isSyncing = false }
+			try await sync(syncManager)
+			issue = repository.object(issue.id)
+			mapController?.updateFromRepository()
+		}
 	}
 	
 	override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
@@ -174,5 +183,13 @@ final class ViewIssueViewController: UITableViewController, InstantiableViewCont
 	
 	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		UITableView.automaticDimension
+	}
+}
+
+final class TrilinearImageView: UIImageView {
+	override func awakeFromNib() {
+		super.awakeFromNib()
+		
+		layer.minificationFilter = .trilinear
 	}
 }

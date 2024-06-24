@@ -2,7 +2,7 @@
 
 import UIKit
 
-extension Issue.Status.Simplified {
+extension Issue.Status.Stage {
 	typealias Localization = L10n.Issue.Status
 	
 	var localizedName: String {
@@ -48,22 +48,22 @@ extension Issue.Status.Simplified {
 extension Issue.Status {
 	typealias Localization = L10n.Issue.Status
 	
-	func makeLocalizedMultilineDescription() -> String {
+	func makeLocalizedMultilineDescription(repository: Repository) -> String {
 		guard let registeredBy = registeredBy else {
 			return Localization.new
 		}
 		
-		let name = Repository.shared.object(registeredBy)?.fullName ?? Localization.unknownEntity
+		let name = repository.object(registeredBy)?.fullName ?? Localization.unknownEntity
 		var description = Localization.registeredBy(name)
 		
 		if let resolvedBy = resolvedBy {
-			let name = Repository.shared.object(resolvedBy)?.company ?? Localization.unknownEntity
+			let name = repository.object(resolvedBy)?.company ?? Localization.unknownEntity
 			description += "\n"
 			description += Localization.resolvedBy(name)
 		}
 		
 		if let closedBy = closedBy {
-			let name = Repository.shared.object(closedBy)?.fullName ?? Localization.unknownEntity
+			let name = repository.object(closedBy)?.fullName ?? Localization.unknownEntity
 			description += "\n"
 			description += Localization.closedBy(name)
 		}

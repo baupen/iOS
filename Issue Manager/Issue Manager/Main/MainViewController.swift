@@ -31,15 +31,15 @@ final class MainViewController: UISplitViewController, InstantiableViewControlle
 		super.decodeRestorableState(with: coder)
 		
 		let siteID = ConstructionSite.ID(coder.decodeObject(of: NSString.self, forKey: "siteID")! as String)
-		if let site = Repository.object(siteID) {
+		if let site = repository.object(siteID) {
 			self.site = site
-			DispatchQueue.main.async {
+			Task {
 				self.masterNav.mapList.refreshManually()
 			}
 		} else {
 			// site to decode has been deleted; this can only really happen in dev environment
 			children.forEach(unembed) // cancel loading actual content
-			DispatchQueue.main.async { // not in parent quite yet
+			Task { // not in parent quite yet
 				self.dismiss(animated: false)
 			}
 		}

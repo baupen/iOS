@@ -1,7 +1,6 @@
 // Created by Julian Dunskus
 
 import UIKit
-import Promise
 import HandyOperators
 
 final class MapCell: UITableViewCell, Reusable {
@@ -52,17 +51,17 @@ final class MapCell: UITableViewCell, Reusable {
 		
 		let issues = map.issues(recursively: shouldUseRecursiveIssues).openIssues
 		// async because there could be a lot of issues (e.g. if we're calculating it for a high-level map)
-		let openIssueCount = BasicFuture(asyncOn: .global()) {
-			Repository.read(issues.fetchCount)
-		}
-		openIssueCount.on(.main).then { count in
-			self.openIssuesLabel?.text = Localization.openIssues(String(count))
+		Task.detached(priority: .userInitiated) { [repository] in
+			let count = repository.read(issues.fetchCount)
+			await MainActor.run {
+				self.openIssuesLabel?.text = Localization.openIssues(String(count))
+			}
 		}
 		
 		issueBadge.shouldUseRecursiveIssues = shouldUseRecursiveIssues
 		issueBadge.holder = map
 		
-		if shouldUseRecursiveIssues, Repository.read(map.hasChildren) {
+		if shouldUseRecursiveIssues, repository.read(map.hasChildren) {
 			accessoryView = nil
 			// nil makes it use accessoryType, which is a disclosure indicator
 		} else {

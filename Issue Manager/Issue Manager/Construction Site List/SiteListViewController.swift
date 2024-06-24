@@ -1,8 +1,8 @@
 // Created by Julian Dunskus
 
 import UIKit
-import Promise
 import SwiftUI
+import class Combine.AnyCancellable
 
 final class SiteListViewController: RefreshingTableViewController, InstantiableViewController {
 	fileprivate typealias Localization = L10n.SiteList
@@ -21,9 +21,7 @@ final class SiteListViewController: RefreshingTableViewController, InstantiableV
 	@IBOutlet private var fileProgressLabel: UILabel!
 	
 	@IBAction func clientModeSwitched() {
-		Issue.isInClientMode = clientModeSwitch.isOn
-		updateClientModeAppearance()
-		siteListView.reloadData()
+		ViewOptions.shared.isInClientMode = clientModeSwitch.isOn
 	}
 	
 	@IBAction func backToSiteList(_ segue: UIStoryboardSegue) {
@@ -70,14 +68,19 @@ final class SiteListViewController: RefreshingTableViewController, InstantiableV
 		}
 	}
 	
+	private var viewOptionsToken: AnyCancellable?
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		let user = Client.shared.localUser!
+		let user = client.localUser!
 		welcomeLabel.text = Localization.welcome(user.givenName ?? "")
 		
-		clientModeSwitch.isOn = Issue.isInClientMode
 		updateClientModeAppearance()
+		viewOptionsToken = ViewOptions.shared.didChange.sink { [unowned self] in
+			updateClientModeAppearance()
+			siteListView.reloadData()
+		}
 		
 		updateContent()
 	}
@@ -93,7 +96,7 @@ final class SiteListViewController: RefreshingTableViewController, InstantiableV
 		super.viewDidAppear(animated)
 		
 		// have to wait because we're not presenting anything yet
-		DispatchQueue.main.async {
+		Task {
 			if self.needsRefresh, self.presentedViewController == nil {
 				self.needsRefresh = false
 				self.refreshManually()
@@ -101,35 +104,28 @@ final class SiteListViewController: RefreshingTableViewController, InstantiableV
 		}
 	}
 	
-	override func doRefresh() -> Future<Void> {
-		Client.shared.pullRemoteChanges { progress in
-			DispatchQueue.main.async {
-				self.syncProgress = progress
-			}
-		} onIssueImageProgress: { imageProgress in
-			DispatchQueue.main.async {
-				self.fileDownloadProgress = imageProgress
-			}
+	override func doRefresh() async throws {
+		try await syncManager.withContext { 
+			try await $0
+				.onProgress(.onMainActor { self.syncProgress = $0 })
+				.onIssueImageProgress(.onMainActor { self.fileDownloadProgress = $0 })
+				.pullRemoteChanges()
 		}
-	}
-	
-	override func refreshCompleted() {
-		super.refreshCompleted()
 		
 		updateContent()
 	}
 	
 	private func updateContent() {
-		sites = Repository.read(ConstructionSite.all().withoutDeleted.fetchAll) // TODO: order?
+		sites = repository.read(ConstructionSite.all().withoutDeleted.fetchAll) // TODO: order?
 		siteListView.reloadData()
 	}
 	
 	func updateClientModeAppearance() {
+		clientModeSwitch.isOn = Issue.isInClientMode
 		let color = Issue.isInClientMode ? UIColor.clientMode : nil
 		UIView.animate(withDuration: 0.1) {
 			self.clientModeCell.backgroundColor = color
 		}
-		UINavigationBar.appearance().barTintColor = color
 	}
 	
 	func showMapList(for site: ConstructionSite, animated: Bool = true) {

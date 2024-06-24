@@ -62,10 +62,10 @@ final class SiteCell: UICollectionViewCell, Reusable {
 		let meta = site.meta // capture current site
 		let issues = site.issues(recursively: true)
 		// async because there could be a lot of issues (e.g. if we're calculating it for a whole site)
-		DispatchQueue.global().async {
-			let totalCount = Repository.read(issues.fetchCount)
-			let openCount = Repository.read(issues.openIssues.fetchCount)
-			DispatchQueue.main.async {
+		Task.detached(priority: .userInitiated) { [repository] in
+			let totalCount = repository.read(issues.fetchCount)
+			let openCount = repository.read(issues.openIssues.fetchCount)
+			Task { @MainActor in
 				guard self.site.meta == meta else { return }
 				self.totalIssuesLabel.text = Localization.totalIssues(String(totalCount))
 				self.openIssuesLabel.text = Localization.openIssues(String(openCount))
@@ -73,16 +73,15 @@ final class SiteCell: UICollectionViewCell, Reusable {
 		}
 	}
 	
-	private var imageTimer: Timer?
-	func updateImage() {
-		imageTimer?.invalidate()
+	func updateImage(backoffDuration: TimeInterval = 1) {
 		if let imageURL = site.image.map(ConstructionSite.localURL(for:)) {
 			if let image = UIImage(contentsOfFile: imageURL.path) {
 				imageView.image = image
 			} else {
 				// because images may not be downloaded right away and we don't have a callback for that
-				imageTimer = .scheduledTimer(withTimeInterval: 1, repeats: false) { _ in
-					self.updateImage()
+				Task { @MainActor [weak self] in
+					try await Task.sleep(forSeconds: backoffDuration)
+					self?.updateImage(backoffDuration: backoffDuration * 2) // exponential backoff
 				}
 			}
 		} else {

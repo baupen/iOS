@@ -22,7 +22,8 @@ final class IssueCell: UITableViewCell, Reusable {
 	
 	@IBAction func markPressed() {
 		issue.isMarked.toggle()
-		_ = issue.saveAndSync()
+		let sync = issue.saveChanges(in: repository)
+		Task { try await sync(syncManager) }
 		Haptics.mediumImpact.impactOccurred()
 		update()
 	}
@@ -73,7 +74,7 @@ final class IssueCell: UITableViewCell, Reusable {
 		
 		markButton.setImage(issue.isMarked ? #imageLiteral(resourceName: "mark_marked.pdf") : #imageLiteral(resourceName: "mark_unmarked.pdf"), for: .normal)
 		
-		iconView.image = issue.status.simplified.flatIcon
+		iconView.image = issue.status.stage.flatIcon
 		
 		numberLabel.setText(to: issue.number.map { "#\($0)" }, fallback: Localization.unregistered)
 		
@@ -82,7 +83,7 @@ final class IssueCell: UITableViewCell, Reusable {
 		
 		showInMapButton.isEnabled = issue.position != nil
 		
-		let craftsman = Repository.read(issue.craftsman)
+		let craftsman = repository.read(issue.craftsman)
 		tradeLabel.setText(
 			to: craftsman?.trade,
 			fallback: Localization.noCraftsman
@@ -92,12 +93,13 @@ final class IssueCell: UITableViewCell, Reusable {
 			fallback: Localization.noCraftsman
 		)
 		
-		statusLabel.text = issue.status.makeLocalizedMultilineDescription()
+		statusLabel.text = issue.status.makeLocalizedMultilineDescription(repository: repository)
 		
 		clientModeLabel.isShown = issue.wasAddedWithClient
 	}
 }
 
+@MainActor
 protocol IssueCellDelegate: AnyObject {
 	func zoomMap(to issue: Issue)
 	func showDetails(for issue: Issue)

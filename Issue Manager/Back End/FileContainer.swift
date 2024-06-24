@@ -1,7 +1,6 @@
 // Created by Julian Dunskus
 
 import Foundation
-import Promise
 
 private let manager = FileManager.default
 
@@ -60,10 +59,6 @@ extension File {
 	}
 }
 
-/// limit max concurrent file downloads
-/// (otherwise we start getting overrun with timeouts, though URLSession automatically limits concurrent connections per host)
-private let downloadLimiter = ConcurrencyLimiter(label: "file download", maxConcurrency: 3)
-
 enum FileDownloadProgress: Hashable {
 	/// going through local files to figure out what's missing, but also already downloading if necessary
 	case undetermined
@@ -111,13 +106,19 @@ extension FileContainer {
 	}
 	
 	/// Identifies files in the local folder that are no longer actively needed (e.g. because their construction site is no longer selected for this user), and moves them to the caches folder.
-	static func moveDisusedFiles(inUse: [Self]) {
+	static func moveDisusedFiles(in repository: Repository) async {
 		let allLocalFiles: Set<String>
 		do {
 			allLocalFiles = Set(try manager.contentsOfDirectory(atPath: baseLocalFolder.path))
 		} catch {
 			error.printDetails(context: "could not establish present files in \(baseLocalFolder)")
 			return
+		}
+		
+		// only fetch in-use containers _after_ reading files to avoid clearing files created between the query and the file system check
+		// run on main actor to further minimize data race potential
+		let inUse = await MainActor.run {
+			repository.read(Self.fetchAll)
 		}
 		
 		let necessaryFiles = inUse.compactMap(\.file?.localFilename)
@@ -138,9 +139,10 @@ extension FileContainer {
 	}
 	
 	static func purgeInactiveFiles(
-		for containers: Self.Query = Self.all()
+		for containers: Self.Query = Self.all(),
+		in repository: Repository
 	) {
-		let allContainers = Repository.shared.read(containers.fetchAll)
+		let allContainers = repository.read(containers.fetchAll)
 		for container in allContainers where !container.shouldAutoDownloadFile {
 			container.deleteFile()
 		}
@@ -148,91 +150,96 @@ extension FileContainer {
 	
 	static func downloadMissingFiles(
 		for containers: Self.Query? = nil,
+		in repository: Repository,
+		using client: Client,
 		includeInactive: Bool = false,
-		onProgress: ((FileDownloadProgress) -> Void)? = nil
-	) -> Future<Void> {
-		onProgress?(.undetermined)
-		
-		let allContainers = Repository.shared.read(
-			(containers ?? all())
-				.order(Meta.Columns.lastChangeTime.desc)
-				.withoutDeleted
-				.fetchAll
-		)
-		
-		if containers == nil { // can't do this when only handling a subset
-			moveDisusedFiles(inUse: allContainers)
-		}
-		let activeContainers = includeInactive
+		onProgress: ProgressHandler<FileDownloadProgress> = .ignore
+	) async throws {
+		try await onProgress.unisolated { onProgress in
+			onProgress(.undetermined)
+			
+			if containers == nil { // can't do this when only handling a subset
+				await moveDisusedFiles(in: repository)
+			}
+			
+			// bookkeeping
+			let allContainers = repository.read(
+				(containers ?? all())
+					.withoutDeleted
+					.order(Meta.Columns.lastChangeTime.desc)
+					.fetchAll
+			)
+			
+			// figure out what to download
+			let activeContainers = includeInactive
 			? allContainers
 			: allContainers.filter(\.shouldAutoDownloadFile)
-		
-		print("downloading files for \(activeContainers.count) \(Self.self)s")
-		let futures = activeContainers.compactMap { $0.downloadFile() }
-		print("\(futures.count) downloads to make")
-		
-		// this is much easier if we don't have to report progress
-		guard let onProgress = onProgress else { return futures.sequence() }
-		
-		let total = futures.count
-		var completed: Int32 = 0
-		
-		onProgress(.determined(current: 0, total: total))
-		
-		return futures
-			.map {
-				$0.map {
-					OSAtomicIncrement32(&completed)
-					onProgress(.determined(current: Int(completed), total: total))
-				}
+			let filesToDownload = activeContainers.filter { $0.checkForFileDownload() }
+			print("\(Self.self): downloading files for \(filesToDownload.count)/\(activeContainers.count) containers")
+			onProgress(.determined(current: 0, total: filesToDownload.count))
+			
+			// parallel downloads
+			let context = await client.makeContext()
+			var completed = 0
+			// limit concurrent downloads to avoid overwhelming the server
+			try await filesToDownload.concurrentForEach(slots: 5) { container in
+				try await container.downloadFile(using: context)
+			} onProgress: {
+				completed += 1
+				onProgress(.determined(current: completed, total: filesToDownload.count))
 			}
-			.sequence()
-			.always { onProgress(.done) }
+			
+			onProgress(.done)
+		}
 	}
 	
-	/// - returns: A `Future` that resolves when the file is downloaded, or `nil` if there's nothing to do.
-	@discardableResult func downloadFile() -> Future<Void>? {
-		guard let file = file else { return nil }
+	func downloadFileIfNeeded(using client: Client) async throws {
+		guard checkForFileDownload() else { return }
+		try await downloadFile(using: await client.makeContext())
+	}
+	
+	// returns whether the file needs to be downloaded
+	func checkForFileDownload() -> Bool {
+		guard let file = file else { return false }
 		
 		// check if it already exists
 		let url = Self.localURL(for: file)
-		guard !manager.fileExists(atPath: url.path) else { return nil }
+		guard !manager.fileExists(atPath: url.path) else { return false }
 		
 		// check if we already have it cached
 		let cached = Self.cacheURL(for: file)
 		if manager.fileExists(atPath: cached.path) {
 			do {
 				try manager.moveItem(at: cached, to: url)
-				return nil
+				return false
 			} catch {
 				error.printDetails(context: "could not restore local file at \(url) from cached file at \(cached)")
 			}
 		}
 		
-		return downloadLimiter.dispatch(_downloadFile)
+		return true // needs download
 	}
-		
-	private func _downloadFile() -> Future<Void> {
+	
+	private func downloadFile(using context: RequestContext) async throws {
 		// check again in case it's changed by now (defensive coding, i know…)
-		guard let file = file else { return .fulfilled }
+		guard let file = file else { return }
 		let url = Self.localURL(for: file)
-		guard !manager.fileExists(atPath: url.path) else { return .fulfilled }
+		guard !manager.fileExists(atPath: url.path) else { return }
 		
 		let debugDesc = "for \(Self.pathPrefix) (id \(id))"
 		print("Downloading \(file)", debugDesc)
 		
-		return Client.shared.download(file)
-			.map { data in
-				try? manager.createDirectory(
-					at: url.deletingLastPathComponent(),
-					withIntermediateDirectories: true
-				)
-				let success = manager.createFile(atPath: url.path, contents: data)
-				print(success ? "Saved file to" : "Could not save file to", url, debugDesc)
-			}
-			.catch { error in
-				error.printDetails(context: "Could not download \(file) \(debugDesc)")
-			}
+		do {
+			let data = try await context.download(file)
+			try? manager.createDirectory(
+				at: url.deletingLastPathComponent(),
+				withIntermediateDirectories: true
+			)
+			let success = manager.createFile(atPath: url.path, contents: data)
+			print(success ? "Saved file to" : "Could not save file to", url, debugDesc)
+		} catch {
+			error.printDetails(context: "Could not download \(file) \(debugDesc)")
+		}
 	}
 	
 	func deleteFile() {

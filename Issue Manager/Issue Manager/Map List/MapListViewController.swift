@@ -1,8 +1,8 @@
 // Created by Julian Dunskus
 
 import UIKit
-import Promise
 import HandyOperators
+import class Combine.AnyCancellable
 
 final class MapListViewController: RefreshingTableViewController, InstantiableViewController {
 	typealias Localization = L10n.MapList
@@ -11,7 +11,7 @@ final class MapListViewController: RefreshingTableViewController, InstantiableVi
 	
 	@IBOutlet private var backToSiteListButton: UIBarButtonItem!
 	
-	var holder: MapHolder! {
+	var holder: (any MapHolder)! {
 		didSet { update() }
 	}
 	
@@ -30,10 +30,16 @@ final class MapListViewController: RefreshingTableViewController, InstantiableVi
 		}
 	}
 	
+	private var viewOptionsToken: AnyCancellable?
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		clearsSelectionOnViewWillAppear = false
+		
+		viewOptionsToken = ViewOptions.shared.didChange.sink { [unowned self] in
+			update()
+		}
 		
 		update()
 	}
@@ -47,7 +53,7 @@ final class MapListViewController: RefreshingTableViewController, InstantiableVi
 			}
 		} else if let selected = tableView.indexPathForSelectedRow {
 			// not appearing for the first time
-			if Repository.read(map(for: selected).hasChildren) {
+			if repository.read(map(for: selected).hasChildren) {
 				// coming back from selected map's sublist
 				showOwnMap(in: mainController)
 			} else {
@@ -63,34 +69,25 @@ final class MapListViewController: RefreshingTableViewController, InstantiableVi
 		super.viewWillAppear(animated)
 	}
 	
-	/// set to true when encountering a site we've been removed from during refresh to avoid multiple alerts
-	private var isAlreadyReturning = false
-	override func doRefresh() -> Future<Void> {
-		Client.shared.pullRemoteChanges(for: holder.constructionSiteID) { progress in
-			DispatchQueue.main.async {
-				self.syncProgress = progress
+	override func doRefresh() async throws {
+		do {
+			let siteID = holder.constructionSiteID
+			try await syncManager.withContext {
+				try await $0
+					.onProgress(.onMainActor { self.syncProgress = $0 })
+					.pullRemoteChanges(for: siteID)
 			}
+		} catch SyncError.siteAccessRemoved {
+			self.showAlert(
+				titled: Localization.RemovedFromMap.title,
+				message: Localization.RemovedFromMap.message,
+				okMessage: Localization.RemovedFromMap.dismiss,
+				okHandler: self.returnToSiteList
+			)
+			return
 		}
-		.flatMapError { error in
-			if case SyncError.siteAccessRemoved = error {
-				self.isAlreadyReturning = true
-				self.showAlert(
-					titled: Localization.RemovedFromMap.title,
-					message: Localization.RemovedFromMap.message,
-					okMessage: Localization.RemovedFromMap.dismiss,
-					okHandler: self.returnToSiteList
-				)
-				return .fulfilled
-			} else {
-				return .rejected(with: error)
-			}
-		}
-	}
-	
-	override func refreshCompleted() {
-		guard let mainController = mainController else { return } // dismissed in the meantime
 		
-		super.refreshCompleted()
+		guard let mainController = mainController else { return } // dismissed in the meantime
 		
 		let isValid = handleRefresh()
 		if isValid {
@@ -98,14 +95,12 @@ final class MapListViewController: RefreshingTableViewController, InstantiableVi
 				mainController.detailNav.mapController.holder = holder
 			}
 		} else {
-			if !isAlreadyReturning {
-				showAlert(
-					titled: Localization.MapRemoved.title,
-					message: Localization.MapRemoved.message,
-					okMessage: Localization.MapRemoved.dismiss,
-					okHandler: returnToSiteList
-				)
-			}
+			showAlert(
+				titled: Localization.MapRemoved.title,
+				message: Localization.MapRemoved.message,
+				okMessage: Localization.MapRemoved.dismiss,
+				okHandler: returnToSiteList
+			)
 		}
 		
 		for viewController in navigationController!.viewControllers where viewController !== self {
@@ -114,29 +109,17 @@ final class MapListViewController: RefreshingTableViewController, InstantiableVi
 	}
 	
 	private func returnToSiteList() {
-		self.performSegue(withIdentifier: "back to site list", sender: self)
+		performSegue(withIdentifier: "back to site list", sender: self)
 	}
 	
 	/// - returns: whether or not the holder is still valid
 	@discardableResult private func handleRefresh() -> Bool {
-		if
-			let oldSite = holder as? ConstructionSite,
-			let site = Repository.object(oldSite.id),
-			!site.isDeleted
-		{
-			holder = site
-			return true
-		} else if
-			let oldMap = holder as? Map,
-			let map = Repository.object(oldMap.id),
-			!map.isDeleted
-		{
-			holder = map
-			return true
-		} else {
+		guard let fresh = holder.freshlyFetched(in: repository), !fresh.isDeleted else {
 			maps = []
 			return false
 		}
+		holder = fresh
+		return true
 	}
 	
 	func update() {
@@ -144,7 +127,7 @@ final class MapListViewController: RefreshingTableViewController, InstantiableVi
 		
 		navigationItem.title = holder.name
 		
-		maps = Repository.read(
+		maps = repository.read(
 			holder.children
 				.withoutDeleted
 				.order(Map.Columns.name.asc)
@@ -166,17 +149,18 @@ final class MapListViewController: RefreshingTableViewController, InstantiableVi
 				mapController.holder = holder
 			}
 		} else {
-			showMapController(for: holder)
+			let h = holder! // awkward work around for implicit existential opening not opening IUOs
+			showMapController(for: h)
 		}
 	}
 	
-	func showMapController(for holder: MapHolder) {
+	func showMapController(for holder: some MapHolder) {
 		let mapController = MapViewController.instantiate()!
 		mapController.holder = holder
 		show(mapController, sender: self)
 	}
 	
-	func showListController(for holder: MapHolder) {
+	func showListController(for holder: some MapHolder) {
 		let listController = MapListViewController.instantiate()!
 		listController.holder = holder
 		show(listController, sender: self)
@@ -247,7 +231,7 @@ final class MapListViewController: RefreshingTableViewController, InstantiableVi
 			showOwnMap(in: mainController)
 		} else {
 			let map = maps[indexPath.row]
-			let mapHasChildren = Repository.read(map.hasChildren)
+			let mapHasChildren = repository.read(map.hasChildren)
 			
 			if mainController.isExtended {
 				let mapController = mainController.detailNav.mapController
