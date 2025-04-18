@@ -24,8 +24,8 @@
         "repositoryURL": "https://github.com/groue/GRDB.swift.git",
         "state": {
           "branch": null,
-          "revision": "77b85bed259b7f107710a0b78c439b1c5839dc45",
-          "version": "6.26.0"
+          "revision": "2cf6c756e1e5ef6901ebae16576a7e4e4b834622",
+          "version": "6.29.3"
         }
       },
       {
@@ -42,7 +42,7 @@
         "repositoryURL": "https://github.com/juliand665/Protoquest.git",
         "state": {
           "branch": "main",
-          "revision": "523b5f735d38e827f3c52a3f87849fbed54209e3",
+          "revision": "301aa4a5e52bc23223c378c3011a127ebde2bc06",
           "version": null
         }
       },

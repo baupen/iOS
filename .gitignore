@@ -71,3 +71,5 @@ fastlane/test_output
 Issue Manager/Testing
 
 *.private.*
+
+.DS_Store
