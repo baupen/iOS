@@ -2,20 +2,25 @@
 
 import Foundation
 import Protoquest
+import HandyOperators
 
 private struct FileDownloadRequest: GetDataRequest, BaupenRequest {
 	var path: String
 	
 	var size: String? = "full"
 	
-	init(file: AnyFile) {
-		path = file.urlPath
+	init(file: AnyFile) throws {
+		path = try file.urlPath.removingPercentEncoding ??? RequestConstructionError.percentDecodingFailed(file.urlPath)
 	}
 	
 	var urlParams: [URLParameter] {
 		if let size = size {
 			("size", size)
 		}
+	}
+	
+	enum RequestConstructionError: Error {
+		case percentDecodingFailed(String)
 	}
 }
 
