@@ -357,8 +357,10 @@ final class MapViewController: UIViewController, InstantiableViewController {
 		
 		let markersView = pdfController!.overlayView!
 		let tap = recognizer.location(in: markersView)
-		let distances = markers.lazy.map { ($0.center - tap).length }
-		let closest = zip(markers, distances).min { $0.1 < $1.1 }?.0
+		let displayedMarkersAndDistance = zip(markers, issues).lazy	
+			.filter { (marker, issue) in ViewOptions.shared.shouldDisplay(issue) }
+			.map { (displayedMarker, _) in (displayedMarker, (displayedMarker.center - tap).length) }
+		let closest = displayedMarkersAndDistance.min { (tuple1, tuple2) in tuple1.1 < tuple2.1 }?.0
 		guard let closest else { return }
 		let screenSpaceDistance = (markersView.convert(closest.center, to: view) - recognizer.location(in: view)).length
 		guard screenSpaceDistance < 40 else { return } // too far to be intentional
